@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { GlobalStyle } from './components/styles/GlobalStyle';
 
 function App() {
     const { t, i18n } = useTranslation();
@@ -9,6 +10,7 @@ function App() {
     };
     return (
         <>
+            <GlobalStyle />
             <div>
                 <button onClick={() => changeLanguage('gb')}>gb</button>
                 <button onClick={() => changeLanguage('us')}>us</button>
