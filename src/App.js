@@ -12,11 +12,11 @@ function App() {
         <>
             <GlobalStyle />
             <div>
-                <button onClick={() => changeLanguage('gb')}>gb</button>
-                <button onClick={() => changeLanguage('us')}>us</button>
-                <button onClick={() => changeLanguage('ro')}>ro</button>
+                <button onClick={() => changeLanguage('en-GB')}>gb</button>
+                <button onClick={() => changeLanguage('en-US')}>us</button>
+                <button onClick={() => changeLanguage('ro-RO')}>ro</button>
             </div>
-            <p>{t('desktop.title')}</p>
+            <h1>{t('desktop.title')}</h1>
         </>
     );
 }

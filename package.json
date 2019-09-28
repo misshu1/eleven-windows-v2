@@ -9,7 +9,6 @@
         "google-maps-react": "^2.0.2",
         "i18next": "^17.0.16",
         "i18next-browser-languagedetector": "^3.0.3",
-        "i18next-xhr-backend": "^3.2.0",
         "react": "^16.9.0",
         "react-calendar": "^2.19.2",
         "react-dom": "^16.9.0",
