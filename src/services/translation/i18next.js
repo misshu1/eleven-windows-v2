@@ -23,8 +23,7 @@ i18n.use(LanguageDetector)
         resources,
         lang: 'en-US',
         fallbackLng: 'en-US',
-        debug: true,
-
+        debug: false,
         interpolation: {
             escapeValue: false
         }
