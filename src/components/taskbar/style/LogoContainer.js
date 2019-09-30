@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const LogoContainer = styled.div`
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,7 +8,7 @@ export const LogoContainer = styled.div`
     height: 100%;
     outline: none;
 
-    @media (min-width: 450px) {
+    @media (min-width: 28rem) {
         width: 4rem;
         &&:hover,
         :focus {

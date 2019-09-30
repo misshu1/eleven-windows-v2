@@ -20,9 +20,6 @@ const animate = keyframes`
 
 `;
 export const BorderLogo = styled.div`
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
     position: relative;
     width: 3rem;
     height: 3rem;
@@ -33,7 +30,6 @@ export const BorderLogo = styled.div`
         width: 100%;
         height: 100%;
         display: block;
-        box-sizing: border-box;
     }
 
     && span:nth-child(1) {

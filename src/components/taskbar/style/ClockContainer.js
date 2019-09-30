@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ClockContainer = styled.div`
     display: none;
     @media (min-width: 28rem) {
-        font-family: "Roboto", sans-serif;
+        font-family: 'Roboto', sans-serif;
         cursor: default;
         display: flex;
         align-items: center;

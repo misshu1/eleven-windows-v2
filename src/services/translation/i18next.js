@@ -4,6 +4,27 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import translationGB from '../../assets/languages/en-GB/translation.json';
 import translationUS from '../../assets/languages/en-US/translation.json';
 import translationRO from '../../assets/languages/ro-RO/translation.json';
+import flagUS from '../../assets/images/flags/us.svg';
+import flagGB from '../../assets/images/flags/gb.svg';
+import flagRO from '../../assets/images/flags/ro.svg';
+
+export const languages = [
+    {
+        name: 'us',
+        lang: 'en-US',
+        flag: flagUS
+    },
+    {
+        name: 'gb',
+        lang: 'en-GB',
+        flag: flagGB
+    },
+    {
+        name: 'ro',
+        lang: 'ro-RO',
+        flag: flagRO
+    }
+];
 
 const resources = {
     'en-US': {
