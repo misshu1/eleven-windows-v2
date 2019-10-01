@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const Taskbar = styled.div`
     display: flex;
     color: ${props => props.theme.textColor};
-    z-index: 200;
-    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;

@@ -49,7 +49,13 @@ const DarkTheme = {
     calendarColorCurrentDate: '#000',
     calendarBgCurrentDate: '#006edc',
     calendarTodayClock: '#4b8af2',
-    calendarColorNeighboringMonth: '#969696'
+    calendarColorNeighboringMonth: '#969696',
+
+    // Notification Modal
+    modalBg: 'rgba(32, 32, 32, 0.95)',
+    modalBorder: '#444',
+    modalColor: '#d6d8de',
+    modalTitle: '#fff'
 };
 
 export default DarkTheme;

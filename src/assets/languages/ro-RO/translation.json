@@ -2,7 +2,7 @@
     "desktop": {
         "title": "titlu RO"
     },
-    "clock": {
+    "calendar": {
         "monthAbrev": {
             "1": "Ian",
             "2": "Feb",
@@ -16,6 +16,33 @@
             "10": "Oct",
             "11": "Nov",
             "12": "Dec"
+        },
+        "month": {
+            "1": "Ianuarie",
+            "2": "Februarie",
+            "3": "Martie",
+            "4": "Aprilie",
+            "5": "Mai",
+            "6": "Iunie",
+            "7": "Iulie",
+            "8": "August",
+            "9": "Septembrie",
+            "10": "Octombrie",
+            "11": "Noiembrie",
+            "12": "Decembrie"
+        },
+        "day": {
+            "1": "Duminică",
+            "2": "Luni",
+            "3": "Marți",
+            "4": "Miercuri",
+            "5": "Joi",
+            "6": "Vineri",
+            "7": "Sâmbătă"
         }
+    },
+    "language": {
+        "successTitle": "Română",
+        "successMessage": "Limba a fost schimbată cu succes!"
     }
 }

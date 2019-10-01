@@ -1,0 +1,40 @@
+import React, { useContext } from 'react';
+import ReactDOM from 'react-dom';
+import { Container, Notification } from './style';
+import { NotificationContext } from '../../../contexts/notificationContext';
+
+const NotificationModalApp = props => {
+    const { notification, hideModal } = useContext(NotificationContext);
+
+    return ReactDOM.createPortal(
+        <Container>
+            {notification
+                .filter(item => item.isVisible)
+                .map(item => (
+                    <Notification
+                        key={item.id}
+                        visible={item.isVisible}
+                        close={item.closeAnimation}
+                    >
+                        <div className='icon'>{item.icon}</div>
+                        <div className='content'>
+                            <span className='title'>
+                                <h2>{item.notificationTitle}</h2>
+                                <button
+                                    onClick={e => hideModal(e)}
+                                    id={item.id}
+                                >
+                                    x
+                                </button>
+                            </span>
+                            <p>{item.notificationInfo}</p>
+                            <p>{item.code}</p>
+                        </div>
+                    </Notification>
+                ))}
+        </Container>,
+        document.querySelector('#modal')
+    );
+};
+
+export default NotificationModalApp;

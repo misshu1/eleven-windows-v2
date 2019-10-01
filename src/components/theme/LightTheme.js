@@ -49,7 +49,13 @@ const LightTheme = {
     calendarColorCurrentDate: '#fff',
     calendarBgCurrentDate: '#006edc',
     calendarTodayClock: '#006edc',
-    calendarColorNeighboringMonth: '#828282'
+    calendarColorNeighboringMonth: '#828282',
+
+    // Notification Modal
+    modalBg: 'rgba(196, 217, 252, 0.95)',
+    modalBorder: '#202020',
+    modalColor: '#212121',
+    modalTitle: '#000'
 };
 
 export default LightTheme;

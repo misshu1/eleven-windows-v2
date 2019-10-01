@@ -1,12 +1,15 @@
 import React from 'react';
 import { ThemeStateProvider } from './contexts/themeContext';
 import WindowsApp from './components/windows/WindowsApp';
+import { NotificationProvider } from './contexts/notificationContext';
 
 const App = () => {
     return (
-        <ThemeStateProvider>
-            <WindowsApp />
-        </ThemeStateProvider>
+        <NotificationProvider>
+            <ThemeStateProvider>
+                <WindowsApp />
+            </ThemeStateProvider>
+        </NotificationProvider>
     );
 };
 

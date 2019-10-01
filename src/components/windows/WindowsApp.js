@@ -7,6 +7,11 @@ import LightTheme from '../../components/theme/LightTheme';
 import DarkTheme from '../../components/theme/DarkTheme';
 import TaskbarApp from '../../components/taskbar/TaskbarApp';
 import DesktopApp from '../../components/desktop/DesktopApp';
+import CalendarApp from '../taskbar/calendar/CalendarApp';
+import { CalendarProvider } from '../../contexts/calendarContext';
+import LanguageApp from '../taskbar/language/LanguageApp';
+import { TaskbarProvider } from '../../contexts/taskbarContext';
+import NotificationModalApp from '../notification/notificationModal/NotificationModalApp';
 
 const WindowsApp = props => {
     const { theme, setTheme } = useContext(ThemeContext);
@@ -48,8 +53,15 @@ const WindowsApp = props => {
                 <button onClick={() => changeLanguage('ro-RO')}>ro</button>
             </div>
             <h1>{t('desktop.title')}</h1> */}
-            <DesktopApp />
-            <TaskbarApp />
+            <NotificationModalApp></NotificationModalApp>
+            <TaskbarProvider>
+                <LanguageApp />
+                <CalendarProvider>
+                    <CalendarApp />
+                </CalendarProvider>
+                <TaskbarApp />
+                <DesktopApp />
+            </TaskbarProvider>
         </ThemeProvider>
     );
 };

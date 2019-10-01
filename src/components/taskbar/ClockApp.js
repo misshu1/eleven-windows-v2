@@ -28,13 +28,14 @@ const ClockApp = () => {
 
     useEffect(() => {
         const update = () => {
-            setClock({
+            setClock(prevState => ({
+                ...prevState,
                 hour: new Date().getHours(),
                 minute: new Date().getMinutes(),
                 year: new Date().getFullYear(),
                 month: new Date().getMonth(),
                 day: new Date().getDate()
-            });
+            }));
         };
         setInterval(update, 1000);
 
@@ -46,7 +47,9 @@ const ClockApp = () => {
     return (
         <React.Fragment>
             {`${hours}:${minutes}${session}`} <br />
-            {`${currentDay}-${t(`clock.monthAbrev.${currentMonth}`)}-${year}`}
+            {`${currentDay}-${t(
+                `calendar.monthAbrev.${currentMonth}`
+            )}-${year}`}
         </React.Fragment>
     );
 };

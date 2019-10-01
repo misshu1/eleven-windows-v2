@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Desktop } from './style';
+import { TaskbarContext } from '../../contexts/taskbarContext';
 
 const DesktopApp = props => {
-    return <Desktop>ceva</Desktop>;
+    const { closeAllApps } = useContext(TaskbarContext);
+
+    return (
+        <Desktop
+            onClick={() => {
+                closeAllApps();
+            }}
+        ></Desktop>
+    );
 };
 
 export default DesktopApp;

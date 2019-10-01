@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 import i18next, { languages } from '../../services/translation/i18next';
 import PropTypes from 'prop-types';
@@ -19,9 +19,13 @@ import logoBlue from '../../assets/images/logo/logo-blue.svg';
 import globeImg from '../../assets/images/flags/globe.svg';
 import ClockApp from './ClockApp';
 import { ClockProvider } from '../../contexts/clockContext';
+import { TaskbarContext } from '../../contexts/taskbarContext';
 
 const TaskbarApp = props => {
     const theme = localStorage.getItem('theme');
+    const { closeAllApps, toggleAppVisibility, handleKeyPress } = useContext(
+        TaskbarContext
+    );
 
     const selectLanguage = () => {
         const locationLanguage = i18next.language;
@@ -44,10 +48,10 @@ const TaskbarApp = props => {
 
     return ReactDOM.createPortal(
         <Taskbar
-        // onClick={() => {
-        //     closeApp('startMenuOpen');
-        //     closeApp('calendarOpen');
-        // }}
+            id='test'
+            onClick={() => {
+                closeAllApps();
+            }}
         >
             <NotificationContainer></NotificationContainer>
 
@@ -69,13 +73,17 @@ const TaskbarApp = props => {
                 </BorderLogo>
             </LogoContainer>
             <OpenAppsContainer>{/* {this.showIcons()} */}</OpenAppsContainer>
-            <LanguagesContainer>
+            <LanguagesContainer
+                tabIndex='0'
+                onKeyPress={e => handleKeyPress(e, 'languagesOpen')}
+                onClick={() => toggleAppVisibility('languagesOpen')}
+            >
                 <FlagImg src={selectLanguage()} alt={'language'} />
             </LanguagesContainer>
             <ClockContainer
                 tabIndex='0'
-                // onKeyPress={e => this.handleKeyPress(e, 'calendarOpen')}
-                // onClick={() => toggleAppVisibility('calendarOpen')}
+                onKeyPress={e => handleKeyPress(e, 'calendarOpen')}
+                onClick={() => toggleAppVisibility('calendarOpen')}
             >
                 <ClockProvider>
                     <ClockApp />
