@@ -27,7 +27,6 @@ export const TaskbarProvider = props => {
             ...prevState,
             [app]: !taskbar[app]
         }));
-        console.log('open');
     };
 
     const handleKeyPress = (e, app) => {

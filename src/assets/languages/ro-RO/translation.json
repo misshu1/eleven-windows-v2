@@ -44,5 +44,9 @@
     "language": {
         "successTitle": "Română",
         "successMessage": "Limba a fost schimbată cu succes!"
+    },
+    "notification": {
+        "status": "Nu sunt notificări noi",
+        "clear": "Ștergeți toate notificările"
     }
 }

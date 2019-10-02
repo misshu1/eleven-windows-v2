@@ -55,7 +55,15 @@ const LightTheme = {
     modalBg: 'rgba(196, 217, 252, 0.95)',
     modalBorder: '#202020',
     modalColor: '#212121',
-    modalTitle: '#000'
+    modalTitle: '#000',
+
+    // Notification App
+    notificationBg: 'rgba(225, 235, 252, 0.90)',
+    notificationColor: '#212121',
+    nottificationMessageBg: 'rgba(196, 217, 252, 0.95)',
+    notificationBorder: '#202020',
+    notificationWidgetBg: 'rgb(196, 217, 252)',
+    notificationWidgetColor: '#212121'
 };
 
 export default LightTheme;

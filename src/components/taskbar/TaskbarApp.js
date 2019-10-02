@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import ReactDOM from 'react-dom';
 import i18next, { languages } from '../../services/translation/i18next';
-import PropTypes from 'prop-types';
 import {
     Logo,
     LogoContainer,
@@ -20,12 +20,17 @@ import globeImg from '../../assets/images/flags/globe.svg';
 import ClockApp from './ClockApp';
 import { ClockProvider } from '../../contexts/clockContext';
 import { TaskbarContext } from '../../contexts/taskbarContext';
+import { NotificationContext } from '../../contexts/notificationContext';
+import { faCommentAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+library.add(faCommentAlt);
 
 const TaskbarApp = props => {
     const theme = localStorage.getItem('theme');
     const { closeAllApps, toggleAppVisibility, handleKeyPress } = useContext(
         TaskbarContext
     );
+    const { notification, hideAllModals } = useContext(NotificationContext);
 
     const selectLanguage = () => {
         const locationLanguage = i18next.language;
@@ -48,13 +53,10 @@ const TaskbarApp = props => {
 
     return ReactDOM.createPortal(
         <Taskbar
-            id='test'
             onClick={() => {
                 closeAllApps();
             }}
         >
-            <NotificationContainer></NotificationContainer>
-
             <LogoContainer
                 tabIndex='0'
                 // onKeyPress={e => this.handleKeyPress(e, 'startMenuOpen')}
@@ -90,6 +92,20 @@ const TaskbarApp = props => {
                 </ClockProvider>
             </ClockContainer>
             <SettingsContainer></SettingsContainer>
+            <NotificationContainer
+                tabIndex='0'
+                onKeyPress={e => handleKeyPress(e, 'notificationsOpen')}
+                onClick={() => {
+                    toggleAppVisibility('notificationsOpen');
+                    hideAllModals();
+                }}
+            >
+                {notification.length > 0 ? (
+                    <FontAwesomeIcon icon={['fas', 'comment-alt']} />
+                ) : (
+                    <FontAwesomeIcon icon={['far', 'comment-alt']} />
+                )}
+            </NotificationContainer>
         </Taskbar>,
         document.querySelector('#taskbar')
     );

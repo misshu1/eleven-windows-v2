@@ -12,6 +12,7 @@ import { CalendarProvider } from '../../contexts/calendarContext';
 import LanguageApp from '../taskbar/language/LanguageApp';
 import { TaskbarProvider } from '../../contexts/taskbarContext';
 import NotificationModalApp from '../notification/notificationModal/NotificationModalApp';
+import NotificationApp from '../notification/notificationApp/NotificationApp';
 
 const WindowsApp = props => {
     const { theme, setTheme } = useContext(ThemeContext);
@@ -55,12 +56,13 @@ const WindowsApp = props => {
             <h1>{t('desktop.title')}</h1> */}
             <NotificationModalApp></NotificationModalApp>
             <TaskbarProvider>
+                <DesktopApp />
                 <LanguageApp />
                 <CalendarProvider>
                     <CalendarApp />
                 </CalendarProvider>
+                <NotificationApp />
                 <TaskbarApp />
-                <DesktopApp />
             </TaskbarProvider>
         </ThemeProvider>
     );

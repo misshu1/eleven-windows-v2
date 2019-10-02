@@ -44,5 +44,9 @@
     "language": {
         "successTitle": "English (US)",
         "successMessage": "The language changed successfully!"
+    },
+    "notification": {
+        "status": "No new notifications",
+        "clear": "Clear all notifications"
     }
 }

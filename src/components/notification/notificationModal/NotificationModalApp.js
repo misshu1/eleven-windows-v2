@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 import { Container, Notification } from './style';
 import { NotificationContext } from '../../../contexts/notificationContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NotificationModalApp = props => {
     const { notification, hideModal } = useContext(NotificationContext);
@@ -24,7 +25,13 @@ const NotificationModalApp = props => {
                                     onClick={e => hideModal(e)}
                                     id={item.id}
                                 >
-                                    x
+                                    <FontAwesomeIcon
+                                        icon={['fas', 'times']}
+                                        style={{
+                                            position: 'relative',
+                                            zIndex: '-1'
+                                        }}
+                                    />
                                 </button>
                             </span>
                             <p>{item.notificationInfo}</p>

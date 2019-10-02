@@ -3,7 +3,7 @@ import styled, { keyframes, css } from 'styled-components';
 const slideUp = keyframes`
 0% {
     opacity: 0;
-    transform: translate3d(0, 10%, 0);
+    transform: translate3d(20%, 0, 0);
 }
 100% {
     opacity: 1;
@@ -18,7 +18,7 @@ const fadeout = keyframes`
 }
 100% {
     opacity: 0;
-    transform: translate3d(0, 10%, 0);
+    transform: translate3d(50%, 0, 0);
 }
 `;
 
@@ -39,7 +39,7 @@ export const Notification = styled.div`
     ${props =>
         props.close &&
         css`
-            animation: ${fadeout} 0.3s ease-in 1 forwards;
+            animation: ${fadeout} 0.1s ease-in 1 forwards;
         `}
 
 

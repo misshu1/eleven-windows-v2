@@ -1,11 +1,17 @@
 import React, { useState, createContext } from 'react';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import DescriptionIcon from '@material-ui/icons/Description';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const NotificationContext = createContext();
 export const NotificationProvider = props => {
     const [notification, setNotification] = useState([]);
+
+    const hideAllModals = () => {
+        if (notification.length > 0) {
+            setNotification(
+                notification.map(item => ({ ...item, isVisible: false }))
+            );
+        }
+    };
 
     const hideModal = e => {
         const eventTargetID = e.target.id;
@@ -28,9 +34,7 @@ export const NotificationProvider = props => {
     };
 
     const closeNotification = e => {
-        setNotification(
-            notification.map(item => (item.id === +e.target.id ? '' : item))
-        );
+        setNotification(notification.filter(item => item.id !== +e.target.id));
     };
 
     const createNotificationWarn = (
@@ -45,9 +49,8 @@ export const NotificationProvider = props => {
                 closeAnimation: false,
                 notificationTitle,
                 notificationInfo,
-                icon: <DescriptionIcon />,
-                type: 'warn',
-                code: `Warn ${code}`
+                code: `Warn ${code}`,
+                icon: <FontAwesomeIcon icon={['fas', 'list-alt']} size='lg' />
             },
             ...notification
         ]);
@@ -65,9 +68,14 @@ export const NotificationProvider = props => {
                 closeAnimation: false,
                 notificationTitle,
                 notificationInfo,
-                icon: <ErrorOutlineIcon />,
-                type: 'error',
-                code: `Error ${code}`
+                code: `Error ${code}`,
+                icon: (
+                    <FontAwesomeIcon
+                        icon={['fas', 'exclamation-triangle']}
+                        size='lg'
+                        style={{ color: 'red' }}
+                    />
+                )
             },
             ...notification
         ]);
@@ -81,8 +89,13 @@ export const NotificationProvider = props => {
                 closeAnimation: false,
                 notificationTitle,
                 notificationInfo,
-                icon: <CheckCircleIcon />,
-                type: 'success'
+                icon: (
+                    <FontAwesomeIcon
+                        icon={['fas', 'check-square']}
+                        size='lg'
+                        style={{ color: 'green' }}
+                    />
+                )
             },
             ...notification
         ]);
@@ -102,7 +115,8 @@ export const NotificationProvider = props => {
                 createNotificationError,
                 clearAllNotifications,
                 hideModal,
-                closeNotification
+                closeNotification,
+                hideAllModals
             }}
         >
             {props.children}

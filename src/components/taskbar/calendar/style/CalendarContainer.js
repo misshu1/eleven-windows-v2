@@ -14,7 +14,7 @@ const slideUp = keyframes`
 export const CalendarContainer = styled.section`
     font-family: 'Roboto', sans-serif;
     user-select: none;
-    z-index: 200;
+    z-index: 250;
     position: absolute;
     border-top: 1px solid ${props => props.theme.calendarBorder};
     border-left: 1px solid ${props => props.theme.calendarBorder};
