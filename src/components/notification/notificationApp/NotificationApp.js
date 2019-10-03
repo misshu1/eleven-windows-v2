@@ -67,7 +67,11 @@ const NotificationApp = () => {
                     </span>
                     <WidgetsContainer>
                         <Widget>
-                            <FontAwesomeIcon icon={['fas', 'cog']} size='lg' />
+                            <FontAwesomeIcon
+                                icon={['fas', 'cog']}
+                                size='lg'
+                                className='icon'
+                            />
                             <div style={{ flex: 1 }}></div>
                             <h5>Settings</h5>
                         </Widget>
@@ -75,6 +79,7 @@ const NotificationApp = () => {
                             <FontAwesomeIcon
                                 icon={['fas', 'sitemap']}
                                 size='lg'
+                                className='icon'
                             />
                             <div style={{ flex: 1 }}></div>
                             <h5>Task Manager</h5>

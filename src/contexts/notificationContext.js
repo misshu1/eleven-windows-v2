@@ -102,7 +102,9 @@ export const NotificationProvider = props => {
     };
 
     const clearAllNotifications = () => {
-        setNotification([]);
+        if (notification.length > 0) {
+            setNotification([]);
+        }
     };
 
     return (

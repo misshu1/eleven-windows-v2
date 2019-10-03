@@ -9,6 +9,11 @@ export const Widget = styled.div`
     background: ${props => props.theme.notificationWidgetBg};
     border: 1px solid ${props => props.theme.notificationBorder};
     padding: 0.2rem;
+
+    .icon {
+        margin: 0.3rem;
+    }
+
     h5 {
         margin: 0;
     }

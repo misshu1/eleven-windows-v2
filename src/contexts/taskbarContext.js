@@ -9,10 +9,12 @@ export const TaskbarProvider = props => {
         notificationsOpen: false
     });
 
+    // Run closeApp function for every element inside taskbar object
     const closeAllApps = () => {
         Object.keys(taskbar).forEach(item => closeApp(item));
     };
 
+    // Check to see if "app" is open(true) then is closed
     const closeApp = app => {
         if (taskbar[app]) {
             setTaskbar(prevState => ({
@@ -29,6 +31,7 @@ export const TaskbarProvider = props => {
         }));
     };
 
+    // Toggle app visibility on "Enter" key press
     const handleKeyPress = (e, app) => {
         if (e.charCode === 13) {
             toggleAppVisibility(app);
