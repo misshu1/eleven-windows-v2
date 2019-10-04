@@ -10,6 +10,10 @@ export const Widget = styled.div`
     border: 1px solid ${props => props.theme.notificationBorder};
     padding: 0.2rem;
 
+    &&:hover {
+        background: ${props => props.theme.widgetHover};
+    }
+
     .icon {
         margin: 0.3rem;
     }

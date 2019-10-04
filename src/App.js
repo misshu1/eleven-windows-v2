@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeStateProvider } from './contexts/themeContext';
 import WindowsApp from './components/windows/WindowsApp';
 import { NotificationProvider } from './contexts/notificationContext';
+import { GlobalAppProvider } from './contexts/GlobalContext';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faListAlt,
@@ -9,7 +10,8 @@ import {
     faExclamationTriangle,
     faTimes,
     faSitemap,
-    faCog
+    faCog,
+    faWindowMinimize
 } from '@fortawesome/free-solid-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 library.add(
@@ -19,16 +21,19 @@ library.add(
     faExclamationTriangle,
     faTimes,
     faSitemap,
-    faCog
+    faCog,
+    faWindowMinimize
 );
 
 const App = () => {
     return (
-        <NotificationProvider>
+        <GlobalAppProvider>
             <ThemeStateProvider>
-                <WindowsApp />
+                <NotificationProvider>
+                    <WindowsApp />
+                </NotificationProvider>
             </ThemeStateProvider>
-        </NotificationProvider>
+        </GlobalAppProvider>
     );
 };
 

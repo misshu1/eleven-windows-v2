@@ -24,9 +24,10 @@ export const NotificationContainer = styled.section`
     border-left: 1px solid ${props => props.theme.notificationBorder};
 
     .clear {
+        width: fit-content;
+        margin-left: auto;
         font-size: 0.9rem;
         color: ${props => props.theme.calendarTodayClock};
-        text-align: right;
     }
     .clear:hover {
         color: ${props => props.theme.calendarColorSecondary};

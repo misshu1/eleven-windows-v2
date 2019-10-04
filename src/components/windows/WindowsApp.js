@@ -13,6 +13,9 @@ import LanguageApp from '../taskbar/language/LanguageApp';
 import { TaskbarProvider } from '../../contexts/taskbarContext';
 import NotificationModalApp from '../notification/notificationModal/NotificationModalApp';
 import NotificationApp from '../notification/notificationApp/NotificationApp';
+import { IndexProvider } from '../../contexts/indexContext';
+import { FolderProvider } from '../../contexts/FolderContext';
+import RoutesApp from '../routes/RoutesApp';
 
 const WindowsApp = props => {
     const { theme, setTheme } = useContext(ThemeContext);
@@ -54,9 +57,15 @@ const WindowsApp = props => {
                 <button onClick={() => changeLanguage('ro-RO')}>ro</button>
             </div>
             <h1>{t('desktop.title')}</h1> */}
-            <NotificationModalApp></NotificationModalApp>
+
+            <NotificationModalApp />
             <TaskbarProvider>
-                <DesktopApp />
+                <IndexProvider>
+                    <FolderProvider>
+                        <RoutesApp />
+                        <DesktopApp />
+                    </FolderProvider>
+                </IndexProvider>
                 <LanguageApp />
                 <CalendarProvider>
                     <CalendarApp />

@@ -69,7 +69,8 @@ const DarkTheme = {
     nottificationMessageBg: 'rgba(32, 32, 32, 0.95)',
     notificationBorder: '#444',
     notificationWidgetBg: 'rgb(32, 32, 32)',
-    notificationWidgetColor: '#d6d8de'
+    notificationWidgetColor: '#d6d8de',
+    widgetHover: 'rgba(100, 100, 100, 0.01)'
 };
 
 export default DarkTheme;

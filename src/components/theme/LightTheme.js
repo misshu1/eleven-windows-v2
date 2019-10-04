@@ -69,7 +69,8 @@ const LightTheme = {
     nottificationMessageBg: 'rgba(196, 217, 252, 0.95)',
     notificationBorder: '#202020',
     notificationWidgetBg: 'rgb(196, 217, 252)',
-    notificationWidgetColor: '#212121'
+    notificationWidgetColor: '#212121',
+    widgetHover: 'rgba(150, 189, 255, 0.5)'
 };
 
 export default LightTheme;
