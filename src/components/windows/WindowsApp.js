@@ -58,12 +58,12 @@ const WindowsApp = props => {
             </div>
             <h1>{t('desktop.title')}</h1> */}
 
-            <NotificationModalApp />
             <TaskbarProvider>
                 <IndexProvider>
                     <FolderProvider>
                         <RoutesApp />
                         <DesktopApp />
+                        <TaskbarApp />
                     </FolderProvider>
                 </IndexProvider>
                 <LanguageApp />
@@ -71,8 +71,8 @@ const WindowsApp = props => {
                     <CalendarApp />
                 </CalendarProvider>
                 <NotificationApp />
-                <TaskbarApp />
             </TaskbarProvider>
+            <NotificationModalApp />
         </ThemeProvider>
     );
 };

@@ -20,7 +20,7 @@ const FolderApp = props => {
     const [handleDrag, setHandleDrag] = useState(false);
     const [close, setClose] = useState('');
     const { folder, minimizeApp, closeApp } = useContext(FolderContext);
-    const { index, activeWindow } = useContext(IndexContext);
+    const { activeWindow } = useContext(IndexContext);
 
     useEffect(() => {
         globalApp.isMobile && setHandleDrag(true);

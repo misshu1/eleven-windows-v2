@@ -11,6 +11,10 @@ export const NotificationContainer = styled.div`
     margin: 0 1px;
     transition: color 0.2s ease-in-out;
 
+    @media (max-width: 28rem) {
+        order: 1;
+    }
+
     @media (min-width: 28rem) {
         height: 100%;
         width: 3.5rem;

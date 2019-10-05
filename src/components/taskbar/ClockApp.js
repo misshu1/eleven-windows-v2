@@ -37,7 +37,7 @@ const ClockApp = () => {
                 day: new Date().getDate()
             }));
         };
-        setInterval(update, 1000);
+        setInterval(update, 1000 * 30);
 
         return function() {
             clearInterval(update);

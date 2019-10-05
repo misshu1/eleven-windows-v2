@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SettingsContainer = styled.div`
     width: 33.33%;
@@ -16,6 +16,11 @@ export const SettingsContainer = styled.div`
         cursor: default;
         transition: color 0.2s ease-in-out;
     }
+
+    @media (max-width: 28rem) {
+        order: 3;
+    }
+
     @media (min-width: 28rem) {
         display: none;
     }

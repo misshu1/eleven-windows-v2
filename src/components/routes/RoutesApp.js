@@ -1,35 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
-import FolderApp from '../../components/folder/FolderApp';
-import { IndexContext } from '../../contexts/indexContext';
 import { FolderContext } from '../../contexts/FolderContext';
 import { GlobalAppContext } from '../../contexts/GlobalContext';
 
+const SettingsApp = lazy(() => import('../apps/settings/SettingsApp'));
+
 const RoutesApp = () => {
     const { folder } = useContext(FolderContext);
-    const { index } = useContext(IndexContext);
     const { globalApp } = useContext(GlobalAppContext);
+
     return (
         <React.Fragment>
             <Route
-                exact
+                exact={globalApp.isMobile ? true : false}
                 path={globalApp.isMobile ? '/settings' : '/'}
-                render={() =>
-                    folder.settingsOpen === 'open' && (
-                        <FolderApp
-                            appMinimize={'settingsMinimize'}
-                            appOpen={'settingsOpen'}
-                            appIndexName='settings'
-                            appIndexValue={index.settings}
-                            folderName='Settings'
-                            width='20rem'
-                            linkMobile='settings'
-                            open={folder.settingsOpen}
-                        >
-                            lasdorasdeasdasasd
-                        </FolderApp>
-                    )
-                }
+                render={() => folder.settingsOpen === 'open' && <SettingsApp />}
             />
         </React.Fragment>
     );

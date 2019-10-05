@@ -8,6 +8,10 @@ export const LogoContainer = styled.div`
     height: 100%;
     outline: none;
 
+    @media (max-width: 28rem) {
+        order: 2;
+    }
+
     @media (min-width: 28rem) {
         width: 4rem;
         &&:hover,

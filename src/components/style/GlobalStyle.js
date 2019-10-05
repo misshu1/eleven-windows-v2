@@ -22,9 +22,11 @@ body {
     height: calc(100vh - 3.5rem);
     width: 100%;
     overflow: hidden;
+    background: ${props => props.theme.desktopBg.bg11};
 }
 
 #taskbar {
+    background: ${props => props.theme.background};
     z-index: 300;
     position:fixed;
     bottom: 0;

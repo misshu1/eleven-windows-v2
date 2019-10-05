@@ -9,6 +9,5 @@ export const Desktop = styled.section`
     height: calc(100vh - 3.5rem);
     width: 100%;
     color: #d6d8de;
-    background: ${props => props.theme.desktopBg.bg11};
     overflow: hidden;
 `;
