@@ -1,11 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { IconContainer } from './style';
 import { GlobalAppContext } from '../../contexts/GlobalContext';
 import { FolderContext } from '../../contexts/FolderContext';
 import { IndexContext } from '../../contexts/indexContext';
 
-const DesktopIconApp = props => {
+const DesktopIconApp = memo(props => {
+    const {
+        linkMobile,
+        folderIcon,
+        iconName,
+        appIndexName,
+        appMinimize,
+        appOpen
+    } = props;
     const { globalApp } = useContext(GlobalAppContext);
     const { startApp } = useContext(FolderContext);
     const { activeWindow } = useContext(IndexContext);
@@ -13,37 +21,37 @@ const DesktopIconApp = props => {
     return (
         <IconContainer tabIndex='0'>
             {globalApp.isMobile ? (
-                <Link to={props.linkMobile}>
+                <Link to={linkMobile}>
                     <img
-                        src={props.folderIcon}
-                        alt={props.iconName}
-                        aria-label={props.iconName}
+                        src={folderIcon}
+                        alt={iconName}
+                        aria-label={iconName}
                     />
-                    <div>{props.iconName}</div>
+                    <div>{iconName}</div>
                 </Link>
             ) : (
                 <div
                     className='icon'
                     onDoubleClick={() => {
                         startApp(
-                            props.appOpen,
-                            props.folderIcon,
-                            props.appIndexName,
-                            props.appMinimize
+                            appOpen,
+                            folderIcon,
+                            appIndexName,
+                            appMinimize
                         );
-                        activeWindow(props.appIndexName);
+                        activeWindow(appIndexName);
                     }}
                 >
                     <img
-                        src={props.folderIcon}
-                        alt={props.iconName}
-                        aria-label={props.iconName}
+                        src={folderIcon}
+                        alt={iconName}
+                        aria-label={iconName}
                     />
-                    <div>{props.iconName}</div>
+                    <div>{iconName}</div>
                 </div>
             )}
         </IconContainer>
     );
-};
+});
 
 export default DesktopIconApp;

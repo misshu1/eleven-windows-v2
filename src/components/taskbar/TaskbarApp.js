@@ -20,7 +20,6 @@ import logoRed from '../../assets/images/logo/logo-red.svg';
 import logoBlue from '../../assets/images/logo/logo-blue.svg';
 import globeImg from '../../assets/images/flags/globe.svg';
 import ClockApp from './ClockApp';
-import { ClockProvider } from '../../contexts/clockContext';
 import { TaskbarContext } from '../../contexts/taskbarContext';
 import { FolderContext } from '../../contexts/FolderContext';
 import { IndexContext } from '../../contexts/indexContext';
@@ -120,9 +119,7 @@ const TaskbarApp = props => {
                 onKeyPress={e => handleKeyPress(e, 'calendarOpen')}
                 onClick={() => toggleAppVisibility('calendarOpen')}
             >
-                <ClockProvider>
-                    <ClockApp />
-                </ClockProvider>
+                <ClockApp />
             </ClockContainer>
             <SettingsContainer>
                 <Link to={'/settings'} aria-label='settings'>

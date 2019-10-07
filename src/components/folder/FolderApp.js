@@ -29,7 +29,7 @@ const FolderApp = props => {
     const quitApp = () => {
         setClose('close');
         setTimeout(() => {
-            closeApp(props.appOpen, folder[props.appMinimize]);
+            closeApp(props.appOpen, props.appMinimize);
         }, 200);
     };
 

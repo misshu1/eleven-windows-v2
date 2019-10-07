@@ -1,15 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, memo } from 'react';
 import { Desktop } from './style';
 import { TaskbarContext } from '../../contexts/taskbarContext';
 import IconContainer from './DesktopIconApp';
 import folderIcon from '../../assets/images/desktop/folder-icon.png';
 
-const DesktopApp = props => {
+const DesktopApp = memo(props => {
     const { closeAllApps } = useContext(TaskbarContext);
     const [icons] = useState([
         {
-            name: 'Settings',
-            appName: 'settings',
+            iconDisplayame: 'Settings',
             folderIcon: folderIcon,
             linkMobile: '/settings',
             appIndexName: 'settings',
@@ -17,23 +16,18 @@ const DesktopApp = props => {
             appOpen: 'settingsOpen'
         },
         {
-            name: 'Readme',
-            appName: 'readme',
+            iconDisplayame: 'Readme',
             folderIcon: folderIcon,
             linkMobile: '/readme'
         }
     ]);
 
     return (
-        <Desktop
-            onClick={() => {
-                closeAllApps();
-            }}
-        >
+        <Desktop onClick={closeAllApps}>
             {icons.map(item => (
                 <IconContainer
-                    key={item.name}
-                    iconName={item.name}
+                    key={item.iconDisplayame}
+                    iconName={item.iconDisplayame}
                     linkMobile={item.linkMobile}
                     folderIcon={item.folderIcon}
                     appIndexName={item.appIndexName}
@@ -43,6 +37,6 @@ const DesktopApp = props => {
             ))}
         </Desktop>
     );
-};
+});
 
 export default DesktopApp;

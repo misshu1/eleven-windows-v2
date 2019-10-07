@@ -1,9 +1,14 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ClockContext } from '../../contexts/clockContext';
 
 const ClockApp = () => {
-    const { clock, setClock } = useContext(ClockContext);
+    const [clock, setClock] = useState({
+        hour: new Date().getHours(),
+        minute: new Date().getMinutes(),
+        year: new Date().getFullYear(),
+        month: new Date().getMonth(),
+        day: new Date().getDate()
+    });
     const { hour, minute, year, month, day } = clock;
     const { t } = useTranslation();
 
@@ -37,7 +42,7 @@ const ClockApp = () => {
                 day: new Date().getDate()
             }));
         };
-        setInterval(update, 1000 * 30);
+        setInterval(update, 1000);
 
         return function() {
             clearInterval(update);

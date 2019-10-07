@@ -9,9 +9,13 @@ export const TaskbarProvider = props => {
         notificationsOpen: false
     });
 
-    // Run closeApp function for every element inside taskbar object
+    // Find The currenty open app and close it
     const closeAllApps = () => {
-        Object.keys(taskbar).forEach(item => closeApp(item));
+        Object.keys(taskbar).forEach(item => {
+            if (taskbar[item]) {
+                closeApp(item);
+            }
+        });
     };
 
     // Check to see if "app" is open(true) then is closed

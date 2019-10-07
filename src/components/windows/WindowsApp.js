@@ -8,7 +8,6 @@ import DarkTheme from '../../components/theme/DarkTheme';
 import TaskbarApp from '../../components/taskbar/TaskbarApp';
 import DesktopApp from '../../components/desktop/DesktopApp';
 import CalendarApp from '../taskbar/calendar/CalendarApp';
-import { CalendarProvider } from '../../contexts/calendarContext';
 import LanguageApp from '../taskbar/language/LanguageApp';
 import { TaskbarProvider } from '../../contexts/taskbarContext';
 import NotificationModalApp from '../notification/notificationModal/NotificationModalApp';
@@ -67,9 +66,7 @@ const WindowsApp = props => {
                     </FolderProvider>
                 </IndexProvider>
                 <LanguageApp />
-                <CalendarProvider>
-                    <CalendarApp />
-                </CalendarProvider>
+                <CalendarApp />
                 <NotificationApp />
             </TaskbarProvider>
             <NotificationModalApp />

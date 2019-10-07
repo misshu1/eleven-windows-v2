@@ -8,14 +8,18 @@ const SettingsApp = lazy(() => import('../apps/settings/SettingsApp'));
 const RoutesApp = () => {
     const { folder } = useContext(FolderContext);
     const { globalApp } = useContext(GlobalAppContext);
+    const { isMobile } = globalApp;
+    const { settingsOpen } = folder;
 
     return (
         <React.Fragment>
-            <Route
-                exact={globalApp.isMobile ? true : false}
-                path={globalApp.isMobile ? '/settings' : '/'}
-                render={() => folder.settingsOpen === 'open' && <SettingsApp />}
-            />
+            <Suspense fallback={<div></div>}>
+                <Route
+                    exact={isMobile ? true : false}
+                    path={isMobile ? '/settings' : '/'}
+                    render={() => settingsOpen === 'open' && <SettingsApp />}
+                />
+            </Suspense>
         </React.Fragment>
     );
 };
