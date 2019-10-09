@@ -3,10 +3,10 @@ import { ThemeProvider } from 'styled-components';
 import { ThemeContext } from '../../contexts/themeContext';
 import { useTranslation } from 'react-i18next';
 import { GlobalStyle } from '../style/GlobalStyle';
-import LightTheme from '../../components/theme/LightTheme';
-import DarkTheme from '../../components/theme/DarkTheme';
-import TaskbarApp from '../../components/taskbar/TaskbarApp';
-import DesktopApp from '../../components/desktop/DesktopApp';
+import LightTheme from '../theme/LightTheme';
+import DarkTheme from '../theme/DarkTheme';
+import TaskbarApp from '../taskbar/TaskbarApp';
+import DesktopApp from '../desktop/DesktopApp';
 import CalendarApp from '../taskbar/calendar/CalendarApp';
 import LanguageApp from '../taskbar/language/LanguageApp';
 import { TaskbarProvider } from '../../contexts/taskbarContext';
@@ -15,8 +15,9 @@ import NotificationApp from '../notification/notificationApp/NotificationApp';
 import { IndexProvider } from '../../contexts/indexContext';
 import { FolderProvider } from '../../contexts/FolderContext';
 import RoutesApp from '../routes/RoutesApp';
+import StartMenuApp from '../startMenu/StartMenuApp';
 
-const WindowsApp = props => {
+const WorkspaceApp = props => {
     const { theme, setTheme } = useContext(ThemeContext);
 
     // Set initial "theme" value in localStorage
@@ -65,6 +66,7 @@ const WindowsApp = props => {
                         <TaskbarApp />
                     </FolderProvider>
                 </IndexProvider>
+                <StartMenuApp />
                 <LanguageApp />
                 <CalendarApp />
                 <NotificationApp />
@@ -74,4 +76,4 @@ const WindowsApp = props => {
     );
 };
 
-export default WindowsApp;
+export default WorkspaceApp;

@@ -39,9 +39,7 @@ const NotificationApp = () => {
                                         <span className='title'>
                                             <h2>{item.notificationTitle}</h2>
                                             <button
-                                                onClick={e =>
-                                                    closeNotification(e)
-                                                }
+                                                onClick={closeNotification}
                                                 id={item.id}
                                             >
                                                 <FontAwesomeIcon

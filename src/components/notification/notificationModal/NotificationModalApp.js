@@ -21,10 +21,7 @@ const NotificationModalApp = props => {
                         <div className='content'>
                             <span className='title'>
                                 <h2>{item.notificationTitle}</h2>
-                                <button
-                                    onClick={e => hideModal(e)}
-                                    id={item.id}
-                                >
+                                <button onClick={hideModal} id={item.id}>
                                     <FontAwesomeIcon
                                         icon={['fas', 'times']}
                                         style={{
