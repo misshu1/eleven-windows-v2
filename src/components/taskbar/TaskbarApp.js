@@ -91,8 +91,8 @@ const TaskbarApp = props => {
         >
             <LogoContainer
                 tabIndex='0'
-                // onKeyPress={e => this.handleKeyPress(e, 'startMenuOpen')}
-                // onClick={() => toggleAppVisibility('startMenuOpen')}
+                onKeyPress={e => handleKeyPress(e, 'startMenuOpen')}
+                onClick={() => toggleAppVisibility('startMenuOpen')}
             >
                 <BorderLogo>
                     {/* This 4 spans are used for border animation inside BorderLogo component */}

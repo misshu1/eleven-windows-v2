@@ -39,8 +39,8 @@ const LightTheme = {
 
     // StartMenu
     startMenuBg: 'rgba(196, 217, 252, 0.95)',
-    startSmallWidgetColor: '#212121',
-    startSmallWidgetHover: 'rgba(150, 189, 255, 0.5)',
+    startMenuColor: '#212121',
+    startLeftMenuHover: 'rgba(150, 189, 255, 0.5)',
 
     // Taskbar Icons
     iconBg: 'rgba(0, 21, 255, 0.1)',

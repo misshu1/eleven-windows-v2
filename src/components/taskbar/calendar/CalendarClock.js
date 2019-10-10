@@ -1,4 +1,4 @@
-import React, { useState, memo, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ClockStyleCalendar } from './style';
 import { useTranslation } from 'react-i18next';
 
@@ -15,16 +15,12 @@ const CalendarClock = ({ goToToday }) => {
     const { hour, minute, second, year, month, day, wDay } = clock;
     const { t } = useTranslation();
 
-    let currentDay = day;
     let hours = hour;
     let minutes = minute;
     let seconds = second;
     let session = ' AM';
     let currentMonth = month + 1;
 
-    if (currentDay < 10) {
-        currentDay = '0' + day;
-    }
     if (minutes < 10) {
         minutes = '0' + minutes;
     }
@@ -41,7 +37,6 @@ const CalendarClock = ({ goToToday }) => {
     useEffect(() => {
         let update = setInterval(() => {
             setClock({
-                ...clock,
                 hour: new Date().getHours(),
                 minute: new Date().getMinutes(),
                 second: new Date().getSeconds(),
@@ -62,7 +57,7 @@ const CalendarClock = ({ goToToday }) => {
             <span>{`${hours}:${minutes}:${seconds}`}</span>
             <span>{session}</span>
             <span onClick={goToToday}>
-                {`${t(`calendar.day.${wDay + 1}`)}, ${t(
+                {`${t(`calendar.day.${wDay + 1}`)}, ${day} ${t(
                     `calendar.month.${currentMonth}`
                 )}, ${year}`}
             </span>

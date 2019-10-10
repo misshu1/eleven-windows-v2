@@ -18,7 +18,6 @@ export const TaskbarProvider = props => {
         });
     };
 
-    // Check to see if "app" is open(true) then is closed
     const closeApp = app => {
         if (taskbar[app]) {
             setTaskbar(prevState => ({

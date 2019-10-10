@@ -39,8 +39,8 @@ const DarkTheme = {
 
     // StartMenu
     startMenuBg: 'rgba(32, 32, 32, 0.95)',
-    startSmallWidgetColor: '#d6d8de',
-    startSmallWidgetHover: 'rgba(100, 100, 100, 0.3)',
+    startMenuColor: '#d6d8de',
+    startLeftMenuHover: 'rgba(100, 100, 100, 0.3)',
 
     // Taskbar Icons
     iconBg: 'rgba(255, 255, 255, 0.1)',

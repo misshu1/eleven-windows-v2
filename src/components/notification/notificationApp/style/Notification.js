@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Notification = styled.div`
     border: 1px solid ${props => props.theme.notificationBorder};

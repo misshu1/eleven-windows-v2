@@ -19,13 +19,14 @@ export const StartMenu = styled.section`
     width: 100%;
     height: calc(100vh - 3.5rem);
     background: ${props => props.theme.startMenuBg};
-    color: ${props => props.theme.textColor};
+    color: ${props => props.theme.startMenuColor};
     transition: background 0.2s ease-in-out;
+    user-select: none;
     z-index: 250;
     animation: ${slideUp} 0.4s ease-out 1 forwards;
 
     @media (min-width: 28rem) {
-        max-width: 28rem;
+        max-width: 21.87rem;
         max-height: 45.5rem;
         top: auto;
         bottom: 0;

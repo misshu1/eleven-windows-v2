@@ -63,10 +63,10 @@ const WorkspaceApp = props => {
                     <FolderProvider>
                         <RoutesApp />
                         <DesktopApp />
+                        <StartMenuApp />
                         <TaskbarApp />
                     </FolderProvider>
                 </IndexProvider>
-                <StartMenuApp />
                 <LanguageApp />
                 <CalendarApp />
                 <NotificationApp />

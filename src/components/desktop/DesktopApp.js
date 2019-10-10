@@ -16,9 +16,9 @@ const DesktopApp = memo(props => {
             appOpen: 'settingsOpen'
         },
         {
-            iconDisplayame: 'Readme',
+            iconDisplayame: 'Docs',
             folderIcon: folderIcon,
-            linkMobile: '/readme'
+            linkMobile: '/docs'
         }
     ]);
 
@@ -33,7 +33,7 @@ const DesktopApp = memo(props => {
                     appIndexName={item.appIndexName}
                     appMinimize={item.appMinimize}
                     appOpen={item.appOpen}
-                ></IconContainer>
+                />
             ))}
         </Desktop>
     );

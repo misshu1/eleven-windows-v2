@@ -12,7 +12,8 @@ import {
     faSitemap,
     faCog,
     faWindowMinimize,
-    faUserCircle
+    faUserCircle,
+    faPowerOff
 } from '@fortawesome/free-solid-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 library.add(
@@ -24,7 +25,8 @@ library.add(
     faSitemap,
     faCog,
     faWindowMinimize,
-    faUserCircle
+    faUserCircle,
+    faPowerOff
 );
 
 const App = () => {
