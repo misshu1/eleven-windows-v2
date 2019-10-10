@@ -38,7 +38,7 @@ export const AppIcon = styled.div`
         transform: translate(-50%, -50%);
         width: 2rem;
         height: 2rem;
-        border-radius: 100%;
+        border-radius: 0.2rem;
     }
 
     &&:hover::after {

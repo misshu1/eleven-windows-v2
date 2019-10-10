@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Taskbar = styled.div`
+export const Taskbar = styled.nav`
     display: flex;
     color: ${props => props.theme.textColor};
     bottom: 0;

@@ -15,11 +15,53 @@
         <link rel="apple-touch-icon" href="icon/icon_192.png" />
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
         <title>Eleven Windows</title>
+        <style>
+            @keyframes animate {
+                0% {
+                    transform: scale(1);
+                }
+                25% {
+                    transform: scale(1.05);
+                }
+                50% {
+                    transform: scale(1);
+                }
+                75% {
+                    transform: scale(1.05);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+            .loading {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                background: #202020;
+            }
+            .loading img {
+                animation: 2s infinite animate;
+            }
+        </style>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="desktop" role="application"></div>
-        <div id="taskbar" role="application"></div>
+        <main id="desktop" role="application">
+            <div class="loading">
+                <img
+                    src="./logo/logo-red.svg"
+                    width="200"
+                    height="200"
+                    alt="AndreiNedelus.ro"
+                />
+            </div>
+        </main>
+        <header id="taskbar" role="application"></header>
         <div id="modal" role="application"></div>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <!-- <script
