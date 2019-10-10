@@ -9,6 +9,10 @@ ${normalize}
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     position: relative;
     margin: 0;
@@ -19,7 +23,7 @@ body {
 
 #desktop {
     position: relative;
-    height: calc(100vh - 3.5rem);
+    height: calc(100% - 3.5rem);
     width: 100%;
     overflow: hidden;
     background: ${props => props.theme.desktopBg.bg11};
