@@ -47,6 +47,7 @@ export const NotificationContainer = styled.section`
     user-select: none;
     background: ${props => props.theme.notificationBg};
     color: ${props => props.theme.notificationColor};
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 
     @media (max-width: 28rem) {
         animation: ${slideDown} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1

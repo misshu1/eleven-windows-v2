@@ -1,11 +1,10 @@
-import React, { lazy, Suspense, useContext } from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 import { TaskbarContext } from '../../contexts/taskbarContext';
 import { StartMenu, LoginContainer } from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import RightMenuApp from './rightMenu/RightMenuApp';
-
-const LeftMenuApp = lazy(() => import('./leftMenu/LeftMenuApp'));
+import LeftMenuApp from './leftMenu/LeftMenuApp';
 
 const StartMenuApp = () => {
     const { taskbar } = useContext(TaskbarContext);
@@ -15,17 +14,15 @@ const StartMenuApp = () => {
             {startMenuOpen && (
                 <StartMenu>
                     <LoginContainer>
-                        <FontAwesomeIcon
-                            icon={['fas', 'user-circle']}
-                            size='2x'
-                        />
-                        <span>Loged in as Guest.</span>
+                        <span>
+                            <FontAwesomeIcon
+                                icon={['fas', 'user-circle']}
+                                size='2x'
+                            />
+                        </span>
+                        <h4>Loged in as Guest.</h4>
                     </LoginContainer>
-                    <Suspense
-                        fallback={<div style={{ width: '4.5rem' }}></div>}
-                    >
-                        <LeftMenuApp />
-                    </Suspense>
+                    <LeftMenuApp />
                     <RightMenuApp />
                 </StartMenu>
             )}

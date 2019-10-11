@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import ReactDOM from 'react-dom';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { TaskbarContext } from '../../contexts/taskbarContext';
 import { faCommentAlt } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { Taskbar } from './style';
-import ClockApp from './ClockApp';
 import Notification from './Notification';
+import ReactDOM from 'react-dom';
+import ClockApp from './ClockApp';
 import Settings from './Settings';
 import Language from './Language';
 import OpenApps from './OpenApps';

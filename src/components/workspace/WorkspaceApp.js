@@ -1,21 +1,21 @@
 import React, { useContext, useEffect } from 'react';
+import { TaskbarProvider } from '../../contexts/taskbarContext';
+import { FolderProvider } from '../../contexts/FolderContext';
+import { useTranslation } from 'react-i18next';
+import { IndexProvider } from '../../contexts/indexContext';
 import { ThemeProvider } from 'styled-components';
 import { ThemeContext } from '../../contexts/themeContext';
-import { useTranslation } from 'react-i18next';
 import { GlobalStyle } from '../style/GlobalStyle';
-import LightTheme from '../theme/LightTheme';
-import DarkTheme from '../theme/DarkTheme';
-import TaskbarApp from '../taskbar/TaskbarApp';
-import DesktopApp from '../desktop/DesktopApp';
-import CalendarApp from '../taskbar/calendar/CalendarApp';
-import LanguageApp from '../taskbar/language/LanguageApp';
-import { TaskbarProvider } from '../../contexts/taskbarContext';
 import NotificationModalApp from '../notification/notificationModal/NotificationModalApp';
 import NotificationApp from '../notification/notificationApp/NotificationApp';
-import { IndexProvider } from '../../contexts/indexContext';
-import { FolderProvider } from '../../contexts/FolderContext';
-import RoutesApp from '../routes/RoutesApp';
 import StartMenuApp from '../startMenu/StartMenuApp';
+import CalendarApp from '../taskbar/calendar/CalendarApp';
+import LanguageApp from '../taskbar/language/LanguageApp';
+import TaskbarApp from '../taskbar/TaskbarApp';
+import DesktopApp from '../desktop/DesktopApp';
+import LightTheme from '../theme/LightTheme';
+import DarkTheme from '../theme/DarkTheme';
+import RoutesApp from '../routes/RoutesApp';
 
 const WorkspaceApp = props => {
     const { theme, setTheme } = useContext(ThemeContext);

@@ -9,6 +9,7 @@ export const Widget = styled.div`
     background: ${props => props.theme.notificationWidgetBg};
     border: 1px solid ${props => props.theme.notificationBorder};
     padding: 0.2rem;
+    transition: background 0.2s ease-in-out;
 
     &&:hover {
         background: ${props => props.theme.widgetHover};

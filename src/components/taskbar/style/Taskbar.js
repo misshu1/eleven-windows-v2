@@ -7,5 +7,6 @@ export const Taskbar = styled.nav`
     left: 0;
     width: 100%;
     height: 3.5rem;
+    background: ${props => props.theme.background};
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 `;

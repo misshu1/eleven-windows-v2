@@ -22,6 +22,7 @@ export const CalendarContainer = styled.section`
     right: 0;
     width: 21.87rem;
     background: ${props => props.theme.calendarBg};
+    transition: background 0.2s ease-in-out;
     animation: ${slideUp} 0.3s ease-out 1 forwards;
     box-shadow: -2px -2px 4px -1px rgba(0, 0, 0, 0.2),
         -4px -4px 5px 0px rgba(0, 0, 0, 0.14),
