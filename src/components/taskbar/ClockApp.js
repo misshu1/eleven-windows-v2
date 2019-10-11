@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ClockContainer } from './style';
+import { TaskbarContext } from '../../contexts/taskbarContext';
 
 const ClockApp = () => {
+    const { toggleAppVisibility, handleKeyPress } = useContext(TaskbarContext);
     const [clock, setClock] = useState({
         hour: new Date().getHours(),
         minute: new Date().getMinutes(),
@@ -50,12 +53,16 @@ const ClockApp = () => {
     }, [setClock]);
 
     return (
-        <React.Fragment>
+        <ClockContainer
+            tabIndex='0'
+            onKeyPress={e => handleKeyPress(e, 'calendarOpen')}
+            onClick={() => toggleAppVisibility('calendarOpen')}
+        >
             {`${hours}:${minutes}${session}`} <br />
             {`${currentDay}-${t(
                 `calendar.monthAbrev.${currentMonth}`
             )}-${year}`}
-        </React.Fragment>
+        </ClockContainer>
     );
 };
 

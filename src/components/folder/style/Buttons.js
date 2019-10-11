@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Buttons = styled.div`
     display: flex;
@@ -9,7 +9,8 @@ export const Buttons = styled.div`
     color: ${props => props.theme.textColor};
     transition: color 0.2s ease-in-out;
 
-    && div {
+    && div,
+    .closeBtnDesktop {
         display: none;
     }
 
@@ -30,14 +31,9 @@ export const Buttons = styled.div`
         background: ${props => props.theme.folderNameBarBtnHover};
     }
 
-    && :nth-child(2):hover,
-    && :nth-child(2):focus {
-        background: #ff0000;
-        color: #d6d8de;
-        outline: none;
-    }
     @media (min-width: 28rem) {
         width: 6rem;
+
         && div {
             display: flex;
             align-items: center;
@@ -45,11 +41,16 @@ export const Buttons = styled.div`
             width: 50%;
             height: 100%;
         }
-        && a {
-            width: 50%;
-            color: ${props => props.theme.textColor};
-            background: transparent;
-            transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+
+        && .closeBtnDesktop:hover,
+        && .closeBtnDesktop:focus {
+            background: #ff0000;
+            color: #d6d8de;
+            outline: none;
+        }
+
+        && .closeBtnMobile {
+            display: none;
         }
     }
 `;

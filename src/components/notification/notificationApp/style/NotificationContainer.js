@@ -62,6 +62,9 @@ export const NotificationContainer = styled.section`
     @media (min-width: 28rem) {
         width: 21.87rem;
         border-left: 1px solid ${props => props.theme.notificationBorder};
+        box-shadow: -2px 0px 4px -1px rgba(0, 0, 0, 0.2),
+            -4px 0px 5px 0px rgba(0, 0, 0, 0.14),
+            -1px 0px 10px 0px rgba(0, 0, 0, 0.12);
         animation: ${slideLeft} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1
             forwards;
         .clear {

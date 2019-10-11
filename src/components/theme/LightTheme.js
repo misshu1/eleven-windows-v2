@@ -40,6 +40,7 @@ const LightTheme = {
     // StartMenu
     startMenuBg: 'rgba(196, 217, 252, 0.95)',
     startMenuColor: '#212121',
+    startMenuBorder: '#202020',
     startLeftMenuHover: 'rgba(150, 189, 255, 0.5)',
 
     // Taskbar Icons
@@ -64,7 +65,7 @@ const LightTheme = {
     modalTitle: '#000',
 
     // Notification App
-    notificationBg: 'rgba(225, 235, 252, 0.90)',
+    notificationBg: 'rgba(225, 235, 252, 0.96)',
     notificationColor: '#212121',
     nottificationMessageBg: 'rgba(196, 217, 252, 0.95)',
     notificationBorder: '#202020',

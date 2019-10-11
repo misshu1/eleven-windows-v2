@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, memo } from 'react';
 import ReactDOM from 'react-dom';
 import Draggable from 'react-draggable';
 import { FolderContext } from '../../contexts/FolderContext';
@@ -15,16 +15,16 @@ import {
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const FolderApp = props => {
+const FolderApp = memo(props => {
     const { globalApp } = useContext(GlobalAppContext);
     const [handleDrag, setHandleDrag] = useState(false);
     const [close, setClose] = useState('');
     const { folder, minimizeApp, closeApp } = useContext(FolderContext);
     const { activeWindow } = useContext(IndexContext);
-
+    const { isMobile } = globalApp;
     useEffect(() => {
-        globalApp.isMobile && setHandleDrag(true);
-    }, [globalApp.isMobile]);
+        isMobile && setHandleDrag(true);
+    }, [isMobile]);
 
     const quitApp = () => {
         setClose('close');
@@ -62,12 +62,18 @@ const FolderApp = props => {
                                     size='sm'
                                 />
                             </div>
-                            <Link to='/' onClick={() => quitApp()}>
+                            <Link to='/' className='closeBtnMobile'>
                                 <FontAwesomeIcon
                                     icon={['fas', 'times']}
                                     size='lg'
                                 />
                             </Link>
+                            <div className='closeBtnDesktop' onClick={quitApp}>
+                                <FontAwesomeIcon
+                                    icon={['fas', 'times']}
+                                    size='lg'
+                                />
+                            </div>
                         </Buttons>
                     </NameBar>
                     <Content>{props.children}</Content>
@@ -76,5 +82,5 @@ const FolderApp = props => {
         </Draggable>,
         document.querySelector('#desktop')
     );
-};
+});
 export default FolderApp;

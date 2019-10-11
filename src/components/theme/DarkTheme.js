@@ -40,6 +40,7 @@ const DarkTheme = {
     // StartMenu
     startMenuBg: 'rgba(32, 32, 32, 0.95)',
     startMenuColor: '#d6d8de',
+    startMenuBorder: '#444',
     startLeftMenuHover: 'rgba(100, 100, 100, 0.3)',
 
     // Taskbar Icons
@@ -64,7 +65,7 @@ const DarkTheme = {
     modalTitle: '#fff',
 
     // Notification App
-    notificationBg: 'rgba(48, 48, 48, 0.90)',
+    notificationBg: 'rgba(48, 48, 48, 0.96)',
     notificationColor: '#d6d8de',
     nottificationMessageBg: 'rgba(32, 32, 32, 0.95)',
     notificationBorder: '#444',
