@@ -3,10 +3,11 @@ import { TaskbarContext } from '../../contexts/taskbarContext';
 import { LogoContainer, BorderLogo, Logo } from './style';
 import logoRed from '../../assets/images/logo/logo-red.svg';
 import logoBlue from '../../assets/images/logo/logo-blue.svg';
+import { ThemeContext } from '../../contexts/themeContext';
 
 const LogoApp = () => {
     const { toggleAppVisibility, handleKeyPress } = useContext(TaskbarContext);
-    const theme = localStorage.getItem('theme');
+    const { theme } = useContext(ThemeContext);
 
     return (
         <LogoContainer
@@ -20,7 +21,10 @@ const LogoApp = () => {
                 <span />
                 <span />
                 <span />
-                <Logo src={theme === 'dark' ? logoRed : logoBlue} alt='logo' />
+                <Logo
+                    src={theme.id === 'dark' ? logoRed : logoBlue}
+                    alt='logo'
+                />
             </BorderLogo>
         </LogoContainer>
     );

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import ReactDOM from 'react-dom';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { languages } from '../../../services/translation/i18next';
@@ -35,10 +36,11 @@ const LanguageApp = props => {
             </LanguagesContainer>
         ));
     };
-    return (
+    return ReactDOM.createPortal(
         <React.Fragment>
             {languagesOpen && <Container>{renderImg()}</Container>}
-        </React.Fragment>
+        </React.Fragment>,
+        document.querySelector('#desktop')
     );
 };
 

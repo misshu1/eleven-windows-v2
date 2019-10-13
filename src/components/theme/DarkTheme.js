@@ -1,7 +1,7 @@
 import background from './DesktopBackground';
 
 const DarkTheme = {
-    id: ' dark',
+    id: 'dark',
 
     // Desktop
     desktopBg: background,

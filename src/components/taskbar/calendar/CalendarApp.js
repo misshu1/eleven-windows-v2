@@ -1,4 +1,4 @@
-import React, { useContext, useCallback, useState } from 'react';
+import React, { useContext, useCallback, useState, memo } from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import { useTranslation } from 'react-i18next';
@@ -6,7 +6,7 @@ import { CalendarContainer, CalendarStyle } from './style';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
 import CalendarClock from './CalendarClock';
 
-const CalendarApp = () => {
+const CalendarApp = memo(() => {
     const [calendar, setCalendar] = useState({ value: new Date() });
     const { taskbar } = useContext(TaskbarContext);
     const { calendarOpen } = taskbar;
@@ -38,6 +38,6 @@ const CalendarApp = () => {
         </React.Fragment>,
         document.querySelector('#desktop')
     );
-};
+});
 
 export default CalendarApp;

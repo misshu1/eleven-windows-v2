@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useLayoutEffect } from 'react';
 import DarkTheme from '../components/theme/DarkTheme';
 import LightTheme from '../components/theme/LightTheme';
 
@@ -7,16 +7,20 @@ export const ThemeStateProvider = props => {
     const checkLocalStorageTheme = () => {
         const theme = localStorage.getItem('theme');
         if (!theme || theme === undefined || theme === null || theme === '') {
-            return DarkTheme;
+            setTheme(DarkTheme);
         }
         if (theme === 'dark') {
-            return DarkTheme;
+            setTheme(DarkTheme);
         } else if (theme === 'light') {
-            return LightTheme;
+            setTheme(LightTheme);
         }
     };
 
-    const [theme, setTheme] = useState(checkLocalStorageTheme());
+    useLayoutEffect(() => {
+        checkLocalStorageTheme();
+    }, []);
+
+    const [theme, setTheme] = useState(DarkTheme);
     return (
         <ThemeContext.Provider value={{ theme, setTheme }}>
             {props.children}

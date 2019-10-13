@@ -13,7 +13,8 @@ import {
     faCog,
     faWindowMinimize,
     faUserCircle,
-    faPowerOff
+    faPowerOff,
+    faSpinner
 } from '@fortawesome/free-solid-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 library.add(
@@ -26,7 +27,8 @@ library.add(
     faCog,
     faWindowMinimize,
     faUserCircle,
-    faPowerOff
+    faPowerOff,
+    faSpinner
 );
 
 const App = () => {

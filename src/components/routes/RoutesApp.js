@@ -2,6 +2,7 @@ import React, { useContext, lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
 import { FolderContext } from '../../contexts/FolderContext';
 import { GlobalAppContext } from '../../contexts/GlobalContext';
+import SpinnerApp from '../style/SpinnerApp';
 
 const SettingsApp = lazy(() => import('../apps/settings/SettingsApp'));
 
@@ -13,7 +14,7 @@ const RoutesApp = () => {
 
     return (
         <React.Fragment>
-            <Suspense fallback={<div></div>}>
+            <Suspense fallback={<SpinnerApp />}>
                 <Route
                     exact={isMobile ? true : false}
                     path={isMobile ? '/settings' : '/'}

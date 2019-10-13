@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, lazy, Suspense } from 'react';
 import { TaskbarProvider } from '../../contexts/taskbarContext';
 import { FolderProvider } from '../../contexts/FolderContext';
 import { useTranslation } from 'react-i18next';
@@ -7,15 +7,19 @@ import { ThemeProvider } from 'styled-components';
 import { ThemeContext } from '../../contexts/themeContext';
 import { GlobalStyle } from '../style/GlobalStyle';
 import NotificationModalApp from '../notification/notificationModal/NotificationModalApp';
-import NotificationApp from '../notification/notificationApp/NotificationApp';
-import StartMenuApp from '../startMenu/StartMenuApp';
-import CalendarApp from '../taskbar/calendar/CalendarApp';
-import LanguageApp from '../taskbar/language/LanguageApp';
 import TaskbarApp from '../taskbar/TaskbarApp';
 import DesktopApp from '../desktop/DesktopApp';
 import LightTheme from '../theme/LightTheme';
+import SpinnerApp from '../style/SpinnerApp';
 import DarkTheme from '../theme/DarkTheme';
 import RoutesApp from '../routes/RoutesApp';
+
+const CalendarApp = lazy(() => import('../taskbar/calendar/CalendarApp'));
+const LanguageApp = lazy(() => import('../taskbar/language/LanguageApp'));
+const StartMenuApp = lazy(() => import('../startMenu/StartMenuApp'));
+const NotificationApp = lazy(() =>
+    import('../notification/notificationApp/NotificationApp')
+);
 
 const WorkspaceApp = props => {
     const { theme, setTheme } = useContext(ThemeContext);
@@ -57,21 +61,22 @@ const WorkspaceApp = props => {
                 <button onClick={() => changeLanguage('ro-RO')}>ro</button>
             </div>
             <h1>{t('desktop.title')}</h1> */}
-
-            <TaskbarProvider>
-                <IndexProvider>
-                    <FolderProvider>
-                        <RoutesApp />
-                        <DesktopApp />
-                        <StartMenuApp />
-                        <TaskbarApp />
-                    </FolderProvider>
-                </IndexProvider>
-                <LanguageApp />
-                <CalendarApp />
-                <NotificationApp />
-            </TaskbarProvider>
-            <NotificationModalApp />
+            <Suspense fallback={<SpinnerApp />}>
+                <TaskbarProvider>
+                    <IndexProvider>
+                        <FolderProvider>
+                            <RoutesApp />
+                            <DesktopApp />
+                            <StartMenuApp />
+                            <TaskbarApp />
+                        </FolderProvider>
+                    </IndexProvider>
+                    <LanguageApp />
+                    <CalendarApp />
+                    <NotificationApp />
+                </TaskbarProvider>
+                <NotificationModalApp />
+            </Suspense>
         </ThemeProvider>
     );
 };

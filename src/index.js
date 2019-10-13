@@ -4,9 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './services/translation/i18next';
 import * as serviceWorker from './serviceWorker';
+import SpinnerApp from './components/style/SpinnerApp';
 
 ReactDOM.render(
-    <Suspense fallback={<div>Loading</div>}>
+    <Suspense fallback={<SpinnerApp />}>
         <BrowserRouter>
             <App />
         </BrowserRouter>
