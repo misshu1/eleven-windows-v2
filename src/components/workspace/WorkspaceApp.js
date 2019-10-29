@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, lazy, Suspense } from 'react';
-import { TaskbarProvider } from '../../contexts/taskbarContext';
+import { TaskbarContext } from '../../contexts/taskbarContext';
 import { FolderProvider } from '../../contexts/FolderContext';
 import { useTranslation } from 'react-i18next';
 import { IndexProvider } from '../../contexts/indexContext';
@@ -21,8 +21,9 @@ const NotificationApp = lazy(() =>
     import('../notification/notificationApp/NotificationApp')
 );
 
-const WorkspaceApp = props => {
+const WorkspaceApp = () => {
     const { theme, setTheme } = useContext(ThemeContext);
+    const { taskbar } = useContext(TaskbarContext);
 
     // Set initial "theme" value in localStorage
     useEffect(() => {
@@ -61,22 +62,29 @@ const WorkspaceApp = props => {
                 <button onClick={() => changeLanguage('ro-RO')}>ro</button>
             </div>
             <h1>{t('desktop.title')}</h1> */}
-            <Suspense fallback={<SpinnerApp />}>
-                <TaskbarProvider>
-                    <IndexProvider>
-                        <FolderProvider>
-                            <RoutesApp />
-                            <DesktopApp />
-                            <StartMenuApp />
-                            <TaskbarApp />
-                        </FolderProvider>
-                    </IndexProvider>
-                    <LanguageApp />
-                    <CalendarApp />
-                    <NotificationApp />
-                </TaskbarProvider>
-                <NotificationModalApp />
+            <IndexProvider>
+                <FolderProvider>
+                    <RoutesApp />
+                    <DesktopApp />
+                    <TaskbarApp />
+
+                    <Suspense fallback={<SpinnerApp delay={200} />}>
+                        {taskbar.startMenuOpen && <StartMenuApp />}
+                    </Suspense>
+                </FolderProvider>
+            </IndexProvider>
+
+            <Suspense fallback={<SpinnerApp delay={200} />}>
+                {taskbar.languagesOpen && <LanguageApp />}
             </Suspense>
+            <Suspense fallback={<SpinnerApp delay={200} />}>
+                {taskbar.calendarOpen && <CalendarApp />}
+            </Suspense>
+            <Suspense fallback={<SpinnerApp delay={200} />}>
+                {taskbar.notificationsOpen && <NotificationApp />}
+            </Suspense>
+
+            <NotificationModalApp />
         </ThemeProvider>
     );
 };

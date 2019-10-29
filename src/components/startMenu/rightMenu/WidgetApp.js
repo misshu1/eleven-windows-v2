@@ -1,11 +1,12 @@
-import React, { useContext, memo } from 'react';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { GlobalAppContext } from '../../../contexts/GlobalContext';
 import { FolderContext } from '../../../contexts/FolderContext';
 import { IndexContext } from '../../../contexts/indexContext';
 import { Widget } from './style';
 
-const WidgetApp = memo(props => {
+const WidgetApp = props => {
     const {
         linkMobile,
         widgetIcon,
@@ -55,6 +56,16 @@ const WidgetApp = memo(props => {
             )}
         </React.Fragment>
     );
-});
+};
 
 export default WidgetApp;
+
+WidgetApp.propTypes = {
+    linkMobile: PropTypes.string.isRequired,
+    widgetIcon: PropTypes.node.isRequired,
+    iconDisplayame: PropTypes.string.isRequired,
+    appIndexName: PropTypes.string.isRequired,
+    appMinimize: PropTypes.string.isRequired,
+    appOpen: PropTypes.string.isRequired,
+    animationDuration: PropTypes.number.isRequired
+};

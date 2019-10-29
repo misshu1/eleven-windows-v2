@@ -3,6 +3,7 @@ import { ThemeStateProvider } from './contexts/themeContext';
 import WorkspaceApp from './components/workspace/WorkspaceApp';
 import { NotificationProvider } from './contexts/notificationContext';
 import { GlobalAppProvider } from './contexts/GlobalContext';
+import { TaskbarProvider } from './contexts/taskbarContext';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faListAlt,
@@ -34,11 +35,13 @@ library.add(
 const App = () => {
     return (
         <GlobalAppProvider>
-            <ThemeStateProvider>
-                <NotificationProvider>
-                    <WorkspaceApp />
-                </NotificationProvider>
-            </ThemeStateProvider>
+            <TaskbarProvider>
+                <ThemeStateProvider>
+                    <NotificationProvider>
+                        <WorkspaceApp />
+                    </NotificationProvider>
+                </ThemeStateProvider>
+            </TaskbarProvider>
         </GlobalAppProvider>
     );
 };

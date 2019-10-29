@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SettingsContainer } from './style';
+import { SettingsContainer } from '../style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Settings = () => {
+const SettingsIconApp = () => {
     return (
         <SettingsContainer>
             <Link to={'/settings'} aria-label='settings'>
@@ -13,4 +13,4 @@ const Settings = () => {
     );
 };
 
-export default Settings;
+export default SettingsIconApp;

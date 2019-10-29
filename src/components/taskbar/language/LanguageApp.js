@@ -8,10 +8,9 @@ import { FlagImg, LanguagesContainer } from '../style/';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { NotificationContext } from '../../../contexts/notificationContext';
 
-const LanguageApp = props => {
-    const { taskbar, closeApp } = useContext(TaskbarContext);
+const LanguageApp = () => {
+    const { closeApp } = useContext(TaskbarContext);
     const { createNotificationSuccess } = useContext(NotificationContext);
-    const { languagesOpen } = taskbar;
     const { t } = useTranslation();
 
     const changeLanguage = lang => {
@@ -38,7 +37,7 @@ const LanguageApp = props => {
     };
     return ReactDOM.createPortal(
         <React.Fragment>
-            {languagesOpen && <Container>{renderImg()}</Container>}
+            <Container>{renderImg()}</Container>
         </React.Fragment>,
         document.querySelector('#desktop')
     );

@@ -27,17 +27,19 @@ export const TaskbarProvider = props => {
         }
     };
 
-    const toggleAppVisibility = app => {
-        setTaskbar(prevState => ({
-            ...prevState,
-            [app]: !taskbar[app]
-        }));
+    const startTaskbarApp = app => {
+        if (taskbar[app] === false) {
+            setTaskbar(prevState => ({
+                ...prevState,
+                [app]: true
+            }));
+        }
     };
 
-    // Toggle app visibility on "Enter" key press
     const handleKeyPress = (e, app) => {
         if (e.charCode === 13) {
-            toggleAppVisibility(app);
+            closeAllApps();
+            startTaskbarApp(app);
         }
     };
 
@@ -47,7 +49,7 @@ export const TaskbarProvider = props => {
                 taskbar,
                 setTaskbar,
                 closeApp,
-                toggleAppVisibility,
+                startTaskbarApp,
                 handleKeyPress,
                 closeAllApps
             }}

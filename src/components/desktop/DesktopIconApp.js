@@ -1,11 +1,12 @@
-import React, { useContext, memo } from 'react';
+import React, { useContext, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { IconContainer } from './style';
 import { GlobalAppContext } from '../../contexts/GlobalContext';
 import { FolderContext } from '../../contexts/FolderContext';
 import { IndexContext } from '../../contexts/indexContext';
 
-const DesktopIconApp = memo(props => {
+const DesktopIconApp = props => {
     const {
         linkMobile,
         folderIcon,
@@ -17,6 +18,18 @@ const DesktopIconApp = memo(props => {
     const { globalApp } = useContext(GlobalAppContext);
     const { startApp } = useContext(FolderContext);
     const { activeWindow } = useContext(IndexContext);
+
+    const start = useCallback(() => {
+        startApp(appOpen, folderIcon, appIndexName, appMinimize);
+        activeWindow(appIndexName);
+    }, [
+        activeWindow,
+        appIndexName,
+        appMinimize,
+        appOpen,
+        folderIcon,
+        startApp
+    ]);
 
     return (
         <IconContainer tabIndex='0'>
@@ -30,18 +43,7 @@ const DesktopIconApp = memo(props => {
                     <div>{iconName}</div>
                 </Link>
             ) : (
-                <div
-                    className='icon'
-                    onDoubleClick={() => {
-                        startApp(
-                            appOpen,
-                            folderIcon,
-                            appIndexName,
-                            appMinimize
-                        );
-                        activeWindow(appIndexName);
-                    }}
-                >
+                <div className='icon' onDoubleClick={start}>
                     <img
                         src={folderIcon}
                         alt={iconName}
@@ -52,6 +54,15 @@ const DesktopIconApp = memo(props => {
             )}
         </IconContainer>
     );
-});
+};
 
 export default DesktopIconApp;
+
+DesktopIconApp.propTypes = {
+    linkMobile: PropTypes.string.isRequired,
+    folderIcon: PropTypes.string.isRequired,
+    iconName: PropTypes.node.isRequired,
+    appIndexName: PropTypes.string.isRequired,
+    appMinimize: PropTypes.string.isRequired,
+    appOpen: PropTypes.string.isRequired
+};

@@ -1,28 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { TaskbarContext } from '../../contexts/taskbarContext';
-import { faCommentAlt } from '@fortawesome/free-solid-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { Taskbar } from './style';
-import Notification from './Notification';
+import NotificationIconApp from './icons/NotificationIconApp';
 import ReactDOM from 'react-dom';
-import ClockApp from './ClockApp';
-import Settings from './Settings';
-import Language from './Language';
+import ClockIconApp from './icons/ClockIconApp';
+import SettingsIconApp from './icons/SettingsIconApp';
+import LanguageIconApp from './icons/LanguageIconApp';
 import OpenApps from './OpenApps';
-import LogoApp from './LogoApp';
-library.add(faCommentAlt);
+import LogoIconApp from './icons/LogoIconApp';
 
-const TaskbarApp = props => {
+const TaskbarApp = () => {
     const { closeAllApps } = useContext(TaskbarContext);
 
+    const close = useCallback(() => {
+        closeAllApps();
+    }, [closeAllApps]);
+
     return ReactDOM.createPortal(
-        <Taskbar onClick={closeAllApps}>
-            <LogoApp />
+        <Taskbar onClick={close}>
+            <LogoIconApp />
             <OpenApps />
-            <Language />
-            <ClockApp />
-            <Settings />
-            <Notification />
+            <LanguageIconApp />
+            <ClockIconApp />
+            <SettingsIconApp />
+            <NotificationIconApp />
         </Taskbar>,
         document.querySelector('#taskbar')
     );

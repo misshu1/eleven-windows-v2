@@ -1,19 +1,22 @@
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { NotificationContainer } from './style';
-import { NotificationContext } from '../../contexts/notificationContext';
-import { TaskbarContext } from '../../contexts/taskbarContext';
+import { faCommentAlt } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { NotificationContainer } from '../style';
+import { NotificationContext } from '../../../contexts/notificationContext';
+import { TaskbarContext } from '../../../contexts/taskbarContext';
+library.add(faCommentAlt);
 
-const Notification = () => {
+const NotificationIconApp = () => {
     const { notification, hideAllModals } = useContext(NotificationContext);
-    const { toggleAppVisibility, handleKeyPress } = useContext(TaskbarContext);
+    const { startTaskbarApp, handleKeyPress } = useContext(TaskbarContext);
 
     return (
         <NotificationContainer
             tabIndex='0'
             onKeyPress={e => handleKeyPress(e, 'notificationsOpen')}
             onClick={() => {
-                toggleAppVisibility('notificationsOpen');
+                startTaskbarApp('notificationsOpen');
                 hideAllModals();
             }}
         >
@@ -25,4 +28,4 @@ const Notification = () => {
         </NotificationContainer>
     );
 };
-export default Notification;
+export default NotificationIconApp;

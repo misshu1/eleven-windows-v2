@@ -7,30 +7,11 @@ export const FolderProvider = props => {
         : false;
 
     const [folder, setFolder] = useState({
-        startMenuOpen: isMobile ? 'open' : 'close',
-        memoryGameOpen: isMobile ? 'open' : 'close',
-        calendarOpen: isMobile ? 'open' : 'close',
-        calculatorOpen: isMobile ? 'open' : 'close',
         settingsOpen: isMobile ? 'open' : 'close',
-        weatherOpen: isMobile ? 'open' : 'close',
-        neighborhoodOpen: isMobile ? 'open' : 'close',
-        resumeOpen: isMobile ? 'open' : 'close',
-        aboutOpen: isMobile ? 'open' : 'close',
-        contactOpen: isMobile ? 'open' : 'close',
-        myProjectsOpen: isMobile ? 'open' : 'close',
-        businessCompanyOpen: isMobile ? 'open' : 'close',
-        myReadsOpen: isMobile ? 'open' : 'close',
-        memoryGameMinimize: null,
-        calculatorMinimize: null,
+        docsOpen: isMobile ? 'open' : 'close',
+        calculatorOpen: isMobile ? 'open' : 'close',
         settingsMinimize: null,
-        weatherMinimize: null,
-        neighborhoodMinimize: null,
-        resumeMinimize: null,
-        aboutMinimize: null,
-        contactMinimize: null,
-        myProjectsMinimize: null,
-        businessCompanyMinimize: null,
-        myReadsMinimize: null,
+        docsMinimize: null,
         openApps: []
     });
 
@@ -65,7 +46,9 @@ export const FolderProvider = props => {
         if (isMobile) {
             return;
         }
-        setFolder({ ...folder, [app]: boolean });
+        if (folder[app] === null || folder[app] !== boolean) {
+            setFolder({ ...folder, [app]: boolean });
+        }
     };
 
     return (
