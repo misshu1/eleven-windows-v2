@@ -20,8 +20,13 @@ const OpenApps = () => {
                     key={app}
                     minimize={folder[minimize]}
                     onClick={() => {
-                        if (folder[minimize] !== null) {
+                        if (folder[minimize] === true) {
                             minimizeApp(minimize, false);
+                        } else if (
+                            folder[minimize] !== true &&
+                            index[zIndex] !== 100
+                        ) {
+                            minimizeApp(minimize, true);
                         }
                         activeWindow(zIndex);
                     }}

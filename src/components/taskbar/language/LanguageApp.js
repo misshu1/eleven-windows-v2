@@ -31,7 +31,11 @@ const LanguageApp = () => {
                     );
                 }}
             >
-                <FlagImg src={item.flag} style={{ margin: '1px' }} />
+                <FlagImg
+                    src={item.flag}
+                    style={{ margin: '1px' }}
+                    loading='lazy'
+                />
             </LanguagesContainer>
         ));
     };

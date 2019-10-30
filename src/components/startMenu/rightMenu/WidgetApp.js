@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { GlobalAppContext } from '../../../contexts/GlobalContext';
 import { FolderContext } from '../../../contexts/FolderContext';
 import { IndexContext } from '../../../contexts/indexContext';
+import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { Widget } from './style';
 
 const WidgetApp = props => {
@@ -17,8 +18,23 @@ const WidgetApp = props => {
         animationDuration
     } = props;
     const { globalApp } = useContext(GlobalAppContext);
-    const { startApp } = useContext(FolderContext);
+    const { closeApp } = useContext(TaskbarContext);
     const { activeWindow } = useContext(IndexContext);
+    const { startApp } = useContext(FolderContext);
+
+    const start = useCallback(() => {
+        startApp(appOpen, widgetIcon, appIndexName, appMinimize);
+        activeWindow(appIndexName);
+        closeApp('startMenuOpen');
+    }, [
+        activeWindow,
+        appIndexName,
+        appMinimize,
+        appOpen,
+        closeApp,
+        startApp,
+        widgetIcon
+    ]);
 
     return (
         <React.Fragment>
@@ -29,27 +45,18 @@ const WidgetApp = props => {
                             src={widgetIcon}
                             alt={iconDisplayame}
                             aria-label={iconDisplayame}
+                            loading='lazy'
                         />
                         <span>{iconDisplayame}</span>
                     </Link>
                 </Widget>
             ) : (
-                <Widget
-                    animationDuration={animationDuration}
-                    onClick={() => {
-                        startApp(
-                            appOpen,
-                            widgetIcon,
-                            appIndexName,
-                            appMinimize
-                        );
-                        activeWindow(appIndexName);
-                    }}
-                >
+                <Widget animationDuration={animationDuration} onClick={start}>
                     <img
                         src={widgetIcon}
                         alt={iconDisplayame}
                         aria-label={iconDisplayame}
+                        loading='lazy'
                     />
                     <span>{iconDisplayame}</span>
                 </Widget>
