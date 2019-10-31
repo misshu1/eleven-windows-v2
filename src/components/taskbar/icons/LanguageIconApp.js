@@ -38,7 +38,11 @@ const LanguageIconApp = () => {
 
     return (
         <LanguagesContainer tabIndex='0' onClick={toggle} onKeyPress={keyPress}>
-            <FlagImg src={selectLanguage()} alt={'language'} />
+            <FlagImg
+                src={selectLanguage()}
+                alt={'language'}
+                draggable='false'
+            />
         </LanguagesContainer>
     );
 };

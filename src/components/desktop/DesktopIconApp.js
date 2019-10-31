@@ -44,6 +44,7 @@ const DesktopIconApp = props => {
                         src={folderIcon}
                         alt={iconName}
                         aria-label={iconName}
+                        draggable='false'
                     />
                     <div>{iconName}</div>
                 </Link>
@@ -53,6 +54,7 @@ const DesktopIconApp = props => {
                         src={folderIcon}
                         alt={iconName}
                         aria-label={iconName}
+                        draggable='false'
                     />
                     <div>{iconName}</div>
                 </div>

@@ -7,6 +7,7 @@ export const ThemeStateProvider = props => {
     const checkLocalStorageTheme = () => {
         const theme = localStorage.getItem('theme');
         if (!theme || theme === undefined || theme === null || theme === '') {
+            localStorage.setItem('theme', 'dark');
             setTheme(DarkTheme);
         }
         if (theme === 'dark') {
@@ -20,9 +21,20 @@ export const ThemeStateProvider = props => {
         checkLocalStorageTheme();
     }, []);
 
+    const changeTheme = themeName => {
+        localStorage.setItem('theme', themeName);
+        setTheme(() => {
+            if (themeName === 'dark') {
+                return DarkTheme;
+            } else if (themeName === 'light') {
+                return LightTheme;
+            }
+        });
+    };
+
     const [theme, setTheme] = useState(DarkTheme);
     return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
+        <ThemeContext.Provider value={{ theme, changeTheme }}>
             {props.children}
         </ThemeContext.Provider>
     );

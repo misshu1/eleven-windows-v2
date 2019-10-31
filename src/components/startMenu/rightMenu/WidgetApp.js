@@ -20,10 +20,13 @@ const WidgetApp = props => {
     const { globalApp } = useContext(GlobalAppContext);
     const { closeApp } = useContext(TaskbarContext);
     const { activeWindow } = useContext(IndexContext);
-    const { startApp } = useContext(FolderContext);
+    const { folder, startApp, minimizeApp } = useContext(FolderContext);
 
     const start = useCallback(() => {
         startApp(appOpen, widgetIcon, appIndexName, appMinimize);
+        if (folder[appMinimize] === true) {
+            minimizeApp(appMinimize, false);
+        }
         activeWindow(appIndexName);
         closeApp('startMenuOpen');
     }, [
@@ -32,6 +35,8 @@ const WidgetApp = props => {
         appMinimize,
         appOpen,
         closeApp,
+        folder,
+        minimizeApp,
         startApp,
         widgetIcon
     ]);
@@ -46,6 +51,7 @@ const WidgetApp = props => {
                             alt={iconDisplayame}
                             aria-label={iconDisplayame}
                             loading='lazy'
+                            draggable='false'
                         />
                         <span>{iconDisplayame}</span>
                     </Link>
@@ -57,6 +63,7 @@ const WidgetApp = props => {
                         alt={iconDisplayame}
                         aria-label={iconDisplayame}
                         loading='lazy'
+                        draggable='false'
                     />
                     <span>{iconDisplayame}</span>
                 </Widget>

@@ -2,14 +2,15 @@ import React, { useContext, useState, useCallback } from 'react';
 import { Desktop } from './style';
 import { TaskbarContext } from '../../contexts/taskbarContext';
 import IconContainer from './DesktopIconApp';
-import folderIcon from '../../assets/images/desktop/folder-icon.png';
+import settingsIcon from '../../assets/images/icons/cog.svg';
+import docsIcon from '../../assets/images/icons/docs.svg';
 
 const DesktopApp = () => {
     const { closeAllApps } = useContext(TaskbarContext);
     const [icons] = useState([
         {
             iconDisplayame: 'Settings',
-            folderIcon: folderIcon,
+            folderIcon: settingsIcon,
             linkMobile: '/settings',
             appIndexName: 'settings',
             appMinimize: 'settingsMinimize',
@@ -17,7 +18,7 @@ const DesktopApp = () => {
         },
         {
             iconDisplayame: 'Docs',
-            folderIcon: folderIcon,
+            folderIcon: docsIcon,
             linkMobile: '/docs',
             appIndexName: 'docs',
             appMinimize: 'docsMinimize',

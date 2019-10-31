@@ -32,7 +32,7 @@ const OpenApps = () => {
                     }}
                     appIndex={index[zIndex]}
                 >
-                    <img src={icon} alt={app} />
+                    <img src={icon} alt={app} draggable='false' />
                 </AppIcon>
             );
         });

@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 import { Container } from './style';
 import WidgetApp from './WidgetApp';
-import calc from '../../../assets/images/startmenu/calculator.png';
+import calcIcon from '../../../assets/images/icons/calculator.svg';
+import docsIcon from '../../../assets/images/icons/docs.svg';
 
 const RightMenuApp = () => {
     const [widget] = useState([
         {
             iconDisplayame: 'Calculator',
-            widgetIcon: calc,
+            widgetIcon: calcIcon,
             linkMobile: '/calculator',
-            appIndexName: 'calculatorIndex',
+            appIndexName: 'calculator',
             appMinimize: 'calculatorMinimize',
             appOpen: 'calculatorOpen'
+        },
+        {
+            iconDisplayame: 'Documentation',
+            widgetIcon: docsIcon,
+            linkMobile: '/docs',
+            appIndexName: 'docs',
+            appMinimize: 'docsMinimize',
+            appOpen: 'docsOpen'
         }
     ]);
 

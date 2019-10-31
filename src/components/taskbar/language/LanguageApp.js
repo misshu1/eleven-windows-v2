@@ -35,6 +35,7 @@ const LanguageApp = () => {
                     src={item.flag}
                     style={{ margin: '1px' }}
                     loading='lazy'
+                    draggable='false'
                 />
             </LanguagesContainer>
         ));

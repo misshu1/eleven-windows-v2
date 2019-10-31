@@ -30,6 +30,7 @@ const LogoIconApp = () => {
                 <Logo
                     src={theme.id === 'dark' ? logoRed : logoBlue}
                     alt='logo'
+                    draggable='false'
                 />
             </BorderLogo>
         </LogoContainer>
