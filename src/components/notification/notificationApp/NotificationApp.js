@@ -10,6 +10,7 @@ import {
 import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { NotificationContext } from '../../../contexts/notificationContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Scrollbar from 'react-scrollbars-custom';
 
 const NotificationApp = () => {
     const { taskbar } = useContext(TaskbarContext);
@@ -24,42 +25,47 @@ const NotificationApp = () => {
         <React.Fragment>
             {taskbar.notificationsOpen && (
                 <NotificationContainer>
-                    <div
-                        style={{
-                            flex: 1,
-                            padding: '1rem',
-                            overflowY: 'auto'
-                        }}
-                    >
-                        {notification.length > 0 ? (
-                            notification.map(item => (
-                                <Notification key={item.id}>
-                                    <div className='icon'>{item.icon}</div>
-                                    <div className='content'>
-                                        <span className='title'>
-                                            <h2>{item.notificationTitle}</h2>
-                                            <button
-                                                onClick={closeNotification}
-                                                id={item.id}
-                                            >
-                                                <FontAwesomeIcon
-                                                    icon={['fas', 'times']}
-                                                    style={{
-                                                        position: 'relative',
-                                                        zIndex: '-1'
-                                                    }}
-                                                />
-                                            </button>
-                                        </span>
-                                        <p>{item.notificationInfo}</p>
-                                        <p>{item.code}</p>
-                                    </div>
-                                </Notification>
-                            ))
-                        ) : (
-                            <p>{t('notification.status')}</p>
-                        )}
-                    </div>
+                    <Scrollbar style={{ width: '100%', height: '100%' }}>
+                        <div
+                            style={{
+                                flex: 1,
+                                padding: '1rem',
+                                overflowY: 'auto'
+                            }}
+                        >
+                            {notification.length > 0 ? (
+                                notification.map(item => (
+                                    <Notification key={item.id}>
+                                        <div className='icon'>{item.icon}</div>
+                                        <div className='content'>
+                                            <span className='title'>
+                                                <h2>
+                                                    {item.notificationTitle}
+                                                </h2>
+                                                <button
+                                                    onClick={closeNotification}
+                                                    id={item.id}
+                                                >
+                                                    <FontAwesomeIcon
+                                                        icon={['fas', 'times']}
+                                                        style={{
+                                                            position:
+                                                                'relative',
+                                                            zIndex: '-1'
+                                                        }}
+                                                    />
+                                                </button>
+                                            </span>
+                                            <p>{item.notificationInfo}</p>
+                                            <p>{item.code}</p>
+                                        </div>
+                                    </Notification>
+                                ))
+                            ) : (
+                                <p>{t('notification.status')}</p>
+                            )}
+                        </div>
+                    </Scrollbar>
                     <span className='clear' onClick={clearAllNotifications}>
                         {t('notification.clear')}
                     </span>

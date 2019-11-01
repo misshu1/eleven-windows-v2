@@ -2,9 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
 
 export const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css?family=Roboto:100,400&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Kalam&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Kalam|Roboto:100,400|Source+Sans+Pro&display=swap');
 ${normalize}
 
 

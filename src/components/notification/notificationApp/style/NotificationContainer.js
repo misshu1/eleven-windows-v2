@@ -69,7 +69,10 @@ export const NotificationContainer = styled.section`
         animation: ${slideLeft} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1
             forwards;
         .clear {
+            display: flex;
+            align-items: center;
             width: fit-content;
+            height: 3rem;
             margin-left: auto;
             font-size: 0.9rem;
             color: ${props => props.theme.calendarTodayClock};
