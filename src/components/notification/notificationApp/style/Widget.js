@@ -11,6 +11,12 @@ export const Widget = styled.div`
     padding: 0.2rem;
     transition: background 0.2s ease-in-out;
 
+    img {
+        width: 1.8rem;
+        height: 1.8rem;
+        margin: 0 auto auto;
+    }
+
     &&:hover {
         background: ${props => props.theme.widgetHover};
     }
@@ -21,5 +27,6 @@ export const Widget = styled.div`
 
     h5 {
         margin: 0;
+        text-align: center;
     }
 `;

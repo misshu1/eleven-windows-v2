@@ -23,8 +23,8 @@ const DarkTheme = {
     backButtonColor: '#26c11b',
 
     // Settings App
-    settingsBg: 'rgba(174, 192, 229, 0.2)',
-    settingsOutline: 'rgb(220, 227, 242, 0.5)',
+    settingsResizeIconBg: 'rgba(174, 192, 229, 0.2)',
+    settingsResizeOutline: 'rgb(220, 227, 242, 0.5)',
 
     // Calculator App
     calcNumButtonBg: '#000',

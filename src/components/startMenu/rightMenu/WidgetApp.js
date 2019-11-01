@@ -11,7 +11,7 @@ const WidgetApp = props => {
     const {
         linkMobile,
         widgetIcon,
-        iconDisplayame,
+        iconDisplayName,
         appIndexName,
         appMinimize,
         appOpen,
@@ -48,24 +48,22 @@ const WidgetApp = props => {
                     <Link to={linkMobile}>
                         <img
                             src={widgetIcon}
-                            alt={iconDisplayame}
-                            aria-label={iconDisplayame}
-                            loading='lazy'
+                            alt={iconDisplayName}
+                            aria-label={iconDisplayName}
                             draggable='false'
                         />
-                        <span>{iconDisplayame}</span>
+                        <span>{iconDisplayName}</span>
                     </Link>
                 </Widget>
             ) : (
                 <Widget animationDuration={animationDuration} onClick={start}>
                     <img
                         src={widgetIcon}
-                        alt={iconDisplayame}
-                        aria-label={iconDisplayame}
-                        loading='lazy'
+                        alt={iconDisplayName}
+                        aria-label={iconDisplayName}
                         draggable='false'
                     />
-                    <span>{iconDisplayame}</span>
+                    <span>{iconDisplayName}</span>
                 </Widget>
             )}
         </React.Fragment>
@@ -77,7 +75,7 @@ export default WidgetApp;
 WidgetApp.propTypes = {
     linkMobile: PropTypes.string.isRequired,
     widgetIcon: PropTypes.node.isRequired,
-    iconDisplayame: PropTypes.string.isRequired,
+    iconDisplayName: PropTypes.string.isRequired,
     appIndexName: PropTypes.string.isRequired,
     appMinimize: PropTypes.string.isRequired,
     appOpen: PropTypes.string.isRequired,

@@ -16,14 +16,14 @@ export const Icon = styled.div`
     }
 
     .icon {
-        color: #d6d8de;
+        color: ${props => props.theme.textColor};
         cursor: default;
         text-align: center;
         text-decoration: none;
     }
 
     &&:hover {
-        background: rgba(174, 192, 229, 0.2);
-        border: 1px solid rgb(220, 227, 242, 0.5);
+        background: ${props => props.theme.settingsResizeIconBg};
+        border: 1px solid ${props => props.theme.settingsResizeOutline};
     }
 `;

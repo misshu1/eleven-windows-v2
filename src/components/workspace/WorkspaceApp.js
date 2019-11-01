@@ -36,6 +36,9 @@ const WorkspaceApp = () => {
                     <Suspense fallback={<SpinnerApp delay={200} />}>
                         {taskbar.startMenuOpen && <StartMenuApp />}
                     </Suspense>
+                    <Suspense fallback={<SpinnerApp delay={200} />}>
+                        {taskbar.notificationsOpen && <NotificationApp />}
+                    </Suspense>
                 </FolderProvider>
             </IndexProvider>
 
@@ -44,9 +47,6 @@ const WorkspaceApp = () => {
             </Suspense>
             <Suspense fallback={<SpinnerApp delay={200} />}>
                 {taskbar.calendarOpen && <CalendarApp />}
-            </Suspense>
-            <Suspense fallback={<SpinnerApp delay={200} />}>
-                {taskbar.notificationsOpen && <NotificationApp />}
             </Suspense>
 
             <NotificationModalApp />

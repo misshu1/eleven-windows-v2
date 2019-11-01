@@ -1,18 +1,35 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import {
-    NotificationContainer,
-    Notification,
-    WidgetsContainer,
-    Widget
-} from './style';
+import { NotificationContainer, Notification, WidgetsContainer } from './style';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { NotificationContext } from '../../../contexts/notificationContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Scrollbar from 'react-scrollbars-custom';
+import WidgetApp from './WidgetApp';
+import cogIcon from '../../../assets/images/icons/cog.svg';
 
 const NotificationApp = () => {
+    const [widget] = useState([
+        {
+            iconDisplayName: 'Settings',
+            useWidgetIcon: true,
+            widgetIcon: cogIcon,
+            fontIcon: ['fas', 'cog'],
+            appIndexName: 'settings',
+            appMinimize: 'settingsMinimize',
+            appOpen: 'settingsOpen'
+        },
+        {
+            iconDisplayName: 'Task Manager',
+            useWidgetIcon: false,
+            widgetIcon: null,
+            fontIcon: ['fas', 'sitemap'],
+            appIndexName: 'taskManager',
+            appMinimize: 'taskManagerMinimize',
+            appOpen: 'taskManagerOpen'
+        }
+    ]);
     const { taskbar } = useContext(TaskbarContext);
     const {
         notification,
@@ -70,24 +87,18 @@ const NotificationApp = () => {
                         {t('notification.clear')}
                     </span>
                     <WidgetsContainer>
-                        <Widget>
-                            <FontAwesomeIcon
-                                icon={['fas', 'cog']}
-                                size='lg'
-                                className='icon'
+                        {widget.map(item => (
+                            <WidgetApp
+                                key={item.appOpen}
+                                iconDisplayName={item.iconDisplayName}
+                                widgetIcon={item.widgetIcon}
+                                fontIcon={item.fontIcon}
+                                appIndexName={item.appIndexName}
+                                appMinimize={item.appMinimize}
+                                appOpen={item.appOpen}
+                                useWidgetIcon={item.useWidgetIcon}
                             />
-                            <div style={{ flex: 1 }}></div>
-                            <h5>Settings</h5>
-                        </Widget>
-                        <Widget>
-                            <FontAwesomeIcon
-                                icon={['fas', 'sitemap']}
-                                size='lg'
-                                className='icon'
-                            />
-                            <div style={{ flex: 1 }}></div>
-                            <h5>Task Manager</h5>
-                        </Widget>
+                        ))}
                     </WidgetsContainer>
                 </NotificationContainer>
             )}

@@ -23,8 +23,8 @@ const LightTheme = {
     backButtonColor: '#41a83a',
 
     // Settings App
-    settingsBg: 'rgba(0, 0, 0, 0.1)',
-    settingsOutline: 'rgb(0, 0, 0, 0.3)',
+    settingsResizeIconBg: 'rgba(0, 0, 0, 0.1)',
+    settingsResizeOutline: 'rgb(0, 0, 0, 0.3)',
 
     // Calculator App
     calcNumButtonBg: 'rgba(0, 21, 255, 0.1)',

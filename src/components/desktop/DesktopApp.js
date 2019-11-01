@@ -9,7 +9,7 @@ const DesktopApp = () => {
     const { closeAllApps } = useContext(TaskbarContext);
     const [icons] = useState([
         {
-            iconDisplayame: 'Settings',
+            iconDisplayName: 'Settings',
             folderIcon: settingsIcon,
             linkMobile: '/settings',
             appIndexName: 'settings',
@@ -17,7 +17,7 @@ const DesktopApp = () => {
             appOpen: 'settingsOpen'
         },
         {
-            iconDisplayame: 'Docs',
+            iconDisplayName: 'Docs',
             folderIcon: docsIcon,
             linkMobile: '/docs',
             appIndexName: 'docs',
@@ -34,8 +34,8 @@ const DesktopApp = () => {
         <Desktop onClick={close}>
             {icons.map(item => (
                 <IconContainer
-                    key={item.iconDisplayame}
-                    iconName={item.iconDisplayame}
+                    key={item.iconDisplayName}
+                    iconName={item.iconDisplayName}
                     linkMobile={item.linkMobile}
                     folderIcon={item.folderIcon}
                     appIndexName={item.appIndexName}

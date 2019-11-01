@@ -8,7 +8,7 @@ import Scrollbar from 'react-scrollbars-custom';
 const RightMenuApp = () => {
     const [widget] = useState([
         {
-            iconDisplayame: 'Calculator',
+            iconDisplayName: 'Calculator',
             widgetIcon: calcIcon,
             linkMobile: '/calculator',
             appIndexName: 'calculator',
@@ -16,7 +16,7 @@ const RightMenuApp = () => {
             appOpen: 'calculatorOpen'
         },
         {
-            iconDisplayame: 'Documentation',
+            iconDisplayName: 'Documentation',
             widgetIcon: docsIcon,
             linkMobile: '/docs',
             appIndexName: 'docs',
@@ -35,7 +35,7 @@ const RightMenuApp = () => {
                             key={item.appOpen}
                             linkMobile={item.linkMobile}
                             widgetIcon={item.widgetIcon}
-                            iconDisplayame={item.iconDisplayame}
+                            iconDisplayName={item.iconDisplayName}
                             appIndexName={item.appIndexName}
                             appMinimize={item.appMinimize}
                             appOpen={item.appOpen}

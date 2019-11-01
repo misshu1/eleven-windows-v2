@@ -8,6 +8,12 @@ export const Widget = styled.div`
     width: 3.5rem;
     height: 3.5rem;
     margin: 0.1rem 0;
+
+    img {
+        width: 2rem;
+        height: 2rem;
+    }
+
     &&:hover {
         background: ${props => props.theme.startLeftMenuHover};
     }
