@@ -41,10 +41,14 @@ const WidgetApp = props => {
         widgetIcon
     ]);
 
+    const startMobile = useCallback(() => {
+        closeApp('startMenuOpen');
+    }, [closeApp]);
+
     return (
         <React.Fragment>
             {globalApp.isMobile ? (
-                <Widget>
+                <Widget onClick={startMobile}>
                     <Link to={linkMobile}>
                         <img
                             src={widgetIcon}

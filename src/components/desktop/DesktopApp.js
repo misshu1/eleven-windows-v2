@@ -11,7 +11,7 @@ const DesktopApp = () => {
     const [icons] = useState([
         {
             iconDisplayName: 'Docs',
-            folderIcon: docsIcon,
+            widgetIcon: docsIcon,
             linkMobile: '/docs',
             appIndexName: 'docs',
             appMinimize: 'docsMinimize',
@@ -19,7 +19,7 @@ const DesktopApp = () => {
         },
         {
             iconDisplayName: 'Store',
-            folderIcon: storeIcon,
+            widgetIcon: storeIcon,
             linkMobile: '/store',
             appIndexName: 'store',
             appMinimize: 'storeMinimize',
@@ -27,7 +27,7 @@ const DesktopApp = () => {
         },
         {
             iconDisplayName: 'Settings',
-            folderIcon: settingsIcon,
+            widgetIcon: settingsIcon,
             linkMobile: '/settings',
             appIndexName: 'settings',
             appMinimize: 'settingsMinimize',
@@ -46,7 +46,7 @@ const DesktopApp = () => {
                     key={item.iconDisplayName}
                     iconName={item.iconDisplayName}
                     linkMobile={item.linkMobile}
-                    folderIcon={item.folderIcon}
+                    widgetIcon={item.widgetIcon}
                     appIndexName={item.appIndexName}
                     appMinimize={item.appMinimize}
                     appOpen={item.appOpen}

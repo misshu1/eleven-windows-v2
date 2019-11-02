@@ -4,8 +4,8 @@ export const Folder = styled.section`
     display: flex;
     flex-direction: column;
     position: absolute;
-    width: 100vw;
-    height: calc(100vh - 3.5rem);
+    width: 100%;
+    height: 100%;
     background: ${props => props.theme.background};
     color: ${props => props.theme.textColor};
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;

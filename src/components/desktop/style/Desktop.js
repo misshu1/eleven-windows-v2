@@ -6,7 +6,7 @@ export const Desktop = styled.section`
     flex-direction: column;
     user-select: none;
     position: relative;
-    height: calc(100vh - 3.5rem);
+    height: 100%;
     width: 100%;
     color: #d6d8de;
     overflow: hidden;

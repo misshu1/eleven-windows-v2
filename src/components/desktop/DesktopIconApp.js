@@ -9,7 +9,7 @@ import { IndexContext } from '../../contexts/indexContext';
 const DesktopIconApp = props => {
     const {
         linkMobile,
-        folderIcon,
+        widgetIcon,
         iconName,
         appIndexName,
         appMinimize,
@@ -20,7 +20,7 @@ const DesktopIconApp = props => {
     const { activeWindow } = useContext(IndexContext);
 
     const start = useCallback(() => {
-        startApp(appOpen, folderIcon, appIndexName, appMinimize);
+        startApp(appOpen, widgetIcon, appIndexName, appMinimize);
         if (folder[appMinimize] === true) {
             minimizeApp(appMinimize, false);
         }
@@ -31,7 +31,7 @@ const DesktopIconApp = props => {
         appMinimize,
         appOpen,
         folder,
-        folderIcon,
+        widgetIcon,
         minimizeApp,
         startApp
     ]);
@@ -41,7 +41,7 @@ const DesktopIconApp = props => {
             {globalApp.isMobile ? (
                 <Link to={linkMobile}>
                     <img
-                        src={folderIcon}
+                        src={widgetIcon}
                         alt={iconName}
                         aria-label={iconName}
                         draggable='false'
@@ -51,7 +51,7 @@ const DesktopIconApp = props => {
             ) : (
                 <div className='icon' onDoubleClick={start}>
                     <img
-                        src={folderIcon}
+                        src={widgetIcon}
                         alt={iconName}
                         aria-label={iconName}
                         draggable='false'
@@ -67,7 +67,7 @@ export default DesktopIconApp;
 
 DesktopIconApp.propTypes = {
     linkMobile: PropTypes.string.isRequired,
-    folderIcon: PropTypes.string.isRequired,
+    widgetIcon: PropTypes.node.isRequired,
     iconName: PropTypes.node.isRequired,
     appIndexName: PropTypes.string.isRequired,
     appMinimize: PropTypes.string.isRequired,

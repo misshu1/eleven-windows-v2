@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const SettingsContainer = styled.div`
     width: 33.33%;
     height: 100%;
+    position: relative;
 
     && a {
         display: flex;
@@ -15,6 +16,16 @@ export const SettingsContainer = styled.div`
         height: 100%;
         cursor: default;
         transition: color 0.2s ease-in-out;
+
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 0.2rem;
+        }
     }
 
     @media (max-width: 28rem) {

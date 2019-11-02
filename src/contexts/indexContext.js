@@ -6,7 +6,8 @@ export const IndexProvider = props => {
         calculator: 100,
         settings: 100,
         docs: 100,
-        store: 100
+        store: 100,
+        taskManager: 100
     });
 
     const activeWindow = newActive => {

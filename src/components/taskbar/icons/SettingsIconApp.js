@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SettingsContainer } from '../style';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import cogIcon from '../../../assets/images/icons/cog.svg';
 
 const SettingsIconApp = () => {
     return (
         <SettingsContainer>
             <Link to={'/settings'} aria-label='settings'>
-                <FontAwesomeIcon icon={['fa', 'cog']} />
+                <img src={cogIcon} alt='settings' draggable='false' />
             </Link>
         </SettingsContainer>
     );
