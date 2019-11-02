@@ -17,6 +17,9 @@ export const IconContainer = styled.div`
 
     && a,
     .icon {
+        display: block;
+        width: 100%;
+        height: 100%;
         color: #d6d8de;
         cursor: default;
         text-align: center;

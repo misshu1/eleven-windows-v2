@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
 import { Container } from './style';
+import Scrollbar from 'react-scrollbars-custom';
 import WidgetApp from './WidgetApp';
 import calcIcon from '../../../assets/images/icons/calculator.svg';
 import docsIcon from '../../../assets/images/icons/docs.svg';
-import Scrollbar from 'react-scrollbars-custom';
+import storeIcon from '../../../assets/images/icons/store.svg';
 
 const RightMenuApp = () => {
     const [widget] = useState([
-        {
-            iconDisplayName: 'Calculator',
-            widgetIcon: calcIcon,
-            linkMobile: '/calculator',
-            appIndexName: 'calculator',
-            appMinimize: 'calculatorMinimize',
-            appOpen: 'calculatorOpen'
-        },
         {
             iconDisplayName: 'Documentation',
             widgetIcon: docsIcon,
@@ -22,6 +15,22 @@ const RightMenuApp = () => {
             appIndexName: 'docs',
             appMinimize: 'docsMinimize',
             appOpen: 'docsOpen'
+        },
+        {
+            iconDisplayName: 'Store',
+            widgetIcon: storeIcon,
+            linkMobile: '/store',
+            appIndexName: 'store',
+            appMinimize: 'storeMinimize',
+            appOpen: 'storeOpen'
+        },
+        {
+            iconDisplayName: 'Calculator',
+            widgetIcon: calcIcon,
+            linkMobile: '/calculator',
+            appIndexName: 'calculator',
+            appMinimize: 'calculatorMinimize',
+            appOpen: 'calculatorOpen'
         }
     ]);
 

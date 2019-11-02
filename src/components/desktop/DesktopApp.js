@@ -4,18 +4,11 @@ import { TaskbarContext } from '../../contexts/taskbarContext';
 import IconContainer from './DesktopIconApp';
 import settingsIcon from '../../assets/images/icons/cog.svg';
 import docsIcon from '../../assets/images/icons/docs.svg';
+import storeIcon from '../../assets/images/icons/store.svg';
 
 const DesktopApp = () => {
     const { closeAllApps } = useContext(TaskbarContext);
     const [icons] = useState([
-        {
-            iconDisplayName: 'Settings',
-            folderIcon: settingsIcon,
-            linkMobile: '/settings',
-            appIndexName: 'settings',
-            appMinimize: 'settingsMinimize',
-            appOpen: 'settingsOpen'
-        },
         {
             iconDisplayName: 'Docs',
             folderIcon: docsIcon,
@@ -23,6 +16,22 @@ const DesktopApp = () => {
             appIndexName: 'docs',
             appMinimize: 'docsMinimize',
             appOpen: 'docsOpen'
+        },
+        {
+            iconDisplayName: 'Store',
+            folderIcon: storeIcon,
+            linkMobile: '/store',
+            appIndexName: 'store',
+            appMinimize: 'storeMinimize',
+            appOpen: 'storeOpen'
+        },
+        {
+            iconDisplayName: 'Settings',
+            folderIcon: settingsIcon,
+            linkMobile: '/settings',
+            appIndexName: 'settings',
+            appMinimize: 'settingsMinimize',
+            appOpen: 'settingsOpen'
         }
     ]);
 

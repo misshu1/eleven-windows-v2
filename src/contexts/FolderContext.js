@@ -10,8 +10,11 @@ export const FolderProvider = props => {
         settingsOpen: isMobile ? 'open' : 'close',
         docsOpen: isMobile ? 'open' : 'close',
         calculatorOpen: isMobile ? 'open' : 'close',
+        storeOpen: isMobile ? 'open' : 'close',
         settingsMinimize: null,
         docsMinimize: null,
+        calculatorMinimize: null,
+        storeMinimize: null,
         openApps: []
     });
 

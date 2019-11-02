@@ -5,7 +5,8 @@ export const IndexProvider = props => {
     const [index, setIndex] = useState({
         calculator: 100,
         settings: 100,
-        docs: 100
+        docs: 100,
+        store: 100
     });
 
     const activeWindow = newActive => {
