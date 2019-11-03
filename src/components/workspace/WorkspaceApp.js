@@ -30,8 +30,9 @@ const WorkspaceApp = () => {
             <GlobalStyle size={globalApp.size} background={desktopBg} />
             <IndexProvider>
                 <FolderProvider>
+                    <RoutesApp />
+
                     <Suspense fallback={<SpinnerApp delay={200} />}>
-                        <RoutesApp />
                         <DesktopApp />
                         <TaskbarApp />
                     </Suspense>

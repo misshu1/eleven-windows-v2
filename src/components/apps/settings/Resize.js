@@ -3,7 +3,7 @@ import { GlobalAppContext } from '../../../contexts/GlobalContext';
 import { Box, Icon, Title } from './style';
 import folderIcon from '../../../assets/images/icons/folder.svg';
 
-const Resize = props => {
+const Resize = () => {
     const { changeAppSize } = useContext(GlobalAppContext);
     return (
         <React.Fragment>
