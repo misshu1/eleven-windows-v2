@@ -29,7 +29,7 @@ body {
     height: calc(100% - 3.5rem);
     width: 100%;
     overflow: hidden;
-    background: ${props => props.theme.desktopBg.bg11};
+    background: ${props => props.theme.desktopBg[props.background]};
 }
 
 #taskbar {

@@ -23,6 +23,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TaskbarContext } from '../../contexts/taskbarContext';
 import Scrollbar from 'react-scrollbars-custom';
+
 const FolderApp = props => {
     const { globalApp } = useContext(GlobalAppContext);
     const [handleDrag, setHandleDrag] = useState(false);

@@ -57,36 +57,38 @@ export const AnimateFadeInOut = styled.div`
     height: 100%;
     z-index: ${props => props.appIndex};
 
-    .folder {
-        @media (min-width: 28em) {
-                ${props =>
-                    props.open === 'open' &&
-                    css`
-                        animation: ${fadeIn} 0.2s ease-out 1 forwards;
-                    `}
-                ${props =>
-                    props.minimize === true &&
-                    css`
-                        animation: ${minimizeDown} 0.3s ease-in 1 forwards;
-                    `}
-                ${props =>
-                    props.minimize === false &&
-                    css`
-                        animation: ${minimizeUp} 0.3s ease-out 1 forwards;
-                    `}
-                ${props =>
-                    props.close === 'close' &&
-                    css`
-                        animation: ${fadeOut} 0.2s ease 1 forwards;
-                    `}
-                ${props =>
-                    props.appIndex === 104 &&
-                    css`
-                        outline: 1px solid #01307c;
-                        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
-                        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
-                        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
-                    `};
+    @media (min-width: 28em) {
+        width: fit-content;
+        height: fit-content;
+        .folder {
+            ${props =>
+                props.open === 'open' &&
+                css`
+                    animation: ${fadeIn} 0.2s ease-out 1 forwards;
+                `}
+            ${props =>
+                props.minimize === true &&
+                css`
+                    animation: ${minimizeDown} 0.3s ease-in 1 forwards;
+                `}
+            ${props =>
+                props.minimize === false &&
+                css`
+                    animation: ${minimizeUp} 0.3s ease-out 1 forwards;
+                `}
+            ${props =>
+                props.close === 'close' &&
+                css`
+                    animation: ${fadeOut} 0.2s ease 1 forwards;
+                `}
+            ${props =>
+                props.appIndex === 104 &&
+                css`
+                    outline: 1px solid #01307c;
+                    -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
+                    -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
+                    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
+                `};
         }
     }
 `;

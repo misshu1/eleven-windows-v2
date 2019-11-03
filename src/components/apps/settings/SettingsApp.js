@@ -3,8 +3,9 @@ import { Container, Title, ThemesImg, Box } from './style';
 import { FolderContext } from '../../../contexts/FolderContext';
 import { ThemeContext } from '../../../contexts/themeContext';
 import { IndexContext } from '../../../contexts/indexContext';
-import Resize from './Resize';
+import Background from './Background';
 import FolderApp from '../../folder/FolderApp';
+import Resize from './Resize';
 import darkImg from '../../../assets/images/apps/settings/dark-preview.jpg';
 import lightImg from '../../../assets/images/apps/settings/light-preview.jpg';
 
@@ -43,10 +44,11 @@ const SettingsApp = () => {
                         draggable='false'
                     />
                 </Box>
-                <Language />
-                <Title>Background</Title>
 
+                <Language />
+                <Background />
                 <Resize />
+
                 <Title>Notifications</Title>
             </Container>
         </FolderApp>

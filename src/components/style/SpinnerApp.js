@@ -17,8 +17,13 @@ const SpinnerApp = props => {
     const [ready, setReady] = useState(false);
 
     useEffect(() => {
-        const time = setTimeout(() => setReady(true), delay);
-        return clearTimeout(time);
+        const time = setTimeout(() => {
+            setReady(true);
+        }, delay);
+
+        return () => {
+            clearTimeout(time);
+        };
     }, [delay]);
 
     return (
