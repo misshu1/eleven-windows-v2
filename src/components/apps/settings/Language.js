@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import i18n from 'i18next';
-import { FlagImgContainer, Title, Box } from './style';
+import { FlagImgContainer, Title, Box, Spacer } from './style';
 import { languages } from '../../../services/translation/i18next';
 import { useTranslation } from 'react-i18next';
 import { FlagImg } from '../../taskbar/style';
@@ -38,10 +38,10 @@ const Language = () => {
         ));
     };
     return (
-        <React.Fragment>
+        <Spacer>
             <Title>Language</Title>
             <Box style={{ justifyContent: 'flex-start' }}>{renderImg()}</Box>
-        </React.Fragment>
+        </Spacer>
     );
 };
 

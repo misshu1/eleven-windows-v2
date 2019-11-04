@@ -52,13 +52,16 @@ const NotificationApp = () => {
                         >
                             {notification.length > 0 ? (
                                 notification.map(item => (
-                                    <Notification key={item.id}>
+                                    <Notification
+                                        key={item.id}
+                                        type={item.type}
+                                    >
                                         <div className='icon'>{item.icon}</div>
                                         <div className='content'>
                                             <span className='title'>
-                                                <h2>
+                                                <h3>
                                                     {item.notificationTitle}
-                                                </h2>
+                                                </h3>
                                                 <button
                                                     onClick={closeNotification}
                                                     id={item.id}

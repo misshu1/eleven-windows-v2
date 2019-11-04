@@ -15,7 +15,7 @@ export const Container = styled.section`
     display: flex;
     flex-wrap: wrap;
     max-height: 20rem;
-    z-index: 200;
+    z-index: 250;
     position: absolute;
     user-select: none;
     border-top: 1px solid ${props => props.theme.calendarBorder};

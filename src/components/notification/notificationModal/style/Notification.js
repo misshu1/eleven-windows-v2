@@ -23,14 +23,27 @@ const fadeout = keyframes`
 `;
 
 export const Notification = styled.div`
-    border-top: 1px solid ${props => props.theme.modalBorder};
-    border-left: 1px solid ${props => props.theme.modalBorder};
-    border-bottom: 1px solid ${props => props.theme.modalBorder};
     background: ${props => props.theme.modalBg};
     color: ${props => props.theme.modalColor};
-    width: 21.87rem;
-    margin: 0.5rem 0;
+    margin: 0.5rem;
     display: flex;
+
+    ${props =>
+        props.type === 'success' &&
+        css`
+            background: #43a047;
+        `}
+    ${props =>
+        props.type === 'warn' &&
+        css`
+            background: #ffa000;
+        `}
+    ${props =>
+        props.type === 'error' &&
+        css`
+            background: #d32f2f;
+        `}
+
     ${props =>
         props.visible &&
         css`
@@ -60,20 +73,28 @@ export const Notification = styled.div`
             color: ${props => props.theme.modalColor};
             font-weight: 600;
             font-size: 1.2rem;
+            margin-right: .5rem;
         }
     }
 
     .content {
         flex: 1;
+        padding: .4rem 0;
     }
 
-    h2 {
-        color: ${props => props.theme.modalTitle};
+    h3 {
         margin: 0;
         flex: 1;
     }
     p {
         margin: 0.5rem 0;
         padding-right: 0.5rem;
+    }
+
+    @media (min-width: 28rem) {
+        width: 21.87rem;
+        border-radius: .5rem 0 0 .5rem;
+        margin: 0.5rem 0;
+        box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
     }
 `;

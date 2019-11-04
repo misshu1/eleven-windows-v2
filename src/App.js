@@ -6,7 +6,6 @@ import { GlobalAppProvider } from './contexts/GlobalContext';
 import { TaskbarProvider } from './contexts/taskbarContext';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faListAlt,
     faCheckSquare,
     faExclamationTriangle,
     faTimes,
@@ -14,12 +13,12 @@ import {
     faWindowMinimize,
     faUserCircle,
     faPowerOff,
-    faSpinner
+    faSpinner,
+    faExclamationCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 library.add(
     faCommentAlt,
-    faListAlt,
     faCheckSquare,
     faExclamationTriangle,
     faTimes,
@@ -27,7 +26,8 @@ library.add(
     faWindowMinimize,
     faUserCircle,
     faPowerOff,
-    faSpinner
+    faSpinner,
+    faExclamationCircle
 );
 
 const App = () => {

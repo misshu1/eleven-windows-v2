@@ -1,9 +1,52 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const isMobile = window.matchMedia('(max-width: 28rem)').matches ? true : false;
 
 export const NotificationContext = createContext();
 export const NotificationProvider = props => {
     const [notification, setNotification] = useState([]);
+    const [disable, setDesable] = useState(false);
+
+    const disableNotifications = e => {
+        if (notification.length !== 0 && (e === true || e.target)) {
+            setNotification(
+                notification.map(item => ({ ...item, isVisible: false }))
+            );
+        }
+
+        if (e.target) {
+            localStorage.setItem('showNotifications', e.target.checked);
+            setDesable(e.target.checked);
+        } else {
+            setDesable(e);
+        }
+    };
+
+    const checkLocalStorageNotification = () => {
+        const showNotifications = localStorage.getItem('showNotifications');
+        if (
+            !showNotifications ||
+            showNotifications === undefined ||
+            showNotifications === null ||
+            showNotifications === ''
+        ) {
+            if (isMobile) {
+                localStorage.setItem('showNotifications', true);
+                disableNotifications(true);
+            } else {
+                localStorage.setItem('showNotifications', false);
+                disableNotifications(false);
+            }
+        } else {
+            disableNotifications(JSON.parse(showNotifications));
+        }
+    };
+
+    useEffect(() => {
+        checkLocalStorageNotification();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const hideAllModals = () => {
         if (notification.length > 0) {
@@ -45,12 +88,18 @@ export const NotificationProvider = props => {
         setNotification([
             {
                 id: Math.random(),
-                isVisible: true,
+                isVisible: disable ? false : true,
                 closeAnimation: false,
                 notificationTitle,
                 notificationInfo,
                 code: `Warn ${code}`,
-                icon: <FontAwesomeIcon icon={['fas', 'list-alt']} size='lg' />
+                type: 'warn',
+                icon: (
+                    <FontAwesomeIcon
+                        icon={['fas', 'exclamation-circle']}
+                        size='lg'
+                    />
+                )
             },
             ...notification
         ]);
@@ -64,16 +113,16 @@ export const NotificationProvider = props => {
         setNotification([
             {
                 id: Math.random(),
-                isVisible: true,
+                isVisible: disable ? false : true,
                 closeAnimation: false,
                 notificationTitle,
                 notificationInfo,
                 code: `Error ${code}`,
+                type: 'error',
                 icon: (
                     <FontAwesomeIcon
                         icon={['fas', 'exclamation-triangle']}
                         size='lg'
-                        style={{ color: 'red' }}
                     />
                 )
             },
@@ -85,16 +134,13 @@ export const NotificationProvider = props => {
         setNotification([
             {
                 id: Math.random(),
-                isVisible: true,
+                isVisible: disable ? false : true,
                 closeAnimation: false,
                 notificationTitle,
                 notificationInfo,
+                type: 'success',
                 icon: (
-                    <FontAwesomeIcon
-                        icon={['fas', 'check-square']}
-                        size='lg'
-                        style={{ color: 'green' }}
-                    />
+                    <FontAwesomeIcon icon={['fas', 'check-square']} size='lg' />
                 )
             },
             ...notification
@@ -118,7 +164,9 @@ export const NotificationProvider = props => {
                 clearAllNotifications,
                 hideModal,
                 closeNotification,
-                hideAllModals
+                hideAllModals,
+                disableNotifications,
+                disable
             }}
         >
             {props.children}

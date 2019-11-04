@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Container, Title, ThemesImg, Box } from './style';
+import { Container, Title, ThemesImg, Box, Spacer } from './style';
 import { FolderContext } from '../../../contexts/FolderContext';
 import { ThemeContext } from '../../../contexts/themeContext';
 import { IndexContext } from '../../../contexts/indexContext';
@@ -8,8 +8,9 @@ import FolderApp from '../../folder/FolderApp';
 import Resize from './Resize';
 import darkImg from '../../../assets/images/apps/settings/dark-preview.jpg';
 import lightImg from '../../../assets/images/apps/settings/light-preview.jpg';
-
 import Language from './Language';
+import Notification from './Notification';
+
 const SettingsApp = () => {
     const { folder } = useContext(FolderContext);
     const { index } = useContext(IndexContext);
@@ -27,29 +28,30 @@ const SettingsApp = () => {
             open={folder.settingsOpen}
         >
             <Container>
-                <Title>Themes</Title>
-                <Box>
-                    <ThemesImg
-                        src={darkImg}
-                        onClick={() => changeTheme('dark')}
-                        alt='dark theme'
-                        loading='lazy'
-                        draggable='false'
-                    />
-                    <ThemesImg
-                        src={lightImg}
-                        onClick={() => changeTheme('light')}
-                        alt='light theme'
-                        loading='lazy'
-                        draggable='false'
-                    />
-                </Box>
+                <Spacer>
+                    <Title>Themes</Title>
+                    <Box>
+                        <ThemesImg
+                            src={darkImg}
+                            onClick={() => changeTheme('dark')}
+                            alt='dark theme'
+                            loading='lazy'
+                            draggable='false'
+                        />
+                        <ThemesImg
+                            src={lightImg}
+                            onClick={() => changeTheme('light')}
+                            alt='light theme'
+                            loading='lazy'
+                            draggable='false'
+                        />
+                    </Box>
+                </Spacer>
 
                 <Language />
                 <Background />
                 <Resize />
-
-                <Title>Notifications</Title>
+                <Notification />
             </Container>
         </FolderApp>
     );

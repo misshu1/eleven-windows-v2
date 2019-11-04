@@ -3,7 +3,7 @@ import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Title, Box, BackgroundPreview } from './style';
+import { Title, Box, BackgroundPreview, Spacer } from './style';
 import { ThemeContext } from '../../../contexts/themeContext';
 
 const useStyles = makeStyles({
@@ -49,7 +49,7 @@ const Background = () => {
     );
 
     return (
-        <React.Fragment>
+        <Spacer>
             <Title>Background</Title>
             <Box>
                 <Button
@@ -87,7 +87,7 @@ const Background = () => {
                     <h4>{selectedBgName}</h4>
                 </BackgroundPreview>
             </Box>
-        </React.Fragment>
+        </Spacer>
     );
 };
 

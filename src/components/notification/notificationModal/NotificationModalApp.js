@@ -16,11 +16,12 @@ const NotificationModalApp = props => {
                         key={item.id}
                         visible={item.isVisible}
                         close={item.closeAnimation}
+                        type={item.type}
                     >
                         <div className='icon'>{item.icon}</div>
                         <div className='content'>
                             <span className='title'>
-                                <h2>{item.notificationTitle}</h2>
+                                <h3>{item.notificationTitle}</h3>
                                 <button onClick={hideModal} id={item.id}>
                                     <FontAwesomeIcon
                                         icon={['fas', 'times']}

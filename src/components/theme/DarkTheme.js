@@ -60,9 +60,7 @@ const DarkTheme = {
 
     // Notification Modal
     modalBg: 'rgba(32, 32, 32, 0.95)',
-    modalBorder: '#444',
-    modalColor: '#d6d8de',
-    modalTitle: '#fff',
+    modalColor: '#fff',
 
     // Notification App
     notificationBg: 'rgba(48, 48, 48, 0.96)',

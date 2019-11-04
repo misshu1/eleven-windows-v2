@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { GlobalAppContext } from '../../../contexts/GlobalContext';
-import { Box, Icon, Title } from './style';
+import { Box, Icon, Title, Spacer } from './style';
 import folderIcon from '../../../assets/images/icons/folder.svg';
 
 const Resize = () => {
     const { changeAppSize } = useContext(GlobalAppContext);
     return (
-        <React.Fragment>
+        <Spacer>
             <Title>Resize App</Title>
             <Box style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
                 <Icon
@@ -70,7 +70,7 @@ const Resize = () => {
                     </div>
                 </Icon>
             </Box>
-        </React.Fragment>
+        </Spacer>
     );
 };
 
