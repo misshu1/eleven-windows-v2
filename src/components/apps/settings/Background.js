@@ -1,10 +1,11 @@
 import React, { useState, useCallback, useContext } from 'react';
-import Menu from '@material-ui/core/Menu';
-import Button from '@material-ui/core/Button';
+import { Title, Box, BackgroundPreview, Spacer } from './style';
+import { useTranslation } from 'react-i18next';
+import { ThemeContext } from '../../../contexts/themeContext';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Title, Box, BackgroundPreview, Spacer } from './style';
-import { ThemeContext } from '../../../contexts/themeContext';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
 
 const useStyles = makeStyles({
     bgButton: {
@@ -26,6 +27,7 @@ const Background = () => {
     const { background, changeBackground, getSelectedBackground } = useContext(
         ThemeContext
     );
+    const { t } = useTranslation();
     const selectedBg = getSelectedBackground()[0].bg;
     const selectedBgName = getSelectedBackground()[0].name;
     const [anchorEl, setAnchorEl] = useState(null);
@@ -50,7 +52,7 @@ const Background = () => {
 
     return (
         <Spacer>
-            <Title>Background</Title>
+            <Title>{t('settings.title.background')}</Title>
             <Box>
                 <Button
                     className={classes.bgButton}
@@ -58,7 +60,7 @@ const Background = () => {
                     aria-controls='background-menu'
                     onClick={handleClick}
                 >
-                    Select Background
+                    {t('settings.backgroundButton')}
                 </Button>
                 <Menu
                     id='background-menu'

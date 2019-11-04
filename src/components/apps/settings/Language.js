@@ -8,7 +8,6 @@ import { NotificationContext } from '../../../contexts/notificationContext';
 
 const Language = () => {
     const { createNotificationSuccess } = useContext(NotificationContext);
-
     const { t } = useTranslation();
 
     const changeLanguage = lang => {
@@ -39,7 +38,7 @@ const Language = () => {
     };
     return (
         <Spacer>
-            <Title>Language</Title>
+            <Title>{t('settings.title.language')}</Title>
             <Box style={{ justifyContent: 'flex-start' }}>{renderImg()}</Box>
         </Spacer>
     );

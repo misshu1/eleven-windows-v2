@@ -1,7 +1,4 @@
 {
-    "desktop": {
-        "title": "titlu RO"
-    },
     "calendar": {
         "monthAbrev": {
             "1": "Ian",
@@ -48,5 +45,17 @@
     "notification": {
         "status": "Nu sunt notificări noi",
         "clear": "Ștergeți toate notificările"
+    },
+    "settings": {
+        "title": {
+            "theme": "Temă",
+            "background": "Fundal",
+            "language": "Limbă",
+            "resize": "Redimensionare aplicație",
+            "notifications": "Notificări"
+        },
+        "backgroundButton": "Alege fundalul",
+        "disableButton": "Dezactivați alertele de notificări.",
+        "disableButtonInfo": "Le veți vedea în continuare în fereastra notificărilor."
     }
 }

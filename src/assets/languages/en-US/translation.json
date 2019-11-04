@@ -1,7 +1,4 @@
 {
-    "desktop": {
-        "title": "title US"
-    },
     "calendar": {
         "monthAbrev": {
             "1": "Jan",
@@ -48,5 +45,17 @@
     "notification": {
         "status": "No new notifications",
         "clear": "Clear all notifications"
+    },
+    "settings": {
+        "title": {
+            "theme": "Theme",
+            "background": "Background",
+            "language": "Language",
+            "resize": "Resize app",
+            "notifications": "Notifications"
+        },
+        "backgroundButton": "Select Background",
+        "disableButton": "Disable notifications alerts.",
+        "disableButtonInfo": "You will still see them inside the notifications window."
     }
 }

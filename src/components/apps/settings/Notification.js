@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import Switch from '@material-ui/core/Switch';
 import { NotificationContext } from '../../../contexts/notificationContext';
+import { useTranslation } from 'react-i18next';
 import {
     Title,
     NotificationContainer,
@@ -9,11 +10,12 @@ import {
 } from './style';
 
 const Notification = () => {
+    const { t } = useTranslation();
     const { disable, disableNotifications } = useContext(NotificationContext);
 
     return (
         <Spacer>
-            <Title>Notifications</Title>
+            <Title>{t('settings.title.notifications')}</Title>
             <NotificationContainer>
                 <Switch
                     checked={disable}
@@ -21,11 +23,11 @@ const Notification = () => {
                     value={disable}
                     inputProps={{ 'aria-label': 'secondary checkbox' }}
                 />
-                <h4>Disable notifications alerts.</h4>
+                <h4>{t('settings.disableButton')}</h4>
             </NotificationContainer>
             <NotificationText>
-                <strong>*</strong>You will still see them inside notification
-                window.
+                <strong>*</strong>
+                {t('settings.disableButtonInfo')}
             </NotificationText>
         </Spacer>
     );

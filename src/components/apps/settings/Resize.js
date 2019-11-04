@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
-import { GlobalAppContext } from '../../../contexts/GlobalContext';
 import { Box, Icon, Title, Spacer } from './style';
+import { GlobalAppContext } from '../../../contexts/GlobalContext';
+import { useTranslation } from 'react-i18next';
 import folderIcon from '../../../assets/images/icons/folder.svg';
 
 const Resize = () => {
+    const { t } = useTranslation();
     const { changeAppSize } = useContext(GlobalAppContext);
+
     return (
         <Spacer>
-            <Title>Resize App</Title>
+            <Title>{t('settings.title.resize')}</Title>
             <Box style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
                 <Icon
                     iconSize='6.875'
