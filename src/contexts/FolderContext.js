@@ -1,11 +1,9 @@
 import React, { useState, createContext } from 'react';
 
+const isMobile = window.matchMedia('(max-width: 28rem)').matches ? true : false;
+
 export const FolderContext = createContext();
 export const FolderProvider = props => {
-    const isMobile = window.matchMedia('(max-width: 28rem)').matches
-        ? true
-        : false;
-
     const [folder, setFolder] = useState({
         settingsOpen: isMobile ? 'open' : 'close',
         docsOpen: isMobile ? 'open' : 'close',

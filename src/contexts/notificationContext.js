@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import uuid from 'uuid';
 
 const isMobile = window.matchMedia('(max-width: 28rem)').matches ? true : false;
 
@@ -18,10 +19,6 @@ export const NotificationProvider = props => {
         setDesable(e.target.checked);
     };
 
-    const disableNotificationsOnInit = boolean => {
-        setDesable(boolean);
-    };
-
     const checkLocalStorageNotification = useCallback(() => {
         const disableNotifications = localStorage.getItem(
             'disableNotifications'
@@ -34,13 +31,13 @@ export const NotificationProvider = props => {
         ) {
             if (isMobile) {
                 localStorage.setItem('disableNotifications', true);
-                disableNotificationsOnInit(true);
+                setDesable(true);
             } else {
                 localStorage.setItem('disableNotifications', false);
-                disableNotificationsOnInit(false);
+                setDesable(false);
             }
         } else {
-            disableNotificationsOnInit(JSON.parse(disableNotifications));
+            setDesable(JSON.parse(disableNotifications));
         }
     }, []);
 
@@ -60,7 +57,7 @@ export const NotificationProvider = props => {
         const eventTargetID = e.target.id;
         setNotification(
             notification.map(item =>
-                item.id === +eventTargetID
+                item.id === eventTargetID
                     ? { ...item, closeAnimation: true }
                     : item
             )
@@ -68,7 +65,7 @@ export const NotificationProvider = props => {
         setTimeout(() => {
             setNotification(
                 notification.map(item =>
-                    item.id === +eventTargetID
+                    item.id === eventTargetID
                         ? { ...item, isVisible: false }
                         : item
                 )
@@ -77,7 +74,7 @@ export const NotificationProvider = props => {
     };
 
     const closeNotification = e => {
-        setNotification(notification.filter(item => item.id !== +e.target.id));
+        setNotification(notification.filter(item => item.id !== e.target.id));
     };
 
     const createNotificationWarn = (
@@ -87,7 +84,7 @@ export const NotificationProvider = props => {
     ) => {
         setNotification([
             {
-                id: Math.random(),
+                id: uuid.v4(),
                 isVisible: disable ? false : true,
                 closeAnimation: false,
                 notificationTitle,
@@ -112,7 +109,7 @@ export const NotificationProvider = props => {
     ) => {
         setNotification([
             {
-                id: Math.random(),
+                id: uuid.v4(),
                 isVisible: disable ? false : true,
                 closeAnimation: false,
                 notificationTitle,
@@ -133,7 +130,7 @@ export const NotificationProvider = props => {
     const createNotificationSuccess = (notificationTitle, notificationInfo) => {
         setNotification([
             {
-                id: Math.random(),
+                id: uuid.v4(),
                 isVisible: disable ? false : true,
                 closeAnimation: false,
                 notificationTitle,

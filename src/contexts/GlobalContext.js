@@ -10,7 +10,7 @@ export const GlobalAppProvider = props => {
     });
 
     const changeAppSize = size => {
-        setGlobalApp({ ...globalApp, size: size });
+        setGlobalApp({ ...globalApp, size });
     };
 
     return (

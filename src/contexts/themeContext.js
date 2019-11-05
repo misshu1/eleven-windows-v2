@@ -15,13 +15,9 @@ const createBackgroundObject = () => {
         isSelected: false
     }));
 
-    const setDefault = obj.map(item => {
-        if (item.bg === 'bg11') {
-            return { ...item, isSelected: true };
-        } else {
-            return item;
-        }
-    });
+    const setDefault = obj.map(item =>
+        item.bg === 'bg11' ? { ...item, isSelected: true } : item
+    );
 
     return setDefault;
 };

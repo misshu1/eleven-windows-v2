@@ -7,9 +7,9 @@ const SpinnerContainer = styled.div`
     color: #d6d8de;
     z-index: 200;
     position: absolute;
-    top: calc(50% - 1.75rem);
+    top: 50%;
     left: 50%;
-    transform: translate(50%, calc(50% - 1.75rem));
+    transform: translate(-50%, -50%);
 `;
 
 const SpinnerApp = props => {
