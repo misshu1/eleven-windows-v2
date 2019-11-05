@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const isMobile = window.matchMedia('(max-width: 28rem)').matches ? true : false;
@@ -9,44 +9,44 @@ export const NotificationProvider = props => {
     const [disable, setDesable] = useState(false);
 
     const disableNotifications = e => {
-        if (notification.length !== 0 && (e === true || e.target)) {
+        if (notification.length !== 0) {
             setNotification(
                 notification.map(item => ({ ...item, isVisible: false }))
             );
         }
-
-        if (e.target) {
-            localStorage.setItem('showNotifications', e.target.checked);
-            setDesable(e.target.checked);
-        } else {
-            setDesable(e);
-        }
+        localStorage.setItem('disableNotifications', e.target.checked);
+        setDesable(e.target.checked);
     };
 
-    const checkLocalStorageNotification = () => {
-        const showNotifications = localStorage.getItem('showNotifications');
+    const disableNotificationsOnInit = boolean => {
+        setDesable(boolean);
+    };
+
+    const checkLocalStorageNotification = useCallback(() => {
+        const disableNotifications = localStorage.getItem(
+            'disableNotifications'
+        );
         if (
-            !showNotifications ||
-            showNotifications === undefined ||
-            showNotifications === null ||
-            showNotifications === ''
+            !disableNotifications ||
+            disableNotifications === undefined ||
+            disableNotifications === null ||
+            disableNotifications === ''
         ) {
             if (isMobile) {
-                localStorage.setItem('showNotifications', true);
-                disableNotifications(true);
+                localStorage.setItem('disableNotifications', true);
+                disableNotificationsOnInit(true);
             } else {
-                localStorage.setItem('showNotifications', false);
-                disableNotifications(false);
+                localStorage.setItem('disableNotifications', false);
+                disableNotificationsOnInit(false);
             }
         } else {
-            disableNotifications(JSON.parse(showNotifications));
+            disableNotificationsOnInit(JSON.parse(disableNotifications));
         }
-    };
+    }, []);
 
     useEffect(() => {
         checkLocalStorageNotification();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [checkLocalStorageNotification]);
 
     const hideAllModals = () => {
         if (notification.length > 0) {

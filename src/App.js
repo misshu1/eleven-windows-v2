@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ThemeStateProvider } from './contexts/themeContext';
 import WorkspaceApp from './components/workspace/WorkspaceApp';
 import { NotificationProvider } from './contexts/notificationContext';
-import { GlobalAppProvider } from './contexts/GlobalContext';
+import { GlobalAppContext } from './contexts/GlobalContext';
 import { TaskbarProvider } from './contexts/taskbarContext';
+import { Route, Switch } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faCheckSquare,
@@ -31,16 +32,29 @@ library.add(
 );
 
 const App = () => {
+    const { globalApp } = useContext(GlobalAppContext);
+    const { isMobile } = globalApp;
+
     return (
-        <GlobalAppProvider>
-            <TaskbarProvider>
-                <ThemeStateProvider>
-                    <NotificationProvider>
-                        <WorkspaceApp />
-                    </NotificationProvider>
-                </ThemeStateProvider>
-            </TaskbarProvider>
-        </GlobalAppProvider>
+        <TaskbarProvider>
+            <ThemeStateProvider>
+                <NotificationProvider>
+                    <Switch>
+                        <Route
+                            exact
+                            path='/login'
+                            render={() => <div>login component...</div>}
+                        />
+                        <Route
+                            exact={isMobile ? false : true}
+                            path='/'
+                            render={() => <WorkspaceApp />}
+                        />
+                        <Route render={() => <div>404...</div>} />
+                    </Switch>
+                </NotificationProvider>
+            </ThemeStateProvider>
+        </TaskbarProvider>
     );
 };
 

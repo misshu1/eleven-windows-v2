@@ -28,6 +28,7 @@ const WorkspaceApp = () => {
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle size={globalApp.size} background={desktopBg} />
+
             <IndexProvider>
                 <FolderProvider>
                     <RoutesApp />
