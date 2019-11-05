@@ -1,5 +1,5 @@
 import React, { useContext, lazy, Suspense } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { FolderContext } from '../../contexts/FolderContext';
 import { GlobalAppContext } from '../../contexts/GlobalContext';
 import SpinnerApp from '../style/SpinnerApp';
@@ -15,20 +15,31 @@ const RoutesApp = () => {
 
     return (
         <React.Fragment>
-            <Suspense fallback={<SpinnerApp delay={200} />}>
+            <Switch>
                 <Route
                     exact={isMobile ? true : false}
                     path={isMobile ? '/settings' : '/'}
-                    render={() => settingsOpen === 'open' && <SettingsApp />}
+                    render={() =>
+                        settingsOpen === 'open' && (
+                            <Suspense fallback={<SpinnerApp delay={200} />}>
+                                <SettingsApp />
+                            </Suspense>
+                        )
+                    }
                 />
-            </Suspense>
-            <Suspense fallback={<SpinnerApp delay={200} />}>
+
                 <Route
                     exact={isMobile ? true : false}
                     path={isMobile ? '/docs' : '/'}
-                    render={() => docsOpen === 'open' && <DocsApp />}
+                    render={() =>
+                        docsOpen === 'open' && (
+                            <Suspense fallback={<SpinnerApp delay={200} />}>
+                                <DocsApp />
+                            </Suspense>
+                        )
+                    }
                 />
-            </Suspense>
+            </Switch>
         </React.Fragment>
     );
 };
