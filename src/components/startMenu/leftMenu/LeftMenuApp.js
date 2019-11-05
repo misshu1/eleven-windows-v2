@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { Container, Widget } from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { TaskbarContext } from '../../../contexts/taskbarContext';
+import { Link } from 'react-router-dom';
 import WidgetApp from './WidgetApp';
 import cogIcon from '../../../assets/images/icons/cog.svg';
 
 const LeftMenuApp = () => {
+    const { closeApp } = useContext(TaskbarContext);
     const [widget] = useState([
         {
             useWidgetIcon: true,
@@ -15,6 +18,10 @@ const LeftMenuApp = () => {
             appOpen: 'settingsOpen'
         }
     ]);
+
+    const closeStartMenu = useCallback(() => {
+        closeApp('startMenuOpen');
+    }, [closeApp]);
 
     return (
         <Container>
@@ -29,8 +36,10 @@ const LeftMenuApp = () => {
                     useWidgetIcon={item.useWidgetIcon}
                 />
             ))}
-            <Widget>
-                <FontAwesomeIcon icon={['fas', 'power-off']} />
+            <Widget onClick={closeStartMenu}>
+                <Link to='/login'>
+                    <FontAwesomeIcon icon={['fas', 'power-off']} />
+                </Link>
             </Widget>
         </Container>
     );

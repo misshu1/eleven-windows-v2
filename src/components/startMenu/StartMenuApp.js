@@ -9,6 +9,7 @@ import LeftMenuApp from './leftMenu/LeftMenuApp';
 const StartMenuApp = () => {
     const { taskbar } = useContext(TaskbarContext);
     const { startMenuOpen } = taskbar;
+
     return ReactDOM.createPortal(
         <React.Fragment>
             {startMenuOpen && (

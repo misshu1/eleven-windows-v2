@@ -9,6 +9,16 @@ export const Widget = styled.div`
     height: 3.5rem;
     margin: 0.1rem 0;
 
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        color: ${props => props.theme.startMenuColor};
+    }
+
     img {
         width: 2rem;
         height: 2rem;
