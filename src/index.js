@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider } from './contexts/themeContext';
 import { GlobalAppProvider } from './contexts/GlobalContext';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
@@ -8,9 +9,11 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <BrowserRouter>
-        <GlobalAppProvider>
-            <App />
-        </GlobalAppProvider>
+        <ThemeProvider>
+            <GlobalAppProvider>
+                <App />
+            </GlobalAppProvider>
+        </ThemeProvider>
     </BrowserRouter>,
     document.getElementById('desktop')
 );

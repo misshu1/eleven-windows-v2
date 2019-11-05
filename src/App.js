@@ -1,10 +1,12 @@
-import React from 'react';
-import { ThemeStateProvider } from './contexts/themeContext';
+import React, { useContext } from 'react';
 import WorkspaceApp from './components/workspace/WorkspaceApp';
 import { NotificationProvider } from './contexts/notificationContext';
 import { TaskbarProvider } from './contexts/taskbarContext';
 import { Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { ThemeContext } from './contexts/themeContext';
 import { library } from '@fortawesome/fontawesome-svg-core';
+
 import {
     faCheckSquare,
     faExclamationTriangle,
@@ -31,9 +33,11 @@ library.add(
 );
 
 const App = () => {
+    const { theme } = useContext(ThemeContext);
+
     return (
         <TaskbarProvider>
-            <ThemeStateProvider>
+            <ThemeProvider theme={theme}>
                 <NotificationProvider>
                     <Switch>
                         <Route
@@ -42,9 +46,10 @@ const App = () => {
                             render={() => <div>login component...</div>}
                         />
                         <Route path='/' component={WorkspaceApp} />
+                        <Route path='/404' render={() => <div>404...</div>} />
                     </Switch>
                 </NotificationProvider>
-            </ThemeStateProvider>
+            </ThemeProvider>
         </TaskbarProvider>
     );
 };

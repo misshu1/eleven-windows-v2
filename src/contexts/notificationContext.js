@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useCallback } from 'react';
+import React, { useState, createContext, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import uuid from 'uuid';
 
@@ -40,10 +40,6 @@ export const NotificationProvider = props => {
             setDesable(JSON.parse(disableNotifications));
         }
     }, []);
-
-    useEffect(() => {
-        checkLocalStorageNotification();
-    }, [checkLocalStorageNotification]);
 
     const hideAllModals = () => {
         if (notification.length > 0) {
@@ -163,7 +159,8 @@ export const NotificationProvider = props => {
                 closeNotification,
                 hideAllModals,
                 disableNotifications,
-                disable
+                disable,
+                checkLocalStorageNotification
             }}
         >
             {props.children}

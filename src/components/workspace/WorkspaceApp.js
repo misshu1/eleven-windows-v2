@@ -1,11 +1,17 @@
-import React, { useContext, lazy, Suspense } from 'react';
+import React, {
+    useEffect,
+    useLayoutEffect,
+    useContext,
+    lazy,
+    Suspense
+} from 'react';
 import { GlobalAppContext } from '../../contexts/GlobalContext';
 import { TaskbarContext } from '../../contexts/taskbarContext';
 import { FolderProvider } from '../../contexts/FolderContext';
 import { IndexProvider } from '../../contexts/indexContext';
-import { ThemeProvider } from 'styled-components';
 import { ThemeContext } from '../../contexts/themeContext';
 import { GlobalStyle } from '../style/GlobalStyle';
+import { NotificationContext } from '../../contexts/notificationContext';
 import NotificationModalApp from '../notification/notificationModal/NotificationModalApp';
 import SpinnerApp from '../style/SpinnerApp';
 import RoutesApp from '../routes/RoutesApp';
@@ -20,13 +26,27 @@ const NotificationApp = lazy(() =>
 );
 
 const WorkspaceApp = () => {
-    const { theme, getSelectedBackground } = useContext(ThemeContext);
+    const {
+        getSelectedBackground,
+        checkLocalStorageTheme,
+        checkLocalStorageBackground
+    } = useContext(ThemeContext);
+    const { checkLocalStorageNotification } = useContext(NotificationContext);
     const { taskbar } = useContext(TaskbarContext);
     const { globalApp } = useContext(GlobalAppContext);
     const desktopBg = getSelectedBackground()[0].bg;
 
+    useLayoutEffect(() => {
+        checkLocalStorageTheme();
+        checkLocalStorageBackground();
+    }, [checkLocalStorageBackground, checkLocalStorageTheme]);
+
+    useEffect(() => {
+        checkLocalStorageNotification();
+    }, [checkLocalStorageNotification]);
+
     return (
-        <ThemeProvider theme={theme}>
+        <React.Fragment>
             <GlobalStyle size={globalApp.size} background={desktopBg} />
 
             <IndexProvider>
@@ -57,7 +77,7 @@ const WorkspaceApp = () => {
             </Suspense>
 
             <NotificationModalApp />
-        </ThemeProvider>
+        </React.Fragment>
     );
 };
 

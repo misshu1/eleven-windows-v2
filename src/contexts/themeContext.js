@@ -1,9 +1,4 @@
-import React, {
-    useState,
-    createContext,
-    useLayoutEffect,
-    useCallback
-} from 'react';
+import React, { useState, createContext, useCallback } from 'react';
 import DarkTheme from '../components/theme/DarkTheme';
 import LightTheme from '../components/theme/LightTheme';
 import DesktopBackground from '../components/theme/DesktopBackground';
@@ -23,7 +18,7 @@ const createBackgroundObject = () => {
 };
 
 export const ThemeContext = createContext();
-export const ThemeStateProvider = props => {
+export const ThemeProvider = props => {
     const [theme, setTheme] = useState(DarkTheme);
     const [background, setBackground] = useState(createBackgroundObject());
 
@@ -86,11 +81,6 @@ export const ThemeStateProvider = props => {
         });
     }, []);
 
-    useLayoutEffect(() => {
-        checkLocalStorageTheme();
-        checkLocalStorageBackground();
-    }, [checkLocalStorageBackground, checkLocalStorageTheme]);
-
     return (
         <ThemeContext.Provider
             value={{
@@ -98,7 +88,9 @@ export const ThemeStateProvider = props => {
                 changeTheme,
                 background,
                 changeBackground,
-                getSelectedBackground
+                getSelectedBackground,
+                checkLocalStorageTheme,
+                checkLocalStorageBackground
             }}
         >
             {props.children}
