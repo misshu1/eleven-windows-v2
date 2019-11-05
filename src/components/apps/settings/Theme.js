@@ -17,14 +17,12 @@ const Theme = () => {
                     src={darkImg}
                     onClick={() => changeTheme('dark')}
                     alt='dark theme'
-                    loading='lazy'
                     draggable='false'
                 />
                 <ThemesImg
                     src={lightImg}
                     onClick={() => changeTheme('light')}
                     alt='light theme'
-                    loading='lazy'
                     draggable='false'
                 />
             </Box>

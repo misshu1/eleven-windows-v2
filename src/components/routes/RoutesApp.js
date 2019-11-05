@@ -1,5 +1,5 @@
 import React, { useContext, lazy, Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { FolderContext } from '../../contexts/FolderContext';
 import { GlobalAppContext } from '../../contexts/GlobalContext';
 import SpinnerApp from '../style/SpinnerApp';
@@ -15,31 +15,29 @@ const RoutesApp = () => {
 
     return (
         <React.Fragment>
-            <Switch>
-                <Route
-                    exact={isMobile ? true : false}
-                    path={isMobile ? '/settings' : '/'}
-                    render={() =>
-                        settingsOpen === 'open' && (
-                            <Suspense fallback={<SpinnerApp delay={200} />}>
-                                <SettingsApp />
-                            </Suspense>
-                        )
-                    }
-                />
+            <Route
+                exact={isMobile ? true : false}
+                path={isMobile ? '/settings' : '/'}
+                render={() =>
+                    settingsOpen === 'open' && (
+                        <Suspense fallback={<SpinnerApp delay={200} />}>
+                            <SettingsApp />
+                        </Suspense>
+                    )
+                }
+            />
 
-                <Route
-                    exact={isMobile ? true : false}
-                    path={isMobile ? '/docs' : '/'}
-                    render={() =>
-                        docsOpen === 'open' && (
-                            <Suspense fallback={<SpinnerApp delay={200} />}>
-                                <DocsApp />
-                            </Suspense>
-                        )
-                    }
-                />
-            </Switch>
+            <Route
+                exact={isMobile ? true : false}
+                path={isMobile ? '/docs' : '/'}
+                render={() =>
+                    docsOpen === 'open' && (
+                        <Suspense fallback={<SpinnerApp delay={200} />}>
+                            <DocsApp />
+                        </Suspense>
+                    )
+                }
+            />
         </React.Fragment>
     );
 };
