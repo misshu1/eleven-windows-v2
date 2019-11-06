@@ -2,19 +2,23 @@ import styled, { keyframes, css } from 'styled-components';
 
 const fadeIn = keyframes`
 0% {
-    filter: blur(0) brightness(1);
+    filter: blur(0) brightness(1) grayscale(0);
+    transform: scale(1);
 }
 100% {
-    filter: blur(16px) brightness(0.75);
+    filter: blur(16px) brightness(0.75) grayscale(0.2);
+    transform: scale(1.1);
 }
 `;
 
 const fadeOut = keyframes`
 0% {
-    filter: blur(16px) brightness(0.75);
+    filter: blur(16px) brightness(0.75) grayscale(0.2);
+    transform: scale(1.1);
 }
 100% {
-    filter: blur(0) brightness(1);
+    filter: blur(0) brightness(1) grayscale(0);
+    transform: scale(1);
 }
 `;
 
