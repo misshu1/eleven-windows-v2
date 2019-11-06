@@ -2,8 +2,10 @@ import styled, { keyframes, css } from 'styled-components';
 
 const fadeIn = keyframes`
 0% {
-    filter: blur(0) brightness(1) grayscale(0);
     transform: scale(1);
+}
+40% {
+    filter: blur(0) brightness(1) grayscale(0);
 }
 100% {
     filter: blur(16px) brightness(0.75) grayscale(0.2);
@@ -16,8 +18,10 @@ const fadeOut = keyframes`
     filter: blur(16px) brightness(0.75) grayscale(0.2);
     transform: scale(1.1);
 }
-100% {
+60% {
     filter: blur(0) brightness(1) grayscale(0);
+}
+100% {
     transform: scale(1);
 }
 `;
@@ -45,12 +49,12 @@ export const Container = styled.section`
         ${props =>
             props.animateInOut &&
             css`
-                animation: ${fadeIn} 0.5s ease-in 1 forwards;
+                animation: ${fadeIn} 0.8s ease-in 1 forwards;
             `}
         ${props =>
             !props.animateInOut &&
             css`
-                animation: ${fadeOut} 0.5s ease-in 1 forwards;
+                animation: ${fadeOut} 0.8s ease-in 1 forwards;
             `}
     }
 `;

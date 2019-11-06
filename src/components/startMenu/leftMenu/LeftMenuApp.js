@@ -1,12 +1,12 @@
 import React, { useState, useContext, useCallback } from 'react';
 import { Container, Widget } from './style';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import WidgetApp from './WidgetApp';
 import cogIcon from '../../../assets/images/icons/cog.svg';
+import powerIcon from '../../../assets/images/icons/power-off.svg';
 
-const LeftMenuApp = () => {
+const LeftMenuApp = props => {
     const { closeApp } = useContext(TaskbarContext);
     const [widget] = useState([
         {
@@ -21,7 +21,8 @@ const LeftMenuApp = () => {
 
     const closeStartMenu = useCallback(() => {
         closeApp('startMenuOpen');
-    }, [closeApp]);
+        props.history.push('/login');
+    }, [closeApp, props.history]);
 
     return (
         <Container>
@@ -37,12 +38,15 @@ const LeftMenuApp = () => {
                 />
             ))}
             <Widget onClick={closeStartMenu}>
-                <Link to='/login'>
-                    <FontAwesomeIcon icon={['fas', 'power-off']} />
-                </Link>
+                <img
+                    src={powerIcon}
+                    alt='login'
+                    aria-label='login'
+                    draggable='false'
+                />
             </Widget>
         </Container>
     );
 };
 
-export default LeftMenuApp;
+export default withRouter(LeftMenuApp);
