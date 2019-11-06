@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
         color: '#fff'
     },
     button: {
+        cursor: 'default',
         margin: '.5rem'
     }
 }));
