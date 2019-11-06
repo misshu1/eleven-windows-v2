@@ -23,6 +23,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TaskbarContext } from '../../contexts/taskbarContext';
 import Scrollbar from 'react-scrollbars-custom';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const FolderApp = props => {
     const { globalApp } = useContext(GlobalAppContext);
@@ -84,27 +85,48 @@ const FolderApp = props => {
                                     {props.folderName}
                                 </Name>
                                 <Buttons>
-                                    <div onClick={minimize}>
-                                        <FontAwesomeIcon
-                                            icon={['fas', 'window-minimize']}
-                                            size='sm'
-                                        />
-                                    </div>
-                                    <Link to='/' className='closeBtnMobile'>
-                                        <FontAwesomeIcon
-                                            icon={['fas', 'times']}
-                                            size='lg'
-                                        />
-                                    </Link>
-                                    <div
-                                        className='closeBtnDesktop'
-                                        onClick={quitApp}
+                                    <Tooltip
+                                        title='Minimize'
+                                        placement='top'
+                                        enterDelay={1000}
                                     >
-                                        <FontAwesomeIcon
-                                            icon={['fas', 'times']}
-                                            size='lg'
-                                        />
-                                    </div>
+                                        <div onClick={minimize}>
+                                            <FontAwesomeIcon
+                                                icon={[
+                                                    'fas',
+                                                    'window-minimize'
+                                                ]}
+                                                size='sm'
+                                            />
+                                        </div>
+                                    </Tooltip>
+                                    <Tooltip
+                                        title='Close'
+                                        placement='top'
+                                        enterDelay={1000}
+                                    >
+                                        <Link to='/' className='closeBtnMobile'>
+                                            <FontAwesomeIcon
+                                                icon={['fas', 'times']}
+                                                size='lg'
+                                            />
+                                        </Link>
+                                    </Tooltip>
+                                    <Tooltip
+                                        title='Close'
+                                        placement='top'
+                                        enterDelay={1000}
+                                    >
+                                        <div
+                                            className='closeBtnDesktop'
+                                            onClick={quitApp}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={['fas', 'times']}
+                                                size='lg'
+                                            />
+                                        </div>
+                                    </Tooltip>
                                 </Buttons>
                             </NameBar>
                             <Content>

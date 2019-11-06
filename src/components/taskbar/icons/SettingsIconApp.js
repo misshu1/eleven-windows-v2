@@ -1,15 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { SettingsContainer } from '../style';
+import { Link } from 'react-router-dom';
 import cogIcon from '../../../assets/images/icons/cog.svg';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const SettingsIconApp = () => {
     return (
-        <SettingsContainer>
-            <Link to={'/settings'} aria-label='settings'>
-                <img src={cogIcon} alt='settings' draggable='false' />
-            </Link>
-        </SettingsContainer>
+        <Tooltip title='Settings' placement='top' enterDelay={500}>
+            <SettingsContainer>
+                <Link to={'/settings'} aria-label='settings'>
+                    <img src={cogIcon} alt='settings' draggable='false' />
+                </Link>
+            </SettingsContainer>
+        </Tooltip>
     );
 };
 

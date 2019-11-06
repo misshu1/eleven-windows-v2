@@ -23,7 +23,13 @@ const WidgetApp = props => {
     const { folder, startApp, minimizeApp } = useContext(FolderContext);
 
     const start = useCallback(() => {
-        startApp(appOpen, widgetIcon, appIndexName, appMinimize);
+        startApp(
+            appOpen,
+            widgetIcon,
+            appIndexName,
+            appMinimize,
+            iconDisplayName
+        );
         if (folder[appMinimize] === true) {
             minimizeApp(appMinimize, false);
         }
@@ -36,6 +42,7 @@ const WidgetApp = props => {
         appOpen,
         closeApp,
         folder,
+        iconDisplayName,
         minimizeApp,
         startApp,
         widgetIcon

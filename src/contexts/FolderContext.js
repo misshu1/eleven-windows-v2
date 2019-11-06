@@ -18,7 +18,7 @@ export const FolderProvider = props => {
         openApps: []
     });
 
-    const startApp = (app, icon, zIndex, minimize) => {
+    const startApp = (app, icon, zIndex, minimize, tooltipName) => {
         if (isMobile) {
             return;
         }
@@ -26,7 +26,10 @@ export const FolderProvider = props => {
             setFolder({
                 ...folder,
                 [app]: 'open',
-                openApps: [...folder.openApps, [app, icon, zIndex, minimize]]
+                openApps: [
+                    ...folder.openApps,
+                    [app, icon, zIndex, minimize, tooltipName]
+                ]
             });
         }
     };

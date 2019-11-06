@@ -57,5 +57,13 @@
         "backgroundButton": "Alege fundalul",
         "disableButton": "Dezactivați alertele de notificări.",
         "disableButtonInfo": "Le veți vedea în continuare în fereastra notificărilor."
+    },
+    "tooltip": {
+        "login": "Autentificare",
+        "logout": "Deconectare",
+        "menu": "Meniu",
+        "language": "Limbă",
+        "notifications": "notificări noi",
+        "emptyNotifications": "Nu sunt notificări noi"
     }
 }

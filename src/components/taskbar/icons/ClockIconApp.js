@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ClockContainer } from '../style';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const ClockIconApp = () => {
     const { startTaskbarApp, handleKeyPress } = useContext(TaskbarContext);
@@ -10,9 +11,10 @@ const ClockIconApp = () => {
         minute: new Date().getMinutes(),
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
-        day: new Date().getDate()
+        day: new Date().getDate(),
+        wDay: new Date().getDay()
     });
-    const { hour, minute, year, month, day } = clock;
+    const { hour, minute, year, month, day, wDay } = clock;
     const { t } = useTranslation();
 
     let currentDay = day;
@@ -53,16 +55,24 @@ const ClockIconApp = () => {
     }, [setClock]);
 
     return (
-        <ClockContainer
-            tabIndex='0'
-            onKeyPress={e => handleKeyPress(e, 'calendarOpen')}
-            onClick={() => startTaskbarApp('calendarOpen')}
+        <Tooltip
+            title={`${t(`calendar.day.${wDay + 1}`)}, ${day} ${t(
+                `calendar.month.${currentMonth}`
+            )}, ${year}`}
+            placement='top'
+            enterDelay={500}
         >
-            {`${hours}:${minutes}${session}`} <br />
-            {`${currentDay}-${t(
-                `calendar.monthAbrev.${currentMonth}`
-            )}-${year}`}
-        </ClockContainer>
+            <ClockContainer
+                tabIndex='0'
+                onKeyPress={e => handleKeyPress(e, 'calendarOpen')}
+                onClick={() => startTaskbarApp('calendarOpen')}
+            >
+                {`${hours}:${minutes}${session}`} <br />
+                {`${currentDay}-${t(
+                    `calendar.monthAbrev.${currentMonth}`
+                )}-${year}`}
+            </ClockContainer>
+        </Tooltip>
     );
 };
 

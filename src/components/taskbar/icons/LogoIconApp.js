@@ -1,13 +1,16 @@
 import React, { useContext, useCallback } from 'react';
-import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { LogoContainer, BorderLogo, Logo } from '../style';
-import logoRed from '../../../assets/images/logo/logo-red.svg';
-import logoBlue from '../../../assets/images/logo/logo-blue.svg';
+import { TaskbarContext } from '../../../contexts/taskbarContext';
+import { useTranslation } from 'react-i18next';
 import { ThemeContext } from '../../../contexts/themeContext';
+import logoBlue from '../../../assets/images/logo/logo-blue.svg';
+import logoRed from '../../../assets/images/logo/logo-red.svg';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const LogoIconApp = () => {
     const { startTaskbarApp, handleKeyPress } = useContext(TaskbarContext);
     const { theme } = useContext(ThemeContext);
+    const { t } = useTranslation();
 
     const toggle = useCallback(() => {
         startTaskbarApp('startMenuOpen');
@@ -21,19 +24,21 @@ const LogoIconApp = () => {
     );
 
     return (
-        <LogoContainer tabIndex='0' onKeyPress={keyPress} onClick={toggle}>
-            <BorderLogo>
-                <span />
-                <span />
-                <span />
-                <span />
-                <Logo
-                    src={theme.id === 'dark' ? logoRed : logoBlue}
-                    alt='logo'
-                    draggable='false'
-                />
-            </BorderLogo>
-        </LogoContainer>
+        <Tooltip title={t('tooltip.menu')} placement='top' enterDelay={500}>
+            <LogoContainer tabIndex='0' onKeyPress={keyPress} onClick={toggle}>
+                <BorderLogo>
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                    <Logo
+                        src={theme.id === 'dark' ? logoRed : logoBlue}
+                        alt='logo'
+                        draggable='false'
+                    />
+                </BorderLogo>
+            </LogoContainer>
+        </Tooltip>
     );
 };
 

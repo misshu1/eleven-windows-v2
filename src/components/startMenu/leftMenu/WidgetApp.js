@@ -5,9 +5,11 @@ import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { FolderContext } from '../../../contexts/FolderContext';
 import { IndexContext } from '../../../contexts/indexContext';
 import { Widget } from './style';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const WidgetApp = props => {
     const {
+        iconDisplayName,
         widgetIcon,
         fontIcon,
         appIndexName,
@@ -20,7 +22,13 @@ const WidgetApp = props => {
     const { folder, startApp, minimizeApp } = useContext(FolderContext);
 
     const start = useCallback(() => {
-        startApp(appOpen, widgetIcon, appIndexName, appMinimize);
+        startApp(
+            appOpen,
+            widgetIcon,
+            appIndexName,
+            appMinimize,
+            iconDisplayName
+        );
         if (folder[appMinimize] === true) {
             minimizeApp(appMinimize, false);
         }
@@ -33,29 +41,33 @@ const WidgetApp = props => {
         appOpen,
         closeApp,
         folder,
+        iconDisplayName,
         minimizeApp,
         startApp,
         widgetIcon
     ]);
 
     return (
-        <Widget onClick={start}>
-            {useWidgetIcon && (
-                <img
-                    src={widgetIcon}
-                    alt={appOpen}
-                    aria-label={appOpen}
-                    draggable='false'
-                />
-            )}
-            {!useWidgetIcon && <FontAwesomeIcon icon={fontIcon} />}
-        </Widget>
+        <Tooltip title={iconDisplayName} placement='top' enterDelay={500}>
+            <Widget onClick={start}>
+                {useWidgetIcon && (
+                    <img
+                        src={widgetIcon}
+                        alt={appOpen}
+                        aria-label={appOpen}
+                        draggable='false'
+                    />
+                )}
+                {!useWidgetIcon && <FontAwesomeIcon icon={fontIcon} />}
+            </Widget>
+        </Tooltip>
     );
 };
 
 export default WidgetApp;
 
 WidgetApp.propTypes = {
+    iconDisplayName: PropTypes.string.isRequired,
     useWidgetIcon: PropTypes.bool.isRequired,
     widgetIcon: PropTypes.node.isRequired,
     fontIcon: PropTypes.array.isRequired,

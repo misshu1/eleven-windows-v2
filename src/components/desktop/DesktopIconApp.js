@@ -20,20 +20,21 @@ const DesktopIconApp = props => {
     const { activeWindow } = useContext(IndexContext);
 
     const start = useCallback(() => {
-        startApp(appOpen, widgetIcon, appIndexName, appMinimize);
+        startApp(appOpen, widgetIcon, appIndexName, appMinimize, iconName);
         if (folder[appMinimize] === true) {
             minimizeApp(appMinimize, false);
         }
         activeWindow(appIndexName);
     }, [
-        activeWindow,
+        startApp,
+        appOpen,
+        widgetIcon,
         appIndexName,
         appMinimize,
-        appOpen,
+        iconName,
         folder,
-        widgetIcon,
-        minimizeApp,
-        startApp
+        activeWindow,
+        minimizeApp
     ]);
 
     return (
