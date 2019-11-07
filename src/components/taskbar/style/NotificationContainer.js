@@ -9,6 +9,7 @@ export const NotificationContainer = styled.div`
     color: ${props => props.theme.startSmallWidgetColor};
     font-size: 1.5rem;
     margin: 0 1px;
+    outline: none;
 
     @media (max-width: 28rem) {
         order: 1;

@@ -9,6 +9,7 @@ export const IconContainer = styled.div`
     height: 5.5rem;
     border: 1px solid transparent;
     margin: 0.5rem;
+    outline: none;
 
     img {
         height: 3.75rem;
@@ -24,16 +25,16 @@ export const IconContainer = styled.div`
         cursor: default;
         text-align: center;
         text-decoration: none;
+        border: 1px solid transparent;
     }
 
-    && a:hover,
-    :hover {
+    &&:hover {
         background: rgba(174, 192, 229, 0.2);
         border: 1px solid rgb(220, 227, 242, 0.5);
     }
 
-    && a:focus,
-    :focus {
+    &&:focus,
+    &&:active {
         background: rgba(174, 192, 229, 0.4);
         border: 1px solid rgb(220, 227, 242, 0.7);
     }

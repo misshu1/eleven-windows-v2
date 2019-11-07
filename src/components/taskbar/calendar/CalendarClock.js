@@ -36,7 +36,7 @@ const CalendarClock = ({ goToToday }) => {
     }
 
     useEffect(() => {
-        let update = setInterval(() => {
+        const update = setInterval(() => {
             setClock({
                 hour: new Date().getHours(),
                 minute: new Date().getMinutes(),

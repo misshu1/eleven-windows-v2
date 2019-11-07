@@ -17,6 +17,11 @@ export const SettingsContainer = styled.div`
         cursor: default;
         transition: color 0.2s ease-in-out;
 
+        && a:visited,
+        && a:active {
+            color: ${props => props.theme.startSmallWidgetColor};
+        }
+
         img {
             position: absolute;
             top: 50%;

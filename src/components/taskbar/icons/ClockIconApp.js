@@ -37,7 +37,7 @@ const ClockIconApp = () => {
     }
 
     useEffect(() => {
-        const update = () => {
+        const update = setInterval(() => {
             setClock(prevState => ({
                 ...prevState,
                 hour: new Date().getHours(),
@@ -46,8 +46,7 @@ const ClockIconApp = () => {
                 month: new Date().getMonth(),
                 day: new Date().getDate()
             }));
-        };
-        setInterval(() => update, 1000);
+        }, 1000);
 
         return function() {
             clearInterval(update);

@@ -22,9 +22,9 @@ const OpenApps = () => {
                     title={appDisplayName}
                     placement='top'
                     enterDelay={500}
+                    key={app}
                 >
                     <AppIcon
-                        key={app}
                         minimize={folder[minimize]}
                         onClick={() => {
                             if (folder[minimize] === true) {
