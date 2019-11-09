@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Scrollbar from 'react-scrollbars-custom';
 import WidgetApp from './WidgetApp';
 import cogIcon from '../../../assets/images/icons/cog.svg';
+import taskIcon from '../../../assets/images/icons/task.svg';
 
 const NotificationApp = () => {
     const [widget] = useState([
@@ -22,8 +23,8 @@ const NotificationApp = () => {
         },
         {
             iconDisplayName: 'Task Manager',
-            useWidgetIcon: false,
-            widgetIcon: null,
+            useWidgetIcon: true,
+            widgetIcon: taskIcon,
             fontIcon: ['fas', 'sitemap'],
             appIndexName: 'taskManager',
             appMinimize: 'taskManagerMinimize',
