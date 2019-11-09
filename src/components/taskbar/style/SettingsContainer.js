@@ -35,6 +35,10 @@ export const SettingsContainer = styled.div`
 
     @media (max-width: 28rem) {
         order: 3;
+        &&:active {
+            background: ${props => props.theme.clockHover};
+            outline: none;
+        }
     }
 
     @media (min-width: 28rem) {

@@ -47,7 +47,8 @@ const App = () => {
     useLayoutEffect(() => {
         checkLocalStorageTheme();
         checkLocalStorageBackground();
-    }, [checkLocalStorageBackground, checkLocalStorageTheme]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <TaskbarProvider>

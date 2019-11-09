@@ -50,7 +50,7 @@ export const NotificationProvider = props => {
     };
 
     const hideModal = e => {
-        const eventTargetID = e.target.id;
+        const eventTargetID = e.currentTarget.id;
         setNotification(
             notification.map(item =>
                 item.id === eventTargetID
@@ -70,7 +70,9 @@ export const NotificationProvider = props => {
     };
 
     const closeNotification = e => {
-        setNotification(notification.filter(item => item.id !== e.target.id));
+        setNotification(
+            notification.filter(item => item.id !== e.currentTarget.id)
+        );
     };
 
     const createNotificationWarn = (

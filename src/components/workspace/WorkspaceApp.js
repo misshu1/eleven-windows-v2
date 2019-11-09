@@ -17,12 +17,16 @@ const NotificationApp = lazy(() =>
 );
 
 const WorkspaceApp = () => {
-    const { checkLocalStorageNotification } = useContext(NotificationContext);
+    const { checkLocalStorageNotification, clearAllNotifications } = useContext(
+        NotificationContext
+    );
     const { taskbar } = useContext(TaskbarContext);
 
     useEffect(() => {
+        clearAllNotifications();
         checkLocalStorageNotification();
-    }, [checkLocalStorageNotification]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <React.Fragment>

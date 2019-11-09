@@ -10,6 +10,10 @@ export const LogoContainer = styled.div`
 
     @media (max-width: 28rem) {
         order: 2;
+        &&:active {
+            background: ${props => props.theme.clockHover};
+            outline: none;
+        }
     }
 
     @media (min-width: 28rem) {
