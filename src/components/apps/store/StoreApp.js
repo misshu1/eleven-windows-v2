@@ -3,20 +3,22 @@ import { FolderContext } from '../../../contexts/FolderContext';
 import { IndexContext } from '../../../contexts/indexContext';
 import FolderApp from '../../folder/FolderApp';
 
-const DocsApp = () => {
+const StoreApp = () => {
     const { folder } = useContext(FolderContext);
     const { index } = useContext(IndexContext);
     return (
         <FolderApp
-            appMinimize={'docsMinimize'}
-            appOpen={'docsOpen'}
-            appIndexName='docs'
-            appIndexValue={index.docs}
-            folderName='Docs'
-            open={folder.docsOpen}
+            appMinimize={'storeMinimize'}
+            appOpen={'storeOpen'}
+            appIndexName='store'
+            appIndexValue={index.store}
+            folderName='Store'
+            open={folder.storeOpen}
+            marginLeft='4rem'
+            marginTop='4rem'
         >
-            docs
+            Store
         </FolderApp>
     );
 };
-export default DocsApp;
+export default StoreApp;

@@ -22,7 +22,6 @@ const SettingsApp = () => {
             folderName='Settings'
             marginLeft='6rem'
             marginTop='6rem'
-            linkMobile='settings'
             open={folder.settingsOpen}
         >
             <Container>

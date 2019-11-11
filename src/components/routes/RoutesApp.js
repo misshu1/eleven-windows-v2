@@ -3,6 +3,9 @@ import { Route } from 'react-router-dom';
 import { FolderContext } from '../../contexts/FolderContext';
 import { GlobalAppContext } from '../../contexts/GlobalContext';
 import SpinnerApp from '../style/SpinnerApp';
+import TaskManagerApp from '../apps/taskManager/TaskManagerApp';
+import StoreApp from '../apps/store/StoreApp';
+import CalculatorApp from '../apps/calculator/CalculatorApp';
 
 const SettingsApp = lazy(() => import('../apps/settings/SettingsApp'));
 const DocsApp = lazy(() => import('../apps/docs/Docs'));
@@ -11,7 +14,13 @@ const RoutesApp = () => {
     const { folder } = useContext(FolderContext);
     const { globalApp } = useContext(GlobalAppContext);
     const { isMobile } = globalApp;
-    const { settingsOpen, docsOpen } = folder;
+    const {
+        settingsOpen,
+        docsOpen,
+        taskManagerOpen,
+        storeOpen,
+        calculatorOpen
+    } = folder;
 
     return (
         <React.Fragment>
@@ -34,6 +43,41 @@ const RoutesApp = () => {
                     docsOpen === 'open' && (
                         <Suspense fallback={<SpinnerApp delay={200} />}>
                             <DocsApp />
+                        </Suspense>
+                    )
+                }
+            />
+
+            <Route
+                exact={isMobile ? true : false}
+                path={isMobile ? '/store' : '/'}
+                render={() =>
+                    storeOpen === 'open' && (
+                        <Suspense fallback={<SpinnerApp delay={200} />}>
+                            <StoreApp />
+                        </Suspense>
+                    )
+                }
+            />
+
+            <Route
+                exact={isMobile ? true : false}
+                path={isMobile ? '/calculator' : '/'}
+                render={() =>
+                    calculatorOpen === 'open' && (
+                        <Suspense fallback={<SpinnerApp delay={200} />}>
+                            <CalculatorApp />
+                        </Suspense>
+                    )
+                }
+            />
+
+            <Route
+                path='/'
+                render={() =>
+                    taskManagerOpen === 'open' && (
+                        <Suspense fallback={<SpinnerApp delay={200} />}>
+                            <TaskManagerApp />
                         </Suspense>
                     )
                 }

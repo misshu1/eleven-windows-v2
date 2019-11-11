@@ -168,7 +168,6 @@ FolderApp.propTypes = {
     appIndexName: PropTypes.string.isRequired,
     appIndexValue: PropTypes.number.isRequired,
     folderName: PropTypes.string.isRequired,
-    linkMobile: PropTypes.string.isRequired,
     width: PropTypes.string,
     height: PropTypes.string,
     marginTop: PropTypes.string,
