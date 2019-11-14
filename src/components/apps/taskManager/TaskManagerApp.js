@@ -3,13 +3,30 @@ import { FolderContext } from '../../../contexts/FolderContext';
 import { IndexContext } from '../../../contexts/indexContext';
 import FolderApp from '../../folder/FolderApp';
 import WidgetApp from './WidgetApp';
-import { Container, TableHead } from './style';
+import ButtonApp from './ButtonApp';
+import { Container, Table, TableHead } from './style';
 
 const TaskManagerApp = () => {
     const [selectedApp, setSelectedApp] = useState([]);
-    const { folder } = useContext(FolderContext);
+    const [disableBtn, setDisableBtn] = useState(true);
+    const { folder, closeApp } = useContext(FolderContext);
     const { index } = useContext(IndexContext);
     const { openApps } = folder;
+
+    const closeSelectedApp = useCallback(() => {
+        const noneSelected = selectedApp.every(
+            item => item.isSelected === false
+        );
+        if (noneSelected) {
+            return;
+        }
+
+        const app = selectedApp.filter(item => item.isSelected === true);
+
+        const { appName, appMinimize } = app[0];
+        closeApp(appName, appMinimize);
+        setSelectedApp(selectedApp.filter(item => item.isSelected === false));
+    }, [closeApp, selectedApp]);
 
     const getSelectedAppName = app => {
         const findApp = selectedApp.find(
@@ -17,6 +34,7 @@ const TaskManagerApp = () => {
         );
 
         if (findApp) {
+            setDisableBtn(false);
             return findApp.isSelected;
         }
     };
@@ -34,8 +52,10 @@ const TaskManagerApp = () => {
     const createSelectedAppObj = useCallback(() => {
         return openApps.map(item => {
             const app = item[0];
+            const minimize = item[3];
+            setDisableBtn(true);
 
-            return { appName: app, isSelected: false };
+            return { appName: app, appMinimize: minimize, isSelected: false };
         });
     }, [openApps]);
 
@@ -44,7 +64,7 @@ const TaskManagerApp = () => {
     }, [createSelectedAppObj, openApps]);
 
     const showApps = () => {
-        return openApps.map(item => {
+        const widget = openApps.map(item => {
             const app = item[0];
             const icon = item[1];
             const appDisplayName = item[4];
@@ -61,6 +81,7 @@ const TaskManagerApp = () => {
                 />
             );
         });
+        return widget;
     };
 
     return (
@@ -75,13 +96,19 @@ const TaskManagerApp = () => {
             marginTop='7rem'
         >
             <Container>
-                <TableHead>
-                    <div className='app-name'>Name</div>
-                    <div className='category'>Ram</div>
-                    <div className='category'>Open Time</div>
-                    <div className='category'>Ceva</div>
-                </TableHead>
-                {showApps()}
+                <Table>
+                    <TableHead>
+                        <div className='app-name'>Name</div>
+                        <div className='category'>Ram</div>
+                        <div className='category'>Open Time</div>
+                        <div className='category'>Ceva</div>
+                    </TableHead>
+                    {showApps()}
+                </Table>
+                <ButtonApp
+                    closeSelectedApp={closeSelectedApp}
+                    disableBtn={disableBtn}
+                />
             </Container>
         </FolderApp>
     );

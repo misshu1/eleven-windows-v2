@@ -1,5 +1,6 @@
 import React from 'react';
-import { Widget, Table } from './style';
+import PropTypes from 'prop-types';
+import { Widget, TableRow } from './style';
 
 const WidgetApp = props => {
     const {
@@ -13,7 +14,7 @@ const WidgetApp = props => {
     const selected = getSelectedAppName(app);
 
     return (
-        <Table
+        <TableRow
             tabIndex='0'
             onClick={() => handleSelectApp(app)}
             selectedApp={selected}
@@ -30,8 +31,16 @@ const WidgetApp = props => {
             <div className='stats'>1 MB</div>
             <div className='stats'>2 MB</div>
             <div className='stats'>3 MB</div>
-        </Table>
+        </TableRow>
     );
 };
 
 export default WidgetApp;
+
+WidgetApp.propTypes = {
+    app: PropTypes.string.isRequired,
+    widgetIcon: PropTypes.node.isRequired,
+    iconDisplayName: PropTypes.string.isRequired,
+    handleSelectApp: PropTypes.func.isRequired,
+    getSelectedAppName: PropTypes.func.isRequired
+};

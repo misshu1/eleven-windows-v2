@@ -12,6 +12,10 @@ const DarkTheme = {
     hover: 'rgba(100, 100, 100, 0.3)',
     whiteBlack: '#fff',
 
+    // Buttons
+    accentBg: '#AF0138',
+    disableBg: '#363636',
+
     // Folder
     folderNameBarBg: '#444',
     folderBorder: '#444',
@@ -25,6 +29,9 @@ const DarkTheme = {
     // Settings App
     settingsResizeIconBg: 'rgba(174, 192, 229, 0.2)',
     settingsResizeOutline: 'rgb(220, 227, 242, 0.5)',
+
+    // Task Manager
+    bottomBg: '#242424',
 
     // Calculator App
     calcNumButtonBg: '#000',

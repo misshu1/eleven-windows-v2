@@ -7,7 +7,8 @@ export const TableHead = styled.div`
     grid-template-rows: minmax(2rem, 2.5rem);
     outline: none;
     user-select: none;
-    color: #347aeb;
+    color: ${props => props.theme.accentColor};
+    font-weight: 600;
     border-left: 1px solid ${props => props.theme.folderHoverOutline};
     border-bottom: 1px solid ${props => props.theme.folderHoverOutline};
 

@@ -8,31 +8,36 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 
 const useStyles = makeStyles({
-    bgButton: {
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    bgButton: theme => ({
+        backgroundColor: theme.accentBg,
         border: 0,
         borderRadius: 3,
-        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
         color: 'white',
         height: '3rem',
         padding: '0 2rem',
         margin: 'auto 0',
-        cursor: 'default'
-    }
+        cursor: 'default',
+        '&:hover': {
+            backgroundColor: theme.accentBg
+        }
+    })
 });
 
 const ITEM_HEIGHT = 48;
 
 const Background = () => {
-    const { background, changeBackground, getSelectedBackground } = useContext(
-        ThemeContext
-    );
+    const {
+        theme,
+        background,
+        changeBackground,
+        getSelectedBackground
+    } = useContext(ThemeContext);
     const { t } = useTranslation();
     const selectedBg = getSelectedBackground()[0].bg;
     const selectedBgName = getSelectedBackground()[0].name;
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const classes = useStyles();
+    const classes = useStyles(theme);
 
     const handleClick = event => {
         setAnchorEl(event.currentTarget);

@@ -12,6 +12,10 @@ const LightTheme = {
     hover: 'rgba(150, 189, 255, 0.5)',
     whiteBlack: '#000',
 
+    // Buttons
+    accentBg: '#009BCE',
+    disableBg: '#99aeff',
+
     // Folder
     folderNameBarBg: '#b2b7f7',
     folderBorder: '#202020',
@@ -25,6 +29,9 @@ const LightTheme = {
     // Settings App
     settingsResizeIconBg: 'rgba(0, 0, 0, 0.1)',
     settingsResizeOutline: 'rgb(0, 0, 0, 0.3)',
+
+    // Task Manager
+    bottomBg: '#b0c0ff',
 
     // Calculator App
     calcNumButtonBg: 'rgba(0, 21, 255, 0.1)',
