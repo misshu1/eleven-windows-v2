@@ -14,7 +14,9 @@ const DarkTheme = {
 
     // Buttons
     accentBg: '#AF0138',
+    accentBgLight: '#d7809b',
     disableBg: '#363636',
+    switchColor: '#c80140',
 
     // Folder
     folderNameBarBg: '#444',
@@ -24,6 +26,7 @@ const DarkTheme = {
     folderHoverOutline: 'rgb(220, 227, 242, 0.5)',
     folderFocusBg: 'rgba(174, 192, 229, 0.2)',
     folderFocusOutline: 'rgb(220, 227, 242, 0.7)',
+    folderCloseBtn: '#AF0138',
     backButtonColor: '#26c11b',
 
     // Settings App
@@ -60,9 +63,9 @@ const DarkTheme = {
     calendarColorDefault: '#d6d8de',
     calendarColorPrimary: '#fff',
     calendarColorSecondary: '#bababa',
-    calendarColorCurrentDate: '#000',
-    calendarBgCurrentDate: '#006edc',
-    calendarTodayClock: '#4b8af2',
+    calendarColorCurrentDate: '#fff',
+    calendarBgCurrentDate: '#AF0138',
+    calendarTodayClock: '#d7809b',
     calendarColorNeighboringMonth: '#969696',
 
     // Notification Modal

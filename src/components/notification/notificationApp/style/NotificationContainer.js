@@ -75,7 +75,7 @@ export const NotificationContainer = styled.section`
             height: 3rem;
             margin-left: auto;
             font-size: 0.9rem;
-            color: ${props => props.theme.calendarTodayClock};
+            color: ${props => props.theme.accentBgLight};
         }
         .clear:hover {
             color: ${props => props.theme.calendarColorSecondary};

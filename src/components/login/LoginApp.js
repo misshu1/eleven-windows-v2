@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container, LoginContainer } from './style';
 import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
+import { ThemeContext } from '../../contexts/themeContext';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -23,14 +24,26 @@ const useStyles = makeStyles(theme => ({
         height: '1rem',
         color: '#fff'
     },
-    button: {
+    button: theme => ({
+        backgroundColor: theme.accentBg,
+        color: '#fff',
         cursor: 'default',
-        margin: '.5rem'
-    }
+        border: 0,
+        margin: '.5rem',
+        borderRadius: 3,
+        '&:disabled': {
+            color: '#e3e3e3',
+            backgroundColor: theme.disableBg
+        },
+        '&:hover': {
+            backgroundColor: theme.accentBg
+        }
+    })
 }));
 
 const LoginApp = props => {
-    const classes = useStyles();
+    const { theme } = useContext(ThemeContext);
+    const classes = useStyles(theme);
     const [animateInOut, setAnimateInOut] = useState(true);
 
     const handleAnimationOut = e => {

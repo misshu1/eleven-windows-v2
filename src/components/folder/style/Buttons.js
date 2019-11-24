@@ -18,12 +18,12 @@ export const Buttons = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-around;
-        background: red;
+        background: ${props => props.theme.folderCloseBtn};
         width: 100%;
         height: 100%;
         text-decoration: none;
         cursor: default;
-        color: #d6d8de;
+        color: #fff;
     }
 
     && div:hover,
@@ -44,8 +44,8 @@ export const Buttons = styled.div`
 
         && .closeBtnDesktop:hover,
         && .closeBtnDesktop:focus {
-            background: #ff0000;
-            color: #d6d8de;
+            background: ${props => props.theme.folderCloseBtn};
+            color: #fff;
             outline: none;
         }
 

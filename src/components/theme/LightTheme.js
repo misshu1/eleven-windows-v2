@@ -14,7 +14,9 @@ const LightTheme = {
 
     // Buttons
     accentBg: '#009BCE',
+    accentBgLight: '#006edc',
     disableBg: '#99aeff',
+    switchColor: '#006edc',
 
     // Folder
     folderNameBarBg: '#b2b7f7',
@@ -24,6 +26,7 @@ const LightTheme = {
     folderHoverOutline: 'rgb(0, 0, 0, 0.3)',
     folderFocusBg: 'rgba(0, 0, 0, 0.2)',
     folderFocusOutline: 'rgb(0, 0, 0, 0.4)',
+    folderCloseBtn: '#009BCE',
     backButtonColor: '#41a83a',
 
     // Settings App
@@ -61,7 +64,7 @@ const LightTheme = {
     calendarColorPrimary: '#000',
     calendarColorSecondary: '#595959',
     calendarColorCurrentDate: '#fff',
-    calendarBgCurrentDate: '#006edc',
+    calendarBgCurrentDate: '#009BCE',
     calendarTodayClock: '#006edc',
     calendarColorNeighboringMonth: '#828282',
 
