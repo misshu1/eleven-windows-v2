@@ -22,15 +22,13 @@ const useStyles = makeStyles({
         }
     }),
     checked: theme => ({
-        color: theme.accentBg,
-        opacity: 1
+        color: theme.accentBg
     }),
     track: theme => ({
         color: theme.accentBg
     }),
     thumb: theme => ({
-        color: theme.switchColor,
-        opacity: 0.75
+        color: theme.switchColor
     })
 });
 
