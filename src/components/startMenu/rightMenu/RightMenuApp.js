@@ -9,7 +9,7 @@ import storeIcon from '../../../assets/images/icons/store.svg';
 const RightMenuApp = () => {
     const [widget] = useState([
         {
-            iconDisplayName: 'Documentation',
+            iconDisplayName: 'Docs',
             widgetIcon: docsIcon,
             linkMobile: '/docs',
             appIndexName: 'docs',

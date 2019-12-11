@@ -1,62 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { FolderContext } from '../../../contexts/FolderContext';
-import { IndexContext } from '../../../contexts/indexContext';
-import FolderApp from '../../folder/FolderApp';
-
+import { Container } from './style';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
-import { atomDark, coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { FolderContext } from '../../../contexts/FolderContext';
+import { vs, tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { IndexContext } from '../../../contexts/indexContext';
 import { ThemeContext } from '../../../contexts/themeContext';
+import FolderApp from '../../folder/FolderApp';
+import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import { demo } from './CodeExamples';
+
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 
-const code = `
-import React from "react"
-import Prism from "prismjs"
-export class PrismCode extends React.Component {
-  constructor(props) {
-    super(props)
-    this.ref = React.createRef()
-  }
-
-  componentDidMount() {
-    this.highlight()
-  }
-
-  componentDidUpdate() {
-    this.highlight()
-  }
-
-  highlight = () => {
-    if (this.ref && this.ref.current) {
-      Prism.highlightElement(this.ref.current)
-    }
-  }
-
-  render() {
-    const { code, plugins, language } = this.props
-
-    return (
-      <pre className={!plugins ? "something" : plugins.join(" ")}>
-        <code ref={this.ref} >
-          {code.trim()}
-        </code>
-      </pre>
-    )
-  }
-}
-`.trim();
-
 const DocsApp = () => {
-    const [highlightStyle, setHighlightStyle] = useState(atomDark);
+    const [highlightStyle, setHighlightStyle] = useState(tomorrow);
     const { folder } = useContext(FolderContext);
     const { index } = useContext(IndexContext);
     const { theme } = useContext(ThemeContext);
 
     useEffect(() => {
         if (theme.id === 'dark') {
-            setHighlightStyle(atomDark);
+            setHighlightStyle(tomorrow);
         } else if (theme.id === 'light') {
-            setHighlightStyle(coy);
+            setHighlightStyle(vs);
         }
     }, [theme.id]);
 
@@ -69,9 +34,16 @@ const DocsApp = () => {
             folderName='Docs'
             open={folder.docsOpen}
         >
-            <SyntaxHighlighter language='jsx' style={highlightStyle}>
-                {code}
-            </SyntaxHighlighter>
+            <Container>
+                <h1>Documentation</h1>
+                <p>
+                    This folder is an overview of Eleven Windows documentation
+                    and resources.
+                </p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {demo}
+                </SyntaxHighlighter>
+            </Container>
         </FolderApp>
     );
 };
