@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Box, Icon, Title, Spacer } from './style';
-import { GlobalAppContext } from '../../../contexts/GlobalContext';
+import { GlobalAppContext } from '../../../contexts/globalContext';
 import { useTranslation } from 'react-i18next';
 import folderIcon from '../../../assets/images/icons/folder.svg';
 

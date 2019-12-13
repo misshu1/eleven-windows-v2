@@ -1,7 +1,7 @@
 import React, { useContext, lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
-import { FolderContext } from '../../contexts/FolderContext';
-import { GlobalAppContext } from '../../contexts/GlobalContext';
+import { FolderContext } from '../../contexts/folderContext';
+import { GlobalAppContext } from '../../contexts/globalContext';
 import SpinnerApp from '../style/SpinnerApp';
 import TaskManagerApp from '../apps/taskManager/TaskManagerApp';
 import StoreApp from '../apps/store/StoreApp';

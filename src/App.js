@@ -1,7 +1,7 @@
 import React, { useContext, useLayoutEffect } from 'react';
 import WorkspaceApp from './components/workspace/WorkspaceApp';
 import { NotificationProvider } from './contexts/notificationContext';
-import { GlobalAppContext } from './contexts/GlobalContext';
+import { GlobalAppContext } from './contexts/globalContext';
 import { TaskbarProvider } from './contexts/taskbarContext';
 import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';

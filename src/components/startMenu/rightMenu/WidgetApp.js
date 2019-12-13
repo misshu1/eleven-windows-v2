@@ -1,8 +1,8 @@
 import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { GlobalAppContext } from '../../../contexts/GlobalContext';
-import { FolderContext } from '../../../contexts/FolderContext';
+import { GlobalAppContext } from '../../../contexts/globalContext';
+import { FolderContext } from '../../../contexts/folderContext';
 import { IndexContext } from '../../../contexts/indexContext';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { Widget } from './style';

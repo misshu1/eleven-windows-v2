@@ -1,36 +1,37 @@
-export const demo = `
-import React from "react"
-import Prism from "prismjs"
-export class PrismCode extends React.Component {
-  constructor(props) {
-    super(props)
-    this.ref = React.createRef()
-  }
+export const folderContextState = `
+const [folder, setFolder] = useState({
+  exampleOpen: isMobile ? 'open' : 'close',
+  exampleMinimize: null
+});
+`.trim();
 
-  componentDidMount() {
-    this.highlight()
-  }
+export const indexContextState = `
+const [index, setIndex] = useState({
+  example: 100
+});
+`.trim();
 
-  componentDidUpdate() {
-    this.highlight()
-  }
+export const folderExample = `
+import React, { useContext } from 'react';
+// Make sure the import paths are correct
+import { IndexContext } from 'src/contexts/indexContext';
+import FolderApp from 'src/folder/FolderApp';
 
-  highlight = () => {
-    if (this.ref && this.ref.current) {
-      Prism.highlightElement(this.ref.current)
-    }
-  }
+const ExampleApp = () => {
+  const { index } = useContext(IndexContext);
 
-  render() {
-    const { code, plugins, language } = this.props
-
-    return (
-      <pre className={!plugins ? "something" : plugins.join(" ")}>
-        <code ref={this.ref} >
-          {code.trim()}
-        </code>
-      </pre>
-    )
-  }
+  return (
+    <FolderApp
+      appMinimize={'exampleMinimize'}
+      appOpen={'exampleOpen'}
+      appIndexName='example'
+      appIndexValue={index.example}
+      folderName='Example folder name'
+    >
+    {/* Add folder content here */}
+    </FolderApp>
+  );
 }
+
+export default ExampleApp;
 `.trim();

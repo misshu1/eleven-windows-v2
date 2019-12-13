@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, lazy, Suspense } from 'react';
 import { NotificationContext } from '../../contexts/notificationContext';
 import { TaskbarContext } from '../../contexts/taskbarContext';
-import { FolderProvider } from '../../contexts/FolderContext';
+import { FolderProvider } from '../../contexts/folderContext';
 import { IndexProvider } from '../../contexts/indexContext';
 import NotificationModalApp from '../notification/notificationModal/NotificationModalApp';
 import SpinnerApp from '../style/SpinnerApp';

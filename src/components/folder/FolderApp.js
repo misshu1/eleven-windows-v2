@@ -8,9 +8,9 @@ import React, {
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
-import { FolderContext } from '../../contexts/FolderContext';
+import { FolderContext } from '../../contexts/folderContext';
 import { IndexContext } from '../../contexts/indexContext';
-import { GlobalAppContext } from '../../contexts/GlobalContext';
+import { GlobalAppContext } from '../../contexts/globalContext';
 import {
     Name,
     NameBar,

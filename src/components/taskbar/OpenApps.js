@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { OpenAppsContainer, AppIcon } from './style';
-import { FolderContext } from '../../contexts/FolderContext';
+import { FolderContext } from '../../contexts/folderContext';
 import { IndexContext } from '../../contexts/indexContext';
 import Tooltip from '@material-ui/core/Tooltip';
 

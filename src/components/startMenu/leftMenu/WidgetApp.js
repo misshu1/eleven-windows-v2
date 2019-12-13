@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
-import { FolderContext } from '../../../contexts/FolderContext';
+import { FolderContext } from '../../../contexts/folderContext';
 import { IndexContext } from '../../../contexts/indexContext';
 import { Widget } from './style';
 import Tooltip from '@material-ui/core/Tooltip';

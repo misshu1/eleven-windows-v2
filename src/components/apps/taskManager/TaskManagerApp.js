@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
-import { FolderContext } from '../../../contexts/FolderContext';
+import { FolderContext } from '../../../contexts/folderContext';
 import { IndexContext } from '../../../contexts/indexContext';
 import FolderApp from '../../folder/FolderApp';
 import WidgetApp from './WidgetApp';
@@ -91,7 +91,6 @@ const TaskManagerApp = () => {
             appIndexName='taskManager'
             appIndexValue={index.taskManager}
             folderName='Task Manager'
-            open={folder.taskManagerOpen}
             marginLeft='7rem'
             marginTop='7rem'
         >
