@@ -9,7 +9,9 @@ import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import {
     folderExample,
     folderContextState,
-    indexContextState
+    indexContextState,
+    desktopIconExample,
+    notificationIconExample
 } from './CodeExamples';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -108,49 +110,45 @@ const DocsApp = () => {
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {folderExample}
                 </SyntaxHighlighter>
-
                 <p>
                     Note that
                     <span className='text-highlight'>{` FolderApp `}</span> has
                     a lot of props, here is a list with all props, some of them
                     are required.
                 </p>
-                <div>
-                    <Table className={classes.table} aria-label='simple table'>
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>Prop Name</StyledTableCell>
-                                <StyledTableCell align='right'>
-                                    Type
+                <Table className={classes.table} aria-label='simple table'>
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Prop Name</StyledTableCell>
+                            <StyledTableCell align='right'>
+                                Type
+                            </StyledTableCell>
+                            <StyledTableCell align='right'>
+                                Default
+                            </StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {folderPropsTable.map(item => (
+                            <StyledTableRow key={item.propName}>
+                                <StyledTableCell component='th' scope='row'>
+                                    {item.propName}{' '}
+                                    <span className='required'>
+                                        {item.required
+                                            ? 'Required'
+                                            : 'Optional'}
+                                    </span>
                                 </StyledTableCell>
                                 <StyledTableCell align='right'>
-                                    Default
+                                    {item.type}
                                 </StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {folderPropsTable.map(item => (
-                                <StyledTableRow key={item.propName}>
-                                    <StyledTableCell component='th' scope='row'>
-                                        {item.propName}{' '}
-                                        <span className='required'>
-                                            {item.required
-                                                ? 'Required'
-                                                : 'Optional'}
-                                        </span>
-                                    </StyledTableCell>
-                                    <StyledTableCell align='right'>
-                                        {item.type}
-                                    </StyledTableCell>
-                                    <StyledTableCell align='right'>
-                                        {item.defaultVal}
-                                    </StyledTableCell>
-                                </StyledTableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </div>
-
+                                <StyledTableCell align='right'>
+                                    {item.defaultVal}
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
                 <p>
                     Now go to
                     <span className='text-highlight'>
@@ -161,18 +159,63 @@ const DocsApp = () => {
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {folderContextState}
                 </SyntaxHighlighter>
-
                 <p>
                     Then go to
                     <span className='text-highlight'>
                         {` src/contexts/indexContext `}
                     </span>
-                    and add the following code inside index state.
+                    and add the following code inside the index state.
                 </p>
-
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {indexContextState}
                 </SyntaxHighlighter>
+                <p>
+                    Now that you've created the folder, you need a way to open
+                    it, and for that, you can create an Icon in 3 components:
+                    Desktop, Start Menu, and Notification window.
+                </p>
+                <p>
+                    For Desktop, go to
+                    <span className='text-highlight'>
+                        {` src/components/desktop/DesktopApp.js `}
+                    </span>
+                    and add the following code inside the icons state.
+                </p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {desktopIconExample}
+                </SyntaxHighlighter>
+                <p>
+                    For Start Menu (right-side menu), go to
+                    <span className='text-highlight'>
+                        {` src/components/startMenu/rightMenu/RightMenuApp.js `}
+                    </span>
+                    add the same code from above inside the widget state.
+                </p>
+                <p>
+                    And for Start Menu (left-side menu) and Notification window,
+                    go to{' '}
+                    <span className='text-highlight'>
+                        {` src/components/startMenu/leftMenu/LeftMenuApp.js `}
+                    </span>
+                    or
+                    <span className='text-highlight'>
+                        {` src/components/notification/notificationApp/NotificationApp.js `}
+                    </span>
+                    and add the following code inside the widget state.
+                </p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {notificationIconExample}
+                </SyntaxHighlighter>
+                <p>
+                    Note that we no longer have the
+                    <span className='text-highlight'>{` linkMobile `}</span>
+                    option, these 2 components are not visible on mobile, and
+                    you can choose between adding an Icon or using FontAwesome
+                    Icon, to use FontAwesome Icon change
+                    <span className='text-highlight'>{` useWidgetIcon `}</span>
+                    to false and choose your icon in
+                    <span className='text-highlight'>{` fontIcon `}</span>.
+                </p>
             </Container>
         </FolderApp>
     );
