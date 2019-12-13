@@ -45,21 +45,35 @@ const useStyles = makeStyles({
         overflowX: 'auto'
     },
     table: {
-        display: 'block',
-        '@media (min-width:28rem)': {
-            display: 'table'
+        display: 'table',
+        '@media (max-width:28rem)': {
+            display: 'block'
         },
-        overflowX: 'auto',
+        overflowX: 'auto'
+    },
+    name: {
         whiteSpace: 'nowrap'
+    },
+    description: {
+        '@media (max-width:28rem)': {
+            display: 'block',
+            width: '20rem'
+        }
     }
 });
 
-const createData = (propName, required, type, defaultVal) => {
-    return { propName, required, type, defaultVal };
+const createData = (propName, required, type, defaultVal, description) => {
+    return { propName, required, type, defaultVal, description };
 };
 
 const folderPropsTable = [
-    createData('folderName', true, 'string', '-'),
+    createData(
+        'folderName',
+        true,
+        'string',
+        '-',
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi sunt sequi ratione neque nesciunt nostrum veniam, in tenetur numquam debitis!'
+    ),
     createData('appMinimize', true, 'string', '-'),
     createData('appIndexName', true, 'string', '-'),
     createData('appIndexValue', true, 'number', '-'),
@@ -126,17 +140,24 @@ const DocsApp = () => {
                             <StyledTableCell align='right'>
                                 Default
                             </StyledTableCell>
+                            <StyledTableCell align='right'>
+                                Description
+                            </StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {folderPropsTable.map(item => (
                             <StyledTableRow key={item.propName}>
-                                <StyledTableCell component='th' scope='row'>
-                                    {item.propName}{' '}
+                                <StyledTableCell
+                                    component='th'
+                                    scope='row'
+                                    className={classes.name}
+                                >
+                                    {item.propName}
                                     <span className='required'>
                                         {item.required
-                                            ? 'Required'
-                                            : 'Optional'}
+                                            ? ' Required'
+                                            : ' Optional'}
                                     </span>
                                 </StyledTableCell>
                                 <StyledTableCell align='right'>
@@ -145,6 +166,12 @@ const DocsApp = () => {
                                 <StyledTableCell align='right'>
                                     {item.defaultVal}
                                 </StyledTableCell>
+                                <StyledTableCell
+                                    align='right'
+                                    className={classes.description}
+                                >
+                                    {item.description}
+                                </StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
@@ -152,7 +179,12 @@ const DocsApp = () => {
                 <p>
                     Now go to
                     <span className='text-highlight'>
-                        {` src/contexts/folderContext `}
+                        {' '}
+                        src/
+                        <wbr />
+                        contexts/
+                        <wbr />
+                        folderContext{' '}
                     </span>
                     and add the following code inside the folder state.
                 </p>
@@ -162,7 +194,12 @@ const DocsApp = () => {
                 <p>
                     Then go to
                     <span className='text-highlight'>
-                        {` src/contexts/indexContext `}
+                        {' '}
+                        src/
+                        <wbr />
+                        contexts/
+                        <wbr />
+                        indexContext{' '}
                     </span>
                     and add the following code inside the index state.
                 </p>
@@ -177,7 +214,14 @@ const DocsApp = () => {
                 <p>
                     For Desktop, go to
                     <span className='text-highlight'>
-                        {` src/components/desktop/DesktopApp.js `}
+                        {' '}
+                        src/
+                        <wbr />
+                        components/
+                        <wbr />
+                        desktop/
+                        <wbr />
+                        DesktopApp.js{' '}
                     </span>
                     and add the following code inside the icons state.
                 </p>
@@ -187,7 +231,16 @@ const DocsApp = () => {
                 <p>
                     For Start Menu (right-side menu), go to
                     <span className='text-highlight'>
-                        {` src/components/startMenu/rightMenu/RightMenuApp.js `}
+                        {' '}
+                        src/
+                        <wbr />
+                        components/
+                        <wbr />
+                        startMenu/
+                        <wbr />
+                        rightMenu/
+                        <wbr />
+                        RightMenuApp.js{' '}
                     </span>
                     add the same code from above inside the widget state.
                 </p>
@@ -195,11 +248,29 @@ const DocsApp = () => {
                     And for Start Menu (left-side menu) and Notification window,
                     go to{' '}
                     <span className='text-highlight'>
-                        {` src/components/startMenu/leftMenu/LeftMenuApp.js `}
+                        {' '}
+                        src/
+                        <wbr />
+                        components/
+                        <wbr />
+                        startMenu/
+                        <wbr />
+                        leftMenu/
+                        <wbr />
+                        LeftMenuApp.js{' '}
                     </span>
                     or
                     <span className='text-highlight'>
-                        {` src/components/notification/notificationApp/NotificationApp.js `}
+                        {' '}
+                        src/
+                        <wbr />
+                        components/
+                        <wbr />
+                        notification/
+                        <wbr />
+                        notificationApp/
+                        <wbr />
+                        NotificationApp.js{' '}
                     </span>
                     and add the following code inside the widget state.
                 </p>

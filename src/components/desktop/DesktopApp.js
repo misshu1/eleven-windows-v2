@@ -2,7 +2,7 @@ import React, { useContext, useState, useCallback } from 'react';
 import { Desktop } from './style';
 import { TaskbarContext } from '../../contexts/taskbarContext';
 import IconContainer from './DesktopIconApp';
-import settingsIcon from '../../assets/images/icons/cog.svg';
+import cogIcon from '../../assets/images/icons/cog.svg';
 import docsIcon from '../../assets/images/icons/docs.svg';
 import storeIcon from '../../assets/images/icons/store.svg';
 
@@ -27,7 +27,7 @@ const DesktopApp = () => {
         },
         {
             iconDisplayName: 'Settings',
-            widgetIcon: settingsIcon,
+            widgetIcon: cogIcon,
             linkMobile: '/settings',
             appIndexName: 'settings',
             appMinimize: 'settingsMinimize',

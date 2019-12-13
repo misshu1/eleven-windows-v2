@@ -13,10 +13,9 @@ export const Container = styled.div`
     }
 
     .text-highlight {
-        font-size: 1.1rem;
         font-weight: 900;
-        border-bottom: 1px solid ${props => props.theme.accentBgLight};
         color: ${props => props.theme.accentBgLight};
+        border-bottom: 1px solid ${props => props.theme.accentBgLight};
     }
 
     .required {
