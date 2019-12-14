@@ -1,19 +1,28 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useAppIconsContext } from '../../../contexts/appIconsContext';
 import { Container } from './style';
 import Scrollbar from 'react-scrollbars-custom';
 import WidgetApp from './WidgetApp';
 
+let ANIMATION_DURATION = 0;
+
 const RightMenuApp = () => {
     const { icons, ICON_LOCATION } = useAppIconsContext();
 
+    useEffect(() => {
+        return () => {
+            ANIMATION_DURATION = 0;
+        };
+    }, []);
+
     const widgetIcons = useCallback(() => {
-        return icons.map((item, index) => {
-            return item.iconLocation.map(
-                location =>
-                    location === ICON_LOCATION.startMenuRight && (
+        return icons.map(item => {
+            return item.iconLocation.map(location => {
+                if (location === ICON_LOCATION.startMenuRight) {
+                    ANIMATION_DURATION++;
+                    return (
                         <WidgetApp
-                            animationDuration={(index + 1) / 10}
+                            animationDuration={ANIMATION_DURATION / 10}
                             key={item.appOpen}
                             linkMobile={item.linkMobile}
                             widgetIcon={item.widgetIcon}
@@ -22,8 +31,10 @@ const RightMenuApp = () => {
                             appMinimize={item.appMinimize}
                             appOpen={item.appOpen}
                         />
-                    )
-            );
+                    );
+                }
+                return undefined;
+            });
         });
     }, [ICON_LOCATION.startMenuRight, icons]);
 
