@@ -36,35 +36,19 @@ const ExampleApp = () => {
 export default ExampleApp;
 `.trim();
 
-export const desktopIconExample = `
-// Upload an image for your Icon
-import exampleIcon from '.../your/icon_path.svg'
-
-const [icons] = useState([
-  {
-    iconDisplayName: 'Example icon name',
-    widgetIcon: exampleIcon,
-    linkMobile: '/exampleLink',
-    appIndexName: 'example',
-    appMinimize: 'exampleMinimize',
-    appOpen: 'exampleOpen'
-  }
-]);
-`.trim();
-
-export const notificationIconExample = `
-// Upload an image for your Icon
-import exampleIcon from '.../your/icon_path.svg'
-
-const [widget] = useState([
-  {
-    iconDisplayName: 'Example icon name',
-    useWidgetIcon: true,
-    widgetIcon: exampleIcon,
-    fontIcon: ['fas', 'cog'],
-    appIndexName: 'example',
-    appMinimize: 'exampleMinimize',
-    appOpen: 'exampleOpen'
-  }
-]);
+export const iconsExample = `
+{
+  iconDisplayName: 'Example icon name',
+  widgetIcon: exampleIcon,
+  linkMobile: '/exampleLink',
+  appIndexName: 'example',
+  appMinimize: 'exampleMinimize',
+  appOpen: 'exampleOpen',
+  // Choose icon location here
+  iconLocation: [
+    ICON_LOCATION.desktop,
+    ICON_LOCATION.notificationsWindow,
+    ICON_LOCATION.startMenuLeft
+  ]
+}
 `.trim();

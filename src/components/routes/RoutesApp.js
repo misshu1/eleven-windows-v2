@@ -3,13 +3,13 @@ import { useAppIconsContext } from '../../contexts/appIconsContext';
 import { GlobalAppContext } from '../../contexts/globalContext';
 import { FolderContext } from '../../contexts/folderContext';
 import { Route } from 'react-router-dom';
-import TaskManagerApp from '../apps/taskManager/TaskManagerApp';
-import CalculatorApp from '../apps/calculator/CalculatorApp';
 import SpinnerApp from '../style/SpinnerApp';
-import StoreApp from '../apps/store/StoreApp';
 
 const SettingsApp = lazy(() => import('../apps/settings/SettingsApp'));
-const DocsApp = lazy(() => import('../apps/docs/Docs'));
+const DocsApp = lazy(() => import('../apps/docs/DocsApp'));
+const StoreApp = lazy(() => import('../apps/store/StoreApp'));
+const CalculatorApp = lazy(() => import('../apps/calculator/CalculatorApp'));
+const TaskManagerApp = lazy(() => import('../apps/taskManager/TaskManagerApp'));
 
 const RoutesApp = () => {
     const { icons } = useAppIconsContext();
@@ -25,7 +25,7 @@ const RoutesApp = () => {
     } = folder;
 
     // Route paths are only for mobile
-    // Here we check the url and open the app if the url contains the mobile route
+    // Here we check the url to see if it contains any paths and open the app if the url contains the route
     // For example https://example.com/docs if docs is in the url we open docs app
     useEffect(() => {
         const href = window.location.href.split('/');

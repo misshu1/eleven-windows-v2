@@ -10,8 +10,7 @@ import {
     folderExample,
     folderContextState,
     indexContextState,
-    desktopIconExample,
-    notificationIconExample
+    iconsExample
 } from './CodeExamples';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -62,26 +61,72 @@ const useStyles = makeStyles({
     }
 });
 
+const folderNameDescription = (
+    <span>
+        Make sure it's the same name as
+        <span className='required'>{` iconDisplayName `}</span>
+    </span>
+);
+
+const appMinimizeDescription = (
+    <span>
+        It's an object key from
+        <span className='required'>{` src/contexts/folderContext.js `}</span>
+    </span>
+);
+
+const appIndexNameDescription = (
+    <span>
+        It's an object key from
+        <span className='required'>{` src/contexts/indexContext.js `}</span>
+    </span>
+);
+
+const appIndexValueDescription = (
+    <span>
+        It's an object value from
+        <span className='required'>{` src/contexts/indexContext.js `}</span>
+    </span>
+);
+
+const appOpenDescription = (
+    <span>
+        It's an object key from
+        <span className='required'>{` src/contexts/folderContext.js `}</span>
+    </span>
+);
+
+const widthDescription = <span>Width of the folder.</span>;
+const heightDescription = <span>Height of the folder.</span>;
+const marginTopDescription = (
+    <span>
+        Since the folder is position absolute margin-top is set by the
+        <span className='required'>{` top `}</span>
+        property in css.
+    </span>
+);
+const marginLeftDescription = (
+    <span>
+        Since the folder is position absolute margin-left is set by the
+        <span className='required'>{` left `}</span>
+        property in css.
+    </span>
+);
+
 const createData = (propName, required, type, defaultVal, description) => {
     return { propName, required, type, defaultVal, description };
 };
 
 const folderPropsTable = [
-    createData(
-        'folderName',
-        true,
-        'string',
-        '-',
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi sunt sequi ratione neque nesciunt nostrum veniam, in tenetur numquam debitis!'
-    ),
-    createData('appMinimize', true, 'string', '-'),
-    createData('appIndexName', true, 'string', '-'),
-    createData('appIndexValue', true, 'number', '-'),
-    createData('appOpen', true, 'string', '-'),
-    createData('width', false, 'string', '44rem'),
-    createData('height', false, 'string', '44rem'),
-    createData('marginTop', false, 'string', '5rem'),
-    createData('marginLeft', false, 'string', '5rem')
+    createData('folderName', true, 'string', '-', folderNameDescription),
+    createData('appMinimize', true, 'string', '-', appMinimizeDescription),
+    createData('appIndexName', true, 'string', '-', appIndexNameDescription),
+    createData('appIndexValue', true, 'number', '-', appIndexValueDescription),
+    createData('appOpen', true, 'string', '-', appOpenDescription),
+    createData('width', false, 'string', '44rem', widthDescription),
+    createData('height', false, 'string', '44rem', heightDescription),
+    createData('marginTop', false, 'string', '5rem', marginTopDescription),
+    createData('marginLeft', false, 'string', '5rem', marginLeftDescription)
 ];
 
 const DocsApp = () => {
@@ -125,7 +170,7 @@ const DocsApp = () => {
                     {folderExample}
                 </SyntaxHighlighter>
                 <p>
-                    Note that
+                    📝 Note that
                     <span className='text-highlight'>{` FolderApp `}</span> has
                     a lot of props, here is a list with all props, some of them
                     are required.
@@ -209,84 +254,33 @@ const DocsApp = () => {
                 <p>
                     Now that you've created the folder, you need a way to open
                     it, and for that, you can create an Icon in 3 components:
-                    Desktop, Start Menu, and Notification window.
+                    Desktop, Start Menu, and Notification window. In Start Menu
+                    you can choose between the left and right side of the menu.
                 </p>
                 <p>
-                    For Desktop, go to
+                    Go to
                     <span className='text-highlight'>
                         {' '}
                         src/
                         <wbr />
-                        components/
+                        contexts/
                         <wbr />
-                        desktop/
-                        <wbr />
-                        DesktopApp.js{' '}
+                        appIconsContext.js{' '}
                     </span>
                     and add the following code inside the icons state.
                 </p>
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
-                    {desktopIconExample}
+                    {iconsExample}
                 </SyntaxHighlighter>
+
                 <p>
-                    For Start Menu (right-side menu), go to
-                    <span className='text-highlight'>
-                        {' '}
-                        src/
-                        <wbr />
-                        components/
-                        <wbr />
-                        startMenu/
-                        <wbr />
-                        rightMenu/
-                        <wbr />
-                        RightMenuApp.js{' '}
-                    </span>
-                    add the same code from above inside the widget state.
+                    📝 Note that{' '}
+                    <span className='text-highlight'> LeftMenuApp.js </span>{' '}
+                    from Start Menu and icons from{' '}
+                    <span className='text-highlight'> NotificationApp.js </span>{' '}
+                    s are not visible on mobile.
                 </p>
-                <p>
-                    And for Start Menu (left-side menu) and Notification window,
-                    go to{' '}
-                    <span className='text-highlight'>
-                        {' '}
-                        src/
-                        <wbr />
-                        components/
-                        <wbr />
-                        startMenu/
-                        <wbr />
-                        leftMenu/
-                        <wbr />
-                        LeftMenuApp.js{' '}
-                    </span>
-                    or
-                    <span className='text-highlight'>
-                        {' '}
-                        src/
-                        <wbr />
-                        components/
-                        <wbr />
-                        notification/
-                        <wbr />
-                        notificationApp/
-                        <wbr />
-                        NotificationApp.js{' '}
-                    </span>
-                    and add the following code inside the widget state.
-                </p>
-                <SyntaxHighlighter language='jsx' style={highlightStyle}>
-                    {notificationIconExample}
-                </SyntaxHighlighter>
-                <p>
-                    Note that we no longer have the
-                    <span className='text-highlight'>{` linkMobile `}</span>
-                    option, these 2 components are not visible on mobile, and
-                    you can choose between adding an Icon or using FontAwesome
-                    Icon, to use FontAwesome Icon change
-                    <span className='text-highlight'>{` useWidgetIcon `}</span>
-                    to false and choose your icon in
-                    <span className='text-highlight'>{` fontIcon `}</span>.
-                </p>
+                <p>And that was it, you've created your first folder 🌞. </p>
             </Container>
         </FolderApp>
     );
