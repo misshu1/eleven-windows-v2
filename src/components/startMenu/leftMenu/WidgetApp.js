@@ -1,6 +1,5 @@
 import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { FolderContext } from '../../../contexts/folderContext';
 import { IndexContext } from '../../../contexts/indexContext';
@@ -11,11 +10,9 @@ const WidgetApp = props => {
     const {
         iconDisplayName,
         widgetIcon,
-        fontIcon,
         appIndexName,
         appMinimize,
-        appOpen,
-        useWidgetIcon
+        appOpen
     } = props;
     const { closeApp } = useContext(TaskbarContext);
     const { activeWindow } = useContext(IndexContext);
@@ -50,15 +47,12 @@ const WidgetApp = props => {
     return (
         <Tooltip title={iconDisplayName} placement='top' enterDelay={500}>
             <Widget onClick={start}>
-                {useWidgetIcon && (
-                    <img
-                        src={widgetIcon}
-                        alt={appOpen}
-                        aria-label={appOpen}
-                        draggable='false'
-                    />
-                )}
-                {!useWidgetIcon && <FontAwesomeIcon icon={fontIcon} />}
+                <img
+                    src={widgetIcon}
+                    alt={appOpen}
+                    aria-label={appOpen}
+                    draggable='false'
+                />
             </Widget>
         </Tooltip>
     );
@@ -68,9 +62,7 @@ export default WidgetApp;
 
 WidgetApp.propTypes = {
     iconDisplayName: PropTypes.string.isRequired,
-    useWidgetIcon: PropTypes.bool.isRequired,
     widgetIcon: PropTypes.node.isRequired,
-    fontIcon: PropTypes.array.isRequired,
     appIndexName: PropTypes.string.isRequired,
     appMinimize: PropTypes.string.isRequired,
     appOpen: PropTypes.string.isRequired

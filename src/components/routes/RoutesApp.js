@@ -1,70 +1,18 @@
-import React, {
-    useContext,
-    lazy,
-    Suspense,
-    useEffect,
-    useCallback
-} from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { FolderContext } from '../../contexts/folderContext';
+import React, { useContext, lazy, Suspense, useEffect } from 'react';
+import { useAppIconsContext } from '../../contexts/appIconsContext';
 import { GlobalAppContext } from '../../contexts/globalContext';
-import SpinnerApp from '../style/SpinnerApp';
+import { FolderContext } from '../../contexts/folderContext';
+import { Route } from 'react-router-dom';
 import TaskManagerApp from '../apps/taskManager/TaskManagerApp';
-import StoreApp from '../apps/store/StoreApp';
 import CalculatorApp from '../apps/calculator/CalculatorApp';
-import cogIcon from '../../assets/images/icons/cog.svg';
-import taskIcon from '../../assets/images/icons/task.svg';
-import docsIcon from '../../assets/images/icons/docs.svg';
-import storeIcon from '../../assets/images/icons/store.svg';
-import calcIcon from '../../assets/images/icons/calculator.svg';
+import SpinnerApp from '../style/SpinnerApp';
+import StoreApp from '../apps/store/StoreApp';
 
 const SettingsApp = lazy(() => import('../apps/settings/SettingsApp'));
 const DocsApp = lazy(() => import('../apps/docs/Docs'));
 
-const APPS = [
-    {
-        url: 'docs',
-        appName: 'Docs',
-        widgetIcon: docsIcon,
-        appIndexName: 'docs',
-        appMinimize: 'docsMinimize',
-        appOpen: 'docsOpen'
-    },
-    {
-        url: 'settings',
-        appName: 'Settings',
-        widgetIcon: cogIcon,
-        appIndexName: 'settings',
-        appMinimize: 'settingsMinimize',
-        appOpen: 'settingsOpen'
-    },
-    {
-        url: 'store',
-        appName: 'Store',
-        widgetIcon: storeIcon,
-        appIndexName: 'store',
-        appMinimize: 'storeMinimize',
-        appOpen: 'storeOpen'
-    },
-    {
-        url: 'calculator',
-        appName: 'Calculator',
-        widgetIcon: calcIcon,
-        appIndexName: 'calculator',
-        appMinimize: 'calculatorMinimize',
-        appOpen: 'calculatorOpen'
-    },
-    {
-        url: 'taskManager',
-        appName: 'Task Manager',
-        widgetIcon: taskIcon,
-        appIndexName: 'taskManager',
-        appMinimize: 'taskManagerMinimize',
-        appOpen: 'taskManagerOpen'
-    }
-];
-
 const RoutesApp = () => {
+    const { icons } = useAppIconsContext();
     const { folder, startApp } = useContext(FolderContext);
     const { globalApp } = useContext(GlobalAppContext);
     const { isMobile } = globalApp;
@@ -81,15 +29,15 @@ const RoutesApp = () => {
     // For example https://example.com/docs if docs is in the url we open docs app
     useEffect(() => {
         const href = window.location.href.split('/');
-        APPS.map(
+        icons.map(
             item =>
-                href[href.length - 1] === item.url &&
+                href[href.length - 1] === item.linkMobile.replace(/\//g, '') &&
                 startApp(
                     item.appOpen,
                     item.widgetIcon,
                     item.appIndexName,
                     item.appMinimize,
-                    item.appName
+                    item.iconDisplayName
                 )
         );
         // eslint-disable-next-line react-hooks/exhaustive-deps

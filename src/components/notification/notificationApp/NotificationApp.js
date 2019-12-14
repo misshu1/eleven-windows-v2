@@ -1,36 +1,16 @@
-import React, { useContext, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useTranslation } from 'react-i18next';
+import React, { useContext, useCallback } from 'react';
 import { NotificationContainer, Notification, WidgetsContainer } from './style';
-import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { NotificationContext } from '../../../contexts/notificationContext';
+import { useAppIconsContext } from '../../../contexts/appIconsContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
+import { TaskbarContext } from '../../../contexts/taskbarContext';
 import Scrollbar from 'react-scrollbars-custom';
 import WidgetApp from './WidgetApp';
-import cogIcon from '../../../assets/images/icons/cog.svg';
-import taskIcon from '../../../assets/images/icons/task.svg';
 
 const NotificationApp = () => {
-    const [widget] = useState([
-        {
-            iconDisplayName: 'Settings',
-            useWidgetIcon: true,
-            widgetIcon: cogIcon,
-            fontIcon: ['fas', 'cog'],
-            appIndexName: 'settings',
-            appMinimize: 'settingsMinimize',
-            appOpen: 'settingsOpen'
-        },
-        {
-            iconDisplayName: 'Task Manager',
-            useWidgetIcon: true,
-            widgetIcon: taskIcon,
-            fontIcon: ['fas', 'sitemap'],
-            appIndexName: 'taskManager',
-            appMinimize: 'taskManagerMinimize',
-            appOpen: 'taskManagerOpen'
-        }
-    ]);
+    const { icons, ICON_LOCATION } = useAppIconsContext();
     const { taskbar } = useContext(TaskbarContext);
     const {
         notification,
@@ -38,6 +18,24 @@ const NotificationApp = () => {
         clearAllNotifications
     } = useContext(NotificationContext);
     const { t } = useTranslation();
+
+    const widgetIcons = useCallback(() => {
+        return icons.map(item => {
+            return item.iconLocation.map(
+                location =>
+                    location === ICON_LOCATION.notificationsWindow && (
+                        <WidgetApp
+                            key={item.appOpen}
+                            iconDisplayName={item.iconDisplayName}
+                            widgetIcon={item.widgetIcon}
+                            appIndexName={item.appIndexName}
+                            appMinimize={item.appMinimize}
+                            appOpen={item.appOpen}
+                        />
+                    )
+            );
+        });
+    }, [ICON_LOCATION.notificationsWindow, icons]);
 
     return ReactDOM.createPortal(
         <React.Fragment>
@@ -69,11 +67,6 @@ const NotificationApp = () => {
                                                 >
                                                     <FontAwesomeIcon
                                                         icon={['fas', 'times']}
-                                                        style={{
-                                                            position:
-                                                                'relative',
-                                                            zIndex: '-1'
-                                                        }}
                                                     />
                                                 </button>
                                             </span>
@@ -90,20 +83,7 @@ const NotificationApp = () => {
                     <span className='clear' onClick={clearAllNotifications}>
                         {t('notification.clear')}
                     </span>
-                    <WidgetsContainer>
-                        {widget.map(item => (
-                            <WidgetApp
-                                key={item.appOpen}
-                                iconDisplayName={item.iconDisplayName}
-                                widgetIcon={item.widgetIcon}
-                                fontIcon={item.fontIcon}
-                                appIndexName={item.appIndexName}
-                                appMinimize={item.appMinimize}
-                                appOpen={item.appOpen}
-                                useWidgetIcon={item.useWidgetIcon}
-                            />
-                        ))}
-                    </WidgetsContainer>
+                    <WidgetsContainer>{widgetIcons()}</WidgetsContainer>
                 </NotificationContainer>
             )}
         </React.Fragment>,

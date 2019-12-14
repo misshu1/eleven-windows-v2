@@ -6,6 +6,7 @@ import { IndexProvider } from '../../contexts/indexContext';
 import NotificationModalApp from '../notification/notificationModal/NotificationModalApp';
 import SpinnerApp from '../style/SpinnerApp';
 import RoutesApp from '../routes/RoutesApp';
+import { AppIconsProvider } from '../../contexts/appIconsContext';
 
 const TaskbarApp = lazy(() => import('../taskbar/TaskbarApp'));
 const DesktopApp = lazy(() => import('../desktop/DesktopApp'));
@@ -32,20 +33,22 @@ const WorkspaceApp = () => {
         <React.Fragment>
             <IndexProvider>
                 <FolderProvider>
-                    <RoutesApp />
+                    <AppIconsProvider>
+                        <RoutesApp />
 
-                    <Suspense fallback={<SpinnerApp delay={200} />}>
-                        <DesktopApp />
-                        <TaskbarApp />
-                    </Suspense>
+                        <Suspense fallback={<SpinnerApp delay={200} />}>
+                            <DesktopApp />
+                            <TaskbarApp />
+                        </Suspense>
 
-                    <Suspense fallback={<SpinnerApp delay={200} />}>
-                        {taskbar.startMenuOpen && <StartMenuApp />}
-                    </Suspense>
+                        <Suspense fallback={<SpinnerApp delay={200} />}>
+                            {taskbar.startMenuOpen && <StartMenuApp />}
+                        </Suspense>
 
-                    <Suspense fallback={<SpinnerApp delay={200} />}>
-                        {taskbar.notificationsOpen && <NotificationApp />}
-                    </Suspense>
+                        <Suspense fallback={<SpinnerApp delay={200} />}>
+                            {taskbar.notificationsOpen && <NotificationApp />}
+                        </Suspense>
+                    </AppIconsProvider>
                 </FolderProvider>
             </IndexProvider>
 
