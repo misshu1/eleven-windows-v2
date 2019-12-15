@@ -130,6 +130,26 @@ const folderPropsTable = [
     createData('marginLeft', false, 'string', '5rem', marginLeftDescription)
 ];
 
+const addWordBreak = str => {
+    const regex = /(\/[a-zA-Z.]+)/g;
+    let newStringArray = [];
+    let m;
+
+    while ((m = regex.exec(str)) !== null) {
+        if (m.index === regex.lastIndex) {
+            regex.lastIndex++;
+        }
+        newStringArray = [
+            ...newStringArray,
+            <span key={Math.random()} className='text-highlight'>
+                {m[0]}
+                <wbr />
+            </span>
+        ];
+    }
+    return newStringArray;
+};
+
 const DocsApp = () => {
     const [highlightStyle, setHighlightStyle] = useState(tomorrow);
     const { index } = useContext(IndexContext);
@@ -162,10 +182,10 @@ const DocsApp = () => {
 
                 <h2>Create a new folder</h2>
                 <p>
-                    First of all let's start by creating a new directory in
-                    <span className='text-highlight'>{` src/apps `}</span> and
-                    then create a new file, let's name it ExampleApp.js. In our
-                    ExampleApp add the following code.
+                    First of all let's start by creating a new directory in{' '}
+                    {addWordBreak('/src/apps')} and then create a new file,
+                    let's name it ExampleApp.js. In our ExampleApp add the
+                    following code.
                 </p>
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {folderExample}
@@ -223,30 +243,14 @@ const DocsApp = () => {
                     </TableBody>
                 </Table>
                 <p>
-                    Now go to
-                    <span className='text-highlight'>
-                        {' '}
-                        src/
-                        <wbr />
-                        contexts/
-                        <wbr />
-                        folderContext.js{' '}
-                    </span>
+                    Now go to {addWordBreak('/src/contexts/folderContext.js')}{' '}
                     and add the following code inside the folder state.
                 </p>
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {folderContextState}
                 </SyntaxHighlighter>
                 <p>
-                    Then go to
-                    <span className='text-highlight'>
-                        {' '}
-                        src/
-                        <wbr />
-                        contexts/
-                        <wbr />
-                        indexContext.js{' '}
-                    </span>
+                    Then go to {addWordBreak('/src/contexts/indexContext.js')}{' '}
                     and add the following code inside the index state.
                 </p>
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
@@ -259,16 +263,8 @@ const DocsApp = () => {
                     you can choose between the left and right side of the menu.
                 </p>
                 <p>
-                    Go to
-                    <span className='text-highlight'>
-                        {' '}
-                        src/
-                        <wbr />
-                        contexts/
-                        <wbr />
-                        appIconsContext.js{' '}
-                    </span>
-                    and add the following code inside the icons state.
+                    Go to {addWordBreak('/src/contexts/appIconsContext.js')} and
+                    add the following code inside the icons state.
                 </p>
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {iconsExample}
