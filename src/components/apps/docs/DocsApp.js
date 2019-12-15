@@ -10,7 +10,8 @@ import {
     folderExample,
     folderContextState,
     indexContextState,
-    iconsExample
+    iconsExample,
+    folderRouteExample
 } from './CodeExamples';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -181,8 +182,23 @@ const DocsApp = () => {
                 </p>
 
                 <h2>Create a new folder</h2>
+
                 <p>
-                    First of all let's start by creating a new directory in{' '}
+                    Go to {addWordBreak('/src/contexts/folderContext.js')} and
+                    add the following code inside the folder state.
+                </p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {folderContextState}
+                </SyntaxHighlighter>
+                <p>
+                    Then go to {addWordBreak('/src/contexts/indexContext.js')}{' '}
+                    and add the following code inside the index state.
+                </p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {indexContextState}
+                </SyntaxHighlighter>
+                <p>
+                    Now let's start creating a new directory in{' '}
                     {addWordBreak('/src/apps')} and then create a new file,
                     let's name it ExampleApp.js. In our ExampleApp add the
                     following code.
@@ -242,7 +258,7 @@ const DocsApp = () => {
                         ))}
                     </TableBody>
                 </Table>
-                <p>
+                {/* <p>
                     Now go to {addWordBreak('/src/contexts/folderContext.js')}{' '}
                     and add the following code inside the folder state.
                 </p>
@@ -255,7 +271,7 @@ const DocsApp = () => {
                 </p>
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {indexContextState}
-                </SyntaxHighlighter>
+                </SyntaxHighlighter> */}
                 <p>
                     Now that you've created the folder, you need a way to open
                     it, and for that, you can create an Icon in 3 components:
@@ -269,7 +285,6 @@ const DocsApp = () => {
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {iconsExample}
                 </SyntaxHighlighter>
-
                 <p>
                     <Emoji symbol='📝' label='note' /> Note that
                     <span className='text-highlight'>{` LeftMenuApp.js `}</span>
@@ -277,6 +292,16 @@ const DocsApp = () => {
                     <span className='text-highlight'>{` NotificationApp.js `}</span>
                     are not visible on mobile.
                 </p>
+                <p>
+                    Now we need to create a route for this folder, go to{' '}
+                    {addWordBreak('/src/components/routes/RoutesApp.js')} and
+                    import the folder you just created, and then add a new
+                    object to <span className='required'>COMPONENTS</span>{' '}
+                    array.
+                </p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {folderRouteExample}
+                </SyntaxHighlighter>
                 <p>
                     And that was it, you've created your first folder
                     <Emoji symbol='🌞' label='sun' />.

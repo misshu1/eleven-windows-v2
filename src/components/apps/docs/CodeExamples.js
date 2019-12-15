@@ -38,6 +38,7 @@ export default ExampleApp;
 
 export const iconsExample = `
 {
+  id: 1234,
   iconDisplayName: 'Example icon name',
   widgetIcon: exampleIcon,
   linkMobile: '/exampleLink',
@@ -51,4 +52,18 @@ export const iconsExample = `
     ICON_LOCATION.startMenuLeft
   ]
 }
+`.trim();
+
+export const folderRouteExample = `
+import React, { lazy, Suspense } from 'react';
+const ExampleApp  = lazy(() => import('../apps/example/ExampleApp '));
+
+const COMPONENTS = [
+  {
+      /* This id should be identical
+      with the id from appIconsContext.js */
+      id: 1234,
+      component: <ExampleApp />
+  }
+]
 `.trim();
