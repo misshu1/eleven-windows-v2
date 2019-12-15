@@ -23,13 +23,7 @@ const NotificationModalApp = props => {
                             <span className='title'>
                                 <h3>{item.notificationTitle}</h3>
                                 <button onClick={hideModal} id={item.id}>
-                                    <FontAwesomeIcon
-                                        icon={['fas', 'times']}
-                                        style={{
-                                            position: 'relative',
-                                            zIndex: '-1'
-                                        }}
-                                    />
+                                    <FontAwesomeIcon icon={['fas', 'times']} />
                                 </button>
                             </span>
                             <p>{item.notificationInfo}</p>

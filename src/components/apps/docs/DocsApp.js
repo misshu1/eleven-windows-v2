@@ -4,6 +4,7 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vs, tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { IndexContext } from '../../../contexts/indexContext';
 import { ThemeContext } from '../../../contexts/themeContext';
+import { NotificationContext } from '../../../contexts/notificationContext';
 import FolderApp from '../../folder/FolderApp';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import {
@@ -11,7 +12,9 @@ import {
     folderContextState,
     indexContextState,
     iconsExample,
-    folderRouteExample
+    folderRouteExample,
+    loadingLogoExample,
+    notificationExample
 } from './CodeExamples';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -20,6 +23,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Emoji from '../../../components/emoji/Emoji';
+import Button from '@material-ui/core/Button';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 
@@ -59,6 +63,42 @@ const useStyles = makeStyles({
         '@media (max-width:28rem)': {
             display: 'block',
             width: '20rem'
+        }
+    },
+    successButton: {
+        backgroundColor: '#43a047',
+        border: 0,
+        borderRadius: 3,
+        color: 'white',
+        padding: '.2rem 1rem',
+        margin: 'auto 0',
+        cursor: 'default',
+        '&:hover': {
+            backgroundColor: '#43a047'
+        }
+    },
+    warnButton: {
+        backgroundColor: '#ffa000',
+        border: 0,
+        borderRadius: 3,
+        color: 'white',
+        padding: '.2rem 1rem',
+        margin: 'auto 0',
+        cursor: 'default',
+        '&:hover': {
+            backgroundColor: '#ffa000'
+        }
+    },
+    errorButton: {
+        backgroundColor: '#d32f2f',
+        border: 0,
+        borderRadius: 3,
+        color: 'white',
+        padding: '.2rem 1rem',
+        margin: 'auto 0',
+        cursor: 'default',
+        '&:hover': {
+            backgroundColor: '#d32f2f'
         }
     }
 });
@@ -155,6 +195,11 @@ const DocsApp = () => {
     const [highlightStyle, setHighlightStyle] = useState(tomorrow);
     const { index } = useContext(IndexContext);
     const { theme } = useContext(ThemeContext);
+    const {
+        createNotificationSuccess,
+        createNotificationWarn,
+        createNotificationError
+    } = useContext(NotificationContext);
     const classes = useStyles();
 
     useEffect(() => {
@@ -258,20 +303,6 @@ const DocsApp = () => {
                         ))}
                     </TableBody>
                 </Table>
-                {/* <p>
-                    Now go to {addWordBreak('/src/contexts/folderContext.js')}{' '}
-                    and add the following code inside the folder state.
-                </p>
-                <SyntaxHighlighter language='jsx' style={highlightStyle}>
-                    {folderContextState}
-                </SyntaxHighlighter>
-                <p>
-                    Then go to {addWordBreak('/src/contexts/indexContext.js')}{' '}
-                    and add the following code inside the index state.
-                </p>
-                <SyntaxHighlighter language='jsx' style={highlightStyle}>
-                    {indexContextState}
-                </SyntaxHighlighter> */}
                 <p>
                     Now that you've created the folder, you need a way to open
                     it, and for that, you can create an Icon in 3 components:
@@ -306,6 +337,70 @@ const DocsApp = () => {
                     And that was it, you've created your first folder
                     <Emoji symbol='🌞' label='sun' />.
                 </p>
+
+                <h2>Change loading logo</h2>
+                <p>
+                    To change the logo you see before the site loads just go to{' '}
+                    {addWordBreak('/public/index.html')} and change the img from
+                    inside the div with a{' '}
+                    <span className='required'>loading</span> class.
+                </p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {loadingLogoExample}
+                </SyntaxHighlighter>
+                <h2>Create notifications</h2>
+                <div className='notification-btn-container'>
+                    <Button
+                        className={classes.successButton}
+                        onClick={() => {
+                            createNotificationSuccess(
+                                'Success Title',
+                                'Notification success info.'
+                            );
+                        }}
+                    >
+                        show success
+                    </Button>
+                    <Button
+                        className={classes.warnButton}
+                        onClick={() => {
+                            createNotificationWarn(
+                                'Warn Title',
+                                'Notification warn info.',
+                                400
+                            );
+                        }}
+                    >
+                        show warn
+                    </Button>
+                    <Button
+                        className={classes.errorButton}
+                        onClick={() => {
+                            createNotificationError(
+                                'Error Title',
+                                'Notification error info.',
+                                503
+                            );
+                        }}
+                    >
+                        show error
+                    </Button>
+                </div>
+                <p>
+                    <Emoji symbol='📝' label='note' />
+                    Note notifications alerts are disabled on mobile, but the
+                    user can still see them inside the notification component.
+                </p>
+                <p>
+                    To create a notification alert is really easy, all you have
+                    to do is to import the alert type you need from
+                    <span className='text-highlight'>{` NotificationContext `}</span>
+                    , the function needs a title, and a message and if is an
+                    error or warning you can specify a custom error code.
+                </p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {notificationExample}
+                </SyntaxHighlighter>
             </Container>
         </FolderApp>
     );

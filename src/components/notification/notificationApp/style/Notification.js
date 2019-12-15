@@ -34,13 +34,14 @@ export const Notification = styled.div`
         display: flex;
 
         button {
+            display: inline-block;
             border: none;
             outline: none;
             background: transparent;
             color: ${props => props.theme.modalColor};
             font-weight: 600;
             font-size: 1.2rem;
-            margin-right: 0.5rem;
+            padding: .2rem 1rem;
             z-index: 1;
         }
     }

@@ -87,7 +87,7 @@ export const NotificationProvider = props => {
                 closeAnimation: false,
                 notificationTitle,
                 notificationInfo,
-                code: `Warn ${code}`,
+                code: `Warn code ${code}`,
                 type: 'warn',
                 icon: (
                     <FontAwesomeIcon
@@ -112,7 +112,7 @@ export const NotificationProvider = props => {
                 closeAnimation: false,
                 notificationTitle,
                 notificationInfo,
-                code: `Error ${code}`,
+                code: `Error code ${code}`,
                 type: 'error',
                 icon: (
                     <FontAwesomeIcon

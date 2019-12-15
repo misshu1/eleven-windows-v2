@@ -12,6 +12,10 @@ export const Container = styled.div`
         margin-top: 4rem;
     }
 
+    p {
+        margin: 2rem 0;
+    }
+
     .text-highlight {
         font-weight: 900;
         color: ${props => props.theme.accentBgLight};
@@ -22,5 +26,13 @@ export const Container = styled.div`
         color: ${props => props.theme.accentBgLight};
         font-weight: 900;
         font-size: 0.8rem;
+    }
+    .notification-btn-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .notification-btn-container button {
+        margin: 0.5rem;
     }
 `;

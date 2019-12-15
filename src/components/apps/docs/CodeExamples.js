@@ -60,10 +60,73 @@ const ExampleApp  = lazy(() => import('../apps/example/ExampleApp '));
 
 const COMPONENTS = [
   {
-      /* This id should be identical
+      /* The id should be identical
       with the id from appIconsContext.js */
       id: 1234,
       component: <ExampleApp />
   }
 ]
+`.trim();
+
+export const loadingLogoExample = `
+<div class="loading">
+  <img
+    src="./your-logo.svg"
+    width="200"
+    height="200"
+    alt="Logo"
+  />
+</div>
+`.trim();
+
+export const notificationExample = `
+import React, { useContext } from 'react';
+import { NotificationContext } from 'src/contexts/notificationContext';
+
+const ExampleApp = () => {
+  const { 
+    createNotificationSuccess, 
+    createNotificationWarn, 
+    createNotificationError 
+  } = useContext(NotificationContext);
+
+  return (
+    <button 
+      onClick={() => {
+        createNotificationSuccess(
+          'Success Title',
+          'Notification success info.'
+        );
+      }}
+    >
+      show success
+    </button>
+
+    <button 
+      onClick={() => {
+        createNotificationWarn(
+          'Warn Title',
+          'Notification warn info.',
+          400
+        );
+      }}
+    >
+      show warn
+    </button>
+
+    <button                         
+      onClick={() => {
+        createNotificationError(
+          'Error Title',
+          'Notification error info.',
+          503
+        );
+      }}
+    >
+      show error
+    </button>
+  )
+}
+
+export default ExampleApp;
 `.trim();
