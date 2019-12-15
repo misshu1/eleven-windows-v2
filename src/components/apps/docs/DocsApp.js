@@ -18,6 +18,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Emoji from '../../../components/emoji/Emoji';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 
@@ -170,7 +171,7 @@ const DocsApp = () => {
                     {folderExample}
                 </SyntaxHighlighter>
                 <p>
-                    📝 Note that
+                    <Emoji symbol='📝' label='note' /> Note that
                     <span className='text-highlight'>{` FolderApp `}</span> has
                     a lot of props, here is a list with all props, some of them
                     are required.
@@ -229,7 +230,7 @@ const DocsApp = () => {
                         <wbr />
                         contexts/
                         <wbr />
-                        folderContext{' '}
+                        folderContext.js{' '}
                     </span>
                     and add the following code inside the folder state.
                 </p>
@@ -244,7 +245,7 @@ const DocsApp = () => {
                         <wbr />
                         contexts/
                         <wbr />
-                        indexContext{' '}
+                        indexContext.js{' '}
                     </span>
                     and add the following code inside the index state.
                 </p>
@@ -274,13 +275,16 @@ const DocsApp = () => {
                 </SyntaxHighlighter>
 
                 <p>
-                    📝 Note that{' '}
-                    <span className='text-highlight'> LeftMenuApp.js </span>{' '}
-                    from Start Menu and icons from{' '}
-                    <span className='text-highlight'> NotificationApp.js </span>{' '}
-                    s are not visible on mobile.
+                    <Emoji symbol='📝' label='note' /> Note that
+                    <span className='text-highlight'>{` LeftMenuApp.js `}</span>
+                    from Start Menu and icons from
+                    <span className='text-highlight'>{` NotificationApp.js `}</span>
+                    are not visible on mobile.
                 </p>
-                <p>And that was it, you've created your first folder 🌞. </p>
+                <p>
+                    And that was it, you've created your first folder
+                    <Emoji symbol='🌞' label='sun' />.
+                </p>
             </Container>
         </FolderApp>
     );

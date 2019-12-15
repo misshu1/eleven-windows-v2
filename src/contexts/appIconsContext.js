@@ -16,6 +16,7 @@ const AppIconsContext = createContext();
 const AppIconsProvider = props => {
     const [icons] = useState([
         {
+            id: 1,
             iconDisplayName: 'Docs',
             widgetIcon: docsIcon,
             linkMobile: '/docs',
@@ -25,6 +26,7 @@ const AppIconsProvider = props => {
             iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight]
         },
         {
+            id: 2,
             iconDisplayName: 'Store',
             widgetIcon: storeIcon,
             linkMobile: '/store',
@@ -34,6 +36,7 @@ const AppIconsProvider = props => {
             iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight]
         },
         {
+            id: 3,
             iconDisplayName: 'Settings',
             widgetIcon: cogIcon,
             linkMobile: '/settings',
@@ -47,6 +50,7 @@ const AppIconsProvider = props => {
             ]
         },
         {
+            id: 4,
             iconDisplayName: 'Task Manager',
             widgetIcon: taskIcon,
             linkMobile: 'taskManager',
@@ -56,6 +60,7 @@ const AppIconsProvider = props => {
             iconLocation: [ICON_LOCATION.notificationsWindow]
         },
         {
+            id: 5,
             iconDisplayName: 'Calculator',
             widgetIcon: calcIcon,
             linkMobile: '/calculator',
