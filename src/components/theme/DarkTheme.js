@@ -28,6 +28,7 @@ const DarkTheme = {
     folderFocusOutline: 'rgb(220, 227, 242, 0.7)',
     folderCloseBtn: '#AF0138',
     backButtonColor: '#26c11b',
+    folderMenuBackdrop: 'rgba(0, 0, 0, 0.5)',
 
     // Settings App
     settingsResizeIconBg: 'rgba(174, 192, 229, 0.2)',

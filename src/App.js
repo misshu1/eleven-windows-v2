@@ -12,12 +12,11 @@ import {
     faCheckSquare,
     faExclamationTriangle,
     faTimes,
-    faSitemap,
     faWindowMinimize,
     faUserCircle,
-    faPowerOff,
     faSpinner,
-    faExclamationCircle
+    faExclamationCircle,
+    faBars
 } from '@fortawesome/free-solid-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import LoginApp from './components/login/LoginApp';
@@ -26,12 +25,11 @@ library.add(
     faCheckSquare,
     faExclamationTriangle,
     faTimes,
-    faSitemap,
     faWindowMinimize,
     faUserCircle,
-    faPowerOff,
     faSpinner,
-    faExclamationCircle
+    faExclamationCircle,
+    faBars
 );
 
 const App = () => {

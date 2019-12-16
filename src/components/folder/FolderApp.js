@@ -1,38 +1,38 @@
-import React, {
-    useContext,
-    useState,
-    useEffect,
-    useMemo,
-    useCallback
-} from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import Draggable from 'react-draggable';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
+import { Folder, Content, AnimateFadeInOut } from './style';
+import { GlobalAppContext } from '../../contexts/globalContext';
+import { TaskbarContext } from '../../contexts/taskbarContext';
 import { FolderContext } from '../../contexts/folderContext';
 import { IndexContext } from '../../contexts/indexContext';
-import { GlobalAppContext } from '../../contexts/globalContext';
-import {
-    Name,
-    NameBar,
-    Buttons,
-    Folder,
-    Content,
-    AnimateFadeInOut
-} from './style';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { TaskbarContext } from '../../contexts/taskbarContext';
+import FolderToolbar from './FolderToolbar';
 import Scrollbar from 'react-scrollbars-custom';
-import Tooltip from '@material-ui/core/Tooltip';
+import Draggable from 'react-draggable';
+import PropTypes from 'prop-types';
+import DrawerApp from './drawer/DrawerApp';
 
 const FolderApp = props => {
-    const { globalApp } = useContext(GlobalAppContext);
-    const [handleDrag, setHandleDrag] = useState(false);
     const [close, setClose] = useState('');
+    const [showDrawer, setShowDrawer] = useState(false);
+    const [handleDrag, setHandleDrag] = useState(false);
     const { folder, minimizeApp, closeApp } = useContext(FolderContext);
     const { activeWindow } = useContext(IndexContext);
     const { closeAllApps } = useContext(TaskbarContext);
+    const { globalApp } = useContext(GlobalAppContext);
     const { isMobile } = globalApp;
+    const {
+        appOpen,
+        appMinimize,
+        appIndexName,
+        appIndexValue,
+        children,
+        folderName,
+        height,
+        width,
+        marginLeft,
+        marginTop,
+        toolbarMenu
+    } = props;
 
     useEffect(() => {
         isMobile && setHandleDrag(true);
@@ -41,17 +41,17 @@ const FolderApp = props => {
     const quitApp = useCallback(() => {
         setClose('close');
         setTimeout(() => {
-            closeApp(props.appOpen, props.appMinimize);
+            closeApp(appOpen, appMinimize);
         }, 200);
-    }, [closeApp, props.appMinimize, props.appOpen]);
+    }, [closeApp, appMinimize, appOpen]);
 
     const minimize = useCallback(() => {
-        minimizeApp(props.appMinimize, true);
-    }, [minimizeApp, props.appMinimize]);
+        minimizeApp(appMinimize, true);
+    }, [minimizeApp, appMinimize]);
 
     const active = useCallback(() => {
-        activeWindow(props.appIndexName);
-    }, [activeWindow, props.appIndexName]);
+        activeWindow(appIndexName);
+    }, [activeWindow, appIndexName]);
 
     const closeTaskbarApps = useCallback(() => {
         closeAllApps();
@@ -62,102 +62,43 @@ const FolderApp = props => {
         active();
     }, [active, closeTaskbarApps]);
 
-    return useMemo(
-        () =>
-            ReactDOM.createPortal(
-                <Draggable axis='both' handle='.handle' disabled={handleDrag}>
-                    <AnimateFadeInOut
-                        appIndex={props.appIndexValue}
-                        onClick={handleClick}
-                        open={folder[props.appOpen]}
-                        minimize={folder[props.appMinimize]}
-                        close={close}
-                    >
-                        <Folder
-                            className='folder'
-                            width={props.width}
-                            height={props.height}
-                            marginTop={props.marginTop}
-                            marginLeft={props.marginLeft}
-                        >
-                            <NameBar>
-                                <Name className='handle'>
-                                    {props.folderName}
-                                </Name>
-                                <Buttons>
-                                    <Tooltip
-                                        title='Minimize'
-                                        placement='top'
-                                        enterDelay={1000}
-                                    >
-                                        <div onClick={minimize}>
-                                            <FontAwesomeIcon
-                                                icon={[
-                                                    'fas',
-                                                    'window-minimize'
-                                                ]}
-                                                size='sm'
-                                            />
-                                        </div>
-                                    </Tooltip>
-                                    <Tooltip
-                                        title='Close'
-                                        placement='top'
-                                        enterDelay={1000}
-                                    >
-                                        <Link to='/' className='closeBtnMobile'>
-                                            <FontAwesomeIcon
-                                                icon={['fas', 'times']}
-                                                size='lg'
-                                            />
-                                        </Link>
-                                    </Tooltip>
-                                    <Tooltip
-                                        title='Close'
-                                        placement='top'
-                                        enterDelay={1000}
-                                    >
-                                        <div
-                                            className='closeBtnDesktop'
-                                            onClick={quitApp}
-                                        >
-                                            <FontAwesomeIcon
-                                                icon={['fas', 'times']}
-                                                size='lg'
-                                            />
-                                        </div>
-                                    </Tooltip>
-                                </Buttons>
-                            </NameBar>
-                            <Content>
-                                <Scrollbar
-                                    style={{ width: '100%', height: '100%' }}
-                                >
-                                    {props.children}
-                                </Scrollbar>
-                            </Content>
-                        </Folder>
-                    </AnimateFadeInOut>
-                </Draggable>,
-                document.querySelector('#desktop')
-            ),
-        [
-            close,
-            folder,
-            handleClick,
-            handleDrag,
-            minimize,
-            props.appIndexValue,
-            props.appMinimize,
-            props.appOpen,
-            props.children,
-            props.folderName,
-            props.height,
-            props.marginLeft,
-            props.marginTop,
-            props.width,
-            quitApp
-        ]
+    const toggleDrawer = useCallback(() => {
+        setShowDrawer(!showDrawer);
+    }, [showDrawer]);
+
+    return ReactDOM.createPortal(
+        <Draggable axis='both' handle='.handle' disabled={handleDrag}>
+            <AnimateFadeInOut
+                appIndex={appIndexValue}
+                onClick={handleClick}
+                open={folder[appOpen]}
+                minimize={folder[appMinimize]}
+                close={close}
+            >
+                <Folder
+                    className='folder'
+                    width={width}
+                    height={height}
+                    marginTop={marginTop}
+                    marginLeft={marginLeft}
+                >
+                    <FolderToolbar
+                        toolbarMenu={toolbarMenu}
+                        folderName={folderName}
+                        minimize={minimize}
+                        quitApp={quitApp}
+                        toggleDrawer={toggleDrawer}
+                    />
+                    <Content>
+                        {showDrawer && <DrawerApp toolbarMenu={toolbarMenu} />}
+                        <Scrollbar style={{ width: '100%', height: '100%' }}>
+                            {children}
+                        </Scrollbar>
+                    </Content>
+                </Folder>
+            </AnimateFadeInOut>
+        </Draggable>,
+        document.querySelector('#desktop')
     );
 };
 export default FolderApp;

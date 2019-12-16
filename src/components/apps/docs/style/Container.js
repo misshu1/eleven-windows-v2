@@ -10,10 +10,12 @@ export const Container = styled.div`
 
     h2 {
         margin-top: 4rem;
+        line-height: 2;
     }
 
     p {
         margin: 2rem 0;
+        line-height: 1.7;
     }
 
     .text-highlight {

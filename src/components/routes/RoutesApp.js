@@ -71,20 +71,28 @@ const RoutesApp = () => {
     // Here we check the url to see if it contains any paths and open the app if the url contains the route
     // For example https://example.com/docs if docs is in the url we open docs app
     useEffect(() => {
-        const href = window.location.href.split('/');
-        icons.map(item => {
-            if (href[href.length - 1] === item.linkMobile.replace(/\//g, '')) {
-                startApp(
-                    item.appOpen,
-                    item.widgetIcon,
-                    item.appIndexName,
-                    item.appMinimize,
-                    item.iconDisplayName
-                );
-                activeWindow(item.appIndexName);
-            }
-            return undefined;
-        });
+        const href = window.location.href;
+        const regex = /^http[s]?:\/\/.*?(\/[a-zA-Z-_]+).*$/;
+        let m;
+
+        if ((m = regex.exec(href)) !== null) {
+            m.forEach(match => {
+                icons.map(item => {
+                    if (match === item.linkMobile) {
+                        startApp(
+                            item.appOpen,
+                            item.widgetIcon,
+                            item.appIndexName,
+                            item.appMinimize,
+                            item.iconDisplayName
+                        );
+                        activeWindow(item.appIndexName);
+                    }
+                    return undefined;
+                });
+            });
+        }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

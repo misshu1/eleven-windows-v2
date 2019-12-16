@@ -11,4 +11,17 @@ export const NameBar = styled.div`
     user-select: none;
     background: ${props => props.theme.folderNameBarBg};
     transition: background 0.2s ease-in-out;
+
+    .menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 3rem;
+        height: 100%;
+    }
+
+    && .menu:hover,
+    && .menu:focus {
+        background: ${props => props.theme.folderNameBarBtnHover};
+    }
 `;

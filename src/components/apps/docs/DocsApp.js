@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { Container } from './style';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vs, tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -12,6 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Emoji from '../../../components/emoji/Emoji';
 import Button from '@material-ui/core/Button';
 import CreateFolder from './CreateFolder';
+import folderIcon from '../../../assets/images/icons/folder.svg';
+import logo from '../../../assets/images/logo/logo-red.svg';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 
@@ -85,6 +87,35 @@ const DocsApp = () => {
     } = useContext(NotificationContext);
     const classes = useStyles();
 
+    const toolbarMenu = useCallback(() => {
+        return [
+            {
+                name: 'Create folder',
+                widgetIcon: folderIcon,
+                fontIcon: null,
+                routerLink: null,
+                aTagLink: '#create-new-folder',
+                onClick: null
+            },
+            {
+                name: 'Change loading logo',
+                widgetIcon: logo,
+                fontIcon: null,
+                routerLink: null,
+                aTagLink: '#change-loading-logo',
+                onClick: null
+            },
+            {
+                name: 'Create notifications',
+                widgetIcon: null,
+                fontIcon: ['far', 'comment-alt'],
+                routerLink: null,
+                aTagLink: '#create-notifications',
+                onClick: null
+            }
+        ];
+    }, []);
+
     useEffect(() => {
         if (theme.id === 'dark') {
             setHighlightStyle(tomorrow);
@@ -100,6 +131,7 @@ const DocsApp = () => {
             appIndexName='docs'
             appIndexValue={index.docs}
             folderName='Docs'
+            toolbarMenu={toolbarMenu()}
         >
             <Container>
                 <h1>Documentation</h1>
@@ -109,7 +141,7 @@ const DocsApp = () => {
                     create-react-app with React Hooks and Context API.
                 </p>
                 <CreateFolder />
-                <h2>Change loading logo</h2>
+                <h2 id='change-loading-logo'>Change loading logo</h2>
                 <p>
                     To change the logo you see before the site loads just go to{' '}
                     {addWordBreak('/public/index.html')} and change the img from
@@ -119,7 +151,7 @@ const DocsApp = () => {
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {loadingLogoExample}
                 </SyntaxHighlighter>
-                <h2>Create notifications</h2>
+                <h2 id='create-notifications'>Create notifications</h2>
                 <div className='notification-btn-container'>
                     <Button
                         className={classes.successButton}

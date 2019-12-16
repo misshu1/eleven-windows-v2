@@ -144,7 +144,7 @@ const CreateFolder = () => {
 
     return (
         <React.Fragment>
-            <h2>Create a new folder</h2>
+            <h2 id='create-new-folder'>Create a new folder</h2>
 
             <p>
                 Go to {addWordBreak('/src/contexts/folderContext.js')} and add

@@ -28,6 +28,7 @@ const LightTheme = {
     folderFocusOutline: 'rgb(0, 0, 0, 0.4)',
     folderCloseBtn: '#009BCE',
     backButtonColor: '#41a83a',
+    folderMenuBackdrop: 'rgba(0, 0, 0, 0.5)',
 
     // Settings App
     settingsResizeIconBg: 'rgba(0, 0, 0, 0.1)',

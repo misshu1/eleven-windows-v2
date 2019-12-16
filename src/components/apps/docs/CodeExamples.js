@@ -60,10 +60,10 @@ const ExampleApp  = lazy(() => import('../apps/example/ExampleApp '));
 
 const COMPONENTS = [
   {
-      /* The id should be identical
-      with the id from appIconsContext.js */
-      id: 1234,
-      component: <ExampleApp />
+    /* The id should be identical
+    with the id from appIconsContext.js */
+    id: 1234,
+    component: <ExampleApp />
   }
 ]
 `.trim();
