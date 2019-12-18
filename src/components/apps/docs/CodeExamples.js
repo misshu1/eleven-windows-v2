@@ -55,7 +55,7 @@ export const iconsExample = `
 `.trim();
 
 export const folderRouteExample = `
-import React, { lazy, Suspense } from 'react';
+import React, { lazy } from 'react';
 const ExampleApp  = lazy(() => import('../apps/example/ExampleApp '));
 
 const COMPONENTS = [
@@ -129,4 +129,76 @@ const ExampleApp = () => {
 }
 
 export default ExampleApp;
+`.trim();
+
+export const folderMenuExample = `
+import React, { useRef } from 'react';
+import { IndexContext } from 'src/contexts/indexContext';
+import FolderApp from 'src/folder/FolderApp';
+import folderIcon from 'src/assets/images/icons/folder.svg';
+import logo from 'src/assets/images/logo/logo-red.svg';
+
+const ExampleApp = () => {
+  const { index } = useContext(IndexContext);
+  const myFirstElementRef = useRef(null);
+  const mySecondElementRef = useRef(null);
+  const andSoOnRef = useRef(null);
+
+  const toolbarMenu = useCallback(() => {
+    return [
+      {
+        name: 'My first element',
+        widgetIcon: folderIcon,
+        // FontAwesome icon
+        fontIcon: null,
+        // React router Link
+        link: null,
+        // Name of a ref element
+        scrollToRef: 'myFirstElementRef',
+        // If you don't need a Link or ref, pass a function here
+        onClick: null
+      },
+      {
+        name: 'My second element',
+        widgetIcon: logo,
+        fontIcon: null,
+        link: null,
+        scrollToRef: 'mySecondElementRef',
+        onClick: null
+      },
+      {
+        name: 'And so on',
+        widgetIcon: null,
+        fontIcon: ['far', 'comment-alt'],
+        link: null,
+        scrollToRef: 'andSoOnRef',
+        onClick: null
+      }
+    ];
+  }, []);
+
+  return (
+    <FolderApp
+      appMinimize={'exampleMinimize'}
+      appOpen={'exampleOpen'}
+      appIndexName='example'
+      appIndexValue={index.example}
+      folderName='Example folder name'
+      toolbarMenu={toolbarMenu()}
+      ref={{
+        createFolderRef,
+        changeLoadingLogoRef,
+        createNotificationsRef
+      }}
+    >
+      {/* Add folder content here */}
+      <h2 ref={myFirstElementRef}>My first element</h2>
+      <h2 ref={mySecondElementRef}>My second element</h2>
+      <h2 ref={andSoOnRef}>And so on</h2>
+    </FolderApp>
+  )
+}
+
+export default ExampleApp;
+
 `.trim();

@@ -9,8 +9,9 @@ export const Container = styled.div`
     }
 
     h2 {
-        margin-top: 4rem;
-        line-height: 2;
+        display: flex;
+        align-items: flex-end;
+        height: 4rem;
     }
 
     p {

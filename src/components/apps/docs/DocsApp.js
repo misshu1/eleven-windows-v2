@@ -13,7 +13,11 @@ import { ThemeContext } from '../../../contexts/themeContext';
 import { NotificationContext } from '../../../contexts/notificationContext';
 import FolderApp from '../../folder/FolderApp';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
-import { loadingLogoExample, notificationExample } from './CodeExamples';
+import {
+    loadingLogoExample,
+    notificationExample,
+    folderMenuExample
+} from './CodeExamples';
 import { makeStyles } from '@material-ui/core/styles';
 import Emoji from '../../../components/emoji/Emoji';
 import Button from '@material-ui/core/Button';
@@ -95,11 +99,12 @@ const DocsApp = props => {
     const changeLoadingLogoRef = useRef(null);
     const createNotificationsRef = useRef(null);
     const createFolderRef = useRef(null);
+    const addMenuToFolderRef = useRef(null);
 
     const toolbarMenu = useCallback(() => {
         return [
             {
-                name: 'Create folder',
+                name: 'Create a new folder',
                 widgetIcon: folderIcon,
                 fontIcon: null,
                 link: null,
@@ -120,6 +125,14 @@ const DocsApp = props => {
                 fontIcon: ['far', 'comment-alt'],
                 link: null,
                 scrollToRef: 'createNotificationsRef',
+                onClick: null
+            },
+            {
+                name: 'Add a menu to the folder',
+                widgetIcon: null,
+                fontIcon: null,
+                link: null,
+                scrollToRef: 'addMenuToFolderRef',
                 onClick: null
             }
         ];
@@ -144,7 +157,8 @@ const DocsApp = props => {
             ref={{
                 createFolderRef,
                 changeLoadingLogoRef,
-                createNotificationsRef
+                createNotificationsRef,
+                addMenuToFolderRef
             }}
         >
             <Container>
@@ -155,6 +169,18 @@ const DocsApp = props => {
                     create-react-app with React Hooks and Context API.
                 </p>
                 <CreateFolder ref={createFolderRef} />
+                <h2 ref={addMenuToFolderRef}>Add a menu to the folder</h2>
+                <p>
+                    Now, what if you need to add a menu to your folder, well it
+                    turns out that's pretty easy as well. Just create a
+                    toolbarMenu function that returns an object like the example
+                    below.
+                </p>
+
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {folderMenuExample}
+                </SyntaxHighlighter>
+
                 <h2 ref={changeLoadingLogoRef}>Change loading logo</h2>
                 <p>
                     To change the logo you see before the site loads just go to{' '}

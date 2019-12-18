@@ -16,7 +16,6 @@ import {
     faUserCircle,
     faSpinner,
     faExclamationCircle,
-    faBars,
     faEllipsisV
 } from '@fortawesome/free-solid-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
@@ -30,7 +29,6 @@ library.add(
     faUserCircle,
     faSpinner,
     faExclamationCircle,
-    faBars,
     faEllipsisV
 );
 
