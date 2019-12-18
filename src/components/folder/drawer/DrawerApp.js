@@ -25,7 +25,12 @@ const useStyles = makeStyles({
     },
     fontIconStyle: theme => ({
         color: theme.accentBg
-    })
+    }),
+    listIconStyle: {
+        marginRight: '1rem',
+        minWidth: '2rem',
+        justifyContent: 'center'
+    }
 });
 
 const scrollToRef = (refObj, refName) => {
@@ -52,7 +57,7 @@ const ListItemLink = props => {
             onClick={onClick}
         >
             {(item.widgetIcon || item.fontIcon) && (
-                <ListItemIcon>
+                <ListItemIcon className={classes.listIconStyle}>
                     <React.Fragment>
                         {item.widgetIcon && (
                             <img src={item.widgetIcon} alt='icon' />
@@ -60,7 +65,7 @@ const ListItemLink = props => {
                         {item.fontIcon && (
                             <FontAwesomeIcon
                                 icon={item.fontIcon}
-                                size='2x'
+                                size='lg'
                                 className={classes.fontIconStyle}
                             />
                         )}

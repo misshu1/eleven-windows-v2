@@ -112,6 +112,14 @@ const DocsApp = props => {
                 onClick: null
             },
             {
+                name: 'Add a menu to the folder',
+                widgetIcon: null,
+                fontIcon: ['fas', 'ellipsis-v'],
+                link: null,
+                scrollToRef: 'addMenuToFolderRef',
+                onClick: null
+            },
+            {
                 name: 'Change loading logo',
                 widgetIcon: logo,
                 fontIcon: null,
@@ -125,14 +133,6 @@ const DocsApp = props => {
                 fontIcon: ['far', 'comment-alt'],
                 link: null,
                 scrollToRef: 'createNotificationsRef',
-                onClick: null
-            },
-            {
-                name: 'Add a menu to the folder',
-                widgetIcon: null,
-                fontIcon: null,
-                link: null,
-                scrollToRef: 'addMenuToFolderRef',
                 onClick: null
             }
         ];
@@ -173,8 +173,8 @@ const DocsApp = props => {
                 <p>
                     Now, what if you need to add a menu to your folder, well it
                     turns out that's pretty easy as well. Just create a
-                    toolbarMenu function that returns an object like the example
-                    below.
+                    <span className='required'>{` toolbarMenu `}</span>
+                    function that returns an object like the example below.
                 </p>
 
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
