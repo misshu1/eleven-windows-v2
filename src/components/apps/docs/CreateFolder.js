@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, forwardRef } from 'react';
 import {
     folderExample,
     folderContextState,
@@ -129,7 +129,7 @@ const folderPropsTable = [
     createData('marginLeft', false, 'string', '5rem', marginLeftDescription)
 ];
 
-const CreateFolder = () => {
+const CreateFolder = (props, ref) => {
     const [highlightStyle, setHighlightStyle] = useState(tomorrow);
     const { theme } = useContext(ThemeContext);
     const classes = useStyles();
@@ -144,7 +144,7 @@ const CreateFolder = () => {
 
     return (
         <React.Fragment>
-            <h2 id='create-new-folder'>Create a new folder</h2>
+            <h2 ref={ref}>Create a new folder</h2>
 
             <p>
                 Go to {addWordBreak('/src/contexts/folderContext.js')} and add
@@ -251,4 +251,4 @@ const CreateFolder = () => {
     );
 };
 
-export default CreateFolder;
+export default forwardRef(CreateFolder);

@@ -22,11 +22,15 @@ export const Container = styled.div`
     width: 20rem;
     height: 100%;
     border-right: 1px solid ${props => props.theme.folderBorder};
-    z-index: 100;
+    z-index: 1000;
     animation: ${slide} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1 forwards;
 
     && img {
         height: 2rem;
         width: 2rem;
+    }
+
+    @media (max-width: 20rem) {
+        width: 100%;
     }
 `;

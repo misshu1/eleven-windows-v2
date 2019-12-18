@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState, useCallback } from 'react';
+import React, {
+    useContext,
+    useEffect,
+    useState,
+    useCallback,
+    useRef
+} from 'react';
 import { Container } from './style';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vs, tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -76,7 +82,7 @@ const addWordBreak = str => {
     return newStringArray;
 };
 
-const DocsApp = () => {
+const DocsApp = props => {
     const [highlightStyle, setHighlightStyle] = useState(tomorrow);
     const { index } = useContext(IndexContext);
     const { theme } = useContext(ThemeContext);
@@ -86,6 +92,9 @@ const DocsApp = () => {
         createNotificationError
     } = useContext(NotificationContext);
     const classes = useStyles();
+    const changeLoadingLogoRef = useRef(null);
+    const createNotificationsRef = useRef(null);
+    const createFolderRef = useRef(null);
 
     const toolbarMenu = useCallback(() => {
         return [
@@ -93,24 +102,24 @@ const DocsApp = () => {
                 name: 'Create folder',
                 widgetIcon: folderIcon,
                 fontIcon: null,
-                routerLink: null,
-                aTagLink: '#create-new-folder',
+                link: null,
+                scrollToRef: 'createFolderRef',
                 onClick: null
             },
             {
                 name: 'Change loading logo',
                 widgetIcon: logo,
                 fontIcon: null,
-                routerLink: null,
-                aTagLink: '#change-loading-logo',
+                link: null,
+                scrollToRef: 'changeLoadingLogoRef',
                 onClick: null
             },
             {
                 name: 'Create notifications',
                 widgetIcon: null,
                 fontIcon: ['far', 'comment-alt'],
-                routerLink: null,
-                aTagLink: '#create-notifications',
+                link: null,
+                scrollToRef: 'createNotificationsRef',
                 onClick: null
             }
         ];
@@ -132,6 +141,11 @@ const DocsApp = () => {
             appIndexValue={index.docs}
             folderName='Docs'
             toolbarMenu={toolbarMenu()}
+            ref={{
+                createFolderRef,
+                changeLoadingLogoRef,
+                createNotificationsRef
+            }}
         >
             <Container>
                 <h1>Documentation</h1>
@@ -140,8 +154,8 @@ const DocsApp = () => {
                     and resources. Eleven Windows was built using
                     create-react-app with React Hooks and Context API.
                 </p>
-                <CreateFolder />
-                <h2 id='change-loading-logo'>Change loading logo</h2>
+                <CreateFolder ref={createFolderRef} />
+                <h2 ref={changeLoadingLogoRef}>Change loading logo</h2>
                 <p>
                     To change the logo you see before the site loads just go to{' '}
                     {addWordBreak('/public/index.html')} and change the img from
@@ -151,7 +165,7 @@ const DocsApp = () => {
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {loadingLogoExample}
                 </SyntaxHighlighter>
-                <h2 id='create-notifications'>Create notifications</h2>
+                <h2 ref={createNotificationsRef}>Create notifications</h2>
                 <div className='notification-btn-container'>
                     <Button
                         className={classes.successButton}

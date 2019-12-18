@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, forwardRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from './style';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -8,6 +8,7 @@ import List from '@material-ui/core/List';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ThemeContext } from '../../../contexts/themeContext';
 import { Link } from 'react-router-dom';
+import Scrollbar from 'react-scrollbars-custom';
 
 const useStyles = makeStyles({
     root: theme => ({
@@ -23,81 +24,89 @@ const useStyles = makeStyles({
         }
     },
     fontIconStyle: theme => ({
-        color: theme.textColor
+        color: theme.accentBg
     })
 });
 
-const ListItemLink = props => {
-    return <ListItem button component='a' {...props} />;
+const scrollToRef = (refObj, refName) => {
+    if (!refObj && !refName) {
+        return;
+    }
+
+    refObj[refName].current.offsetParent.scrollTop =
+        refObj[refName].current.offsetTop;
 };
-const DrawerApp = props => {
-    const { toolbarMenu } = props;
+
+const ListItemLink = props => {
+    const { theme } = useContext(ThemeContext);
+    const classes = useStyles(theme);
+    const { item, onClick } = props;
+
+    return (
+        <ListItem
+            button
+            component={
+                item.link && (props => <Link to={item.link} {...props} />)
+            }
+            className={classes.listItemStyle}
+            onClick={onClick}
+        >
+            {(item.widgetIcon || item.fontIcon) && (
+                <ListItemIcon>
+                    <React.Fragment>
+                        {item.widgetIcon && (
+                            <img src={item.widgetIcon} alt='icon' />
+                        )}
+                        {item.fontIcon && (
+                            <FontAwesomeIcon
+                                icon={item.fontIcon}
+                                size='2x'
+                                className={classes.fontIconStyle}
+                            />
+                        )}
+                    </React.Fragment>
+                </ListItemIcon>
+            )}
+            <ListItemText primary={item.name} />
+        </ListItem>
+    );
+};
+
+const DrawerApp = (props, ref) => {
+    const { toolbarMenu, closeDrawer } = props;
     const { theme } = useContext(ThemeContext);
     const classes = useStyles(theme);
 
     const createDrawer = useCallback(() => {
         let menu = [];
-        toolbarMenu.map(item => {
-            if (item.aTagLink) {
-                menu = [
+        toolbarMenu.map(
+            item =>
+                (menu = [
                     ...menu,
                     <ListItemLink
-                        href={item.aTagLink}
-                        className={classes.listItemStyle}
-                        onClick={() => item.onClick && item.onClick()}
-                    >
-                        <ListItemIcon>
-                            {item.widgetIcon && (
-                                <img src={item.widgetIcon} alt='icon' />
-                            )}
-                            {item.fontIcon && (
-                                <FontAwesomeIcon
-                                    icon={item.fontIcon}
-                                    size='2x'
-                                    className={classes.fontIconStyle}
-                                />
-                            )}
-                        </ListItemIcon>
-                        <ListItemText primary={item.name} />
-                    </ListItemLink>
-                ];
-            } else if (item.routerLink) {
-                menu = [
-                    ...menu,
-                    <ListItem
-                        button
-                        component={props => (
-                            <Link to={item.routerLink} {...props} />
-                        )}
-                        className={classes.listItemStyle}
-                        onClick={() => item.onClick && item.onClick()}
-                    >
-                        <ListItemIcon>
-                            {item.widgetIcon && (
-                                <img src={item.widgetIcon} alt='icon' />
-                            )}
-                            {item.fontIcon && (
-                                <FontAwesomeIcon
-                                    icon={item.fontIcon}
-                                    size='2x'
-                                    className={classes.fontIconStyle}
-                                />
-                            )}
-                        </ListItemIcon>
-                        <ListItemText primary={item.name} />
-                    </ListItem>
-                ];
-            }
-        });
+                        key={item.name}
+                        item={item}
+                        onClick={() => {
+                            item.scrollToRef &&
+                                scrollToRef(ref, item.scrollToRef);
+                            item.onClick && item.onClick();
+                            closeDrawer();
+                        }}
+                    />
+                ])
+        );
         return menu;
-    }, [classes.fontIconStyle, classes.listItemStyle, toolbarMenu]);
+    }, [closeDrawer, ref, toolbarMenu]);
 
     return (
         <Container>
-            <List component='nav' className={classes.root}>
-                {createDrawer()}
-            </List>
+            <Scrollbar style={{ width: '100%', height: '100%' }}>
+                <List component='nav' className={classes.root}>
+                    {createDrawer()}
+                </List>
+            </Scrollbar>
         </Container>
     );
 };
-export default DrawerApp;
+
+export default forwardRef(DrawerApp);

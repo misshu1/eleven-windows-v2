@@ -16,7 +16,8 @@ import {
     faUserCircle,
     faSpinner,
     faExclamationCircle,
-    faBars
+    faBars,
+    faEllipsisV
 } from '@fortawesome/free-solid-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import LoginApp from './components/login/LoginApp';
@@ -29,7 +30,8 @@ library.add(
     faUserCircle,
     faSpinner,
     faExclamationCircle,
-    faBars
+    faBars,
+    faEllipsisV
 );
 
 const App = () => {

@@ -1,5 +1,11 @@
 import ReactDOM from 'react-dom';
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, {
+    useContext,
+    useState,
+    useEffect,
+    useCallback,
+    forwardRef
+} from 'react';
 import { Folder, Content, AnimateFadeInOut } from './style';
 import { GlobalAppContext } from '../../contexts/globalContext';
 import { TaskbarContext } from '../../contexts/taskbarContext';
@@ -10,8 +16,9 @@ import Scrollbar from 'react-scrollbars-custom';
 import Draggable from 'react-draggable';
 import PropTypes from 'prop-types';
 import DrawerApp from './drawer/DrawerApp';
+import Backdrop from '@material-ui/core/Backdrop';
 
-const FolderApp = props => {
+const FolderApp = (props, ref) => {
     const [close, setClose] = useState('');
     const [showDrawer, setShowDrawer] = useState(false);
     const [handleDrag, setHandleDrag] = useState(false);
@@ -66,6 +73,10 @@ const FolderApp = props => {
         setShowDrawer(!showDrawer);
     }, [showDrawer]);
 
+    const closeDrawer = useCallback(() => {
+        setShowDrawer(false);
+    }, []);
+
     return ReactDOM.createPortal(
         <Draggable axis='both' handle='.handle' disabled={handleDrag}>
             <AnimateFadeInOut
@@ -90,7 +101,18 @@ const FolderApp = props => {
                         toggleDrawer={toggleDrawer}
                     />
                     <Content>
-                        {showDrawer && <DrawerApp toolbarMenu={toolbarMenu} />}
+                        <Backdrop
+                            open={showDrawer}
+                            style={{ zIndex: 500 }}
+                            onClick={closeDrawer}
+                        ></Backdrop>
+                        {showDrawer && (
+                            <DrawerApp
+                                toolbarMenu={toolbarMenu}
+                                closeDrawer={closeDrawer}
+                                ref={ref}
+                            />
+                        )}
                         <Scrollbar style={{ width: '100%', height: '100%' }}>
                             {children}
                         </Scrollbar>
@@ -101,7 +123,7 @@ const FolderApp = props => {
         document.querySelector('#desktop')
     );
 };
-export default FolderApp;
+export default forwardRef(FolderApp);
 
 FolderApp.propTypes = {
     appOpen: PropTypes.string.isRequired,

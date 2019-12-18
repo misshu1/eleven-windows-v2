@@ -12,10 +12,12 @@ const FolderToolbar = props => {
         <NameBar>
             {toolbarMenu && (
                 <div className='menu' onClick={toggleDrawer}>
-                    <FontAwesomeIcon icon={['fas', 'bars']} size='lg' />
+                    <FontAwesomeIcon icon={['fas', 'ellipsis-v']} size='lg' />
                 </div>
             )}
-            <Name className='handle'>{folderName}</Name>
+            <Name className='handle' toolbarMenu={toolbarMenu}>
+                {folderName}
+            </Name>
             <Buttons>
                 <Tooltip title='Minimize' placement='top' enterDelay={1000}>
                     <div onClick={minimize}>
