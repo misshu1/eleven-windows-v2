@@ -186,9 +186,9 @@ const ExampleApp = () => {
       folderName='Example folder name'
       toolbarMenu={toolbarMenu()}
       ref={{
-        createFolderRef,
-        changeLoadingLogoRef,
-        createNotificationsRef
+        myFirstElementRef,
+        mySecondElementRef,
+        andSoOnRef
       }}
     >
       {/* Add folder content here */}
