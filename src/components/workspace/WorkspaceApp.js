@@ -2,11 +2,9 @@ import React, { useEffect, useContext, lazy, Suspense } from 'react';
 import { NotificationContext } from '../../contexts/notificationContext';
 import { TaskbarContext } from '../../contexts/taskbarContext';
 import { FolderProvider } from '../../contexts/folderContext';
-import { IndexProvider } from '../../contexts/indexContext';
 import NotificationModalApp from '../notification/notificationModal/NotificationModalApp';
 import SpinnerApp from '../style/SpinnerApp';
 import RoutesApp from '../routes/RoutesApp';
-import { AppIconsProvider } from '../../contexts/appIconsContext';
 
 const TaskbarApp = lazy(() => import('../taskbar/TaskbarApp'));
 const DesktopApp = lazy(() => import('../desktop/DesktopApp'));
@@ -31,26 +29,22 @@ const WorkspaceApp = () => {
 
     return (
         <React.Fragment>
-            <IndexProvider>
-                <FolderProvider>
-                    <AppIconsProvider>
-                        <RoutesApp />
+            <FolderProvider>
+                <RoutesApp />
 
-                        <Suspense fallback={<SpinnerApp delay={200} />}>
-                            <DesktopApp />
-                            <TaskbarApp />
-                        </Suspense>
+                <Suspense fallback={<SpinnerApp delay={200} />}>
+                    <DesktopApp />
+                    <TaskbarApp />
+                </Suspense>
 
-                        <Suspense fallback={<SpinnerApp delay={200} />}>
-                            {taskbar.startMenuOpen && <StartMenuApp />}
-                        </Suspense>
+                <Suspense fallback={<SpinnerApp delay={200} />}>
+                    {taskbar.startMenuOpen && <StartMenuApp />}
+                </Suspense>
 
-                        <Suspense fallback={<SpinnerApp delay={200} />}>
-                            {taskbar.notificationsOpen && <NotificationApp />}
-                        </Suspense>
-                    </AppIconsProvider>
-                </FolderProvider>
-            </IndexProvider>
+                <Suspense fallback={<SpinnerApp delay={200} />}>
+                    {taskbar.notificationsOpen && <NotificationApp />}
+                </Suspense>
+            </FolderProvider>
 
             <Suspense fallback={<SpinnerApp delay={200} />}>
                 {taskbar.languagesOpen && <LanguageApp />}
