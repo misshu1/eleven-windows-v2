@@ -1,46 +1,42 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { IconContainer } from './style';
 import { GlobalAppContext } from '../../contexts/globalContext';
-import { FolderContext } from '../../contexts/folderContext';
-import { IndexContext } from '../../contexts/indexContext';
+import { FolderContext, FOLDER_ACTIONS } from '../../contexts/folderContext';
 
 const DesktopIconApp = props => {
-    const {
-        linkMobile,
-        widgetIcon,
-        iconName,
-        appIndexName,
-        appMinimize,
-        appOpen
-    } = props;
+    const { folderState, folderDispatch } = useContext(FolderContext);
+    const { link, appId, widgetIcon, iconName } = props;
     const { globalApp } = useContext(GlobalAppContext);
-    const { folder, startApp, minimizeApp } = useContext(FolderContext);
-    const { activeWindow } = useContext(IndexContext);
 
-    const start = useCallback(() => {
-        startApp(appOpen, widgetIcon, appIndexName, appMinimize, iconName);
-        if (folder[appMinimize] === true) {
-            minimizeApp(appMinimize, false);
-        }
-        activeWindow(appIndexName);
-    }, [
-        startApp,
-        appOpen,
-        widgetIcon,
-        appIndexName,
-        appMinimize,
-        iconName,
-        folder,
-        activeWindow,
-        minimizeApp
-    ]);
+    const start = () => {
+        folderDispatch({
+            type: FOLDER_ACTIONS.open,
+            id: appId
+        });
+
+        folderDispatch({
+            type: FOLDER_ACTIONS.active,
+            id: appId
+        });
+
+        folderState.apps.map(item => {
+            if (item.id === appId && item.isMinimize === true) {
+                folderDispatch({
+                    type: FOLDER_ACTIONS.minimize,
+                    id: appId,
+                    boolean: false
+                });
+            }
+            return undefined;
+        });
+    };
 
     return (
         <IconContainer tabIndex='0'>
             {globalApp.isMobile ? (
-                <Link to={linkMobile}>
+                <Link to={link}>
                     <img
                         src={widgetIcon}
                         alt={iconName}
@@ -67,10 +63,8 @@ const DesktopIconApp = props => {
 export default DesktopIconApp;
 
 DesktopIconApp.propTypes = {
-    linkMobile: PropTypes.string.isRequired,
+    appId: PropTypes.number.isRequired,
+    link: PropTypes.string.isRequired,
     widgetIcon: PropTypes.node.isRequired,
-    iconName: PropTypes.node.isRequired,
-    appIndexName: PropTypes.string.isRequired,
-    appMinimize: PropTypes.string.isRequired,
-    appOpen: PropTypes.string.isRequired
+    iconName: PropTypes.node.isRequired
 };

@@ -8,7 +8,6 @@ import React, {
 import { Container } from './style';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vs, tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { IndexContext } from '../../../contexts/indexContext';
 import { ThemeContext } from '../../../contexts/themeContext';
 import { NotificationContext } from '../../../contexts/notificationContext';
 import FolderApp from '../../folder/FolderApp';
@@ -86,9 +85,8 @@ const addWordBreak = str => {
     return newStringArray;
 };
 
-const DocsApp = props => {
+const DocsApp = () => {
     const [highlightStyle, setHighlightStyle] = useState(tomorrow);
-    const { index } = useContext(IndexContext);
     const { theme } = useContext(ThemeContext);
     const {
         createNotificationSuccess,
@@ -148,11 +146,7 @@ const DocsApp = props => {
 
     return (
         <FolderApp
-            appMinimize={'docsMinimize'}
-            appOpen={'docsOpen'}
-            appIndexName='docs'
-            appIndexValue={index.docs}
-            folderName='Docs'
+            appId={2}
             toolbarMenu={toolbarMenu()}
             ref={{
                 createFolderRef,

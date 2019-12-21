@@ -2,51 +2,45 @@ import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { GlobalAppContext } from '../../../contexts/globalContext';
-import { FolderContext } from '../../../contexts/folderContext';
-import { IndexContext } from '../../../contexts/indexContext';
+import { FolderContext, FOLDER_ACTIONS } from '../../../contexts/folderContext';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { Widget } from './style';
 
 const WidgetApp = props => {
     const {
-        linkMobile,
+        appId,
+        link,
         widgetIcon,
         iconDisplayName,
-        appIndexName,
-        appMinimize,
-        appOpen,
         animationDuration
     } = props;
     const { globalApp } = useContext(GlobalAppContext);
     const { closeApp } = useContext(TaskbarContext);
-    const { activeWindow } = useContext(IndexContext);
-    const { folder, startApp, minimizeApp } = useContext(FolderContext);
+    const { folderState, folderDispatch } = useContext(FolderContext);
 
-    const start = useCallback(() => {
-        startApp(
-            appOpen,
-            widgetIcon,
-            appIndexName,
-            appMinimize,
-            iconDisplayName
-        );
-        if (folder[appMinimize] === true) {
-            minimizeApp(appMinimize, false);
-        }
-        activeWindow(appIndexName);
+    const start = () => {
+        folderDispatch({
+            type: FOLDER_ACTIONS.open,
+            id: appId
+        });
+
+        folderDispatch({
+            type: FOLDER_ACTIONS.active,
+            id: appId
+        });
+
+        folderState.apps.map(item => {
+            if (item.id === appId && item.isMinimize === true) {
+                folderDispatch({
+                    type: FOLDER_ACTIONS.minimize,
+                    id: appId,
+                    boolean: false
+                });
+            }
+            return undefined;
+        });
         closeApp('startMenuOpen');
-    }, [
-        activeWindow,
-        appIndexName,
-        appMinimize,
-        appOpen,
-        closeApp,
-        folder,
-        iconDisplayName,
-        minimizeApp,
-        startApp,
-        widgetIcon
-    ]);
+    };
 
     const startMobile = useCallback(() => {
         closeApp('startMenuOpen');
@@ -56,7 +50,7 @@ const WidgetApp = props => {
         <React.Fragment>
             {globalApp.isMobile ? (
                 <Widget onClick={startMobile}>
-                    <Link to={linkMobile}>
+                    <Link to={link}>
                         <img
                             src={widgetIcon}
                             alt={iconDisplayName}
@@ -84,11 +78,9 @@ const WidgetApp = props => {
 export default WidgetApp;
 
 WidgetApp.propTypes = {
-    linkMobile: PropTypes.string.isRequired,
+    appId: PropTypes.number.isRequired,
+    link: PropTypes.string.isRequired,
     widgetIcon: PropTypes.node.isRequired,
     iconDisplayName: PropTypes.string.isRequired,
-    appIndexName: PropTypes.string.isRequired,
-    appMinimize: PropTypes.string.isRequired,
-    appOpen: PropTypes.string.isRequired,
     animationDuration: PropTypes.number.isRequired
 };

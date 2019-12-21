@@ -1,17 +1,10 @@
-import React, { useContext } from 'react';
-import { IndexContext } from '../../../contexts/indexContext';
+import React from 'react';
 import FolderApp from '../../folder/FolderApp';
 
 const CalculatorApp = () => {
-    const { index } = useContext(IndexContext);
-
     return (
         <FolderApp
-            appMinimize={'calculatorMinimize'}
-            appOpen={'calculatorOpen'}
-            appIndexName='calculator'
-            appIndexValue={index.calculator}
-            folderName='Calculator'
+            appId={3}
             marginLeft='8rem'
             marginTop='8rem'
             height='42rem'

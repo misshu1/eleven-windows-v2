@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect } from 'react';
-import { useAppIconsContext } from '../../../contexts/appIconsContext';
+import React, { useCallback, useEffect, useContext } from 'react';
+import { FolderContext, ICON_LOCATION } from '../../../contexts/folderContext';
 import { Container } from './style';
 import Scrollbar from 'react-scrollbars-custom';
 import WidgetApp from './WidgetApp';
@@ -7,7 +7,7 @@ import WidgetApp from './WidgetApp';
 let ANIMATION_DURATION = 0;
 
 const RightMenuApp = () => {
-    const { icons, ICON_LOCATION } = useAppIconsContext();
+    const { folderState } = useContext(FolderContext);
 
     useEffect(() => {
         return () => {
@@ -16,27 +16,26 @@ const RightMenuApp = () => {
     }, []);
 
     const widgetIcons = useCallback(() => {
-        return icons.map(item => {
+        return folderState.apps.map(item => {
             return item.iconLocation.map(location => {
                 if (location === ICON_LOCATION.startMenuRight) {
                     ANIMATION_DURATION++;
                     return (
                         <WidgetApp
                             animationDuration={ANIMATION_DURATION / 10}
-                            key={item.appOpen}
-                            linkMobile={item.linkMobile}
+                            key={item.id}
+                            appId={item.id}
+                            link={item.link}
                             widgetIcon={item.widgetIcon}
-                            iconDisplayName={item.iconDisplayName}
-                            appIndexName={item.appIndexName}
-                            appMinimize={item.appMinimize}
-                            appOpen={item.appOpen}
+                            iconDisplayName={item.appName}
                         />
                     );
                 }
                 return undefined;
             });
         });
-    }, [ICON_LOCATION.startMenuRight, icons]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Container>

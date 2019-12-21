@@ -1,54 +1,44 @@
-import React, { useContext, useCallback } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import { FolderContext, FOLDER_ACTIONS } from '../../../contexts/folderContext';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
-import { FolderContext } from '../../../contexts/folderContext';
-import { IndexContext } from '../../../contexts/indexContext';
 import { Widget } from './style';
+import PropTypes from 'prop-types';
 
 const WidgetApp = props => {
-    const {
-        iconDisplayName,
-        widgetIcon,
-        appIndexName,
-        appMinimize,
-        appOpen
-    } = props;
+    const { folderState, folderDispatch } = useContext(FolderContext);
     const { closeApp } = useContext(TaskbarContext);
-    const { activeWindow } = useContext(IndexContext);
-    const { folder, startApp, minimizeApp } = useContext(FolderContext);
+    const { iconDisplayName, widgetIcon, appId } = props;
 
-    const start = useCallback(() => {
-        startApp(
-            appOpen,
-            widgetIcon,
-            appIndexName,
-            appMinimize,
-            iconDisplayName
-        );
-        if (folder[appMinimize] === true) {
-            minimizeApp(appMinimize, false);
-        }
-        activeWindow(appIndexName);
+    const start = () => {
+        folderDispatch({
+            type: FOLDER_ACTIONS.open,
+            id: appId
+        });
+
+        folderDispatch({
+            type: FOLDER_ACTIONS.active,
+            id: appId
+        });
+
+        folderState.apps.map(item => {
+            if (item.id === appId && item.isMinimize === true) {
+                folderDispatch({
+                    type: FOLDER_ACTIONS.minimize,
+                    id: appId,
+                    boolean: false
+                });
+            }
+            return undefined;
+        });
         closeApp('notificationsOpen');
-    }, [
-        activeWindow,
-        appIndexName,
-        appMinimize,
-        appOpen,
-        closeApp,
-        folder,
-        iconDisplayName,
-        minimizeApp,
-        startApp,
-        widgetIcon
-    ]);
+    };
 
     return (
         <Widget onClick={start}>
             <img
                 src={widgetIcon}
-                alt={appOpen}
-                aria-label={appOpen}
+                alt={iconDisplayName}
+                aria-label={iconDisplayName}
                 draggable='false'
             />
             <h5>{iconDisplayName}</h5>
@@ -61,7 +51,5 @@ export default WidgetApp;
 WidgetApp.propTypes = {
     iconDisplayName: PropTypes.string.isRequired,
     widgetIcon: PropTypes.node.isRequired,
-    appIndexName: PropTypes.string.isRequired,
-    appMinimize: PropTypes.string.isRequired,
-    appOpen: PropTypes.string.isRequired
+    appId: PropTypes.number.isRequired
 };

@@ -1,5 +1,5 @@
-import React, { useContext, useCallback } from 'react';
-import { useAppIconsContext } from '../../../contexts/appIconsContext';
+import React, { useContext } from 'react';
+import { FolderContext, ICON_LOCATION } from '../../../contexts/folderContext';
 import { Container, Widget } from './style';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { useTranslation } from 'react-i18next';
@@ -9,32 +9,30 @@ import WidgetApp from './WidgetApp';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const LeftMenuApp = props => {
+    const { folderState } = useContext(FolderContext);
     const { closeApp } = useContext(TaskbarContext);
-    const { icons, ICON_LOCATION } = useAppIconsContext();
     const { t } = useTranslation();
 
-    const closeStartMenu = useCallback(() => {
+    const closeStartMenu = () => {
         closeApp('startMenuOpen');
         props.history.push('/login');
-    }, [closeApp, props.history]);
+    };
 
-    const widgetIcons = useCallback(() => {
-        return icons.map(item => {
+    const widgetIcons = () => {
+        return folderState.apps.map(item => {
             return item.iconLocation.map(
                 location =>
                     location === ICON_LOCATION.startMenuLeft && (
                         <WidgetApp
                             key={item.appOpen}
-                            iconDisplayName={item.iconDisplayName}
+                            appId={item.id}
+                            iconDisplayName={item.appName}
                             widgetIcon={item.widgetIcon}
-                            appIndexName={item.appIndexName}
-                            appMinimize={item.appMinimize}
-                            appOpen={item.appOpen}
                         />
                     )
             );
         });
-    }, [ICON_LOCATION.startMenuLeft, icons]);
+    };
 
     return (
         <Container>

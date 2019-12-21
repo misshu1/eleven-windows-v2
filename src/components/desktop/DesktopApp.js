@@ -1,35 +1,34 @@
 import React, { useContext, useCallback } from 'react';
-import { useAppIconsContext } from '../../contexts/appIconsContext';
 import { TaskbarContext } from '../../contexts/taskbarContext';
 import { Desktop } from './style';
 import IconContainer from './DesktopIconApp';
+import { FolderContext, ICON_LOCATION } from '../../contexts/folderContext';
 
 const DesktopApp = () => {
-    const { icons, ICON_LOCATION } = useAppIconsContext();
     const { closeAllApps } = useContext(TaskbarContext);
+    const { folderState } = useContext(FolderContext);
 
     const close = useCallback(() => {
         closeAllApps();
     }, [closeAllApps]);
 
     const desktopIcons = useCallback(() => {
-        return icons.map(item => {
+        return folderState.apps.map(item => {
             return item.iconLocation.map(
                 location =>
                     location === ICON_LOCATION.desktop && (
                         <IconContainer
-                            key={item.iconDisplayName}
-                            iconName={item.iconDisplayName}
-                            linkMobile={item.linkMobile}
+                            key={item.id}
+                            appId={item.id}
+                            iconName={item.appName}
+                            link={item.link}
                             widgetIcon={item.widgetIcon}
-                            appIndexName={item.appIndexName}
-                            appMinimize={item.appMinimize}
-                            appOpen={item.appOpen}
                         />
                     )
             );
         });
-    }, [ICON_LOCATION.desktop, icons]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return <Desktop onClick={close}>{desktopIcons()}</Desktop>;
 };

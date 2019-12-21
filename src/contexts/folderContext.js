@@ -1,225 +1,187 @@
-import React, { useState, createContext } from 'react';
+import React, { createContext, useReducer, lazy } from 'react';
+import cogIcon from '../assets/images/icons/cog.svg';
+import docsIcon from '../assets/images/icons/docs.svg';
+import storeIcon from '../assets/images/icons/store.svg';
+import taskIcon from '../assets/images/icons/task.svg';
+import calcIcon from '../assets/images/icons/calculator.svg';
+
+const DocsApp = lazy(() => import('../components/apps/docs/DocsApp'));
+const SettingsApp = lazy(() =>
+    import('../components/apps/settings/SettingsApp')
+);
+const StoreApp = lazy(() => import('../components/apps/store/StoreApp'));
+const CalculatorApp = lazy(() =>
+    import('../components/apps/calculator/CalculatorApp')
+);
+const TaskManagerApp = lazy(() =>
+    import('../components/apps/taskManager/TaskManagerApp')
+);
 
 const isMobile = window.matchMedia('(max-width: 28rem)').matches ? true : false;
 
-const ICON_LOCATION = {
+export const FOLDER_ACTIONS = {
+    open: 'OPEN',
+    close: 'CLOSE',
+    minimize: 'MINIMIZE',
+    active: 'ACTIVE'
+};
+
+export const ICON_LOCATION = {
     desktop: 'DESKTOP',
     startMenuLeft: 'START_MENU_LEFT',
     startMenuRight: 'START_MENU_RIGHT',
     notificationsWindow: 'NOTIFICATIONS_WINDOW'
 };
 
+const APPS_STATE = [
+    {
+        id: 1,
+        appName: 'Settings',
+        widgetIcon: cogIcon,
+        link: '/settings',
+        component: <SettingsApp />,
+        isOpen: isMobile ? 'open' : 'close',
+        isMinimize: null,
+        appIndex: 100,
+        iconLocation: [
+            ICON_LOCATION.desktop,
+            ICON_LOCATION.notificationsWindow,
+            ICON_LOCATION.startMenuLeft
+        ]
+    },
+    {
+        id: 2,
+        appName: 'Docs',
+        widgetIcon: docsIcon,
+        link: '/docs',
+        component: <DocsApp />,
+        isOpen: isMobile ? 'open' : 'close',
+        isMinimize: null,
+        appIndex: 100,
+        iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight]
+    },
+    {
+        id: 3,
+        appName: 'Calculator',
+        widgetIcon: calcIcon,
+        link: '/calculator',
+        component: <CalculatorApp />,
+        isOpen: isMobile ? 'open' : 'close',
+        isMinimize: null,
+        appIndex: 100,
+        iconLocation: [ICON_LOCATION.startMenuRight]
+    },
+    {
+        id: 4,
+        appName: 'Store',
+        widgetIcon: storeIcon,
+        link: '/store',
+        component: <StoreApp />,
+        isOpen: isMobile ? 'open' : 'close',
+        isMinimize: null,
+        appIndex: 100,
+        iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight]
+    },
+    {
+        id: 5,
+        appName: 'Task Manager',
+        widgetIcon: taskIcon,
+        link: '/taskManager',
+        component: <TaskManagerApp />,
+        isOpen: isMobile ? 'open' : 'close',
+        isMinimize: null,
+        appIndex: 100,
+        iconLocation: [ICON_LOCATION.notificationsWindow]
+    }
+];
+
+const folderReducer = (state, action) => {
+    switch (action.type) {
+        case FOLDER_ACTIONS.open:
+            const selectedOpenApp = state.apps.find(
+                item => item.id === action.id
+            );
+
+            if (selectedOpenApp.isOpen === 'close') {
+                return {
+                    ...state,
+                    apps: state.apps.map(item =>
+                        item.id === action.id
+                            ? { ...item, isOpen: 'open', appIndex: 104 }
+                            : { ...item, appIndex: 100 }
+                    ),
+                    openApps: [...state.openApps, selectedOpenApp]
+                };
+            } else {
+                return state;
+            }
+        case FOLDER_ACTIONS.close:
+            const selectedCloseApp = state.apps.find(
+                item => item.id === action.id
+            );
+
+            if (selectedCloseApp.isOpen === 'open') {
+                return {
+                    ...state,
+                    apps: state.apps.map(item =>
+                        item.id === action.id
+                            ? {
+                                  ...item,
+                                  isOpen: 'close',
+                                  isMinimize: null,
+                                  appIndex: 100
+                              }
+                            : item
+                    ),
+                    openApps: state.openApps.filter(
+                        item => item.id !== action.id
+                    )
+                };
+            } else {
+                return state;
+            }
+        case FOLDER_ACTIONS.minimize:
+            const selectedMinimizeApp = state.apps.find(
+                item => item.id === action.id
+            );
+
+            if (selectedMinimizeApp.isMinimize !== action.boolean) {
+                return {
+                    ...state,
+                    apps: state.apps.map(item =>
+                        item.id === action.id
+                            ? { ...item, isMinimize: action.boolean }
+                            : item
+                    )
+                };
+            } else {
+                return state;
+            }
+        case FOLDER_ACTIONS.active:
+            return {
+                ...state,
+                apps: state.apps.map(item =>
+                    item.id === action.id
+                        ? { ...item, appIndex: 104 }
+                        : { ...item, appIndex: 100 }
+                )
+            };
+        default:
+            return state;
+    }
+};
 export const FolderContext = createContext();
 export const FolderProvider = props => {
-    const [folder, setFolder] = useState({
-        settingsOpen: isMobile ? 'open' : 'close',
-        docsOpen: isMobile ? 'open' : 'close',
-        calculatorOpen: isMobile ? 'open' : 'close',
-        storeOpen: isMobile ? 'open' : 'close',
-        taskManagerOpen: 'close',
-        settingsMinimize: null,
-        docsMinimize: null,
-        calculatorMinimize: null,
-        storeMinimize: null,
-        taskManagerMinimize: null,
-        openApps: [],
-        apps: [
-            {
-                id: 1,
-                appName: 'Settings',
-                widgetIcon: '',
-                linkMobile: '/settings',
-                isOpen: isMobile ? 'open' : 'close',
-                isMinimize: null,
-                appIndex: 100,
-                iconLocation: [
-                    ICON_LOCATION.desktop,
-                    ICON_LOCATION.notificationsWindow,
-                    ICON_LOCATION.startMenuLeft
-                ]
-            },
-            {
-                id: 2,
-                appName: 'Docs',
-                widgetIcon: '',
-                linkMobile: '/docs',
-                isOpen: isMobile ? 'open' : 'close',
-                isMinimize: null,
-                appIndex: 100,
-                iconLocation: [
-                    ICON_LOCATION.desktop,
-                    ICON_LOCATION.startMenuRight
-                ]
-            },
-            {
-                id: 3,
-                appName: 'Calculator',
-                widgetIcon: '',
-                linkMobile: '/calculator',
-                isOpen: isMobile ? 'open' : 'close',
-                isMinimize: null,
-                appIndex: 100,
-                iconLocation: [ICON_LOCATION.startMenuRight]
-            },
-            {
-                id: 4,
-                appName: 'Store',
-                widgetIcon: '',
-                linkMobile: '/store',
-                isOpen: isMobile ? 'open' : 'close',
-                isMinimize: null,
-                appIndex: 100,
-                iconLocation: [
-                    ICON_LOCATION.desktop,
-                    ICON_LOCATION.startMenuRight
-                ]
-            },
-            {
-                id: 5,
-                appName: 'Task Manager',
-                widgetIcon: '',
-                linkMobile: '/taskManager',
-                isOpen: isMobile ? 'open' : 'close',
-                isMinimize: null,
-                appIndex: 100,
-                iconLocation: [ICON_LOCATION.notificationsWindow]
-            }
-        ]
+    const [folderState, folderDispatch] = useReducer(folderReducer, {
+        apps: APPS_STATE,
+        openApps: []
     });
-
-    const testStartApp = id => {
-        if (isMobile) {
-            return;
-        }
-
-        folder.apps.map(filter => {
-            if (filter.id === id && filter.isOpen === 'close') {
-                setFolder(prevState => ({
-                    ...prevState,
-                    apps: prevState.apps.map(item =>
-                        item.id === id && item.isOpen === 'close'
-                            ? { ...item, isOpen: 'open' }
-                            : item
-                    ),
-                    openApps: [...prevState.openApps, filter]
-                }));
-            }
-        });
-    };
-
-    const testCloseApp = id => {
-        if (isMobile) {
-            return;
-        }
-
-        folder.apps.map(filter => {
-            if (filter.id === id && filter.isOpen === 'open') {
-                setFolder(prevState => ({
-                    ...prevState,
-                    apps: prevState.apps.map(item =>
-                        item.id === id && item.isOpen === 'open'
-                            ? { ...item, isOpen: 'close' }
-                            : item
-                    ),
-                    openApps: [
-                        ...prevState.openApps.filter(item => item.id !== id)
-                    ]
-                }));
-            }
-        });
-    };
-
-    const testMinimizeApp = (id, boolean) => {
-        if (isMobile) {
-            return;
-        }
-
-        folder.apps.map(filter => {
-            if (
-                filter.id === id &&
-                (filter.isMinimize === null || filter.isMinimize !== boolean)
-            ) {
-                setFolder(prevState => ({
-                    ...prevState,
-                    apps: prevState.apps.map(item =>
-                        item.id === id &&
-                        (item.isMinimize === null ||
-                            item.isMinimize !== boolean)
-                            ? { ...item, isMinimize: boolean }
-                            : item
-                    )
-                }));
-            }
-        });
-    };
-
-    const testActiveWindow = id => {
-        folder.apps.map(filter => {
-            if (filter.id === id && filter.appIndex === 100) {
-                setFolder(prevState => ({
-                    ...prevState,
-                    apps: prevState.apps.map(item =>
-                        item.id === id && item.appIndex === 100
-                            ? { ...item, appIndex: 104 }
-                            : { ...item, appIndex: 100 }
-                    )
-                }));
-            }
-        });
-    };
-
-    const startApp = (app, icon, zIndex, minimize, tooltipName) => {
-        if (isMobile) {
-            return;
-        }
-
-        if (folder[app] === 'close') {
-            setFolder({
-                ...folder,
-                [app]: 'open',
-                openApps: [
-                    ...folder.openApps,
-                    [app, icon, zIndex, minimize, tooltipName]
-                ]
-            });
-        }
-    };
-
-    const closeApp = (app, minimize) => {
-        if (isMobile) {
-            return;
-        }
-        if (folder[app] === 'open') {
-            setFolder({
-                ...folder,
-                [minimize]: null,
-                [app]: 'close',
-                openApps: [...folder.openApps.filter(item => item[0] !== app)]
-            });
-        }
-    };
-
-    const minimizeApp = (app, boolean) => {
-        if (isMobile) {
-            return;
-        }
-        if (folder[app] === null || folder[app] !== boolean) {
-            setFolder({ ...folder, [app]: boolean });
-        }
-    };
 
     return (
         <FolderContext.Provider
             value={{
-                folder,
-                setFolder,
-                startApp,
-                closeApp,
-                minimizeApp,
-                testStartApp,
-                testCloseApp,
-                testMinimizeApp,
-                testActiveWindow
+                folderState,
+                folderDispatch
             }}
         >
             {props.children}

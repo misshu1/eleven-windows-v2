@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom';
-import React, { useContext, useCallback } from 'react';
+import React, { useContext } from 'react';
 import { NotificationContainer, Notification, WidgetsContainer } from './style';
+import { FolderContext, ICON_LOCATION } from '../../../contexts/folderContext';
 import { NotificationContext } from '../../../contexts/notificationContext';
-import { useAppIconsContext } from '../../../contexts/appIconsContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
@@ -10,7 +10,7 @@ import Scrollbar from 'react-scrollbars-custom';
 import WidgetApp from './WidgetApp';
 
 const NotificationApp = () => {
-    const { icons, ICON_LOCATION } = useAppIconsContext();
+    const { folderState } = useContext(FolderContext);
     const { taskbar } = useContext(TaskbarContext);
     const {
         notification,
@@ -19,23 +19,21 @@ const NotificationApp = () => {
     } = useContext(NotificationContext);
     const { t } = useTranslation();
 
-    const widgetIcons = useCallback(() => {
-        return icons.map(item => {
+    const widgetIcons = () => {
+        return folderState.apps.map(item => {
             return item.iconLocation.map(
                 location =>
                     location === ICON_LOCATION.notificationsWindow && (
                         <WidgetApp
-                            key={item.appOpen}
-                            iconDisplayName={item.iconDisplayName}
+                            key={item.id}
+                            appId={item.id}
+                            iconDisplayName={item.appName}
                             widgetIcon={item.widgetIcon}
-                            appIndexName={item.appIndexName}
-                            appMinimize={item.appMinimize}
-                            appOpen={item.appOpen}
                         />
                     )
             );
         });
-    }, [ICON_LOCATION.notificationsWindow, icons]);
+    };
 
     return ReactDOM.createPortal(
         <React.Fragment>
