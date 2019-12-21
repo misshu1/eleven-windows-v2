@@ -157,6 +157,7 @@ const folderReducer = (state, action) => {
             } else {
                 return state;
             }
+
         case FOLDER_ACTIONS.active:
             return {
                 ...state,
