@@ -1,32 +1,35 @@
 export const folderContextState = `
-const [folder, setFolder] = useState({
-  exampleOpen: isMobile ? 'open' : 'close',
-  exampleMinimize: null
-});
-`.trim();
+import exampleIcon from 'src/assets/images/icons/your_icon.svg';
+import ExampleApp from 'src/components/apps/example/ExampleApp';
 
-export const indexContextState = `
-const [index, setIndex] = useState({
-  example: 100
-});
+const APPS_STATE = [
+  {
+    id: 1234,
+    appName: 'Example app name',
+    widgetIcon: exampleIcon,
+    link: '/example',
+    component: <ExampleApp />,
+    isOpen: isMobile ? 'open' : 'close',
+    isMinimize: null,
+    appIndex: 100,
+    iconLocation: [
+        ICON_LOCATION.desktop,
+        ICON_LOCATION.notificationsWindow,
+        ICON_LOCATION.startMenuLeft
+    ]
+  }
+]
 `.trim();
 
 export const folderExample = `
-import React, { useContext } from 'react';
+import React from 'react';
 // Make sure the import paths are correct
-import { IndexContext } from 'src/contexts/indexContext';
-import FolderApp from 'src/folder/FolderApp';
+import FolderApp from 'src/components/folder/FolderApp';
 
 const ExampleApp = () => {
-  const { index } = useContext(IndexContext);
-
   return (
     <FolderApp
-      appMinimize={'exampleMinimize'}
-      appOpen={'exampleOpen'}
-      appIndexName='example'
-      appIndexValue={index.example}
-      folderName='Example folder name'
+      appId={1234}
     >
     {/* Add folder content here */}
     </FolderApp>
@@ -34,38 +37,6 @@ const ExampleApp = () => {
 }
 
 export default ExampleApp;
-`.trim();
-
-export const iconsExample = `
-{
-  id: 1234,
-  iconDisplayName: 'Example icon name',
-  widgetIcon: exampleIcon,
-  linkMobile: '/exampleLink',
-  appIndexName: 'example',
-  appMinimize: 'exampleMinimize',
-  appOpen: 'exampleOpen',
-  // Choose icon location here
-  iconLocation: [
-    ICON_LOCATION.desktop,
-    ICON_LOCATION.notificationsWindow,
-    ICON_LOCATION.startMenuLeft
-  ]
-}
-`.trim();
-
-export const folderRouteExample = `
-import React, { lazy } from 'react';
-const ExampleApp  = lazy(() => import('../apps/example/ExampleApp '));
-
-const COMPONENTS = [
-  {
-    /* The id should be identical
-    with the id from appIconsContext.js */
-    id: 1234,
-    component: <ExampleApp />
-  }
-]
 `.trim();
 
 export const loadingLogoExample = `
@@ -133,13 +104,11 @@ export default ExampleApp;
 
 export const folderMenuExample = `
 import React, { useRef } from 'react';
-import { IndexContext } from 'src/contexts/indexContext';
-import FolderApp from 'src/folder/FolderApp';
+import FolderApp from 'src/components/folder/FolderApp';
 import folderIcon from 'src/assets/images/icons/folder.svg';
 import logo from 'src/assets/images/logo/logo-red.svg';
 
 const ExampleApp = () => {
-  const { index } = useContext(IndexContext);
   const myFirstElementRef = useRef(null);
   const mySecondElementRef = useRef(null);
   const andSoOnRef = useRef(null);
@@ -179,11 +148,7 @@ const ExampleApp = () => {
 
   return (
     <FolderApp
-      appMinimize={'exampleMinimize'}
-      appOpen={'exampleOpen'}
-      appIndexName='example'
-      appIndexValue={index.example}
-      folderName='Example folder name'
+      appId={1234}
       toolbarMenu={toolbarMenu()}
       ref={{
         myFirstElementRef,
@@ -200,5 +165,4 @@ const ExampleApp = () => {
 }
 
 export default ExampleApp;
-
 `.trim();

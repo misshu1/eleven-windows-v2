@@ -1,11 +1,5 @@
 import React, { useState, useEffect, useContext, forwardRef } from 'react';
-import {
-    folderExample,
-    folderContextState,
-    indexContextState,
-    iconsExample,
-    folderRouteExample
-} from './CodeExamples';
+import { folderExample, folderContextState } from './CodeExamples';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -61,41 +55,12 @@ const useStyles = makeStyles({
     }
 });
 
-const folderNameDescription = (
+const appIdDescription = (
     <span>
-        Make sure it's the same name as
-        <span className='required'>{` iconDisplayName `}</span>
-    </span>
-);
-
-const appMinimizeDescription = (
-    <span>
-        It's an object key from
+        The id of the app declared in
         <span className='required'>{` src/contexts/folderContext.js `}</span>
     </span>
 );
-
-const appIndexNameDescription = (
-    <span>
-        It's an object key from
-        <span className='required'>{` src/contexts/indexContext.js `}</span>
-    </span>
-);
-
-const appIndexValueDescription = (
-    <span>
-        It's an object value from
-        <span className='required'>{` src/contexts/indexContext.js `}</span>
-    </span>
-);
-
-const appOpenDescription = (
-    <span>
-        It's an object key from
-        <span className='required'>{` src/contexts/folderContext.js `}</span>
-    </span>
-);
-
 const widthDescription = <span>Width of the folder.</span>;
 const heightDescription = <span>Height of the folder.</span>;
 const marginTopDescription = (
@@ -112,21 +77,24 @@ const marginLeftDescription = (
         property in css.
     </span>
 );
-
+const toolbarMenuDescription = (
+    <span>Toolbar menu items, more about this, bellow.</span>
+);
+const refDescription = (
+    <span>Passing references from the folder content to the toolbar menu.</span>
+);
 const createData = (propName, required, type, defaultVal, description) => {
     return { propName, required, type, defaultVal, description };
 };
 
 const folderPropsTable = [
-    createData('folderName', true, 'string', '-', folderNameDescription),
-    createData('appMinimize', true, 'string', '-', appMinimizeDescription),
-    createData('appIndexName', true, 'string', '-', appIndexNameDescription),
-    createData('appIndexValue', true, 'number', '-', appIndexValueDescription),
-    createData('appOpen', true, 'string', '-', appOpenDescription),
+    createData('appId', true, 'number', '-', appIdDescription),
     createData('width', false, 'string', '44rem', widthDescription),
     createData('height', false, 'string', '44rem', heightDescription),
     createData('marginTop', false, 'string', '5rem', marginTopDescription),
-    createData('marginLeft', false, 'string', '5rem', marginLeftDescription)
+    createData('marginLeft', false, 'string', '5rem', marginLeftDescription),
+    createData('toolbarMenu', false, 'object', '-', toolbarMenuDescription),
+    createData('ref', false, 'object', '-', refDescription)
 ];
 
 const CreateFolder = (props, ref) => {
@@ -148,22 +116,29 @@ const CreateFolder = (props, ref) => {
 
             <p>
                 Go to {addWordBreak('/src/contexts/folderContext.js')} and add
-                the following code inside the folder state.
+                the following code inside{' '}
+                <span className='required'>{` APPS_STATE `}</span>.
             </p>
             <SyntaxHighlighter language='jsx' style={highlightStyle}>
                 {folderContextState}
             </SyntaxHighlighter>
             <p>
-                Then go to {addWordBreak('/src/contexts/indexContext.js')} and
-                add the following code inside the index state.
+                You can create an Icon in 3 components: Desktop, Start Menu, and
+                Notification window. In Start Menu you can choose between the
+                left and right side of the menu.
             </p>
-            <SyntaxHighlighter language='jsx' style={highlightStyle}>
-                {indexContextState}
-            </SyntaxHighlighter>
+            <p>
+                <Emoji symbol='📝' label='note' /> Note that
+                <span className='text-highlight'>{` LeftMenuApp.js `}</span>
+                from Start Menu and icons from
+                <span className='text-highlight'>{` NotificationApp.js `}</span>
+                are not visible on mobile.
+            </p>
             <p>
                 Now let's start creating a new directory in{' '}
-                {addWordBreak('/src/apps')} and then create a new file, let's
-                name it ExampleApp.js. In our ExampleApp add the following code.
+                {addWordBreak('/src/components/apps')} and then create a new
+                file, let's name it ExampleApp.js. In our ExampleApp add the
+                following code.
             </p>
             <SyntaxHighlighter language='jsx' style={highlightStyle}>
                 {folderExample}
@@ -214,35 +189,6 @@ const CreateFolder = (props, ref) => {
                     ))}
                 </TableBody>
             </Table>
-            <p>
-                Now that you've created the folder, you need a way to open it,
-                and for that, you can create an Icon in 3 components: Desktop,
-                Start Menu, and Notification window. In Start Menu you can
-                choose between the left and right side of the menu.
-            </p>
-            <p>
-                Go to {addWordBreak('/src/contexts/appIconsContext.js')} and add
-                the following code inside the icons state.
-            </p>
-            <SyntaxHighlighter language='jsx' style={highlightStyle}>
-                {iconsExample}
-            </SyntaxHighlighter>
-            <p>
-                <Emoji symbol='📝' label='note' /> Note that
-                <span className='text-highlight'>{` LeftMenuApp.js `}</span>
-                from Start Menu and icons from
-                <span className='text-highlight'>{` NotificationApp.js `}</span>
-                are not visible on mobile.
-            </p>
-            <p>
-                Now we need to create a route for this folder, go to{' '}
-                {addWordBreak('/src/components/routes/RoutesApp.js')} and import
-                the folder you just created, and then add a new object to{' '}
-                <span className='required'>COMPONENTS</span> array.
-            </p>
-            <SyntaxHighlighter language='jsx' style={highlightStyle}>
-                {folderRouteExample}
-            </SyntaxHighlighter>
             <p>
                 And that was it, you've created your first folder
                 <Emoji symbol='🌞' label='sun' />.

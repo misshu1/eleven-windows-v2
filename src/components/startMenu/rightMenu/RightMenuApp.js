@@ -22,8 +22,8 @@ const RightMenuApp = () => {
                     ANIMATION_DURATION++;
                     return (
                         <WidgetApp
-                            animationDuration={ANIMATION_DURATION / 10}
                             key={item.id}
+                            animationDuration={ANIMATION_DURATION / 10}
                             appId={item.id}
                             link={item.link}
                             widgetIcon={item.widgetIcon}

@@ -24,7 +24,7 @@ const LeftMenuApp = props => {
                 location =>
                     location === ICON_LOCATION.startMenuLeft && (
                         <WidgetApp
-                            key={item.appOpen}
+                            key={item.id}
                             appId={item.id}
                             iconDisplayName={item.appName}
                             widgetIcon={item.widgetIcon}
