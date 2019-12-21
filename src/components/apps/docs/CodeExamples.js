@@ -1,6 +1,9 @@
 export const folderContextState = `
+import React, { lazy } from 'react';
 import exampleIcon from 'src/assets/images/icons/your_icon.svg';
-import ExampleApp from 'src/components/apps/example/ExampleApp';
+const ExampleApp = lazy(() =>
+    import('src/components/apps/example/ExampleApp')
+);
 
 const APPS_STATE = [
   {

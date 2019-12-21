@@ -115,9 +115,10 @@ const CreateFolder = (props, ref) => {
             <h2 ref={ref}>Create a new folder</h2>
 
             <p>
-                Go to {addWordBreak('/src/contexts/folderContext.js')} and add
-                the following code inside{' '}
-                <span className='required'>{` APPS_STATE `}</span>.
+                Go to {addWordBreak('/src/contexts/folderContext.js')} and add a
+                new object inside
+                <span className='required'>{` APPS_STATE `}</span> like the
+                below example.
             </p>
             <SyntaxHighlighter language='jsx' style={highlightStyle}>
                 {folderContextState}
