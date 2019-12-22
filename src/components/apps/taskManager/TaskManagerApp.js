@@ -1,104 +1,122 @@
-// import React, { useContext, useState, useEffect, useCallback } from 'react';
-// import { FolderContext, FOLDER_ACTIONS } from '../../../contexts/folderContext';
-// import FolderApp from '../../folder/FolderApp';
-// import WidgetApp from './WidgetApp';
-// import ButtonApp from './ButtonApp';
-// import { Container, Table, TableHead } from './style';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
+import { FolderContext, FOLDER_ACTIONS } from '../../../contexts/folderContext';
+import FolderApp from '../../folder/FolderApp';
+import WidgetApp from './WidgetApp';
+import ButtonApp from './ButtonApp';
+import { Container, Table, TableHead } from './style';
 
-// const TaskManagerApp = () => {
-//     const [selectedApp, setSelectedApp] = useState([]);
-//     const [disableBtn, setDisableBtn] = useState(true);
-//     const { folderState, folderDispatch } = useContext(FolderContext);
+const TaskManagerApp = () => {
+    const [selectedApp, setSelectedApp] = useState([]);
+    const [disableBtn, setDisableBtn] = useState(true);
+    const { folderState, folderDispatch } = useContext(FolderContext);
 
-//     const closeSelectedApp = useCallback(() => {
-//         const noneSelected = selectedApp.every(
-//             item => item.isSelected === false
-//         );
-//         if (noneSelected) {
-//             return;
-//         }
+    const timeSince = previous => {
+        const msPerMinute = 60000;
+        const msPerHour = 3600000;
+        const msPerDay = 86400000;
+        const msPerMonth = 2592000000;
+        const msPerYear = 946080000000;
 
-//         const app = selectedApp.filter(item => item.isSelected === true);
+        const currentDay = new Date().getTime();
+        const elapsed = currentDay - new Date(previous).getTime();
 
-//         const { appName, appMinimize } = app[0];
-//         closeApp(appName, appMinimize);
-//         setSelectedApp(selectedApp.filter(item => item.isSelected === false));
-//     }, [closeApp, selectedApp]);
+        if (elapsed < msPerMinute) {
+            return Math.round(elapsed / 1000) + ' secodns';
+        } else if (elapsed < msPerHour) {
+            return Math.round(elapsed / msPerMinute) + ' minutes';
+        } else if (elapsed < msPerDay) {
+            return Math.round(elapsed / msPerHour) + ' hours';
+        } else if (elapsed < msPerMonth) {
+            return Math.round(elapsed / msPerDay) + ' days';
+        } else if (elapsed < msPerYear) {
+            return Math.round(elapsed / msPerMonth) + ' months';
+        } else {
+            return Math.round(elapsed / msPerYear) + ' years';
+        }
+    };
 
-//     const getSelectedAppName = app => {
-//         const findApp = selectedApp.find(
-//             item => item.appName === app && item.isSelected === true
-//         );
+    const closeSelectedApp = useCallback(() => {
+        const noneSelected = selectedApp.every(
+            item => item.isSelected === false
+        );
+        if (noneSelected) {
+            return;
+        }
 
-//         if (findApp) {
-//             setDisableBtn(false);
-//             return findApp.isSelected;
-//         }
-//     };
+        const app = selectedApp.filter(item => item.isSelected === true);
 
-//     const handleSelectApp = app => {
-//         setSelectedApp(
-//             selectedApp.map(item =>
-//                 item.appName === app
-//                     ? { ...item, isSelected: true }
-//                     : { ...item, isSelected: false }
-//             )
-//         );
-//     };
+        folderDispatch({
+            type: FOLDER_ACTIONS.close,
+            id: app[0].id
+        });
+    }, [selectedApp, folderDispatch]);
 
-//     const createSelectedAppObj = useCallback(() => {
-//         return openApps.map(item => {
-//             const app = item[0];
-//             const minimize = item[3];
-//             setDisableBtn(true);
+    const getSelectedApp = id => {
+        const findApp = selectedApp.find(
+            item => item.id === id && item.isSelected === true
+        );
 
-//             return { appName: app, appMinimize: minimize, isSelected: false };
-//         });
-//     }, [openApps]);
+        if (findApp) {
+            setDisableBtn(false);
+            return findApp.isSelected;
+        }
+    };
 
-//     useEffect(() => {
-//         setSelectedApp(createSelectedAppObj());
-//     }, [createSelectedAppObj, openApps]);
+    const handleSelectApp = id => {
+        setSelectedApp(
+            selectedApp.map(item =>
+                item.id === id
+                    ? { ...item, isSelected: true }
+                    : { ...item, isSelected: false }
+            )
+        );
+    };
 
-//     const showApps = () => {
-//         const widget = openApps.map(item => {
-//             const app = item[0];
-//             const icon = item[1];
-//             const appDisplayName = item[4];
+    const createSelectedAppObj = useCallback(() => {
+        return folderState.openApps.map(item => {
+            setDisableBtn(true);
+            return { ...item, isSelected: false };
+        });
+    }, [folderState.openApps]);
 
-//             return (
-//                 <WidgetApp
-//                     key={app}
-//                     app={app}
-//                     widgetIcon={icon}
-//                     getSelectedAppName={getSelectedAppName}
-//                     handleSelectApp={handleSelectApp}
-//                     iconDisplayName={appDisplayName}
-//                     selectedApp={selectedApp[app]}
-//                 />
-//             );
-//         });
-//         return widget;
-//     };
+    useEffect(() => {
+        setSelectedApp(createSelectedAppObj());
+    }, [createSelectedAppObj, folderState.openApps]);
 
-//     return (
-//         <FolderApp appId={5} marginLeft='7rem' marginTop='7rem'>
-//             <Container>
-//                 <Table>
-//                     <TableHead>
-//                         <div className='app-name'>Name</div>
-//                         <div className='category'>Ram</div>
-//                         <div className='category'>Open Time</div>
-//                         <div className='category'>Ceva</div>
-//                     </TableHead>
-//                     {showApps()}
-//                 </Table>
-//                 <ButtonApp
-//                     closeSelectedApp={closeSelectedApp}
-//                     disableBtn={disableBtn}
-//                 />
-//             </Container>
-//         </FolderApp>
-//     );
-// };
-// export default TaskManagerApp;
+    const showApps = () => {
+        const widget = folderState.openApps.map(item => {
+            return (
+                <WidgetApp
+                    key={item.id}
+                    appId={item.id}
+                    widgetIcon={item.widgetIcon}
+                    getSelectedApp={getSelectedApp}
+                    handleSelectApp={handleSelectApp}
+                    iconDisplayName={item.appName}
+                    openTime={item.openSince}
+                    timeSince={timeSince}
+                />
+            );
+        });
+        return widget;
+    };
+
+    return (
+        <FolderApp appId={5} marginLeft='7rem' marginTop='7rem'>
+            <Container>
+                <Table>
+                    <TableHead>
+                        <div className='app-name'>Name</div>
+                        <div className='category'>Open Time</div>
+                    </TableHead>
+                    {showApps()}
+                </Table>
+                <ButtonApp
+                    closeSelectedApp={closeSelectedApp}
+                    disableBtn={disableBtn}
+                />
+            </Container>
+        </FolderApp>
+    );
+};
+export default TaskManagerApp;

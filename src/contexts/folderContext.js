@@ -88,7 +88,7 @@ const APPS_STATE = [
         widgetIcon: taskIcon,
         link: '/taskManager',
         component: <TaskManagerApp />,
-        isOpen: isMobile ? 'open' : 'close',
+        isOpen: 'close',
         isMinimize: null,
         appIndex: 100,
         iconLocation: [ICON_LOCATION.notificationsWindow]
@@ -110,7 +110,10 @@ const folderReducer = (state, action) => {
                             ? { ...item, isOpen: 'open', appIndex: 104 }
                             : { ...item, appIndex: 100 }
                     ),
-                    openApps: [...state.openApps, selectedOpenApp]
+                    openApps: [
+                        ...state.openApps,
+                        { ...selectedOpenApp, openSince: new Date().getTime() }
+                    ]
                 };
             } else {
                 return state;
@@ -159,14 +162,22 @@ const folderReducer = (state, action) => {
             }
 
         case FOLDER_ACTIONS.active:
-            return {
-                ...state,
-                apps: state.apps.map(item =>
-                    item.id === action.id
-                        ? { ...item, appIndex: 104 }
-                        : { ...item, appIndex: 100 }
-                )
-            };
+            const selectedActiveApp = state.apps.find(
+                item => item.id === action.id
+            );
+
+            if (selectedActiveApp.appIndex !== 104) {
+                return {
+                    ...state,
+                    apps: state.apps.map(item =>
+                        item.id === action.id
+                            ? { ...item, appIndex: 104 }
+                            : { ...item, appIndex: 100 }
+                    )
+                };
+            } else {
+                return state;
+            }
         default:
             return state;
     }

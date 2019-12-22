@@ -1,22 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Widget, TableRow } from './style';
 
 const WidgetApp = props => {
+    const [openSince, setOpenSince] = useState();
     const {
-        app,
+        appId,
         widgetIcon,
         iconDisplayName,
         handleSelectApp,
-        getSelectedAppName
+        getSelectedApp,
+        openTime,
+        timeSince
     } = props;
+    const selected = getSelectedApp(appId);
 
-    const selected = getSelectedAppName(app);
+    useEffect(() => {
+        const time = setTimeout(() => {
+            setOpenSince(timeSince(openTime));
+        }, 1000);
+
+        return () => {
+            clearInterval(time);
+        };
+    }, [openSince, setOpenSince, openTime, timeSince]);
 
     return (
         <TableRow
             tabIndex='0'
-            onClick={() => handleSelectApp(app)}
+            onClick={() => handleSelectApp(appId)}
             selectedApp={selected}
         >
             <Widget className='app-name'>
@@ -28,9 +40,7 @@ const WidgetApp = props => {
                 />
                 <span>{iconDisplayName}</span>
             </Widget>
-            <div className='stats'>1 MB</div>
-            <div className='stats'>2 MB</div>
-            <div className='stats'>3 MB</div>
+            <div className='stats'>{openSince}</div>
         </TableRow>
     );
 };
@@ -38,9 +48,11 @@ const WidgetApp = props => {
 export default WidgetApp;
 
 WidgetApp.propTypes = {
-    app: PropTypes.string.isRequired,
+    appId: PropTypes.number.isRequired,
     widgetIcon: PropTypes.node.isRequired,
     iconDisplayName: PropTypes.string.isRequired,
     handleSelectApp: PropTypes.func.isRequired,
-    getSelectedAppName: PropTypes.func.isRequired
+    openTime: PropTypes.number.isRequired,
+    timeSince: PropTypes.func.isRequired,
+    getSelectedApp: PropTypes.func.isRequired
 };

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const TableRow = styled.div`
     display: grid;
-    grid-template-columns: 4fr 1fr 1fr 1fr;
+    grid-template-columns: 4fr 2fr;
     grid-template-rows: minmax(2rem, 2.5rem);
     outline: none;
     user-select: none;
