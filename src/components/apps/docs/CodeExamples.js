@@ -2,7 +2,7 @@ export const folderContextState = `
 import React, { lazy } from 'react';
 import exampleIcon from 'src/assets/images/icons/your_icon.svg';
 const ExampleApp = lazy(() =>
-    import('src/components/apps/example/ExampleApp')
+  import('src/components/apps/example/ExampleApp')
 );
 
 const APPS_STATE = [
@@ -16,9 +16,9 @@ const APPS_STATE = [
     isMinimize: null,
     appIndex: 100,
     iconLocation: [
-        ICON_LOCATION.desktop,
-        ICON_LOCATION.notificationsWindow,
-        ICON_LOCATION.startMenuLeft
+      ICON_LOCATION.desktop,
+      ICON_LOCATION.notificationsWindow,
+      ICON_LOCATION.startMenuLeft
     ]
   }
 ]

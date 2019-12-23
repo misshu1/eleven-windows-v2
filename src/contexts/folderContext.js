@@ -88,7 +88,7 @@ const APPS_STATE = [
         widgetIcon: taskIcon,
         link: '/taskManager',
         component: <TaskManagerApp />,
-        isOpen: 'close',
+        isOpen: isMobile ? 'open' : 'close',
         isMinimize: null,
         appIndex: 100,
         iconLocation: [ICON_LOCATION.notificationsWindow]
