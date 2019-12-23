@@ -189,11 +189,25 @@ export const FolderProvider = props => {
         openApps: []
     });
 
+    const sortByAppName = (a, b) => {
+        const nameA = a.appName.toUpperCase();
+        const nameB = b.appName.toUpperCase();
+
+        let comparison = 0;
+        if (nameA > nameB) {
+            comparison = 1;
+        } else if (nameA < nameB) {
+            comparison = -1;
+        }
+        return comparison;
+    };
+
     return (
         <FolderContext.Provider
             value={{
                 folderState,
-                folderDispatch
+                folderDispatch,
+                sortByAppName
             }}
         >
             {props.children}

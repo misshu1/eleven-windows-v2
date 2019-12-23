@@ -6,14 +6,15 @@ import { FolderContext, ICON_LOCATION } from '../../contexts/folderContext';
 
 const DesktopApp = () => {
     const { closeAllApps } = useContext(TaskbarContext);
-    const { folderState } = useContext(FolderContext);
+    const { folderState, sortByAppName } = useContext(FolderContext);
 
     const close = useCallback(() => {
         closeAllApps();
     }, [closeAllApps]);
 
     const desktopIcons = useCallback(() => {
-        return folderState.apps.map(item => {
+        const apps = folderState.apps.sort(sortByAppName);
+        return apps.map(item => {
             return item.iconLocation.map(
                 location =>
                     location === ICON_LOCATION.desktop && (

@@ -7,7 +7,7 @@ import WidgetApp from './WidgetApp';
 let ANIMATION_DURATION = 0;
 
 const RightMenuApp = () => {
-    const { folderState } = useContext(FolderContext);
+    const { folderState, sortByAppName } = useContext(FolderContext);
 
     useEffect(() => {
         return () => {
@@ -16,7 +16,8 @@ const RightMenuApp = () => {
     }, []);
 
     const widgetIcons = useCallback(() => {
-        return folderState.apps.map(item => {
+        const apps = folderState.apps.sort(sortByAppName);
+        return apps.map(item => {
             return item.iconLocation.map(location => {
                 if (location === ICON_LOCATION.startMenuRight) {
                     ANIMATION_DURATION++;
