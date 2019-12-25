@@ -47,7 +47,6 @@ export const TaskbarProvider = props => {
         <TaskbarContext.Provider
             value={{
                 taskbar,
-                setTaskbar,
                 closeApp,
                 startTaskbarApp,
                 handleKeyPress,

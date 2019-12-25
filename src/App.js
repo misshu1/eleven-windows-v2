@@ -40,7 +40,7 @@ const App = () => {
         checkLocalStorageBackground
     } = useContext(ThemeContext);
     const { globalApp } = useContext(GlobalAppContext);
-    const desktopBg = getSelectedBackground()[0].bg;
+    const desktopBg = getSelectedBackground().bg;
 
     useLayoutEffect(() => {
         checkLocalStorageTheme();

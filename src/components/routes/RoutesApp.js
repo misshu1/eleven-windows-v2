@@ -1,6 +1,6 @@
 import React, { useContext, Suspense, useEffect } from 'react';
-import { GlobalAppContext } from '../../contexts/globalContext';
 import { FolderContext, FOLDER_ACTIONS } from '../../contexts/folderContext';
+import { GlobalAppContext } from '../../contexts/globalContext';
 import { Route } from 'react-router-dom';
 import SpinnerApp from '../style/SpinnerApp';
 

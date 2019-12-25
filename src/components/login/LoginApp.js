@@ -66,7 +66,7 @@ const LoginApp = props => {
                 >
                     <div>
                         <TextField
-                            id='outlined-basic'
+                            id='user'
                             className={classes.textField}
                             inputProps={{
                                 className: classes.inputStyle
@@ -83,7 +83,7 @@ const LoginApp = props => {
                     </div>
                     <div>
                         <TextField
-                            id='outlined-basic'
+                            id='password'
                             className={classes.textField}
                             inputProps={{
                                 className: classes.inputStyle

@@ -23,7 +23,7 @@ export const ThemeProvider = props => {
     const [background, setBackground] = useState(createBackgroundObject());
 
     const getSelectedBackground = () => {
-        return background.filter(item => item.isSelected === true);
+        return background.find(item => item.isSelected === true);
     };
 
     const changeBackground = useCallback(
@@ -36,11 +36,11 @@ export const ThemeProvider = props => {
                     : { ...item, isSelected: false }
             );
 
-            const checkBackground = background
-                .filter(item => item.bg === selected)
-                .map(item => item.isSelected);
+            const checkBackground = background.find(
+                item => item.bg === selected
+            );
 
-            if (!checkBackground[0]) {
+            if (!checkBackground.isSelected) {
                 setBackground(filterBg);
             }
         },

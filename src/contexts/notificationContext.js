@@ -152,7 +152,6 @@ export const NotificationProvider = props => {
         <NotificationContext.Provider
             value={{
                 notification,
-                setNotification,
                 createNotificationWarn,
                 createNotificationSuccess,
                 createNotificationError,

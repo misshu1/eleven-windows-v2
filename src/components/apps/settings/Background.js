@@ -33,8 +33,8 @@ const Background = () => {
         getSelectedBackground
     } = useContext(ThemeContext);
     const { t } = useTranslation();
-    const selectedBg = getSelectedBackground()[0].bg;
-    const selectedBgName = getSelectedBackground()[0].name;
+    const selectedBg = getSelectedBackground().bg;
+    const selectedBgName = getSelectedBackground().name;
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const classes = useStyles(theme);

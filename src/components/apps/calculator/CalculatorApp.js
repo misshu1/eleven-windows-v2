@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FolderApp from '../../folder/FolderApp';
 import { Container, ButtonsContainer, NumberPad, Operators } from './style';
 

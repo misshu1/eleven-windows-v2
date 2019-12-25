@@ -14,9 +14,7 @@ export const GlobalAppProvider = props => {
     };
 
     return (
-        <GlobalAppContext.Provider
-            value={{ globalApp, setGlobalApp, changeAppSize }}
-        >
+        <GlobalAppContext.Provider value={{ globalApp, changeAppSize }}>
             {props.children}
         </GlobalAppContext.Provider>
     );
