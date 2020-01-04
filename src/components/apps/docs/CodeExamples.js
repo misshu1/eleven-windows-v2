@@ -106,7 +106,7 @@ export default ExampleApp;
 `.trim();
 
 export const folderMenuExample = `
-import React, { useRef } from 'react';
+import React, { useRef, useCallback } from 'react';
 import FolderApp from 'src/components/folder/FolderApp';
 import folderIcon from 'src/assets/images/icons/folder.svg';
 import logo from 'src/assets/images/logo/logo-red.svg';
