@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect } from 'react';
+import React, { useContext, useLayoutEffect, useEffect } from 'react';
 import WorkspaceApp from './components/workspace/WorkspaceApp';
 import { NotificationProvider } from './contexts/notificationContext';
 import { GlobalAppContext } from './contexts/globalContext';
@@ -19,6 +19,7 @@ import {
     faEllipsisV
 } from '@fortawesome/free-solid-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
+import { analytics } from './config/firebase';
 import LoginApp from './components/login/LoginApp';
 library.add(
     faCommentAlt,
@@ -41,6 +42,10 @@ const App = () => {
     } = useContext(ThemeContext);
     const { globalApp } = useContext(GlobalAppContext);
     const desktopBg = getSelectedBackground().bg;
+
+    useEffect(() => {
+        analytics.logEvent('first_visit');
+    }, []);
 
     useLayoutEffect(() => {
         checkLocalStorageTheme();

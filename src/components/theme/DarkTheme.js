@@ -46,7 +46,7 @@ const DarkTheme = {
     // Clock and Logo
     clockHover: 'rgba(100, 100, 100, 0.3)',
     logoHover: 'rgba(100, 100, 100, 0.3)',
-    logoBorder: '#f80012',
+    logoBorder: '#AF0138',
 
     // StartMenu
     startMenuBg: 'rgba(32, 32, 32, 0.95)',
