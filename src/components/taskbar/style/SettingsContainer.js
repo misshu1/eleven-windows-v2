@@ -22,7 +22,7 @@ export const SettingsContainer = styled.div`
             color: ${props => props.theme.startSmallWidgetColor};
         }
 
-        img {
+        svg {
             position: absolute;
             top: 50%;
             left: 50%;

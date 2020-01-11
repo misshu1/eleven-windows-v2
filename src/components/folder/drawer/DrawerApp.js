@@ -28,8 +28,10 @@ const useStyles = makeStyles({
     }),
     listIconStyle: {
         marginRight: '1rem',
-        minWidth: '2rem',
-        justifyContent: 'center'
+        width: '2rem',
+        height: '2rem',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });
 
@@ -59,9 +61,7 @@ const ListItemLink = props => {
             {(item.widgetIcon || item.fontIcon) && (
                 <ListItemIcon className={classes.listIconStyle}>
                     <React.Fragment>
-                        {item.widgetIcon && (
-                            <img src={item.widgetIcon} alt='icon' />
-                        )}
+                        {item.widgetIcon && item.widgetIcon}
                         {item.fontIcon && (
                             <FontAwesomeIcon
                                 icon={item.fontIcon}

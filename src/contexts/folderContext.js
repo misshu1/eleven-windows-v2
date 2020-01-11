@@ -1,9 +1,9 @@
 import React, { createContext, useReducer, lazy } from 'react';
-import cogIcon from '../assets/images/icons/cog.svg';
-import docsIcon from '../assets/images/icons/docs.svg';
-import storeIcon from '../assets/images/icons/store.svg';
-import taskIcon from '../assets/images/icons/task.svg';
-import calcIcon from '../assets/images/icons/calculator.svg';
+import SettingsIcon from '../assets/images/icons/SettingsIcon';
+import StoreIcon from '../assets/images/icons/StoreIcon';
+import DocsIcon from '../assets/images/icons/DocsIcon';
+import TaskIcon from '../assets/images/icons/TaskIcon';
+import CalculatorIcon from '../assets/images/icons/CalculatorIcon';
 
 const DocsApp = lazy(() => import('../components/apps/docs/DocsApp'));
 const SettingsApp = lazy(() =>
@@ -37,7 +37,7 @@ const APPS_STATE = [
     {
         id: 1,
         appName: 'Settings',
-        widgetIcon: cogIcon,
+        widgetIcon: <SettingsIcon />,
         link: '/settings',
         component: <SettingsApp />,
         isOpen: isMobile ? 'open' : 'close',
@@ -52,7 +52,7 @@ const APPS_STATE = [
     {
         id: 2,
         appName: 'Docs',
-        widgetIcon: docsIcon,
+        widgetIcon: <DocsIcon />,
         link: '/docs',
         component: <DocsApp />,
         isOpen: isMobile ? 'open' : 'close',
@@ -63,7 +63,7 @@ const APPS_STATE = [
     {
         id: 3,
         appName: 'Calculator',
-        widgetIcon: calcIcon,
+        widgetIcon: <CalculatorIcon />,
         link: '/calculator',
         component: <CalculatorApp />,
         isOpen: isMobile ? 'open' : 'close',
@@ -74,7 +74,7 @@ const APPS_STATE = [
     {
         id: 4,
         appName: 'Store',
-        widgetIcon: storeIcon,
+        widgetIcon: <StoreIcon />,
         link: '/store',
         component: <StoreApp />,
         isOpen: isMobile ? 'open' : 'close',
@@ -85,7 +85,7 @@ const APPS_STATE = [
     {
         id: 5,
         appName: 'Task Manager',
-        widgetIcon: taskIcon,
+        widgetIcon: <TaskIcon />,
         link: '/taskManager',
         component: <TaskManagerApp />,
         isOpen: isMobile ? 'open' : 'close',

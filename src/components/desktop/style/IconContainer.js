@@ -11,7 +11,7 @@ export const IconContainer = styled.div`
     margin: 0.5rem;
     outline: none;
 
-    img {
+    svg {
         height: 3.75rem;
         width: 3.75rem;
     }

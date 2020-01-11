@@ -2,14 +2,11 @@ import React, { useContext, useCallback } from 'react';
 import { LogoContainer, BorderLogo, Logo } from '../style';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { useTranslation } from 'react-i18next';
-import { ThemeContext } from '../../../contexts/themeContext';
-import logoBlue from '../../../assets/images/logo/logo-blue.svg';
-import logoRed from '../../../assets/images/logo/logo-red.svg';
 import Tooltip from '@material-ui/core/Tooltip';
+import LogoIcon from '../../../assets/images/icons/LogoIcon';
 
 const LogoIconApp = () => {
     const { startTaskbarApp, handleKeyPress } = useContext(TaskbarContext);
-    const { theme } = useContext(ThemeContext);
     const { t } = useTranslation();
 
     const toggle = useCallback(() => {
@@ -31,11 +28,9 @@ const LogoIconApp = () => {
                     <span />
                     <span />
                     <span />
-                    <Logo
-                        src={theme.id === 'dark' ? logoRed : logoBlue}
-                        alt='logo'
-                        draggable='false'
-                    />
+                    <Logo>
+                        <LogoIcon />
+                    </Logo>
                 </BorderLogo>
             </LogoContainer>
         </Tooltip>

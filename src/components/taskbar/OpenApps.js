@@ -43,11 +43,7 @@ const OpenApps = () => {
                                     });
                                 }}
                             >
-                                <img
-                                    src={item.widgetIcon}
-                                    alt={item.appName}
-                                    draggable='false'
-                                />
+                                {item.widgetIcon}
                             </AppIcon>
                         </Tooltip>
                     )

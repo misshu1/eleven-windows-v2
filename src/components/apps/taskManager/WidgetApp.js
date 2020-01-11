@@ -32,12 +32,7 @@ const WidgetApp = props => {
             selectedApp={selected}
         >
             <Widget className='app-name'>
-                <img
-                    src={widgetIcon}
-                    alt={iconDisplayName}
-                    aria-label={iconDisplayName}
-                    draggable='false'
-                />
+                {widgetIcon}
                 <span>{iconDisplayName}</span>
             </Widget>
             <div className='stats'>{openSince}</div>

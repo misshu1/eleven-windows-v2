@@ -9,7 +9,7 @@ export const Widget = styled.div`
     height: 3.5rem;
     margin: 0.1rem 0;
 
-    img {
+    svg {
         width: 2rem;
         height: 2rem;
     }

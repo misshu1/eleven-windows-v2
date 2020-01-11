@@ -31,7 +31,7 @@ export const AppIcon = styled.div`
     margin: 0 1px;
     transition: all 0.2s;
 
-    && img {
+    && svg {
         position: absolute;
         top: 50%;
         left: 50%;

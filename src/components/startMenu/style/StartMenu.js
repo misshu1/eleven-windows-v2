@@ -17,7 +17,7 @@ export const StartMenu = styled.section`
     left: 0;
     top: 0;
     width: 100%;
-    height: calc(100vh - 3.5rem);
+    height: 100%;
     background: ${props => props.theme.startMenuBg};
     color: ${props => props.theme.startMenuColor};
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;

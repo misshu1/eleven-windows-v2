@@ -37,22 +37,12 @@ const DesktopIconApp = props => {
         <IconContainer tabIndex='0'>
             {globalApp.isMobile ? (
                 <Link to={link}>
-                    <img
-                        src={widgetIcon}
-                        alt={iconName}
-                        aria-label={iconName}
-                        draggable='false'
-                    />
+                    {widgetIcon}
                     <div>{iconName}</div>
                 </Link>
             ) : (
                 <div className='icon' onDoubleClick={start}>
-                    <img
-                        src={widgetIcon}
-                        alt={iconName}
-                        aria-label={iconName}
-                        draggable='false'
-                    />
+                    {widgetIcon}
                     <div>{iconName}</div>
                 </div>
             )}

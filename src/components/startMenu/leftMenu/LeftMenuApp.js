@@ -4,9 +4,9 @@ import { Container, Widget } from './style';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { useTranslation } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
-import powerIcon from '../../../assets/images/icons/power-off.svg';
 import WidgetApp from './WidgetApp';
 import Tooltip from '@material-ui/core/Tooltip';
+import PowerOffIcon from '../../../assets/images/icons/PowerOffIcon';
 
 const LeftMenuApp = props => {
     const { folderState } = useContext(FolderContext);
@@ -43,12 +43,7 @@ const LeftMenuApp = props => {
                 enterDelay={500}
             >
                 <Widget onClick={closeStartMenu}>
-                    <img
-                        src={powerIcon}
-                        alt='login'
-                        aria-label='login'
-                        draggable='false'
-                    />
+                    <PowerOffIcon width='2rem' height='2rem' />
                 </Widget>
             </Tooltip>
         </Container>

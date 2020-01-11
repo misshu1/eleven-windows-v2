@@ -26,7 +26,7 @@ export const Widget = styled.div`
         text-decoration: none;
     }
 
-    && img {
+    && svg {
         height: 2rem;
         width: 2rem;
         margin: 0 1rem 0 0;

@@ -51,23 +51,13 @@ const WidgetApp = props => {
             {globalApp.isMobile ? (
                 <Widget onClick={startMobile}>
                     <Link to={link}>
-                        <img
-                            src={widgetIcon}
-                            alt={iconDisplayName}
-                            aria-label={iconDisplayName}
-                            draggable='false'
-                        />
+                        {widgetIcon}
                         <span>{iconDisplayName}</span>
                     </Link>
                 </Widget>
             ) : (
                 <Widget animationDuration={animationDuration} onClick={start}>
-                    <img
-                        src={widgetIcon}
-                        alt={iconDisplayName}
-                        aria-label={iconDisplayName}
-                        draggable='false'
-                    />
+                    {widgetIcon}
                     <span>{iconDisplayName}</span>
                 </Widget>
             )}

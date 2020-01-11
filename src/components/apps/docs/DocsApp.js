@@ -22,7 +22,7 @@ import Emoji from '../../../components/emoji/Emoji';
 import Button from '@material-ui/core/Button';
 import CreateFolder from './CreateFolder';
 import folderIcon from '../../../assets/images/icons/folder.svg';
-import logo from '../../../assets/images/logo/logo-red.svg';
+import LogoIcon from '../../../assets/images/icons/LogoIcon';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 
@@ -119,7 +119,7 @@ const DocsApp = () => {
             },
             {
                 name: 'Change loading logo',
-                widgetIcon: logo,
+                widgetIcon: <LogoIcon />,
                 fontIcon: null,
                 link: null,
                 scrollToRef: 'changeLoadingLogoRef',

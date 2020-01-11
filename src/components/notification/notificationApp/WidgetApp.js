@@ -35,12 +35,7 @@ const WidgetApp = props => {
 
     return (
         <Widget onClick={start}>
-            <img
-                src={widgetIcon}
-                alt={iconDisplayName}
-                aria-label={iconDisplayName}
-                draggable='false'
-            />
+            {widgetIcon}
             <h5>{iconDisplayName}</h5>
         </Widget>
     );

@@ -11,7 +11,7 @@ export const Widget = styled.div`
     padding: 0.2rem;
     transition: background 0.2s ease-in-out;
 
-    img {
+    svg {
         width: 1.8rem;
         height: 1.8rem;
         margin: 0 auto auto;

@@ -36,14 +36,7 @@ const WidgetApp = props => {
 
     return (
         <Tooltip title={iconDisplayName} placement='top' enterDelay={500}>
-            <Widget onClick={start}>
-                <img
-                    src={widgetIcon}
-                    alt={iconDisplayName}
-                    aria-label={iconDisplayName}
-                    draggable='false'
-                />
-            </Widget>
+            <Widget onClick={start}>{widgetIcon}</Widget>
         </Tooltip>
     );
 };
