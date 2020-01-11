@@ -21,8 +21,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Emoji from '../../../components/emoji/Emoji';
 import Button from '@material-ui/core/Button';
 import CreateFolder from './CreateFolder';
-import folderIcon from '../../../assets/images/icons/folder.svg';
 import LogoIcon from '../../../assets/images/icons/LogoIcon';
+import FolderIcon from '../../../assets/images/icons/FolderIcon';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 
@@ -103,7 +103,7 @@ const DocsApp = () => {
         return [
             {
                 name: 'Create a new folder',
-                widgetIcon: folderIcon,
+                widgetIcon: <FolderIcon />,
                 fontIcon: null,
                 link: null,
                 scrollToRef: 'createFolderRef',
