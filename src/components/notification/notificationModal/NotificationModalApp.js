@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import ReactDOM from 'react-dom';
 import { Container, Notification } from './style';
 import { NotificationContext } from '../../../contexts/notificationContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const NotificationModalApp = props => {
+const NotificationModalApp = memo(props => {
     const { notification, hideModal } = useContext(NotificationContext);
 
     return ReactDOM.createPortal(
@@ -34,6 +34,6 @@ const NotificationModalApp = props => {
         </Container>,
         document.querySelector('#modal')
     );
-};
+});
 
 export default NotificationModalApp;

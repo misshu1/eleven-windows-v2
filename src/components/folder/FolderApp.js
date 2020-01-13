@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 import DrawerApp from './drawer/DrawerApp';
 import Backdrop from '@material-ui/core/Backdrop';
 
-const FolderApp = (props, ref) => {
+const FolderApp = forwardRef((props, ref) => {
     const [close, setClose] = useState('');
     const [showDrawer, setShowDrawer] = useState(false);
     const [handleDrag, setHandleDrag] = useState(false);
@@ -144,8 +144,9 @@ const FolderApp = (props, ref) => {
         </>,
         document.querySelector('#desktop')
     );
-};
-export default forwardRef(FolderApp);
+});
+
+export default FolderApp;
 
 FolderApp.propTypes = {
     appId: PropTypes.number.isRequired,
@@ -153,5 +154,5 @@ FolderApp.propTypes = {
     height: PropTypes.string,
     marginTop: PropTypes.string,
     marginLeft: PropTypes.string,
-    toolbarMenu: PropTypes.object
+    toolbarMenu: PropTypes.array
 };

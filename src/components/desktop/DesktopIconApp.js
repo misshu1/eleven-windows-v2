@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { IconContainer } from './style';
 import { GlobalAppContext } from '../../contexts/globalContext';
 import { FolderContext, FOLDER_ACTIONS } from '../../contexts/folderContext';
 
-const DesktopIconApp = props => {
+const DesktopIconApp = memo(props => {
     const { folderState, folderDispatch } = useContext(FolderContext);
     const { link, appId, widgetIcon, iconName } = props;
     const { globalApp } = useContext(GlobalAppContext);
@@ -48,7 +48,16 @@ const DesktopIconApp = props => {
             )}
         </IconContainer>
     );
-};
+}, checkProps);
+
+function checkProps(prevState, nextState) {
+    return (
+        prevState.widgetIcon === nextState.widgetIcon &&
+        prevState.iconName === nextState.iconName &&
+        prevState.link === nextState.link &&
+        prevState.appId === nextState.appId
+    );
+}
 
 export default DesktopIconApp;
 

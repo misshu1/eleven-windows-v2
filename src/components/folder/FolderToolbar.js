@@ -47,5 +47,7 @@ export default FolderToolbar;
 FolderToolbar.propTypes = {
     folderName: PropTypes.string.isRequired,
     minimize: PropTypes.func.isRequired,
-    quitApp: PropTypes.func.isRequired
+    quitApp: PropTypes.func.isRequired,
+    toolbarMenu: PropTypes.array,
+    toggleDrawer: PropTypes.func
 };

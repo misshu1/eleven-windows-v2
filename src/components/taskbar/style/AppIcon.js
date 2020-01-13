@@ -10,6 +10,7 @@ export const AppIcon = styled.div`
         height: 2px;
         width: 70%;
         transition: all 0.2s;
+        border-radius: 1rem;
     }
 
     ${props =>

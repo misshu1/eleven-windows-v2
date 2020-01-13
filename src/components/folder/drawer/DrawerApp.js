@@ -1,14 +1,15 @@
 import React, { useCallback, useContext, forwardRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Container } from './style';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ThemeContext } from '../../../contexts/themeContext';
+import { makeStyles } from '@material-ui/core/styles';
+import { Container } from './style';
 import { Link } from 'react-router-dom';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Scrollbar from 'react-scrollbars-custom';
+import ListItem from '@material-ui/core/ListItem';
+import PropTypes from 'prop-types';
+import List from '@material-ui/core/List';
 
 const useStyles = makeStyles({
     root: theme => ({
@@ -77,7 +78,7 @@ const ListItemLink = props => {
     );
 };
 
-const DrawerApp = (props, ref) => {
+const DrawerApp = forwardRef((props, ref) => {
     const { toolbarMenu, closeDrawer } = props;
     const { theme } = useContext(ThemeContext);
     const classes = useStyles(theme);
@@ -112,6 +113,11 @@ const DrawerApp = (props, ref) => {
             </Scrollbar>
         </Container>
     );
-};
+});
 
-export default forwardRef(DrawerApp);
+export default DrawerApp;
+
+DrawerApp.propTypes = {
+    toolbarMenu: PropTypes.array.isRequired,
+    closeDrawer: PropTypes.func.isRequired
+};
