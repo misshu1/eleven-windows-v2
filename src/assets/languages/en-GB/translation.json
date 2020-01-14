@@ -64,6 +64,7 @@
         "menu": "Menu",
         "language": "Language",
         "notifications": "new notifications",
-        "emptyNotifications": "No new notifications"
+        "emptyNotifications": "No new notifications",
+        "cart": "Cart"
     }
 }

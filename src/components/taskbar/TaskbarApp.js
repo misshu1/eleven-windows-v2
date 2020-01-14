@@ -4,7 +4,7 @@ import { Taskbar } from './style';
 import NotificationIconApp from './icons/NotificationIconApp';
 import ReactDOM from 'react-dom';
 import ClockIconApp from './icons/ClockIconApp';
-import SettingsIconApp from './icons/SettingsIconApp';
+import CartIconApp from './icons/CartIconApp';
 import LanguageIconApp from './icons/LanguageIconApp';
 import OpenApps from './OpenApps';
 import LogoIconApp from './icons/LogoIconApp';
@@ -20,9 +20,9 @@ const TaskbarApp = () => {
         <Taskbar onClick={close}>
             <LogoIconApp />
             <OpenApps />
+            <CartIconApp />
             <LanguageIconApp />
             <ClockIconApp />
-            <SettingsIconApp />
             <NotificationIconApp />
         </Taskbar>,
         document.querySelector('#taskbar')

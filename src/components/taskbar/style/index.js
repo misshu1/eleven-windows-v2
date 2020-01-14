@@ -1,4 +1,4 @@
-export { SettingsContainer } from './SettingsContainer';
+export { CartContainer } from './CartContainer';
 export { BorderLogo } from './BorderLogo';
 export { ClockContainer } from './ClockContainer';
 export { NotificationContainer } from './NotificationContainer';

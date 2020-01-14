@@ -6,7 +6,8 @@ export const TaskbarProvider = props => {
         calendarOpen: false,
         startMenuOpen: false,
         languagesOpen: false,
-        notificationsOpen: false
+        notificationsOpen: false,
+        cartOpen: false
     });
 
     // Find The currenty open app and close it

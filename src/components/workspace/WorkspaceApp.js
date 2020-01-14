@@ -6,6 +6,7 @@ import NotificationModalApp from '../notification/notificationModal/Notification
 import SpinnerApp from '../style/SpinnerApp';
 import RoutesApp from '../routes/RoutesApp';
 
+const CartApp = lazy(() => import('../taskbar/cart/CartApp'));
 const TaskbarApp = lazy(() => import('../taskbar/TaskbarApp'));
 const DesktopApp = lazy(() => import('../desktop/DesktopApp'));
 const CalendarApp = lazy(() => import('../taskbar/calendar/CalendarApp'));
@@ -52,6 +53,10 @@ const WorkspaceApp = () => {
 
             <Suspense fallback={<SpinnerApp delay={200} />}>
                 {taskbar.calendarOpen && <CalendarApp />}
+            </Suspense>
+
+            <Suspense fallback={<SpinnerApp delay={200} />}>
+                {taskbar.cartOpen && <CartApp />}
             </Suspense>
 
             <NotificationModalApp />

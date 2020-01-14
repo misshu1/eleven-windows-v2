@@ -64,6 +64,7 @@
         "menu": "Meniu",
         "language": "Limbă",
         "notifications": "notificări noi",
-        "emptyNotifications": "Nu sunt notificări noi"
+        "emptyNotifications": "Nu sunt notificări noi",
+        "cart": "Coş"
     }
 }

@@ -13,6 +13,7 @@ const CartIcon = props => {
             height={height ? height : '100%'}
         >
             <g
+                className='fill-color'
                 fill={theme.id === 'dark' ? '#af0138' : '#009BCE'}
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             >
@@ -20,6 +21,7 @@ const CartIcon = props => {
                 <circle cx='449.66' cy='544.77' r='48.81' />
             </g>
             <g
+                className='stroke-color'
                 strokeMiterlimit='10'
                 stroke={theme.id === 'dark' ? '#af0138' : '#009BCE'}
                 style={{ transition: 'stroke 0.2s ease-in-out' }}
