@@ -1,14 +1,7 @@
 import styled from 'styled-components';
 
 export const IconContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 5.5rem;
-    height: 5.5rem;
     border: 1px solid transparent;
-    margin: 0.5rem;
     outline: none;
 
     svg {
