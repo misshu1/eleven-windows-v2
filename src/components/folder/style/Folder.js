@@ -23,4 +23,9 @@ export const Folder = styled.section`
         top: ${props => (props.marginTop ? props.marginTop : '5rem')};
         left: ${props => (props.marginLeft ? props.marginLeft : '5rem')};
     }
+
+    @media (max-height: 44rem) {
+        height: 100%;
+        top: 0;
+    }
 `;

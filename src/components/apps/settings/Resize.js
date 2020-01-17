@@ -15,7 +15,7 @@ const Resize = () => {
                 <Icon
                     iconSize='6.875'
                     imgSize='4.6875'
-                    onClick={() => changeAppSize(20)}
+                    onClick={() => changeAppSize(125)}
                 >
                     <div className='icon'>
                         <img
@@ -30,7 +30,7 @@ const Resize = () => {
                 <Icon
                     iconSize='5.5'
                     imgSize='3.75'
-                    onClick={() => changeAppSize(16)}
+                    onClick={() => changeAppSize(100)}
                 >
                     <div className='icon'>
                         <img
@@ -45,7 +45,7 @@ const Resize = () => {
                 <Icon
                     iconSize='4.125'
                     imgSize='2.8125'
-                    onClick={() => changeAppSize(12)}
+                    onClick={() => changeAppSize(75)}
                 >
                     <div className='icon'>
                         <img
@@ -60,7 +60,7 @@ const Resize = () => {
                 <Icon
                     iconSize='2.75'
                     imgSize='1.875'
-                    onClick={() => changeAppSize(8)}
+                    onClick={() => changeAppSize(50)}
                 >
                     <div className='icon'>
                         <img

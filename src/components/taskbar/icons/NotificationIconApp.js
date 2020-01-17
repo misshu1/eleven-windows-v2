@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { faCommentAlt } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import Tooltip from '@material-ui/core/Tooltip';
+import Badge from '@material-ui/core/Badge';
 library.add(faCommentAlt);
 
 const NotificationIconApp = () => {
@@ -30,12 +31,14 @@ const NotificationIconApp = () => {
                 }}
             >
                 {notification.length > 0 ? (
-                    <span className='fa-layers fa-fw'>
+                    <Badge
+                        badgeContent={notification.length}
+                        color='error'
+                        anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+                        showZero={false}
+                    >
                         <FontAwesomeIcon icon={['fas', 'comment-alt']} />
-                        <span className='counter-style fa-layers-counter fa-layers-bottom-right fa-2x'>
-                            {notification.length}
-                        </span>
-                    </span>
+                    </Badge>
                 ) : (
                     <FontAwesomeIcon icon={['far', 'comment-alt']} />
                 )}

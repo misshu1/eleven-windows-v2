@@ -25,6 +25,7 @@ export const Container = styled.section`
     color: ${props => props.theme.startMenuColor};
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
     animation: ${slideUp} 0.4s ease-out 1 forwards;
+    padding: 0.5rem;
 
     @media (min-width: 28rem) {
         max-width: 21.87rem;

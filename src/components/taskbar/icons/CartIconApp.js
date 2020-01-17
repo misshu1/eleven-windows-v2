@@ -4,6 +4,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import CartIcon from '../../../assets/images/icons/CartIcon';
 import { useTranslation } from 'react-i18next';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
+import Badge from '@material-ui/core/Badge';
 
 const CartIconApp = () => {
     const { startTaskbarApp, handleKeyPress } = useContext(TaskbarContext);
@@ -23,13 +24,14 @@ const CartIconApp = () => {
     return (
         <Tooltip title={t('tooltip.cart')} placement='top' enterDelay={500}>
             <CartContainer tabIndex='0' onKeyPress={keyPress} onClick={toggle}>
-                {/* <span className='fa-layers fa-fw'>
+                <Badge
+                    badgeContent={0}
+                    color='error'
+                    anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+                    showZero={false}
+                >
                     <CartIcon />
-                    <span className='counter-style fa-layers-counter fa-layers-bottom-right fa-2x'>
-                        3
-                    </span>
-                </span> */}
-                <CartIcon />
+                </Badge>
             </CartContainer>
         </Tooltip>
     );

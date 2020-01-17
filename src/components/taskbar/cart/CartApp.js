@@ -4,9 +4,7 @@ import { Container } from './style';
 
 const CartApp = () => {
     return ReactDOM.createPortal(
-        <Container>
-            <div style={{ height: '10rem' }}></div>
-        </Container>,
+        <Container>cart</Container>,
         document.querySelector('#desktop')
     );
 };

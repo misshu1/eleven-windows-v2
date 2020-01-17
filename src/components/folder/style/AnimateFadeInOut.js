@@ -57,7 +57,7 @@ export const AnimateFadeInOut = styled.div`
     height: 100%;
     z-index: ${props => props.appIndex};
 
-    @media (min-width: 28em) {
+    @media (min-width: 28rem) {
         width: fit-content;
         height: fit-content;
         .folder {
@@ -90,5 +90,9 @@ export const AnimateFadeInOut = styled.div`
                     box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
                 `};
         }
+    }
+
+    @media (max-height: 44rem) {
+        height: 100%;
     }
 `;

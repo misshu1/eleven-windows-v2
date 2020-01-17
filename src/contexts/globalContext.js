@@ -6,7 +6,7 @@ export const GlobalAppProvider = props => {
         isMobile: window.matchMedia('(max-width: 28rem)').matches
             ? true
             : false,
-        size: 16
+        size: 100
     });
 
     const changeAppSize = size => {

@@ -168,7 +168,8 @@ const DocsApp = () => {
                     Now, what if you need to add a menu to your folder, well it
                     turns out that's pretty easy as well. Just create a
                     <span className='required'>{` toolbarMenu `}</span>
-                    function that returns an object like the example below.
+                    function that returns an array of objects like the example
+                    below.
                 </p>
 
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>

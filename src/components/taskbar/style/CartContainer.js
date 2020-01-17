@@ -11,24 +11,9 @@ export const CartContainer = styled.div`
     outline: none;
 
     svg {
-        position: relative;
         width: 2rem;
         height: 2rem;
         border-radius: 0.2rem;
-    }
-
-    .fa-layers {
-        width: fit-content;
-        height: fit-content;
-    }
-
-    .counter-style {
-        position: absolute;
-        bottom: 3px;
-        right: -4px;
-        color: #fff;
-        background: ${props => props.theme.accentBgLight};
-        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
     }
 
     @media (max-width: 28rem) {
