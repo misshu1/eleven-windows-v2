@@ -18,19 +18,20 @@ const slideLeft = keyframes`
 const slideDown = keyframes`
 0% {
     opacity: 0;
-    transform: translate3d(0, -80%, 0);
-}
-80% {
-    opacity: .5;
-}
-90% {
-    opacity: .8;
-}
-95% {
-    opacity: 1;
+    transform: translate3d(0, -10%, 0);
 }
 100% {
+    opacity: 1;
     transform: translate3d(0, 0, 0);
+}
+`;
+
+const fadeIn = keyframes`
+0% {
+    opacity: 0;
+}
+100% {
+    opacity: 1;
 }
 `;
 
@@ -48,16 +49,23 @@ export const NotificationContainer = styled.section`
     background: ${props => props.theme.notificationBg};
     color: ${props => props.theme.notificationColor};
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+    animation: ${slideDown} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1 forwards;
 
-    @media (max-width: 28rem) {
-        animation: ${slideDown} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1
-            forwards;
-        .clear {
-            width: fit-content;
-            margin: 1.5rem auto;
-            font-size: 1.1rem;
-            color: ${props => props.theme.calendarTodayClock};
-        }
+    .clear {
+        width: fit-content;
+        margin: 1.5rem auto;
+        font-size: 1.1rem;
+        color: ${props => props.theme.calendarTodayClock};
+    }
+
+    .no-notifications {
+        opacity: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        animation: ${fadeIn} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1 forwards;
+        animation-delay: 0.25s;
     }
 
     @media (min-width: 28rem) {
@@ -73,7 +81,7 @@ export const NotificationContainer = styled.section`
             align-items: center;
             width: fit-content;
             height: 3rem;
-            margin-left: auto;
+            margin: 0 0 0 auto;
             font-size: 0.9rem;
             color: ${props => props.theme.accentBgLight};
         }

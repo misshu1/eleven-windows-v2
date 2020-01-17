@@ -39,16 +39,16 @@ const NotificationApp = () => {
         <React.Fragment>
             {taskbar.notificationsOpen && (
                 <NotificationContainer>
-                    <Scrollbar style={{ width: '100%', height: '100%' }}>
-                        <div
-                            style={{
-                                flex: 1,
-                                padding: '1rem',
-                                overflowY: 'auto'
-                            }}
-                        >
-                            {notification.length > 0 ? (
-                                notification.map(item => (
+                    {notification.length > 0 ? (
+                        <Scrollbar style={{ width: '100%', height: '100%' }}>
+                            <div
+                                style={{
+                                    flex: 1,
+                                    padding: '1rem',
+                                    overflowY: 'auto'
+                                }}
+                            >
+                                {notification.map(item => (
                                     <Notification
                                         key={item.id}
                                         type={item.type}
@@ -72,15 +72,19 @@ const NotificationApp = () => {
                                             <p>{item.code}</p>
                                         </div>
                                     </Notification>
-                                ))
-                            ) : (
-                                <p>{t('notification.status')}</p>
-                            )}
+                                ))}
+                            </div>
+                        </Scrollbar>
+                    ) : (
+                        <div className='no-notifications'>
+                            {t('notification.status')}
                         </div>
-                    </Scrollbar>
-                    <span className='clear' onClick={clearAllNotifications}>
-                        {t('notification.clear')}
-                    </span>
+                    )}
+                    {notification.length !== 0 && (
+                        <span className='clear' onClick={clearAllNotifications}>
+                            {t('notification.clear')}
+                        </span>
+                    )}
                     <WidgetsContainer>{widgetIcons()}</WidgetsContainer>
                 </NotificationContainer>
             )}
