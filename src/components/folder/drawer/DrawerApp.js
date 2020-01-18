@@ -32,7 +32,8 @@ const useStyles = makeStyles({
         width: '2rem',
         height: '2rem',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        minWidth: 'unset'
     }
 });
 

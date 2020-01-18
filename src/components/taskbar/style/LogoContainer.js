@@ -7,21 +7,13 @@ export const LogoContainer = styled.div`
     width: 33.33%;
     height: 100%;
     outline: none;
+    background: ${props => props.open && props.theme.clockHover};
 
     @media (max-width: 28rem) {
         order: 2;
-        &&:active {
-            background: ${props => props.theme.clockHover};
-            outline: none;
-        }
     }
 
     @media (min-width: 28rem) {
         width: 4rem;
-        &&:hover,
-        :focus {
-            background: ${props => props.theme.logoHover};
-            outline: none;
-        }
     }
 `;

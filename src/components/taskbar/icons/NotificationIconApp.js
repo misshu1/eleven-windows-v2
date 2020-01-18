@@ -12,7 +12,9 @@ library.add(faCommentAlt);
 
 const NotificationIconApp = () => {
     const { notification, hideAllModals } = useContext(NotificationContext);
-    const { startTaskbarApp, handleKeyPress } = useContext(TaskbarContext);
+    const { taskbar, startTaskbarApp, handleKeyPress } = useContext(
+        TaskbarContext
+    );
     const { t } = useTranslation();
 
     const tooltipNotifications =
@@ -23,6 +25,7 @@ const NotificationIconApp = () => {
     return (
         <Tooltip title={tooltipNotifications} placement='top' enterDelay={500}>
             <NotificationContainer
+                open={taskbar.notificationsOpen}
                 tabIndex='0'
                 onKeyPress={e => handleKeyPress(e, 'notificationsOpen')}
                 onClick={() => {

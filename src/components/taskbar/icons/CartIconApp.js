@@ -7,7 +7,9 @@ import { TaskbarContext } from '../../../contexts/taskbarContext';
 import Badge from '@material-ui/core/Badge';
 
 const CartIconApp = () => {
-    const { startTaskbarApp, handleKeyPress } = useContext(TaskbarContext);
+    const { taskbar, startTaskbarApp, handleKeyPress } = useContext(
+        TaskbarContext
+    );
     const { t } = useTranslation();
 
     const toggle = useCallback(() => {
@@ -23,7 +25,12 @@ const CartIconApp = () => {
 
     return (
         <Tooltip title={t('tooltip.cart')} placement='top' enterDelay={500}>
-            <CartContainer tabIndex='0' onKeyPress={keyPress} onClick={toggle}>
+            <CartContainer
+                open={taskbar.cartOpen}
+                tabIndex='0'
+                onKeyPress={keyPress}
+                onClick={toggle}
+            >
                 <Badge
                     badgeContent={0}
                     color='error'

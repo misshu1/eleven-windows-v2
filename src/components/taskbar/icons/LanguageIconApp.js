@@ -26,7 +26,9 @@ const selectLanguage = () => {
 };
 
 const LanguageIconApp = () => {
-    const { startTaskbarApp, handleKeyPress } = useContext(TaskbarContext);
+    const { taskbar, startTaskbarApp, handleKeyPress } = useContext(
+        TaskbarContext
+    );
     const { t } = useTranslation();
 
     const toggle = useCallback(() => {
@@ -43,6 +45,7 @@ const LanguageIconApp = () => {
     return (
         <Tooltip title={t('tooltip.language')} placement='top' enterDelay={500}>
             <LanguagesContainer
+                open={taskbar.languagesOpen}
                 tabIndex='0'
                 onClick={toggle}
                 onKeyPress={keyPress}

@@ -11,11 +11,7 @@ export const LanguagesContainer = styled.div`
         width: 3.5rem;
         margin: 0 1px;
         transition: color 0.2s ease-in-out;
-
-        &&:hover,
-        :focus {
-            background: ${props => props.theme.clockHover};
-            outline: none;
-        }
+        outline: none;
+        background: ${props => props.open && props.theme.clockHover};
     }
 `;

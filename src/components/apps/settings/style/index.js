@@ -4,7 +4,7 @@ export { ThemesImg } from './ThemesImg';
 export { Box } from './Box';
 export { Icon } from './Icon';
 export { FlagImgContainer } from './FlagImgContainer';
-export { BackgroundPreview } from './BackgroundPreview';
 export { NotificationContainer } from './NotificationContainer';
 export { Spacer } from './Spacer';
 export { NotificationText } from './NotificationText';
+export { ThemePreview } from './ThemePreview';

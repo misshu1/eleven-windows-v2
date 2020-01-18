@@ -9,6 +9,7 @@ export const CartContainer = styled.div`
     height: 100%;
     font-size: 1.5rem;
     outline: none;
+    background: ${props => props.open && props.theme.clockHover};
 
     svg {
         width: 2rem;
@@ -18,10 +19,6 @@ export const CartContainer = styled.div`
 
     @media (max-width: 28rem) {
         order: 3;
-        &&:active {
-            background: ${props => props.theme.clockHover};
-            outline: none;
-        }
     }
 
     @media (min-width: 28rem) {
@@ -29,22 +26,12 @@ export const CartContainer = styled.div`
         width: 3.5rem;
         color: ${props => props.theme.textColor};
 
-        .counter-style {
-            background: ${props => props.theme.accentBg};
-        }
-
         svg .fill-color {
             fill: ${props => props.theme.textColor};
         }
 
         svg .stroke-color {
             stroke: ${props => props.theme.textColor};
-        }
-
-        &&:hover,
-        :focus {
-            background: ${props => props.theme.clockHover};
-            outline: none;
         }
     }
 `;

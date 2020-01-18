@@ -5,4 +5,15 @@ export const Box = styled.div`
     flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
+
+    .buttons-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            margin: 0.5rem 0;
+        }
+    }
 `;
