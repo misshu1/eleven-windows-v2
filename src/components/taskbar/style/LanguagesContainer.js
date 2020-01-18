@@ -13,5 +13,9 @@ export const LanguagesContainer = styled.div`
         transition: color 0.2s ease-in-out;
         outline: none;
         background: ${props => props.open && props.theme.clockHover};
+
+        &&:hover {
+            background: ${props => props.theme.clockHover};
+        }
     }
 `;

@@ -11,6 +11,10 @@ export const CartContainer = styled.div`
     outline: none;
     background: ${props => props.open && props.theme.clockHover};
 
+    &&:hover {
+        background: ${props => props.theme.clockHover};
+    }
+
     svg {
         width: 2rem;
         height: 2rem;
