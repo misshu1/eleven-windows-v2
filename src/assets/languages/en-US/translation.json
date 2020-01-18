@@ -54,7 +54,7 @@
             "notifications": "Notifications"
         },
         "backgroundButton": "Select Background",
-        "themeButton": "Select theme",
+        "themeButton": "Change theme",
         "disableButton": "Disable notifications alerts.",
         "disableButtonInfo": "You will still see them inside the notifications window."
     },

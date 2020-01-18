@@ -37,27 +37,19 @@ const Customize = () => {
     const { t } = useTranslation();
     const selectedBgName = getSelectedBackground().name;
     const [anchorEl, setAnchorEl] = useState(null);
-    const [anchorTheme, setAnchorTheme] = useState(null);
     const open = Boolean(anchorEl);
-    const openTheme = Boolean(anchorTheme);
     const classes = useStyles(theme);
 
     const handleClick = event => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClickTheme = event => {
-        setAnchorTheme(event.currentTarget);
-    };
-
     const handleClose = () => {
         setAnchorEl(null);
-        setAnchorTheme(null);
     };
 
     const updateTheme = useCallback(
         theme => {
-            setAnchorTheme(null);
             changeTheme(theme);
         },
         [changeTheme]
@@ -76,40 +68,22 @@ const Customize = () => {
             <Title>{t('settings.title.customize')}</Title>
             <Box>
                 <div className='buttons-container'>
-                    <Button
-                        className={classes.bgButton}
-                        aria-haspopup='true'
-                        aria-controls='theme-menu'
-                        onClick={handleClickTheme}
-                    >
-                        {t('settings.themeButton')}
-                    </Button>
-                    <Menu
-                        id='theme-menu'
-                        anchorEl={anchorTheme}
-                        keepMounted
-                        open={openTheme}
-                        onClose={handleClose}
-                        PaperProps={{
-                            style: {
-                                maxHeight: ITEM_HEIGHT * 6.5,
-                                width: 220
-                            }
-                        }}
-                    >
-                        <MenuItem
-                            onClick={() => updateTheme('light')}
-                            selected={theme.id === 'light'}
-                        >
-                            Light
-                        </MenuItem>
-                        <MenuItem
+                    {theme.id === 'light' && (
+                        <Button
+                            className={classes.bgButton}
                             onClick={() => updateTheme('dark')}
-                            selected={theme.id === 'dark'}
                         >
-                            Dark
-                        </MenuItem>
-                    </Menu>
+                            {t('settings.themeButton')}
+                        </Button>
+                    )}
+                    {theme.id === 'dark' && (
+                        <Button
+                            className={classes.bgButton}
+                            onClick={() => updateTheme('light')}
+                        >
+                            {t('settings.themeButton')}
+                        </Button>
+                    )}
                     <Button
                         className={classes.bgButton}
                         aria-haspopup='true'

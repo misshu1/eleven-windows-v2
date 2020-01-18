@@ -58,7 +58,7 @@ export const ThemePreview = styled.div`
         left: 0;
         right: 0;
         height: 0.5rem;
-        background: ${props => props.theme.background};
+        background: ${props => props.theme.folderNameBarBg};
         transition: background 0.2s ease-in-out;
 
         .left {

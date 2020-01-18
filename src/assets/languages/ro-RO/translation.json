@@ -54,7 +54,7 @@
             "notifications": "Notificări"
         },
         "backgroundButton": "Alege fundalul",
-        "themeButton": "Alege tema",
+        "themeButton": "Schimbă tema",
         "disableButton": "Dezactivați alertele de notificări.",
         "disableButtonInfo": "Le veți vedea în continuare în fereastra notificărilor."
     },
