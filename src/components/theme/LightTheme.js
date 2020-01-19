@@ -35,7 +35,7 @@ const LightTheme = {
             lighter: '#F1D2B3',
             darker: '#BD4C00',
             contrast: {
-                main: 'rgba(0, 0, 0, 0.9)',
+                main: 'rgb(255, 255, 255)',
                 lighter: 'rgba(0, 0, 0, 0.8)',
                 darker: 'rgb(255, 255, 255)'
             }
