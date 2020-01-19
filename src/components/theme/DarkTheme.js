@@ -18,6 +18,40 @@ const DarkTheme = {
     disableBg: '#363636',
     switchColor: '#c80140',
 
+    // Material colors
+    material: {
+        primary: {
+            main: '#af0138',
+            lighter: '#d7809b',
+            darker: '#960124',
+            contrast: {
+                main: 'rgba(255, 255, 255, 0.9)',
+                lighter: 'rgba(0, 0, 0, 0.8)',
+                darker: 'rgba(255, 255, 255, 0.9)'
+            }
+        },
+        accent: {
+            main: '#14851E',
+            lighter: '#B9DABC',
+            darker: '#0B6812',
+            contrast: {
+                main: 'rgb(255, 255, 255)',
+                lighter: 'rgba(0, 0, 0, 0.8)',
+                darker: 'rgba(255, 255, 255, 0.9)'
+            }
+        },
+        warn: {
+            main: '#FF0352',
+            lighter: '#FFB3CB',
+            darker: '#FF0238',
+            contrast: {
+                main: 'rgba(0, 0, 0, 0.9)',
+                lighter: 'rgba(0, 0, 0, 0.8)',
+                darker: 'rgba(0, 0, 0, 0.8)'
+            }
+        }
+    },
+
     // Folder
     folderNameBarBg: '#444',
     folderBorder: '#444',

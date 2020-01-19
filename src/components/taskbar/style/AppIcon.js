@@ -1,9 +1,19 @@
 import styled, { css } from 'styled-components';
 
 export const AppIcon = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100%;
+    width: 3.5rem;
+    line-height: 3.5rem;
+    margin: 0 1px;
+    transition: all 0.2s;
+
     &&::after {
         content: '';
-        background: rgb(0, 110, 220);
+        background: ${props => props.theme.accentBg};
         position: absolute;
         bottom: 0;
         left: 15%;
@@ -24,19 +34,7 @@ export const AppIcon = styled.div`
             }
         `};
 
-    position: relative;
-    height: 100%;
-    line-height: 3.5rem;
-    width: 3.5rem;
-    padding: 0 0.5rem;
-    margin: 0 1px;
-    transition: all 0.2s;
-
     && svg {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         width: 2rem;
         height: 2rem;
         border-radius: 0.2rem;

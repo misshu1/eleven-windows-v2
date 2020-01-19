@@ -15,10 +15,10 @@ const slideLeft = keyframes`
 }
 `;
 
-const slideDown = keyframes`
+const slideUp = keyframes`
 0% {
     opacity: 0;
-    transform: translate3d(0, -10%, 0);
+    transform: translate3d(0, 10%, 0);
 }
 100% {
     opacity: 1;
@@ -49,7 +49,7 @@ export const NotificationContainer = styled.section`
     background: ${props => props.theme.notificationBg};
     color: ${props => props.theme.notificationColor};
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
-    animation: ${slideDown} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1 forwards;
+    animation: ${slideUp} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1 forwards;
 
     .clear {
         width: fit-content;

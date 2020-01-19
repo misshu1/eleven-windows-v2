@@ -13,10 +13,6 @@ export const NotificationContainer = styled.div`
     background: ${props => props.open && props.theme.clockHover};
     outline: none;
 
-    &&:hover {
-        background: ${props => props.theme.clockHover};
-    }
-
     @media (max-width: 28rem) {
         order: 1;
     }
@@ -25,5 +21,9 @@ export const NotificationContainer = styled.div`
         height: 100%;
         width: 3.5rem;
         color: ${props => props.theme.textColor};
+
+        &&:hover {
+            background: ${props => props.theme.clockHover};
+        }
     }
 `;

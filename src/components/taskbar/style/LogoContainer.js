@@ -9,15 +9,15 @@ export const LogoContainer = styled.div`
     outline: none;
     background: ${props => props.open && props.theme.clockHover};
 
-    &&:hover {
-        background: ${props => props.theme.clockHover};
-    }
-
     @media (max-width: 28rem) {
         order: 2;
     }
 
     @media (min-width: 28rem) {
         width: 4rem;
+
+        &&:hover {
+            background: ${props => props.theme.clockHover};
+        }
     }
 `;

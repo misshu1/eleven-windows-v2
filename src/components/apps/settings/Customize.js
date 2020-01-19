@@ -10,16 +10,23 @@ import Menu from '@material-ui/core/Menu';
 
 const useStyles = makeStyles({
     bgButton: theme => ({
-        backgroundColor: theme.accentBg,
+        cursor: 'default',
         border: 0,
         borderRadius: 3,
-        color: 'white',
-        height: '3rem',
-        padding: '0 2rem',
-        margin: 'auto 0',
-        cursor: 'default',
+        backgroundColor: theme.material.accent.main,
+        color: theme.material.accent.contrast.main,
+
         '&:hover': {
-            backgroundColor: theme.accentBg
+            backgroundColor: theme.material.accent.darker
+        }
+    }),
+    bgButtonTheme: theme => ({
+        cursor: 'default',
+        backgroundColor: theme.material.primary.darker,
+        color: theme.material.primary.contrast.darker,
+
+        '&:hover': {
+            backgroundColor: theme.material.primary.main
         }
     })
 });
@@ -70,7 +77,7 @@ const Customize = () => {
                 <div className='buttons-container'>
                     {theme.id === 'light' && (
                         <Button
-                            className={classes.bgButton}
+                            className={classes.bgButtonTheme}
                             onClick={() => updateTheme('dark')}
                         >
                             {t('settings.themeButton')}
@@ -78,7 +85,7 @@ const Customize = () => {
                     )}
                     {theme.id === 'dark' && (
                         <Button
-                            className={classes.bgButton}
+                            className={classes.bgButtonTheme}
                             onClick={() => updateTheme('light')}
                         >
                             {t('settings.themeButton')}
