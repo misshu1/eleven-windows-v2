@@ -14,7 +14,8 @@ export const LanguagesContainer = styled.div`
         outline: none;
         background: ${props => props.open && props.theme.clockHover};
 
-        &&:hover {
+        &&:hover,
+        &&:focus {
             background: ${props => props.theme.clockHover};
         }
     }

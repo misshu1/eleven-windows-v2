@@ -34,7 +34,8 @@ export const CartContainer = styled.div`
             stroke: ${props => props.theme.textColor};
         }
 
-        &&:hover {
+        &&:hover,
+        &&:focus {
             background: ${props => props.theme.clockHover};
         }
     }

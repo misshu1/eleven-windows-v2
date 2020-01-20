@@ -16,7 +16,8 @@ export const LogoContainer = styled.div`
     @media (min-width: 28rem) {
         width: 4rem;
 
-        &&:hover {
+        &&:hover,
+        &&:focus {
             background: ${props => props.theme.clockHover};
         }
     }

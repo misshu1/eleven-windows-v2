@@ -17,7 +17,8 @@ export const ClockContainer = styled.div`
         transition: color 0.2s ease-in-out;
         outline: none;
 
-        &&:hover {
+        &&:hover,
+        &&:focus {
             background: ${props => props.theme.clockHover};
         }
     }

@@ -22,7 +22,8 @@ export const NotificationContainer = styled.div`
         width: 3.5rem;
         color: ${props => props.theme.textColor};
 
-        &&:hover {
+        &&:hover,
+        &&:focus {
             background: ${props => props.theme.clockHover};
         }
     }
