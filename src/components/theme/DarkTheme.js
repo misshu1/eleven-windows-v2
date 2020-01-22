@@ -64,6 +64,9 @@ const DarkTheme = {
     backButtonColor: '#26c11b',
     folderMenuBackdrop: 'rgba(0, 0, 0, 0.5)',
 
+    // Store
+    cardBg: '#333030',
+
     // Settings App
     settingsResizeIconBg: 'rgba(174, 192, 229, 0.2)',
     settingsResizeOutline: 'rgb(220, 227, 242, 0.5)',

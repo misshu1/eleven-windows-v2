@@ -22,11 +22,11 @@ const useStyles = makeStyles({
     }),
     bgButtonTheme: theme => ({
         cursor: 'default',
-        backgroundColor: theme.material.primary.darker,
+        backgroundColor: theme.material.primary.main,
         color: theme.material.primary.contrast.darker,
 
         '&:hover': {
-            backgroundColor: theme.material.primary.main
+            backgroundColor: theme.material.primary.darker
         }
     })
 });

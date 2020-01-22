@@ -64,6 +64,9 @@ const LightTheme = {
     backButtonColor: '#41a83a',
     folderMenuBackdrop: 'rgba(0, 0, 0, 0.5)',
 
+    // Store
+    cardBg: '#B3E1F0',
+
     // Settings App
     settingsResizeIconBg: 'rgba(0, 0, 0, 0.1)',
     settingsResizeOutline: 'rgb(0, 0, 0, 0.3)',
