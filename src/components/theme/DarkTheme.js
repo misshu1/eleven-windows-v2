@@ -66,6 +66,7 @@ const DarkTheme = {
 
     // Store
     cardBg: '#333030',
+    ratingColorEmpty: 'rgba(255, 255, 255, 0.4)',
 
     // Settings App
     settingsResizeIconBg: 'rgba(174, 192, 229, 0.2)',

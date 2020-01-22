@@ -66,6 +66,7 @@ const LightTheme = {
 
     // Store
     cardBg: '#B3E1F0',
+    ratingColorEmpty: 'rgba(0, 0, 0, 0.4)',
 
     // Settings App
     settingsResizeIconBg: 'rgba(0, 0, 0, 0.1)',
