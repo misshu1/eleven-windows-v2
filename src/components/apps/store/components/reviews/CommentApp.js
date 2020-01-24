@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ThemeContext } from '../../../contexts/themeContext';
+import { ThemeContext } from '../../../../../contexts/themeContext';
 import { makeStyles } from '@material-ui/core/styles';
 import { Comment } from './style';
 import Typography from '@material-ui/core/Typography';
@@ -38,7 +38,7 @@ const timeSince = previous => {
 };
 
 const CommentApp = props => {
-    const { username, rating, date, content } = props;
+    const { userDisplayName, rating, date, content } = props;
     const { theme } = useContext(ThemeContext);
     const classes = useStyles(theme);
 
@@ -49,7 +49,7 @@ const CommentApp = props => {
                     <FontAwesomeIcon icon={['fas', 'user-circle']} size='2x' />
                 </span>
                 <Typography variant='h6' component='h2' className='user'>
-                    {username}
+                    {userDisplayName}
                 </Typography>
                 <Rating
                     className='rating'

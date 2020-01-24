@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Card = styled.div`
-    margin: 1rem 0.5rem;
     max-width: 100%;
     border-radius: 5px;
     background: ${props => props.theme.cardBg};

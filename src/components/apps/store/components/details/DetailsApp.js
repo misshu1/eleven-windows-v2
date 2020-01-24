@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { DetailsContainer } from './style';
-import { ThemeContext } from '../../../contexts/themeContext';
+import { ThemeContext } from '../../../../../contexts/themeContext';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import CartIcon from '../../../assets/images/icons/CartIcon';
+import CartIcon from '../../../../../assets/images/icons/CartIcon';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
