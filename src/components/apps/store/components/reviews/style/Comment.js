@@ -9,23 +9,32 @@ export const Comment = styled.div`
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        padding: 0.5rem 0;
+        padding: 0.5rem;
         border-bottom: 1px solid ${props => props.theme.reviewBorder};
     }
 
-    .avatar,
-    .rating {
-        margin: 0 0.5rem;
+    .left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    .user {
+    .left,
+    .icon {
+        margin-right: 0.5rem;
+    }
+
+    .right {
+        display: flex;
+        flex: 1;
     }
 
     .date {
-        flex: 1;
+        display: flex;
         justify-content: flex-end;
-        text-align: right;
-        padding-right: 1rem;
+        align-items: center;
+        flex: 1;
+        white-space: nowrap;
     }
 
     .comment-content {

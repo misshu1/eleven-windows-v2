@@ -23,6 +23,10 @@ export const DetailsContainer = styled.div`
         grid-area: content;
     }
 
+    .title {
+        margin-bottom: 1rem;
+    }
+
     .buttons {
         grid-area: buttons;
         display: flex;

@@ -7,6 +7,19 @@ import ReviewsApp from './components/reviews/ReviewsApp';
 import DetailsApp from './components/details/DetailsApp';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Badge from '@material-ui/core/Badge';
+
+const BadgeIcon = props => {
+    const { classes, badgeNumber } = props;
+    return (
+        <Badge
+            className={classes.badge}
+            badgeContent={badgeNumber}
+            color='error'
+            showZero={false}
+        ></Badge>
+    );
+};
 
 const useStyles = makeStyles({
     tabIndicator: theme => ({
@@ -16,9 +29,12 @@ const useStyles = makeStyles({
     }),
     tabs: {
         cursor: 'default',
-        minWidth: 'fit-content',
         minHeight: '3rem',
-        padding: 0
+        padding: '0 0.5rem'
+    },
+    tabIcon: {
+        display: 'flex',
+        flexDirection: 'row-reverse'
     },
     root: theme => ({
         minHeight: '3rem',
@@ -38,8 +54,12 @@ const useStyles = makeStyles({
     }),
     ratingColor: theme => ({
         color: theme.ratingColorEmpty
-    })
+    }),
+    badge: {
+        margin: '0 1rem !important'
+    }
 });
+
 const ProductApp = props => {
     const { product } = props;
     const { theme } = useContext(ThemeContext);
@@ -61,8 +81,22 @@ const ProductApp = props => {
                 onChange={handleTabsChange}
                 variant='fullWidth'
             >
-                <Tab label='Details' className={classes.tabs} />
-                <Tab label='Reviews' className={classes.tabs} />
+                <Tab
+                    label={tab !== 0 ? product.title : 'Details'}
+                    className={classes.tabs}
+                />
+                <Tab
+                    classes={{ wrapper: classes.tabIcon }}
+                    label='Reviews'
+                    className={classes.tabs}
+                    icon={
+                        <BadgeIcon
+                            classes={classes}
+                            theme={theme}
+                            badgeNumber={product.reviews.length}
+                        />
+                    }
+                />
                 <Tab label='Download' className={classes.tabs} />
             </Tabs>
             {tab === 0 && (

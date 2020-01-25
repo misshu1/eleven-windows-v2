@@ -33,10 +33,12 @@ const DetailsApp = props => {
         <DetailsContainer>
             <img src={image} alt={title} />
             <div className='card-content'>
-                <Typography variant='h5' component='h2'>
+                <Typography variant='h5' component='h2' className='title'>
                     {title}
                 </Typography>
-                <p>{content}</p>
+                <Typography variant='subtitle2' component='h2'>
+                    {content}
+                </Typography>
             </div>
 
             <div className='buttons'>

@@ -45,25 +45,31 @@ const CommentApp = props => {
     return (
         <Comment>
             <div className='comment-header'>
-                <span className='avatar'>
-                    <FontAwesomeIcon icon={['fas', 'user-circle']} size='2x' />
-                </span>
-                <Typography variant='h6' component='h2' className='user'>
-                    {userDisplayName}
-                </Typography>
-                <Rating
-                    className='rating'
-                    classes={{
-                        iconEmpty: classes.ratingColor
-                    }}
-                    value={rating}
-                    readOnly={true}
-                />
-                <span className='date'>{timeSince(date.toDate())}</span>
+                <div className='left'>
+                    <FontAwesomeIcon
+                        className='icon'
+                        icon={['fas', 'user-circle']}
+                        size='lg'
+                    />
+                    <Typography variant='h6' component='h2'>
+                        {userDisplayName}
+                    </Typography>
+                </div>
+                <div className='right'>
+                    <Rating
+                        className='rating'
+                        classes={{
+                            iconEmpty: classes.ratingColor
+                        }}
+                        value={rating}
+                        readOnly={true}
+                    />
+                    <span className='date'>{timeSince(date.toDate())}</span>
+                </div>
             </div>
             <Typography
-                variant='body2'
-                component='span'
+                variant='subtitle2'
+                component='h2'
                 className='comment-content'
             >
                 {content}
