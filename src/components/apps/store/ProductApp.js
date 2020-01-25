@@ -20,10 +20,10 @@ const useStyles = makeStyles({
         minHeight: '3rem',
         padding: 0
     },
-    root: {
+    root: theme => ({
         minHeight: '3rem',
-        background: 'rgba(0, 0, 0, 0.13)'
-    },
+        background: theme.tabsBg
+    }),
     cartButton: theme => ({
         position: 'relative',
         overflow: 'hidden',

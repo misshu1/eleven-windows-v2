@@ -1,17 +1,21 @@
 import styled from 'styled-components';
 
 export const Comment = styled.div`
-    margin: 2rem 0;
+    margin: 2rem 0.5rem;
+    border: 1px solid ${props => props.theme.reviewBorder};
+    border-radius: 4px;
 
     .comment-header {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid ${props => props.theme.reviewBorder};
     }
 
     .avatar,
     .rating {
-        margin: 0 1rem;
+        margin: 0 0.5rem;
     }
 
     .user {
@@ -26,6 +30,6 @@ export const Comment = styled.div`
 
     .comment-content {
         display: inline-block;
-        margin: 0.5rem 1rem 0 1rem;
+        padding: 1rem;
     }
 `;

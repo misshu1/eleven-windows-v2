@@ -20,6 +20,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import LoginApp from './components/login/LoginApp';
+import { FirebaseProvider } from './contexts/firebaseContext';
 library.add(
     faCommentAlt,
     faCheckSquare,
@@ -49,23 +50,30 @@ const App = () => {
     }, []);
 
     return (
-        <TaskbarProvider>
-            <ThemeProvider theme={theme}>
-                <GlobalStyle size={globalApp.size} background={desktopBg} />
+        <FirebaseProvider>
+            <TaskbarProvider>
+                <ThemeProvider theme={theme}>
+                    <GlobalStyle size={globalApp.size} background={desktopBg} />
 
-                <NotificationProvider>
-                    <Switch>
-                        <Route
-                            exact
-                            path='/login'
-                            render={() => <LoginApp background={desktopBg} />}
-                        />
-                        <Route path='/' component={WorkspaceApp} />
-                        <Route path='/404' render={() => <div>404...</div>} />
-                    </Switch>
-                </NotificationProvider>
-            </ThemeProvider>
-        </TaskbarProvider>
+                    <NotificationProvider>
+                        <Switch>
+                            <Route
+                                exact
+                                path='/login'
+                                render={() => (
+                                    <LoginApp background={desktopBg} />
+                                )}
+                            />
+                            <Route path='/' component={WorkspaceApp} />
+                            <Route
+                                path='/404'
+                                render={() => <div>404...</div>}
+                            />
+                        </Switch>
+                    </NotificationProvider>
+                </ThemeProvider>
+            </TaskbarProvider>
+        </FirebaseProvider>
     );
 };
 

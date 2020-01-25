@@ -5,12 +5,12 @@ export const DetailsContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, max-content);
-    grid-gap: 0.5rem;
+    grid-gap: 1rem;
     grid-template-areas:
         'image'
         'content'
         'buttons';
-    padding: 1rem 0.5rem;
+    padding: 1.5rem 0.5rem;
 
     img {
         grid-area: image;

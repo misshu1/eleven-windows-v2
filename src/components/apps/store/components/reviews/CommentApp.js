@@ -23,7 +23,7 @@ const timeSince = previous => {
     const elapsed = currentDay - new Date(previous).getTime();
 
     if (elapsed < msPerMinute) {
-        return Math.round(elapsed / 1000) + ' just now';
+        return Math.round(elapsed / 1000) + ' seconds ago';
     } else if (elapsed < msPerHour) {
         return Math.round(elapsed / msPerMinute) + ' minutes ago';
     } else if (elapsed < msPerDay) {
@@ -59,7 +59,7 @@ const CommentApp = props => {
                     value={rating}
                     readOnly={true}
                 />
-                <span className='date'>{timeSince(date)}</span>
+                <span className='date'>{timeSince(date.toDate())}</span>
             </div>
             <Typography
                 variant='body2'

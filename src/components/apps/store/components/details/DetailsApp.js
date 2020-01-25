@@ -28,9 +28,10 @@ const DetailsApp = props => {
     const { theme } = useContext(ThemeContext);
     const classes = useStyles(theme);
     const { title, image, content, price, discount, id } = props;
+
     return (
         <DetailsContainer>
-            <img src={image} alt='img' />
+            <img src={image} alt={title} />
             <div className='card-content'>
                 <Typography variant='h5' component='h2'>
                     {title}
