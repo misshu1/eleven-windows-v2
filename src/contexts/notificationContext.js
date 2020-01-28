@@ -1,11 +1,11 @@
 import React, { useState, createContext, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import uuid from 'uuid';
-
-const isMobile = window.matchMedia('(max-width: 28rem)').matches ? true : false;
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 export const NotificationContext = createContext();
 export const NotificationProvider = props => {
+    const isMobile = useMediaQuery('(max-width: 28rem)');
     const [notification, setNotification] = useState([]);
     const [disable, setDesable] = useState(false);
 
@@ -39,7 +39,7 @@ export const NotificationProvider = props => {
         } else {
             setDesable(JSON.parse(disableNotifications));
         }
-    }, []);
+    }, [isMobile]);
 
     const hideAllModals = () => {
         if (notification.length > 0) {

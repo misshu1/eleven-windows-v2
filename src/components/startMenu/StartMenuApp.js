@@ -5,10 +5,12 @@ import { StartMenu, LoginContainer } from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import RightMenuApp from './rightMenu/RightMenuApp';
 import LeftMenuApp from './leftMenu/LeftMenuApp';
+import { useAuth } from '../../hooks/useAuth';
 
 const StartMenuApp = () => {
     const { taskbar } = useContext(TaskbarContext);
     const { startMenuOpen } = taskbar;
+    const auth = useAuth();
 
     return ReactDOM.createPortal(
         <React.Fragment>
@@ -21,7 +23,10 @@ const StartMenuApp = () => {
                                 size='2x'
                             />
                         </span>
-                        <h4>Loged in as Guest.</h4>
+                        <h4>
+                            Loged in as{' '}
+                            {auth.user ? auth.user.displayName : 'Guest'}.
+                        </h4>
                     </LoginContainer>
                     <LeftMenuApp />
                     <RightMenuApp />

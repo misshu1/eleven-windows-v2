@@ -1,11 +1,10 @@
 import React, { useState, createContext } from 'react';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 export const GlobalAppContext = createContext();
 export const GlobalAppProvider = props => {
     const [globalApp, setGlobalApp] = useState({
-        isMobile: window.matchMedia('(max-width: 28rem)').matches
-            ? true
-            : false,
+        isMobile: useMediaQuery('(max-width: 28rem)'),
         size: 100
     });
 

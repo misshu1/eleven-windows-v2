@@ -21,6 +21,7 @@ import {
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import LoginApp from './components/login/LoginApp';
 import { FirebaseProvider } from './contexts/firebaseContext';
+import { ProvideAuth } from './hooks/useAuth';
 library.add(
     faCommentAlt,
     faCheckSquare,
@@ -51,28 +52,33 @@ const App = () => {
 
     return (
         <FirebaseProvider>
-            <TaskbarProvider>
-                <ThemeProvider theme={theme}>
-                    <GlobalStyle size={globalApp.size} background={desktopBg} />
+            <ProvideAuth>
+                <TaskbarProvider>
+                    <ThemeProvider theme={theme}>
+                        <GlobalStyle
+                            size={globalApp.size}
+                            background={desktopBg}
+                        />
 
-                    <NotificationProvider>
-                        <Switch>
-                            <Route
-                                exact
-                                path='/login'
-                                render={() => (
-                                    <LoginApp background={desktopBg} />
-                                )}
-                            />
-                            <Route path='/' component={WorkspaceApp} />
-                            <Route
-                                path='/404'
-                                render={() => <div>404...</div>}
-                            />
-                        </Switch>
-                    </NotificationProvider>
-                </ThemeProvider>
-            </TaskbarProvider>
+                        <NotificationProvider>
+                            <Switch>
+                                <Route
+                                    exact
+                                    path='/login'
+                                    render={() => (
+                                        <LoginApp background={desktopBg} />
+                                    )}
+                                />
+                                <Route path='/' component={WorkspaceApp} />
+                                <Route
+                                    path='/404'
+                                    render={() => <div>404...</div>}
+                                />
+                            </Switch>
+                        </NotificationProvider>
+                    </ThemeProvider>
+                </TaskbarProvider>
+            </ProvideAuth>
         </FirebaseProvider>
     );
 };
