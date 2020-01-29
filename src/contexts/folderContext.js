@@ -4,7 +4,6 @@ import StoreIcon from '../assets/images/icons/StoreIcon';
 import DocsIcon from '../assets/images/icons/DocsIcon';
 import TaskIcon from '../assets/images/icons/TaskIcon';
 import CalculatorIcon from '../assets/images/icons/CalculatorIcon';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const DocsApp = lazy(() => import('../components/apps/docs/DocsApp'));
 const SettingsApp = lazy(() =>
@@ -17,6 +16,7 @@ const CalculatorApp = lazy(() =>
 const TaskManagerApp = lazy(() =>
     import('../components/apps/taskManager/TaskManagerApp')
 );
+const isMobile = window.matchMedia('(max-width: 28rem)').matches ? true : false;
 
 export const FOLDER_ACTIONS = {
     open: 'OPEN',
@@ -31,6 +31,68 @@ export const ICON_LOCATION = {
     startMenuRight: 'START_MENU_RIGHT',
     notificationsWindow: 'NOTIFICATIONS_WINDOW'
 };
+
+const APPS_STATE = [
+    {
+        id: 1,
+        appName: 'Settings',
+        widgetIcon: <SettingsIcon />,
+        link: '/settings',
+        component: <SettingsApp />,
+        isOpen: isMobile ? 'open' : 'close',
+        isMinimize: null,
+        appIndex: 100,
+        iconLocation: [
+            ICON_LOCATION.desktop,
+            ICON_LOCATION.notificationsWindow,
+            ICON_LOCATION.startMenuLeft
+        ]
+    },
+    {
+        id: 2,
+        appName: 'Docs',
+        widgetIcon: <DocsIcon />,
+        link: '/docs',
+        component: <DocsApp />,
+        isOpen: isMobile ? 'open' : 'close',
+        isMinimize: null,
+        appIndex: 100,
+        iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight]
+    },
+    {
+        id: 3,
+        appName: 'Calculator',
+        widgetIcon: <CalculatorIcon />,
+        link: '/calculator',
+        component: <CalculatorApp />,
+        isOpen: isMobile ? 'open' : 'close',
+        isMinimize: null,
+        appIndex: 100,
+        iconLocation: [ICON_LOCATION.startMenuRight]
+    },
+    {
+        id: 4,
+        appName: 'Store',
+        widgetIcon: <StoreIcon />,
+        link: '/store',
+        component: <StoreApp />,
+        isOpen: isMobile ? 'open' : 'close',
+        isMinimize: null,
+        appIndex: 100,
+        iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight]
+    },
+    {
+        id: 5,
+        appName: 'Task Manager',
+        widgetIcon: <TaskIcon />,
+        link: '/taskManager',
+        component: <TaskManagerApp />,
+        isOpen: isMobile ? 'open' : 'close',
+        isMinimize: null,
+        appIndex: 100,
+        iconLocation: [ICON_LOCATION.notificationsWindow]
+    }
+];
 
 const folderReducer = (state, action) => {
     switch (action.type) {
@@ -121,70 +183,6 @@ const folderReducer = (state, action) => {
 };
 export const FolderContext = createContext();
 export const FolderProvider = props => {
-    const isMobile = useMediaQuery('(max-width: 28rem)');
-
-    const APPS_STATE = [
-        {
-            id: 1,
-            appName: 'Settings',
-            widgetIcon: <SettingsIcon />,
-            link: '/settings',
-            component: <SettingsApp />,
-            isOpen: isMobile ? 'open' : 'close',
-            isMinimize: null,
-            appIndex: 100,
-            iconLocation: [
-                ICON_LOCATION.desktop,
-                ICON_LOCATION.notificationsWindow,
-                ICON_LOCATION.startMenuLeft
-            ]
-        },
-        {
-            id: 2,
-            appName: 'Docs',
-            widgetIcon: <DocsIcon />,
-            link: '/docs',
-            component: <DocsApp />,
-            isOpen: isMobile ? 'open' : 'close',
-            isMinimize: null,
-            appIndex: 100,
-            iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight]
-        },
-        {
-            id: 3,
-            appName: 'Calculator',
-            widgetIcon: <CalculatorIcon />,
-            link: '/calculator',
-            component: <CalculatorApp />,
-            isOpen: isMobile ? 'open' : 'close',
-            isMinimize: null,
-            appIndex: 100,
-            iconLocation: [ICON_LOCATION.startMenuRight]
-        },
-        {
-            id: 4,
-            appName: 'Store',
-            widgetIcon: <StoreIcon />,
-            link: '/store',
-            component: <StoreApp />,
-            isOpen: isMobile ? 'open' : 'close',
-            isMinimize: null,
-            appIndex: 100,
-            iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight]
-        },
-        {
-            id: 5,
-            appName: 'Task Manager',
-            widgetIcon: <TaskIcon />,
-            link: '/taskManager',
-            component: <TaskManagerApp />,
-            isOpen: isMobile ? 'open' : 'close',
-            isMinimize: null,
-            appIndex: 100,
-            iconLocation: [ICON_LOCATION.notificationsWindow]
-        }
-    ];
-
     const [folderState, folderDispatch] = useReducer(folderReducer, {
         apps: APPS_STATE,
         openApps: []
