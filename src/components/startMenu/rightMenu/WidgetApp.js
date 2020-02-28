@@ -1,10 +1,10 @@
-import React, { useContext, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
 import { GlobalAppContext } from '../../../contexts/globalContext';
-import { FolderContext, FOLDER_ACTIONS } from '../../../contexts/folderContext';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
+import { FolderContext } from '../../../contexts/folderContext';
 import { Widget } from './style';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const WidgetApp = props => {
     const {
@@ -14,42 +14,21 @@ const WidgetApp = props => {
         iconDisplayName,
         animationDuration
     } = props;
+    const { openFolder, activeFolder, minimizeUp } = useContext(FolderContext);
     const { globalApp } = useContext(GlobalAppContext);
     const { closeApp } = useContext(TaskbarContext);
-    const { folderState, folderDispatch } = useContext(FolderContext);
 
     const start = () => {
-        folderDispatch({
-            type: FOLDER_ACTIONS.open,
-            id: appId
-        });
-
-        folderDispatch({
-            type: FOLDER_ACTIONS.active,
-            id: appId
-        });
-
-        folderState.apps.map(item => {
-            if (item.id === appId && item.isMinimize === true) {
-                folderDispatch({
-                    type: FOLDER_ACTIONS.minimize,
-                    id: appId,
-                    boolean: false
-                });
-            }
-            return undefined;
-        });
+        openFolder(appId);
+        activeFolder(appId);
+        minimizeUp(appId);
         closeApp('startMenuOpen');
     };
 
-    const startMobile = useCallback(() => {
-        closeApp('startMenuOpen');
-    }, [closeApp]);
-
     return (
-        <React.Fragment>
+        <>
             {globalApp.isMobile ? (
-                <Widget onClick={startMobile}>
+                <Widget onClick={() => closeApp('startMenuOpen')}>
                     <Link to={link}>
                         {widgetIcon}
                         <span>{iconDisplayName}</span>
@@ -61,7 +40,7 @@ const WidgetApp = props => {
                     <span>{iconDisplayName}</span>
                 </Widget>
             )}
-        </React.Fragment>
+        </>
     );
 };
 

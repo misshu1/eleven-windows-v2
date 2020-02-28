@@ -8,22 +8,18 @@ const DesktopApp = () => {
     const { closeAllApps } = useContext(TaskbarContext);
     const { folderState, sortByAppName } = useContext(FolderContext);
 
-    const close = useCallback(() => {
-        closeAllApps();
-    }, [closeAllApps]);
-
     const desktopIcons = useCallback(() => {
         const apps = folderState.apps.sort(sortByAppName);
-        return apps.map(item => {
-            return item.iconLocation.map(
+        return apps.map(app => {
+            return app.iconLocation.map(
                 location =>
                     location === ICON_LOCATION.desktop && (
                         <IconContainer
-                            key={item.id}
-                            appId={item.id}
-                            iconName={item.appName}
-                            link={item.link}
-                            widgetIcon={item.widgetIcon}
+                            key={app.id}
+                            appId={app.id}
+                            iconName={app.appName}
+                            link={app.link}
+                            widgetIcon={app.widgetIcon}
                         />
                     )
             );
@@ -31,7 +27,7 @@ const DesktopApp = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return <Desktop onClick={close}>{desktopIcons()}</Desktop>;
+    return <Desktop onClick={closeAllApps}>{desktopIcons()}</Desktop>;
 };
 
 export default DesktopApp;

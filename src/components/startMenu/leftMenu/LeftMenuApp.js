@@ -19,15 +19,15 @@ const LeftMenuApp = props => {
     };
 
     const widgetIcons = () => {
-        return folderState.apps.map(item => {
-            return item.iconLocation.map(
+        return folderState.apps.map(app => {
+            return app.iconLocation.map(
                 location =>
                     location === ICON_LOCATION.startMenuLeft && (
                         <WidgetApp
-                            key={item.id}
-                            appId={item.id}
-                            iconDisplayName={item.appName}
-                            widgetIcon={item.widgetIcon}
+                            key={app.id}
+                            appId={app.id}
+                            iconDisplayName={app.appName}
+                            widgetIcon={app.widgetIcon}
                         />
                     )
             );

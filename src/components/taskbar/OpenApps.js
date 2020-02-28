@@ -1,49 +1,40 @@
 import React, { useContext } from 'react';
 import { OpenAppsContainer, AppIcon } from './style';
-import { FolderContext, FOLDER_ACTIONS } from '../../contexts/folderContext';
+import { FolderContext } from '../../contexts/folderContext';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const OpenApps = () => {
-    const { folderState, folderDispatch } = useContext(FolderContext);
+    const { folderState, activeFolder, minimizeUp, minimizeDown } = useContext(
+        FolderContext
+    );
 
     const showIcons = () => {
-        return folderState.openApps.map(item => {
+        return folderState.openApps.map(openApp => {
             return folderState.apps.map(
                 app =>
-                    app.id === item.id && (
+                    app.id === openApp.id && (
                         <Tooltip
-                            title={item.appName}
+                            title={app.appName}
                             placement='top'
                             enterDelay={500}
-                            key={item.id}
+                            key={app.id}
                         >
                             <AppIcon
                                 minimize={app.isMinimize}
                                 appIndex={app.appIndex}
                                 onClick={() => {
                                     if (app.isMinimize === true) {
-                                        folderDispatch({
-                                            type: FOLDER_ACTIONS.minimize,
-                                            id: item.id,
-                                            boolean: false
-                                        });
+                                        minimizeUp(app.id);
                                     } else if (
                                         app.isMinimize !== true &&
                                         app.appIndex !== 100
                                     ) {
-                                        folderDispatch({
-                                            type: FOLDER_ACTIONS.minimize,
-                                            id: item.id,
-                                            boolean: true
-                                        });
+                                        minimizeDown(app.id);
                                     }
-                                    folderDispatch({
-                                        type: FOLDER_ACTIONS.active,
-                                        id: item.id
-                                    });
+                                    activeFolder(app.id);
                                 }}
                             >
-                                {item.widgetIcon}
+                                {app.widgetIcon}
                             </AppIcon>
                         </Tooltip>
                     )

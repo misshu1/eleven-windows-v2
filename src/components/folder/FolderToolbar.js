@@ -1,9 +1,9 @@
 import React from 'react';
-import { Name, NameBar, Buttons } from './style';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
+import { Name, NameBar, Buttons } from './style';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 const FolderToolbar = props => {
     const { folderName, minimize, quitApp, toolbarMenu, toggleDrawer } = props;

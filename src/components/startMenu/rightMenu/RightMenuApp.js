@@ -17,18 +17,18 @@ const RightMenuApp = () => {
 
     const widgetIcons = useCallback(() => {
         const apps = folderState.apps.sort(sortByAppName);
-        return apps.map(item => {
-            return item.iconLocation.map(location => {
+        return apps.map(app => {
+            return app.iconLocation.map(location => {
                 if (location === ICON_LOCATION.startMenuRight) {
                     ANIMATION_DURATION++;
                     return (
                         <WidgetApp
-                            key={item.id}
+                            key={app.id}
                             animationDuration={ANIMATION_DURATION / 10}
-                            appId={item.id}
-                            link={item.link}
-                            widgetIcon={item.widgetIcon}
-                            iconDisplayName={item.appName}
+                            appId={app.id}
+                            link={app.link}
+                            widgetIcon={app.widgetIcon}
+                            iconDisplayName={app.appName}
                         />
                     );
                 }

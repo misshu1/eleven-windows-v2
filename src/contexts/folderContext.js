@@ -1,9 +1,9 @@
 import React, { createContext, useReducer, lazy } from 'react';
+import CalculatorIcon from '../assets/images/icons/CalculatorIcon';
 import SettingsIcon from '../assets/images/icons/SettingsIcon';
 import StoreIcon from '../assets/images/icons/StoreIcon';
 import DocsIcon from '../assets/images/icons/DocsIcon';
 import TaskIcon from '../assets/images/icons/TaskIcon';
-import CalculatorIcon from '../assets/images/icons/CalculatorIcon';
 
 const DocsApp = lazy(() => import('../components/apps/docs/DocsApp'));
 const SettingsApp = lazy(() =>
@@ -18,11 +18,12 @@ const TaskManagerApp = lazy(() =>
 );
 const isMobile = window.matchMedia('(max-width: 28rem)').matches ? true : false;
 
-export const FOLDER_ACTIONS = {
+const FOLDER_ACTIONS = {
     open: 'OPEN',
     close: 'CLOSE',
-    minimize: 'MINIMIZE',
-    active: 'ACTIVE'
+    active: 'ACTIVE',
+    minimizeUp: 'MINIMIZE_UP',
+    minimizeDown: 'MINIMIZE_DOWN'
 };
 
 export const ICON_LOCATION = {
@@ -98,14 +99,14 @@ const folderReducer = (state, action) => {
     switch (action.type) {
         case FOLDER_ACTIONS.open:
             const selectedOpenApp = state.apps.find(
-                item => item.id === action.id
+                item => item.id === action.payload
             );
 
             if (selectedOpenApp.isOpen === 'close') {
                 return {
                     ...state,
                     apps: state.apps.map(item =>
-                        item.id === action.id
+                        item.id === action.payload
                             ? { ...item, isOpen: 'open', appIndex: 104 }
                             : { ...item, appIndex: 100 }
                     ),
@@ -119,14 +120,14 @@ const folderReducer = (state, action) => {
             }
         case FOLDER_ACTIONS.close:
             const selectedCloseApp = state.apps.find(
-                item => item.id === action.id
+                item => item.id === action.payload
             );
 
             if (selectedCloseApp.isOpen === 'open') {
                 return {
                     ...state,
                     apps: state.apps.map(item =>
-                        item.id === action.id
+                        item.id === action.payload
                             ? {
                                   ...item,
                                   isOpen: 'close',
@@ -136,23 +137,42 @@ const folderReducer = (state, action) => {
                             : item
                     ),
                     openApps: state.openApps.filter(
-                        item => item.id !== action.id
+                        item => item.id !== action.payload
                     )
                 };
             } else {
                 return state;
             }
-        case FOLDER_ACTIONS.minimize:
-            const selectedMinimizeApp = state.apps.find(
-                item => item.id === action.id
+
+        case FOLDER_ACTIONS.minimizeUp:
+            const selectedMinimizeUp = state.apps.find(
+                item => item.id === action.payload
             );
 
-            if (selectedMinimizeApp.isMinimize !== action.boolean) {
+            if (selectedMinimizeUp.isMinimize === true) {
                 return {
                     ...state,
                     apps: state.apps.map(item =>
-                        item.id === action.id
-                            ? { ...item, isMinimize: action.boolean }
+                        item.id === action.payload
+                            ? { ...item, isMinimize: false }
+                            : item
+                    )
+                };
+            } else {
+                return state;
+            }
+
+        case FOLDER_ACTIONS.minimizeDown:
+            const selectedMinimizeDown = state.apps.find(
+                item => item.id === action.payload
+            );
+
+            if (selectedMinimizeDown.isMinimize !== true) {
+                return {
+                    ...state,
+                    apps: state.apps.map(item =>
+                        item.id === action.payload
+                            ? { ...item, isMinimize: true }
                             : item
                     )
                 };
@@ -162,14 +182,14 @@ const folderReducer = (state, action) => {
 
         case FOLDER_ACTIONS.active:
             const selectedActiveApp = state.apps.find(
-                item => item.id === action.id
+                item => item.id === action.payload
             );
 
             if (selectedActiveApp.appIndex !== 104) {
                 return {
                     ...state,
                     apps: state.apps.map(item =>
-                        item.id === action.id
+                        item.id === action.payload
                             ? { ...item, appIndex: 104 }
                             : { ...item, appIndex: 100 }
                     )
@@ -181,12 +201,48 @@ const folderReducer = (state, action) => {
             return state;
     }
 };
+
 export const FolderContext = createContext();
 export const FolderProvider = props => {
     const [folderState, folderDispatch] = useReducer(folderReducer, {
         apps: APPS_STATE,
         openApps: []
     });
+
+    const openFolder = appId => {
+        folderDispatch({
+            type: FOLDER_ACTIONS.open,
+            payload: appId
+        });
+    };
+
+    const closeFolder = appId => {
+        folderDispatch({
+            type: FOLDER_ACTIONS.close,
+            payload: appId
+        });
+    };
+
+    const activeFolder = appId => {
+        folderDispatch({
+            type: FOLDER_ACTIONS.active,
+            payload: appId
+        });
+    };
+
+    const minimizeUp = appId => {
+        folderDispatch({
+            type: FOLDER_ACTIONS.minimizeUp,
+            payload: appId
+        });
+    };
+
+    const minimizeDown = appId => {
+        folderDispatch({
+            type: FOLDER_ACTIONS.minimizeDown,
+            payload: appId
+        });
+    };
 
     const sortByAppName = (a, b) => {
         const nameA = a.appName.toUpperCase();
@@ -205,8 +261,12 @@ export const FolderProvider = props => {
         <FolderContext.Provider
             value={{
                 folderState,
-                folderDispatch,
-                sortByAppName
+                sortByAppName,
+                openFolder,
+                closeFolder,
+                activeFolder,
+                minimizeUp,
+                minimizeDown
             }}
         >
             {props.children}

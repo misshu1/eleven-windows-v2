@@ -9,7 +9,7 @@ import React, {
 import { Folder, Content, AnimateFadeInOut } from './style';
 import { GlobalAppContext } from '../../contexts/globalContext';
 import { TaskbarContext } from '../../contexts/taskbarContext';
-import { FolderContext, FOLDER_ACTIONS } from '../../contexts/folderContext';
+import { FolderContext } from '../../contexts/folderContext';
 import FolderToolbar from './FolderToolbar';
 import Scrollbar from 'react-scrollbars-custom';
 import Draggable from 'react-draggable';
@@ -21,8 +21,9 @@ const FolderApp = forwardRef((props, ref) => {
     const [close, setClose] = useState('');
     const [showDrawer, setShowDrawer] = useState(false);
     const [handleDrag, setHandleDrag] = useState(false);
-    const { folderState, folderDispatch } = useContext(FolderContext);
-
+    const { folderState, closeFolder, activeFolder, minimizeDown } = useContext(
+        FolderContext
+    );
     const { closeAllApps } = useContext(TaskbarContext);
     const { globalApp } = useContext(GlobalAppContext);
     const { isMobile } = globalApp;
@@ -43,36 +44,22 @@ const FolderApp = forwardRef((props, ref) => {
     const quitApp = useCallback(() => {
         setClose('close');
         setTimeout(() => {
-            folderDispatch({
-                type: FOLDER_ACTIONS.close,
-                id: appId
-            });
+            closeFolder(appId);
         }, 200);
-    }, [folderDispatch, appId]);
+    }, [appId, closeFolder]);
 
     const minimize = useCallback(() => {
-        folderDispatch({
-            type: FOLDER_ACTIONS.minimize,
-            id: appId,
-            boolean: true
-        });
-    }, [folderDispatch, appId]);
+        minimizeDown(appId);
+    }, [minimizeDown, appId]);
 
     const active = useCallback(() => {
-        folderDispatch({
-            type: FOLDER_ACTIONS.active,
-            id: appId
-        });
-    }, [folderDispatch, appId]);
-
-    const closeTaskbarApps = useCallback(() => {
-        closeAllApps();
-    }, [closeAllApps]);
+        activeFolder(appId);
+    }, [activeFolder, appId]);
 
     const handleClick = useCallback(() => {
-        closeTaskbarApps();
+        closeAllApps();
         active();
-    }, [active, closeTaskbarApps]);
+    }, [active, closeAllApps]);
 
     const toggleDrawer = useCallback(() => {
         setShowDrawer(!showDrawer);
@@ -85,19 +72,19 @@ const FolderApp = forwardRef((props, ref) => {
     return ReactDOM.createPortal(
         <>
             {folderState.apps.map(
-                item =>
-                    item.id === props.appId && (
+                app =>
+                    app.id === appId && (
                         <Draggable
-                            key={item.id}
+                            key={app.id}
                             axis='both'
                             handle='.handle'
                             disabled={handleDrag}
                         >
                             <AnimateFadeInOut
-                                appIndex={item.appIndex}
+                                appIndex={app.appIndex}
                                 onClick={handleClick}
-                                open={item.isOpen}
-                                minimize={item.isMinimize}
+                                open={app.isOpen}
+                                minimize={app.isMinimize}
                                 close={close}
                             >
                                 <Folder
@@ -109,7 +96,7 @@ const FolderApp = forwardRef((props, ref) => {
                                 >
                                     <FolderToolbar
                                         toolbarMenu={toolbarMenu}
-                                        folderName={item.appName}
+                                        folderName={app.appName}
                                         minimize={minimize}
                                         quitApp={quitApp}
                                         toggleDrawer={toggleDrawer}

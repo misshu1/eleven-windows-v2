@@ -1,11 +1,11 @@
 import React, { useContext, Suspense, useEffect } from 'react';
-import { FolderContext, FOLDER_ACTIONS } from '../../contexts/folderContext';
 import { Route, useLocation } from 'react-router-dom';
 import { GlobalAppContext } from '../../contexts/globalContext';
+import { FolderContext } from '../../contexts/folderContext';
 import SpinnerApp from '../style/SpinnerApp';
 
 const RoutesApp = () => {
-    const { folderState, folderDispatch } = useContext(FolderContext);
+    const { folderState, openFolder } = useContext(FolderContext);
     const { globalApp } = useContext(GlobalAppContext);
     const { isMobile } = globalApp;
     const location = useLocation();
@@ -14,12 +14,9 @@ const RoutesApp = () => {
     // Here we check the url to see if it contains any paths and open the app if the url contains the route
     // For example https://example.com/docs if docs is in the url we open docs app
     useEffect(() => {
-        folderState.apps.map(item => {
-            if (location.pathname === item.link) {
-                folderDispatch({
-                    type: FOLDER_ACTIONS.open,
-                    id: item.id
-                });
+        folderState.apps.map(app => {
+            if (location.pathname === app.link) {
+                openFolder(app.id);
             }
             return undefined;
         });
@@ -27,22 +24,22 @@ const RoutesApp = () => {
     }, []);
 
     return (
-        <React.Fragment>
-            {folderState.apps.map(item => (
+        <>
+            {folderState.apps.map(app => (
                 <Route
-                    key={item.id}
+                    key={app.id}
                     exact={isMobile ? true : false}
-                    path={isMobile ? item.link : '/'}
+                    path={isMobile ? app.link : '/'}
                     render={() =>
-                        item.isOpen === 'open' && (
+                        app.isOpen === 'open' && (
                             <Suspense fallback={<SpinnerApp delay={200} />}>
-                                {item.component}
+                                {app.component}
                             </Suspense>
                         )
                     }
                 />
             ))}
-        </React.Fragment>
+        </>
     );
 };
 

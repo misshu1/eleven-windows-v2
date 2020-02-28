@@ -1,14 +1,14 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
-import { FolderContext, FOLDER_ACTIONS } from '../../../contexts/folderContext';
+import { Container, Table, TableHead } from './style';
+import { FolderContext } from '../../../contexts/folderContext';
 import FolderApp from '../../folder/FolderApp';
 import WidgetApp from './WidgetApp';
 import ButtonApp from './ButtonApp';
-import { Container, Table, TableHead } from './style';
 
 const TaskManagerApp = () => {
     const [selectedApp, setSelectedApp] = useState([]);
     const [disableBtn, setDisableBtn] = useState(true);
-    const { folderState, folderDispatch } = useContext(FolderContext);
+    const { folderState, closeFolder } = useContext(FolderContext);
 
     const timeSince = previous => {
         const msPerMinute = 60000;
@@ -36,24 +36,18 @@ const TaskManagerApp = () => {
     };
 
     const closeSelectedApp = useCallback(() => {
-        const noneSelected = selectedApp.every(
-            item => item.isSelected === false
-        );
+        const noneSelected = selectedApp.every(app => app.isSelected === false);
         if (noneSelected) {
             return;
         }
 
-        const app = selectedApp.filter(item => item.isSelected === true);
-
-        folderDispatch({
-            type: FOLDER_ACTIONS.close,
-            id: app[0].id
-        });
-    }, [selectedApp, folderDispatch]);
+        const app = selectedApp.find(app => app.isSelected === true);
+        closeFolder(app.id);
+    }, [closeFolder, selectedApp]);
 
     const getSelectedApp = id => {
         const findApp = selectedApp.find(
-            item => item.id === id && item.isSelected === true
+            app => app.id === id && app.isSelected === true
         );
 
         if (findApp) {
@@ -64,18 +58,18 @@ const TaskManagerApp = () => {
 
     const handleSelectApp = id => {
         setSelectedApp(
-            selectedApp.map(item =>
-                item.id === id
-                    ? { ...item, isSelected: true }
-                    : { ...item, isSelected: false }
+            selectedApp.map(app =>
+                app.id === id
+                    ? { ...app, isSelected: true }
+                    : { ...app, isSelected: false }
             )
         );
     };
 
     const createSelectedAppObj = useCallback(() => {
-        return folderState.openApps.map(item => {
+        return folderState.openApps.map(app => {
             setDisableBtn(true);
-            return { ...item, isSelected: false };
+            return { ...app, isSelected: false };
         });
     }, [folderState.openApps]);
 
@@ -84,16 +78,16 @@ const TaskManagerApp = () => {
     }, [createSelectedAppObj, folderState.openApps]);
 
     const showApps = () => {
-        const widget = folderState.openApps.map(item => {
+        const widget = folderState.openApps.map(app => {
             return (
                 <WidgetApp
-                    key={item.id}
-                    appId={item.id}
-                    widgetIcon={item.widgetIcon}
+                    key={app.id}
+                    appId={app.id}
+                    widgetIcon={app.widgetIcon}
                     getSelectedApp={getSelectedApp}
                     handleSelectApp={handleSelectApp}
-                    iconDisplayName={item.appName}
-                    openTime={item.openSince}
+                    iconDisplayName={app.appName}
+                    openTime={app.openSince}
                     timeSince={timeSince}
                 />
             );

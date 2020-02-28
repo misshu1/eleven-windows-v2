@@ -1,35 +1,18 @@
 import React, { useContext } from 'react';
-import { FolderContext, FOLDER_ACTIONS } from '../../../contexts/folderContext';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
+import { FolderContext } from '../../../contexts/folderContext';
 import { Widget } from './style';
 import PropTypes from 'prop-types';
 
 const WidgetApp = props => {
-    const { folderState, folderDispatch } = useContext(FolderContext);
-    const { closeApp } = useContext(TaskbarContext);
+    const { openFolder, activeFolder, minimizeUp } = useContext(FolderContext);
     const { iconDisplayName, widgetIcon, appId } = props;
+    const { closeApp } = useContext(TaskbarContext);
 
     const start = () => {
-        folderDispatch({
-            type: FOLDER_ACTIONS.open,
-            id: appId
-        });
-
-        folderDispatch({
-            type: FOLDER_ACTIONS.active,
-            id: appId
-        });
-
-        folderState.apps.map(item => {
-            if (item.id === appId && item.isMinimize === true) {
-                folderDispatch({
-                    type: FOLDER_ACTIONS.minimize,
-                    id: appId,
-                    boolean: false
-                });
-            }
-            return undefined;
-        });
+        openFolder(appId);
+        activeFolder(appId);
+        minimizeUp(appId);
         closeApp('notificationsOpen');
     };
 

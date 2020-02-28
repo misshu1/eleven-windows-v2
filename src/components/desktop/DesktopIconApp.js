@@ -1,37 +1,20 @@
-import React, { useContext, memo } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { IconContainer } from './style';
+import React, { useContext, memo, useCallback } from 'react';
 import { GlobalAppContext } from '../../contexts/globalContext';
-import { FolderContext, FOLDER_ACTIONS } from '../../contexts/folderContext';
+import { FolderContext } from '../../contexts/folderContext';
+import { IconContainer } from './style';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const DesktopIconApp = memo(props => {
-    const { folderState, folderDispatch } = useContext(FolderContext);
+    const { openFolder, activeFolder, minimizeUp } = useContext(FolderContext);
     const { link, appId, widgetIcon, iconName } = props;
     const { globalApp } = useContext(GlobalAppContext);
 
-    const start = () => {
-        folderDispatch({
-            type: FOLDER_ACTIONS.open,
-            id: appId
-        });
-
-        folderDispatch({
-            type: FOLDER_ACTIONS.active,
-            id: appId
-        });
-
-        folderState.apps.map(item => {
-            if (item.id === appId && item.isMinimize === true) {
-                folderDispatch({
-                    type: FOLDER_ACTIONS.minimize,
-                    id: appId,
-                    boolean: false
-                });
-            }
-            return undefined;
-        });
-    };
+    const start = useCallback(() => {
+        openFolder(appId);
+        activeFolder(appId);
+        minimizeUp(appId);
+    }, [activeFolder, appId, minimizeUp, openFolder]);
 
     return (
         <IconContainer tabIndex='0'>
