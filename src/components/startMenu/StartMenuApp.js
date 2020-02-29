@@ -8,12 +8,13 @@ import LeftMenuApp from './leftMenu/LeftMenuApp';
 import { useAuth } from '../../hooks/useAuth';
 
 const StartMenuApp = () => {
-    const { taskbar } = useContext(TaskbarContext);
-    const { startMenuOpen } = taskbar;
+    const {
+        taskbar: { startMenuOpen }
+    } = useContext(TaskbarContext);
     const auth = useAuth();
 
     return ReactDOM.createPortal(
-        <React.Fragment>
+        <>
             {startMenuOpen && (
                 <StartMenu>
                     <LoginContainer>
@@ -32,7 +33,7 @@ const StartMenuApp = () => {
                     <RightMenuApp />
                 </StartMenu>
             )}
-        </React.Fragment>,
+        </>,
         document.querySelector('#desktop')
     );
 };

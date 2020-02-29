@@ -9,7 +9,10 @@ import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { NotificationContext } from '../../../contexts/notificationContext';
 
 const LanguageApp = () => {
-    const { closeApp } = useContext(TaskbarContext);
+    const {
+        closeApp,
+        taskbar: { languagesOpen }
+    } = useContext(TaskbarContext);
     const { createNotificationSuccess } = useContext(NotificationContext);
     const { t } = useTranslation();
 
@@ -40,9 +43,7 @@ const LanguageApp = () => {
         ));
     };
     return ReactDOM.createPortal(
-        <React.Fragment>
-            <Container>{renderImg()}</Container>
-        </React.Fragment>,
+        <>{languagesOpen && <Container>{renderImg()}</Container>}</>,
         document.querySelector('#desktop')
     );
 };

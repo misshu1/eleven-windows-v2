@@ -2,7 +2,6 @@ import React, { useContext, useLayoutEffect } from 'react';
 import WorkspaceApp from './components/workspace/WorkspaceApp';
 import { NotificationProvider } from './contexts/notificationContext';
 import { GlobalAppContext } from './contexts/globalContext';
-import { TaskbarProvider } from './contexts/taskbarContext';
 import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { ThemeContext } from './contexts/themeContext';
@@ -41,7 +40,9 @@ const App = () => {
         checkLocalStorageTheme,
         checkLocalStorageBackground
     } = useContext(ThemeContext);
-    const { globalApp } = useContext(GlobalAppContext);
+    const {
+        globalApp: { size }
+    } = useContext(GlobalAppContext);
     const desktopBg = getSelectedBackground().bg;
 
     useLayoutEffect(() => {
@@ -53,31 +54,26 @@ const App = () => {
     return (
         <FirebaseProvider>
             <ProvideAuth>
-                <TaskbarProvider>
-                    <ThemeProvider theme={theme}>
-                        <GlobalStyle
-                            size={globalApp.size}
-                            background={desktopBg}
-                        />
+                <ThemeProvider theme={theme}>
+                    <GlobalStyle size={size} background={desktopBg} />
 
-                        <NotificationProvider>
-                            <Switch>
-                                <Route
-                                    exact
-                                    path='/login'
-                                    render={() => (
-                                        <LoginApp background={desktopBg} />
-                                    )}
-                                />
-                                <Route path='/' component={WorkspaceApp} />
-                                <Route
-                                    path='/404'
-                                    render={() => <div>404...</div>}
-                                />
-                            </Switch>
-                        </NotificationProvider>
-                    </ThemeProvider>
-                </TaskbarProvider>
+                    <NotificationProvider>
+                        <Switch>
+                            <Route
+                                exact
+                                path='/login'
+                                render={() => (
+                                    <LoginApp background={desktopBg} />
+                                )}
+                            />
+                            <Route path='/' component={WorkspaceApp} />
+                            <Route
+                                path='/404'
+                                render={() => <div>404...</div>}
+                            />
+                        </Switch>
+                    </NotificationProvider>
+                </ThemeProvider>
             </ProvideAuth>
         </FirebaseProvider>
     );

@@ -8,7 +8,6 @@ import React, {
 } from 'react';
 import { Folder, Content, AnimateFadeInOut } from './style';
 import { GlobalAppContext } from '../../contexts/globalContext';
-import { TaskbarContext } from '../../contexts/taskbarContext';
 import { FolderContext } from '../../contexts/folderContext';
 import FolderToolbar from './FolderToolbar';
 import Scrollbar from 'react-scrollbars-custom';
@@ -24,9 +23,10 @@ const FolderApp = forwardRef((props, ref) => {
     const { folderState, closeFolder, activeFolder, minimizeDown } = useContext(
         FolderContext
     );
-    const { closeAllApps } = useContext(TaskbarContext);
-    const { globalApp } = useContext(GlobalAppContext);
-    const { isMobile } = globalApp;
+
+    const {
+        globalApp: { isMobile }
+    } = useContext(GlobalAppContext);
     const {
         appId,
         children,
@@ -57,9 +57,8 @@ const FolderApp = forwardRef((props, ref) => {
     }, [activeFolder, appId]);
 
     const handleClick = useCallback(() => {
-        closeAllApps();
         active();
-    }, [active, closeAllApps]);
+    }, [active]);
 
     const toggleDrawer = useCallback(() => {
         setShowDrawer(!showDrawer);

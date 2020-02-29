@@ -6,9 +6,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import LogoIcon from '../../../assets/images/icons/LogoIcon';
 
 const LogoIconApp = () => {
-    const { taskbar, startTaskbarApp, handleKeyPress } = useContext(
-        TaskbarContext
-    );
+    const {
+        taskbar: { startMenuOpen },
+        startTaskbarApp,
+        handleKeyPress
+    } = useContext(TaskbarContext);
     const { t } = useTranslation();
 
     const toggle = useCallback(() => {
@@ -25,7 +27,7 @@ const LogoIconApp = () => {
     return (
         <Tooltip title={t('tooltip.menu')} placement='top' enterDelay={500}>
             <LogoContainer
-                open={taskbar.startMenuOpen}
+                open={startMenuOpen}
                 tabIndex='0'
                 onKeyPress={keyPress}
                 onClick={toggle}

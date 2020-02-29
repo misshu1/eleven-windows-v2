@@ -1,11 +1,9 @@
 import React, { useContext, useCallback } from 'react';
-import { TaskbarContext } from '../../contexts/taskbarContext';
+import { FolderContext, ICON_LOCATION } from '../../contexts/folderContext';
 import { Desktop } from './style';
 import IconContainer from './DesktopIconApp';
-import { FolderContext, ICON_LOCATION } from '../../contexts/folderContext';
 
 const DesktopApp = () => {
-    const { closeAllApps } = useContext(TaskbarContext);
     const { folderState, sortByAppName } = useContext(FolderContext);
 
     const desktopIcons = useCallback(() => {
@@ -27,7 +25,7 @@ const DesktopApp = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return <Desktop onClick={closeAllApps}>{desktopIcons()}</Desktop>;
+    return <Desktop>{desktopIcons()}</Desktop>;
 };
 
 export default DesktopApp;

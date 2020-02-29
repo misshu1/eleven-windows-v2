@@ -8,7 +8,9 @@ import PropTypes from 'prop-types';
 const DesktopIconApp = memo(props => {
     const { openFolder, activeFolder, minimizeUp } = useContext(FolderContext);
     const { link, appId, widgetIcon, iconName } = props;
-    const { globalApp } = useContext(GlobalAppContext);
+    const {
+        globalApp: { isMobile }
+    } = useContext(GlobalAppContext);
 
     const start = useCallback(() => {
         openFolder(appId);
@@ -18,7 +20,7 @@ const DesktopIconApp = memo(props => {
 
     return (
         <IconContainer tabIndex='0'>
-            {globalApp.isMobile ? (
+            {isMobile ? (
                 <Link to={link}>
                     {widgetIcon}
                     <div>{iconName}</div>

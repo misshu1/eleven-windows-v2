@@ -6,8 +6,9 @@ import SpinnerApp from '../style/SpinnerApp';
 
 const RoutesApp = () => {
     const { folderState, openFolder } = useContext(FolderContext);
-    const { globalApp } = useContext(GlobalAppContext);
-    const { isMobile } = globalApp;
+    const {
+        globalApp: { isMobile }
+    } = useContext(GlobalAppContext);
     const location = useLocation();
 
     // Route paths are only for mobile

@@ -11,7 +11,9 @@ import WidgetApp from './WidgetApp';
 
 const NotificationApp = () => {
     const { folderState } = useContext(FolderContext);
-    const { taskbar } = useContext(TaskbarContext);
+    const {
+        taskbar: { notificationsOpen }
+    } = useContext(TaskbarContext);
     const {
         notification,
         closeNotification,
@@ -37,7 +39,7 @@ const NotificationApp = () => {
 
     return ReactDOM.createPortal(
         <React.Fragment>
-            {taskbar.notificationsOpen && (
+            {notificationsOpen && (
                 <NotificationContainer>
                     {notification.length > 0 ? (
                         <Scrollbar style={{ width: '100%', height: '100%' }}>

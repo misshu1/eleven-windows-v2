@@ -5,9 +5,11 @@ import { TaskbarContext } from '../../../contexts/taskbarContext';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const ClockIconApp = () => {
-    const { taskbar, startTaskbarApp, handleKeyPress } = useContext(
-        TaskbarContext
-    );
+    const {
+        taskbar: { calendarOpen },
+        startTaskbarApp,
+        handleKeyPress
+    } = useContext(TaskbarContext);
     const [clock, setClock] = useState({
         hour: new Date().getHours(),
         minute: new Date().getMinutes(),
@@ -64,7 +66,7 @@ const ClockIconApp = () => {
             enterDelay={500}
         >
             <ClockContainer
-                open={taskbar.calendarOpen}
+                open={calendarOpen}
                 tabIndex='0'
                 onKeyPress={e => handleKeyPress(e, 'calendarOpen')}
                 onClick={() => startTaskbarApp('calendarOpen')}

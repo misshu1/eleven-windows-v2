@@ -15,7 +15,9 @@ const WidgetApp = props => {
         animationDuration
     } = props;
     const { openFolder, activeFolder, minimizeUp } = useContext(FolderContext);
-    const { globalApp } = useContext(GlobalAppContext);
+    const {
+        globalApp: { isMobile }
+    } = useContext(GlobalAppContext);
     const { closeApp } = useContext(TaskbarContext);
 
     const start = () => {
@@ -27,7 +29,7 @@ const WidgetApp = props => {
 
     return (
         <>
-            {globalApp.isMobile ? (
+            {isMobile ? (
                 <Widget onClick={() => closeApp('startMenuOpen')}>
                     <Link to={link}>
                         {widgetIcon}

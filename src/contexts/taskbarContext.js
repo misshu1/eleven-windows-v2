@@ -44,6 +44,11 @@ export const TaskbarProvider = props => {
         }
     };
 
+    const showBackdrop = () => {
+        const app = Object.keys(taskbar).find(app => taskbar[app] && app);
+        return taskbar[app];
+    };
+
     return (
         <TaskbarContext.Provider
             value={{
@@ -51,7 +56,8 @@ export const TaskbarProvider = props => {
                 closeApp,
                 startTaskbarApp,
                 handleKeyPress,
-                closeAllApps
+                closeAllApps,
+                showBackdrop
             }}
         >
             {props.children}

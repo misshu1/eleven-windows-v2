@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SpinnerContainer = styled.div`
     color: #d6d8de;
-    z-index: 200;
+    z-index: 300;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -28,13 +28,13 @@ const SpinnerApp = props => {
     }, [delay]);
 
     return (
-        <React.Fragment>
+        <>
             {ready && (
                 <SpinnerContainer>
                     <FontAwesomeIcon icon='spinner' size='2x' pulse />
                 </SpinnerContainer>
             )}
-        </React.Fragment>
+        </>
     );
 };
 
