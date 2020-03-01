@@ -15,7 +15,8 @@ import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import {
     loadingLogoExample,
     notificationExample,
-    folderMenuExample
+    folderMenuExample,
+    zIndexExample
 } from './CodeExamples';
 import { makeStyles } from '@material-ui/core/styles';
 import Emoji from '../../../components/emoji/Emoji';
@@ -98,6 +99,7 @@ const DocsApp = () => {
     const createNotificationsRef = useRef(null);
     const createFolderRef = useRef(null);
     const addMenuToFolderRef = useRef(null);
+    const zIndexRef = useRef(null);
 
     const toolbarMenu = useCallback(() => {
         return [
@@ -132,6 +134,14 @@ const DocsApp = () => {
                 link: null,
                 scrollToRef: 'createNotificationsRef',
                 onClick: null
+            },
+            {
+                name: 'z-index',
+                widgetIcon: null,
+                fontIcon: ['fas', 'layer-group'],
+                link: null,
+                scrollToRef: 'zIndexRef',
+                onClick: null
             }
         ];
     }, []);
@@ -152,7 +162,8 @@ const DocsApp = () => {
                 createFolderRef,
                 changeLoadingLogoRef,
                 createNotificationsRef,
-                addMenuToFolderRef
+                addMenuToFolderRef,
+                zIndexRef
             }}
         >
             <Container>
@@ -238,6 +249,11 @@ const DocsApp = () => {
                 </p>
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {notificationExample}
+                </SyntaxHighlighter>
+                <h2 ref={zIndexRef}>z-index</h2>
+                <p>Here are all the z-index values used.</p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {zIndexExample}
                 </SyntaxHighlighter>
             </Container>
         </FolderApp>

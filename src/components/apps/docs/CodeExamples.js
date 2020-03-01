@@ -169,3 +169,19 @@ const ExampleApp = () => {
 
 export default ExampleApp;
 `.trim();
+
+export const zIndexExample = `
+zIndex = {
+  TaskbarApp: 300,
+  TaskbarModalApps: 250,
+  NotificationModalApp: 200,
+  FolderApp: {
+    default: 100,
+    actived: 104,
+    DrawerApp: {
+      FolderMenu: 1000,
+      Backdrop: 500
+    }
+  }
+}
+`.trim();
