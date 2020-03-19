@@ -1,10 +1,11 @@
-import React, { useEffect, useContext, lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useContext, useEffect } from 'react';
+
+import { FolderProvider } from '../../contexts/folderContext';
 import { NotificationContext } from '../../contexts/notificationContext';
 import { TaskbarProvider } from '../../contexts/taskbarContext';
-import { FolderProvider } from '../../contexts/folderContext';
 import NotificationModalApp from '../notification/notificationModal/NotificationModalApp';
-import SpinnerApp from '../style/SpinnerApp';
 import RoutesApp from '../routes/RoutesApp';
+import SpinnerApp from '../style/SpinnerApp';
 
 const TaskbarModalApps = lazy(() => import('../taskbar/TaskbarModalApps'));
 const TaskbarApp = lazy(() => import('../taskbar/TaskbarApp'));

@@ -38,7 +38,7 @@ export const TaskbarProvider = props => {
     };
 
     const handleKeyPress = (e, app) => {
-        if (e.charCode === 13) {
+        if (e.key === 'Enter' || e.key === 'NumpadEnter') {
             closeAllApps();
             startTaskbarApp(app);
         }

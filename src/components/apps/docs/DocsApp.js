@@ -1,29 +1,19 @@
-import React, {
-    useContext,
-    useEffect,
-    useState,
-    useCallback,
-    useRef
-} from 'react';
-import { Container } from './style';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vs, tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { ThemeContext } from '../../../contexts/themeContext';
-import { NotificationContext } from '../../../contexts/notificationContext';
-import FolderApp from '../../folder/FolderApp';
-import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
-import {
-    loadingLogoExample,
-    notificationExample,
-    folderMenuExample,
-    zIndexExample
-} from './CodeExamples';
-import { makeStyles } from '@material-ui/core/styles';
-import Emoji from '../../../components/emoji/Emoji';
 import Button from '@material-ui/core/Button';
-import CreateFolder from './CreateFolder';
-import LogoIcon from '../../../assets/images/icons/LogoIcon';
+import { makeStyles } from '@material-ui/core/styles';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import { tomorrow, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 import FolderIcon from '../../../assets/images/icons/FolderIcon';
+import LogoIcon from '../../../assets/images/icons/LogoIcon';
+import Emoji from '../../../components/emoji/Emoji';
+import { NotificationContext } from '../../../contexts/notificationContext';
+import { ThemeContext } from '../../../contexts/themeContext';
+import FolderApp from '../../folder/FolderApp';
+import { folderMenuExample, loadingLogoExample, notificationExample, zIndexExample } from './CodeExamples';
+import CreateFolder from './CreateFolder';
+import { Container } from './style';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 

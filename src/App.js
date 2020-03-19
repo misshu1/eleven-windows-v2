@@ -1,27 +1,29 @@
-import React, { useContext, useLayoutEffect } from 'react';
-import WorkspaceApp from './components/workspace/WorkspaceApp';
-import { NotificationProvider } from './contexts/notificationContext';
-import { GlobalAppContext } from './contexts/globalContext';
-import { Route, Switch } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import { ThemeContext } from './contexts/themeContext';
-import { GlobalStyle } from './components/style/GlobalStyle';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import {
     faCheckSquare,
-    faExclamationTriangle,
-    faTimes,
-    faWindowMinimize,
-    faUserCircle,
-    faSpinner,
-    faExclamationCircle,
     faEllipsisV,
-    faLayerGroup
+    faExclamationCircle,
+    faExclamationTriangle,
+    faLayerGroup,
+    faSpinner,
+    faTimes,
+    faUserCircle,
+    faWindowMinimize
 } from '@fortawesome/free-solid-svg-icons';
-import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
+import React, { useContext, useLayoutEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+
 import LoginApp from './components/login/LoginApp';
+import { GlobalStyle } from './components/style/GlobalStyle';
+import WorkspaceApp from './components/workspace/WorkspaceApp';
 import { FirebaseProvider } from './contexts/firebaseContext';
+import { GlobalAppContext } from './contexts/globalContext';
+import { NotificationProvider } from './contexts/notificationContext';
+import { ThemeContext } from './contexts/themeContext';
 import { ProvideAuth } from './hooks/useAuth';
+
 library.add(
     faCommentAlt,
     faCheckSquare,
