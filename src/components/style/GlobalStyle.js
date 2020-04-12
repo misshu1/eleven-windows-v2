@@ -12,7 +12,7 @@ ${normalize}
 
 html {
     height: 100%;
-    font-size: ${props => props.size}%;
+    font-size: ${(props) => props.size}%;
 }
 
 body {
@@ -29,11 +29,11 @@ body {
     height: calc(100% - 3.5rem);
     width: 100%;
     overflow: hidden;
-    background: ${props => props.theme.desktopBg[props.background]};
+    background: ${(props) => props.theme.desktopBg[props.background]};
 }
 
 #taskbar {
-    background: ${props => props.theme.background};
+    background: ${(props) => props.theme.background};
     z-index: 300;
     position:fixed;
     bottom: 0;

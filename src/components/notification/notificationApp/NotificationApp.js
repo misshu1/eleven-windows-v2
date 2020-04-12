@@ -1,30 +1,33 @@
-import ReactDOM from 'react-dom';
-import React, { useContext } from 'react';
-import { NotificationContainer, Notification, WidgetsContainer } from './style';
-import { FolderContext, ICON_LOCATION } from '../../../contexts/folderContext';
-import { NotificationContext } from '../../../contexts/notificationContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useContext, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { TaskbarContext } from '../../../contexts/taskbarContext';
 import Scrollbar from 'react-scrollbars-custom';
+
+import { ICON_LOCATION, useFolderContext } from '../../../contexts/folderContext';
+import { NotificationContext } from '../../../contexts/notificationContext';
+import { TaskbarContext } from '../../../contexts/taskbarContext';
+import { Notification, NotificationContainer, WidgetsContainer } from './style';
 import WidgetApp from './WidgetApp';
 
 const NotificationApp = () => {
-    const { folderState } = useContext(FolderContext);
+    const { folderState, sortByAppName } = useFolderContext();
+    const apps = useRef(folderState.apps.sort(sortByAppName));
+
     const {
-        taskbar: { notificationsOpen }
+        taskbar: { notificationsOpen },
     } = useContext(TaskbarContext);
     const {
         notification,
         closeNotification,
-        clearAllNotifications
+        clearAllNotifications,
     } = useContext(NotificationContext);
     const { t } = useTranslation();
 
     const widgetIcons = () => {
-        return folderState.apps.map(item => {
+        return apps.current.map((item) => {
             return item.iconLocation.map(
-                location =>
+                (location) =>
                     location === ICON_LOCATION.notificationsWindow && (
                         <WidgetApp
                             key={item.id}
@@ -47,10 +50,10 @@ const NotificationApp = () => {
                                 style={{
                                     flex: 1,
                                     padding: '1rem',
-                                    overflowY: 'auto'
+                                    overflowY: 'auto',
                                 }}
                             >
-                                {notification.map(item => (
+                                {notification.map((item) => (
                                     <Notification
                                         key={item.id}
                                         type={item.type}

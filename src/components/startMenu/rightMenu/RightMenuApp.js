@@ -1,13 +1,15 @@
-import React, { useCallback, useEffect, useContext } from 'react';
-import { FolderContext, ICON_LOCATION } from '../../../contexts/folderContext';
-import { Container } from './style';
+import React, { useCallback, useEffect, useRef } from 'react';
 import Scrollbar from 'react-scrollbars-custom';
+
+import { ICON_LOCATION, useFolderContext } from '../../../contexts/folderContext';
+import { Container } from './style';
 import WidgetApp from './WidgetApp';
 
 let ANIMATION_DURATION = 0;
 
 const RightMenuApp = () => {
-    const { folderState, sortByAppName } = useContext(FolderContext);
+    const { folderState, sortByAppName } = useFolderContext();
+    const apps = useRef(folderState.apps.sort(sortByAppName));
 
     useEffect(() => {
         return () => {
@@ -16,9 +18,8 @@ const RightMenuApp = () => {
     }, []);
 
     const widgetIcons = useCallback(() => {
-        const apps = folderState.apps.sort(sortByAppName);
-        return apps.map(app => {
-            return app.iconLocation.map(location => {
+        return apps.current.map((app) => {
+            return app.iconLocation.map((location) => {
                 if (location === ICON_LOCATION.startMenuRight) {
                     ANIMATION_DURATION++;
                     return (

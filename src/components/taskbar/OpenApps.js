@@ -1,17 +1,21 @@
-import React, { useContext } from 'react';
-import { OpenAppsContainer, AppIcon } from './style';
-import { FolderContext } from '../../contexts/folderContext';
 import Tooltip from '@material-ui/core/Tooltip';
+import React from 'react';
+
+import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
+import { AppIcon, OpenAppsContainer } from './style';
 
 const OpenApps = () => {
-    const { folderState, activeFolder, minimizeUp, minimizeDown } = useContext(
-        FolderContext
-    );
+    const { folderState } = useFolderContext();
+    const {
+        activeFolder,
+        minimizeUp,
+        minimizeDown,
+    } = useDispatchFolderContext();
 
     const showIcons = () => {
-        return folderState.openApps.map(openApp => {
+        return folderState.openApps.map((openApp) => {
             return folderState.apps.map(
-                app =>
+                (app) =>
                     app.id === openApp.id && (
                         <Tooltip
                             title={app.appName}

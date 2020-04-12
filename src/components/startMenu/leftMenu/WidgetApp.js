@@ -1,19 +1,27 @@
-import React, { useContext } from 'react';
-import { TaskbarContext } from '../../../contexts/taskbarContext';
-import { FolderContext } from '../../../contexts/folderContext';
-import { Widget } from './style';
-import PropTypes from 'prop-types';
 import Tooltip from '@material-ui/core/Tooltip';
+import PropTypes from 'prop-types';
+import React, { useContext, useRef } from 'react';
 
-const WidgetApp = props => {
-    const { openFolder, activeFolder, minimizeUp } = useContext(FolderContext);
+import { useDispatchFolderContext } from '../../../contexts/folderContext';
+import { TaskbarContext } from '../../../contexts/taskbarContext';
+import { Widget } from './style';
+
+const WidgetApp = (props) => {
+    const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { appId, iconDisplayName, widgetIcon } = props;
     const { closeApp } = useContext(TaskbarContext);
 
+    const open = useRef(null);
+    const active = useRef(null);
+    const minimize = useRef(null);
+    open.current = () => openFolder(appId);
+    active.current = () => activeFolder(appId);
+    minimize.current = () => minimizeUp(appId);
+
     const start = () => {
-        openFolder(appId);
-        activeFolder(appId);
-        minimizeUp(appId);
+        open.current();
+        active.current();
+        minimize.current();
         closeApp('startMenuOpen');
     };
 
@@ -29,5 +37,5 @@ export default WidgetApp;
 WidgetApp.propTypes = {
     iconDisplayName: PropTypes.string.isRequired,
     widgetIcon: PropTypes.node.isRequired,
-    appId: PropTypes.number.isRequired
+    appId: PropTypes.number.isRequired,
 };

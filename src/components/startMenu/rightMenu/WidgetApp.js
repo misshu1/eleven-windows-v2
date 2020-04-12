@@ -1,29 +1,37 @@
-import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import React, { useContext, useRef } from 'react';
+import { Link } from 'react-router-dom';
+
+import { useDispatchFolderContext } from '../../../contexts/folderContext';
 import { GlobalAppContext } from '../../../contexts/globalContext';
 import { TaskbarContext } from '../../../contexts/taskbarContext';
-import { FolderContext } from '../../../contexts/folderContext';
 import { Widget } from './style';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
-const WidgetApp = props => {
+const WidgetApp = (props) => {
     const {
         appId,
         link,
         widgetIcon,
         iconDisplayName,
-        animationDuration
+        animationDuration,
     } = props;
-    const { openFolder, activeFolder, minimizeUp } = useContext(FolderContext);
+    const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const {
-        globalApp: { isMobile }
+        globalApp: { isMobile },
     } = useContext(GlobalAppContext);
     const { closeApp } = useContext(TaskbarContext);
 
+    const open = useRef(null);
+    const active = useRef(null);
+    const minimize = useRef(null);
+    open.current = () => openFolder(appId);
+    active.current = () => activeFolder(appId);
+    minimize.current = () => minimizeUp(appId);
+
     const start = () => {
-        openFolder(appId);
-        activeFolder(appId);
-        minimizeUp(appId);
+        open.current();
+        active.current();
+        minimize.current();
         closeApp('startMenuOpen');
     };
 
@@ -53,5 +61,5 @@ WidgetApp.propTypes = {
     link: PropTypes.string.isRequired,
     widgetIcon: PropTypes.node.isRequired,
     iconDisplayName: PropTypes.string.isRequired,
-    animationDuration: PropTypes.number.isRequired
+    animationDuration: PropTypes.number.isRequired,
 };

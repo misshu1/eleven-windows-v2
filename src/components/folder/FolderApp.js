@@ -1,28 +1,26 @@
-import ReactDOM from 'react-dom';
-import React, {
-    useContext,
-    useState,
-    useEffect,
-    useCallback,
-    forwardRef
-} from 'react';
-import { Folder, Content, AnimateFadeInOut } from './style';
-import { GlobalAppContext } from '../../contexts/globalContext';
-import { FolderContext } from '../../contexts/folderContext';
-import FolderToolbar from './FolderToolbar';
-import Scrollbar from 'react-scrollbars-custom';
-import Draggable from 'react-draggable';
-import PropTypes from 'prop-types';
-import DrawerApp from './drawer/DrawerApp';
 import Backdrop from '@material-ui/core/Backdrop';
+import PropTypes from 'prop-types';
+import React, { forwardRef, useCallback, useContext, useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import Draggable from 'react-draggable';
+import Scrollbar from 'react-scrollbars-custom';
+
+import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
+import { GlobalAppContext } from '../../contexts/globalContext';
+import DrawerApp from './drawer/DrawerApp';
+import FolderToolbar from './FolderToolbar';
+import { AnimateFadeInOut, Content, Folder } from './style';
 
 const FolderApp = forwardRef((props, ref) => {
     const [close, setClose] = useState('');
     const [showDrawer, setShowDrawer] = useState(false);
     const [handleDrag, setHandleDrag] = useState(false);
-    const { folderState, closeFolder, activeFolder, minimizeDown } = useContext(
-        FolderContext
-    );
+    const { folderState } = useFolderContext();
+    const {
+        closeFolder,
+        activeFolder,
+        minimizeDown
+    } = useDispatchFolderContext();
 
     const {
         globalApp: { isMobile }

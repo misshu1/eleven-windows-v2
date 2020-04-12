@@ -1,27 +1,29 @@
-import React, { useContext } from 'react';
-import { FolderContext, ICON_LOCATION } from '../../../contexts/folderContext';
-import { Container, Widget } from './style';
-import { TaskbarContext } from '../../../contexts/taskbarContext';
+import Tooltip from '@material-ui/core/Tooltip';
+import React, { useContext, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
-import WidgetApp from './WidgetApp';
-import Tooltip from '@material-ui/core/Tooltip';
-import PowerOffIcon from '../../../assets/images/icons/PowerOffIcon';
 
-const LeftMenuApp = props => {
-    const { folderState } = useContext(FolderContext);
+import PowerOffIcon from '../../../assets/images/icons/PowerOffIcon';
+import { ICON_LOCATION, useFolderContext } from '../../../contexts/folderContext';
+import { TaskbarContext } from '../../../contexts/taskbarContext';
+import { Container, Widget } from './style';
+import WidgetApp from './WidgetApp';
+
+const LeftMenuApp = (props) => {
+    const { folderState, sortByAppName } = useFolderContext();
+    const apps = useRef(folderState.apps.sort(sortByAppName));
     const { closeApp } = useContext(TaskbarContext);
     const { t } = useTranslation();
 
-    const closeStartMenu = () => {
+    const goToLogin = () => {
         closeApp('startMenuOpen');
         props.history.push('/login');
     };
 
     const widgetIcons = () => {
-        return folderState.apps.map(app => {
+        return apps.current.map((app) => {
             return app.iconLocation.map(
-                location =>
+                (location) =>
                     location === ICON_LOCATION.startMenuLeft && (
                         <WidgetApp
                             key={app.id}
@@ -42,7 +44,7 @@ const LeftMenuApp = props => {
                 placement='top'
                 enterDelay={500}
             >
-                <Widget onClick={closeStartMenu}>
+                <Widget onClick={goToLogin}>
                     <PowerOffIcon width='2rem' height='2rem' />
                 </Widget>
             </Tooltip>

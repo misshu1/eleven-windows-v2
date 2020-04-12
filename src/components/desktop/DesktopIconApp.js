@@ -1,22 +1,30 @@
-import React, { useContext, memo, useCallback } from 'react';
-import { GlobalAppContext } from '../../contexts/globalContext';
-import { FolderContext } from '../../contexts/folderContext';
-import { IconContainer } from './style';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React, { memo, useContext, useRef } from 'react';
+import { Link } from 'react-router-dom';
+
+import { useDispatchFolderContext } from '../../contexts/folderContext';
+import { GlobalAppContext } from '../../contexts/globalContext';
+import { IconContainer } from './style';
 
 const DesktopIconApp = memo(props => {
-    const { openFolder, activeFolder, minimizeUp } = useContext(FolderContext);
+    const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { link, appId, widgetIcon, iconName } = props;
     const {
         globalApp: { isMobile }
     } = useContext(GlobalAppContext);
 
-    const start = useCallback(() => {
-        openFolder(appId);
-        activeFolder(appId);
-        minimizeUp(appId);
-    }, [activeFolder, appId, minimizeUp, openFolder]);
+    const open = useRef(null);
+    const active = useRef(null);
+    const minimize = useRef(null);
+    open.current = () => openFolder(appId);
+    active.current = () => activeFolder(appId);
+    minimize.current = () => minimizeUp(appId);
+
+    const start = () => {
+        open.current();
+        active.current();
+        minimize.current();
+    };
 
     return (
         <IconContainer tabIndex='0'>

@@ -1,8 +1,9 @@
-import React, { createContext, useReducer, lazy } from 'react';
+import React, { createContext, lazy, useContext, useReducer } from 'react';
+
 import CalculatorIcon from '../assets/images/icons/CalculatorIcon';
+import DocsIcon from '../assets/images/icons/DocsIcon';
 import SettingsIcon from '../assets/images/icons/SettingsIcon';
 import StoreIcon from '../assets/images/icons/StoreIcon';
-import DocsIcon from '../assets/images/icons/DocsIcon';
 import TaskIcon from '../assets/images/icons/TaskIcon';
 
 const DocsApp = lazy(() => import('../components/apps/docs/DocsApp'));
@@ -23,14 +24,14 @@ const FOLDER_ACTIONS = {
     close: 'CLOSE',
     active: 'ACTIVE',
     minimizeUp: 'MINIMIZE_UP',
-    minimizeDown: 'MINIMIZE_DOWN'
+    minimizeDown: 'MINIMIZE_DOWN',
 };
 
 export const ICON_LOCATION = {
     desktop: 'DESKTOP',
     startMenuLeft: 'START_MENU_LEFT',
     startMenuRight: 'START_MENU_RIGHT',
-    notificationsWindow: 'NOTIFICATIONS_WINDOW'
+    notificationsWindow: 'NOTIFICATIONS_WINDOW',
 };
 
 const APPS_STATE = [
@@ -46,8 +47,8 @@ const APPS_STATE = [
         iconLocation: [
             ICON_LOCATION.desktop,
             ICON_LOCATION.notificationsWindow,
-            ICON_LOCATION.startMenuLeft
-        ]
+            ICON_LOCATION.startMenuLeft,
+        ],
     },
     {
         id: 2,
@@ -58,7 +59,7 @@ const APPS_STATE = [
         isOpen: isMobile ? 'open' : 'close',
         isMinimize: null,
         appIndex: 100,
-        iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight]
+        iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight],
     },
     {
         id: 3,
@@ -69,7 +70,7 @@ const APPS_STATE = [
         isOpen: isMobile ? 'open' : 'close',
         isMinimize: null,
         appIndex: 100,
-        iconLocation: [ICON_LOCATION.startMenuRight]
+        iconLocation: [ICON_LOCATION.startMenuRight],
     },
     {
         id: 4,
@@ -80,7 +81,7 @@ const APPS_STATE = [
         isOpen: isMobile ? 'open' : 'close',
         isMinimize: null,
         appIndex: 100,
-        iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight]
+        iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight],
     },
     {
         id: 5,
@@ -91,54 +92,54 @@ const APPS_STATE = [
         isOpen: isMobile ? 'open' : 'close',
         isMinimize: null,
         appIndex: 100,
-        iconLocation: [ICON_LOCATION.notificationsWindow]
-    }
+        iconLocation: [ICON_LOCATION.notificationsWindow],
+    },
 ];
 
 const folderReducer = (state, action) => {
     switch (action.type) {
         case FOLDER_ACTIONS.open:
             const selectedOpenApp = state.apps.find(
-                item => item.id === action.payload
+                (item) => item.id === action.payload
             );
 
             if (selectedOpenApp.isOpen === 'close') {
                 return {
                     ...state,
-                    apps: state.apps.map(item =>
+                    apps: state.apps.map((item) =>
                         item.id === action.payload
                             ? { ...item, isOpen: 'open', appIndex: 104 }
                             : { ...item, appIndex: 100 }
                     ),
                     openApps: [
                         ...state.openApps,
-                        { ...selectedOpenApp, openSince: new Date().getTime() }
-                    ]
+                        { ...selectedOpenApp, openSince: new Date().getTime() },
+                    ],
                 };
             } else {
                 return state;
             }
         case FOLDER_ACTIONS.close:
             const selectedCloseApp = state.apps.find(
-                item => item.id === action.payload
+                (item) => item.id === action.payload
             );
 
             if (selectedCloseApp.isOpen === 'open') {
                 return {
                     ...state,
-                    apps: state.apps.map(item =>
+                    apps: state.apps.map((item) =>
                         item.id === action.payload
                             ? {
                                   ...item,
                                   isOpen: 'close',
                                   isMinimize: null,
-                                  appIndex: 100
+                                  appIndex: 100,
                               }
                             : item
                     ),
                     openApps: state.openApps.filter(
-                        item => item.id !== action.payload
-                    )
+                        (item) => item.id !== action.payload
+                    ),
                 };
             } else {
                 return state;
@@ -146,17 +147,17 @@ const folderReducer = (state, action) => {
 
         case FOLDER_ACTIONS.minimizeUp:
             const selectedMinimizeUp = state.apps.find(
-                item => item.id === action.payload
+                (item) => item.id === action.payload
             );
 
             if (selectedMinimizeUp.isMinimize === true) {
                 return {
                     ...state,
-                    apps: state.apps.map(item =>
+                    apps: state.apps.map((item) =>
                         item.id === action.payload
                             ? { ...item, isMinimize: false }
                             : item
-                    )
+                    ),
                 };
             } else {
                 return state;
@@ -164,17 +165,17 @@ const folderReducer = (state, action) => {
 
         case FOLDER_ACTIONS.minimizeDown:
             const selectedMinimizeDown = state.apps.find(
-                item => item.id === action.payload
+                (item) => item.id === action.payload
             );
 
             if (selectedMinimizeDown.isMinimize !== true) {
                 return {
                     ...state,
-                    apps: state.apps.map(item =>
+                    apps: state.apps.map((item) =>
                         item.id === action.payload
                             ? { ...item, isMinimize: true }
                             : item
-                    )
+                    ),
                 };
             } else {
                 return state;
@@ -182,17 +183,17 @@ const folderReducer = (state, action) => {
 
         case FOLDER_ACTIONS.active:
             const selectedActiveApp = state.apps.find(
-                item => item.id === action.payload
+                (item) => item.id === action.payload
             );
 
             if (selectedActiveApp.appIndex !== 104) {
                 return {
                     ...state,
-                    apps: state.apps.map(item =>
+                    apps: state.apps.map((item) =>
                         item.id === action.payload
                             ? { ...item, appIndex: 104 }
                             : { ...item, appIndex: 100 }
-                    )
+                    ),
                 };
             } else {
                 return state;
@@ -202,45 +203,46 @@ const folderReducer = (state, action) => {
     }
 };
 
-export const FolderContext = createContext();
-export const FolderProvider = props => {
+const FolderContext = createContext();
+const DispatchFolderContext = createContext();
+export const FolderProvider = (props) => {
     const [folderState, folderDispatch] = useReducer(folderReducer, {
         apps: APPS_STATE,
-        openApps: []
+        openApps: [],
     });
 
-    const openFolder = appId => {
+    const openFolder = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.open,
-            payload: appId
+            payload: appId,
         });
     };
 
-    const closeFolder = appId => {
+    const closeFolder = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.close,
-            payload: appId
+            payload: appId,
         });
     };
 
-    const activeFolder = appId => {
+    const activeFolder = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.active,
-            payload: appId
+            payload: appId,
         });
     };
 
-    const minimizeUp = appId => {
+    const minimizeUp = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.minimizeUp,
-            payload: appId
+            payload: appId,
         });
     };
 
-    const minimizeDown = appId => {
+    const minimizeDown = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.minimizeDown,
-            payload: appId
+            payload: appId,
         });
     };
 
@@ -262,14 +264,27 @@ export const FolderProvider = props => {
             value={{
                 folderState,
                 sortByAppName,
-                openFolder,
-                closeFolder,
-                activeFolder,
-                minimizeUp,
-                minimizeDown
             }}
         >
-            {props.children}
+            <DispatchFolderContext.Provider
+                value={{
+                    openFolder,
+                    closeFolder,
+                    activeFolder,
+                    minimizeUp,
+                    minimizeDown,
+                }}
+            >
+                {props.children}
+            </DispatchFolderContext.Provider>
         </FolderContext.Provider>
     );
+};
+
+export const useFolderContext = () => {
+    return useContext(FolderContext);
+};
+
+export const useDispatchFolderContext = () => {
+    return useContext(DispatchFolderContext);
 };
