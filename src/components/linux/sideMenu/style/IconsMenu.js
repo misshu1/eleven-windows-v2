@@ -2,40 +2,43 @@ import styled, { css, keyframes } from 'styled-components';
 
 const expand = keyframes`
 0% {
-    visibility: visible;
+    opacity: 1;
     transform: scale3d(1, 0, 1)
 }
 100% {
-    visibility: visible;
+    opacity: 1;
     transform: scale3d(1, 1, 1);
 }
 `;
 
 const shrink = keyframes`
 0% {
-    visibility: visible;
+    opacity: 1;
     transform: scale3d(1, 1, 1);
 }
 99% {
-    visibility: visible;
+    opacity: 1;
 }
 100% {
-    visibility: hidden;
+    opacity: 0;
     transform: scale3d(1, 0, 1)
 }
 `;
 
-export const ExpandedMenuIcons = styled.div`
+export const IconsMenu = styled.div`
     position: absolute;
-    visibility: hidden;
+    opacity: 0;
     z-index: 150;
     top: 0;
     left: 0;
     height: 100%;
     width: 3.5rem;
     background: ${(props) => props.theme.background};
-    border-top-right-radius: 2rem;
-    border-bottom-right-radius: 2rem;
+    border-top-right-radius: 2em;
+    border-bottom-right-radius: 2em;
+    box-shadow: 2px -2px 4px -1px rgba(0,0,0,0.2), 
+    4px -4px 5px 0px rgba(0,0,0,0.14), 
+    1px -1px 10px 0px rgba(0,0,0,0.12);
 
     ${(props) =>
         props.isMenuOpen === null &&
@@ -53,6 +56,8 @@ export const ExpandedMenuIcons = styled.div`
     ${(props) =>
         props.isMenuOpen === false &&
         css`
-            animation: ${shrink} 0.3s ease-out 1 forwards;
+            opacity: 1;
+            animation: ${shrink} 0.3s ease-in 1 forwards;
+            animation-delay: 0.25s;
         `}
 `;

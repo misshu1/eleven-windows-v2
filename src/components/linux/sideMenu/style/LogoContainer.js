@@ -25,7 +25,7 @@ const moveRight = keyframes`
 }
 `;
 
-export const MenuIcon = styled.div`
+export const LogoContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,6 +48,6 @@ export const MenuIcon = styled.div`
         css`
             opacity: 0;
             animation: ${moveRight} 0.1s ease-out 1 forwards;
-            animation-delay: 0.25s;
+            animation-delay: 0.5s;
         `}
 `;

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
+import BorderBG from '../../../assets/images/bg/BorderBG';
 import LogoIcon from '../../../assets/images/icons/LogoIcon';
-import { BorderLogo, ExpandedMenuIcons, Logo, MenuIcon } from './style';
+import { BorderLogo, ExpandedMenu, IconsMenu, Logo, LogoContainer } from './style';
 
 const SideMenuApp = (props) => {
     const [isMenuOpen, setIsMenuOpen] = useState(null);
@@ -16,7 +17,10 @@ const SideMenuApp = (props) => {
 
     return (
         <>
-            <MenuIcon isMenuOpen={isMenuOpen} onClick={handleExpandIconMenu}>
+            <LogoContainer
+                isMenuOpen={isMenuOpen}
+                onClick={handleExpandIconMenu}
+            >
                 <BorderLogo>
                     <span />
                     <span />
@@ -26,11 +30,17 @@ const SideMenuApp = (props) => {
                         <LogoIcon />
                     </Logo>
                 </BorderLogo>
-            </MenuIcon>
+            </LogoContainer>
             <button onClick={() => setIsMenuOpen(false)}>
+                Close Side Menu Close Side Menu Close Side Menu Close Side Menu
                 Close Side Menu
             </button>
-            <ExpandedMenuIcons isMenuOpen={isMenuOpen}></ExpandedMenuIcons>
+            <IconsMenu isMenuOpen={isMenuOpen}>
+                <p style={{ color: '#fff' }}>ceva</p>
+            </IconsMenu>
+            <ExpandedMenu isMenuOpen={isMenuOpen}>
+                <BorderBG></BorderBG>
+            </ExpandedMenu>
         </>
     );
 };

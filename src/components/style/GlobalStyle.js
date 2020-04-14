@@ -22,6 +22,7 @@ body {
     padding: 0;
     height: 100%;
     width: 100%;
+    background: ${(props) => props.theme.desktopBg[props.background]};
 }
 
 #desktop {
@@ -38,7 +39,6 @@ body {
     position: relative;
     width: 100%;
     overflow: hidden;
-    background: ${(props) => props.theme.desktopBg[props.background]};
 }
 
 #taskbar {

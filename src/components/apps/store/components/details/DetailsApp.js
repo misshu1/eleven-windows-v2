@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
-import { DetailsContainer } from './style';
-import { ThemeContext } from '../../../../../contexts/themeContext';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import React, { useContext } from 'react';
+
 import CartIcon from '../../../../../assets/images/icons/CartIcon';
-import Button from '@material-ui/core/Button';
+import { ThemeContext } from '../../../../../contexts/themeContext';
+import { DetailsContainer } from './style';
 
 const useStyles = makeStyles({
-    cartButton: theme => ({
+    cartButton: (theme) => ({
         position: 'relative',
         overflow: 'hidden',
         paddingLeft: '3rem',
@@ -16,18 +17,18 @@ const useStyles = makeStyles({
         color: theme.material.primary.contrast.darker,
 
         '&:hover': {
-            backgroundColor: theme.material.primary.darker
-        }
+            backgroundColor: theme.material.primary.darker,
+        },
     }),
-    ratingColor: theme => ({
-        color: theme.ratingColorEmpty
-    })
+    ratingColor: (theme) => ({
+        color: theme.ratingColorEmpty,
+    }),
 });
 
-const DetailsApp = props => {
+const DetailsApp = (props) => {
     const { theme } = useContext(ThemeContext);
     const classes = useStyles(theme);
-    const { title, image, content, price, discount, id } = props;
+    const { title, image, content, price, discount } = props;
 
     return (
         <DetailsContainer>

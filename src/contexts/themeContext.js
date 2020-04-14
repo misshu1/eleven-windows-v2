@@ -29,8 +29,6 @@ export const ThemeProvider = (props) => {
     const [background, setBackground] = useState(createBackgroundObject());
     const [currentOS, setCurrentOS] = useState(OS_THEME.linux);
 
-    const setDefaultOs = () => {};
-
     const getSelectedBackground = () => {
         return background.find((item) => item.isSelected === true);
     };

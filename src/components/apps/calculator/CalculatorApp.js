@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import FolderApp from '../../folder/FolderApp';
-import { Container, ButtonsContainer, NumberPad, Operators } from './style';
+import { ButtonsContainer, Container, NumberPad, Operators } from './style';
 
 const CalculatorApp = () => {
     return (

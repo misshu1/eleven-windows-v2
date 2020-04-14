@@ -1,9 +1,9 @@
-import React, { useCallback, useState, useContext, useEffect } from 'react';
-import { Container } from './style';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+
+import { FirebaseContext } from '../../../contexts/firebaseContext';
 import FolderApp from '../../folder/FolderApp';
 import ProductApp from './ProductApp';
-import uuid from 'uuid';
-import { FirebaseContext } from '../../../contexts/firebaseContext';
+import { Container } from './style';
 
 // const store = [
 //     {
@@ -104,15 +104,15 @@ const StoreApp = () => {
         getProducts();
     }, [getProducts]);
 
-    const handleSnapshot = snapshot => {
-        const dbProducts = snapshot.docs.map(doc => {
+    const handleSnapshot = (snapshot) => {
+        const dbProducts = snapshot.docs.map((doc) => {
             return { id: doc.id, ...doc.data() };
         });
         setProducts(dbProducts);
     };
 
     const renderProducts = useCallback(() => {
-        return products.map(product => (
+        return products.map((product) => (
             <ProductApp key={product.id} product={product} />
         ));
     }, [products]);
