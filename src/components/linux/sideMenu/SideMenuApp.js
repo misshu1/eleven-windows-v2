@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 
 import BorderBG from '../../../assets/images/bg/BorderBG';
@@ -31,12 +32,14 @@ const SideMenuApp = (props) => {
                     </Logo>
                 </BorderLogo>
             </LogoContainer>
-            <button onClick={() => setIsMenuOpen(false)}>
-                Close Side Menu Close Side Menu Close Side Menu Close Side Menu
-                Close Side Menu
-            </button>
             <IconsMenu isMenuOpen={isMenuOpen}>
-                <p style={{ color: '#fff' }}>ceva</p>
+                <Button
+                    variant='contained'
+                    color='primary'
+                    onClick={() => setIsMenuOpen(false)}
+                >
+                    X
+                </Button>
             </IconsMenu>
             <ExpandedMenu isMenuOpen={isMenuOpen}>
                 <BorderBG></BorderBG>

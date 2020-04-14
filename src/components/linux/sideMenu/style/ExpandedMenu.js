@@ -45,6 +45,9 @@ export const ExpandedMenu = styled.div`
     left: 0;
     z-index: 149;
     opacity: 0;
+    width: 100%;
+    height: 100%;
+    
     svg {
         opacity: 0;
         display: none;
