@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const SpinnerContainer = styled.div`
     color: #d6d8de;
@@ -12,7 +12,7 @@ const SpinnerContainer = styled.div`
     transform: translate(-50%, -50%);
 `;
 
-const SpinnerApp = props => {
+const SpinnerApp = (props) => {
     const { delay } = props;
     const [ready, setReady] = useState(false);
 
@@ -41,5 +41,5 @@ const SpinnerApp = props => {
 export default SpinnerApp;
 
 SpinnerApp.propTypes = {
-    delay: PropTypes.number
+    delay: PropTypes.number,
 };

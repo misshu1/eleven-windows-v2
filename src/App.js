@@ -21,7 +21,7 @@ import WorkspaceApp from './components/workspace/WorkspaceApp';
 import { FirebaseProvider } from './contexts/firebaseContext';
 import { GlobalAppContext } from './contexts/globalContext';
 import { NotificationProvider } from './contexts/notificationContext';
-import { ThemeContext } from './contexts/themeContext';
+import { OS_THEME, ThemeContext } from './contexts/themeContext';
 import { ProvideAuth } from './hooks/useAuth';
 
 library.add(
@@ -42,10 +42,11 @@ const App = () => {
         theme,
         getSelectedBackground,
         checkLocalStorageTheme,
-        checkLocalStorageBackground
+        checkLocalStorageBackground,
+        currentOS,
     } = useContext(ThemeContext);
     const {
-        globalApp: { size }
+        globalApp: { size },
     } = useContext(GlobalAppContext);
     const desktopBg = getSelectedBackground().bg;
 
@@ -59,7 +60,12 @@ const App = () => {
         <FirebaseProvider>
             <ProvideAuth>
                 <ThemeProvider theme={theme}>
-                    <GlobalStyle size={size} background={desktopBg} />
+                    <GlobalStyle
+                        size={size}
+                        background={desktopBg}
+                        linux={OS_THEME.linux === currentOS}
+                        windows={OS_THEME.windows === currentOS}
+                    />
 
                     <NotificationProvider>
                         <Switch>

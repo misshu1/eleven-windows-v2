@@ -8,26 +8,25 @@ export const AppIcon = styled.div`
     height: 100%;
     width: 3.5rem;
     line-height: 3.5rem;
-    margin: 0 1px;
     transition: all 0.2s;
 
     &&::after {
         content: '';
-        background: ${props => props.theme.accentBg};
+        background: ${(props) => props.theme.accentBg};
         position: absolute;
         bottom: 0;
         left: 15%;
-        height: 2px;
+        height: 3px;
         width: 70%;
         transition: all 0.2s;
         border-radius: 1rem;
     }
 
-    ${props =>
+    ${(props) =>
         props.appIndex === 104 &&
         props.minimize !== true &&
         css`
-            background: ${props => props.theme.iconBg};
+            background: ${(props) => props.theme.iconBg};
             &&::after {
                 left: 0;
                 width: 100%;
@@ -47,7 +46,7 @@ export const AppIcon = styled.div`
     }
 
     &&:hover {
-        background: ${props => props.theme.iconBgHover};
+        background: ${(props) => props.theme.iconBgHover};
         transition: all 0.2s;
     }
 `;

@@ -1,43 +1,52 @@
-import React, { useState, createContext, useCallback } from 'react';
+import React, { createContext, useCallback, useState } from 'react';
+
 import DarkTheme from '../components/theme/DarkTheme';
-import LightTheme from '../components/theme/LightTheme';
 import DesktopBackground from '../components/theme/DesktopBackground';
+import LightTheme from '../components/theme/LightTheme';
 
 const createBackgroundObject = () => {
     const obj = Object.keys(DesktopBackground).map((item, index) => ({
         name: `Backgorund ${index + 1}`,
         bg: item,
-        isSelected: false
+        isSelected: false,
     }));
 
-    const setDefault = obj.map(item =>
+    const setDefault = obj.map((item) =>
         item.bg === 'bg11' ? { ...item, isSelected: true } : item
     );
 
     return setDefault;
 };
 
+export const OS_THEME = {
+    windows: 'WINDOWS',
+    linux: 'LINUX',
+};
+
 export const ThemeContext = createContext();
-export const ThemeProvider = props => {
+export const ThemeProvider = (props) => {
     const [theme, setTheme] = useState(DarkTheme);
     const [background, setBackground] = useState(createBackgroundObject());
+    const [currentOS, setCurrentOS] = useState(OS_THEME.linux);
+
+    const setDefaultOs = () => {};
 
     const getSelectedBackground = () => {
-        return background.find(item => item.isSelected === true);
+        return background.find((item) => item.isSelected === true);
     };
 
     const changeBackground = useCallback(
-        selected => {
+        (selected) => {
             localStorage.setItem('background', selected);
 
-            const filterBg = background.map(item =>
+            const filterBg = background.map((item) =>
                 item.bg === selected
                     ? { ...item, isSelected: true }
                     : { ...item, isSelected: false }
             );
 
             const checkBackground = background.find(
-                item => item.bg === selected
+                (item) => item.bg === selected
             );
 
             if (!checkBackground.isSelected) {
@@ -70,7 +79,7 @@ export const ThemeProvider = props => {
         }
     }, []);
 
-    const changeTheme = useCallback(themeName => {
+    const changeTheme = useCallback((themeName) => {
         localStorage.setItem('theme', themeName);
         setTheme(() => {
             if (themeName === 'dark') {
@@ -90,7 +99,9 @@ export const ThemeProvider = props => {
                 changeBackground,
                 getSelectedBackground,
                 checkLocalStorageTheme,
-                checkLocalStorageBackground
+                checkLocalStorageBackground,
+                currentOS,
+                setCurrentOS,
             }}
         >
             {props.children}
