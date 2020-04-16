@@ -6,11 +6,11 @@ const AppsPreview = lazy(() =>
     import('../sideMenu/components/apps/AppsPreview')
 );
 
-const MENU_ACTIONS = {
-    open: 'OPEN',
-    close: 'CLOSE',
-    active: 'ACTIVE',
-};
+// const MENU_ACTIONS = {
+//     open: 'OPEN',
+//     close: 'CLOSE',
+//     active: 'ACTIVE',
+// };
 
 const SIDE_MENU_STATE = [
     {
@@ -27,10 +27,10 @@ const sideMenuReducer = (state, action) => {};
 
 const SideMenuContext = createContext();
 export const SideMenuProvider = (props) => {
-    const [sideMenuState, sideMenuDispatch] = useReducer(
-        sideMenuReducer,
-        SIDE_MENU_STATE
-    );
+    const [
+        sideMenuState,
+        //  sideMenuDispatch
+    ] = useReducer(sideMenuReducer, SIDE_MENU_STATE);
 
     return (
         <SideMenuContext.Provider value={{ sideMenuState }}>

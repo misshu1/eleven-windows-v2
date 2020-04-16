@@ -133,7 +133,9 @@ const SideMenuApp = (props) => {
                                     }}
                                 >
                                     {sideMenuState.map((item) => (
-                                        <Icon>{item.widgetIcon}</Icon>
+                                        <Icon key={item.id}>
+                                            {item.widgetIcon}
+                                        </Icon>
                                     ))}
                                 </Scrollbar>
                             </IconsMenu>
@@ -151,7 +153,9 @@ const SideMenuApp = (props) => {
                                     height: '100%',
                                 }}
                             >
-                                {sideMenuState.map((item) => item.component)}
+                                {sideMenuState.map((item) => (
+                                    <div key={item.id}>item.component</div>
+                                ))}
                             </Scrollbar>
                         </ExpandedMenu>
                         <SvgContainer
