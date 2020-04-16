@@ -6,6 +6,8 @@ import BorderBG from '../../../assets/images/bg/BorderBG';
 import LogoIcon from '../../../assets/images/icons/LogoIcon';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { useSideMenuContext } from '../contexts/sideMenuContext';
+import Button from '@material-ui/core/Button';
+
 import {
     BorderLogo,
     ExpandedMenu,
@@ -15,25 +17,50 @@ import {
     Logo,
     LogoContainer,
     MenuContainer,
-    SvgContainer
+    SvgContainer,
 } from './style';
 
+const logoAnimations = {
+    open: {
+        x: 0,
+        y: '-50%',
+        opacity: [1, 1, 0],
+
+        transition: {
+            duration: 0.1,
+            ease: 'easeOut',
+            times: [0, 0.9, 1],
+        },
+    },
+    close: {
+        x: '1rem',
+        y: '-50%',
+        opacity: 1,
+        transition: {
+            delay: 0.45,
+            duration: 0.1,
+            ease: 'easeOut',
+        },
+    },
+};
+
 const iconsMenuAnimations = {
-    visible: {
+    open: {
         scaleY: 1,
         opacity: 1,
 
         transition: {
-            delay: 0.05,
+            delay: 0.1,
             duration: 0.3,
             ease: 'easeOut',
         },
     },
-    hidden: {
+    close: {
         scaleY: 0,
         opacity: [1, 1, 0],
         transition: {
             delay: 0.25,
+            duration: 0.25,
             ease: 'easeIn',
             times: [0, 0.9, 1],
         },
@@ -41,7 +68,7 @@ const iconsMenuAnimations = {
 };
 
 const expandedMenuAnimations = {
-    visible: {
+    open: {
         x: 0,
         opacity: 1,
 
@@ -51,10 +78,11 @@ const expandedMenuAnimations = {
             ease: 'easeOut',
         },
     },
-    hidden: {
+    close: {
         x: 'calc(-100% - 3.5rem)',
         opacity: [1, 1, 0],
         transition: {
+            duration: 0.3,
             ease: 'easeIn',
             times: [0, 0.9, 1],
         },
@@ -62,21 +90,24 @@ const expandedMenuAnimations = {
 };
 
 const SVGMenuAnimations = {
-    visible: {
-        x: 0,
+    initial: {
+        y: '-100%',
+        opacity: 0,
+    },
+    open: {
+        y: 0,
         opacity: 1,
 
         transition: {
-            delay: 0.3,
-            duration: 0.3,
+            delay: 0.55,
+            duration: 0.2,
         },
     },
-    hidden: {
-        x: 'calc(-100% - 23.5rem)',
-        opacity: [1, 0, 0],
+    close: {
+        x: '-6rem',
+        opacity: 0,
         transition: {
-            times: [0, 0.3, 1],
-            duration: 0.6,
+            duration: 0.1,
         },
     },
 };
@@ -102,8 +133,9 @@ const SideMenuApp = (props) => {
     return (
         <>
             <LogoContainer
-                isMenuOpen={isMenuOpen}
                 onClick={handleExpandIconMenu}
+                animate={isMenuOpen ? 'open' : 'close'}
+                variants={logoAnimations}
             >
                 <BorderLogo>
                     <span />
@@ -120,9 +152,9 @@ const SideMenuApp = (props) => {
                     <MenuContainer ref={menuRef}>
                         <IconsMenuContainer
                             key='iconMenu'
-                            initial='hidden'
-                            animate='visible'
-                            exit='hidden'
+                            initial='close'
+                            animate='open'
+                            exit='close'
                             variants={iconsMenuAnimations}
                         >
                             <IconsMenu>
@@ -132,6 +164,13 @@ const SideMenuApp = (props) => {
                                         height: '100%',
                                     }}
                                 >
+                                    <Button
+                                        variant='contained'
+                                        color='primary'
+                                        onClick={() => setIsMenuOpen(false)}
+                                    >
+                                        X
+                                    </Button>
                                     {sideMenuState.map((item) => (
                                         <Icon key={item.id}>
                                             {item.widgetIcon}
@@ -142,9 +181,9 @@ const SideMenuApp = (props) => {
                         </IconsMenuContainer>
                         <ExpandedMenu
                             key='expandedMenu'
-                            initial='hidden'
-                            animate='visible'
-                            exit='hidden'
+                            initial='close'
+                            animate='open'
+                            exit='close'
                             variants={expandedMenuAnimations}
                         >
                             <Scrollbar
@@ -160,9 +199,9 @@ const SideMenuApp = (props) => {
                         </ExpandedMenu>
                         <SvgContainer
                             key='svg'
-                            initial='hidden'
-                            animate='visible'
-                            exit='hidden'
+                            initial='initial'
+                            animate='open'
+                            exit='close'
                             variants={SVGMenuAnimations}
                         >
                             <BorderBG></BorderBG>
