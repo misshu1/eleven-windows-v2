@@ -3,3 +3,7 @@ export { IconsMenu } from './IconsMenu';
 export { BorderLogo } from './BorderLogo';
 export { Logo } from './Logo';
 export { ExpandedMenu } from './ExpandedMenu';
+export { Icon } from './Icon';
+export { MenuContainer } from './MenuContainer';
+export { SvgContainer } from './SvgContainer';
+export { IconsMenuContainer } from './IconsMenuContainer';

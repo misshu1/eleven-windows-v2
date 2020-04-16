@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useRef } from 'react';
 
 import { ICON_LOCATION, useFolderContext } from '../../contexts/folderContext';
 import { OS_THEME, ThemeContext } from '../../contexts/themeContext';
+import { SideMenuProvider } from '../linux/contexts/sideMenuContext';
 import SideMenuApp from '../linux/sideMenu/SideMenuApp';
 import IconContainer from './DesktopIconApp';
 import { Desktop } from './style';
@@ -39,7 +40,11 @@ const DesktopApp = () => {
             {currentOS === OS_THEME.windows && (
                 <Desktop>{desktopIcons()}</Desktop>
             )}
-            {currentOS === OS_THEME.linux && <SideMenuApp />}
+            {currentOS === OS_THEME.linux && (
+                <SideMenuProvider>
+                    <SideMenuApp />
+                </SideMenuProvider>
+            )}
         </>
     );
 };

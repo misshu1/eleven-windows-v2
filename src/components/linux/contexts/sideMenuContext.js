@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, lazy, useContext, useReducer } from 'react';
+
+import FolderIcon from '../../../assets/images/icons/FolderIcon';
+
+const AppsPreview = lazy(() =>
+    import('../sideMenu/components/apps/AppsPreview')
+);
 
 const MENU_ACTIONS = {
     open: 'OPEN',
@@ -6,28 +12,28 @@ const MENU_ACTIONS = {
     active: 'ACTIVE',
 };
 
-SIDE_MENU_STATE = {
-    icons: [
-        {
-            id: 1,
-            name: 'Apps',
-            widgetIcon: null, // icon menu
-            component: null, // this is for expanded view content
-            isActive: false,
-        },
-    ],
-    isMenuOpen: false,
-};
+const SIDE_MENU_STATE = [
+    {
+        id: 1,
+        name: 'Apps',
+        widgetIcon: <FolderIcon />,
+        fontIcon: null,
+        component: <AppsPreview />, // this is for expanded view content
+        isActive: false,
+    },
+];
+
+const sideMenuReducer = (state, action) => {};
 
 const SideMenuContext = createContext();
-const SideMenuProvider = (props) => {
-    const [folderState, folderDispatch] = useReducer(
-        reducerName,
+export const SideMenuProvider = (props) => {
+    const [sideMenuState, sideMenuDispatch] = useReducer(
+        sideMenuReducer,
         SIDE_MENU_STATE
     );
 
     return (
-        <SideMenuContext.Provider value={{}}>
+        <SideMenuContext.Provider value={{ sideMenuState }}>
             {props.children}
         </SideMenuContext.Provider>
     );

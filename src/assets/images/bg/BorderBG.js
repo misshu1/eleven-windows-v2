@@ -25,17 +25,6 @@ const BorderBG = (props) => {
                     stopColor={theme.accentBg}
                     stopOpacity={0.194}
                 />
-
-                {/* <stop offset={0.007} stopColor='#fcf7f9' stopOpacity={0.007} />
-                <stop offset={0.047} stopColor='#eec9d5' stopOpacity={0.047} />
-                <stop offset={0.092} stopColor='#e09eb3' stopOpacity={0.092} />
-                <stop offset={0.141} stopColor='#d47895' stopOpacity={0.141} />
-                <stop offset={0.194} stopColor='#ca587c' stopOpacity={0.194} />
-                <stop offset={0.253} stopColor='#c23c67' stopOpacity={0.253} />
-                <stop offset={0.32} stopColor='#bb2655' stopOpacity={0.32} />
-                <stop offset={0.397} stopColor='#b51548' stopOpacity={0.397} />
-                <stop offset={0.493} stopColor='#b20a3f' stopOpacity={0.493} />
-                <stop offset={0.627} stopColor='#b00339' stopOpacity={0.627} /> */}
                 <stop offset={1} stopColor={theme.accentBg} />
             </linearGradient>
             <path

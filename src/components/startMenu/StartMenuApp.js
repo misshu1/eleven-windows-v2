@@ -1,15 +1,16 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
+
 import { TaskbarContext } from '../../contexts/taskbarContext';
-import { StartMenu, LoginContainer } from './style';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import RightMenuApp from './rightMenu/RightMenuApp';
-import LeftMenuApp from './leftMenu/LeftMenuApp';
 import { useAuth } from '../../hooks/useAuth';
+import LeftMenuApp from './leftMenu/LeftMenuApp';
+import RightMenuApp from './rightMenu/RightMenuApp';
+import { LoginContainer, StartMenu } from './style';
 
 const StartMenuApp = () => {
     const {
-        taskbar: { startMenuOpen }
+        taskbar: { startMenuOpen },
     } = useContext(TaskbarContext);
     const auth = useAuth();
 
