@@ -2,10 +2,10 @@ import React, { useCallback, useContext, useRef } from 'react';
 
 import { ICON_LOCATION, useFolderContext } from '../../contexts/folderContext';
 import { OS_THEME, ThemeContext } from '../../contexts/themeContext';
-import { SideMenuProvider } from '../linux/contexts/sideMenuContext';
-import SideMenuApp from '../linux/sideMenu/SideMenuApp';
-import IconContainer from './DesktopIconApp';
+import DesktopIconApp from './DesktopIconApp';
 import { Desktop } from './style';
+import LinuxDesktopApp from '../linux/desktop/LinuxDesktopApp';
+import { SideMenuProvider } from '../linux/contexts/sideMenuContext';
 
 const DesktopApp = () => {
     const { folderState, sortByAppName } = useFolderContext();
@@ -17,7 +17,7 @@ const DesktopApp = () => {
             return app.iconLocation.map(
                 (location) =>
                     location === ICON_LOCATION.desktop && (
-                        <IconContainer
+                        <DesktopIconApp
                             key={app.id}
                             appId={app.id}
                             iconName={app.appName}
@@ -42,7 +42,7 @@ const DesktopApp = () => {
             )}
             {currentOS === OS_THEME.linux && (
                 <SideMenuProvider>
-                    <SideMenuApp />
+                    <LinuxDesktopApp />
                 </SideMenuProvider>
             )}
         </>

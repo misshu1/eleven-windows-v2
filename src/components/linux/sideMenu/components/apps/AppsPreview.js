@@ -1,19 +1,50 @@
-import React from 'react';
+import React, { useRef, useCallback, useMemo } from 'react';
+import Typography from '@material-ui/core/Typography';
 
 import { Container } from './style';
+import {
+    useFolderContext,
+    ICON_LOCATION,
+} from '../../../../../contexts/folderContext';
+import MenuAppIcon from './MenuAppIcon';
+import { useSideMenuContext } from '../../../contexts/sideMenuContext';
 
 const AppsPreview = () => {
+    const { folderState, sortByAppName } = useFolderContext();
+    const { sideMenuState } = useSideMenuContext();
+    const apps = useRef(folderState.apps.sort(sortByAppName));
+
+    const menuIcons = useCallback(() => {
+        return apps.current.map((app) => {
+            return app.iconLocation.map(
+                (location) =>
+                    location === ICON_LOCATION.linuxMenu && (
+                        <MenuAppIcon
+                            key={app.id}
+                            appId={app.id}
+                            iconName={app.appName}
+                            link={app.link}
+                            widgetIcon={app.widgetIcon}
+                        />
+                    )
+            );
+        });
+    }, []);
+
+    const menuName = useMemo(() => {
+        return sideMenuState.map((app) => app.id === 1 && app.name);
+    }, [sideMenuState]);
+
     return (
-        <Container>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Eligendi officiis dolor culpa placeat dignissimos obcaecati
-                harum, eveniet id necessitatibus vel, maxime quod impedit vero!
-                Eos neque delectus perferendis quae, ipsam officia accusamus
-                nisi reprehenderit reiciendis odio eveniet velit quis possimus.
-                Commodi iusto nostrum itaque ipsa. Voluptatibus debitis quis
-            </p>
-        </Container>
+        <>
+            <Container>
+                {' '}
+                <Typography variant='h5' component='h2' className='title'>
+                    {menuName}
+                </Typography>
+                {menuIcons()}
+            </Container>
+        </>
     );
 };
 

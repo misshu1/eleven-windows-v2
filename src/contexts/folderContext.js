@@ -32,6 +32,7 @@ export const ICON_LOCATION = {
     startMenuLeft: 'START_MENU_LEFT',
     startMenuRight: 'START_MENU_RIGHT',
     notificationsWindow: 'NOTIFICATIONS_WINDOW',
+    linuxMenu: 'LINUX_MENU',
 };
 
 const APPS_STATE = [
@@ -59,7 +60,11 @@ const APPS_STATE = [
         isOpen: isMobile ? 'open' : 'close',
         isMinimize: null,
         appIndex: 100,
-        iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight],
+        iconLocation: [
+            ICON_LOCATION.desktop,
+            ICON_LOCATION.startMenuRight,
+            ICON_LOCATION.linuxMenu,
+        ],
     },
     {
         id: 3,
@@ -70,7 +75,7 @@ const APPS_STATE = [
         isOpen: isMobile ? 'open' : 'close',
         isMinimize: null,
         appIndex: 100,
-        iconLocation: [ICON_LOCATION.startMenuRight],
+        iconLocation: [ICON_LOCATION.startMenuRight, ICON_LOCATION.linuxMenu],
     },
     {
         id: 4,
@@ -81,7 +86,11 @@ const APPS_STATE = [
         isOpen: isMobile ? 'open' : 'close',
         isMinimize: null,
         appIndex: 100,
-        iconLocation: [ICON_LOCATION.desktop, ICON_LOCATION.startMenuRight],
+        iconLocation: [
+            ICON_LOCATION.desktop,
+            ICON_LOCATION.startMenuRight,
+            ICON_LOCATION.linuxMenu,
+        ],
     },
     {
         id: 5,

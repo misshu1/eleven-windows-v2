@@ -9,7 +9,8 @@ import {
     faSpinner,
     faTimes,
     faUserCircle,
-    faWindowMinimize
+    faWindowMinimize,
+    faTh,
 } from '@fortawesome/free-solid-svg-icons';
 import React, { useContext, useLayoutEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -34,7 +35,8 @@ library.add(
     faSpinner,
     faExclamationCircle,
     faEllipsisV,
-    faLayerGroup
+    faLayerGroup,
+    faTh
 );
 
 const App = () => {

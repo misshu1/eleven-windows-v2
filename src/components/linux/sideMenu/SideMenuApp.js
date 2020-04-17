@@ -1,48 +1,24 @@
 import { AnimatePresence } from 'framer-motion';
-import React, { useRef, useState } from 'react';
+import React, { useRef, Suspense } from 'react';
 import Scrollbar from 'react-scrollbars-custom';
 
 import BorderBG from '../../../assets/images/bg/BorderBG';
-import LogoIcon from '../../../assets/images/icons/LogoIcon';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { useSideMenuContext } from '../contexts/sideMenuContext';
-import Button from '@material-ui/core/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import ReactDOM from 'react-dom';
 
 import {
-    BorderLogo,
     ExpandedMenu,
-    Icon,
     IconsMenu,
     IconsMenuContainer,
-    Logo,
-    LogoContainer,
     MenuContainer,
     SvgContainer,
+    Icon,
 } from './style';
-
-const logoAnimations = {
-    open: {
-        x: 0,
-        y: '-50%',
-        opacity: [1, 1, 0],
-
-        transition: {
-            duration: 0.1,
-            ease: 'easeOut',
-            times: [0, 0.9, 1],
-        },
-    },
-    close: {
-        x: '1rem',
-        y: '-50%',
-        opacity: 1,
-        transition: {
-            delay: 0.45,
-            duration: 0.1,
-            ease: 'easeOut',
-        },
-    },
-};
+import SpinnerApp from '../../style/SpinnerApp';
 
 const iconsMenuAnimations = {
     open: {
@@ -112,41 +88,35 @@ const SVGMenuAnimations = {
     },
 };
 
+const fadeAnimations = {
+    initial: {
+        opacity: 0,
+    },
+    open: {
+        opacity: 1,
+        transition: {
+            delay: 0.3,
+            duration: 0.2,
+            ease: 'easeOut',
+        },
+    },
+    close: {
+        opacity: 0,
+        transition: {
+            delay: 0.15,
+            duration: 0.15,
+            ease: 'easeOut',
+        },
+    },
+};
+
 const SideMenuApp = (props) => {
     const menuRef = useRef(null);
-    const [isMenuOpen, setIsMenuOpen] = useState(null);
-    const { sideMenuState } = useSideMenuContext();
+    const { sideMenuState, closeSideMenu, isMenuOpen } = useSideMenuContext();
+    useOnClickOutside(menuRef, () => closeSideMenu());
 
-    useOnClickOutside(
-        menuRef,
-        () => isMenuOpen === true && setIsMenuOpen(false)
-    );
-
-    const handleExpandIconMenu = () => {
-        if (isMenuOpen === null) {
-            setIsMenuOpen(true);
-        } else if (isMenuOpen !== null) {
-            setIsMenuOpen(!isMenuOpen);
-        }
-    };
-
-    return (
+    return ReactDOM.createPortal(
         <>
-            <LogoContainer
-                onClick={handleExpandIconMenu}
-                animate={isMenuOpen ? 'open' : 'close'}
-                variants={logoAnimations}
-            >
-                <BorderLogo>
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                    <Logo>
-                        <LogoIcon />
-                    </Logo>
-                </BorderLogo>
-            </LogoContainer>
             <AnimatePresence>
                 {isMenuOpen && (
                     <MenuContainer ref={menuRef}>
@@ -157,27 +127,41 @@ const SideMenuApp = (props) => {
                             exit='close'
                             variants={iconsMenuAnimations}
                         >
-                            <IconsMenu>
-                                <Scrollbar
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                    }}
+                            <div className='left-menu'>
+                                <IconButton
+                                    component='span'
+                                    onClick={closeSideMenu}
                                 >
-                                    <Button
-                                        variant='contained'
-                                        color='primary'
-                                        onClick={() => setIsMenuOpen(false)}
+                                    <FontAwesomeIcon
+                                        icon={['fas', 'times']}
+                                        style={{ color: 'red' }}
+                                    />
+                                </IconButton>
+                                <Scrollbar>
+                                    <IconsMenu
+                                        key='iconsMenu'
+                                        initial='initial'
+                                        animate='open'
+                                        exit='close'
+                                        variants={fadeAnimations}
                                     >
-                                        X
-                                    </Button>
-                                    {sideMenuState.map((item) => (
-                                        <Icon key={item.id}>
-                                            {item.widgetIcon}
-                                        </Icon>
-                                    ))}
+                                        {sideMenuState.map((app) => (
+                                            <Tooltip
+                                                title={app.name}
+                                                placement='top'
+                                                enterDelay={500}
+                                                key={app.id}
+                                            >
+                                                <Icon isActive={app.isActive}>
+                                                    <FontAwesomeIcon
+                                                        icon={app.fontIcon}
+                                                    />
+                                                </Icon>
+                                            </Tooltip>
+                                        ))}
+                                    </IconsMenu>
                                 </Scrollbar>
-                            </IconsMenu>
+                            </div>
                         </IconsMenuContainer>
                         <ExpandedMenu
                             key='expandedMenu'
@@ -186,14 +170,14 @@ const SideMenuApp = (props) => {
                             exit='close'
                             variants={expandedMenuAnimations}
                         >
-                            <Scrollbar
-                                style={{
-                                    width: '100%',
-                                    height: '100%',
-                                }}
-                            >
-                                {sideMenuState.map((item) => (
-                                    <div key={item.id}>item.component</div>
+                            <Scrollbar>
+                                {sideMenuState.map((app) => (
+                                    <Suspense
+                                        key={app.id}
+                                        fallback={<SpinnerApp delay={200} />}
+                                    >
+                                        {app.component}
+                                    </Suspense>
                                 ))}
                             </Scrollbar>
                         </ExpandedMenu>
@@ -209,7 +193,8 @@ const SideMenuApp = (props) => {
                     </MenuContainer>
                 )}
             </AnimatePresence>
-        </>
+        </>,
+        document.querySelector('#desktop')
     );
 };
 
