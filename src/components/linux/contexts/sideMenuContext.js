@@ -20,7 +20,6 @@ const SIDE_MENU_STATE = [
     {
         id: 1,
         name: 'Apps',
-        widgetIcon: null,
         fontIcon: ['fas', 'th'],
         component: <AppsPreview />, // this is for expanded view content
         isActive: true,

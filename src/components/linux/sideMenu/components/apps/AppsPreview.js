@@ -11,7 +11,7 @@ import { useSideMenuContext } from '../../../contexts/sideMenuContext';
 
 const AppsPreview = () => {
     const { folderState, sortByAppName } = useFolderContext();
-    const { sideMenuState } = useSideMenuContext();
+    const { sideMenuState, closeSideMenu } = useSideMenuContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 
     const menuIcons = useCallback(() => {
@@ -25,11 +25,12 @@ const AppsPreview = () => {
                             iconName={app.appName}
                             link={app.link}
                             widgetIcon={app.widgetIcon}
+                            closeSideMenu={closeSideMenu}
                         />
                     )
             );
         });
-    }, []);
+    }, [closeSideMenu]);
 
     const menuName = useMemo(() => {
         return sideMenuState.map((app) => app.id === 1 && app.name);

@@ -7,7 +7,7 @@ import { AppIcon } from './style';
 
 const MenuAppIcon = (props) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
-    const { link, appId, widgetIcon, iconName } = props;
+    const { link, appId, widgetIcon, iconName, closeSideMenu } = props;
     const {
         globalApp: { isMobile },
     } = useContext(GlobalAppContext);
@@ -23,6 +23,7 @@ const MenuAppIcon = (props) => {
         open.current();
         active.current();
         minimize.current();
+        closeSideMenu();
     };
 
     return isMobile ? (
@@ -47,4 +48,5 @@ MenuAppIcon.propTypes = {
     link: PropTypes.string.isRequired,
     widgetIcon: PropTypes.node.isRequired,
     iconName: PropTypes.node.isRequired,
+    closeSideMenu: PropTypes.func.isRequired,
 };
