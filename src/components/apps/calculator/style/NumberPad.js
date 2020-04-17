@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const NumberPad = styled.div`
     display: grid;
-    grid-template-rows: repeat(4, minmax(3rem, 1fr));
+    grid-template-rows: repeat(4, minmax(6rem, 1fr));
     grid-template-columns: repeat(3, 1fr);
 
     && button {
