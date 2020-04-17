@@ -55,33 +55,33 @@ export const AnimateFadeInOut = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: ${props => props.appIndex};
+    z-index: ${(props) => props.appIndex};
 
     @media (min-width: 28rem) {
-        width: fit-content;
-        height: fit-content;
+        width: 0px;
+        height: 0px;
         .folder {
-            ${props =>
+            ${(props) =>
                 props.open === 'open' &&
                 css`
                     animation: ${fadeIn} 0.2s ease-out 1 forwards;
                 `}
-            ${props =>
+            ${(props) =>
                 props.minimize === true &&
                 css`
                     animation: ${minimizeDown} 0.3s ease-in 1 forwards;
                 `}
-            ${props =>
+            ${(props) =>
                 props.minimize === false &&
                 css`
                     animation: ${minimizeUp} 0.3s ease-out 1 forwards;
                 `}
-            ${props =>
+            ${(props) =>
                 props.close === 'close' &&
                 css`
                     animation: ${fadeOut} 0.2s ease 1 forwards;
                 `}
-            ${props =>
+            ${(props) =>
                 props.appIndex === 104 &&
                 css`
                     outline: 1px solid #01307c;

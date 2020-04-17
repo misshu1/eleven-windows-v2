@@ -39,7 +39,6 @@ const AppsPreview = () => {
     return (
         <>
             <Container>
-                {' '}
                 <Typography variant='h5' component='h2' className='title'>
                     {menuName}
                 </Typography>

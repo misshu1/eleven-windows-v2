@@ -1,51 +1,49 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Desktop, SideMenu, BorderLogo, Logo, LogoContainer } from './style';
 import { useSideMenuContext } from '../contexts/sideMenuContext';
 import SideMenuApp from '../sideMenu/SideMenuApp';
 import LogoIcon from '../../../assets/images/icons/LogoIcon';
-
-const logoAnimations = {
-    open: {
-        x: '-1rem',
-        opacity: [1, 1, 0],
-
-        transition: {
-            duration: 0.1,
-            ease: 'easeOut',
-            times: [0, 0.9, 1],
-        },
-    },
-    close: {
-        x: 0,
-        opacity: 1,
-        transition: {
-            delay: 0.45,
-            duration: 0.1,
-            ease: 'easeOut',
-        },
-    },
-};
+import { logoAnimations } from '../../animations/animations';
+import Tooltip from '@material-ui/core/Tooltip';
+import Badge from '@material-ui/core/Badge';
+import { NotificationContext } from '../../../contexts/notificationContext';
+import { motion } from 'framer-motion';
 
 const LinuxDesktopApp = () => {
+    const { notification } = useContext(NotificationContext);
     const { isMenuOpen, openSideMenu } = useSideMenuContext();
+
     return (
         <Desktop>
             <SideMenu>
-                <LogoContainer
-                    onClick={openSideMenu}
+                <motion.div
                     animate={isMenuOpen ? 'open' : 'close'}
                     variants={logoAnimations}
                 >
-                    <BorderLogo>
-                        <span />
-                        <span />
-                        <span />
-                        <span />
-                        <Logo>
-                            <LogoIcon />
-                        </Logo>
-                    </BorderLogo>
-                </LogoContainer>
+                    <Tooltip title='Menu' placement='top' enterDelay={500}>
+                        <Badge
+                            badgeContent={notification.length}
+                            color='error'
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            showZero={false}
+                        >
+                            <LogoContainer onClick={openSideMenu}>
+                                <BorderLogo>
+                                    <span />
+                                    <span />
+                                    <span />
+                                    <span />
+                                    <Logo>
+                                        <LogoIcon />
+                                    </Logo>
+                                </BorderLogo>
+                            </LogoContainer>
+                        </Badge>
+                    </Tooltip>
+                </motion.div>
                 <SideMenuApp />
             </SideMenu>
             <div style={{ flex: 1 }}></div>

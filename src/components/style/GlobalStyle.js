@@ -60,7 +60,7 @@ body {
             bottom: 0.5rem;
             left: 0.5rem;
             right: 0.5rem;
-            width: fit-content;
+            width: max-content;
             margin: 0 auto;
             border-radius: 0.5rem;
             box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.2),

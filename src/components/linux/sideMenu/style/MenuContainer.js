@@ -8,8 +8,9 @@ export const MenuContainer = styled.section`
     left: 0;
     width: 100%;
     color: ${(props) => props.theme.textColor};
+    z-index: 400;
 
     @media (min-width: 28rem) {
-        width: fit-content;
+        width: initial;
     }
 `;

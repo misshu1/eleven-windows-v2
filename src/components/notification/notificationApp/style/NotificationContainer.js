@@ -46,16 +46,16 @@ export const NotificationContainer = styled.section`
     z-index: 250;
     cursor: default;
     user-select: none;
-    background: ${props => props.theme.notificationBg};
-    color: ${props => props.theme.notificationColor};
+    background: ${(props) => props.theme.notificationBg};
+    color: ${(props) => props.theme.notificationColor};
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
     animation: ${slideUp} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1 forwards;
 
     .clear {
-        width: fit-content;
+        width: max-content;
         margin: 1.5rem auto;
         font-size: 1.1rem;
-        color: ${props => props.theme.calendarTodayClock};
+        color: ${(props) => props.theme.calendarTodayClock};
     }
 
     .no-notifications {
@@ -70,7 +70,7 @@ export const NotificationContainer = styled.section`
 
     @media (min-width: 28rem) {
         width: 21.87rem;
-        border-left: 1px solid ${props => props.theme.notificationBorder};
+        border-left: 1px solid ${(props) => props.theme.notificationBorder};
         box-shadow: -2px 0px 4px -1px rgba(0, 0, 0, 0.2),
             -4px 0px 5px 0px rgba(0, 0, 0, 0.14),
             -1px 0px 10px 0px rgba(0, 0, 0, 0.12);
@@ -79,14 +79,14 @@ export const NotificationContainer = styled.section`
         .clear {
             display: flex;
             align-items: center;
-            width: fit-content;
+            width: max-content;
             height: 3rem;
             margin: 0 0 0 auto;
             font-size: 0.9rem;
-            color: ${props => props.theme.accentBgLight};
+            color: ${(props) => props.theme.accentBgLight};
         }
         .clear:hover {
-            color: ${props => props.theme.calendarColorSecondary};
+            color: ${(props) => props.theme.calendarColorSecondary};
         }
     }
 `;

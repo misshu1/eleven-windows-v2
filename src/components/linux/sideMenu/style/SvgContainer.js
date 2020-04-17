@@ -19,6 +19,8 @@ export const SvgContainer = styled(motion.div)`
     @media (min-width: 28rem) {
         z-index: 145;
         display: block;
+        width: 0px;
+
         svg {
             height: 100%;
             #gradiant {
