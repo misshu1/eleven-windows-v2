@@ -6,7 +6,6 @@ import BorderBG from '../../../assets/images/bg/BorderBG';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { useSideMenuContext } from '../contexts/sideMenuContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import ReactDOM from 'react-dom';
 
