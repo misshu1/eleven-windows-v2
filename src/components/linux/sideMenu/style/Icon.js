@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Icon = styled.div`
     display: flex;
@@ -10,4 +10,16 @@ export const Icon = styled.div`
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
     background: ${(props) => props.isActive && '#212736'};
+
+    ${(props) =>
+        props.close &&
+        css`
+            font-size: 1rem;
+            border-radius: 0;
+            border-top-right-radius: inherit;
+            &&:hover {
+                background: ${props.theme.accentBg};
+                color: #fff;
+            }
+        `}
 `;

@@ -8,7 +8,6 @@ export const IconsMenuContainer = styled(motion.div)`
     background: ${(props) => props.theme.startMenuBg};
 
     .left-menu {
-        padding: 0.5em 0 0.5em 0.5em;
         height: 100%;
         width: 100%;
         background: ${(props) => props.theme.background};

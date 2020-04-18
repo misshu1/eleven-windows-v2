@@ -1,5 +1,5 @@
-import { AnimatePresence } from 'framer-motion';
-import React, { useRef, Suspense } from 'react';
+import React, { useRef, Suspense, useContext } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Scrollbar from 'react-scrollbars-custom';
 
 import BorderBG from '../../../assets/images/bg/BorderBG';
@@ -25,10 +25,18 @@ import {
     expandedMenuAnimations,
     SVGMenuAnimations,
 } from '../../animations';
+import Badge from '@material-ui/core/Badge';
+import { NotificationContext } from '../../../contexts/notificationContext';
 
 const SideMenuApp = (props) => {
     const menuRef = useRef(null);
-    const { sideMenuState, closeSideMenu, isMenuOpen } = useSideMenuContext();
+    const {
+        sideMenuState,
+        closeSideMenu,
+        isMenuOpen,
+        activeMenuIcon,
+    } = useSideMenuContext();
+    const { notification } = useContext(NotificationContext);
     useOnClickOutside(menuRef, () => closeSideMenu());
 
     return ReactDOM.createPortal(
@@ -43,24 +51,28 @@ const SideMenuApp = (props) => {
                             exit='close'
                             variants={iconsMenuAnimations}
                         >
-                            <div className='left-menu'>
-                                <IconButton
-                                    component='span'
-                                    onClick={closeSideMenu}
+                            <motion.div
+                                className='left-menu'
+                                key='iconsMenu'
+                                initial='initial'
+                                animate='open'
+                                exit='close'
+                                variants={fadeAnimations}
+                            >
+                                <Tooltip
+                                    title='Close'
+                                    placement='bottom'
+                                    enterDelay={500}
                                 >
-                                    <FontAwesomeIcon
-                                        icon={['fas', 'times']}
-                                        style={{ color: 'red' }}
-                                    />
-                                </IconButton>
+                                    <Icon onClick={closeSideMenu} close>
+                                        <FontAwesomeIcon
+                                            icon={['fas', 'times']}
+                                            size='lg'
+                                        />
+                                    </Icon>
+                                </Tooltip>
                                 <Scrollbar>
-                                    <IconsMenu
-                                        key='iconsMenu'
-                                        initial='initial'
-                                        animate='open'
-                                        exit='close'
-                                        variants={fadeAnimations}
-                                    >
+                                    <IconsMenu>
                                         {sideMenuState.map((app) => (
                                             <Tooltip
                                                 title={app.name}
@@ -68,16 +80,40 @@ const SideMenuApp = (props) => {
                                                 enterDelay={500}
                                                 key={app.id}
                                             >
-                                                <Icon isActive={app.isActive}>
-                                                    <FontAwesomeIcon
-                                                        icon={app.fontIcon}
-                                                    />
+                                                <Icon
+                                                    isActive={app.isActive}
+                                                    onClick={() =>
+                                                        activeMenuIcon(app.id)
+                                                    }
+                                                >
+                                                    <Badge
+                                                        badgeContent={
+                                                            notification.length
+                                                        }
+                                                        color='error'
+                                                        anchorOrigin={{
+                                                            vertical: 'top',
+                                                            horizontal: 'right',
+                                                        }}
+                                                        invisible={
+                                                            app.showNotificationBadge &&
+                                                            notification.length >
+                                                                0
+                                                                ? false
+                                                                : true
+                                                        }
+                                                        variant='dot'
+                                                    >
+                                                        <FontAwesomeIcon
+                                                            icon={app.fontIcon}
+                                                        />
+                                                    </Badge>
                                                 </Icon>
                                             </Tooltip>
                                         ))}
                                     </IconsMenu>
                                 </Scrollbar>
-                            </div>
+                            </motion.div>
                         </IconsMenuContainer>
                         <ExpandedMenu
                             key='expandedMenu'
@@ -92,7 +128,7 @@ const SideMenuApp = (props) => {
                                         key={app.id}
                                         fallback={<SpinnerApp delay={200} />}
                                     >
-                                        {app.component}
+                                        {app.isActive && app.component}
                                     </Suspense>
                                 ))}
                             </Scrollbar>

@@ -8,8 +8,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Badge from '@material-ui/core/Badge';
 import { NotificationContext } from '../../../contexts/notificationContext';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const LinuxDesktopApp = () => {
+    const { t } = useTranslation();
     const { notification } = useContext(NotificationContext);
     const { isMenuOpen, openSideMenu } = useSideMenuContext();
 
@@ -20,7 +22,11 @@ const LinuxDesktopApp = () => {
                     animate={isMenuOpen ? 'open' : 'close'}
                     variants={logoAnimations}
                 >
-                    <Tooltip title='Menu' placement='top' enterDelay={500}>
+                    <Tooltip
+                        title={t('tooltip.menu')}
+                        placement='top'
+                        enterDelay={500}
+                    >
                         <Badge
                             badgeContent={notification.length}
                             color='error'

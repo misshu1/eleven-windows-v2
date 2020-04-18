@@ -11,6 +11,7 @@ import {
     faUserCircle,
     faWindowMinimize,
     faTh,
+    faCog,
 } from '@fortawesome/free-solid-svg-icons';
 import React, { useContext, useLayoutEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -36,7 +37,8 @@ library.add(
     faExclamationCircle,
     faEllipsisV,
     faLayerGroup,
-    faTh
+    faTh,
+    faCog
 );
 
 const App = () => {

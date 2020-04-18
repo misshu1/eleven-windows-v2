@@ -27,7 +27,7 @@ const MenuAppIcon = (props) => {
     };
 
     return isMobile ? (
-        <AppIcon className='icon'>
+        <AppIcon className='icon' onClick={closeSideMenu}>
             <Link to={link}>
                 {widgetIcon}
                 <div className='name'>{iconName}</div>

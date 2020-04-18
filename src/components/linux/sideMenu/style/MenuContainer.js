@@ -9,6 +9,7 @@ export const MenuContainer = styled.section`
     width: 100%;
     color: ${(props) => props.theme.textColor};
     z-index: 400;
+    user-select: none;
 
     @media (min-width: 28rem) {
         width: initial;
