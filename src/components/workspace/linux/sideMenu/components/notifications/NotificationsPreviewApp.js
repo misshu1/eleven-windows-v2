@@ -1,7 +1,8 @@
 import React from 'react';
+import { Container } from './style';
 
 const NotificationsPreviewApp = () => {
-    return <div>notfications</div>;
+    return <Container>notfications</Container>;
 };
 
 export default NotificationsPreviewApp;

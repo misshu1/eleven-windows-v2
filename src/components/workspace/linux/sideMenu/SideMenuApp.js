@@ -2,8 +2,8 @@ import React, { useRef, Suspense, useContext } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Scrollbar from 'react-scrollbars-custom';
 
-import BorderBG from '../../../assets/images/bg/BorderBG';
-import useOnClickOutside from '../../../hooks/useOnClickOutside';
+import BorderBG from '../../../../assets/images/bg/BorderBG';
+import useOnClickOutside from '../../../../hooks/useOnClickOutside';
 import { useSideMenuContext } from '../contexts/sideMenuContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -17,15 +17,15 @@ import {
     SvgContainer,
     Icon,
 } from './style';
-import SpinnerApp from '../../style/SpinnerApp';
+import SpinnerApp from '../../../style/SpinnerApp';
 import {
     iconsMenuAnimations,
     fadeAnimations,
     expandedMenuAnimations,
     SVGMenuAnimations,
-} from '../../animations';
+} from '../../../animations';
 import Badge from '@material-ui/core/Badge';
-import { NotificationContext } from '../../../contexts/notificationContext';
+import { NotificationContext } from '../../../../contexts/notificationContext';
 
 const SideMenuApp = (props) => {
     const menuRef = useRef(null);

@@ -5,7 +5,7 @@ import { Container } from './style';
 import {
     useFolderContext,
     ICON_LOCATION,
-} from '../../../../../contexts/folderContext';
+} from '../../../../../../contexts/folderContext';
 import MenuAppIcon from './MenuAppIcon';
 import { useSideMenuContext } from '../../../contexts/sideMenuContext';
 

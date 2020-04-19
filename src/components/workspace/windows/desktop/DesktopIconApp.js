@@ -2,15 +2,15 @@ import PropTypes from 'prop-types';
 import React, { memo, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useDispatchFolderContext } from '../../contexts/folderContext';
-import { GlobalAppContext } from '../../contexts/globalContext';
+import { useDispatchFolderContext } from '../../../../contexts/folderContext';
+import { GlobalAppContext } from '../../../../contexts/globalContext';
 import { IconContainer } from './style';
 
-const DesktopIconApp = memo(props => {
+const DesktopIconApp = memo((props) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { link, appId, widgetIcon, iconName } = props;
     const {
-        globalApp: { isMobile }
+        globalApp: { isMobile },
     } = useContext(GlobalAppContext);
 
     const open = useRef(null);
@@ -58,5 +58,5 @@ DesktopIconApp.propTypes = {
     appId: PropTypes.number.isRequired,
     link: PropTypes.string.isRequired,
     widgetIcon: PropTypes.node.isRequired,
-    iconName: PropTypes.node.isRequired
+    iconName: PropTypes.node.isRequired,
 };

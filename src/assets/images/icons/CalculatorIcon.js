@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../../contexts/themeContext';
 
-const CalculatorIcon = props => {
+const CalculatorIcon = (props) => {
     const { width, height } = props;
     const { theme } = useContext(ThemeContext);
 

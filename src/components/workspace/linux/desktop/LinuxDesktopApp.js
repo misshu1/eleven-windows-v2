@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { Desktop, SideMenu, BorderLogo, Logo, LogoContainer } from './style';
 import { useSideMenuContext } from '../contexts/sideMenuContext';
 import SideMenuApp from '../sideMenu/SideMenuApp';
-import LogoIcon from '../../../assets/images/icons/LogoIcon';
-import { logoAnimations } from '../../animations/animations';
+import LogoIcon from '../../../../assets/images/icons/LogoIcon';
+import { logoAnimations } from '../../../animations/animations';
 import Tooltip from '@material-ui/core/Tooltip';
 import Badge from '@material-ui/core/Badge';
-import { NotificationContext } from '../../../contexts/notificationContext';
+import { NotificationContext } from '../../../../contexts/notificationContext';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
