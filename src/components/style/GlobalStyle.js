@@ -25,11 +25,6 @@ body {
     background: ${(props) => props.theme.desktopBg[props.background]};
 }
 
-.ScrollbarsCustom-Content {
-    height: 100%;
-    width: 100%;
-}
-
 #desktop {
     ${(props) =>
         props.linux &&

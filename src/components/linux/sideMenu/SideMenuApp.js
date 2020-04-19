@@ -70,7 +70,14 @@ const SideMenuApp = (props) => {
                                         />
                                     </Icon>
                                 </Tooltip>
-                                <Scrollbar>
+                                <Scrollbar
+                                    contentProps={{
+                                        style: {
+                                            display: 'flex',
+                                            minHeight: 'calc(100% - 3rem)',
+                                        },
+                                    }}
+                                >
                                     <IconsMenu>
                                         {sideMenuState.map((app) => (
                                             <Tooltip

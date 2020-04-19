@@ -9,6 +9,12 @@ import React, {
 const AppsPreview = lazy(() =>
     import('../sideMenu/components/apps/AppsPreview')
 );
+const SettingsPreviewApp = lazy(() =>
+    import('../sideMenu/components/settings/SettingsPreviewApp')
+);
+const NotificationsPreviewApp = lazy(() =>
+    import('../sideMenu/components/notifications/NotificationsPreviewApp')
+);
 
 const MENU_ACTIONS = {
     active: 'ACTIVE',
@@ -26,14 +32,14 @@ const SIDE_MENU_STATE = [
         id: 2,
         name: 'Settings',
         fontIcon: ['fas', 'cog'],
-        component: <p>settings content soon</p>,
+        component: <SettingsPreviewApp />,
         isActive: false,
     },
     {
         id: 3,
         name: 'Notifications',
         fontIcon: ['far', 'comment-alt'],
-        component: <p>some notifications here coming soon</p>,
+        component: <NotificationsPreviewApp />,
         isActive: false,
         showNotificationBadge: true,
     },
