@@ -6,7 +6,7 @@ export const LoginContainer = styled.div`
     align-items: center;
     height: 3.5rem;
     width: 100%;
-    border-bottom: 1px solid ${props => props.theme.startMenuBorder};
+    border-bottom: 1px solid ${(props) => props.theme.startMenuBorder};
 
     && span {
         display: block;

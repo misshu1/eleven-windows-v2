@@ -1,2 +1,2 @@
-export { StartMenu } from './StartMenu';
+export { Container } from './Container';
 export { LoginContainer } from './LoginContainer';

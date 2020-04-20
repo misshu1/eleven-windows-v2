@@ -7,14 +7,13 @@ import Backdrop from '@material-ui/core/Backdrop';
 const CartApp = lazy(() => import('./cart/CartApp'));
 const CalendarApp = lazy(() => import('./calendar/CalendarApp'));
 const LanguageApp = lazy(() => import('./language/LanguageApp'));
-const StartMenuApp = lazy(() => import('../startMenu/StartMenuApp'));
 const NotificationApp = lazy(() =>
     import('../notification/notificationApp/NotificationApp')
 );
 
 const TaskbarModalApps = () => {
     const {
-        globalApp: { isMobile }
+        globalApp: { isMobile },
     } = useContext(GlobalAppContext);
     const {
         showBackdrop,
@@ -24,15 +23,15 @@ const TaskbarModalApps = () => {
             startMenuOpen,
             languagesOpen,
             notificationsOpen,
-            cartOpen
-        }
+            cartOpen,
+        },
     } = useContext(TaskbarContext);
 
     return (
         <>
-            <Suspense fallback={<SpinnerApp delay={200} />}>
+            {/* <Suspense fallback={<SpinnerApp delay={200} />}>
                 {startMenuOpen && <StartMenuApp />}
-            </Suspense>
+            </Suspense> */}
 
             <Suspense fallback={<SpinnerApp delay={200} />}>
                 {notificationsOpen && <NotificationApp />}
@@ -50,13 +49,13 @@ const TaskbarModalApps = () => {
                 {cartOpen && <CartApp />}
             </Suspense>
 
-            {showBackdrop() && !isMobile && (
+            {/* {showBackdrop() && !isMobile && (
                 <Backdrop
                     open={showBackdrop()}
                     style={{ zIndex: 220, background: 'rgba(0, 0, 0, 0.15)' }}
                     onClick={closeAllApps}
                 ></Backdrop>
-            )}
+            )} */}
         </>
     );
 };

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 
 import { TaskbarContext } from '../../contexts/taskbarContext';
@@ -10,24 +10,30 @@ import LogoIconApp from './icons/LogoIconApp';
 import NotificationIconApp from './icons/NotificationIconApp';
 import OpenApps from './OpenApps';
 import { Taskbar } from './style';
+import SpinnerApp from '../style/SpinnerApp';
+import TaskbarLinuxApp from '../workspace/linux/taskbar/TaskbarLinuxApp';
+import TaskbarWindowsApp from '../workspace/windows/taskbar/TaskbarWindowsApp';
 
 const TaskbarApp = () => {
     const { currentOS } = useContext(ThemeContext);
-    const { closeAllApps } = useContext(TaskbarContext);
 
     return ReactDOM.createPortal(
         <>
             {currentOS === OS_THEME.windows && (
-                <Taskbar onClick={closeAllApps}>
-                    <LogoIconApp />
-                    <OpenApps />
-                    <CartIconApp />
-                    <LanguageIconApp />
-                    <ClockIconApp />
-                    <NotificationIconApp />
-                </Taskbar>
+                // <Taskbar onClick={closeAllApps}>
+                //     <LogoIconApp />
+                //     <OpenApps />
+                //     <CartIconApp />
+                //     <Suspense fallback={<SpinnerApp delay={200} />}>
+                //         {startMenuOpen && <StartMenuApp />}
+                //     </Suspense>{' '}
+                //     <LanguageIconApp />
+                //     <ClockIconApp />
+                //     <NotificationIconApp />
+                // </Taskbar>
+                <TaskbarWindowsApp />
             )}
-            {currentOS === OS_THEME.linux && <OpenApps />}
+            {currentOS === OS_THEME.linux && <TaskbarLinuxApp />}
         </>,
         document.querySelector('#taskbar')
     );

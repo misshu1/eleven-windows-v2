@@ -2,10 +2,9 @@ import PropTypes from 'prop-types';
 import React, { useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useDispatchFolderContext } from '../../../contexts/folderContext';
-import { GlobalAppContext } from '../../../contexts/globalContext';
-import { TaskbarContext } from '../../../contexts/taskbarContext';
 import { Widget } from './style';
+import { useDispatchFolderContext } from '../../../../../../../contexts/folderContext';
+import { GlobalAppContext } from '../../../../../../../contexts/globalContext';
 
 const WidgetApp = (props) => {
     const {
@@ -14,12 +13,12 @@ const WidgetApp = (props) => {
         widgetIcon,
         iconDisplayName,
         animationDuration,
+        closeStartMenu,
     } = props;
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const {
         globalApp: { isMobile },
     } = useContext(GlobalAppContext);
-    const { closeApp } = useContext(TaskbarContext);
 
     const open = useRef(null);
     const active = useRef(null);
@@ -32,13 +31,13 @@ const WidgetApp = (props) => {
         open.current();
         active.current();
         minimize.current();
-        closeApp('startMenuOpen');
+        closeStartMenu();
     };
 
     return (
         <>
             {isMobile ? (
-                <Widget onClick={() => closeApp('startMenuOpen')}>
+                <Widget onClick={closeStartMenu}>
                     <Link to={link}>
                         {widgetIcon}
                         <span>{iconDisplayName}</span>

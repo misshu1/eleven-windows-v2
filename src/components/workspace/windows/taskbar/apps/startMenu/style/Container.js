@@ -11,16 +11,15 @@ const slideUp = keyframes`
 }
 `;
 
-export const StartMenu = styled.section`
+export const Container = styled.section`
     position: absolute;
     display: flex;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: ${props => props.theme.startMenuBg};
-    color: ${props => props.theme.startMenuColor};
-    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+    background: ${(props) => props.theme.startMenuBg};
+    color: ${(props) => props.theme.startMenuColor};
     user-select: none;
     z-index: 250;
     animation: ${slideUp} 0.4s ease-out 1 forwards;
@@ -30,8 +29,8 @@ export const StartMenu = styled.section`
         max-height: 45.5rem;
         top: auto;
         bottom: 0;
-        border-top: 1px solid ${props => props.theme.startMenuBorder};
-        border-right: 1px solid ${props => props.theme.startMenuBorder};
+        border-top: 1px solid ${(props) => props.theme.startMenuBorder};
+        border-right: 1px solid ${(props) => props.theme.startMenuBorder};
         box-shadow: 2px -2px 4px -1px rgba(0, 0, 0, 0.2),
             4px -4px 5px 0px rgba(0, 0, 0, 0.14),
             1px -1px 10px 0px rgba(0, 0, 0, 0.12);

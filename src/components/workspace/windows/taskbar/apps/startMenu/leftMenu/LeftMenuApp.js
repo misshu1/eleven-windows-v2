@@ -3,21 +3,22 @@ import React, { useContext, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
 
-import PowerOffIcon from '../../../assets/images/icons/PowerOffIcon';
-import { ICON_LOCATION, useFolderContext } from '../../../contexts/folderContext';
-import { TaskbarContext } from '../../../contexts/taskbarContext';
+import PowerOffIcon from '../../../../../../../assets/images/icons/PowerOffIcon';
 import { Container, Widget } from './style';
 import WidgetApp from './WidgetApp';
+import {
+    useFolderContext,
+    ICON_LOCATION,
+} from '../../../../../../../contexts/folderContext';
 
-const LeftMenuApp = (props) => {
+const LeftMenuApp = ({ history, closeStartMenu }) => {
     const { folderState, sortByAppName } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
-    const { closeApp } = useContext(TaskbarContext);
     const { t } = useTranslation();
 
     const goToLogin = () => {
-        closeApp('startMenuOpen');
-        props.history.push('/login');
+        closeStartMenu();
+        history.push('/login');
     };
 
     const widgetIcons = () => {
@@ -30,6 +31,7 @@ const LeftMenuApp = (props) => {
                             appId={app.id}
                             iconDisplayName={app.appName}
                             widgetIcon={app.widgetIcon}
+                            closeStartMenu={closeStartMenu}
                         />
                     )
             );

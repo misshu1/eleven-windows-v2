@@ -1,23 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { TaskbarContext } from '../../contexts/taskbarContext';
-import { useAuth } from '../../hooks/useAuth';
 import LeftMenuApp from './leftMenu/LeftMenuApp';
 import RightMenuApp from './rightMenu/RightMenuApp';
-import { LoginContainer, StartMenu } from './style';
+import { LoginContainer, Container } from './style';
+import { useAuth } from '../../../../../../hooks/useAuth';
 
-const StartMenuApp = () => {
-    const {
-        taskbar: { startMenuOpen },
-    } = useContext(TaskbarContext);
+const StartMenuApp = (props) => {
+    const { isStartMenuOpen, startMenuRef, closeStartMenu } = props;
     const auth = useAuth();
 
     return ReactDOM.createPortal(
         <>
-            {startMenuOpen && (
-                <StartMenu>
+            {/* TODO Animations with framer motion */}
+            {isStartMenuOpen && (
+                <Container ref={startMenuRef}>
                     <LoginContainer>
                         <span>
                             <FontAwesomeIcon
@@ -30,9 +28,9 @@ const StartMenuApp = () => {
                             {auth.user ? auth.user.displayName : 'Guest'}.
                         </h4>
                     </LoginContainer>
-                    <LeftMenuApp />
-                    <RightMenuApp />
-                </StartMenu>
+                    <LeftMenuApp closeStartMenu={closeStartMenu} />
+                    <RightMenuApp closeStartMenu={closeStartMenu} />
+                </Container>
             )}
         </>,
         document.querySelector('#desktop')
