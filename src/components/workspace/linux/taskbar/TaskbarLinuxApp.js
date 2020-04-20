@@ -1,10 +1,8 @@
-import React, { useCallback } from 'react';
-import { Container, AppIcon } from './style';
-import {
-    useFolderContext,
-    useDispatchFolderContext,
-} from '../../../../contexts/folderContext';
 import Tooltip from '@material-ui/core/Tooltip';
+import React, { useCallback } from 'react';
+
+import { useDispatchFolderContext, useFolderContext } from '../../../../contexts/folderContext';
+import { AppIcon, Container } from './style';
 
 const TaskbarLinuxApp = () => {
     const { folderState } = useFolderContext();
@@ -46,7 +44,13 @@ const TaskbarLinuxApp = () => {
                     )
             );
         });
-    }, [folderState.openApps, folderState.apps]);
+    }, [
+        activeFolder,
+        folderState.apps,
+        folderState.openApps,
+        minimizeDown,
+        minimizeUp,
+    ]);
 
     return <Container>{showIcons()}</Container>;
 };

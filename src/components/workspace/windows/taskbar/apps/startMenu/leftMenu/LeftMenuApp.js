@@ -1,18 +1,17 @@
 import Tooltip from '@material-ui/core/Tooltip';
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
 
 import PowerOffIcon from '../../../../../../../assets/images/icons/PowerOffIcon';
+import { ICON_LOCATION, useFolderContext } from '../../../../../../../contexts/folderContext';
+import { useStartMenuContext } from '../../../contexts/startMenuContext';
 import { Container, Widget } from './style';
 import WidgetApp from './WidgetApp';
-import {
-    useFolderContext,
-    ICON_LOCATION,
-} from '../../../../../../../contexts/folderContext';
 
-const LeftMenuApp = ({ history, closeStartMenu }) => {
+const LeftMenuApp = ({ history }) => {
     const { folderState, sortByAppName } = useFolderContext();
+    const { closeStartMenu } = useStartMenuContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
     const { t } = useTranslation();
 
@@ -31,7 +30,6 @@ const LeftMenuApp = ({ history, closeStartMenu }) => {
                             appId={app.id}
                             iconDisplayName={app.appName}
                             widgetIcon={app.widgetIcon}
-                            closeStartMenu={closeStartMenu}
                         />
                     )
             );

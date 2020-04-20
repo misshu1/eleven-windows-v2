@@ -1,31 +1,18 @@
-import React, { useRef, Suspense, useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Badge from '@material-ui/core/Badge';
+import Tooltip from '@material-ui/core/Tooltip';
 import { AnimatePresence, motion } from 'framer-motion';
+import React, { Suspense, useContext, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import Scrollbar from 'react-scrollbars-custom';
 
 import BorderBG from '../../../../assets/images/bg/BorderBG';
-import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import { useSideMenuContext } from '../contexts/sideMenuContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Tooltip from '@material-ui/core/Tooltip';
-import ReactDOM from 'react-dom';
-
-import {
-    ExpandedMenu,
-    IconsMenu,
-    IconsMenuContainer,
-    MenuContainer,
-    SvgContainer,
-    Icon,
-} from './style';
-import SpinnerApp from '../../../style/SpinnerApp';
-import {
-    iconsMenuAnimations,
-    fadeAnimations,
-    expandedMenuAnimations,
-    SVGMenuAnimations,
-} from '../../../animations';
-import Badge from '@material-ui/core/Badge';
 import { NotificationContext } from '../../../../contexts/notificationContext';
+import useOnClickOutside from '../../../../hooks/useOnClickOutside';
+import { expandedMenuAnimations, fadeAnimations, iconsMenuAnimations, SVGMenuAnimations } from '../../../animations';
+import SpinnerApp from '../../../style/SpinnerApp';
+import { useSideMenuContext } from '../contexts/sideMenuContext';
+import { ExpandedMenu, Icon, IconsMenu, IconsMenuContainer, MenuContainer, SvgContainer } from './style';
 
 const SideMenuApp = (props) => {
     const menuRef = useRef(null);

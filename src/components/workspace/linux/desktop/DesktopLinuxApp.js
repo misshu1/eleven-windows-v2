@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
-import { Desktop, SideMenu, BorderLogo, Logo, LogoContainer } from './style';
-import { useSideMenuContext } from '../contexts/sideMenuContext';
-import SideMenuApp from '../sideMenu/SideMenuApp';
-import LogoIcon from '../../../../assets/images/icons/LogoIcon';
-import { logoAnimations } from '../../../animations/animations';
-import Tooltip from '@material-ui/core/Tooltip';
 import Badge from '@material-ui/core/Badge';
-import { NotificationContext } from '../../../../contexts/notificationContext';
+import Tooltip from '@material-ui/core/Tooltip';
 import { motion } from 'framer-motion';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const LinuxDesktopApp = () => {
+import LogoIcon from '../../../../assets/images/icons/LogoIcon';
+import { NotificationContext } from '../../../../contexts/notificationContext';
+import { logoAnimations } from '../../../animations/animations';
+import { useSideMenuContext } from '../contexts/sideMenuContext';
+import SideMenuApp from '../sideMenu/SideMenuApp';
+import { BorderLogo, Desktop, Logo, LogoContainer, SideMenu } from './style';
+
+const DesktopLinuxApp = () => {
     const { t } = useTranslation();
     const { notification } = useContext(NotificationContext);
     const { isMenuOpen, openSideMenu } = useSideMenuContext();
@@ -57,4 +58,4 @@ const LinuxDesktopApp = () => {
     );
 };
 
-export default LinuxDesktopApp;
+export default DesktopLinuxApp;

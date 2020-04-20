@@ -2,12 +2,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 
-import { Widget } from './style';
 import { useDispatchFolderContext } from '../../../../../../../contexts/folderContext';
+import { useStartMenuContext } from '../../../contexts/startMenuContext';
+import { Widget } from './style';
 
-const WidgetApp = (props) => {
+const WidgetApp = ({ appId, iconDisplayName, widgetIcon }) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
-    const { appId, iconDisplayName, widgetIcon, closeStartMenu } = props;
+    const { closeStartMenu } = useStartMenuContext();
 
     const open = useRef(null);
     const active = useRef(null);

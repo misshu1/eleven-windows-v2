@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 import React, { useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Widget } from './style';
 import { useDispatchFolderContext } from '../../../../../../../contexts/folderContext';
 import { GlobalAppContext } from '../../../../../../../contexts/globalContext';
+import { useStartMenuContext } from '../../../contexts/startMenuContext';
+import { Widget } from './style';
 
 const WidgetApp = (props) => {
     const {
@@ -13,9 +14,10 @@ const WidgetApp = (props) => {
         widgetIcon,
         iconDisplayName,
         animationDuration,
-        closeStartMenu,
     } = props;
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
+    const { closeStartMenu } = useStartMenuContext();
+
     const {
         globalApp: { isMobile },
     } = useContext(GlobalAppContext);

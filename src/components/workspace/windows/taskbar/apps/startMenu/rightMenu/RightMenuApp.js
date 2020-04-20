@@ -1,16 +1,13 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import Scrollbar from 'react-scrollbars-custom';
 
+import { ICON_LOCATION, useFolderContext } from '../../../../../../../contexts/folderContext';
 import { Container } from './style';
 import WidgetApp from './WidgetApp';
-import {
-    useFolderContext,
-    ICON_LOCATION,
-} from '../../../../../../../contexts/folderContext';
 
 let ANIMATION_DURATION = 0;
 
-const RightMenuApp = ({ closeStartMenu }) => {
+const RightMenuApp = () => {
     const { folderState, sortByAppName } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 
@@ -33,7 +30,6 @@ const RightMenuApp = ({ closeStartMenu }) => {
                             link={app.link}
                             widgetIcon={app.widgetIcon}
                             iconDisplayName={app.appName}
-                            closeStartMenu={closeStartMenu}
                         />
                     );
                 }

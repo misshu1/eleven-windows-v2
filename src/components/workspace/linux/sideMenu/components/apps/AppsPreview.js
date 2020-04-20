@@ -1,13 +1,10 @@
-import React, { useRef, useCallback, useMemo } from 'react';
 import Typography from '@material-ui/core/Typography';
+import React, { useCallback, useMemo, useRef } from 'react';
 
-import { Container } from './style';
-import {
-    useFolderContext,
-    ICON_LOCATION,
-} from '../../../../../../contexts/folderContext';
-import MenuAppIcon from './MenuAppIcon';
+import { ICON_LOCATION, useFolderContext } from '../../../../../../contexts/folderContext';
 import { useSideMenuContext } from '../../../contexts/sideMenuContext';
+import MenuAppIcon from './MenuAppIcon';
+import { Container } from './style';
 
 const AppsPreview = () => {
     const { folderState, sortByAppName } = useFolderContext();

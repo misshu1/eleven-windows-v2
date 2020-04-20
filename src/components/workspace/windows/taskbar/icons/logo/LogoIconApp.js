@@ -1,11 +1,13 @@
-import React, { useCallback } from 'react';
-import { Container, BorderLogo, Logo } from './style';
-import { useTranslation } from 'react-i18next';
 import Tooltip from '@material-ui/core/Tooltip';
-import LogoIcon from '../../../../../../assets/images/icons/LogoIcon';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-const LogoIconApp = (props) => {
-    const { isStartMenuOpen, logoRef, toggleStartMenu } = props;
+import LogoIcon from '../../../../../../assets/images/icons/LogoIcon';
+import { useStartMenuContext } from '../../contexts/startMenuContext';
+import { BorderLogo, Container, Logo } from './style';
+
+const LogoIconApp = ({ logoRef }) => {
+    const { isStartMenuOpen, toggleStartMenu } = useStartMenuContext();
     const { t } = useTranslation();
 
     return (

@@ -15,6 +15,7 @@ function useOnClickOutsideMultipleRefs([...refs], handler) {
                 if (!ref.current || ref.current.contains(event.target)) {
                     return true;
                 }
+                return null;
             });
             let refExists = checkRefs.some((ref) => ref === true);
 

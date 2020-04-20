@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
+
 import { useDispatchFolderContext } from '../../../../../../contexts/folderContext';
 import { GlobalAppContext } from '../../../../../../contexts/globalContext';
 import { AppIcon } from './style';

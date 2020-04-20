@@ -1,12 +1,10 @@
-import React, { useRef, useCallback } from 'react';
-import {
-    useFolderContext,
-    ICON_LOCATION,
-} from '../../../../contexts/folderContext';
-import { Desktop } from './style';
-import DesktopIconApp from './DesktopIconApp';
+import React, { useCallback, useRef } from 'react';
 
-const WindowsDesktopApp = () => {
+import { ICON_LOCATION, useFolderContext } from '../../../../contexts/folderContext';
+import DesktopIconApp from './DesktopIconApp';
+import { Desktop } from './style';
+
+const DesktopWindowsApp = () => {
     const { folderState, sortByAppName } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 
@@ -29,4 +27,4 @@ const WindowsDesktopApp = () => {
     return <Desktop>{desktopIcons()}</Desktop>;
 };
 
-export default WindowsDesktopApp;
+export default DesktopWindowsApp;

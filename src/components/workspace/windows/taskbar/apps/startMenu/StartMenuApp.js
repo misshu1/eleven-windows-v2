@@ -2,13 +2,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { useAuth } from '../../../../../../hooks/useAuth';
+import { useStartMenuContext } from '../../contexts/startMenuContext';
 import LeftMenuApp from './leftMenu/LeftMenuApp';
 import RightMenuApp from './rightMenu/RightMenuApp';
-import { LoginContainer, Container } from './style';
-import { useAuth } from '../../../../../../hooks/useAuth';
+import { Container, LoginContainer } from './style';
 
-const StartMenuApp = (props) => {
-    const { isStartMenuOpen, startMenuRef, closeStartMenu } = props;
+const StartMenuApp = ({ startMenuRef }) => {
+    const { isStartMenuOpen, closeStartMenu } = useStartMenuContext();
+
     const auth = useAuth();
 
     return ReactDOM.createPortal(

@@ -1,8 +1,7 @@
 import React, { lazy, Suspense, useContext } from 'react';
-import { GlobalAppContext } from '../../contexts/globalContext';
+
 import { TaskbarContext } from '../../contexts/taskbarContext';
 import SpinnerApp from '../style/SpinnerApp';
-import Backdrop from '@material-ui/core/Backdrop';
 
 const CartApp = lazy(() => import('./cart/CartApp'));
 const CalendarApp = lazy(() => import('./calendar/CalendarApp'));
@@ -13,26 +12,11 @@ const NotificationApp = lazy(() =>
 
 const TaskbarModalApps = () => {
     const {
-        globalApp: { isMobile },
-    } = useContext(GlobalAppContext);
-    const {
-        showBackdrop,
-        closeAllApps,
-        taskbar: {
-            calendarOpen,
-            startMenuOpen,
-            languagesOpen,
-            notificationsOpen,
-            cartOpen,
-        },
+        taskbar: { calendarOpen, languagesOpen, notificationsOpen, cartOpen },
     } = useContext(TaskbarContext);
 
     return (
         <>
-            {/* <Suspense fallback={<SpinnerApp delay={200} />}>
-                {startMenuOpen && <StartMenuApp />}
-            </Suspense> */}
-
             <Suspense fallback={<SpinnerApp delay={200} />}>
                 {notificationsOpen && <NotificationApp />}
             </Suspense>
