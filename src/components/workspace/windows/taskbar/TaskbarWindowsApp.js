@@ -1,5 +1,6 @@
 import React from 'react';
 
+import OpenApps from './apps/openApps/OpenApps';
 import { StartMenuProvider } from './contexts/startMenuContext';
 import StartMenuAndLogo from './StartMenuAndLogo';
 import { Container } from './style';
@@ -10,7 +11,8 @@ const TaskbarWindowsApp = () => {
             <StartMenuProvider>
                 <StartMenuAndLogo></StartMenuAndLogo>
             </StartMenuProvider>
-            {/* <OpenApps />
+            <OpenApps />
+            {/* 
             <CartIconApp />
             <LanguageIconApp />
             <ClockIconApp />

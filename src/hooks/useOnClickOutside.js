@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-function useOnClickOutside(ref, handler) {
+function useOnClickOutside([...refs], handler) {
     const calbackHandler = useCallback(
         (event) => {
             handler(event);
@@ -10,12 +10,18 @@ function useOnClickOutside(ref, handler) {
 
     useEffect(() => {
         const listener = (event) => {
-            // Do nothing if clicking ref's element or descendent elements
-            if (!ref.current || ref.current.contains(event.target)) {
-                return;
-            }
+            // Do nothing if clicking ref's elements or descendent elements
+            const checkRefs = refs.map((ref) => {
+                if (!ref.current || ref.current.contains(event.target)) {
+                    return true;
+                }
+                return null;
+            });
+            const refExists = checkRefs.some((ref) => ref === true);
 
-            calbackHandler(event);
+            if (!refExists) {
+                calbackHandler(event);
+            }
         };
 
         document.addEventListener('mousedown', listener);
@@ -25,7 +31,7 @@ function useOnClickOutside(ref, handler) {
             document.removeEventListener('mousedown', listener);
             document.removeEventListener('touchstart', listener);
         };
-    }, [ref, handler, calbackHandler]);
+    }, [refs, handler, calbackHandler]);
 }
 
 export default useOnClickOutside;

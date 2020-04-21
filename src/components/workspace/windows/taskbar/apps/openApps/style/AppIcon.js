@@ -7,7 +7,6 @@ export const AppIcon = styled.div`
     position: relative;
     height: 100%;
     width: 3.5rem;
-    line-height: 3.5rem;
     transition: all 0.2s;
 
     &&::after {

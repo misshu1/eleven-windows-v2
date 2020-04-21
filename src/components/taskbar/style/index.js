@@ -4,8 +4,5 @@ export { ClockContainer } from './ClockContainer';
 export { NotificationContainer } from './NotificationContainer';
 export { Logo } from './Logo';
 export { LogoContainer } from './LogoContainer';
-export { OpenAppsContainer } from './OpenAppsContainer';
-export { Taskbar } from './Taskbar';
 export { LanguagesContainer } from './LanguagesContainer';
 export { FlagImg } from './FlagImg';
-export { AppIcon } from './AppIcon';

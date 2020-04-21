@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useRef } from 'react';
 
-import useOnClickOutsideMultipleRefs from '../../../../hooks/useOnClickOutsideMultipleRefs';
+import useOnClickOutside from '../../../../hooks/useOnClickOutside';
 import SpinnerApp from '../../../style/SpinnerApp';
 import { useStartMenuContext } from './contexts/startMenuContext';
 import LogoIconApp from './icons/logo/LogoIconApp';
@@ -12,7 +12,7 @@ const StartMenuAndLogo = () => {
     const startMenuRef = useRef(null);
     const logoRef = useRef(null);
 
-    useOnClickOutsideMultipleRefs(
+    useOnClickOutside(
         [startMenuRef, logoRef],
         () => isStartMenuOpen && closeStartMenu()
     );

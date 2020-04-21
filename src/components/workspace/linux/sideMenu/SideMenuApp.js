@@ -23,7 +23,7 @@ const SideMenuApp = (props) => {
         activeMenuIcon,
     } = useSideMenuContext();
     const { notification } = useContext(NotificationContext);
-    useOnClickOutside(menuRef, () => closeSideMenu());
+    useOnClickOutside([menuRef], () => closeSideMenu());
 
     return ReactDOM.createPortal(
         <>
