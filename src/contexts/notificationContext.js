@@ -1,18 +1,19 @@
-import React, { useState, createContext, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { createContext, useCallback, useState } from 'react';
 import uuid from 'uuid';
 
-const isMobile = window.matchMedia('(max-width: 28rem)').matches ? true : false;
+import useMediaQuery from '../hooks/useMediaQuery';
 
 export const NotificationContext = createContext();
-export const NotificationProvider = props => {
+export const NotificationProvider = (props) => {
+    const isMobile = useMediaQuery('(max-width: 28rem)');
     const [notification, setNotification] = useState([]);
     const [disable, setDesable] = useState(false);
 
-    const disableNotifications = e => {
+    const disableNotifications = (e) => {
         if (notification.length !== 0) {
             setNotification(
-                notification.map(item => ({ ...item, isVisible: false }))
+                notification.map((item) => ({ ...item, isVisible: false }))
             );
         }
         localStorage.setItem('disableNotifications', e.target.checked);
@@ -39,20 +40,20 @@ export const NotificationProvider = props => {
         } else {
             setDesable(JSON.parse(disableNotifications));
         }
-    }, []);
+    }, [isMobile]);
 
     const hideAllModals = () => {
         if (notification.length > 0) {
             setNotification(
-                notification.map(item => ({ ...item, isVisible: false }))
+                notification.map((item) => ({ ...item, isVisible: false }))
             );
         }
     };
 
-    const hideModal = e => {
+    const hideModal = (e) => {
         const eventTargetID = e.currentTarget.id;
         setNotification(
-            notification.map(item =>
+            notification.map((item) =>
                 item.id === eventTargetID
                     ? { ...item, closeAnimation: true }
                     : item
@@ -60,7 +61,7 @@ export const NotificationProvider = props => {
         );
         setTimeout(() => {
             setNotification(
-                notification.map(item =>
+                notification.map((item) =>
                     item.id === eventTargetID
                         ? { ...item, isVisible: false }
                         : item
@@ -69,9 +70,9 @@ export const NotificationProvider = props => {
         }, 300);
     };
 
-    const closeNotification = e => {
+    const closeNotification = (e) => {
         setNotification(
-            notification.filter(item => item.id !== e.currentTarget.id)
+            notification.filter((item) => item.id !== e.currentTarget.id)
         );
     };
 
@@ -94,9 +95,9 @@ export const NotificationProvider = props => {
                         icon={['fas', 'exclamation-circle']}
                         size='lg'
                     />
-                )
+                ),
             },
-            ...notification
+            ...notification,
         ]);
     };
 
@@ -119,9 +120,9 @@ export const NotificationProvider = props => {
                         icon={['fas', 'exclamation-triangle']}
                         size='lg'
                     />
-                )
+                ),
             },
-            ...notification
+            ...notification,
         ]);
     };
 
@@ -136,9 +137,9 @@ export const NotificationProvider = props => {
                 type: 'success',
                 icon: (
                     <FontAwesomeIcon icon={['fas', 'check-square']} size='lg' />
-                )
+                ),
             },
-            ...notification
+            ...notification,
         ]);
     };
 
@@ -161,7 +162,7 @@ export const NotificationProvider = props => {
                 hideAllModals,
                 disableNotifications,
                 disable,
-                checkLocalStorageNotification
+                checkLocalStorageNotification,
             }}
         >
             {props.children}

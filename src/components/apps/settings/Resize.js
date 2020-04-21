@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
-import { Box, Icon, Title, Spacer } from './style';
-import { GlobalAppContext } from '../../../contexts/globalContext';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import folderIcon from '../../../assets/images/icons/folder.svg';
+import { useSettingsContext } from '../../../contexts/settingsContext';
+import { Box, Icon, Spacer, Title } from './style';
 
 const Resize = () => {
     const { t } = useTranslation();
-    const { changeAppSize } = useContext(GlobalAppContext);
+    const { changeAppSize } = useSettingsContext();
 
     return (
         <Spacer>
@@ -15,7 +16,7 @@ const Resize = () => {
                 <Icon
                     iconSize='6.875'
                     imgSize='4.6875'
-                    onClick={() => changeAppSize(125)}
+                    onClick={() => changeAppSize(20)}
                 >
                     <div className='icon'>
                         <img
@@ -30,7 +31,7 @@ const Resize = () => {
                 <Icon
                     iconSize='5.5'
                     imgSize='3.75'
-                    onClick={() => changeAppSize(100)}
+                    onClick={() => changeAppSize(16)}
                 >
                     <div className='icon'>
                         <img
@@ -45,7 +46,7 @@ const Resize = () => {
                 <Icon
                     iconSize='4.125'
                     imgSize='2.8125'
-                    onClick={() => changeAppSize(75)}
+                    onClick={() => changeAppSize(12)}
                 >
                     <div className='icon'>
                         <img
@@ -60,7 +61,7 @@ const Resize = () => {
                 <Icon
                     iconSize='2.75'
                     imgSize='1.875'
-                    onClick={() => changeAppSize(50)}
+                    onClick={() => changeAppSize(8)}
                 >
                     <div className='icon'>
                         <img

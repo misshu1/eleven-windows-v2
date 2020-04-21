@@ -1,12 +1,12 @@
 import Backdrop from '@material-ui/core/Backdrop';
 import PropTypes from 'prop-types';
-import React, { forwardRef, useCallback, useContext, useEffect, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Draggable from 'react-draggable';
 import Scrollbar from 'react-scrollbars-custom';
 
 import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
-import { GlobalAppContext } from '../../contexts/globalContext';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import DrawerApp from './drawer/DrawerApp';
 import FolderToolbar from './FolderToolbar';
 import { AnimateFadeInOut, Content, Folder } from './style';
@@ -19,12 +19,11 @@ const FolderApp = forwardRef((props, ref) => {
     const {
         closeFolder,
         activeFolder,
-        minimizeDown
+        minimizeDown,
     } = useDispatchFolderContext();
 
-    const {
-        globalApp: { isMobile }
-    } = useContext(GlobalAppContext);
+    const isMobile = useMediaQuery('(max-width: 28rem)');
+
     const {
         appId,
         children,
@@ -32,7 +31,7 @@ const FolderApp = forwardRef((props, ref) => {
         width,
         marginLeft,
         marginTop,
-        toolbarMenu
+        toolbarMenu,
     } = props;
 
     useEffect(() => {
@@ -69,7 +68,7 @@ const FolderApp = forwardRef((props, ref) => {
     return ReactDOM.createPortal(
         <>
             {folderState.apps.map(
-                app =>
+                (app) =>
                     app.id === appId && (
                         <Draggable
                             key={app.id}
@@ -114,7 +113,7 @@ const FolderApp = forwardRef((props, ref) => {
                                         <Scrollbar
                                             style={{
                                                 width: '100%',
-                                                height: '100%'
+                                                height: '100%',
                                             }}
                                         >
                                             {children}
@@ -138,5 +137,5 @@ FolderApp.propTypes = {
     height: PropTypes.string,
     marginTop: PropTypes.string,
     marginLeft: PropTypes.string,
-    toolbarMenu: PropTypes.array
+    toolbarMenu: PropTypes.array,
 };

@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { ThemeContext } from '../../contexts/themeContext';
+import { useSettingsContext } from '../../contexts/settingsContext';
 import TaskbarLinuxApp from '../workspace/linux/taskbar/TaskbarLinuxApp';
 import TaskbarWindowsApp from '../workspace/windows/taskbar/TaskbarWindowsApp';
 
 const TaskbarApp = () => {
-    const { isLinuxSelected, isWindowsSelected } = useContext(ThemeContext);
+    const { isLinuxSelected, isWindowsSelected } = useSettingsContext();
 
     return ReactDOM.createPortal(
         <>

@@ -27,15 +27,6 @@ export const ThemeContext = createContext();
 export const ThemeProvider = (props) => {
     const [theme, setTheme] = useState(DarkTheme);
     const [background, setBackground] = useState(createBackgroundObject());
-    const [currentOS, setCurrentOS] = useState(OS_THEME.linux);
-
-    const isLinuxSelected = () => {
-        return currentOS === OS_THEME.linux;
-    };
-
-    const isWindowsSelected = () => {
-        return currentOS === OS_THEME.windows;
-    };
 
     const getSelectedBackground = () => {
         return background.find((item) => item.isSelected === true);
@@ -106,10 +97,6 @@ export const ThemeProvider = (props) => {
                 getSelectedBackground,
                 checkLocalStorageTheme,
                 checkLocalStorageBackground,
-                currentOS,
-                setCurrentOS,
-                isLinuxSelected,
-                isWindowsSelected,
             }}
         >
             {props.children}

@@ -1,16 +1,14 @@
-import React, { Suspense, useContext, useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Route, useLocation } from 'react-router-dom';
 
 import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
-import { GlobalAppContext } from '../../contexts/globalContext';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import SpinnerApp from '../style/SpinnerApp';
 
 const RoutesApp = () => {
     const { folderState } = useFolderContext();
     const { openFolder } = useDispatchFolderContext();
-    const {
-        globalApp: { isMobile },
-    } = useContext(GlobalAppContext);
+    const isMobile = useMediaQuery('(max-width: 28rem)');
     const location = useLocation();
 
     // Route paths are only for mobile

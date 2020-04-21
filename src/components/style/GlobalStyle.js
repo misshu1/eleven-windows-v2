@@ -12,7 +12,7 @@ ${normalize}
 
 html {
     height: 100%;
-    font-size: ${(props) => props.size}%;
+    font-size: ${(props) => props.size}px;
 }
 
 body {

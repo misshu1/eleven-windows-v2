@@ -1,14 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { OS_THEME, ThemeContext } from '../../contexts/themeContext';
+import { useSettingsContext } from '../../contexts/settingsContext';
 import { SideMenuProvider } from '../workspace/linux/contexts/sideMenuContext';
 import DesktopLinuxApp from '../workspace/linux/desktop/DesktopLinuxApp';
 import DesktopWindowsApp from '../workspace/windows/desktop/DesktopWindowsApp';
 
 const DesktopApp = () => {
-    const { isLinuxSelected, isWindowsSelected, setCurrentOS } = useContext(
-        ThemeContext
-    );
+    const {
+        isLinuxSelected,
+        isWindowsSelected,
+        selectWindowsOS,
+        selectLinuxOS,
+    } = useSettingsContext();
 
     return (
         <>
@@ -21,12 +24,8 @@ const DesktopApp = () => {
                     bottom: 'auto',
                 }}
             >
-                <button onClick={() => setCurrentOS(OS_THEME.windows)}>
-                    Windows OS
-                </button>
-                <button onClick={() => setCurrentOS(OS_THEME.linux)}>
-                    Linux OS
-                </button>
+                <button onClick={selectWindowsOS}>Windows OS</button>
+                <button onClick={selectLinuxOS}>Linux OS</button>
                 <h3 style={{ color: '#b6b8de' }}>
                     Some features might be disabled, we are working on
                     refactoring our codebase.

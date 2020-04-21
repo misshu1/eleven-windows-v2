@@ -1,17 +1,15 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useDispatchFolderContext } from '../../../../../../contexts/folderContext';
-import { GlobalAppContext } from '../../../../../../contexts/globalContext';
+import useMediaQuery from '../../../../../../hooks/useMediaQuery';
 import { AppIcon } from './style';
 
 const MenuAppIcon = (props) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { link, appId, widgetIcon, iconName, closeSideMenu } = props;
-    const {
-        globalApp: { isMobile },
-    } = useContext(GlobalAppContext);
+    const isMobile = useMediaQuery('(max-width: 28rem)');
 
     const open = useRef(null);
     const active = useRef(null);

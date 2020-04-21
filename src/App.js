@@ -2,16 +2,16 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import {
     faCheckSquare,
+    faCog,
     faEllipsisV,
     faExclamationCircle,
     faExclamationTriangle,
     faLayerGroup,
     faSpinner,
+    faTh,
     faTimes,
     faUserCircle,
-    faWindowMinimize,
-    faTh,
-    faCog,
+    faWindowMinimize
 } from '@fortawesome/free-solid-svg-icons';
 import React, { useContext, useLayoutEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -21,9 +21,9 @@ import LoginApp from './components/login/LoginApp';
 import { GlobalStyle } from './components/style/GlobalStyle';
 import WorkspaceApp from './components/workspace/WorkspaceApp';
 import { FirebaseProvider } from './contexts/firebaseContext';
-import { GlobalAppContext } from './contexts/globalContext';
 import { NotificationProvider } from './contexts/notificationContext';
-import { OS_THEME, ThemeContext } from './contexts/themeContext';
+import { useSettingsContext } from './contexts/settingsContext';
+import { ThemeContext } from './contexts/themeContext';
 import { ProvideAuth } from './hooks/useAuth';
 
 library.add(
@@ -47,13 +47,13 @@ const App = () => {
         getSelectedBackground,
         checkLocalStorageTheme,
         checkLocalStorageBackground,
-        currentOS,
     } = useContext(ThemeContext);
-    const {
-        globalApp: { size },
-    } = useContext(GlobalAppContext);
     const desktopBg = getSelectedBackground().bg;
-
+    const {
+        isLinuxSelected,
+        isWindowsSelected,
+        appSize,
+    } = useSettingsContext();
     useLayoutEffect(() => {
         checkLocalStorageTheme();
         checkLocalStorageBackground();
@@ -65,10 +65,10 @@ const App = () => {
             <ProvideAuth>
                 <ThemeProvider theme={theme}>
                     <GlobalStyle
-                        size={size}
+                        size={appSize}
                         background={desktopBg}
-                        linux={OS_THEME.linux === currentOS}
-                        windows={OS_THEME.windows === currentOS}
+                        linux={isLinuxSelected()}
+                        windows={isWindowsSelected()}
                     />
 
                     <NotificationProvider>

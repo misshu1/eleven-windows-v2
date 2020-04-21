@@ -1,17 +1,15 @@
 import PropTypes from 'prop-types';
-import React, { memo, useContext, useRef } from 'react';
+import React, { memo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useDispatchFolderContext } from '../../../../contexts/folderContext';
-import { GlobalAppContext } from '../../../../contexts/globalContext';
+import useMediaQuery from '../../../../hooks/useMediaQuery';
 import { IconContainer } from './style';
 
 const DesktopIconApp = memo((props) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { link, appId, widgetIcon, iconName } = props;
-    const {
-        globalApp: { isMobile },
-    } = useContext(GlobalAppContext);
+    const isMobile = useMediaQuery('(max-width: 28rem)');
 
     const open = useRef(null);
     const active = useRef(null);

@@ -1,10 +1,11 @@
-import React, { createContext, lazy, useContext, useReducer } from 'react';
+import React, { createContext, lazy, useContext, useLayoutEffect, useReducer } from 'react';
 
 import CalculatorIcon from '../assets/images/icons/CalculatorIcon';
 import DocsIcon from '../assets/images/icons/DocsIcon';
 import SettingsIcon from '../assets/images/icons/SettingsIcon';
 import StoreIcon from '../assets/images/icons/StoreIcon';
 import TaskIcon from '../assets/images/icons/TaskIcon';
+import useMediaQuery from '../hooks/useMediaQuery';
 
 const DocsApp = lazy(() => import('../components/apps/docs/DocsApp'));
 const SettingsApp = lazy(() =>
@@ -17,7 +18,6 @@ const CalculatorApp = lazy(() =>
 const TaskManagerApp = lazy(() =>
     import('../components/apps/taskManager/TaskManagerApp')
 );
-const isMobile = window.matchMedia('(max-width: 28rem)').matches ? true : false;
 
 const FOLDER_ACTIONS = {
     open: 'OPEN',
@@ -25,6 +25,7 @@ const FOLDER_ACTIONS = {
     active: 'ACTIVE',
     minimizeUp: 'MINIMIZE_UP',
     minimizeDown: 'MINIMIZE_DOWN',
+    setIsAppOpen: 'SET_IS_APP_OPEN',
 };
 
 export const ICON_LOCATION = {
@@ -42,7 +43,7 @@ const APPS_STATE = [
         widgetIcon: <SettingsIcon />,
         link: '/settings',
         component: <SettingsApp />,
-        isOpen: isMobile ? 'open' : 'close',
+        isOpen: null,
         isMinimize: null,
         appIndex: 100,
         iconLocation: [
@@ -57,7 +58,7 @@ const APPS_STATE = [
         widgetIcon: <DocsIcon />,
         link: '/docs',
         component: <DocsApp />,
-        isOpen: isMobile ? 'open' : 'close',
+        isOpen: null,
         isMinimize: null,
         appIndex: 100,
         iconLocation: [
@@ -72,7 +73,7 @@ const APPS_STATE = [
         widgetIcon: <CalculatorIcon />,
         link: '/calculator',
         component: <CalculatorApp />,
-        isOpen: isMobile ? 'open' : 'close',
+        isOpen: null,
         isMinimize: null,
         appIndex: 100,
         iconLocation: [ICON_LOCATION.startMenuRight, ICON_LOCATION.linuxMenu],
@@ -83,7 +84,7 @@ const APPS_STATE = [
         widgetIcon: <StoreIcon />,
         link: '/store',
         component: <StoreApp />,
-        isOpen: isMobile ? 'open' : 'close',
+        isOpen: null,
         isMinimize: null,
         appIndex: 100,
         iconLocation: [
@@ -98,7 +99,7 @@ const APPS_STATE = [
         widgetIcon: <TaskIcon />,
         link: '/taskManager',
         component: <TaskManagerApp />,
-        isOpen: isMobile ? 'open' : 'close',
+        isOpen: null,
         isMinimize: null,
         appIndex: 100,
         iconLocation: [ICON_LOCATION.notificationsWindow],
@@ -207,6 +208,17 @@ const folderReducer = (state, action) => {
             } else {
                 return state;
             }
+
+        case FOLDER_ACTIONS.setIsAppOpen:
+            return {
+                ...state,
+                apps: state.apps.map((item) => ({
+                    ...item,
+                    isOpen: action.payload ? 'open' : 'close',
+                })),
+                openApps: [],
+            };
+
         default:
             return state;
     }
@@ -215,10 +227,21 @@ const folderReducer = (state, action) => {
 const FolderContext = createContext();
 const DispatchFolderContext = createContext();
 export const FolderProvider = (props) => {
+    const isMobile = useMediaQuery('(max-width: 28rem)');
+
     const [folderState, folderDispatch] = useReducer(folderReducer, {
         apps: APPS_STATE,
         openApps: [],
     });
+
+    // Set "isOpen" from APPS_STATE when user resizes the browser
+    // All apps are "open" on mobile and "close" on desktop
+    useLayoutEffect(() => {
+        folderDispatch({
+            type: FOLDER_ACTIONS.setIsAppOpen,
+            payload: isMobile,
+        });
+    }, [isMobile]);
 
     const openFolder = (appId) => {
         folderDispatch({

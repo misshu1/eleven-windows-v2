@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useDispatchFolderContext } from '../../../../../../../contexts/folderContext';
-import { GlobalAppContext } from '../../../../../../../contexts/globalContext';
+import useMediaQuery from '../../../../../../../hooks/useMediaQuery';
 import { useStartMenuContext } from '../../../contexts/startMenuContext';
 import { Widget } from './style';
 
@@ -17,10 +17,7 @@ const WidgetApp = (props) => {
     } = props;
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { closeStartMenu } = useStartMenuContext();
-
-    const {
-        globalApp: { isMobile },
-    } = useContext(GlobalAppContext);
+    const isMobile = useMediaQuery('(max-width: 28rem)');
 
     const open = useRef(null);
     const active = useRef(null);
