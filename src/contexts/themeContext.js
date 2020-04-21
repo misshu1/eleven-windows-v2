@@ -29,6 +29,14 @@ export const ThemeProvider = (props) => {
     const [background, setBackground] = useState(createBackgroundObject());
     const [currentOS, setCurrentOS] = useState(OS_THEME.linux);
 
+    const isLinuxSelected = () => {
+        return currentOS === OS_THEME.linux;
+    };
+
+    const isWindowsSelected = () => {
+        return currentOS === OS_THEME.windows;
+    };
+
     const getSelectedBackground = () => {
         return background.find((item) => item.isSelected === true);
     };
@@ -100,6 +108,8 @@ export const ThemeProvider = (props) => {
                 checkLocalStorageBackground,
                 currentOS,
                 setCurrentOS,
+                isLinuxSelected,
+                isWindowsSelected,
             }}
         >
             {props.children}

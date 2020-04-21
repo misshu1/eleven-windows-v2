@@ -2,7 +2,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React, { useContext } from 'react';
 
 import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
-import { OS_THEME, ThemeContext } from '../../contexts/themeContext';
+import { ThemeContext } from '../../contexts/themeContext';
 import { AppIcon, OpenAppsContainer, Taskbar } from './style';
 
 const OpenApps = () => {
@@ -12,7 +12,7 @@ const OpenApps = () => {
         minimizeUp,
         minimizeDown,
     } = useDispatchFolderContext();
-    const { currentOS } = useContext(ThemeContext);
+    const { isLinuxSelected, isWindowsSelected } = useContext(ThemeContext);
 
     const showIcons = () => {
         return folderState.openApps.map((openApp) => {
@@ -50,10 +50,10 @@ const OpenApps = () => {
 
     return (
         <>
-            {currentOS === OS_THEME.windows && (
+            {isWindowsSelected() && (
                 <OpenAppsContainer>{showIcons()}</OpenAppsContainer>
             )}
-            {currentOS === OS_THEME.linux && <Taskbar>{showIcons()}</Taskbar>}
+            {isLinuxSelected() && <Taskbar>{showIcons()}</Taskbar>}
         </>
     );
 };

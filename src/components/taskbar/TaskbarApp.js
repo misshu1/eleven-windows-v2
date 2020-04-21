@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 
-import { OS_THEME, ThemeContext } from '../../contexts/themeContext';
+import { ThemeContext } from '../../contexts/themeContext';
 import TaskbarLinuxApp from '../workspace/linux/taskbar/TaskbarLinuxApp';
 import TaskbarWindowsApp from '../workspace/windows/taskbar/TaskbarWindowsApp';
 
 const TaskbarApp = () => {
-    const { currentOS } = useContext(ThemeContext);
+    const { isLinuxSelected, isWindowsSelected } = useContext(ThemeContext);
 
     return ReactDOM.createPortal(
         <>
-            {currentOS === OS_THEME.windows && (
+            {isWindowsSelected() && (
                 // <Taskbar onClick={closeAllApps}>
                 //     <LogoIconApp />
                 //     <OpenApps />
@@ -24,7 +24,7 @@ const TaskbarApp = () => {
                 // </Taskbar>
                 <TaskbarWindowsApp />
             )}
-            {currentOS === OS_THEME.linux && <TaskbarLinuxApp />}
+            {isLinuxSelected() && <TaskbarLinuxApp />}
         </>,
         document.querySelector('#taskbar')
     );
