@@ -1,4 +1,8 @@
+import i18n from 'i18next';
 import React, { createContext, useContext, useState } from 'react';
+
+import globeImg from '../assets/images/flags/globe.svg';
+import i18next, { languages } from '../services/translation/i18next';
 
 const OS_THEME = {
     windows: 'WINDOWS',
@@ -10,6 +14,20 @@ export const SettingsProvider = ({ children }) => {
     const [currentOS, setCurrentOS] = useState(OS_THEME.linux);
     // Default HTML font size 16px
     const [appSize, setAppSize] = useState(16);
+
+    const languageFlag = () => {
+        const locationLanguage = i18next.language;
+        const lang = languages.find((item) => item.lang === i18next.language);
+        const checkLanguage = languages.find(
+            (item) => item.lang === locationLanguage
+        );
+
+        return !checkLanguage ? globeImg : lang.flag;
+    };
+
+    const changeLanguage = (lang) => {
+        i18n.changeLanguage(lang);
+    };
 
     const changeAppSize = (size) => {
         setAppSize(size);
@@ -40,6 +58,8 @@ export const SettingsProvider = ({ children }) => {
                 selectLinuxOS,
                 appSize,
                 changeAppSize,
+                languageFlag,
+                changeLanguage,
             }}
         >
             {children}

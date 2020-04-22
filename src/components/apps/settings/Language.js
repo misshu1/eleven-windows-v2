@@ -1,21 +1,22 @@
-import React, { useContext } from 'react';
 import i18n from 'i18next';
-import { FlagImgContainer, Title, Box, Spacer } from './style';
-import { languages } from '../../../services/translation/i18next';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlagImg } from '../../taskbar/style';
+
 import { NotificationContext } from '../../../contexts/notificationContext';
+import { languages } from '../../../services/translation/i18next';
+import { FlagImg } from '../../workspace/windows/taskbar/icons/language/style/FlagImg';
+import { Box, FlagImgContainer, Spacer, Title } from './style';
 
 const Language = () => {
     const { createNotificationSuccess } = useContext(NotificationContext);
     const { t } = useTranslation();
 
-    const changeLanguage = lang => {
+    const changeLanguage = (lang) => {
         i18n.changeLanguage(lang);
     };
 
     const renderImg = () => {
-        return languages.map(item => (
+        return languages.map((item) => (
             <FlagImgContainer
                 key={item.lang}
                 style={{ height: '3.5rem' }}

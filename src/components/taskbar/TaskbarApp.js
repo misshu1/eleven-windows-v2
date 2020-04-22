@@ -10,20 +10,7 @@ const TaskbarApp = () => {
 
     return ReactDOM.createPortal(
         <>
-            {isWindowsSelected() && (
-                // <Taskbar onClick={closeAllApps}>
-                //     <LogoIconApp />
-                //     <OpenApps />
-                //     <CartIconApp />
-                //     <Suspense fallback={<SpinnerApp delay={200} />}>
-                //         {startMenuOpen && <StartMenuApp />}
-                //     </Suspense>{' '}
-                //     <LanguageIconApp />
-                //     <ClockIconApp />
-                //     <NotificationIconApp />
-                // </Taskbar>
-                <TaskbarWindowsApp />
-            )}
+            {isWindowsSelected() && <TaskbarWindowsApp />}
             {isLinuxSelected() && <TaskbarLinuxApp />}
         </>,
         document.querySelector('#taskbar')
