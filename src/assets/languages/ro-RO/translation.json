@@ -44,7 +44,8 @@
     },
     "notification": {
         "status": "Nu sunt notificări noi",
-        "clear": "Ștergeți toate notificările"
+        "clear": "Ștergeți toate notificările",
+        "title": "Notificări"
     },
     "settings": {
         "title": {

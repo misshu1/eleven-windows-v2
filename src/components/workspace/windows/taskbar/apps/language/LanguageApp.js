@@ -1,8 +1,8 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
-import { NotificationContext } from '../../../../../../contexts/notificationContext';
+import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
 import { languages } from '../../../../../../services/translation/i18next';
 import { useLanguageContext } from '../../contexts/languageContext';
@@ -10,7 +10,7 @@ import { Container as LanguageContainer, FlagImg } from '../../icons/language/st
 import { Container } from './style';
 
 const LanguageApp = ({ languageMenuRef }) => {
-    const { createNotificationSuccess } = useContext(NotificationContext);
+    const { showSuccess } = useNotificationsContext();
     const { closeLanguage } = useLanguageContext();
     const { changeLanguage } = useSettingsContext();
     const { t } = useTranslation();
@@ -23,7 +23,7 @@ const LanguageApp = ({ languageMenuRef }) => {
                 onClick={() => {
                     changeLanguage(item.lang);
                     closeLanguage();
-                    createNotificationSuccess(
+                    showSuccess(
                         t('language.successTitle'),
                         t('language.successMessage')
                     );
@@ -36,7 +36,7 @@ const LanguageApp = ({ languageMenuRef }) => {
                 />
             </LanguageContainer>
         ));
-    }, [changeLanguage, closeLanguage, createNotificationSuccess, t]);
+    }, [changeLanguage, closeLanguage, showSuccess, t]);
 
     return ReactDOM.createPortal(
         <Container ref={languageMenuRef}>{showLanguages()}</Container>,

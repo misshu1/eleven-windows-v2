@@ -1,42 +1,38 @@
-import React, { useContext } from 'react';
-import { NotificationContext } from '../../../contexts/notificationContext';
-import { useTranslation } from 'react-i18next';
-import { ThemeContext } from '../../../contexts/themeContext';
 import { makeStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
-import {
-    Title,
-    NotificationContainer,
-    Spacer,
-    NotificationText
-} from './style';
+import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { useNotificationsContext } from '../../../contexts/notificationsContext';
+import { ThemeContext } from '../../../contexts/themeContext';
+import { NotificationContainer, NotificationText, Spacer, Title } from './style';
 
 const useStyles = makeStyles({
-    switchBase: theme => ({
+    switchBase: (theme) => ({
         color: theme.accentBg,
         '&$checked': {
-            color: theme.accentBg
+            color: theme.accentBg,
         },
         '&$checked + $track': {
-            backgroundColor: theme.accentBg
-        }
+            backgroundColor: theme.accentBg,
+        },
     }),
-    checked: theme => ({
-        color: theme.accentBg
+    checked: (theme) => ({
+        color: theme.accentBg,
     }),
-    track: theme => ({
-        color: theme.accentBg
+    track: (theme) => ({
+        color: theme.accentBg,
     }),
-    thumb: theme => ({
-        color: theme.switchColor
-    })
+    thumb: (theme) => ({
+        color: theme.switchColor,
+    }),
 });
 
 const Notification = () => {
     const { theme } = useContext(ThemeContext);
     const classes = useStyles(theme);
     const { t } = useTranslation();
-    const { disable, disableNotifications } = useContext(NotificationContext);
+    const { disable, disableNotifications } = useNotificationsContext();
 
     return (
         <Spacer>
@@ -50,7 +46,7 @@ const Notification = () => {
                         switchBase: classes.switchBase,
                         track: classes.track,
                         thumb: classes.thumb,
-                        checked: classes.checked
+                        checked: classes.checked,
                     }}
                 />
                 <h4>{t('settings.disableButton')}</h4>

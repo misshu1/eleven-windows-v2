@@ -1,11 +1,12 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import {
-    faCheckSquare,
+    faCheck,
     faCog,
     faEllipsisV,
-    faExclamationCircle,
+    faExclamation,
     faExclamationTriangle,
+    faInfo,
     faLayerGroup,
     faSpinner,
     faTh,
@@ -13,6 +14,8 @@ import {
     faUserCircle,
     faWindowMinimize
 } from '@fortawesome/free-solid-svg-icons';
+import { makeStyles } from '@material-ui/core/styles';
+import { SnackbarProvider } from 'notistack';
 import React, { useContext, useLayoutEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
@@ -21,25 +24,32 @@ import LoginApp from './components/login/LoginApp';
 import { GlobalStyle } from './components/style/GlobalStyle';
 import WorkspaceApp from './components/workspace/WorkspaceApp';
 import { FirebaseProvider } from './contexts/firebaseContext';
-import { NotificationProvider } from './contexts/notificationContext';
+import { NotificationsProvider } from './contexts/notificationsContext';
 import { useSettingsContext } from './contexts/settingsContext';
 import { ThemeContext } from './contexts/themeContext';
 import { ProvideAuth } from './hooks/useAuth';
 
 library.add(
     faCommentAlt,
-    faCheckSquare,
-    faExclamationTriangle,
+    faCheck,
+    faExclamation,
     faTimes,
     faWindowMinimize,
     faUserCircle,
     faSpinner,
-    faExclamationCircle,
+    faExclamationTriangle,
     faEllipsisV,
     faLayerGroup,
     faTh,
-    faCog
+    faCog,
+    faInfo
 );
+
+const useStyles = makeStyles({
+    margin: {
+        bottom: '5rem',
+    },
+});
 
 const App = () => {
     const {
@@ -59,37 +69,50 @@ const App = () => {
         checkLocalStorageBackground();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    const classes = useStyles();
 
     return (
-        <FirebaseProvider>
-            <ProvideAuth>
-                <ThemeProvider theme={theme}>
-                    <GlobalStyle
-                        size={appSize}
-                        background={desktopBg}
-                        linux={isLinuxSelected()}
-                        windows={isWindowsSelected()}
-                    />
+        <SnackbarProvider
+            dense
+            domRoot={document.getElementById('modal')}
+            classes={{
+                containerAnchorOriginBottomRight: classes.margin,
+            }}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+            }}
+        >
+            <FirebaseProvider>
+                <ProvideAuth>
+                    <ThemeProvider theme={theme}>
+                        <GlobalStyle
+                            size={appSize}
+                            background={desktopBg}
+                            linux={isLinuxSelected()}
+                            windows={isWindowsSelected()}
+                        />
 
-                    <NotificationProvider>
-                        <Switch>
-                            <Route
-                                exact
-                                path='/login'
-                                render={() => (
-                                    <LoginApp background={desktopBg} />
-                                )}
-                            />
-                            <Route path='/' component={WorkspaceApp} />
-                            <Route
-                                path='/404'
-                                render={() => <div>404...</div>}
-                            />
-                        </Switch>
-                    </NotificationProvider>
-                </ThemeProvider>
-            </ProvideAuth>
-        </FirebaseProvider>
+                        <NotificationsProvider>
+                            <Switch>
+                                <Route
+                                    exact
+                                    path='/login'
+                                    render={() => (
+                                        <LoginApp background={desktopBg} />
+                                    )}
+                                />
+                                <Route path='/' component={WorkspaceApp} />
+                                <Route
+                                    path='/404'
+                                    render={() => <div>404...</div>}
+                                />
+                            </Switch>
+                        </NotificationsProvider>
+                    </ThemeProvider>
+                </ProvideAuth>
+            </FirebaseProvider>
+        </SnackbarProvider>
     );
 };
 

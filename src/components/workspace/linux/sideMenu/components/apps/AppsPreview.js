@@ -1,5 +1,6 @@
 import Typography from '@material-ui/core/Typography';
 import React, { useCallback, useMemo, useRef } from 'react';
+import Scrollbar from 'react-scrollbars-custom';
 
 import { ICON_LOCATION, useFolderContext } from '../../../../../../contexts/folderContext';
 import { useSideMenuContext } from '../../../contexts/sideMenuContext';
@@ -36,10 +37,16 @@ const AppsPreview = () => {
     return (
         <>
             <Container>
-                <Typography variant='h5' component='h2' className='title'>
+                <Typography
+                    variant='h5'
+                    component='h2'
+                    className='heading-name'
+                >
                     {menuName}
                 </Typography>
-                {menuIcons()}
+                <Scrollbar>
+                    <div className='apps-container'>{menuIcons()}</div>
+                </Scrollbar>
             </Container>
         </>
     );

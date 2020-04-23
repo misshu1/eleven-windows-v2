@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -12,7 +13,7 @@ const Container = styled.div`
     transform: translate(-50%, -50%);
 `;
 
-const SpinnerApp = (props) => {
+const SpinnerGlobalApp = (props) => {
     const { delay } = props;
     const [ready, setReady] = useState(false);
 
@@ -27,19 +28,20 @@ const SpinnerApp = (props) => {
         };
     }, [delay]);
 
-    return (
+    return ReactDOM.createPortal(
         <>
             {ready && (
                 <Container>
                     <FontAwesomeIcon icon='spinner' size='2x' pulse />
                 </Container>
             )}
-        </>
+        </>,
+        document.getElementById('desktop')
     );
 };
 
-export default SpinnerApp;
+export default SpinnerGlobalApp;
 
-SpinnerApp.propTypes = {
+SpinnerGlobalApp.propTypes = {
     delay: PropTypes.number,
 };

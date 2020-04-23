@@ -1,11 +1,11 @@
 import Badge from '@material-ui/core/Badge';
 import Tooltip from '@material-ui/core/Tooltip';
 import { motion } from 'framer-motion';
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import LogoIcon from '../../../../assets/images/icons/LogoIcon';
-import { NotificationContext } from '../../../../contexts/notificationContext';
+import { useNotificationsContext } from '../../../../contexts/notificationsContext';
 import { logoAnimations } from '../../../animations/animations';
 import { useSideMenuContext } from '../contexts/sideMenuContext';
 import SideMenuApp from '../sideMenu/SideMenuApp';
@@ -13,7 +13,7 @@ import { BorderLogo, Desktop, Logo, LogoContainer, SideMenu } from './style';
 
 const DesktopLinuxApp = () => {
     const { t } = useTranslation();
-    const { notification } = useContext(NotificationContext);
+    const { notificationsHistory } = useNotificationsContext();
     const { isMenuOpen, openSideMenu } = useSideMenuContext();
 
     return (
@@ -29,7 +29,7 @@ const DesktopLinuxApp = () => {
                         enterDelay={500}
                     >
                         <Badge
-                            badgeContent={notification.length}
+                            badgeContent={notificationsHistory.length}
                             color='error'
                             anchorOrigin={{
                                 vertical: 'top',

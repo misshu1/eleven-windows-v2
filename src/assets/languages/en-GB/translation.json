@@ -44,7 +44,8 @@
     },
     "notification": {
         "status": "No new notifications",
-        "clear": "Clear all notifications"
+        "clear": "Clear all notifications",
+        "title": "Notifications"
     },
     "settings": {
         "title": {

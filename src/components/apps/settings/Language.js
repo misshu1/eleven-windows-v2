@@ -1,14 +1,14 @@
 import i18n from 'i18next';
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { NotificationContext } from '../../../contexts/notificationContext';
+import { useNotificationsContext } from '../../../contexts/notificationsContext';
 import { languages } from '../../../services/translation/i18next';
 import { FlagImg } from '../../workspace/windows/taskbar/icons/language/style/FlagImg';
 import { Box, FlagImgContainer, Spacer, Title } from './style';
 
 const Language = () => {
-    const { createNotificationSuccess } = useContext(NotificationContext);
+    const { showSuccess } = useNotificationsContext();
     const { t } = useTranslation();
 
     const changeLanguage = (lang) => {
@@ -22,7 +22,7 @@ const Language = () => {
                 style={{ height: '3.5rem' }}
                 onClick={() => {
                     changeLanguage(item.lang);
-                    createNotificationSuccess(
+                    showSuccess(
                         t('language.successTitle'),
                         t('language.successMessage')
                     );

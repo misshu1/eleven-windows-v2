@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useRef } from 'react';
 
 import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import SpinnerApp from '../../../style/SpinnerApp';
+import SpinnerGlobalApp from '../../../style/SpinnerGlobalApp';
 import { useCartContext } from './contexts/cartContext';
 import { CartIconApp } from './icons/cart/CartIconApp';
 
@@ -20,7 +20,7 @@ const CartMenuAndIcon = () => {
     return (
         <>
             <CartIconApp cartIconRef={cartIconRef} />
-            <Suspense fallback={<SpinnerApp delay={200} />}>
+            <Suspense fallback={<SpinnerGlobalApp delay={200} />}>
                 {isCartOpen && <CartApp cartMenuRef={cartMenuRef} />}
             </Suspense>
         </>

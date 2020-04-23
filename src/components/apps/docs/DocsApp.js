@@ -8,7 +8,7 @@ import { tomorrow, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import FolderIcon from '../../../assets/images/icons/FolderIcon';
 import LogoIcon from '../../../assets/images/icons/LogoIcon';
 import Emoji from '../../../components/emoji/Emoji';
-import { NotificationContext } from '../../../contexts/notificationContext';
+import { useNotificationsContext } from '../../../contexts/notificationsContext';
 import { ThemeContext } from '../../../contexts/themeContext';
 import FolderApp from '../../folder/FolderApp';
 import { folderMenuExample, loadingLogoExample, notificationExample, zIndexExample } from './CodeExamples';
@@ -27,8 +27,8 @@ const useStyles = makeStyles({
         margin: 'auto 0',
         cursor: 'default',
         '&:hover': {
-            backgroundColor: '#43a047'
-        }
+            backgroundColor: '#43a047',
+        },
     },
     warnButton: {
         backgroundColor: '#ffa000',
@@ -39,8 +39,8 @@ const useStyles = makeStyles({
         margin: 'auto 0',
         cursor: 'default',
         '&:hover': {
-            backgroundColor: '#ffa000'
-        }
+            backgroundColor: '#ffa000',
+        },
     },
     errorButton: {
         backgroundColor: '#d32f2f',
@@ -51,12 +51,12 @@ const useStyles = makeStyles({
         margin: 'auto 0',
         cursor: 'default',
         '&:hover': {
-            backgroundColor: '#d32f2f'
-        }
-    }
+            backgroundColor: '#d32f2f',
+        },
+    },
 });
 
-const addWordBreak = str => {
+const addWordBreak = (str) => {
     const regex = /(\/[a-zA-Z.]+)/g;
     let newStringArray = [];
     let m;
@@ -70,7 +70,7 @@ const addWordBreak = str => {
             <span key={Math.random()} className='text-highlight'>
                 {m[0]}
                 <wbr />
-            </span>
+            </span>,
         ];
     }
     return newStringArray;
@@ -79,11 +79,7 @@ const addWordBreak = str => {
 const DocsApp = () => {
     const [highlightStyle, setHighlightStyle] = useState(tomorrow);
     const { theme } = useContext(ThemeContext);
-    const {
-        createNotificationSuccess,
-        createNotificationWarn,
-        createNotificationError
-    } = useContext(NotificationContext);
+    const { showSuccess, showError, showWarning } = useNotificationsContext();
     const classes = useStyles();
     const changeLoadingLogoRef = useRef(null);
     const createNotificationsRef = useRef(null);
@@ -99,7 +95,7 @@ const DocsApp = () => {
                 fontIcon: null,
                 link: null,
                 scrollToRef: 'createFolderRef',
-                onClick: null
+                onClick: null,
             },
             {
                 name: 'Add a menu to the folder',
@@ -107,7 +103,7 @@ const DocsApp = () => {
                 fontIcon: ['fas', 'ellipsis-v'],
                 link: null,
                 scrollToRef: 'addMenuToFolderRef',
-                onClick: null
+                onClick: null,
             },
             {
                 name: 'Change loading logo',
@@ -115,7 +111,7 @@ const DocsApp = () => {
                 fontIcon: null,
                 link: null,
                 scrollToRef: 'changeLoadingLogoRef',
-                onClick: null
+                onClick: null,
             },
             {
                 name: 'Create notifications',
@@ -123,7 +119,7 @@ const DocsApp = () => {
                 fontIcon: ['far', 'comment-alt'],
                 link: null,
                 scrollToRef: 'createNotificationsRef',
-                onClick: null
+                onClick: null,
             },
             {
                 name: 'z-index',
@@ -131,8 +127,8 @@ const DocsApp = () => {
                 fontIcon: ['fas', 'layer-group'],
                 link: null,
                 scrollToRef: 'zIndexRef',
-                onClick: null
-            }
+                onClick: null,
+            },
         ];
     }, []);
 
@@ -153,7 +149,7 @@ const DocsApp = () => {
                 changeLoadingLogoRef,
                 createNotificationsRef,
                 addMenuToFolderRef,
-                zIndexRef
+                zIndexRef,
             }}
         >
             <Container>
@@ -192,7 +188,7 @@ const DocsApp = () => {
                     <Button
                         className={classes.successButton}
                         onClick={() => {
-                            createNotificationSuccess(
+                            showSuccess(
                                 'Success Title',
                                 'Notification success info.'
                             );
@@ -203,7 +199,7 @@ const DocsApp = () => {
                     <Button
                         className={classes.warnButton}
                         onClick={() => {
-                            createNotificationWarn(
+                            showWarning(
                                 'Warn Title',
                                 'Notification warn info.',
                                 400
@@ -215,7 +211,7 @@ const DocsApp = () => {
                     <Button
                         className={classes.errorButton}
                         onClick={() => {
-                            createNotificationError(
+                            showError(
                                 'Error Title',
                                 'Notification error info.',
                                 503

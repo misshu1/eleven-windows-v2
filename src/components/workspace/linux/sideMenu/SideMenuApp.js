@@ -2,12 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Badge from '@material-ui/core/Badge';
 import Tooltip from '@material-ui/core/Tooltip';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { Suspense, useContext, useRef } from 'react';
+import React, { Suspense, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import Scrollbar from 'react-scrollbars-custom';
 
 import BorderBG from '../../../../assets/images/bg/BorderBG';
-import { NotificationContext } from '../../../../contexts/notificationContext';
+import { useNotificationsContext } from '../../../../contexts/notificationsContext';
 import useOnClickOutside from '../../../../hooks/useOnClickOutside';
 import { expandedMenuAnimations, fadeAnimations, iconsMenuAnimations, SVGMenuAnimations } from '../../../animations';
 import SpinnerApp from '../../../style/SpinnerApp';
@@ -22,7 +22,7 @@ const SideMenuApp = (props) => {
         isMenuOpen,
         activeMenuIcon,
     } = useSideMenuContext();
-    const { notification } = useContext(NotificationContext);
+    const { notificationsHistory } = useNotificationsContext();
     useOnClickOutside([menuRef], () => closeSideMenu());
 
     return ReactDOM.createPortal(
@@ -81,7 +81,7 @@ const SideMenuApp = (props) => {
                                                 >
                                                     <Badge
                                                         badgeContent={
-                                                            notification.length
+                                                            notificationsHistory.length
                                                         }
                                                         color='error'
                                                         anchorOrigin={{
@@ -90,7 +90,7 @@ const SideMenuApp = (props) => {
                                                         }}
                                                         invisible={
                                                             app.showNotificationBadge &&
-                                                            notification.length >
+                                                            notificationsHistory.length >
                                                                 0
                                                                 ? false
                                                                 : true
@@ -115,16 +115,14 @@ const SideMenuApp = (props) => {
                             exit='close'
                             variants={expandedMenuAnimations}
                         >
-                            <Scrollbar>
-                                {sideMenuState.map((app) => (
-                                    <Suspense
-                                        key={app.id}
-                                        fallback={<SpinnerApp delay={200} />}
-                                    >
-                                        {app.isActive && app.component}
-                                    </Suspense>
-                                ))}
-                            </Scrollbar>
+                            {sideMenuState.map((app) => (
+                                <Suspense
+                                    key={app.id}
+                                    fallback={<SpinnerApp delay={200} />}
+                                >
+                                    {app.isActive && app.component}
+                                </Suspense>
+                            ))}
                         </ExpandedMenu>
                         <SvgContainer
                             key='svg'

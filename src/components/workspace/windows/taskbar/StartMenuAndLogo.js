@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useRef } from 'react';
 
 import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import SpinnerApp from '../../../style/SpinnerApp';
+import SpinnerGlobalApp from '../../../style/SpinnerGlobalApp';
 import { useStartMenuContext } from './contexts/startMenuContext';
 import LogoIconApp from './icons/logo/LogoIconApp';
 
@@ -20,7 +20,7 @@ const StartMenuAndLogo = () => {
     return (
         <>
             <LogoIconApp logoRef={logoRef} />
-            <Suspense fallback={<SpinnerApp delay={200} />}>
+            <Suspense fallback={<SpinnerGlobalApp delay={200} />}>
                 {isStartMenuOpen && (
                     <StartMenuApp startMenuRef={startMenuRef} />
                 )}
