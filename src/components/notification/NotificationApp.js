@@ -14,19 +14,22 @@ const NotificationApp = forwardRef((props, ref) => {
         <Container type={type} ref={ref}>
             <div className='icon'>
                 {type === NOTIFICATION_TYPE.success && (
-                    <FontAwesomeIcon icon={['fas', 'check']} size='lg' />
+                    <FontAwesomeIcon icon={['fas', 'check']} size='small' />
                 )}
                 {type === NOTIFICATION_TYPE.error && (
-                    <FontAwesomeIcon icon={['fas', 'exclamation']} size='lg' />
+                    <FontAwesomeIcon
+                        icon={['fas', 'exclamation']}
+                        size='small'
+                    />
                 )}
                 {type === NOTIFICATION_TYPE.warning && (
                     <FontAwesomeIcon
                         icon={['fas', 'exclamation-triangle']}
-                        size='lg'
+                        size='small'
                     />
                 )}
                 {type === NOTIFICATION_TYPE.info && (
-                    <FontAwesomeIcon icon={['fas', 'info']} size='lg' />
+                    <FontAwesomeIcon icon={['fas', 'info']} size='small' />
                 )}
             </div>
             <div className='content'>
@@ -44,12 +47,18 @@ const NotificationApp = forwardRef((props, ref) => {
                     </IconButton>
                 </span>
                 <p>{message}</p>
-                {type === NOTIFICATION_TYPE.error && (
-                    <p>{`Error code ${code}`}</p>
+                {code && type === NOTIFICATION_TYPE.error && (
+                    <p>
+                        {`Error code `}
+                        <span className='code'>{code}</span>
+                    </p>
                 )}
 
-                {type === NOTIFICATION_TYPE.warning && (
-                    <p>{`Warn code ${code}`}</p>
+                {code && type === NOTIFICATION_TYPE.warning && (
+                    <p>
+                        {`Warn code `}
+                        <span className='code'>{code}</span>
+                    </p>
                 )}
             </div>
         </Container>

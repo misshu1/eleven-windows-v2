@@ -26,10 +26,6 @@ const DesktopApp = () => {
             >
                 <button onClick={selectWindowsOS}>Windows OS</button>
                 <button onClick={selectLinuxOS}>Linux OS</button>
-                <h3 style={{ color: '#b6b8de' }}>
-                    Some features might be disabled, we are working on
-                    refactoring our codebase.
-                </h3>
             </div>
             {isWindowsSelected() && <DesktopWindowsApp />}
             {isLinuxSelected() && (
