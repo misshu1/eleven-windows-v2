@@ -41,6 +41,12 @@ export const NotificationsProvider = ({ children }) => {
         );
     };
 
+    const clearAllNotifications = () => {
+        if (notificationsHistory.length > 0) {
+            setNotificationsHistory([]);
+        }
+    };
+
     const showSuccess = (title, message) => {
         const id = uuid.v4();
         setNotificationsHistory((prevState) => [
@@ -173,15 +179,10 @@ export const NotificationsProvider = ({ children }) => {
         }
     };
 
-    const clearAllNotifications = () => {
-        if (notificationsHistory.length > 0) {
-            setNotificationsHistory([]);
-        }
-    };
-
     return (
         <NotificationsContext.Provider
             value={{
+                disable,
                 notificationsHistory,
                 showSuccess,
                 showError,
