@@ -1,41 +1,32 @@
 import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import translationGB from '../../assets/languages/en-GB/translation.json';
+import { initReactI18next } from 'react-i18next';
+
+import flagRO from '../../assets/images/flags/ro.svg';
+import flagUS from '../../assets/images/flags/us.svg';
 import translationUS from '../../assets/languages/en-US/translation.json';
 import translationRO from '../../assets/languages/ro-RO/translation.json';
-import flagUS from '../../assets/images/flags/us.svg';
-import flagGB from '../../assets/images/flags/gb.svg';
-import flagRO from '../../assets/images/flags/ro.svg';
 
 export const languages = [
     {
         name: 'us',
         lang: 'en-US',
-        flag: flagUS
-    },
-    {
-        name: 'gb',
-        lang: 'en-GB',
-        flag: flagGB
+        flag: flagUS,
     },
     {
         name: 'ro',
         lang: 'ro-RO',
-        flag: flagRO
-    }
+        flag: flagRO,
+    },
 ];
 
 const resources = {
     'en-US': {
-        translation: translationUS
-    },
-    'en-GB': {
-        translation: translationGB
+        translation: translationUS,
     },
     'ro-RO': {
-        translation: translationRO
-    }
+        translation: translationRO,
+    },
 };
 
 i18n.use(LanguageDetector)
@@ -46,8 +37,8 @@ i18n.use(LanguageDetector)
         fallbackLng: 'en-US',
         debug: false,
         interpolation: {
-            escapeValue: false
-        }
+            escapeValue: false,
+        },
     });
 
 export default i18n;

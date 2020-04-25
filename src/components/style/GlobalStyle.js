@@ -7,9 +7,18 @@ ${normalize}
 
 
 :root {
+    --white: #ffffff;
+    --black: #000000;
+
     --linuxCloseBtn: #ff605c;
     --linuxMinimizeBtn: #00ca4e;
     --linuxMaximizeBtn: #ffbd44;
+
+    --textColor: #d6d8de;
+    --borderColor: #444444;
+    --hoverColor: rgba(100, 100, 100, 0.3);
+
+    --accentColor: #AF0138;
 }
 
 

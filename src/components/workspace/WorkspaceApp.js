@@ -9,15 +9,13 @@ const DesktopApp = lazy(() => import('../desktop/DesktopApp'));
 
 const WorkspaceApp = () => {
     return (
-        <>
-            <FolderProvider>
-                <RoutesApp />
-                <Suspense fallback={<SpinnerApp delay={200} />}>
-                    <DesktopApp />
-                    <TaskbarApp />
-                </Suspense>
-            </FolderProvider>
-        </>
+        <FolderProvider>
+            <RoutesApp />
+            <Suspense fallback={<SpinnerApp delay={200} />}>
+                <DesktopApp />
+                <TaskbarApp />
+            </Suspense>
+        </FolderProvider>
     );
 };
 
