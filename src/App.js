@@ -8,6 +8,7 @@ import {
     faExclamationTriangle,
     faInfo,
     faLayerGroup,
+    faShoppingCart,
     faSpinner,
     faTh,
     faTimes,
@@ -42,7 +43,8 @@ library.add(
     faLayerGroup,
     faTh,
     faCog,
-    faInfo
+    faInfo,
+    faShoppingCart
 );
 
 const useStyles = makeStyles({

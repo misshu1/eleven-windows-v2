@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-export const ExpandedMenu = styled(motion.div)`
+export const Container = styled(motion.div)`
     background: ${(props) => props.theme.startMenuBg};
     overflow-y: auto;
     z-index: 149;

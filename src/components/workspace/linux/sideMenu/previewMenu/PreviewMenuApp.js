@@ -1,0 +1,26 @@
+import React, { Suspense } from 'react';
+
+import { expandedMenuAnimations } from '../../../../animations';
+import SpinnerApp from '../../../../style/SpinnerApp';
+import { useSideMenuContext } from '../../contexts/sideMenuContext';
+import { Container } from './style';
+
+export const PreviewMenuApp = () => {
+    const { sideMenuState } = useSideMenuContext();
+
+    return (
+        <Container
+            key='Container'
+            initial='close'
+            animate='open'
+            exit='close'
+            variants={expandedMenuAnimations}
+        >
+            {sideMenuState.map((app) => (
+                <Suspense key={app.id} fallback={<SpinnerApp delay={200} />}>
+                    {app.isActive && app.component}
+                </Suspense>
+            ))}
+        </Container>
+    );
+};

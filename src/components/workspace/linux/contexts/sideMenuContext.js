@@ -1,19 +1,17 @@
-import React, {
-    createContext,
-    lazy,
-    useContext,
-    useReducer,
-    useState,
-} from 'react';
+import React, { createContext, lazy, useContext, useReducer, useState } from 'react';
 
 const AppsPreview = lazy(() =>
-    import('../sideMenu/components/apps/AppsPreview')
+    import('../sideMenu/previewMenu/apps/AppsPreview')
 );
 const SettingsPreviewApp = lazy(() =>
-    import('../sideMenu/components/settings/SettingsPreviewApp')
+    import('../sideMenu/previewMenu/settings/SettingsPreviewApp')
 );
 const NotificationsPreviewApp = lazy(() =>
-    import('../sideMenu/components/notifications/NotificationsPreviewApp')
+    import('../sideMenu/previewMenu/notifications/NotificationsPreviewApp')
+);
+
+const CartPreviewApp = lazy(() =>
+    import('../sideMenu/previewMenu/cart/CartPreviewApp')
 );
 
 const MENU_ACTIONS = {
@@ -30,18 +28,25 @@ const SIDE_MENU_STATE = [
     },
     {
         id: 2,
+        name: 'Notifications',
+        fontIcon: ['far', 'comment-alt'],
+        component: <NotificationsPreviewApp />,
+        isActive: false,
+        showNotificationBadge: true,
+    },
+    {
+        id: 3,
         name: 'Settings',
         fontIcon: ['fas', 'cog'],
         component: <SettingsPreviewApp />,
         isActive: false,
     },
     {
-        id: 3,
-        name: 'Notifications',
-        fontIcon: ['far', 'comment-alt'],
-        component: <NotificationsPreviewApp />,
+        id: 4,
+        name: 'Cart',
+        fontIcon: ['fas', 'shopping-cart'],
+        component: <CartPreviewApp />,
         isActive: false,
-        showNotificationBadge: true,
     },
 ];
 

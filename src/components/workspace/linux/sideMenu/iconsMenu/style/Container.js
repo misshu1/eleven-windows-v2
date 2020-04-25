@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-export const IconsMenuContainer = styled(motion.div)`
+export const Container = styled(motion.div)`
     z-index: 150;
     height: 100%;
     width: 3.5rem;

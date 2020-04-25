@@ -6,6 +6,13 @@ export const GlobalStyle = createGlobalStyle`
 ${normalize}
 
 
+:root {
+    --linuxCloseBtn: #ff605c;
+    --linuxMinimizeBtn: #00ca4e;
+    --linuxMaximizeBtn: #ffbd44;
+}
+
+
 * {
     box-sizing: border-box;
 }
