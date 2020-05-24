@@ -12,8 +12,6 @@ const OS_THEME = {
 export const SettingsContext = createContext();
 export const SettingsProvider = ({ children }) => {
     const [currentOS, setCurrentOS] = useState(OS_THEME.linux);
-    // Default HTML font size 16px
-    const [appSize, setAppSize] = useState(16);
 
     const languageFlag = () => {
         const locationLanguage = i18next.language;
@@ -27,10 +25,6 @@ export const SettingsProvider = ({ children }) => {
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang);
-    };
-
-    const changeAppSize = (size) => {
-        setAppSize(size);
     };
 
     const isLinuxSelected = () => {
@@ -56,8 +50,6 @@ export const SettingsProvider = ({ children }) => {
                 isWindowsSelected,
                 selectWindowsOS,
                 selectLinuxOS,
-                appSize,
-                changeAppSize,
                 languageFlag,
                 changeLanguage,
             }}

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Container } from './style';
-import Customize from './Customize';
+
 import FolderApp from '../../folder/FolderApp';
-import Resize from './Resize';
+import Customize from './Customize';
 import Language from './Language';
 import Notification from './Notification';
+import { Container } from './style';
 
 const SettingsApp = () => {
     return (
@@ -12,7 +12,6 @@ const SettingsApp = () => {
             <Container>
                 <Customize />
                 <Language />
-                <Resize />
                 <Notification />
             </Container>
         </FolderApp>

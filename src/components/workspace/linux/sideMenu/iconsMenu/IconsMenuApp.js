@@ -10,6 +10,23 @@ import { fadeAnimations, iconsMenuAnimations } from '../../../../animations';
 import { useSideMenuContext } from '../../contexts/sideMenuContext';
 import { Container, Icon, IconsMenu } from './style';
 
+const IconWithBadge = ({ badgeContent, fontIcon }) => {
+    return (
+        <Badge
+            badgeContent={badgeContent}
+            color='error'
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            invisible={badgeContent > 0 ? false : true}
+            variant='dot'
+        >
+            <FontAwesomeIcon icon={fontIcon} />
+        </Badge>
+    );
+};
+
 export const IconsMenuApp = () => {
     const {
         sideMenuState,
@@ -59,25 +76,27 @@ export const IconsMenuApp = () => {
                                     isActive={app.isActive}
                                     onClick={() => activeMenuIcon(app.id)}
                                 >
-                                    <Badge
-                                        badgeContent={
-                                            notificationsHistory.length
-                                        }
-                                        color='error'
-                                        anchorOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        invisible={
-                                            app.showNotificationBadge &&
-                                            notificationsHistory.length > 0
-                                                ? false
-                                                : true
-                                        }
-                                        variant='dot'
-                                    >
-                                        <FontAwesomeIcon icon={app.fontIcon} />
-                                    </Badge>
+                                    {app.showNotificationBadge && (
+                                        <IconWithBadge
+                                            badgeContent={
+                                                notificationsHistory.length
+                                            }
+                                            fontIcon={app.fontIcon}
+                                        />
+                                    )}
+                                    {/* TODO Update the Cart badgeContent */}
+                                    {app.showCartBadge && (
+                                        <IconWithBadge
+                                            badgeContent={0}
+                                            fontIcon={app.fontIcon}
+                                        />
+                                    )}
+                                    {!app.showNotificationBadge &&
+                                        !app.showCartBadge && (
+                                            <FontAwesomeIcon
+                                                icon={app.fontIcon}
+                                            />
+                                        )}
                                 </Icon>
                             </Tooltip>
                         ))}

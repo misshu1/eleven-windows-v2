@@ -47,6 +47,7 @@ const SIDE_MENU_STATE = [
         fontIcon: ['fas', 'shopping-cart'],
         component: <CartPreviewApp />,
         isActive: false,
+        showCartBadge: true,
     },
 ];
 
@@ -87,6 +88,7 @@ export const SideMenuProvider = ({ children }) => {
     };
 
     const openSideMenu = () => {
+        activeMenuIcon(1);
         !isMenuOpen && setIsMenuOpen(true);
     };
 

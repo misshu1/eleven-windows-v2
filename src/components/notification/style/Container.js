@@ -57,12 +57,10 @@ export const Container = styled.div`
     h3 {
         margin: 0;
         flex: 1;
-        font-size: 1rem;
     }
     
     p {
         margin: 0.5rem 0;
-        font-size: .9rem;
     }
 
 .code {

@@ -61,16 +61,14 @@ const App = () => {
         checkLocalStorageBackground,
     } = useContext(ThemeContext);
     const desktopBg = getSelectedBackground().bg;
-    const {
-        isLinuxSelected,
-        isWindowsSelected,
-        appSize,
-    } = useSettingsContext();
+    const { isLinuxSelected, isWindowsSelected } = useSettingsContext();
+
     useLayoutEffect(() => {
         checkLocalStorageTheme();
         checkLocalStorageBackground();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
     const classes = useStyles();
 
     return (
@@ -89,7 +87,6 @@ const App = () => {
                 <ProvideAuth>
                     <ThemeProvider theme={theme}>
                         <GlobalStyle
-                            size={appSize}
                             background={desktopBg}
                             linux={isLinuxSelected()}
                             windows={isWindowsSelected()}
