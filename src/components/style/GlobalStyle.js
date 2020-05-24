@@ -81,7 +81,7 @@ ${normalize}
 
 html {
     height: 100%;
-    font-size: 100%;
+    font-size: 16px;
 }
 
 body {
@@ -152,25 +152,25 @@ body {
 
 @media screen and (min-width: 1901px) {
     html {
-        font-size: 100%
+        font-size: 16px;
     }
 }
 
 @media screen and (min-width: 1401px) and (max-width: 1900px) {
     html {
-        font-size: 90%
+        font-size: 15px;
     }
 }
 
 @media screen and (min-width: 901px) and (max-width: 1400px) {
     html {
-        font-size: 80%
+        font-size: 14px;
     }
 }
 
 @media screen and (max-width: 900px) {
     html {
-        font-size: 70%
+        font-size: 13px;
     }
 }
 `;
