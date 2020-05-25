@@ -11,7 +11,7 @@ const OS_THEME = {
 
 export const SettingsContext = createContext();
 export const SettingsProvider = ({ children }) => {
-    const [currentOS, setCurrentOS] = useState(OS_THEME.linux);
+    const [currentOS, setCurrentOS] = useState(OS_THEME.windows);
 
     const languageFlag = () => {
         const locationLanguage = i18next.language;
