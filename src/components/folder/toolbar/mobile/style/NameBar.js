@@ -6,9 +6,8 @@ export const NameBar = styled.div`
     position: sticky;
     top: 0;
     width: 100%;
-    height: 3rem;
+    height: 3.5rem;
     user-select: none;
-    /* background: ${(props) => props.theme.folderNameBarBg}; */
     transition: background 0.2s ease-in-out;
 
     && .backBtn {
@@ -18,16 +17,16 @@ export const NameBar = styled.div`
         width: 4rem;
         height: 100%;
         color: ${(props) => props.theme.accentBg};
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
 
     .menu {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 3rem;
+        width: 4rem;
         height: 100%;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     && .menu:hover,

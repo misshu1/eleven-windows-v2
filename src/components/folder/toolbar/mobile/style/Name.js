@@ -8,7 +8,7 @@ export const Name = styled.h2`
     align-items: center;
     height: 100%;
     margin: 0;
-    padding-left: ${(props) => (props.toolbarMenu ? '0.5rem' : '1.5rem')};
+    padding-left: 0.5rem;
     transition: color 0.2s ease-in-out;
     cursor: default;
 `;

@@ -105,7 +105,9 @@ const FolderApp = forwardRef((props, ref) => {
                                             open={showDrawer}
                                             style={{
                                                 zIndex: 500,
-                                                marginTop: '2.5rem',
+                                                marginTop: isMobile
+                                                    ? '3.5rem'
+                                                    : '2.5rem',
                                             }}
                                             onClick={closeDrawer}
                                         ></Backdrop>
