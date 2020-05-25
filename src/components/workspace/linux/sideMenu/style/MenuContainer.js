@@ -11,7 +11,7 @@ export const MenuContainer = styled.section`
     z-index: 400;
     user-select: none;
 
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 450px) {
         width: initial;
     }
 `;

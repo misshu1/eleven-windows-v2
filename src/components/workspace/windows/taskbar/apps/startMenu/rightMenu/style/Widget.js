@@ -15,14 +15,14 @@ export const Widget = styled.div`
     width: 100%;
     padding: 0.2rem;
     margin: 0.4rem 0;
-    background: ${props => props.theme.folderHoverBg};
-    outline: 1px solid ${props => props.theme.folderHoverOutline};
+    background: ${(props) => props.theme.folderHoverBg};
+    outline: 1px solid ${(props) => props.theme.folderHoverOutline};
 
     && a {
         display: flex;
         align-items: center;
         width: 100%;
-        color: ${props => props.theme.startMenuColor};
+        color: ${(props) => props.theme.startMenuColor};
         text-decoration: none;
     }
 
@@ -38,15 +38,15 @@ export const Widget = styled.div`
         text-overflow: ellipsis;
     }
 
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 450px) {
         background: transparent;
         outline: none;
-        animation: ${slideUp} ${props => props.animationDuration + 0.3 + 's'}
+        animation: ${slideUp} ${(props) => props.animationDuration + 0.3 + 's'}
             ease-out 1 forwards;
 
         &&:hover {
-            background: ${props => props.theme.folderHoverBg};
-            outline: 1px solid ${props => props.theme.folderHoverOutline};
+            background: ${(props) => props.theme.folderHoverBg};
+            outline: 1px solid ${(props) => props.theme.folderHoverOutline};
             transition: background 0.05s ease-in-out;
         }
     }

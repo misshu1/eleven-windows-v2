@@ -1,6 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import {
+    faArrowLeft,
     faCheck,
     faCog,
     faEllipsisV,
@@ -44,7 +45,8 @@ library.add(
     faTh,
     faCog,
     faInfo,
-    faShoppingCart
+    faShoppingCart,
+    faArrowLeft
 );
 
 const useStyles = makeStyles({

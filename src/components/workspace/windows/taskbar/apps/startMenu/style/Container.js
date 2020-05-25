@@ -24,7 +24,7 @@ export const Container = styled.section`
     z-index: 250;
     animation: ${slideUp} 0.4s ease-out 1 forwards;
 
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 450px) {
         max-width: 21.87rem;
         max-height: 45.5rem;
         top: auto;

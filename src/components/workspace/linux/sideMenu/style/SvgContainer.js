@@ -16,7 +16,7 @@ const animateSVGGradiant = keyframes`
 export const SvgContainer = styled(motion.div)`
     display: none;
 
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 450px) {
         z-index: 145;
         display: block;
         width: 0px;

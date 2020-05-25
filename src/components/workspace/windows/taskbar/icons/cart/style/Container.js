@@ -17,11 +17,11 @@ export const Container = styled.div`
         border-radius: 0.2rem;
     }
 
-    @media (max-width: 28rem) {
+    @media only screen and (max-width: 450px) {
         order: 3;
     }
 
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 451px) {
         height: 100%;
         width: 3.5rem;
         color: ${(props) => props.theme.textColor};

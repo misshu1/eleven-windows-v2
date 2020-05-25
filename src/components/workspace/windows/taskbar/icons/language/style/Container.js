@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     display: none;
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 450px) {
         cursor: default;
         display: flex;
         align-items: center;

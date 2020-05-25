@@ -67,7 +67,7 @@ export const Container = styled.section`
         animation-delay: 0.25s;
     }
 
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 450px) {
         width: 21.87rem;
         border-left: 1px solid ${(props) => props.theme.notificationBorder};
         box-shadow: -2px 0px 4px -1px rgba(0, 0, 0, 0.2),

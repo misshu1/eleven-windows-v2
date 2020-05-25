@@ -41,7 +41,7 @@ export const Container = styled.div`
         color: ${(props) => props.theme.calendarTodayClock};
     }
 
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 450px) {
         .clear {
             display: flex;
             align-items: center;

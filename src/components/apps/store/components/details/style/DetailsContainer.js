@@ -43,7 +43,7 @@ export const DetailsContainer = styled.div`
         .full-price {
             display: flex;
             margin: 0 2rem 0 1rem;
-            color: ${props => props.theme.material.accent.main};
+            color: ${(props) => props.theme.material.accent.main};
             transition: color 0.2s ease-in-out;
 
             .currency {
@@ -55,7 +55,7 @@ export const DetailsContainer = styled.div`
         .full-price {
             position: relative;
             margin: 0;
-            color: ${props => props.theme.textColor};
+            color: ${(props) => props.theme.textColor};
 
             .currency {
                 font-size: 0.9rem;
@@ -83,7 +83,7 @@ export const DetailsContainer = styled.div`
             top: 0;
             bottom: 0;
             width: 2.5rem;
-            background: ${props => props.theme.material.accent.main};
+            background: ${(props) => props.theme.material.accent.main};
             transition: background 0.2s ease-in-out;
             border-top-right-radius: 0 0;
             border-bottom-right-radius: 37% 100%;
@@ -99,7 +99,7 @@ export const DetailsContainer = styled.div`
         }
     }
 
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 450px) {
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: minmax(10rem, max-content) auto;
         grid-template-areas:

@@ -67,7 +67,7 @@ export const Container = styled.div`
     font-weight: 900;
 }
 
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 450px) {
         width: 21.87rem;   
         ${(props) =>
             props.showInComponent &&

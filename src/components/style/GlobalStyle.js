@@ -150,25 +150,25 @@ body {
     position: relative;
 }
 
-@media screen and (min-width: 1901px) {
+@media only screen and (min-width: 1901px) {
     html {
         font-size: 16px;
     }
 }
 
-@media screen and (min-width: 1401px) and (max-width: 1900px) {
+@media only screen and (min-width: 1401px) and (max-width: 1900px) {
     html {
         font-size: 15px;
     }
 }
 
-@media screen and (min-width: 901px) and (max-width: 1400px) {
+@media only screen and (min-width: 901px) and (max-width: 1400px) {
     html {
         font-size: 14px;
     }
 }
 
-@media screen and (max-width: 900px) {
+@media only screen and (max-width: 900px) {
     html {
         font-size: 13px;
     }

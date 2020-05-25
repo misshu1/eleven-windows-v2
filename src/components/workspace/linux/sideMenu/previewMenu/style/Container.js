@@ -8,7 +8,7 @@ export const Container = styled(motion.div)`
     width: 100%;
     height: 100%;
 
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 450px) {
         width: 20rem;
     }
 `;

@@ -4,6 +4,7 @@ import React from 'react';
 import { useSettingsContext } from '../../../contexts/settingsContext';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import LinuxToolbar from './linux/LinuxToolbar';
+import MobileToolbar from './mobile/MobileToolbar';
 import WindowsToolbar from './windows/WindowsToolbar';
 
 const FolderToolbar = (props) => {
@@ -13,7 +14,13 @@ const FolderToolbar = (props) => {
 
     return (
         <>
-            {isMobile && <div>mobile</div>}
+            {isMobile && (
+                <MobileToolbar
+                    folderName={folderName}
+                    toolbarMenu={toolbarMenu}
+                    toggleDrawer={toggleDrawer}
+                />
+            )}
             {!isMobile && isWindowsSelected() && (
                 <WindowsToolbar
                     folderName={folderName}

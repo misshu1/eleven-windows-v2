@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
     display: none;
 
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 450px) {
         font-family: 'Roboto', sans-serif;
         cursor: default;
         display: flex;

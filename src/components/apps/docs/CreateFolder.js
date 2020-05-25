@@ -1,58 +1,59 @@
-import React, { useState, useEffect, useContext, forwardRef } from 'react';
-import { folderExample, folderContextState } from './CodeExamples';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import React, { forwardRef, useContext, useEffect, useState } from 'react';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import { tomorrow, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 import Emoji from '../../../components/emoji/Emoji';
-import { addWordBreak } from './DocsApp';
 import { ThemeContext } from '../../../contexts/themeContext';
-import { vs, tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { folderContextState, folderExample } from './CodeExamples';
+import { addWordBreak } from './DocsApp';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 
 const StyledTableCell = withStyles({
     root: {
         borderBottom: '1px solid rgba(0, 0, 0, 0.5)',
-        color: 'inherit'
+        color: 'inherit',
     },
     head: {
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
-        fontWeight: 900
-    }
+        fontWeight: 900,
+    },
 })(TableCell);
 
 const StyledTableRow = withStyles({
     root: {
-        backgroundColor: 'rgba(0, 0, 0, 0.1)'
-    }
+        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    },
 })(TableRow);
 
 const useStyles = makeStyles({
     root: {
         width: '100%',
-        overflowX: 'auto'
+        overflowX: 'auto',
     },
     table: {
         display: 'table',
-        '@media (max-width:28rem)': {
-            display: 'block'
+        '@media only screen and (max-width: 450px)': {
+            display: 'block',
         },
-        overflowX: 'auto'
+        overflowX: 'auto',
     },
     name: {
-        whiteSpace: 'nowrap'
+        whiteSpace: 'nowrap',
     },
     description: {
-        '@media (max-width:28rem)': {
+        '@media only screen and (max-width: 450px)': {
             display: 'block',
-            width: '20rem'
-        }
-    }
+            width: '20rem',
+        },
+    },
 });
 
 const appIdDescription = (
@@ -94,7 +95,7 @@ const folderPropsTable = [
     createData('marginTop', false, 'string', '5rem', marginTopDescription),
     createData('marginLeft', false, 'string', '5rem', marginLeftDescription),
     createData('toolbarMenu', false, 'object', '-', toolbarMenuDescription),
-    createData('ref', false, 'object', '-', refDescription)
+    createData('ref', false, 'object', '-', refDescription),
 ];
 
 const CreateFolder = (props, ref) => {
@@ -162,7 +163,7 @@ const CreateFolder = (props, ref) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {folderPropsTable.map(item => (
+                    {folderPropsTable.map((item) => (
                         <StyledTableRow key={item.propName}>
                             <StyledTableCell
                                 component='th'

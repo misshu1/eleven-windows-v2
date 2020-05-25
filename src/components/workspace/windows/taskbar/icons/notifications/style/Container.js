@@ -13,11 +13,11 @@ export const Container = styled.div`
     background: ${(props) => props.open && props.theme.clockHover};
     outline: none;
 
-    @media (max-width: 28rem) {
+    @media only screen and (max-width: 450px) {
         order: 1;
     }
 
-    @media (min-width: 28rem) {
+    @media only screen and (min-width: 451px) {
         height: 100%;
         width: 3.5rem;
         color: ${(props) => props.theme.textColor};
