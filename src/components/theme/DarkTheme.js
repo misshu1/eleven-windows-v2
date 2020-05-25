@@ -27,8 +27,8 @@ const DarkTheme = {
             contrast: {
                 main: 'rgba(255, 255, 255, 0.9)',
                 lighter: 'rgba(0, 0, 0, 0.8)',
-                darker: 'rgba(255, 255, 255, 0.9)'
-            }
+                darker: 'rgba(255, 255, 255, 0.9)',
+            },
         },
         accent: {
             main: '#14851E',
@@ -37,8 +37,8 @@ const DarkTheme = {
             contrast: {
                 main: 'rgb(255, 255, 255)',
                 lighter: 'rgba(0, 0, 0, 0.8)',
-                darker: 'rgba(255, 255, 255, 0.9)'
-            }
+                darker: 'rgba(255, 255, 255, 0.9)',
+            },
         },
         warn: {
             main: '#FF0352',
@@ -47,9 +47,9 @@ const DarkTheme = {
             contrast: {
                 main: 'rgba(0, 0, 0, 0.9)',
                 lighter: 'rgba(0, 0, 0, 0.8)',
-                darker: 'rgba(0, 0, 0, 0.8)'
-            }
-        }
+                darker: 'rgba(0, 0, 0, 0.8)',
+            },
+        },
     },
 
     // Folder
@@ -63,6 +63,7 @@ const DarkTheme = {
     folderCloseBtn: '#AF0138',
     backButtonColor: '#26c11b',
     folderMenuBackdrop: 'rgba(0, 0, 0, 0.5)',
+    folderLinuxButtonsBg: 'rgba(255, 255, 255, 0.1)',
 
     // Store
     cardBg: '#333030',
@@ -120,7 +121,7 @@ const DarkTheme = {
     notificationBorder: '#444',
     notificationWidgetBg: 'rgb(32, 32, 32)',
     notificationWidgetColor: '#d6d8de',
-    widgetHover: 'rgba(100, 100, 100, 0.01)'
+    widgetHover: 'rgba(100, 100, 100, 0.01)',
 };
 
 export default DarkTheme;

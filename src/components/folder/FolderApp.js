@@ -6,10 +6,11 @@ import Draggable from 'react-draggable';
 import Scrollbar from 'react-scrollbars-custom';
 
 import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
+import { useSettingsContext } from '../../contexts/settingsContext';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import DrawerApp from './drawer/DrawerApp';
-import FolderToolbar from './FolderToolbar';
 import { AnimateFadeInOut, Content, Folder } from './style';
+import FolderToolbar from './toolbar/FolderToolbar';
 
 const FolderApp = forwardRef((props, ref) => {
     const [close, setClose] = useState(false);
@@ -21,6 +22,7 @@ const FolderApp = forwardRef((props, ref) => {
         activeFolder,
         minimizeDown,
     } = useDispatchFolderContext();
+    const { isLinuxSelected } = useSettingsContext();
 
     const isMobile = useMediaQuery('(max-width: 28rem)');
 
@@ -84,6 +86,7 @@ const FolderApp = forwardRef((props, ref) => {
                                 close={close}
                             >
                                 <Folder
+                                    isLinuxSelected={isLinuxSelected()}
                                     className='folder'
                                     width={width}
                                     height={height}
@@ -100,7 +103,10 @@ const FolderApp = forwardRef((props, ref) => {
                                     <Content>
                                         <Backdrop
                                             open={showDrawer}
-                                            style={{ zIndex: 500 }}
+                                            style={{
+                                                zIndex: 500,
+                                                marginTop: '2.5rem',
+                                            }}
                                             onClick={closeDrawer}
                                         ></Backdrop>
                                         {showDrawer && (

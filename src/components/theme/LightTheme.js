@@ -27,8 +27,8 @@ const LightTheme = {
             contrast: {
                 main: 'rgba(0, 0, 0, 0.8)',
                 lighter: 'rgba(0, 0, 0, 0.7)',
-                darker: 'rgb(255, 255, 255)'
-            }
+                darker: 'rgb(255, 255, 255)',
+            },
         },
         accent: {
             main: '#CF6900',
@@ -37,8 +37,8 @@ const LightTheme = {
             contrast: {
                 main: 'rgb(255, 255, 255)',
                 lighter: 'rgba(0, 0, 0, 0.8)',
-                darker: 'rgb(255, 255, 255)'
-            }
+                darker: 'rgb(255, 255, 255)',
+            },
         },
         warn: {
             main: '#D71547',
@@ -47,9 +47,9 @@ const LightTheme = {
             contrast: {
                 main: 'rgb(255, 255, 255)',
                 lighter: 'rgba(0, 0, 0, 0.8)',
-                darker: 'rgb(255, 255, 255)'
-            }
-        }
+                darker: 'rgb(255, 255, 255)',
+            },
+        },
     },
 
     // Folder
@@ -63,6 +63,7 @@ const LightTheme = {
     folderCloseBtn: '#009BCE',
     backButtonColor: '#41a83a',
     folderMenuBackdrop: 'rgba(0, 0, 0, 0.5)',
+    folderLinuxButtonsBg: 'rgba(0, 0, 0, 0.1)',
 
     // Store
     cardBg: '#B3E1F0',
@@ -120,7 +121,7 @@ const LightTheme = {
     notificationBorder: '#202020',
     notificationWidgetBg: 'rgb(196, 217, 252)',
     notificationWidgetColor: '#212121',
-    widgetHover: 'rgba(150, 189, 255, 0.5)'
+    widgetHover: 'rgba(150, 189, 255, 0.5)',
 };
 
 export default LightTheme;
