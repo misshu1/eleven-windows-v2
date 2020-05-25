@@ -1,31 +1,32 @@
-import React, { useCallback, useContext, forwardRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ThemeContext } from '../../../contexts/themeContext';
-import { makeStyles } from '@material-ui/core/styles';
-import { Container } from './style';
-import { Link } from 'react-router-dom';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Scrollbar from 'react-scrollbars-custom';
-import ListItem from '@material-ui/core/ListItem';
-import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import React, { forwardRef, useCallback, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import Scrollbar from 'react-scrollbars-custom';
+
+import { ThemeContext } from '../../../contexts/themeContext';
+import { Container } from './style';
 
 const useStyles = makeStyles({
-    root: theme => ({
+    root: (theme) => ({
         width: '100%',
         maxWidth: '100%',
         backgroundColor: 'transparent',
-        color: theme.textColor
+        color: theme.textColor,
     }),
     listItemStyle: {
         '&:hover': {
             cursor: 'default',
-            background: 'rgba(0, 0, 0, 0.2)'
-        }
+            background: 'rgba(0, 0, 0, 0.2)',
+        },
     },
-    fontIconStyle: theme => ({
-        color: theme.accentBg
+    fontIconStyle: (theme) => ({
+        color: theme.accentBg,
     }),
     listIconStyle: {
         marginRight: '1rem',
@@ -33,8 +34,8 @@ const useStyles = makeStyles({
         height: '2rem',
         justifyContent: 'center',
         alignItems: 'center',
-        minWidth: 'unset'
-    }
+        minWidth: 'unset',
+    },
 });
 
 const scrollToRef = (refObj, refName) => {
@@ -46,7 +47,7 @@ const scrollToRef = (refObj, refName) => {
         refObj[refName].current.offsetTop;
 };
 
-const ListItemLink = props => {
+const ListItemLink = (props) => {
     const { theme } = useContext(ThemeContext);
     const classes = useStyles(theme);
     const { item, onClick } = props;
@@ -55,14 +56,14 @@ const ListItemLink = props => {
         <ListItem
             button
             component={
-                item.link && (props => <Link to={item.link} {...props} />)
+                item.link && ((props) => <Link to={item.link} {...props} />)
             }
             className={classes.listItemStyle}
             onClick={onClick}
         >
             {(item.widgetIcon || item.fontIcon) && (
                 <ListItemIcon className={classes.listIconStyle}>
-                    <React.Fragment>
+                    <>
                         {item.widgetIcon && item.widgetIcon}
                         {item.fontIcon && (
                             <FontAwesomeIcon
@@ -71,7 +72,7 @@ const ListItemLink = props => {
                                 className={classes.fontIconStyle}
                             />
                         )}
-                    </React.Fragment>
+                    </>
                 </ListItemIcon>
             )}
             <ListItemText primary={item.name} />
@@ -87,7 +88,7 @@ const DrawerApp = forwardRef((props, ref) => {
     const createDrawer = useCallback(() => {
         let menu = [];
         toolbarMenu.map(
-            item =>
+            (item) =>
                 (menu = [
                     ...menu,
                     <ListItemLink
@@ -99,7 +100,7 @@ const DrawerApp = forwardRef((props, ref) => {
                             item.onClick && item.onClick();
                             closeDrawer();
                         }}
-                    />
+                    />,
                 ])
         );
         return menu;
@@ -120,5 +121,5 @@ export default DrawerApp;
 
 DrawerApp.propTypes = {
     toolbarMenu: PropTypes.array.isRequired,
-    closeDrawer: PropTypes.func.isRequired
+    closeDrawer: PropTypes.func.isRequired,
 };

@@ -12,15 +12,20 @@ const FolderToolbar = (props) => {
     return (
         <NameBar>
             {toolbarMenu && (
-                <div className='menu' onClick={toggleDrawer}>
-                    <FontAwesomeIcon icon={['fas', 'ellipsis-v']} size='lg' />
-                </div>
+                <Tooltip title='Menu' placement='top' enterDelay={500}>
+                    <div className='menu' onClick={toggleDrawer}>
+                        <FontAwesomeIcon
+                            icon={['fas', 'ellipsis-v']}
+                            size='lg'
+                        />
+                    </div>
+                </Tooltip>
             )}
             <Name className='handle' toolbarMenu={toolbarMenu}>
                 {folderName}
             </Name>
             <Buttons>
-                <Tooltip title='Minimize' placement='top' enterDelay={1000}>
+                <Tooltip title='Minimize' placement='top' enterDelay={500}>
                     <div onClick={minimize}>
                         <FontAwesomeIcon
                             icon={['fas', 'window-minimize']}
@@ -28,12 +33,12 @@ const FolderToolbar = (props) => {
                         />
                     </div>
                 </Tooltip>
-                <Tooltip title='Close' placement='top' enterDelay={1000}>
+                <Tooltip title='Close' placement='top' enterDelay={500}>
                     <Link to='/' className='closeBtnMobile'>
                         <FontAwesomeIcon icon={['fas', 'times']} size='lg' />
                     </Link>
                 </Tooltip>
-                <Tooltip title='Close' placement='top' enterDelay={1000}>
+                <Tooltip title='Close' placement='top' enterDelay={500}>
                     <div className='closeBtnDesktop' onClick={quitApp}>
                         <FontAwesomeIcon icon={['fas', 'times']} size='lg' />
                     </div>

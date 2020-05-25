@@ -12,7 +12,7 @@ import FolderToolbar from './FolderToolbar';
 import { AnimateFadeInOut, Content, Folder } from './style';
 
 const FolderApp = forwardRef((props, ref) => {
-    const [close, setClose] = useState('');
+    const [close, setClose] = useState(false);
     const [showDrawer, setShowDrawer] = useState(false);
     const [handleDrag, setHandleDrag] = useState(false);
     const { folderState } = useFolderContext();
@@ -39,7 +39,7 @@ const FolderApp = forwardRef((props, ref) => {
     }, [isMobile]);
 
     const quitApp = useCallback(() => {
-        setClose('close');
+        setClose(true);
         setTimeout(() => {
             closeFolder(appId);
         }, 200);

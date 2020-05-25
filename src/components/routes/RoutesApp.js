@@ -32,7 +32,7 @@ const RoutesApp = () => {
                     exact={isMobile ? true : false}
                     path={isMobile ? app.link : '/'}
                     render={() =>
-                        app.isOpen === 'open' && (
+                        app.isOpen && (
                             <Suspense fallback={<SpinnerApp delay={200} />}>
                                 {app.component}
                             </Suspense>

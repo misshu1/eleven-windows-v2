@@ -14,19 +14,16 @@ const NotificationStaticApp = ({ id, message, title, code, type }) => {
         <Container type={type} showInComponent>
             <div className='icon'>
                 {type === NOTIFICATION_TYPE.success && (
-                    <FontAwesomeIcon icon={['fas', 'check']} size='sm' />
+                    <FontAwesomeIcon icon={['fas', 'check']} />
                 )}
                 {type === NOTIFICATION_TYPE.error && (
-                    <FontAwesomeIcon icon={['fas', 'exclamation']} size='sm' />
+                    <FontAwesomeIcon icon={['fas', 'exclamation']} />
                 )}
                 {type === NOTIFICATION_TYPE.warning && (
-                    <FontAwesomeIcon
-                        icon={['fas', 'exclamation-triangle']}
-                        size='sm'
-                    />
+                    <FontAwesomeIcon icon={['fas', 'exclamation-triangle']} />
                 )}
                 {type === NOTIFICATION_TYPE.info && (
-                    <FontAwesomeIcon icon={['fas', 'info']} size='sm' />
+                    <FontAwesomeIcon icon={['fas', 'info']} />
                 )}
             </div>
             <div className='content'>

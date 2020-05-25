@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
 0% {
@@ -62,7 +62,7 @@ export const AnimateFadeInOut = styled.div`
         height: 0px;
         .folder {
             ${(props) =>
-                props.open === 'open' &&
+                props.open === true &&
                 css`
                     animation: ${fadeIn} 0.2s ease-out 1 forwards;
                 `}
@@ -77,7 +77,7 @@ export const AnimateFadeInOut = styled.div`
                     animation: ${minimizeUp} 0.3s ease-out 1 forwards;
                 `}
             ${(props) =>
-                props.close === 'close' &&
+                props.close === true &&
                 css`
                     animation: ${fadeOut} 0.2s ease 1 forwards;
                 `}

@@ -113,12 +113,12 @@ const folderReducer = (state, action) => {
                 (item) => item.id === action.payload
             );
 
-            if (selectedOpenApp.isOpen === 'close') {
+            if (selectedOpenApp.isOpen === false) {
                 return {
                     ...state,
                     apps: state.apps.map((item) =>
                         item.id === action.payload
-                            ? { ...item, isOpen: 'open', appIndex: 104 }
+                            ? { ...item, isOpen: true, appIndex: 104 }
                             : { ...item, appIndex: 100 }
                     ),
                     openApps: [
@@ -134,14 +134,14 @@ const folderReducer = (state, action) => {
                 (item) => item.id === action.payload
             );
 
-            if (selectedCloseApp.isOpen === 'open') {
+            if (selectedCloseApp.isOpen === true) {
                 return {
                     ...state,
                     apps: state.apps.map((item) =>
                         item.id === action.payload
                             ? {
                                   ...item,
-                                  isOpen: 'close',
+                                  isOpen: false,
                                   isMinimize: null,
                                   appIndex: 100,
                               }
@@ -214,13 +214,13 @@ const folderReducer = (state, action) => {
                 ...state,
                 apps: state.apps.map((item) => ({
                     ...item,
-                    isOpen: action.payload ? 'open' : 'close',
+                    isOpen: action.payload ? true : false,
                 })),
                 openApps: [],
             };
 
         default:
-            return state;
+            throw new Error(`Unhandled action type: ${action.type}`);
     }
 };
 
