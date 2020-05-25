@@ -5,11 +5,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import React, { forwardRef, useCallback, useContext } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Scrollbar from 'react-scrollbars-custom';
 
-import { ThemeContext } from '../../../contexts/themeContext';
+import { useSettingsContext } from '../../../contexts/settingsContext';
 import { Container } from './style';
 
 const useStyles = makeStyles({
@@ -48,7 +48,7 @@ const scrollToRef = (refObj, refName) => {
 };
 
 const ListItemLink = (props) => {
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useSettingsContext();
     const classes = useStyles(theme);
     const { item, onClick } = props;
 
@@ -82,7 +82,7 @@ const ListItemLink = (props) => {
 
 const DrawerApp = forwardRef((props, ref) => {
     const { toolbarMenu, closeDrawer } = props;
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useSettingsContext();
     const classes = useStyles(theme);
 
     const createDrawer = useCallback(() => {

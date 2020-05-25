@@ -18,7 +18,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { SnackbarProvider } from 'notistack';
-import React, { useContext, useLayoutEffect } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
@@ -28,7 +28,6 @@ import WorkspaceApp from './components/workspace/WorkspaceApp';
 import { FirebaseProvider } from './contexts/firebaseContext';
 import { NotificationsProvider } from './contexts/notificationsContext';
 import { useSettingsContext } from './contexts/settingsContext';
-import { ThemeContext } from './contexts/themeContext';
 import { ProvideAuth } from './hooks/useAuth';
 
 library.add(
@@ -59,18 +58,9 @@ const App = () => {
     const {
         theme,
         getSelectedBackground,
-        checkLocalStorageTheme,
-        checkLocalStorageBackground,
-    } = useContext(ThemeContext);
-    const desktopBg = getSelectedBackground().bg;
-    const { isLinuxSelected, isWindowsSelected } = useSettingsContext();
-
-    useLayoutEffect(() => {
-        checkLocalStorageTheme();
-        checkLocalStorageBackground();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
+        isLinuxSelected,
+        isWindowsSelected,
+    } = useSettingsContext();
     const classes = useStyles();
 
     return (
@@ -89,7 +79,7 @@ const App = () => {
                 <ProvideAuth>
                     <ThemeProvider theme={theme}>
                         <GlobalStyle
-                            background={desktopBg}
+                            background={getSelectedBackground()}
                             linux={isLinuxSelected()}
                             windows={isWindowsSelected()}
                         />
@@ -100,7 +90,9 @@ const App = () => {
                                     exact
                                     path='/login'
                                     render={() => (
-                                        <LoginApp background={desktopBg} />
+                                        <LoginApp
+                                            background={getSelectedBackground()}
+                                        />
                                     )}
                                 />
                                 <Route path='/' component={WorkspaceApp} />

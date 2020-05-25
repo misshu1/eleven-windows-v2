@@ -1,15 +1,16 @@
-import React, { useState, useContext } from 'react';
-import { ThemeContext } from '../../../contexts/themeContext';
+import Badge from '@material-ui/core/Badge';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card } from './style';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import React, { useState } from 'react';
+
+import { useSettingsContext } from '../../../contexts/settingsContext';
+import DetailsApp from './components/details/DetailsApp';
 import DownloadApp from './components/download/DownloadApp';
 import ReviewsApp from './components/reviews/ReviewsApp';
-import DetailsApp from './components/details/DetailsApp';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Badge from '@material-ui/core/Badge';
+import { Card } from './style';
 
-const BadgeIcon = props => {
+const BadgeIcon = (props) => {
     const { classes, badgeNumber } = props;
     return (
         <Badge
@@ -22,25 +23,25 @@ const BadgeIcon = props => {
 };
 
 const useStyles = makeStyles({
-    tabIndicator: theme => ({
+    tabIndicator: (theme) => ({
         backgroundColor: theme.material.primary.main,
         height: '3px',
-        maxWidth: 'inherit'
+        maxWidth: 'inherit',
     }),
     tabs: {
         cursor: 'default',
         minHeight: '3rem',
-        padding: '0 0.5rem'
+        padding: '0 0.5rem',
     },
     tabIcon: {
         display: 'flex',
-        flexDirection: 'row-reverse'
+        flexDirection: 'row-reverse',
     },
-    root: theme => ({
+    root: (theme) => ({
         minHeight: '3rem',
-        background: theme.tabsBg
+        background: theme.tabsBg,
     }),
-    cartButton: theme => ({
+    cartButton: (theme) => ({
         position: 'relative',
         overflow: 'hidden',
         paddingLeft: '3rem',
@@ -49,20 +50,20 @@ const useStyles = makeStyles({
         color: theme.material.primary.contrast.darker,
 
         '&:hover': {
-            backgroundColor: theme.material.primary.darker
-        }
+            backgroundColor: theme.material.primary.darker,
+        },
     }),
-    ratingColor: theme => ({
-        color: theme.ratingColorEmpty
+    ratingColor: (theme) => ({
+        color: theme.ratingColorEmpty,
     }),
     badge: {
-        margin: '0 1rem !important'
-    }
+        margin: '0 1rem !important',
+    },
 });
 
-const ProductApp = props => {
+const ProductApp = (props) => {
     const { product } = props;
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useSettingsContext();
     const classes = useStyles(theme);
     const [tab, setTab] = useState(0);
 
@@ -75,7 +76,7 @@ const ProductApp = props => {
             <Tabs
                 classes={{
                     indicator: classes.tabIndicator,
-                    root: classes.root
+                    root: classes.root,
                 }}
                 value={tab}
                 onChange={handleTabsChange}

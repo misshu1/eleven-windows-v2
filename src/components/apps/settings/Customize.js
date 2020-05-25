@@ -1,15 +1,16 @@
-import React, { useState, useCallback, useContext } from 'react';
-import { Title, Box, Spacer } from './style';
-import { useTranslation } from 'react-i18next';
-import { ThemeContext } from '../../../contexts/themeContext';
-import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import Preview from './Preview';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+import React, { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { useSettingsContext } from '../../../contexts/settingsContext';
+import Preview from './Preview';
+import { Box, Spacer, Title } from './style';
 
 const useStyles = makeStyles({
-    bgButton: theme => ({
+    bgButton: (theme) => ({
         cursor: 'default',
         border: 0,
         borderRadius: 3,
@@ -17,18 +18,18 @@ const useStyles = makeStyles({
         color: theme.material.accent.contrast.main,
 
         '&:hover': {
-            backgroundColor: theme.material.accent.darker
-        }
+            backgroundColor: theme.material.accent.darker,
+        },
     }),
-    bgButtonTheme: theme => ({
+    bgButtonTheme: (theme) => ({
         cursor: 'default',
         backgroundColor: theme.material.primary.main,
         color: theme.material.primary.contrast.darker,
 
         '&:hover': {
-            backgroundColor: theme.material.primary.darker
-        }
-    })
+            backgroundColor: theme.material.primary.darker,
+        },
+    }),
 });
 
 const ITEM_HEIGHT = 48;
@@ -37,17 +38,17 @@ const Customize = () => {
     const {
         theme,
         background,
+        getSelectedBackgroundName,
+        selectLightTheme,
+        selectDarkTheme,
         changeBackground,
-        getSelectedBackground,
-        changeTheme
-    } = useContext(ThemeContext);
+    } = useSettingsContext();
     const { t } = useTranslation();
-    const selectedBgName = getSelectedBackground().name;
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const classes = useStyles(theme);
 
-    const handleClick = event => {
+    const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
@@ -55,15 +56,8 @@ const Customize = () => {
         setAnchorEl(null);
     };
 
-    const updateTheme = useCallback(
-        theme => {
-            changeTheme(theme);
-        },
-        [changeTheme]
-    );
-
     const changeBg = useCallback(
-        selectedBg => {
+        (selectedBg) => {
             setAnchorEl(null);
             changeBackground(selectedBg);
         },
@@ -78,7 +72,7 @@ const Customize = () => {
                     {theme.id === 'light' && (
                         <Button
                             className={classes.bgButtonTheme}
-                            onClick={() => updateTheme('dark')}
+                            onClick={selectDarkTheme}
                         >
                             {t('settings.themeButton')}
                         </Button>
@@ -86,7 +80,7 @@ const Customize = () => {
                     {theme.id === 'dark' && (
                         <Button
                             className={classes.bgButtonTheme}
-                            onClick={() => updateTheme('light')}
+                            onClick={selectLightTheme}
                         >
                             {t('settings.themeButton')}
                         </Button>
@@ -108,15 +102,17 @@ const Customize = () => {
                         PaperProps={{
                             style: {
                                 maxHeight: ITEM_HEIGHT * 6.5,
-                                width: 220
-                            }
+                                width: 220,
+                            },
                         }}
                     >
-                        {background.map(item => (
+                        {background.map((item) => (
                             <MenuItem
-                                key={item.name}
-                                onClick={() => changeBg(item.bg)}
-                                selected={item.name === selectedBgName}
+                                key={item.id}
+                                onClick={() => changeBg(item.id)}
+                                selected={
+                                    item.name === getSelectedBackgroundName()
+                                }
                             >
                                 {item.name}
                             </MenuItem>

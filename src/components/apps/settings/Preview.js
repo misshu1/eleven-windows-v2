@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
-import { ThemePreview } from './style';
-import { ThemeContext } from '../../../contexts/themeContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+
+import globeIcon from '../../../assets/images/flags/globe.svg';
+import CalculatorIcon from '../../../assets/images/icons/CalculatorIcon';
+import CartIcon from '../../../assets/images/icons/CartIcon';
 import FolderIcon from '../../../assets/images/icons/FolderIcon';
 import LogoIcon from '../../../assets/images/icons/LogoIcon';
-import CalculatorIcon from '../../../assets/images/icons/CalculatorIcon';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import globeIcon from '../../../assets/images/flags/globe.svg';
-import CartIcon from '../../../assets/images/icons/CartIcon';
+import { useSettingsContext } from '../../../contexts/settingsContext';
+import { ThemePreview } from './style';
 
 const calculatorButtons = () => {
     let arr = [];
@@ -22,11 +23,10 @@ const calculatorButtons = () => {
 };
 
 const Preview = () => {
-    const { getSelectedBackground } = useContext(ThemeContext);
-    const desktopBg = getSelectedBackground().bg;
+    const { getSelectedBackground } = useSettingsContext();
 
     return (
-        <ThemePreview bg={desktopBg}>
+        <ThemePreview background={getSelectedBackground()}>
             <div className='calculator'>
                 <div className='calculator-title'>
                     <span className='folder-name'></span>

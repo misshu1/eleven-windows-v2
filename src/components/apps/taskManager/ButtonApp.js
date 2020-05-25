@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import React from 'react';
+
+import { useSettingsContext } from '../../../contexts/settingsContext';
 import { BtnContainer } from './style';
-import { ThemeContext } from '../../../contexts/themeContext';
 
 const useStyles = makeStyles(() => ({
-    btnStyle: theme => ({
+    btnStyle: (theme) => ({
         backgroundColor: theme.accentBg,
         color: '#fff',
         cursor: 'default',
@@ -14,17 +15,17 @@ const useStyles = makeStyles(() => ({
         borderRadius: 3,
         '&:disabled': {
             color: '#e3e3e3',
-            backgroundColor: theme.disableBg
+            backgroundColor: theme.disableBg,
         },
         '&:hover': {
-            backgroundColor: theme.accentBg
-        }
-    })
+            backgroundColor: theme.accentBg,
+        },
+    }),
 }));
 
-const ButtonApp = props => {
+const ButtonApp = (props) => {
     const { closeSelectedApp, disableBtn } = props;
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useSettingsContext();
     const classes = useStyles(theme);
 
     return (
@@ -46,5 +47,5 @@ export default ButtonApp;
 
 ButtonApp.propTypes = {
     closeSelectedApp: PropTypes.func.isRequired,
-    disableBtn: PropTypes.bool.isRequired
+    disableBtn: PropTypes.bool.isRequired,
 };

@@ -91,7 +91,7 @@ body {
     padding: 0;
     height: 100%;
     width: 100%;
-    background: ${(props) => props.theme.desktopBg[props.background]};
+    background: ${(props) => props.background};
 }
 
 #desktop {

@@ -6,16 +6,13 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import { SettingsProvider } from './contexts/settingsContext';
-import { ThemeProvider } from './contexts/themeContext';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <BrowserRouter>
-        <ThemeProvider>
-            <SettingsProvider>
-                <App />
-            </SettingsProvider>
-        </ThemeProvider>
+        <SettingsProvider>
+            <App />
+        </SettingsProvider>
     </BrowserRouter>,
     document.getElementById('desktop')
 );

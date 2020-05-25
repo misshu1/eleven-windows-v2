@@ -1,10 +1,10 @@
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import React, { useContext } from 'react';
+import React from 'react';
 
 import CartIcon from '../../../../../assets/images/icons/CartIcon';
-import { ThemeContext } from '../../../../../contexts/themeContext';
+import { useSettingsContext } from '../../../../../contexts/settingsContext';
 import { DetailsContainer } from './style';
 
 const useStyles = makeStyles({
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 });
 
 const DetailsApp = (props) => {
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useSettingsContext();
     const classes = useStyles(theme);
     const { title, image, content, price, discount } = props;
 

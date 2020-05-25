@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
-import { ThemeContext } from '../../../contexts/themeContext';
+import React from 'react';
 
-const TaskIcon = props => {
+import { useSettingsContext } from '../../../contexts/settingsContext';
+
+const TaskIcon = (props) => {
     const { width, height } = props;
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useSettingsContext();
 
     return (
         <svg

@@ -1,10 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useNotificationsContext } from '../../../contexts/notificationsContext';
-import { ThemeContext } from '../../../contexts/themeContext';
+import { useSettingsContext } from '../../../contexts/settingsContext';
 import { NotificationContainer, NotificationText, Spacer, Title } from './style';
 
 const useStyles = makeStyles({
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 });
 
 const Notification = () => {
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useSettingsContext();
     const classes = useStyles(theme);
     const { t } = useTranslation();
     const { disable, disableNotifications } = useNotificationsContext();

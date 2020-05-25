@@ -1,18 +1,19 @@
-import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ThemeContext } from '../../../../../contexts/themeContext';
 import { makeStyles } from '@material-ui/core/styles';
-import { Comment } from './style';
 import Typography from '@material-ui/core/Typography';
 import Rating from '@material-ui/lab/Rating';
+import React from 'react';
+
+import { useSettingsContext } from '../../../../../contexts/settingsContext';
+import { Comment } from './style';
 
 const useStyles = makeStyles({
-    ratingColor: theme => ({
-        color: theme.ratingColorEmpty
-    })
+    ratingColor: (theme) => ({
+        color: theme.ratingColorEmpty,
+    }),
 });
 
-const timeSince = previous => {
+const timeSince = (previous) => {
     const msPerMinute = 60000;
     const msPerHour = 3600000;
     const msPerDay = 86400000;
@@ -37,9 +38,9 @@ const timeSince = previous => {
     }
 };
 
-const CommentApp = props => {
+const CommentApp = (props) => {
     const { userDisplayName, rating, date, content } = props;
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useSettingsContext();
     const classes = useStyles(theme);
 
     return (
@@ -59,7 +60,7 @@ const CommentApp = props => {
                     <Rating
                         className='rating'
                         classes={{
-                            iconEmpty: classes.ratingColor
+                            iconEmpty: classes.ratingColor,
                         }}
                         value={rating}
                         readOnly={true}

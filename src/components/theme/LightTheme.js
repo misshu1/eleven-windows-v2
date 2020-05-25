@@ -1,10 +1,5 @@
-import background from './DesktopBackground';
-
 const LightTheme = {
     id: 'light',
-
-    // Desktop
-    desktopBg: background,
 
     // Global colors
     textColor: '#212121',

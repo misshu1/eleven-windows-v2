@@ -1,12 +1,13 @@
-import React, { useState, useContext } from 'react';
-import { Container, LoginContainer } from './style';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../contexts/themeContext';
+import React, { useState } from 'react';
+
+import { useSettingsContext } from '../../contexts/settingsContext';
 import useFormValidation from '../../hooks/useFormValidation';
 import validateLogin from '../../hooks/validateLogin';
+import { Container, LoginContainer } from './style';
 
 const useStyles = makeStyles(() => ({
     container: {
@@ -14,18 +15,18 @@ const useStyles = makeStyles(() => ({
         flexDirection: 'column',
         flexWrap: 'wrap',
         background: 'rgba(0,0,0,0.2)',
-        padding: '.5rem'
+        padding: '.5rem',
     },
     textField: {
         marginLeft: '.5rem',
         marginRight: '.5rem',
-        maxWidth: '15rem'
+        maxWidth: '15rem',
     },
     inputStyle: {
         height: '1rem',
-        color: '#fff'
+        color: '#fff',
     },
-    loginButton: theme => ({
+    loginButton: (theme) => ({
         backgroundColor: theme.material.accent.main,
         color: theme.material.accent.contrast.main,
         cursor: 'default',
@@ -34,13 +35,13 @@ const useStyles = makeStyles(() => ({
         borderRadius: 3,
         '&:disabled': {
             color: '#e3e3e3',
-            backgroundColor: theme.disableBg
+            backgroundColor: theme.disableBg,
         },
         '&:hover': {
-            backgroundColor: theme.material.accent.main
-        }
+            backgroundColor: theme.material.accent.main,
+        },
     }),
-    cancelButton: theme => ({
+    cancelButton: (theme) => ({
         backgroundColor: theme.material.warn.main,
         color: '#fff',
         cursor: 'default',
@@ -48,26 +49,26 @@ const useStyles = makeStyles(() => ({
         margin: '.5rem',
         borderRadius: 3,
         '&:hover': {
-            backgroundColor: theme.material.warn.main
-        }
+            backgroundColor: theme.material.warn.main,
+        },
     }),
-    changeViewButton: theme => ({
+    changeViewButton: (theme) => ({
         border: `1px solid ${theme.material.primary.main}`,
         color: '#fff',
         cursor: 'default',
         margin: '.5rem',
-        borderRadius: 3
-    })
+        borderRadius: 3,
+    }),
 }));
 
 const INITIAL_STATE = {
     name: '',
     email: '',
-    password: ''
+    password: '',
 };
 
-const LoginApp = props => {
-    const { theme } = useContext(ThemeContext);
+const LoginApp = (props) => {
+    const { theme } = useSettingsContext();
     const classes = useStyles(theme);
 
     const {
@@ -80,7 +81,7 @@ const LoginApp = props => {
         cancelLogin,
         firebaseError,
         handleLogin,
-        handleRegister
+        handleRegister,
     } = useFormValidation(INITIAL_STATE, validateLogin);
     const [showLogin, setShowLogin] = useState(true);
 
@@ -103,19 +104,19 @@ const LoginApp = props => {
                             autoComplete='off'
                             className={classes.textField}
                             inputProps={{
-                                className: classes.inputStyle
+                                className: classes.inputStyle,
                             }}
                             InputLabelProps={{
                                 style: {
-                                    color: '#fff'
-                                }
+                                    color: '#fff',
+                                },
                             }}
                             label='Name'
                             margin='normal'
                             variant='outlined'
                             error={errors.name ? true : false}
                             helperText={errors.name}
-                            onKeyPress={e => {
+                            onKeyPress={(e) => {
                                 e.key === 'Enter' && e.preventDefault();
                             }}
                             required
@@ -131,19 +132,19 @@ const LoginApp = props => {
                         autoComplete='off'
                         className={classes.textField}
                         inputProps={{
-                            className: classes.inputStyle
+                            className: classes.inputStyle,
                         }}
                         InputLabelProps={{
                             style: {
-                                color: '#fff'
-                            }
+                                color: '#fff',
+                            },
                         }}
                         label='Email'
                         margin='normal'
                         variant='outlined'
                         error={errors.email || firebaseError ? true : false}
                         helperText={errors.email || firebaseError}
-                        onKeyPress={e => {
+                        onKeyPress={(e) => {
                             e.key === 'Enter' && e.preventDefault();
                         }}
                         required
@@ -157,19 +158,19 @@ const LoginApp = props => {
                         id='password'
                         className={classes.textField}
                         inputProps={{
-                            className: classes.inputStyle
+                            className: classes.inputStyle,
                         }}
                         InputLabelProps={{
                             style: {
-                                color: '#fff'
-                            }
+                                color: '#fff',
+                            },
                         }}
                         label='Password'
                         margin='normal'
                         variant='outlined'
                         error={errors.password ? true : false}
                         helperText={errors.password}
-                        onKeyPress={e => {
+                        onKeyPress={(e) => {
                             e.key === 'Enter' && e.preventDefault();
                         }}
                         required
@@ -195,7 +196,7 @@ const LoginApp = props => {
                         size='small'
                         variant='outlined'
                         className={classes.changeViewButton}
-                        onClick={() => setShowLogin(prevState => !prevState)}
+                        onClick={() => setShowLogin((prevState) => !prevState)}
                     >
                         {showLogin
                             ? 'Create new account'
@@ -210,5 +211,5 @@ const LoginApp = props => {
 export default LoginApp;
 
 LoginApp.propTypes = {
-    background: PropTypes.string.isRequired
+    background: PropTypes.string.isRequired,
 };

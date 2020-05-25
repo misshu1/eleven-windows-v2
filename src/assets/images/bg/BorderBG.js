@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { ThemeContext } from '../../../contexts/themeContext';
+import { useSettingsContext } from '../../../contexts/settingsContext';
 
 const BorderBG = (props) => {
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useSettingsContext();
 
     return (
         <svg viewBox='0 0 60 600' {...props}>

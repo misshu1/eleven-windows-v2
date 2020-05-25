@@ -4,7 +4,7 @@ export const ThemePreview = styled.div`
     position: relative;
     width: 15rem;
     height: 8rem;
-    background: ${props => props.theme.desktopBg[props.bg]};
+    background: ${(props) => props.background};
     margin: 0.5rem 0;
 
     .calculator {
@@ -16,7 +16,7 @@ export const ThemePreview = styled.div`
         transform: translate(-50%, -50%);
         width: 2.5rem;
         height: 5rem;
-        background: ${props => props.theme.background};
+        background: ${(props) => props.theme.background};
         transition: background 0.2s ease-in-out;
         font-size: 0.15rem;
 
@@ -26,7 +26,7 @@ export const ThemePreview = styled.div`
             .folder-name {
                 display: block;
                 height: 0.3rem;
-                background: ${props => props.theme.folderNameBarBg};
+                background: ${(props) => props.theme.folderNameBarBg};
                 transition: background 0.2s ease-in-out;
             }
         }
@@ -41,12 +41,12 @@ export const ThemePreview = styled.div`
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background: ${props => props.theme.calcNumButtonBg};
+                background: ${(props) => props.theme.calcNumButtonBg};
                 transition: background 0.2s ease-in-out;
             }
             span:last-child {
                 color: #fff;
-                background: ${props => props.theme.accentBg};
+                background: ${(props) => props.theme.accentBg};
                 transition: background 0.2s ease-in-out;
             }
         }
@@ -58,7 +58,7 @@ export const ThemePreview = styled.div`
         left: 0;
         right: 0;
         height: 0.5rem;
-        background: ${props => props.theme.folderNameBarBg};
+        background: ${(props) => props.theme.folderNameBarBg};
         transition: background 0.2s ease-in-out;
 
         .left {
@@ -87,11 +87,11 @@ export const ThemePreview = styled.div`
 
             svg {
                 .fill-color {
-                    fill: ${props => props.theme.textColor};
+                    fill: ${(props) => props.theme.textColor};
                 }
 
                 .stroke-color {
-                    stroke: ${props => props.theme.textColor};
+                    stroke: ${(props) => props.theme.textColor};
                 }
             }
 

@@ -4,13 +4,13 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import React, { forwardRef, useContext, useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import { tomorrow, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import Emoji from '../../../components/emoji/Emoji';
-import { ThemeContext } from '../../../contexts/themeContext';
+import { useSettingsContext } from '../../../contexts/settingsContext';
 import { folderContextState, folderExample } from './CodeExamples';
 import { addWordBreak } from './DocsApp';
 
@@ -100,7 +100,7 @@ const folderPropsTable = [
 
 const CreateFolder = (props, ref) => {
     const [highlightStyle, setHighlightStyle] = useState(tomorrow);
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useSettingsContext();
     const classes = useStyles();
 
     useEffect(() => {

@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
 0% {
@@ -45,13 +45,13 @@ export const Container = styled.section`
         right: 0;
         width: 100%;
         height: 100%;
-        background: ${props => props.theme.desktopBg[props.background]};
-        ${props =>
+        background: ${(props) => props.background};
+        ${(props) =>
             props.animateInOut &&
             css`
                 animation: ${fadeIn} 0.8s ease-in 1 forwards;
             `}
-        ${props =>
+        ${(props) =>
             !props.animateInOut &&
             css`
                 animation: ${fadeOut} 0.8s ease-in 1 forwards;

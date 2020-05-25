@@ -1,10 +1,5 @@
-import background from './DesktopBackground';
-
 const DarkTheme = {
     id: 'dark',
-
-    // Desktop
-    desktopBg: background,
 
     // Global colors
     textColor: '#d6d8de',
