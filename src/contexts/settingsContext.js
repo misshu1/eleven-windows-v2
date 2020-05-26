@@ -63,9 +63,9 @@ export const SettingsProvider = ({ children }) => {
             localStorage.setItem('theme', THEME.dark);
             setTheme(DarkTheme);
         }
-        if (theme === 'dark') {
+        if (theme === THEME.dark) {
             setTheme(DarkTheme);
-        } else if (theme === 'light') {
+        } else if (theme === THEME.light) {
             setTheme(LightTheme);
         }
     };
