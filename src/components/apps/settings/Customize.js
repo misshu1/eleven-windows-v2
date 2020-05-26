@@ -10,18 +10,7 @@ import Preview from './Preview';
 import { Box, Spacer, Title } from './style';
 
 const useStyles = makeStyles({
-    bgButton: (theme) => ({
-        cursor: 'default',
-        border: 0,
-        borderRadius: 3,
-        backgroundColor: theme.material.accent.main,
-        color: theme.material.accent.contrast.main,
-
-        '&:hover': {
-            backgroundColor: theme.material.accent.darker,
-        },
-    }),
-    bgButtonTheme: (theme) => ({
+    btnStyle: (theme) => ({
         cursor: 'default',
         backgroundColor: theme.material.primary.main,
         color: theme.material.primary.contrast.darker,
@@ -71,7 +60,7 @@ const Customize = () => {
                 <div className='buttons-container'>
                     {theme.id === 'light' && (
                         <Button
-                            className={classes.bgButtonTheme}
+                            className={classes.btnStyle}
                             onClick={selectDarkTheme}
                         >
                             {t('settings.themeButton')}
@@ -79,14 +68,14 @@ const Customize = () => {
                     )}
                     {theme.id === 'dark' && (
                         <Button
-                            className={classes.bgButtonTheme}
+                            className={classes.btnStyle}
                             onClick={selectLightTheme}
                         >
                             {t('settings.themeButton')}
                         </Button>
                     )}
                     <Button
-                        className={classes.bgButton}
+                        className={classes.btnStyle}
                         aria-haspopup='true'
                         aria-controls='background-menu'
                         onClick={handleClick}

@@ -49,6 +49,7 @@
     },
     "settings": {
         "title": {
+            "name": "Setări",
             "customize": "Personalizați Aplicația",
             "language": "Limbă",
             "resize": "Redimensionare aplicație",

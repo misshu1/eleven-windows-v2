@@ -49,6 +49,7 @@
     },
     "settings": {
         "title": {
+            "name": "Settings",
             "customize": "Customize app",
             "language": "Language",
             "resize": "Resize app",
