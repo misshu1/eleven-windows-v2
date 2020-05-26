@@ -8,7 +8,7 @@ import SpinnerApp from '../style/SpinnerApp';
 const RoutesApp = () => {
     const { folderState } = useFolderContext();
     const { openFolder } = useDispatchFolderContext();
-    const isMobile = useMediaQuery('(max-width: 28rem)');
+    const isMobile = useMediaQuery('(max-width: 450px)');
     const location = useLocation();
 
     // Route paths are only for mobile

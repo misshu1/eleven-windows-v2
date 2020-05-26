@@ -9,7 +9,7 @@ import { Container } from './style';
 import WidgetsApp from './widgets/WidgetsApp';
 
 const NotificationsApp = ({ notificationMenuRef }) => {
-    const isMobile = useMediaQuery('(max-width: 28rem)');
+    const isMobile = useMediaQuery('(max-width: 450px)');
     const { t } = useTranslation();
     const {
         notificationsHistory,

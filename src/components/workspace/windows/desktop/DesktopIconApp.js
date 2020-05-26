@@ -9,7 +9,7 @@ import { IconContainer } from './style';
 const DesktopIconApp = memo((props) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { link, appId, widgetIcon, iconName } = props;
-    const isMobile = useMediaQuery('(max-width: 28rem)');
+    const isMobile = useMediaQuery('(max-width: 450px)');
 
     const open = useRef(null);
     const active = useRef(null);

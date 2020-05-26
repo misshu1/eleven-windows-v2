@@ -227,7 +227,7 @@ const folderReducer = (state, action) => {
 const FolderContext = createContext();
 const DispatchFolderContext = createContext();
 export const FolderProvider = (props) => {
-    const isMobile = useMediaQuery('(max-width: 28rem)');
+    const isMobile = useMediaQuery('(max-width: 450px)');
 
     const [folderState, folderDispatch] = useReducer(folderReducer, {
         apps: APPS_STATE,

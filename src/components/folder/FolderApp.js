@@ -24,7 +24,7 @@ const FolderApp = forwardRef((props, ref) => {
     } = useDispatchFolderContext();
     const { isLinuxSelected } = useSettingsContext();
 
-    const isMobile = useMediaQuery('(max-width: 28rem)');
+    const isMobile = useMediaQuery('(max-width: 450px)');
 
     const {
         appId,

@@ -9,7 +9,7 @@ import { AppIcon } from './style';
 const MenuAppIcon = (props) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { link, appId, widgetIcon, iconName, closeSideMenu } = props;
-    const isMobile = useMediaQuery('(max-width: 28rem)');
+    const isMobile = useMediaQuery('(max-width: 450px)');
 
     const open = useRef(null);
     const active = useRef(null);

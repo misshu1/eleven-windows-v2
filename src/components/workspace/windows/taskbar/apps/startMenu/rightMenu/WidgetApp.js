@@ -17,7 +17,7 @@ const WidgetApp = (props) => {
     } = props;
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { closeStartMenu } = useStartMenuContext();
-    const isMobile = useMediaQuery('(max-width: 28rem)');
+    const isMobile = useMediaQuery('(max-width: 450px)');
 
     const open = useRef(null);
     const active = useRef(null);
