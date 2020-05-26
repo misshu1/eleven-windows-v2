@@ -25,6 +25,7 @@ export const Container = styled.section`
     color: ${(props) => props.theme.startMenuColor};
     animation: ${slideUp} 0.4s ease-out 1 forwards;
     padding: 0.5rem;
+    backdrop-filter: blur(4px);
 
     @media only screen and (min-width: 450px) {
         max-width: 21.87rem;

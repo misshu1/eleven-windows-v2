@@ -49,6 +49,7 @@ export const Container = styled.section`
     background: ${(props) => props.theme.notificationBg};
     color: ${(props) => props.theme.notificationColor};
     animation: ${slideUp} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1 forwards;
+    backdrop-filter: blur(4px);
 
     .clear {
         width: max-content;
