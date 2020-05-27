@@ -6,11 +6,17 @@ import TaskbarLinuxApp from '../workspace/linux/taskbar/TaskbarLinuxApp';
 import TaskbarWindowsApp from '../workspace/windows/taskbar/TaskbarWindowsApp';
 
 const TaskbarApp = () => {
-    const { isLinuxSelected, isWindowsSelected } = useSettingsContext();
+    const {
+        isLinuxSelected,
+        isWindowsSelected,
+        isMobileSelected,
+    } = useSettingsContext();
 
     return ReactDOM.createPortal(
         <>
-            {isWindowsSelected() && <TaskbarWindowsApp />}
+            {(isWindowsSelected() || isMobileSelected()) && (
+                <TaskbarWindowsApp />
+            )}
             {isLinuxSelected() && <TaskbarLinuxApp />}
         </>,
         document.querySelector('#taskbar')

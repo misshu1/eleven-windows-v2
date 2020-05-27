@@ -106,7 +106,7 @@ body {
             height: 100%;
         `}
     ${(props) =>
-        props.windows &&
+        (props.windows || props.mobile) &&
         css`
             height: calc(100% - 3.5rem);
         `}

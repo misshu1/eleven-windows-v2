@@ -16,7 +16,7 @@ const AppsPreview = () => {
         return apps.current.map((app) => {
             return app.iconLocation.map(
                 (location) =>
-                    location === ICON_LOCATION.linuxMenu && (
+                    location === ICON_LOCATION.linux.appsMenu && (
                         <MenuAppIcon
                             key={app.id}
                             appId={app.id}

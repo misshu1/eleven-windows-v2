@@ -29,11 +29,22 @@ const FOLDER_ACTIONS = {
 };
 
 export const ICON_LOCATION = {
-    desktop: 'DESKTOP',
-    startMenuLeft: 'START_MENU_LEFT',
-    startMenuRight: 'START_MENU_RIGHT',
-    notificationsWindow: 'NOTIFICATIONS_WINDOW',
-    linuxMenu: 'LINUX_MENU',
+    windows: {
+        desktop: 'DESKTOP',
+        notificationsWindow: 'NOTIFICATIONS_WINDOW',
+        startMenu: {
+            left: 'LEFT',
+            right: 'RIGHT',
+        },
+    },
+    linux: {
+        desktop: 'DESKTOP',
+        appsMenu: 'APPS_MENU',
+    },
+    mobile: {
+        homeScreen: 'HOME_SCREEN',
+        appsMenu: 'APPS_MENU',
+    },
 };
 
 const APPS_STATE = [
@@ -47,9 +58,10 @@ const APPS_STATE = [
         isMinimize: null,
         appIndex: 100,
         iconLocation: [
-            ICON_LOCATION.desktop,
-            ICON_LOCATION.notificationsWindow,
-            ICON_LOCATION.startMenuLeft,
+            ICON_LOCATION.windows.desktop,
+            ICON_LOCATION.mobile.homeScreen,
+            ICON_LOCATION.windows.notificationsWindow,
+            ICON_LOCATION.windows.startMenu.left,
         ],
     },
     {
@@ -62,9 +74,10 @@ const APPS_STATE = [
         isMinimize: null,
         appIndex: 100,
         iconLocation: [
-            ICON_LOCATION.desktop,
-            ICON_LOCATION.startMenuRight,
-            ICON_LOCATION.linuxMenu,
+            ICON_LOCATION.windows.desktop,
+            ICON_LOCATION.mobile.homeScreen,
+            ICON_LOCATION.windows.startMenu.right,
+            ICON_LOCATION.linux.appsMenu,
         ],
     },
     {
@@ -76,7 +89,10 @@ const APPS_STATE = [
         isOpen: null,
         isMinimize: null,
         appIndex: 100,
-        iconLocation: [ICON_LOCATION.startMenuRight, ICON_LOCATION.linuxMenu],
+        iconLocation: [
+            ICON_LOCATION.windows.startMenu.right,
+            ICON_LOCATION.linux.appsMenu,
+        ],
     },
     {
         id: 4,
@@ -88,9 +104,10 @@ const APPS_STATE = [
         isMinimize: null,
         appIndex: 100,
         iconLocation: [
-            ICON_LOCATION.desktop,
-            ICON_LOCATION.startMenuRight,
-            ICON_LOCATION.linuxMenu,
+            ICON_LOCATION.windows.desktop,
+            ICON_LOCATION.mobile.homeScreen,
+            ICON_LOCATION.windows.startMenu.right,
+            ICON_LOCATION.linux.appsMenu,
         ],
     },
     {
@@ -102,7 +119,7 @@ const APPS_STATE = [
         isOpen: null,
         isMinimize: null,
         appIndex: 100,
-        iconLocation: [ICON_LOCATION.notificationsWindow],
+        iconLocation: [ICON_LOCATION.windows.notificationsWindow],
     },
 ];
 

@@ -2,26 +2,28 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useSettingsContext } from '../../../contexts/settingsContext';
-import useMediaQuery from '../../../hooks/useMediaQuery';
 import LinuxToolbar from './linux/LinuxToolbar';
 import MobileToolbar from './mobile/MobileToolbar';
 import WindowsToolbar from './windows/WindowsToolbar';
 
 const FolderToolbar = (props) => {
     const { folderName, minimize, quitApp, toolbarMenu, toggleDrawer } = props;
-    const { isWindowsSelected, isLinuxSelected } = useSettingsContext();
-    const isMobile = useMediaQuery('(max-width: 450px)');
+    const {
+        isWindowsSelected,
+        isLinuxSelected,
+        isMobileSelected,
+    } = useSettingsContext();
 
     return (
         <>
-            {isMobile && (
+            {isMobileSelected() && (
                 <MobileToolbar
                     folderName={folderName}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
                 />
             )}
-            {!isMobile && isWindowsSelected() && (
+            {isWindowsSelected() && (
                 <WindowsToolbar
                     folderName={folderName}
                     minimize={minimize}
@@ -30,7 +32,7 @@ const FolderToolbar = (props) => {
                     toggleDrawer={toggleDrawer}
                 />
             )}
-            {!isMobile && isLinuxSelected() && (
+            {isLinuxSelected() && (
                 <LinuxToolbar
                     folderName={folderName}
                     minimize={minimize}

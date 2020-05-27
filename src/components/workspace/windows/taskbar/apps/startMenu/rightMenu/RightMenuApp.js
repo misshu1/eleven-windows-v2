@@ -20,7 +20,7 @@ const RightMenuApp = () => {
     const widgetIcons = useCallback(() => {
         return apps.current.map((app) => {
             return app.iconLocation.map((location) => {
-                if (location === ICON_LOCATION.startMenuRight) {
+                if (location === ICON_LOCATION.windows.startMenu.right) {
                     ANIMATION_DURATION++;
                     return (
                         <WidgetApp

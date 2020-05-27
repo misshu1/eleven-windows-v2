@@ -24,7 +24,7 @@ const LeftMenuApp = ({ history }) => {
         return apps.current.map((app) => {
             return app.iconLocation.map(
                 (location) =>
-                    location === ICON_LOCATION.startMenuLeft && (
+                    location === ICON_LOCATION.windows.startMenu.left && (
                         <WidgetApp
                             key={app.id}
                             appId={app.id}

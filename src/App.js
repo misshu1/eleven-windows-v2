@@ -59,6 +59,7 @@ const App = () => {
         getSelectedBackground,
         isLinuxSelected,
         isWindowsSelected,
+        isMobileSelected,
     } = useSettingsContext();
     const classes = useStyles();
 
@@ -81,6 +82,7 @@ const App = () => {
                             background={getSelectedBackground()}
                             linux={isLinuxSelected()}
                             windows={isWindowsSelected()}
+                            mobile={isMobileSelected()}
                         />
                         <NotificationsProvider>
                             <FolderProvider>

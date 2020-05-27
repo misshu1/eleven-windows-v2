@@ -1,15 +1,17 @@
 import i18n from 'i18next';
-import React, { createContext, useContext, useLayoutEffect, useState } from 'react';
+import React, { createContext, useContext, useLayoutEffect, useRef, useState } from 'react';
 
 import globeImg from '../assets/images/flags/globe.svg';
 import DarkTheme from '../components/theme/DarkTheme';
 import { backgrounds } from '../components/theme/DesktopBackground';
 import LightTheme from '../components/theme/LightTheme';
+import useMediaQuery from '../hooks/useMediaQuery';
 import i18next, { languages } from '../services/translation/i18next';
 
 const OS_THEME = {
     windows: 'WINDOWS',
     linux: 'LINUX',
+    mobile: 'MOBILE',
 };
 
 const THEME = {
@@ -20,8 +22,10 @@ const THEME = {
 export const SettingsContext = createContext();
 export const SettingsProvider = ({ children }) => {
     const [currentOS, setCurrentOS] = useState(OS_THEME.windows);
+    const prevOS_Ref = useRef(null);
     const [theme, setTheme] = useState(DarkTheme);
     const [background, setBackground] = useState(backgrounds);
+    const isMobile = useMediaQuery('(max-width: 450px)');
 
     const getSelectedBackground = () => {
         const bg = background.find((item) => item.isSelected === true);
@@ -91,6 +95,18 @@ export const SettingsProvider = ({ children }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useLayoutEffect(() => {
+        if (currentOS !== OS_THEME.mobile) {
+            // Store the old OS value in prevOS_Ref
+            prevOS_Ref.current = currentOS;
+        }
+        if (isMobile) {
+            setCurrentOS(OS_THEME.mobile);
+        } else if (!isMobile && currentOS === OS_THEME.mobile) {
+            setCurrentOS(prevOS_Ref.current);
+        }
+    }, [currentOS, isMobile]);
+
     const selectDarkTheme = () => {
         changeTheme(THEME.dark);
     };
@@ -121,6 +137,10 @@ export const SettingsProvider = ({ children }) => {
         return currentOS === OS_THEME.windows;
     };
 
+    const isMobileSelected = () => {
+        return currentOS === OS_THEME.mobile;
+    };
+
     const selectWindowsOS = () => {
         setCurrentOS(OS_THEME.windows);
     };
@@ -134,6 +154,7 @@ export const SettingsProvider = ({ children }) => {
             value={{
                 isLinuxSelected,
                 isWindowsSelected,
+                isMobileSelected,
                 selectWindowsOS,
                 selectLinuxOS,
                 languageFlag,

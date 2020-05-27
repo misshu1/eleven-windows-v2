@@ -13,7 +13,7 @@ const WidgetsApp = () => {
         return apps.current.map((item) => {
             return item.iconLocation.map(
                 (location) =>
-                    location === ICON_LOCATION.notificationsWindow && (
+                    location === ICON_LOCATION.windows.notificationsWindow && (
                         <WidgetApp
                             key={item.id}
                             appId={item.id}
