@@ -19,13 +19,12 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import LoginApp from './components/login/LoginApp';
+import { Routes } from './components/routes/Routes';
 import { GlobalStyle } from './components/style/GlobalStyle';
-import WorkspaceApp from './components/workspace/WorkspaceApp';
 import { FirebaseProvider } from './contexts/firebaseContext';
+import { FolderProvider } from './contexts/folderContext';
 import { NotificationsProvider } from './contexts/notificationsContext';
 import { useSettingsContext } from './contexts/settingsContext';
 import { ProvideAuth } from './hooks/useAuth';
@@ -85,22 +84,9 @@ const App = () => {
                         />
 
                         <NotificationsProvider>
-                            <Switch>
-                                <Route
-                                    exact
-                                    path='/login'
-                                    render={() => (
-                                        <LoginApp
-                                            background={getSelectedBackground()}
-                                        />
-                                    )}
-                                />
-                                <Route path='/' component={WorkspaceApp} />
-                                <Route
-                                    path='/404'
-                                    render={() => <div>404...</div>}
-                                />
-                            </Switch>
+                            <FolderProvider>
+                                <Routes />
+                            </FolderProvider>
                         </NotificationsProvider>
                     </ThemeProvider>
                 </ProvideAuth>

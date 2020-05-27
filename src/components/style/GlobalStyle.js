@@ -94,6 +94,11 @@ body {
     background: ${(props) => props.background};
 }
 
+#pages {
+    position: relative;
+    z-index: 500;
+}
+
 #desktop {
     ${(props) =>
         props.linux &&

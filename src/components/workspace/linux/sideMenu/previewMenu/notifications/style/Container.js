@@ -45,9 +45,10 @@ export const Container = styled.div`
         .clear {
             display: flex;
             align-items: center;
-            width: max-content;
+            justify-content: center;
+            width: 100%;
             height: 3rem;
-            margin: 0 0 0 auto;
+            margin: 0;
             font-size: 0.9rem;
             color: ${(props) => props.theme.accentBgLight};
         }

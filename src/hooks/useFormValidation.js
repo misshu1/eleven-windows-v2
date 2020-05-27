@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
 import { useAuth } from './useAuth';
 
 function useFormValidation(initialState, validate, authenticate) {
@@ -13,9 +14,9 @@ function useFormValidation(initialState, validate, authenticate) {
 
     function handleChange(e) {
         e.persist();
-        setValues(previousValues => ({
+        setValues((previousValues) => ({
             ...previousValues,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         }));
     }
 
@@ -97,7 +98,7 @@ function useFormValidation(initialState, validate, authenticate) {
         cancelLogin,
         firebaseError,
         handleLogin,
-        handleRegister
+        handleRegister,
     };
 }
 
