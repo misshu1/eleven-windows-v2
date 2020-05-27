@@ -82,7 +82,6 @@ const App = () => {
                             linux={isLinuxSelected()}
                             windows={isWindowsSelected()}
                         />
-
                         <NotificationsProvider>
                             <FolderProvider>
                                 <Routes />
