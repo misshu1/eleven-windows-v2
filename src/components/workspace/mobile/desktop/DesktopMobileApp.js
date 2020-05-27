@@ -2,7 +2,8 @@ import React, { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ICON_LOCATION, useFolderContext } from '../../../../contexts/folderContext';
-import { Desktop, IconContainer } from './style';
+import Clock from './Clock';
+import { Container, Desktop, IconContainer } from './style';
 
 const DesktopIconApp = (props) => {
     const { link, widgetIcon, iconName } = props;
@@ -11,7 +12,7 @@ const DesktopIconApp = (props) => {
         <IconContainer>
             <Link to={link}>
                 {widgetIcon}
-                <div>{iconName}</div>
+                <div className='app-name'>{iconName}</div>
             </Link>
         </IconContainer>
     );
@@ -37,7 +38,12 @@ const DesktopMobileApp = () => {
         });
     }, []);
 
-    return <Desktop>{desktopIcons()}</Desktop>;
+    return (
+        <Container>
+            <Clock />
+            <Desktop>{desktopIcons()}</Desktop>
+        </Container>
+    );
 };
 
 export default DesktopMobileApp;

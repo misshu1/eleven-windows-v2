@@ -36,6 +36,15 @@
             "5": "Joi",
             "6": "Vineri",
             "7": "Sâmbătă"
+        },
+        "dayAbrev": {
+            "1": "Dum",
+            "2": "Lu",
+            "3": "Mar",
+            "4": "Mie",
+            "5": "Joi",
+            "6": "Vin",
+            "7": "Sâm"
         }
     },
     "language": {
