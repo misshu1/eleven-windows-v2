@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { memo, useRef } from 'react';
-import { Link } from 'react-router-dom';
 
 import { useDispatchFolderContext } from '../../../../contexts/folderContext';
-import useMediaQuery from '../../../../hooks/useMediaQuery';
 import { IconContainer } from './style';
 
 const DesktopIconApp = memo((props) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
-    const { link, appId, widgetIcon, iconName } = props;
-    const isMobile = useMediaQuery('(max-width: 450px)');
+    const { appId, widgetIcon, iconName } = props;
 
     const open = useRef(null);
     const active = useRef(null);
@@ -26,17 +23,10 @@ const DesktopIconApp = memo((props) => {
 
     return (
         <IconContainer tabIndex='0'>
-            {isMobile ? (
-                <Link to={link}>
-                    {widgetIcon}
-                    <div>{iconName}</div>
-                </Link>
-            ) : (
-                <div className='icon' onDoubleClick={start}>
-                    {widgetIcon}
-                    <div>{iconName}</div>
-                </div>
-            )}
+            <div className='icon' onDoubleClick={start}>
+                {widgetIcon}
+                <div>{iconName}</div>
+            </div>
         </IconContainer>
     );
 }, checkProps);
@@ -45,7 +35,6 @@ function checkProps(prevState, nextState) {
     return (
         prevState.widgetIcon === nextState.widgetIcon &&
         prevState.iconName === nextState.iconName &&
-        prevState.link === nextState.link &&
         prevState.appId === nextState.appId
     );
 }
@@ -54,7 +43,6 @@ export default DesktopIconApp;
 
 DesktopIconApp.propTypes = {
     appId: PropTypes.number.isRequired,
-    link: PropTypes.string.isRequired,
     widgetIcon: PropTypes.node.isRequired,
     iconName: PropTypes.node.isRequired,
 };

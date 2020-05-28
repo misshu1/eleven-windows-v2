@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
-export const IconContainer = styled.div`
+export const Widget = styled.div`
     svg {
-        height: 3.2rem;
-        width: 3.2rem;
+        height: 3rem;
+        width: 3rem;
     }
 
     && a {
         display: block;
         width: 100%;
         height: 100%;
-        color: #d6d8de;
+        color: ${(props) => props.theme.startMenuColor};
         cursor: default;
         text-align: center;
         text-decoration: none;

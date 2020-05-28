@@ -17,7 +17,6 @@ const DesktopWindowsApp = () => {
                             key={app.id}
                             appId={app.id}
                             iconName={app.appName}
-                            link={app.link}
                             widgetIcon={app.widgetIcon}
                         />
                     )

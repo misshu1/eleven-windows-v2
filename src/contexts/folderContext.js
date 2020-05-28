@@ -30,20 +30,20 @@ const FOLDER_ACTIONS = {
 
 export const ICON_LOCATION = {
     windows: {
-        desktop: 'DESKTOP',
-        notificationsWindow: 'NOTIFICATIONS_WINDOW',
+        desktop: 'WINDOWS_DESKTOP',
+        notificationsWindow: 'WINDOWS_NOTIFICATIONS_WINDOW',
         startMenu: {
-            left: 'LEFT',
-            right: 'RIGHT',
+            left: 'WINDOWS_STARTMENU_LEFT',
+            right: 'WINDOWS_STARTMENU_RIGHT',
         },
     },
     linux: {
-        desktop: 'DESKTOP',
-        appsMenu: 'APPS_MENU',
+        desktop: 'LINUX_DESKTOP',
+        appsMenu: 'LINUX_APPS_MENU',
     },
     mobile: {
-        homeScreen: 'HOME_SCREEN',
-        appsMenu: 'APPS_MENU',
+        homeScreen: 'MOBILE_HOME_SCREEN',
+        appsMenu: 'MOBILE_APPS_MENU',
     },
 };
 
@@ -59,9 +59,9 @@ const APPS_STATE = [
         appIndex: 100,
         iconLocation: [
             ICON_LOCATION.windows.desktop,
-            ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.windows.notificationsWindow,
             ICON_LOCATION.windows.startMenu.left,
+            ICON_LOCATION.mobile.homeScreen,
         ],
     },
     {
@@ -75,8 +75,9 @@ const APPS_STATE = [
         appIndex: 100,
         iconLocation: [
             ICON_LOCATION.windows.desktop,
-            ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.windows.startMenu.right,
+            ICON_LOCATION.mobile.homeScreen,
+            ICON_LOCATION.mobile.appsMenu,
             ICON_LOCATION.linux.appsMenu,
         ],
     },
@@ -92,6 +93,7 @@ const APPS_STATE = [
         iconLocation: [
             ICON_LOCATION.windows.startMenu.right,
             ICON_LOCATION.linux.appsMenu,
+            ICON_LOCATION.mobile.appsMenu,
         ],
     },
     {
@@ -105,9 +107,10 @@ const APPS_STATE = [
         appIndex: 100,
         iconLocation: [
             ICON_LOCATION.windows.desktop,
-            ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.windows.startMenu.right,
             ICON_LOCATION.linux.appsMenu,
+            ICON_LOCATION.mobile.homeScreen,
+            ICON_LOCATION.mobile.appsMenu,
         ],
     },
     {
