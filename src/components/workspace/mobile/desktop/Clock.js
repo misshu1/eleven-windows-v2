@@ -37,8 +37,13 @@ const Clock = () => {
     const { t } = useTranslation();
 
     let currentDay = day;
+    let hours = hour;
     let minutes = minute;
     let currentMonth = month + 1;
+
+    if (hour < 10) {
+        hours = '0' + hour;
+    }
 
     if (currentDay < 10) {
         currentDay = '0' + day;
@@ -66,7 +71,7 @@ const Clock = () => {
     return (
         <Container>
             <h2>
-                {`${hour}:${minutes}`} <br />
+                {`${hours}:${minutes}`} <br />
             </h2>
             <span>
                 {`${t(`calendar.dayAbrev.${wDay + 1}`)}, ${t(

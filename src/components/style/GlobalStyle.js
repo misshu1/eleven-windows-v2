@@ -138,7 +138,7 @@ body {
         `}
 
     ${(props) =>
-        props.windows &&
+        (props.windows || props.mobile) &&
         css`
             position: fixed;
             bottom: 0;
