@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from 'react';
+import ReactDOM from 'react-dom';
 
 import { ICON_LOCATION, useFolderContext } from '../../../../contexts/folderContext';
 import DesktopIconApp from './DesktopIconApp';
@@ -23,7 +24,10 @@ const DesktopWindowsApp = () => {
             );
         });
     }, []);
-    return <Desktop>{desktopIcons()}</Desktop>;
+    return ReactDOM.createPortal(
+        <Desktop>{desktopIcons()}</Desktop>,
+        document.querySelector('#desktop')
+    );
 };
 
 export default DesktopWindowsApp;

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import OpenApps from './apps/openApps/OpenApps';
 import CartMenuAndIcon from './CartMenuAndIcon';
@@ -14,7 +15,7 @@ import StartMenuAndLogo from './StartMenuAndLogo';
 import { Container } from './style';
 
 const TaskbarWindowsApp = () => {
-    return (
+    return ReactDOM.createPortal(
         <Container>
             <StartMenuProvider>
                 <StartMenuAndLogo />
@@ -32,7 +33,8 @@ const TaskbarWindowsApp = () => {
             <NotificationsTaskbarProvider>
                 <NotificationMenuAndIcon />
             </NotificationsTaskbarProvider>
-        </Container>
+        </Container>,
+        document.querySelector('#taskbar')
     );
 };
 

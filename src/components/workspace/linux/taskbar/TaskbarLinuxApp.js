@@ -1,5 +1,6 @@
 import Tooltip from '@material-ui/core/Tooltip';
 import React, { useCallback } from 'react';
+import ReactDOM from 'react-dom';
 
 import { useDispatchFolderContext, useFolderContext } from '../../../../contexts/folderContext';
 import { AppIcon, Container } from './style';
@@ -52,7 +53,10 @@ const TaskbarLinuxApp = () => {
         minimizeUp,
     ]);
 
-    return <Container>{showIcons()}</Container>;
+    return ReactDOM.createPortal(
+        <Container>{showIcons()}</Container>,
+        document.querySelector('#taskbar')
+    );
 };
 
 export default TaskbarLinuxApp;

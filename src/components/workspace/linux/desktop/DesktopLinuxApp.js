@@ -2,6 +2,7 @@ import Badge from '@material-ui/core/Badge';
 import Tooltip from '@material-ui/core/Tooltip';
 import { motion } from 'framer-motion';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 import LogoIcon from '../../../../assets/images/icons/LogoIcon';
@@ -16,7 +17,7 @@ const DesktopLinuxApp = () => {
     const { notificationsHistory } = useNotificationsContext();
     const { isMenuOpen, openSideMenu } = useSideMenuContext();
 
-    return (
+    return ReactDOM.createPortal(
         <Desktop>
             <SideMenu>
                 <motion.div
@@ -54,7 +55,8 @@ const DesktopLinuxApp = () => {
                 <SideMenuApp />
             </SideMenu>
             <div style={{ flex: 1 }}></div>
-        </Desktop>
+        </Desktop>,
+        document.querySelector('#desktop')
     );
 };
 
