@@ -24,7 +24,7 @@ const widgetsContainerStyles = {
     padding: '1rem',
 };
 
-const AppsMenu = () => {
+const AppsMenu = ({ startMenuRef }) => {
     const { closeStartMenu } = useStartMenuContext();
     const { folderState, sortByAppName } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
@@ -49,7 +49,7 @@ const AppsMenu = () => {
     }, [closeStartMenu]);
 
     return ReactDOM.createPortal(
-        <Container>
+        <Container ref={startMenuRef}>
             <LoginContainer>
                 <span>
                     <FontAwesomeIcon icon={['fas', 'user-circle']} size='2x' />

@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 
 import { useSettingsContext } from '../../contexts/settingsContext';
-import TaskbarLinuxApp from '../workspace/linux/taskbar/TaskbarLinuxApp';
-import TaskbarWindowsApp from '../workspace/windows/taskbar/TaskbarWindowsApp';
+import SpinnerApp from '../style/SpinnerApp';
+
+const TaskbarWindowsApp = lazy(() =>
+    import('../workspace/windows/taskbar/TaskbarWindowsApp')
+);
+const TaskbarLinuxApp = lazy(() =>
+    import('../workspace/linux/taskbar/TaskbarLinuxApp')
+);
 
 const TaskbarApp = () => {
     const {
@@ -15,9 +21,15 @@ const TaskbarApp = () => {
     return ReactDOM.createPortal(
         <>
             {(isWindowsSelected() || isMobileSelected()) && (
-                <TaskbarWindowsApp />
+                <Suspense fallback={<SpinnerApp delay={200} />}>
+                    <TaskbarWindowsApp />
+                </Suspense>
             )}
-            {isLinuxSelected() && <TaskbarLinuxApp />}
+            {isLinuxSelected() && (
+                <Suspense fallback={<SpinnerApp delay={200} />}>
+                    <TaskbarLinuxApp />
+                </Suspense>
+            )}
         </>,
         document.querySelector('#taskbar')
     );

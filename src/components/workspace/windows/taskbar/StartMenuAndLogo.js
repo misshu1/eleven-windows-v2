@@ -29,7 +29,9 @@ const StartMenuAndLogo = () => {
                 {isWindowsSelected() && isStartMenuOpen && (
                     <StartMenuApp startMenuRef={startMenuRef} />
                 )}
-                {isMobileSelected() && isStartMenuOpen && <AppsMenu />}
+                {isMobileSelected() && isStartMenuOpen && (
+                    <AppsMenu startMenuRef={startMenuRef} />
+                )}
             </Suspense>
         </>
     );

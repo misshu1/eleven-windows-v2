@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 
 import { useSettingsContext } from '../../contexts/settingsContext';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import SpinnerApp from '../style/SpinnerApp';
 import { SideMenuProvider } from '../workspace/linux/contexts/sideMenuContext';
-import DesktopLinuxApp from '../workspace/linux/desktop/DesktopLinuxApp';
-import DesktopMobileApp from '../workspace/mobile/desktop/DesktopMobileApp';
-import DesktopWindowsApp from '../workspace/windows/desktop/DesktopWindowsApp';
+
+const DesktopLinuxApp = lazy(() =>
+    import('../workspace/linux/desktop/DesktopLinuxApp')
+);
+const DesktopMobileApp = lazy(() =>
+    import('../workspace/mobile/desktop/DesktopMobileApp')
+);
+const DesktopWindowsApp = lazy(() =>
+    import('../workspace/windows/desktop/DesktopWindowsApp')
+);
 
 const DesktopApp = () => {
     const {
@@ -33,12 +41,22 @@ const DesktopApp = () => {
                     <button onClick={selectLinuxOS}>Linux OS</button>
                 </div>
             )}
-            {isMobileSelected() && <DesktopMobileApp />}
-            {isWindowsSelected() && <DesktopWindowsApp />}
+            {isMobileSelected() && (
+                <Suspense fallback={<SpinnerApp delay={200} />}>
+                    <DesktopMobileApp />
+                </Suspense>
+            )}
+            {isWindowsSelected() && (
+                <Suspense fallback={<SpinnerApp delay={200} />}>
+                    <DesktopWindowsApp />
+                </Suspense>
+            )}
             {isLinuxSelected() && (
-                <SideMenuProvider>
-                    <DesktopLinuxApp />
-                </SideMenuProvider>
+                <Suspense fallback={<SpinnerApp delay={200} />}>
+                    <SideMenuProvider>
+                        <DesktopLinuxApp />
+                    </SideMenuProvider>
+                </Suspense>
             )}
         </>
     );
