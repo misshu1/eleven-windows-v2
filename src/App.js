@@ -21,6 +21,7 @@ import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
+import FolderRoutes from './components/routes/FolderRoutes';
 import { Routes } from './components/routes/Routes';
 import { GlobalStyle } from './components/style/GlobalStyle';
 import { FirebaseProvider } from './contexts/firebaseContext';
@@ -87,6 +88,7 @@ const App = () => {
                         <NotificationsProvider>
                             <FolderProvider>
                                 <Routes />
+                                <FolderRoutes />
                             </FolderProvider>
                         </NotificationsProvider>
                     </ThemeProvider>

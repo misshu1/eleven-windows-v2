@@ -27,7 +27,8 @@ const FolderRoutes = () => {
     }, []);
 
     // Route paths are only for mobile
-    // Here we check the url to see if it contains any paths and open the app if the url contains the route
+    // Here we check the route path and check if it contains any folder routes specified in 'folderContext'
+    // and open the app if the url contains the folder route
     // For example http://localhost:3000/docs if '/docs' is in the url we open Docs app
     useEffect(() => {
         folderState.apps.map((app) => {

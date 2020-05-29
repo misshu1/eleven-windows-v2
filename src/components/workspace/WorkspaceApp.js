@@ -2,7 +2,6 @@ import React from 'react';
 
 import { useSettingsContext } from '../../contexts/settingsContext';
 import useMediaQuery from '../../hooks/useMediaQuery';
-import FolderRoutes from '../routes/FolderRoutes';
 import WorkspaceLinux from './linux/WorkspaceLinux';
 import WorkspaceMobile from './mobile/WorkspaceMobile';
 import WorkspaceWindows from './windows/WorkspaceWindows';
@@ -33,7 +32,6 @@ const WorkspaceApp = () => {
                     <button onClick={selectLinuxOS}>Linux OS</button>
                 </div>
             )}
-            <FolderRoutes />
             {isLinuxSelected() && <WorkspaceLinux />}
             {isWindowsSelected() && <WorkspaceWindows />}
             {isMobileSelected() && <WorkspaceMobile />}
