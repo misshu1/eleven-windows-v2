@@ -152,7 +152,7 @@ body {
 }
 
 #modal {
-    z-index: ${(props) => (props.linux ? '500' : '200')};
+    z-index: 200;
     position: relative;
 }
 

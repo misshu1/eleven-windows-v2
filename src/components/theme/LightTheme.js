@@ -65,6 +65,8 @@ const LightTheme = {
     ratingColorEmpty: 'rgba(0, 0, 0, 0.4)',
     tabsBg: 'rgba(0, 0, 0, 0.13)',
     reviewBorder: 'rgba(0, 0, 0, 0.1)',
+    productCardBg: 'rgba(0, 0, 0, 0.1)',
+    productCardBoxShadow: '0px 0px 10px 1px rgba(0, 0, 0, 0.5)',
 
     // Settings App
     settingsResizeIconBg: 'rgba(0, 0, 0, 0.1)',

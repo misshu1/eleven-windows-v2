@@ -21,14 +21,13 @@ import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import FolderRoutes from './components/routes/FolderRoutes';
 import { Routes } from './components/routes/Routes';
 import { GlobalStyle } from './components/style/GlobalStyle';
 import { FirebaseProvider } from './contexts/firebaseContext';
 import { FolderProvider } from './contexts/folderContext';
 import { NotificationsProvider } from './contexts/notificationsContext';
 import { useSettingsContext } from './contexts/settingsContext';
-import { ProvideAuth } from './hooks/useAuth';
+import { AuthProvider } from './hooks/useAuth';
 
 library.add(
     faCommentAlt,
@@ -77,7 +76,7 @@ const App = () => {
             }}
         >
             <FirebaseProvider>
-                <ProvideAuth>
+                <AuthProvider>
                     <ThemeProvider theme={theme}>
                         <GlobalStyle
                             background={getSelectedBackground()}
@@ -88,11 +87,10 @@ const App = () => {
                         <NotificationsProvider>
                             <FolderProvider>
                                 <Routes />
-                                <FolderRoutes />
                             </FolderProvider>
                         </NotificationsProvider>
                     </ThemeProvider>
-                </ProvideAuth>
+                </AuthProvider>
             </FirebaseProvider>
         </SnackbarProvider>
     );

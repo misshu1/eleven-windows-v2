@@ -62,6 +62,7 @@ const APPS_STATE = [
             ICON_LOCATION.windows.notificationsWindow,
             ICON_LOCATION.windows.startMenu.left,
             ICON_LOCATION.mobile.homeScreen,
+            ICON_LOCATION.mobile.appsMenu,
         ],
     },
     {

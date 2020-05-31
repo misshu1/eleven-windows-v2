@@ -1,8 +1,8 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import { FirebaseContext } from '../../../contexts/firebaseContext';
+import { useFirebaseContext } from '../../../contexts/firebaseContext';
 import FolderApp from '../../folder/FolderApp';
-import ProductApp from './ProductApp';
+import ProductApp from './product/ProductApp';
 import { Container } from './style';
 
 // const store = [
@@ -21,7 +21,7 @@ import { Container } from './style';
 //                 userDisplayName: 'Arnold Shisad',
 //                 rating: 4,
 //                 date: firebase.getFirebaseTimestamp(),
-//                 content: 'something here'
+//                 content: 'something here',
 //             },
 //             {
 //                 id: uuid.v4(),
@@ -29,14 +29,14 @@ import { Container } from './style';
 //                 rating: 5,
 //                 date: firebase.getFirebaseTimestamp(),
 //                 content:
-//                     'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, deserunt.'
+//                     'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, deserunt.',
 //             },
 //             {
 //                 id: uuid.v4(),
 //                 userDisplayName: 'Arnold Shisad',
 //                 rating: 4,
 //                 date: firebase.getFirebaseTimestamp(),
-//                 content: 'something here'
+//                 content: 'something here',
 //             },
 //             {
 //                 id: uuid.v4(),
@@ -44,14 +44,14 @@ import { Container } from './style';
 //                 rating: 5,
 //                 date: firebase.getFirebaseTimestamp(),
 //                 content:
-//                     'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, deserunt.'
+//                     'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, deserunt.',
 //             },
 //             {
 //                 id: uuid.v4(),
 //                 userDisplayName: 'Arnold Shisad',
 //                 rating: 4,
 //                 date: firebase.getFirebaseTimestamp(),
-//                 content: 'something here'
+//                 content: 'something here',
 //             },
 //             {
 //                 id: uuid.v4(),
@@ -59,9 +59,9 @@ import { Container } from './style';
 //                 rating: 5,
 //                 date: firebase.getFirebaseTimestamp(),
 //                 content:
-//                     'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, deserunt.'
-//             }
-//         ]
+//                     'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, deserunt.',
+//             },
+//         ],
 //     },
 //     {
 //         id: uuid.v4(),
@@ -78,7 +78,7 @@ import { Container } from './style';
 //                 userDisplayName: 'Arnold Shisad',
 //                 rating: 4,
 //                 date: firebase.getFirebaseTimestamp(),
-//                 content: 'something here'
+//                 content: 'something here',
 //             },
 //             {
 //                 id: uuid.v4(),
@@ -86,30 +86,44 @@ import { Container } from './style';
 //                 rating: 5,
 //                 date: firebase.getFirebaseTimestamp(),
 //                 content:
-//                     'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, deserunt.'
-//             }
-//         ]
-//     }
+//                     'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, deserunt.',
+//             },
+//         ],
+//     },
 // ];
 
 const StoreApp = () => {
-    const { firebase } = useContext(FirebaseContext);
+    const { firestore } = useFirebaseContext();
     const [products, setProducts] = useState([]);
 
-    const getProducts = useCallback(() => {
-        firebase.db.collection('store').onSnapshot(handleSnapshot);
-    }, [firebase.db]);
+    // const getProducts = useCallback(async () => {
+    //     const test = await firestore
+    //         .collection('store')
+    //         .get()
+    //         .then((data) => console.log(data.data()));
+    // }, [firestore]);
+
+    const getProducts = useCallback(async () => {
+        let dbProducts = [];
+        try {
+            const productsRef = await firestore.collection('products').get();
+            await productsRef.forEach(
+                (doc) =>
+                    (dbProducts = [
+                        ...dbProducts,
+                        { id: doc.id, ...doc.data() },
+                    ])
+            );
+        } catch (err) {
+            // TODO add custom notification alert
+            console.log(err);
+        }
+        setProducts(dbProducts);
+    }, [firestore]);
 
     useEffect(() => {
         getProducts();
     }, [getProducts]);
-
-    const handleSnapshot = (snapshot) => {
-        const dbProducts = snapshot.docs.map((doc) => {
-            return { id: doc.id, ...doc.data() };
-        });
-        setProducts(dbProducts);
-    };
 
     const renderProducts = useCallback(() => {
         return products.map((product) => (

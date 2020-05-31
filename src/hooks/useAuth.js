@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext, createContext } from 'react';
-import firebase from '../config/firebase';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
+import { useFirebaseContext } from '../contexts/firebaseContext';
 
 const AuthContext = createContext();
-export function ProvideAuth(props) {
+export function AuthProvider(props) {
     const auth = useProvideAuth();
 
     return (
@@ -12,30 +13,27 @@ export function ProvideAuth(props) {
     );
 }
 
-export const useAuth = () => {
-    return useContext(AuthContext);
-};
-
 function useProvideAuth() {
+    const { auth } = useFirebaseContext();
     const [user, setUser] = useState(null);
 
     const login = async (email, password) => {
-        return await firebase
-            .auth()
+        return await auth
             .signInWithEmailAndPassword(email, password)
-            .then(response => {
+            .then((response) => {
                 setUser(response.user);
                 return response.user;
             });
     };
 
     const register = async (name, email, password) => {
-        const newUser = await firebase
-            .auth()
-            .createUserWithEmailAndPassword(email, password);
+        const newUser = await auth.createUserWithEmailAndPassword(
+            email,
+            password
+        );
 
         await newUser.user.updateProfile({
-            displayName: name
+            displayName: name,
         });
 
         setUser(newUser.user);
@@ -44,21 +42,21 @@ function useProvideAuth() {
 
     const logout = async () => {
         setUser(null);
-        return await firebase.auth().signOut();
+        return await auth.signOut();
     };
 
-    const sendPasswordResetEmail = async email => {
-        await firebase.auth().sendPasswordResetEmail(email);
+    const sendPasswordResetEmail = async (email) => {
+        await auth.sendPasswordResetEmail(email);
         return true;
     };
 
     const confirmPasswordReset = async (code, password) => {
-        await firebase.auth().confirmPasswordReset(code, password);
+        await auth.confirmPasswordReset(code, password);
         return true;
     };
 
     useEffect(() => {
-        const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 setUser(user);
             } else {
@@ -67,7 +65,7 @@ function useProvideAuth() {
         });
 
         return () => unsubscribe();
-    }, []);
+    }, [auth]);
 
     return {
         user,
@@ -75,6 +73,10 @@ function useProvideAuth() {
         register,
         logout,
         sendPasswordResetEmail,
-        confirmPasswordReset
+        confirmPasswordReset,
     };
 }
+
+export const useAuth = () => {
+    return useContext(AuthContext);
+};
