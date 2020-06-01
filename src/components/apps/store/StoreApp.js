@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useRef } from 'react';
 
 import { useFirebaseContext } from '../../../contexts/firebaseContext';
 import { useNotificationsContext } from '../../../contexts/notificationsContext';
@@ -10,23 +11,23 @@ const StoreApp = () => {
     const { firestore } = useFirebaseContext();
     const [products, setProducts] = useState([]);
     const { showError } = useNotificationsContext();
+    const getProducts = useRef(null);
 
-    const getProducts = useCallback(async () => {
+    getProducts.current = async () => {
         let dbProducts = [];
         try {
             const productsRef = await firestore.collection('products').get();
-            if (productsRef.size) {
-                await productsRef.forEach(
-                    (doc) =>
-                        (dbProducts = [
-                            ...dbProducts,
-                            { id: doc.id, ...doc.data() },
-                        ])
-                );
-                setProducts(dbProducts);
-            } else {
+            if (!productsRef.size) {
                 throw new Error();
             }
+            await productsRef.forEach(
+                (doc) =>
+                    (dbProducts = [
+                        ...dbProducts,
+                        { id: doc.id, ...doc.data() },
+                    ])
+            );
+            setProducts(dbProducts);
         } catch (err) {
             showError(
                 'Error',
@@ -34,12 +35,11 @@ const StoreApp = () => {
                 500
             );
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    };
 
     useEffect(() => {
-        getProducts();
-    }, [getProducts]);
+        getProducts.current();
+    }, []);
 
     const renderProducts = useCallback(() => {
         return products.map((product) => (
