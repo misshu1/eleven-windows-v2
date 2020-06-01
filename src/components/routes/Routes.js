@@ -33,10 +33,6 @@ export const Routes = () => {
             >
                 Github Profile
             </a>
-            <br />
-            <br />
-            P.S This project is a private repo on Github{' '}
-            <Emoji symbol='🙂' label='happy sun' />
         </span>
     );
 
