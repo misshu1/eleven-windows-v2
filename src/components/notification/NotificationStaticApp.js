@@ -32,7 +32,7 @@ const NotificationStaticApp = ({ id, message, title, code, type }) => {
                     <IconButton
                         size='small'
                         onClick={() => closeNotification(id)}
-                        style={{ marginRight: '0.5rem' }}
+                        style={{ padding: '0.5rem' }}
                     >
                         <FontAwesomeIcon
                             icon={['fas', 'times']}

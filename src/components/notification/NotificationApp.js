@@ -32,7 +32,7 @@ const NotificationApp = forwardRef((props, ref) => {
                     <IconButton
                         size='small'
                         onClick={() => closeSnackbar(id)}
-                        style={{ marginRight: '0.5rem' }}
+                        style={{ padding: '0.5rem' }}
                     >
                         <FontAwesomeIcon
                             icon={['fas', 'times']}

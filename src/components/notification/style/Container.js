@@ -55,6 +55,8 @@ export const Container = styled.div`
     }
 
     h3 {
+        display: flex;
+        align-items: center;
         margin: 0;
         flex: 1;
     }
