@@ -71,7 +71,7 @@
             src="https://www.googletagmanager.com/gtag/js?id=UA-111995187-3"
         ></script>
         <script>
-            if (process.env.NODE_ENV === 'production') {
+            if ('%REACT_APP_ENABLE_ANALYTICS%' === 'true') {
                 window.dataLayer = window.dataLayer || [];
                 function gtag() {
                     dataLayer.push(arguments);
