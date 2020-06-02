@@ -42,7 +42,7 @@ const NotificationsApp = ({ notificationMenuRef }) => {
             )}
             {!isMobile && <WidgetsApp />}
         </Container>,
-        document.querySelector('#desktop')
+        document.getElementById('desktop')
     );
 };
 export default NotificationsApp;

@@ -26,7 +26,7 @@ const DesktopWindowsApp = () => {
     }, []);
     return ReactDOM.createPortal(
         <Desktop>{desktopIcons()}</Desktop>,
-        document.querySelector('#desktop')
+        document.getElementById('desktop')
     );
 };
 

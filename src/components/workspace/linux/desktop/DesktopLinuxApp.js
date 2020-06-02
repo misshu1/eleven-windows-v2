@@ -56,7 +56,7 @@ const DesktopLinuxApp = () => {
             </SideMenu>
             <div style={{ flex: 1 }}></div>
         </Desktop>,
-        document.querySelector('#desktop')
+        document.getElementById('desktop')
     );
 };
 

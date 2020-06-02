@@ -40,7 +40,7 @@ const LanguageApp = ({ languageMenuRef }) => {
 
     return ReactDOM.createPortal(
         <Container ref={languageMenuRef}>{showLanguages()}</Container>,
-        document.querySelector('#desktop')
+        document.getElementById('desktop')
     );
 };
 

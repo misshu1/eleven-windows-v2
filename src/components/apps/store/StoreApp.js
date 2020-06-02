@@ -18,7 +18,11 @@ const StoreApp = () => {
         try {
             const productsRef = await firestore.collection('products').get();
             if (!productsRef.size) {
-                throw new Error();
+                showError(
+                    'Error',
+                    'The "products" collection was not found in the database!',
+                    404
+                );
             }
             await productsRef.forEach(
                 (doc) =>

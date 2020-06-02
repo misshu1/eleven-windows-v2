@@ -55,7 +55,7 @@ const TaskbarLinuxApp = () => {
 
     return ReactDOM.createPortal(
         <Container>{showIcons()}</Container>,
-        document.querySelector('#taskbar')
+        document.getElementById('taskbar')
     );
 };
 

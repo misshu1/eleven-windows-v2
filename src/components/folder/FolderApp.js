@@ -133,7 +133,7 @@ const FolderApp = forwardRef((props, ref) => {
                     )
             )}
         </>,
-        document.querySelector('#desktop')
+        document.getElementById('desktop')
     );
 });
 

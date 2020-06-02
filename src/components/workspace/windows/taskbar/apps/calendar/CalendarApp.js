@@ -30,7 +30,7 @@ const CalendarApp = ({ calendarRef }) => {
                 />
             </CustomCalendarStyles>
         </Container>,
-        document.querySelector('#desktop')
+        document.getElementById('desktop')
     );
 };
 

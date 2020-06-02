@@ -9,14 +9,14 @@ const fadeIn = keyframes`
 }
 100% {
     filter: blur(16px) brightness(0.75) grayscale(0.2);
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 `;
 
 const fadeOut = keyframes`
 0% {
     filter: blur(16px) brightness(0.75) grayscale(0.2);
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 60% {
     filter: blur(0) brightness(1) grayscale(0);
@@ -28,12 +28,17 @@ const fadeOut = keyframes`
 
 export const Container = styled.section`
     z-index: 10;
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
 
     &&::before {
         content: '';
@@ -46,6 +51,8 @@ export const Container = styled.section`
         width: 100%;
         height: 100%;
         background: ${(props) => props.background};
+        overflow: hidden;
+
         ${(props) =>
             props.animateInOut &&
             css`

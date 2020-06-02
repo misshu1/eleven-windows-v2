@@ -19,7 +19,7 @@ const IconWithBadge = ({ badgeContent, fontIcon }) => {
                 vertical: 'top',
                 horizontal: 'right',
             }}
-            invisible={badgeContent > 0 ? false : true}
+            invisible={badgeContent === 0}
             variant='dot'
         >
             <FontAwesomeIcon icon={fontIcon} />

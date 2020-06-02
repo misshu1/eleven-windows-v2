@@ -29,13 +29,13 @@ const SideMenuApp = () => {
                             exit='close'
                             variants={SVGMenuAnimations}
                         >
-                            <BorderBG></BorderBG>
+                            <BorderBG />
                         </SvgContainer>
                     </MenuContainer>
                 )}
             </AnimatePresence>
         </>,
-        document.querySelector('#desktop')
+        document.getElementById('desktop')
     );
 };
 

@@ -1,8 +1,8 @@
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 
 import { useSettingsContext } from '../../contexts/settingsContext';
 import useFormValidation from '../../hooks/useFormValidation';
@@ -67,7 +67,7 @@ const INITIAL_STATE = {
     password: '',
 };
 
-const LoginApp = (props) => {
+const LoginApp = () => {
     const { theme } = useSettingsContext();
     const classes = useStyles(theme);
 
@@ -84,9 +84,13 @@ const LoginApp = (props) => {
         handleRegister,
     } = useFormValidation(INITIAL_STATE, validateLogin);
     const [showLogin, setShowLogin] = useState(true);
+    const { getSelectedBackground } = useSettingsContext();
 
-    return (
-        <Container background={props.background} animateInOut={animateInOut}>
+    return ReactDOM.createPortal(
+        <Container
+            background={getSelectedBackground()}
+            animateInOut={animateInOut}
+        >
             <LoginContainer animateInOut={animateInOut}>
                 <form
                     className={classes.container}
@@ -204,12 +208,9 @@ const LoginApp = (props) => {
                     </Button>
                 </form>
             </LoginContainer>
-        </Container>
+        </Container>,
+        document.getElementById('pages')
     );
 };
 
 export default LoginApp;
-
-LoginApp.propTypes = {
-    background: PropTypes.string.isRequired,
-};

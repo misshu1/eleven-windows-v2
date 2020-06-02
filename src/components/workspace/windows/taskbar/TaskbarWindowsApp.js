@@ -34,7 +34,7 @@ const TaskbarWindowsApp = () => {
                 <NotificationMenuAndIcon />
             </NotificationsTaskbarProvider>
         </Container>,
-        document.querySelector('#taskbar')
+        document.getElementById('taskbar')
     );
 };
 

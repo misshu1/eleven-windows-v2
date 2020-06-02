@@ -68,7 +68,7 @@ const AppsMenu = ({ startMenuRef }) => {
                 </Scrollbar>
             </div>
         </Container>,
-        document.querySelector('#desktop')
+        document.getElementById('desktop')
     );
 };
 

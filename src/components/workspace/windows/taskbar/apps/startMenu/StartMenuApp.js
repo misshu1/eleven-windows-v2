@@ -26,7 +26,7 @@ const StartMenuApp = ({ startMenuRef }) => {
             <LeftMenuApp closeStartMenu={closeStartMenu} />
             <RightMenuApp closeStartMenu={closeStartMenu} />
         </Container>,
-        document.querySelector('#desktop')
+        document.getElementById('desktop')
     );
 };
 
