@@ -23,6 +23,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { Routes } from './components/routes/Routes';
 import { GlobalStyle } from './components/style/GlobalStyle';
+import { CartProvider } from './contexts/cartContext';
 import { FirebaseProvider } from './contexts/firebaseContext';
 import { FolderProvider } from './contexts/folderContext';
 import { NotificationsProvider } from './contexts/notificationsContext';
@@ -84,11 +85,13 @@ const App = () => {
                             windows={isWindowsSelected()}
                             mobile={isMobileSelected()}
                         />
-                        <NotificationsProvider>
-                            <FolderProvider>
-                                <Routes />
-                            </FolderProvider>
-                        </NotificationsProvider>
+                        <CartProvider>
+                            <NotificationsProvider>
+                                <FolderProvider>
+                                    <Routes />
+                                </FolderProvider>
+                            </NotificationsProvider>{' '}
+                        </CartProvider>
                     </ThemeProvider>
                 </AuthProvider>
             </FirebaseProvider>

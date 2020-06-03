@@ -4,6 +4,7 @@ import Rating from '@material-ui/lab/Rating';
 import React, { useEffect, useState } from 'react';
 
 import CartIcon from '../../../../assets/images/icons/CartIcon';
+import { useCartContext, useDispatchCartContext } from '../../../../contexts/cartContext';
 import { useSettingsContext } from '../../../../contexts/settingsContext';
 import { Card } from './style';
 
@@ -31,6 +32,8 @@ const ProductApp = ({ product }) => {
     const [ratingVal, setRatingVal] = useState(0);
     const { theme } = useSettingsContext();
     const classes = useStyles(theme);
+    const { addToCart } = useDispatchCartContext();
+    const { getCartTotalPrice } = useCartContext();
 
     useEffect(() => {
         if (oldPrice) {
@@ -74,12 +77,16 @@ const ProductApp = ({ product }) => {
             <Button
                 className='product-add-to-cart'
                 classes={{ root: classes.cartButton }}
+                onClick={() => {
+                    addToCart(product);
+                }}
             >
                 <div className='svg-bg'>
                     <CartIcon width='1.5rem' height='1.5rem' />
                 </div>
                 Add to cart
             </Button>
+            {getCartTotalPrice()}
         </Card>
     );
 };
