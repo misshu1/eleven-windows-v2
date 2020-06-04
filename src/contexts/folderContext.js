@@ -45,6 +45,9 @@ export const ICON_LOCATION = {
         homeScreen: 'MOBILE_HOME_SCREEN',
         appsMenu: 'MOBILE_APPS_MENU',
     },
+    cart: {
+        cartApp: 'CART_APP',
+    },
 };
 
 const APPS_STATE = [
@@ -112,6 +115,7 @@ const APPS_STATE = [
             ICON_LOCATION.linux.appsMenu,
             ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.mobile.appsMenu,
+            ICON_LOCATION.cart.cartApp,
         ],
     },
     {

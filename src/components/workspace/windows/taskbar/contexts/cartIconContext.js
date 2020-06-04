@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 
-const CartContext = createContext();
-export const CartProvider = ({ children }) => {
+const CartIconContext = createContext();
+export const CartIconProvider = ({ children }) => {
     const [isCartOpen, setIsCartOpen] = useState(false);
 
     const toggleCart = useCallback(() => {
@@ -13,7 +13,7 @@ export const CartProvider = ({ children }) => {
     }, [setIsCartOpen]);
 
     return (
-        <CartContext.Provider
+        <CartIconContext.Provider
             value={{
                 toggleCart,
                 closeCart,
@@ -21,10 +21,10 @@ export const CartProvider = ({ children }) => {
             }}
         >
             {children}
-        </CartContext.Provider>
+        </CartIconContext.Provider>
     );
 };
 
-export const useCartContext = () => {
-    return useContext(CartContext);
+export const useCartIconContext = () => {
+    return useContext(CartIconContext);
 };

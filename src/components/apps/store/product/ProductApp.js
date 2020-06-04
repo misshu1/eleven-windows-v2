@@ -4,9 +4,19 @@ import Rating from '@material-ui/lab/Rating';
 import React, { useEffect, useState } from 'react';
 
 import CartIcon from '../../../../assets/images/icons/CartIcon';
-import { useCartContext, useDispatchCartContext } from '../../../../contexts/cartContext';
+import { useDispatchCartContext } from '../../../../contexts/cartContext';
 import { useSettingsContext } from '../../../../contexts/settingsContext';
 import { Card } from './style';
+
+// const productSchema = {
+//     title: String,
+//     description: String,
+//     imagePreview: String,
+//     images: Array<String>,
+//     type: String,
+//     newPrice: Number,
+//     oldPrice: Number,
+// }
 
 const useStyles = makeStyles({
     cartButton: (theme) => ({
@@ -33,7 +43,6 @@ const ProductApp = ({ product }) => {
     const { theme } = useSettingsContext();
     const classes = useStyles(theme);
     const { addToCart } = useDispatchCartContext();
-    const { getCartTotalPrice } = useCartContext();
 
     useEffect(() => {
         if (oldPrice) {
@@ -51,7 +60,7 @@ const ProductApp = ({ product }) => {
     }, [ratings]);
 
     return (
-        <Card>
+        <Card type={product.type}>
             {oldPrice && (
                 <div className='product-discount'>-{discountVal}%</div>
             )}
@@ -86,7 +95,6 @@ const ProductApp = ({ product }) => {
                 </div>
                 Add to cart
             </Button>
-            {getCartTotalPrice()}
         </Card>
     );
 };

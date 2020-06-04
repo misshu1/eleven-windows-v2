@@ -20,7 +20,7 @@ const cartReducer = (state, action) => {
             }
 
         case CART_ACTIONS.remove:
-            return state.filter((item) => item.id !== action.payload.id);
+            return state.filter((item) => item.id !== action.payload);
 
         default:
             return state;
@@ -38,7 +38,13 @@ export const CartProvider = ({ children }) => {
             type: CART_ACTIONS.add,
             payload: product,
         });
-        console.log(cartState);
+    };
+
+    const removeFromCart = (id) => {
+        cartDispatch({
+            type: CART_ACTIONS.remove,
+            payload: id,
+        });
     };
 
     const getCartTotalPrice = () => {
@@ -56,6 +62,7 @@ export const CartProvider = ({ children }) => {
             <DispatchCartContext.Provider
                 value={{
                     addToCart,
+                    removeFromCart,
                 }}
             >
                 {children}

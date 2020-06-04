@@ -13,6 +13,7 @@ import {
     faSpinner,
     faTh,
     faTimes,
+    faTrashAlt,
     faUserCircle,
     faWindowMinimize
 } from '@fortawesome/free-solid-svg-icons';
@@ -45,7 +46,8 @@ library.add(
     faCog,
     faInfo,
     faShoppingCart,
-    faArrowLeft
+    faArrowLeft,
+    faTrashAlt
 );
 
 const useStyles = makeStyles({

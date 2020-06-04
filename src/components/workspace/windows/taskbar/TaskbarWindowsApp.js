@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import OpenApps from './apps/openApps/OpenApps';
 import CartMenuAndIcon from './CartMenuAndIcon';
 import ClockAndCalendar from './ClockAndCalendar';
-import { CartProvider } from './contexts/cartContext';
+import { CartIconProvider } from './contexts/cartIconContext';
 import { ClockCalendarProvider } from './contexts/clockCalendarContext';
 import { LanguageProvider } from './contexts/languageContext';
 import { NotificationsTaskbarProvider } from './contexts/notificationsTaskbarContext';
@@ -21,9 +21,9 @@ const TaskbarWindowsApp = () => {
                 <StartMenuAndLogo />
             </StartMenuProvider>
             <OpenApps />
-            <CartProvider>
+            <CartIconProvider>
                 <CartMenuAndIcon />
-            </CartProvider>
+            </CartIconProvider>
             <LanguageProvider>
                 <LanguageMenuAndIcon />
             </LanguageProvider>

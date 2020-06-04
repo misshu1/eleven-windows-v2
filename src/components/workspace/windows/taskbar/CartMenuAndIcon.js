@@ -2,13 +2,13 @@ import React, { lazy, Suspense, useRef } from 'react';
 
 import useOnClickOutside from '../../../../hooks/useOnClickOutside';
 import SpinnerGlobalApp from '../../../style/SpinnerGlobalApp';
-import { useCartContext } from './contexts/cartContext';
+import { useCartIconContext } from './contexts/cartIconContext';
 import { CartIconApp } from './icons/cart/CartIconApp';
 
 const CartApp = lazy(() => import('./apps/cart/CartApp'));
 
 const CartMenuAndIcon = () => {
-    const { isCartOpen, closeCart } = useCartContext();
+    const { isCartOpen, closeCart } = useCartIconContext();
     const cartMenuRef = useRef(null);
     const cartIconRef = useRef(null);
 

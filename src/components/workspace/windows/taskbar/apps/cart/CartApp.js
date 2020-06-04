@@ -1,11 +1,126 @@
-import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { makeStyles } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import React, { useRef } from 'react';
 import ReactDOM from 'react-dom';
+import Scrollbar from 'react-scrollbars-custom';
 
-import { Container } from './style';
+import { useCartContext, useDispatchCartContext } from '../../../../../../contexts/cartContext';
+import { ICON_LOCATION, useDispatchFolderContext, useFolderContext } from '../../../../../../contexts/folderContext';
+import { useSettingsContext } from '../../../../../../contexts/settingsContext';
+import { Container, Product } from './style';
+
+const useStyles = makeStyles({
+    btnStyle: (theme) => ({
+        cursor: 'default',
+        backgroundColor: theme.material.primary.main,
+        color: theme.material.primary.contrast.darker,
+
+        '&:hover': {
+            backgroundColor: theme.material.primary.darker,
+        },
+    }),
+});
+
+const CartProduct = ({ product }) => {
+    const { removeFromCart } = useDispatchCartContext();
+
+    return (
+        <Product type={product.type}>
+            <div className='img-container'>
+                <img src={product.imagePreview} alt='product.title' />
+            </div>
+            <div className='product-info'>
+                <h4 className='title'>{product.title}</h4>
+                <p className='price'>
+                    <strong>{product.newPrice} $</strong>
+                </p>
+            </div>
+            <div
+                className='remove-product'
+                onClick={() => removeFromCart(product.id)}
+            >
+                <FontAwesomeIcon icon={['fas', 'trash-alt']} size='lg' />
+            </div>
+        </Product>
+    );
+};
 
 const CartApp = ({ cartMenuRef }) => {
+    const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
+    const { folderState } = useFolderContext();
+    const { theme } = useSettingsContext();
+    const { cartState, getCartTotalPrice } = useCartContext();
+    const classes = useStyles(theme);
+    const apps = useRef(folderState.apps);
+
+    const open = useRef((appId) => openFolder(appId));
+    const active = useRef((appId) => activeFolder(appId));
+    const minimize = useRef((appId) => minimizeUp(appId));
+
+    const storeBtn = () => {
+        const start = (appId) => {
+            open.current(appId);
+            active.current(appId);
+            minimize.current(appId);
+        };
+
+        return apps.current.map((app) => {
+            return app.iconLocation.map(
+                (location) =>
+                    location === ICON_LOCATION.cart.cartApp && (
+                        <Button
+                            className={classes.btnStyle}
+                            onClick={() => start(app.id)}
+                        >
+                            Go to {app.appName}
+                        </Button>
+                    )
+            );
+        });
+    };
+
+    const emptryCart = () => {
+        return (
+            <div className='empty-cart'>
+                <h4>Your cart is empty add something.</h4>
+                {storeBtn()}
+            </div>
+        );
+    };
+
+    const renderCartProducts = () => {
+        const products = cartState.map((product) => {
+            return <CartProduct product={product} key={product.id} />;
+        });
+        return products;
+    };
+
     return ReactDOM.createPortal(
-        <Container ref={cartMenuRef}>Cart</Container>,
+        <Container ref={cartMenuRef}>
+            {cartState.length !== 0 ? (
+                <>
+                    <div className='products-container'>
+                        <Scrollbar>{renderCartProducts()}</Scrollbar>
+                    </div>
+                    <div className='checkout-container'>
+                        <div className='checkout-total'>
+                            <h3>Total</h3>
+                            <h3 className='checkout-value'>
+                                {getCartTotalPrice()} $
+                            </h3>
+                        </div>
+                        <div className='checkout-btn'>
+                            <Button className={classes.btnStyle} fullWidth>
+                                Checkout
+                            </Button>
+                        </div>
+                    </div>
+                </>
+            ) : (
+                emptryCart()
+            )}
+        </Container>,
         document.getElementById('desktop')
     );
 };

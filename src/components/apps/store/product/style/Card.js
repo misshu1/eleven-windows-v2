@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Card = styled.div`
     position: relative;
@@ -11,6 +11,16 @@ export const Card = styled.div`
     background: ${(props) => props.theme.productCardBg};
     user-select: none;
     border-radius: 0.5rem;
+    ${(props) =>
+        props.type === 'donation' &&
+        css`
+            background: rgba(70, 143, 97, 0.5);
+        `}
+    ${(props) =>
+        props.type === 'product' &&
+        css`
+            background: ${(props) => props.theme.productCardBg};
+        `}
 
     &&:hover {
         box-shadow: ${(props) => props.theme.productCardBoxShadow};
