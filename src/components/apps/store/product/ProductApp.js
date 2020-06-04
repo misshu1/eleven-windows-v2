@@ -13,9 +13,9 @@ import { Card } from './style';
 //     description: String,
 //     imagePreview: String,
 //     images: Array<String>,
-//     type: String,
+//     type: String, // 'product' || 'donation'
 //     newPrice: Number,
-//     oldPrice: Number,
+//     oldPrice: Number || null
 // }
 
 const useStyles = makeStyles({

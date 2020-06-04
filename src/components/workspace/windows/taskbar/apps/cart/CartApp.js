@@ -5,13 +5,18 @@ import React, { useRef } from 'react';
 import ReactDOM from 'react-dom';
 import Scrollbar from 'react-scrollbars-custom';
 
+import StoreIcon from '../../../../../../assets/images/icons/StoreIcon';
 import { useCartContext, useDispatchCartContext } from '../../../../../../contexts/cartContext';
 import { ICON_LOCATION, useDispatchFolderContext, useFolderContext } from '../../../../../../contexts/folderContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
+import { useCartIconContext } from '../../contexts/cartIconContext';
 import { Container, Product } from './style';
 
 const useStyles = makeStyles({
     btnStyle: (theme) => ({
+        position: 'relative',
+        overflow: 'hidden',
+        paddingLeft: '3rem',
         cursor: 'default',
         backgroundColor: theme.material.primary.main,
         color: theme.material.primary.contrast.darker,
@@ -40,7 +45,11 @@ const CartProduct = ({ product }) => {
                 className='remove-product'
                 onClick={() => removeFromCart(product.id)}
             >
-                <FontAwesomeIcon icon={['fas', 'trash-alt']} size='lg' />
+                <FontAwesomeIcon
+                    icon={['fas', 'trash-alt']}
+                    size='lg'
+                    className='icon'
+                />
             </div>
         </Product>
     );
@@ -48,11 +57,12 @@ const CartProduct = ({ product }) => {
 
 const CartApp = ({ cartMenuRef }) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
+    const { cartState, getCartTotalPrice } = useCartContext();
+    const { closeCart } = useCartIconContext();
     const { folderState } = useFolderContext();
     const { theme } = useSettingsContext();
-    const { cartState, getCartTotalPrice } = useCartContext();
-    const classes = useStyles(theme);
     const apps = useRef(folderState.apps);
+    const classes = useStyles(theme);
 
     const open = useRef((appId) => openFolder(appId));
     const active = useRef((appId) => activeFolder(appId));
@@ -63,6 +73,7 @@ const CartApp = ({ cartMenuRef }) => {
             open.current(appId);
             active.current(appId);
             minimize.current(appId);
+            closeCart();
         };
 
         return apps.current.map((app) => {
@@ -70,9 +81,13 @@ const CartApp = ({ cartMenuRef }) => {
                 (location) =>
                     location === ICON_LOCATION.cart.cartApp && (
                         <Button
-                            className={classes.btnStyle}
+                            classes={{ root: classes.btnStyle }}
                             onClick={() => start(app.id)}
+                            key={app.id}
                         >
+                            <div className='icon'>
+                                <StoreIcon width='1.5rem' height='1.5rem' />
+                            </div>
                             Go to {app.appName}
                         </Button>
                     )
@@ -90,10 +105,9 @@ const CartApp = ({ cartMenuRef }) => {
     };
 
     const renderCartProducts = () => {
-        const products = cartState.map((product) => {
-            return <CartProduct product={product} key={product.id} />;
-        });
-        return products;
+        return cartState.map((product) => (
+            <CartProduct product={product} key={product.id} />
+        ));
     };
 
     return ReactDOM.createPortal(
@@ -111,7 +125,16 @@ const CartApp = ({ cartMenuRef }) => {
                             </h3>
                         </div>
                         <div className='checkout-btn'>
-                            <Button className={classes.btnStyle} fullWidth>
+                            <Button
+                                classes={{ root: classes.btnStyle }}
+                                fullWidth
+                            >
+                                <div className='icon'>
+                                    <FontAwesomeIcon
+                                        icon={['fas', 'angle-double-right']}
+                                        size='lg'
+                                    />
+                                </div>
                                 Checkout
                             </Button>
                         </div>

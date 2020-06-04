@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const Product = styled.div`
     display: flex;
     background: ${(props) => props.theme.productCardBg};
-    margin: 1rem 0;
+    margin: 1rem 0.5rem;
     padding: 1rem 0.5rem;
     border-radius: 0.5rem;
     position: relative;
@@ -20,7 +20,11 @@ export const Product = styled.div`
             background: ${(props) => props.theme.productCardBg};
         `}
         
-.img-container {
+        &&:hover {
+        box-shadow: ${(props) => props.theme.productCardBoxShadow};
+    }
+
+    .img-container {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -63,5 +67,12 @@ export const Product = styled.div`
         width: 3rem;
         border-top-right-radius: inherit;
         border-bottom-right-radius: inherit;
+    }
+
+    .remove-product:hover {
+        .icon {
+            transform: rotate(10deg);
+            transition: transform 0.2s;
+        }
     }
 `;

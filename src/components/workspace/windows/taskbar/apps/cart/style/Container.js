@@ -35,6 +35,21 @@ export const Container = styled.section`
         justify-content: center;
         align-items: center;
         height: 100%;
+
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2.5rem;
+            background: ${(props) => props.theme.material.accent.main};
+            transition: background 0.2s ease-in-out;
+            border-top-right-radius: 0 0;
+            border-bottom-right-radius: 37% 100%;
+        }
     }
 
     .products-container {
@@ -65,6 +80,21 @@ export const Container = styled.section`
 
         .checkout-btn {
             flex: 1;
+
+            .icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 2.5rem;
+                background: ${(props) => props.theme.material.accent.main};
+                transition: background 0.2s ease-in-out;
+                border-top-right-radius: 0 0;
+                border-bottom-right-radius: 37% 100%;
+            }
         }
     }
 
