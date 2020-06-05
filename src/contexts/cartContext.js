@@ -23,8 +23,7 @@ const cartReducer = (state, action) => {
             return state.filter((item) => item.id !== action.payload);
 
         default:
-            return state;
-        // throw new Error(`Unhandled action type: ${action.type}`);
+            throw new Error(`Unhandled action type: ${action.type}`);
     }
 };
 
@@ -40,10 +39,10 @@ export const CartProvider = ({ children }) => {
         });
     };
 
-    const removeFromCart = (id) => {
+    const removeFromCart = (productId) => {
         cartDispatch({
             type: CART_ACTIONS.remove,
-            payload: id,
+            payload: productId,
         });
     };
 
@@ -52,11 +51,16 @@ export const CartProvider = ({ children }) => {
         return Math.round((total + Number.EPSILON) * 100) / 100;
     };
 
+    const isProductInCart = (productId) => {
+        return cartState.some((product) => product.id === productId);
+    };
+
     return (
         <CartContext.Provider
             value={{
                 cartState,
                 getCartTotalPrice,
+                isProductInCart,
             }}
         >
             <DispatchCartContext.Provider

@@ -4,7 +4,7 @@ import Rating from '@material-ui/lab/Rating';
 import React, { useEffect, useState } from 'react';
 
 import CartIcon from '../../../../assets/images/icons/CartIcon';
-import { useDispatchCartContext } from '../../../../contexts/cartContext';
+import { useCartContext, useDispatchCartContext } from '../../../../contexts/cartContext';
 import { useSettingsContext } from '../../../../contexts/settingsContext';
 import { Card } from './style';
 
@@ -27,6 +27,11 @@ const useStyles = makeStyles({
         backgroundColor: theme.material.primary.main,
         color: theme.material.primary.contrast.darker,
 
+        '&:disabled': {
+            filter: 'grayscale(1)',
+            color: '#d6d8de',
+        },
+
         '&:hover': {
             backgroundColor: theme.material.primary.darker,
         },
@@ -38,11 +43,12 @@ const useStyles = makeStyles({
 
 const ProductApp = ({ product }) => {
     const { imagePreview, newPrice, oldPrice, ratings, title } = product;
+    const { addToCart } = useDispatchCartContext();
+    const { isProductInCart } = useCartContext();
+    const { theme } = useSettingsContext();
     const [discountVal, setDiscountVal] = useState(0);
     const [ratingVal, setRatingVal] = useState(0);
-    const { theme } = useSettingsContext();
     const classes = useStyles(theme);
-    const { addToCart } = useDispatchCartContext();
 
     useEffect(() => {
         if (oldPrice) {
@@ -89,11 +95,13 @@ const ProductApp = ({ product }) => {
                 onClick={() => {
                     addToCart(product);
                 }}
+                disabled={isProductInCart(product.id)}
+                fullWidth
             >
                 <div className='svg-bg'>
                     <CartIcon width='1.5rem' height='1.5rem' />
                 </div>
-                Add to cart
+                {isProductInCart(product.id) ? 'Added' : 'Add to cart'}
             </Button>
         </Card>
     );

@@ -61,12 +61,13 @@ export const Container = styled.section`
         align-items: center;
         height: fit-content;
         border-top: 1px solid ${(props) => props.theme.startMenuBorder};
+        padding: 1rem;
 
         .checkout-total {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 1rem;
+            margin-right: 1rem;
 
             h3 {
                 margin: 0;
