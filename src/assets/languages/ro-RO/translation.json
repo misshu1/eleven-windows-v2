@@ -77,5 +77,8 @@
         "notifications": "notificări noi",
         "emptyNotifications": "Nu sunt notificări noi",
         "cart": "Coş"
+    },
+    "cart": {
+        "title": "Coş"
     }
 }

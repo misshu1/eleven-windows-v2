@@ -77,5 +77,8 @@
         "notifications": "new notifications",
         "emptyNotifications": "No new notifications",
         "cart": "Cart"
+    },
+    "cart": {
+        "title": "Cart"
     }
 }

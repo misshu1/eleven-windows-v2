@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 import LogoIcon from '../../../../assets/images/icons/LogoIcon';
+import { useCartContext } from '../../../../contexts/cartContext';
 import { useNotificationsContext } from '../../../../contexts/notificationsContext';
 import { logoAnimations } from '../../../animations/animations';
 import { useSideMenuContext } from '../contexts/sideMenuContext';
@@ -16,6 +17,7 @@ const DesktopLinuxApp = () => {
     const { t } = useTranslation();
     const { notificationsHistory } = useNotificationsContext();
     const { isMenuOpen, openSideMenu } = useSideMenuContext();
+    const { cartState } = useCartContext();
 
     return ReactDOM.createPortal(
         <Desktop>
@@ -30,7 +32,9 @@ const DesktopLinuxApp = () => {
                         enterDelay={500}
                     >
                         <Badge
-                            badgeContent={notificationsHistory.length}
+                            badgeContent={
+                                notificationsHistory.length + cartState.length
+                            }
                             color='error'
                             anchorOrigin={{
                                 vertical: 'top',
@@ -54,6 +58,7 @@ const DesktopLinuxApp = () => {
                 </motion.div>
                 <SideMenuApp />
             </SideMenu>
+            {/* TODO This div should be replaced by a component with desktop icons */}
             <div style={{ flex: 1 }}></div>
         </Desktop>,
         document.getElementById('desktop')

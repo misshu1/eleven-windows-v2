@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import Scrollbar from 'react-scrollbars-custom';
 
+import { useCartContext } from '../../../../../contexts/cartContext';
 import { useNotificationsContext } from '../../../../../contexts/notificationsContext';
 import { fadeAnimations, iconsMenuAnimations } from '../../../../animations';
 import { useSideMenuContext } from '../../contexts/sideMenuContext';
@@ -34,6 +35,7 @@ export const IconsMenuApp = () => {
         activeMenuIcon,
     } = useSideMenuContext();
     const { notificationsHistory } = useNotificationsContext();
+    const { cartState } = useCartContext();
 
     return (
         <Container
@@ -84,10 +86,9 @@ export const IconsMenuApp = () => {
                                             fontIcon={app.fontIcon}
                                         />
                                     )}
-                                    {/* TODO Update the Cart badgeContent */}
                                     {app.showCartBadge && (
                                         <IconWithBadge
-                                            badgeContent={0}
+                                            badgeContent={cartState.length}
                                             fontIcon={app.fontIcon}
                                         />
                                     )}
