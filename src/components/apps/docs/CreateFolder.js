@@ -96,8 +96,8 @@ const folderPropsTable = [
     createData('height', false, 'String', '44rem', heightDescription),
     createData('marginTop', false, 'String', '5rem', marginTopDescription),
     createData('marginLeft', false, 'String', '5rem', marginLeftDescription),
-    createData('toolbarMenu', false, 'Object', '-', toolbarMenuDescription),
-    createData('ref', false, 'Array', '-', refDescription),
+    createData('toolbarMenu', false, 'Array', '-', toolbarMenuDescription),
+    createData('ref', false, 'Object', '-', refDescription),
 ];
 
 const CreateFolder = (props, ref) => {
