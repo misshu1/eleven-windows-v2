@@ -82,20 +82,22 @@ const toolbarMenuDescription = (
     <span>Toolbar menu items, more about this, bellow.</span>
 );
 const refDescription = (
-    <span>Passing references from the folder content to the toolbar menu.</span>
+    <span>
+        Passing references from the folder app elements to the toolbar menu.
+    </span>
 );
 const createData = (propName, required, type, defaultVal, description) => {
     return { propName, required, type, defaultVal, description };
 };
 
 const folderPropsTable = [
-    createData('appId', true, 'number', '-', appIdDescription),
-    createData('width', false, 'string', '44rem', widthDescription),
-    createData('height', false, 'string', '44rem', heightDescription),
-    createData('marginTop', false, 'string', '5rem', marginTopDescription),
-    createData('marginLeft', false, 'string', '5rem', marginLeftDescription),
-    createData('toolbarMenu', false, 'object', '-', toolbarMenuDescription),
-    createData('ref', false, 'object', '-', refDescription),
+    createData('appId', true, 'Number', '-', appIdDescription),
+    createData('width', false, 'String', '44rem', widthDescription),
+    createData('height', false, 'String', '44rem', heightDescription),
+    createData('marginTop', false, 'String', '5rem', marginTopDescription),
+    createData('marginLeft', false, 'String', '5rem', marginLeftDescription),
+    createData('toolbarMenu', false, 'Object', '-', toolbarMenuDescription),
+    createData('ref', false, 'Array', '-', refDescription),
 ];
 
 const CreateFolder = (props, ref) => {
