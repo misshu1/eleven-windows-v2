@@ -38,6 +38,14 @@ export const Container = styled.div`
             background: #2979ff;
         `}
 
+        ${(props) =>
+            props.showHoverEffect &&
+            css`
+                &&:hover {
+                    box-shadow: ${(props) => props.theme.productCardBoxShadow};
+                }
+            `}
+
     .icon {
         display: flex;
         justify-content: center;

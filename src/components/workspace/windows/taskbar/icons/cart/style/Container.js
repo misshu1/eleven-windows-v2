@@ -12,8 +12,8 @@ export const Container = styled.div`
     background: ${(props) => props.open && props.theme.clockHover};
 
     svg {
-        width: 2rem;
-        height: 2rem;
+        width: 1.7rem;
+        height: 1.7rem;
         border-radius: 0.2rem;
     }
 

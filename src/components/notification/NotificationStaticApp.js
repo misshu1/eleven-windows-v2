@@ -11,7 +11,7 @@ const NotificationStaticApp = ({ id, message, title, code, type }) => {
     const { closeNotification } = useNotificationsContext();
 
     return (
-        <Container type={type} showInComponent>
+        <Container type={type} showInComponent showHoverEffect>
             <div className='icon'>
                 {type === NOTIFICATION_TYPE.success && (
                     <FontAwesomeIcon icon={['fas', 'check']} />

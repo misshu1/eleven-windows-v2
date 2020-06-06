@@ -11,6 +11,7 @@ export const Card = styled.div`
     background: ${(props) => props.theme.productCardBg};
     user-select: none;
     border-radius: 0.5rem;
+
     ${(props) =>
         props.type === 'donation' &&
         css`
