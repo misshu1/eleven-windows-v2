@@ -118,8 +118,8 @@ const CreateFolder = (props, ref) => {
             <h2 ref={ref}>Create a new folder</h2>
 
             <p>
-                Let's start creating a new directory in
-                {addWordBreak(' /src/components/apps ')}and then create a new
+                Let's start creating a new directory in{' '}
+                {addWordBreak(' /src/components/apps ')} and then create a new
                 file, let's name it ExampleApp.js. In our ExampleApp add the
                 following code.
             </p>

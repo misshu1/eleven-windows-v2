@@ -156,22 +156,33 @@ export default ExampleApp;
 
 export const zIndexExample = `
 zIndex = {
-  Pages: 500,
-  TaskbarApp: 300,
-  TaskbarApps: 250, // StartMenu, NotificationWindow, etc.
-  Notification: 200,
+  Pages: 500, // section id='pages' inside index.html
+  Taskbar: 300, // header id='taskbar' inside index.html
+  Notification: 200, // div id='modal' inside index.html
   SpinnerApp: 1000,
   FolderApp: {
     default: 100,
     actived: 104,
     DrawerApp: {
-      FolderMenu: 1000,
+      Menu: 1000,
       Backdrop: 500
     }
   },
+  windows: {
+    StartMenuApp: 250,
+    CartApp: 250,
+    LanguageApp: 250,
+    CalendarApp: 250,
+    NotificationsApp: 250
+  },
+  mobile: {
+    AppsMenu: 250,
+    CartApp: 250,
+    NotificationsApp: 250
+  },
   linux: {
     SideMenuIcon: 150, // The logo
-    SideMenuContainer: 400 
+    SideMenuApp: 400 
   }
 }
 `.trim();
@@ -195,7 +206,7 @@ export const folderStructureExample = `
 ---- routes // App routes 
 ---- style // Global styles
 ---- theme
----- workspace/ // Each OS has its own styles
+---- workspace/ 
 ------ linux/ // Only for Desktop
 -------- contexts
 -------- desktop

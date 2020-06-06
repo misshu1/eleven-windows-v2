@@ -7,7 +7,6 @@ import { tomorrow, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import FolderIcon from '../../../assets/images/icons/FolderIcon';
 import LogoIcon from '../../../assets/images/icons/LogoIcon';
-import Emoji from '../../../components/emoji/Emoji';
 import { useNotificationsContext } from '../../../contexts/notificationsContext';
 import { useSettingsContext } from '../../../contexts/settingsContext';
 import FolderApp from '../../folder/FolderApp';
@@ -267,14 +266,9 @@ const DocsApp = () => {
                     </Button>
                 </div>
                 <p>
-                    <Emoji symbol='📝' label='note' />
-                    Note notifications alerts are disabled on mobile, but the
-                    user can still see them inside the notification component.
-                </p>
-                <p>
                     To create a notification alert is really easy, all you have
                     to do is to import the alert type you need from
-                    <span className='text-highlight'>{` NotificationContext `}</span>
+                    <span className='text-highlight'>{` useNotificationsContext `}</span>
                     , the function needs a title, and a message and if is an
                     error or warning you can specify a custom error code.
                 </p>
@@ -288,7 +282,6 @@ const DocsApp = () => {
                 </SyntaxHighlighter>
 
                 <h2 ref={folderStructureRef}>Folder Structure</h2>
-                <p>Here is an example of the app structure.</p>
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {folderStructureExample}
                 </SyntaxHighlighter>
