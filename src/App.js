@@ -11,6 +11,7 @@ import {
     faInfo,
     faLayerGroup,
     faShoppingCart,
+    faSitemap,
     faSpinner,
     faTh,
     faTimes,
@@ -49,7 +50,8 @@ library.add(
     faShoppingCart,
     faArrowLeft,
     faTrashAlt,
-    faAngleDoubleRight
+    faAngleDoubleRight,
+    faSitemap
 );
 
 const useStyles = makeStyles({

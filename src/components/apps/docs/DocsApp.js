@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import { tomorrow, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -11,7 +11,13 @@ import Emoji from '../../../components/emoji/Emoji';
 import { useNotificationsContext } from '../../../contexts/notificationsContext';
 import { useSettingsContext } from '../../../contexts/settingsContext';
 import FolderApp from '../../folder/FolderApp';
-import { folderMenuExample, loadingLogoExample, notificationExample, zIndexExample } from './CodeExamples';
+import {
+    folderMenuExample,
+    folderStructureExample,
+    loadingLogoExample,
+    notificationExample,
+    zIndexExample
+} from './CodeExamples';
 import CreateFolder from './CreateFolder';
 import { Container } from './style';
 
@@ -54,6 +60,18 @@ const useStyles = makeStyles({
             backgroundColor: '#d32f2f',
         },
     },
+    infoButton: {
+        backgroundColor: '#2979ff',
+        border: 0,
+        borderRadius: 3,
+        color: 'white',
+        padding: '.2rem 1rem',
+        margin: 'auto 0',
+        cursor: 'default',
+        '&:hover': {
+            backgroundColor: '#2979ff',
+        },
+    },
 });
 
 const addWordBreak = (str) => {
@@ -76,61 +94,75 @@ const addWordBreak = (str) => {
     return newStringArray;
 };
 
+const toolbarMenu = () => {
+    return [
+        {
+            name: 'Create a new folder',
+            widgetIcon: <FolderIcon />,
+            fontIcon: null,
+            link: null,
+            scrollToRef: 'createFolderRef',
+            onClick: null,
+        },
+        {
+            name: 'Add a menu to the folder',
+            widgetIcon: null,
+            fontIcon: ['fas', 'ellipsis-v'],
+            link: null,
+            scrollToRef: 'addMenuToFolderRef',
+            onClick: null,
+        },
+        {
+            name: 'Change loading logo',
+            widgetIcon: <LogoIcon />,
+            fontIcon: null,
+            link: null,
+            scrollToRef: 'changeLoadingLogoRef',
+            onClick: null,
+        },
+        {
+            name: 'Create notifications',
+            widgetIcon: null,
+            fontIcon: ['far', 'comment-alt'],
+            link: null,
+            scrollToRef: 'createNotificationsRef',
+            onClick: null,
+        },
+        {
+            name: 'z-index',
+            widgetIcon: null,
+            fontIcon: ['fas', 'layer-group'],
+            link: null,
+            scrollToRef: 'zIndexRef',
+            onClick: null,
+        },
+        {
+            name: 'Folder Structure',
+            widgetIcon: null,
+            fontIcon: ['fas', 'sitemap'],
+            link: null,
+            scrollToRef: 'folderStructureRef',
+            onClick: null,
+        },
+    ];
+};
+
 const DocsApp = () => {
     const [highlightStyle, setHighlightStyle] = useState(tomorrow);
     const { theme } = useSettingsContext();
-    const { showSuccess, showError, showWarning } = useNotificationsContext();
+    const {
+        showSuccess,
+        showError,
+        showWarning,
+        showInfo,
+    } = useNotificationsContext();
     const classes = useStyles();
     const changeLoadingLogoRef = useRef(null);
     const createNotificationsRef = useRef(null);
     const createFolderRef = useRef(null);
     const addMenuToFolderRef = useRef(null);
     const zIndexRef = useRef(null);
-
-    const toolbarMenu = useCallback(() => {
-        return [
-            {
-                name: 'Create a new folder',
-                widgetIcon: <FolderIcon />,
-                fontIcon: null,
-                link: null,
-                scrollToRef: 'createFolderRef',
-                onClick: null,
-            },
-            {
-                name: 'Add a menu to the folder',
-                widgetIcon: null,
-                fontIcon: ['fas', 'ellipsis-v'],
-                link: null,
-                scrollToRef: 'addMenuToFolderRef',
-                onClick: null,
-            },
-            {
-                name: 'Change loading logo',
-                widgetIcon: <LogoIcon />,
-                fontIcon: null,
-                link: null,
-                scrollToRef: 'changeLoadingLogoRef',
-                onClick: null,
-            },
-            {
-                name: 'Create notifications',
-                widgetIcon: null,
-                fontIcon: ['far', 'comment-alt'],
-                link: null,
-                scrollToRef: 'createNotificationsRef',
-                onClick: null,
-            },
-            {
-                name: 'z-index',
-                widgetIcon: null,
-                fontIcon: ['fas', 'layer-group'],
-                link: null,
-                scrollToRef: 'zIndexRef',
-                onClick: null,
-            },
-        ];
-    }, []);
+    const folderStructureRef = useRef(null);
 
     useEffect(() => {
         if (theme.id === 'dark') {
@@ -150,6 +182,7 @@ const DocsApp = () => {
                 createNotificationsRef,
                 addMenuToFolderRef,
                 zIndexRef,
+                folderStructureRef,
             }}
         >
             <Container>
@@ -185,6 +218,18 @@ const DocsApp = () => {
                 </SyntaxHighlighter>
                 <h2 ref={createNotificationsRef}>Create notifications</h2>
                 <div className='notification-btn-container'>
+                    <Button
+                        className={classes.infoButton}
+                        onClick={() => {
+                            showInfo(
+                                'Info Title',
+                                'Notification info contante.'
+                            );
+                        }}
+                    >
+                        show info
+                    </Button>
+
                     <Button
                         className={classes.successButton}
                         onClick={() => {
@@ -240,6 +285,12 @@ const DocsApp = () => {
                 <p>Here are all the z-index values used.</p>
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {zIndexExample}
+                </SyntaxHighlighter>
+
+                <h2 ref={folderStructureRef}>Folder Structure</h2>
+                <p>Here is an example of the app structure.</p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {folderStructureExample}
                 </SyntaxHighlighter>
             </Container>
         </FolderApp>

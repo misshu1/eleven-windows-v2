@@ -12,13 +12,15 @@ const APPS_STATE = [
     widgetIcon: exampleIcon,
     link: '/example',
     component: <ExampleApp />,
-    isOpen: isMobile ? 'open' : 'close',
+    isOpen: null,
     isMinimize: null,
     appIndex: 100,
     iconLocation: [
-      ICON_LOCATION.desktop,
-      ICON_LOCATION.notificationsWindow,
-      ICON_LOCATION.startMenuLeft
+      ICON_LOCATION.windows.desktop,
+      ICON_LOCATION.windows.startMenu.right,
+      ICON_LOCATION.mobile.homeScreen,
+      ICON_LOCATION.mobile.appsMenu,
+      ICON_LOCATION.linux.appsMenu
     ]
   }
 ]
@@ -26,7 +28,6 @@ const APPS_STATE = [
 
 export const folderExample = `
 import React from 'react';
-// Make sure the import paths are correct
 import FolderApp from 'src/components/folder/FolderApp';
 
 const ExampleApp = () => {
@@ -55,19 +56,17 @@ export const loadingLogoExample = `
 
 export const notificationExample = `
 import React, { useContext } from 'react';
-import { NotificationContext } from 'src/contexts/notificationContext';
+import { 
+  useNotificationsContext
+} from 'src/contexts/notificationContext';
 
 const ExampleApp = () => {
-  const { 
-    createNotificationSuccess, 
-    createNotificationWarn, 
-    createNotificationError 
-  } = useContext(NotificationContext);
+  const { showSuccess, showWarning } = useNotificationsContext();
 
   return (
     <button 
       onClick={() => {
-        createNotificationSuccess(
+        showSuccess(
           'Success Title',
           'Notification success info.'
         );
@@ -78,7 +77,7 @@ const ExampleApp = () => {
 
     <button 
       onClick={() => {
-        createNotificationWarn(
+        showWarning(
           'Warn Title',
           'Notification warn info.',
           400
@@ -87,18 +86,6 @@ const ExampleApp = () => {
     >
       show warn
     </button>
-
-    <button                         
-      onClick={() => {
-        createNotificationError(
-          'Error Title',
-          'Notification error info.',
-          503
-        );
-      }}
-    >
-      show error
-    </button>
   )
 }
 
@@ -106,48 +93,45 @@ export default ExampleApp;
 `.trim();
 
 export const folderMenuExample = `
-import React, { useRef, useCallback } from 'react';
+import React, { useRef } from 'react';
 import FolderApp from 'src/components/folder/FolderApp';
 import folderIcon from 'src/assets/images/icons/folder.svg';
 import logo from 'src/assets/images/logo/logo-red.svg';
+
+const toolbarMenu = () => {
+  return [
+    {
+      name: 'My first element',
+      widgetIcon: folderIcon, // SVG Icon
+      fontIcon: null, // FontAwesome icon
+      link: null, // React router Link
+      scrollToRef: 'myFirstElementRef', // Name of a ref element
+      onClick: null // If you don't need a Link or ref
+                    // pass a function here
+    },
+    {
+      name: 'My second element',
+      widgetIcon: logo,
+      fontIcon: null,
+      link: null,
+      scrollToRef: 'mySecondElementRef',
+      onClick: null
+    },
+    {
+      name: 'And so on',
+      widgetIcon: null,
+      fontIcon: ['far', 'comment-alt'],
+      link: null,
+      scrollToRef: 'andSoOnRef',
+      onClick: null
+    }
+  ];
+}
 
 const ExampleApp = () => {
   const myFirstElementRef = useRef(null);
   const mySecondElementRef = useRef(null);
   const andSoOnRef = useRef(null);
-
-  const toolbarMenu = useCallback(() => {
-    return [
-      {
-        name: 'My first element',
-        widgetIcon: folderIcon,
-        // FontAwesome icon
-        fontIcon: null,
-        // React router Link
-        link: null,
-        // Name of a ref element
-        scrollToRef: 'myFirstElementRef',
-        // If you don't need a Link or ref, pass a function here
-        onClick: null
-      },
-      {
-        name: 'My second element',
-        widgetIcon: logo,
-        fontIcon: null,
-        link: null,
-        scrollToRef: 'mySecondElementRef',
-        onClick: null
-      },
-      {
-        name: 'And so on',
-        widgetIcon: null,
-        fontIcon: ['far', 'comment-alt'],
-        link: null,
-        scrollToRef: 'andSoOnRef',
-        onClick: null
-      }
-    ];
-  }, []);
 
   return (
     <FolderApp
@@ -172,9 +156,11 @@ export default ExampleApp;
 
 export const zIndexExample = `
 zIndex = {
+  Pages: 500,
   TaskbarApp: 300,
-  TaskbarModalApps: 250,
-  NotificationModalApp: 200,
+  TaskbarApps: 250, // StartMenu, NotificationWindow, etc.
+  Notification: 200,
+  SpinnerApp: 1000,
   FolderApp: {
     default: 100,
     actived: 104,
@@ -182,6 +168,43 @@ zIndex = {
       FolderMenu: 1000,
       Backdrop: 500
     }
+  },
+  linux: {
+    SideMenuIcon: 150, // The logo
+    SideMenuContainer: 400 
   }
 }
+`.trim();
+
+export const folderStructureExample = `
+- src/
+-- assets
+-- contexts
+-- hooks
+-- services
+-- components/
+---- animations // Framer motion animations
+---- apps // All folder apps are here
+---- folder/ // Folder component
+------ drawer
+------ style
+------ toolbar
+---- login
+---- notification 
+---- pages // 401, 404
+---- routes // App routes 
+---- style // Global styles
+---- theme
+---- workspace/ // Each OS has its own styles
+------ linux/ // Only for Desktop
+-------- contexts
+-------- desktop
+-------- sideMenu
+-------- taskbar
+------ mobile/
+-------- desktop
+-------- taskbar
+------ windows/ // Only for Desktop
+-------- desktop
+-------- taskbar
 `.trim();

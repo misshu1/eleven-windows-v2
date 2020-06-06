@@ -116,6 +116,16 @@ const CreateFolder = (props, ref) => {
             <h2 ref={ref}>Create a new folder</h2>
 
             <p>
+                Let's start creating a new directory in
+                {addWordBreak(' /src/components/apps ')}and then create a new
+                file, let's name it ExampleApp.js. In our ExampleApp add the
+                following code.
+            </p>
+            <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                {folderExample}
+            </SyntaxHighlighter>
+
+            <p>
                 Go to {addWordBreak('/src/contexts/folderContext.js')} and add a
                 new object inside
                 <span className='required'>{` APPS_STATE `}</span> like the
@@ -124,27 +134,7 @@ const CreateFolder = (props, ref) => {
             <SyntaxHighlighter language='jsx' style={highlightStyle}>
                 {folderContextState}
             </SyntaxHighlighter>
-            <p>
-                You can create an Icon in 3 components: Desktop, Start Menu, and
-                Notification window. In Start Menu you can choose between the
-                left and right side of the menu.
-            </p>
-            <p>
-                <Emoji symbol='📝' label='note' /> Note that
-                <span className='text-highlight'>{` LeftMenuApp.js `}</span>
-                from Start Menu and icons from
-                <span className='text-highlight'>{` NotificationApp.js `}</span>
-                are not visible on mobile.
-            </p>
-            <p>
-                Now let's start creating a new directory in{' '}
-                {addWordBreak('/src/components/apps')} and then create a new
-                file, let's name it ExampleApp.js. In our ExampleApp add the
-                following code.
-            </p>
-            <SyntaxHighlighter language='jsx' style={highlightStyle}>
-                {folderExample}
-            </SyntaxHighlighter>
+
             <p>
                 <Emoji symbol='📝' label='note' /> Note that
                 <span className='text-highlight'>{` FolderApp `}</span> has a
