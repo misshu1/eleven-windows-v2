@@ -23,7 +23,7 @@ const TaskManagerApp = () => {
         const elapsed = currentDay - new Date(previous).getTime();
 
         if (elapsed < msPerMinute) {
-            return Math.round(elapsed / 1000) + ' secodns';
+            return Math.round(elapsed / 1000) + ' seconds';
         } else if (elapsed < msPerHour) {
             return Math.round(elapsed / msPerMinute) + ' minutes';
         } else if (elapsed < msPerDay) {

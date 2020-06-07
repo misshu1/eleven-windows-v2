@@ -103,7 +103,7 @@ const toolbarMenu = () => {
     {
       name: 'My first element',
       widgetIcon: folderIcon, // SVG Icon
-      fontIcon: null, // FontAwesome icon
+      fontIcon: null, // FontAwesome Icon
       link: null, // React router Link
       scrollToRef: 'myFirstElementRef', // Name of a ref element
       onClick: null // If you don't need a Link or ref
