@@ -89,6 +89,10 @@
         "logout": "Log Out",
         "signUp": "Sign Up",
         "cancel": "Cancel",
-        "register": "Register"
+        "register": "Register",
+        "changeView": {
+            "haveAccount": "Already have an account?",
+            "dontHaveAccount": "Create a new account"
+        }
     }
 }

@@ -9,7 +9,7 @@ import StoreIcon from '../../../../../../assets/images/icons/StoreIcon';
 import { useCartContext, useDispatchCartContext } from '../../../../../../contexts/cartContext';
 import { ICON_LOCATION, useDispatchFolderContext, useFolderContext } from '../../../../../../contexts/folderContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
-import AuthApp from '../../../../../login/AuthApp';
+import AuthApp from '../../../../../auth/AuthApp';
 import { useCartIconContext } from '../../contexts/cartIconContext';
 import { Container, Product } from './style';
 

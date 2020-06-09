@@ -4,7 +4,6 @@ import { Route, Switch } from 'react-router-dom';
 
 import { useNotificationsContext } from '../../contexts/notificationsContext';
 import Emoji from '../emoji/Emoji';
-import LoginApp from '../login/LoginApp';
 import NotAuthorized from '../pages/401/NotAuthorized';
 import NotFound from '../pages/404/NotFound';
 import WorkspaceApp from '../workspace/WorkspaceApp';
@@ -46,7 +45,7 @@ export const Routes = () => {
         <Switch>
             <Route exact path='/404' component={NotFound} />
             <Route exact path='/401' component={NotAuthorized} />
-            <Route exact path='/login' component={LoginApp} />
+            {/* <Route exact path='/login' component={LoginApp} /> */}
             <Route path='/' component={WorkspaceApp} />
         </Switch>
     );

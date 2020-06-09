@@ -50,7 +50,7 @@ const useAuthValidation = (initialState) => {
         }
     };
 
-    const handleLogin = async (e) => {
+    const handleLogin = async (e, callback) => {
         e.preventDefault();
         const validationErrors = validateInput(values);
         setErrors(validationErrors);
@@ -59,6 +59,9 @@ const useAuthValidation = (initialState) => {
         if (!errors.email && !errors.password) {
             try {
                 await auth.login(values.email, values.password);
+
+                // Do something after user logged in
+                callback();
             } catch (err) {
                 setErrors((prevState) => ({
                     ...prevState,
@@ -69,7 +72,7 @@ const useAuthValidation = (initialState) => {
         setSubmitting(false);
     };
 
-    const handleRegister = async (e) => {
+    const handleRegister = async (e, callback) => {
         e.preventDefault();
         const validationErrors = validateInput(values);
         setErrors(validationErrors);
@@ -78,6 +81,9 @@ const useAuthValidation = (initialState) => {
         if (!errors.name && !errors.email && !errors.password) {
             try {
                 await auth.register(values.name, values.email, values.password);
+
+                // Do something after user sign up
+                callback();
             } catch (err) {
                 setErrors((prevState) => ({
                     ...prevState,

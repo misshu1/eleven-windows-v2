@@ -35,6 +35,13 @@ const useStyles = makeStyles(() => ({
             backgroundColor: theme.material.warn.main,
         },
     }),
+    changeViewButton: (theme) => ({
+        border: `1px solid ${theme.material.primary.main}`,
+        color: `${theme.whiteBlack}`,
+        cursor: 'default',
+        margin: '.5rem',
+        borderRadius: 3,
+    }),
 }));
 
 const INITIAL_STATE = {
@@ -42,7 +49,7 @@ const INITIAL_STATE = {
     password: '',
 };
 
-const Login = ({ onCancel }) => {
+const Login = ({ onCancel, changeView }) => {
     const { theme } = useSettingsContext();
     const classes = useStyles(theme);
     const { t } = useTranslation();
@@ -66,7 +73,11 @@ const Login = ({ onCancel }) => {
                     },
                 }}
             >
-                <Form autoComplete='off' onSubmit={handleLogin} errors={errors}>
+                <Form
+                    autoComplete='off'
+                    onSubmit={(e) => handleLogin(e, onCancel)}
+                    errors={errors}
+                >
                     <label htmlFor='email'>
                         <span>{t('auth.email')} *</span>
                         <input
@@ -111,6 +122,14 @@ const Login = ({ onCancel }) => {
                         onClick={onCancel}
                     >
                         {t('auth.cancel')}
+                    </Button>
+                    <Button
+                        type='button'
+                        variant='outlined'
+                        className={classes.changeViewButton}
+                        onClick={changeView}
+                    >
+                        {t('auth.changeView.dontHaveAccount')}
                     </Button>
                 </Form>
             </Scrollbar>

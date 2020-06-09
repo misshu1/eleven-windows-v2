@@ -89,6 +89,10 @@
         "logout": "Deconectare",
         "signUp": "Înscrie-te",
         "cancel": "Anulare",
-        "register": "Înscrie-te"
+        "register": "Înscrie-te",
+        "changeView": {
+            "haveAccount": "Ai deja un cont?",
+            "dontHaveAccount": "Creați un cont nou"
+        }
     }
 }

@@ -13,7 +13,6 @@ export const Form = styled.form`
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-bottom: 1rem;
 
         .error {
             display: block;
@@ -51,6 +50,15 @@ export const Form = styled.form`
             input:hover {
                 border: 1px solid transparent;
             }
+        }
+
+        #name {
+            ${(props) =>
+                (props.errors.name || props.errors.firebase) &&
+                css`
+                    box-shadow: 0 0 0 2px red;
+                    border: 1px solid transparent;
+                `}
         }
 
         #email {
