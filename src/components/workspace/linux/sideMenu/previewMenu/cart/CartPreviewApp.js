@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Scrollbar from 'react-scrollbars-custom';
 
@@ -10,6 +10,8 @@ import StoreIcon from '../../../../../../assets/images/icons/StoreIcon';
 import { useCartContext, useDispatchCartContext } from '../../../../../../contexts/cartContext';
 import { ICON_LOCATION, useDispatchFolderContext, useFolderContext } from '../../../../../../contexts/folderContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
+import { useAuth } from '../../../../../../hooks/useAuth';
+import AuthApp from '../../../../../auth/AuthApp';
 import { useSideMenuContext } from '../../../contexts/sideMenuContext';
 import { Container, Product } from './style';
 
@@ -57,6 +59,7 @@ const CartProduct = ({ product }) => {
 };
 
 const CartPreviewApp = () => {
+    const [isAuthOpen, setIsAuthOpen] = useState(false);
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { cartState, getCartTotalPrice } = useCartContext();
     const { closeSideMenu } = useSideMenuContext();
@@ -65,6 +68,7 @@ const CartPreviewApp = () => {
     const { t } = useTranslation();
     const apps = useRef(folderState.apps);
     const classes = useStyles(theme);
+    const auth = useAuth();
 
     const open = useRef((appId) => openFolder(appId));
     const active = useRef((appId) => activeFolder(appId));
@@ -112,38 +116,81 @@ const CartPreviewApp = () => {
         ));
     };
 
+    const showAuth = () => {
+        setIsAuthOpen(true);
+    };
+
+    const hideAuth = () => {
+        setIsAuthOpen(false);
+    };
+
     return (
         <Container>
-            <Typography variant='h5' component='h2' className='heading-name'>
-                {t('cart.title')}
-            </Typography>
+            {!isAuthOpen && (
+                <Typography
+                    variant='h5'
+                    component='h2'
+                    className='heading-name'
+                >
+                    {t('cart.title')}
+                </Typography>
+            )}
             {cartState.length !== 0 ? (
                 <>
-                    <div className='products-container'>
-                        <Scrollbar>{renderCartProducts()}</Scrollbar>
-                    </div>
-                    <div className='checkout-container'>
-                        <div className='checkout-total'>
-                            <h3>Total</h3>
-                            <h3 className='checkout-value'>
-                                {getCartTotalPrice()} $
-                            </h3>
-                        </div>
-                        <div className='checkout-btn'>
-                            <Button
-                                classes={{ root: classes.btnStyle }}
-                                fullWidth
-                            >
-                                <div className='icon'>
-                                    <FontAwesomeIcon
-                                        icon={['fas', 'angle-double-right']}
-                                        size='lg'
-                                    />
+                    {isAuthOpen && <AuthApp onCancel={hideAuth} />}
+                    {!isAuthOpen && (
+                        <>
+                            <div className='products-container'>
+                                <Scrollbar>{renderCartProducts()}</Scrollbar>
+                            </div>
+                            <div className='checkout-container'>
+                                <div className='checkout-total'>
+                                    <h3>Total</h3>
+                                    <h3 className='checkout-value'>
+                                        {getCartTotalPrice()} $
+                                    </h3>
                                 </div>
-                                Checkout
-                            </Button>
-                        </div>
-                    </div>
+                                <div className='checkout-btn'>
+                                    {auth.user && (
+                                        <Button
+                                            classes={{ root: classes.btnStyle }}
+                                            fullWidth
+                                        >
+                                            <div className='icon'>
+                                                <FontAwesomeIcon
+                                                    icon={[
+                                                        'fas',
+                                                        'angle-double-right',
+                                                    ]}
+                                                    size='lg'
+                                                />
+                                            </div>
+                                            Checkout
+                                        </Button>
+                                    )}
+
+                                    {!auth.user && (
+                                        <Button
+                                            classes={{ root: classes.btnStyle }}
+                                            fullWidth
+                                            onClick={showAuth}
+                                        >
+                                            <div className='icon'>
+                                                <FontAwesomeIcon
+                                                    icon={[
+                                                        'fas',
+                                                        'sign-in-alt',
+                                                    ]}
+                                                    size='lg'
+                                                />
+                                            </div>
+                                            Login
+                                        </Button>
+                                    )}
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </>
             ) : (
                 emptryCart()

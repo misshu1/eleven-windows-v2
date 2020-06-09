@@ -9,6 +9,7 @@ import StoreIcon from '../../../../../../assets/images/icons/StoreIcon';
 import { useCartContext, useDispatchCartContext } from '../../../../../../contexts/cartContext';
 import { ICON_LOCATION, useDispatchFolderContext, useFolderContext } from '../../../../../../contexts/folderContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
+import { useAuth } from '../../../../../../hooks/useAuth';
 import AuthApp from '../../../../../auth/AuthApp';
 import { useCartIconContext } from '../../contexts/cartIconContext';
 import { Container, Product } from './style';
@@ -65,6 +66,7 @@ const CartApp = ({ cartMenuRef }) => {
     const { theme } = useSettingsContext();
     const apps = useRef(folderState.apps);
     const classes = useStyles(theme);
+    const auth = useAuth();
 
     const open = useRef((appId) => openFolder(appId));
     const active = useRef((appId) => activeFolder(appId));
@@ -124,38 +126,63 @@ const CartApp = ({ cartMenuRef }) => {
         <Container ref={cartMenuRef}>
             {cartState.length !== 0 ? (
                 <>
-                    <div className='products-container'>
-                        <Scrollbar>{renderCartProducts()}</Scrollbar>
-                    </div>
-                    <div className='checkout-container'>
-                        <div className='checkout-total'>
-                            <h3>Total</h3>
-                            <h3 className='checkout-value'>
-                                {getCartTotalPrice()} $
-                            </h3>
-                        </div>
-                        <div className='checkout-btn'>
-                            <Button
-                                classes={{ root: classes.btnStyle }}
-                                fullWidth
-                            >
-                                <div className='icon'>
-                                    <FontAwesomeIcon
-                                        icon={['fas', 'angle-double-right']}
-                                        size='lg'
-                                    />
+                    {isAuthOpen && <AuthApp onCancel={hideAuth} />}
+                    {!isAuthOpen && (
+                        <>
+                            <div className='products-container'>
+                                <Scrollbar>{renderCartProducts()}</Scrollbar>
+                            </div>
+                            <div className='checkout-container'>
+                                <div className='checkout-total'>
+                                    <h3>Total</h3>
+                                    <h3 className='checkout-value'>
+                                        {getCartTotalPrice()} $
+                                    </h3>
                                 </div>
-                                Checkout
-                            </Button>
-                        </div>
-                    </div>
+                                <div className='checkout-btn'>
+                                    {auth.user && (
+                                        <Button
+                                            classes={{ root: classes.btnStyle }}
+                                            fullWidth
+                                        >
+                                            <div className='icon'>
+                                                <FontAwesomeIcon
+                                                    icon={[
+                                                        'fas',
+                                                        'angle-double-right',
+                                                    ]}
+                                                    size='lg'
+                                                />
+                                            </div>
+                                            Checkout
+                                        </Button>
+                                    )}
+
+                                    {!auth.user && (
+                                        <Button
+                                            classes={{ root: classes.btnStyle }}
+                                            fullWidth
+                                            onClick={showAuth}
+                                        >
+                                            <div className='icon'>
+                                                <FontAwesomeIcon
+                                                    icon={[
+                                                        'fas',
+                                                        'sign-in-alt',
+                                                    ]}
+                                                    size='lg'
+                                                />
+                                            </div>
+                                            Login
+                                        </Button>
+                                    )}
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </>
             ) : (
-                // emptryCart()
-                <>
-                    <button onClick={showAuth}>login</button>
-                    {isAuthOpen && <AuthApp onCancel={hideAuth} />}
-                </>
+                emptryCart()
             )}
         </Container>,
         document.getElementById('desktop')
