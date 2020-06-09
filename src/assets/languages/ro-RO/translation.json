@@ -80,5 +80,15 @@
     },
     "cart": {
         "title": "Coş"
+    },
+    "auth": {
+        "name": "Nume",
+        "email": "Email",
+        "pass": "Parolă",
+        "login": "Autentificare",
+        "logout": "Deconectare",
+        "signUp": "Înscrie-te",
+        "cancel": "Anulare",
+        "register": "Înscrie-te"
     }
 }

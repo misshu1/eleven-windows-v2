@@ -80,5 +80,15 @@
     },
     "cart": {
         "title": "Cart"
+    },
+    "auth": {
+        "name": "Name",
+        "email": "Email",
+        "pass": "Password",
+        "login": "Login",
+        "logout": "Log Out",
+        "signUp": "Sign Up",
+        "cancel": "Cancel",
+        "register": "Register"
     }
 }

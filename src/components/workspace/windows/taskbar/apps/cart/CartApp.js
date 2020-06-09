@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Scrollbar from 'react-scrollbars-custom';
 
@@ -9,6 +9,7 @@ import StoreIcon from '../../../../../../assets/images/icons/StoreIcon';
 import { useCartContext, useDispatchCartContext } from '../../../../../../contexts/cartContext';
 import { ICON_LOCATION, useDispatchFolderContext, useFolderContext } from '../../../../../../contexts/folderContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
+import AuthApp from '../../../../../login/AuthApp';
 import { useCartIconContext } from '../../contexts/cartIconContext';
 import { Container, Product } from './style';
 
@@ -56,6 +57,7 @@ const CartProduct = ({ product }) => {
 };
 
 const CartApp = ({ cartMenuRef }) => {
+    const [isAuthOpen, setIsAuthOpen] = useState(false);
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { cartState, getCartTotalPrice } = useCartContext();
     const { closeCart } = useCartIconContext();
@@ -110,6 +112,14 @@ const CartApp = ({ cartMenuRef }) => {
         ));
     };
 
+    const showAuth = () => {
+        setIsAuthOpen(true);
+    };
+
+    const hideAuth = () => {
+        setIsAuthOpen(false);
+    };
+
     return ReactDOM.createPortal(
         <Container ref={cartMenuRef}>
             {cartState.length !== 0 ? (
@@ -141,7 +151,11 @@ const CartApp = ({ cartMenuRef }) => {
                     </div>
                 </>
             ) : (
-                emptryCart()
+                // emptryCart()
+                <>
+                    <button onClick={showAuth}>login</button>
+                    {isAuthOpen && <AuthApp onCancel={hideAuth} />}
+                </>
             )}
         </Container>,
         document.getElementById('desktop')
