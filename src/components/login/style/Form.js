@@ -55,7 +55,7 @@ export const Form = styled.form`
 
         #email {
             ${(props) =>
-                (props.errors.email || props.firebaseError) &&
+                (props.errors.email || props.errors.firebase) &&
                 css`
                     box-shadow: 0 0 0 2px red;
                     border: 1px solid transparent;
@@ -64,7 +64,7 @@ export const Form = styled.form`
 
         #password {
             ${(props) =>
-                (props.errors.password || props.firebaseError) &&
+                (props.errors.password || props.errors.firebase) &&
                 css`
                     box-shadow: 0 0 0 2px red;
                     border: 1px solid transparent;

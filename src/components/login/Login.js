@@ -52,7 +52,6 @@ const Login = ({ onCancel }) => {
         values,
         errors,
         isSubmitting,
-        firebaseError,
         handleLogin,
     } = useAuthValidation(INITIAL_STATE);
 
@@ -67,12 +66,7 @@ const Login = ({ onCancel }) => {
                     },
                 }}
             >
-                <Form
-                    autoComplete='off'
-                    onSubmit={handleLogin}
-                    errors={errors}
-                    firebaseError={firebaseError}
-                >
+                <Form autoComplete='off' onSubmit={handleLogin} errors={errors}>
                     <label htmlFor='email'>
                         <span>{t('auth.email')} *</span>
                         <input
@@ -84,7 +78,9 @@ const Login = ({ onCancel }) => {
                             id='email'
                             required
                         />
-                        <p className='error'>{errors.email || firebaseError}</p>
+                        <p className='error'>
+                            {errors.email || errors.firebase}
+                        </p>
                     </label>
                     <label htmlFor='password'>
                         <span>{t('auth.pass')} *</span>

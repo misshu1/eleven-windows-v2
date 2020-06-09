@@ -5,11 +5,10 @@ import useDebounce from '../../hooks/useDebounce';
 import validateInput from './validationRules';
 
 const useAuthValidation = (initialState) => {
-    const [firebaseError, setFirebaseError] = useState(null);
     const [isSubmitting, setSubmitting] = useState(null);
     const [values, setValues] = useState(initialState);
     const [errors, setErrors] = useState({});
-    const debouncedValues = useDebounce(values, 300);
+    const debouncedValues = useDebounce(values, 500);
     const auth = useAuth();
 
     const handleChange = (e) => {
@@ -61,7 +60,10 @@ const useAuthValidation = (initialState) => {
             try {
                 await auth.login(values.email, values.password);
             } catch (err) {
-                setFirebaseError(err.message);
+                setErrors((prevState) => ({
+                    ...prevState,
+                    firebase: err.message,
+                }));
             }
         }
         setSubmitting(false);
@@ -77,21 +79,23 @@ const useAuthValidation = (initialState) => {
             try {
                 await auth.register(values.name, values.email, values.password);
             } catch (err) {
-                setFirebaseError(err.message);
+                setErrors((prevState) => ({
+                    ...prevState,
+                    firebase: err.message,
+                }));
             }
         }
         setSubmitting(false);
     };
 
     return {
-        handleBlur,
-        handleChange,
         values,
         errors,
         isSubmitting,
-        firebaseError,
-        handleLogin,
         handleRegister,
+        handleChange,
+        handleLogin,
+        handleBlur,
     };
 };
 
