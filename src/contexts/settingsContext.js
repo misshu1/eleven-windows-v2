@@ -22,7 +22,7 @@ const THEME = {
 export const SettingsContext = createContext();
 export const SettingsProvider = ({ children }) => {
     const [currentOS, setCurrentOS] = useState(OS_THEME.windows);
-    const [isVideoBgEnabled, setIsVideoBgEnabled] = useState(true);
+    const [isVideoBgEnabled, setIsVideoBgEnabled] = useState(false);
     const prevOSRef = useRef(null);
     const prevVideoRef = useRef(null);
     const [theme, setTheme] = useState(DarkTheme);
