@@ -3,6 +3,7 @@ import React from 'react';
 import { useSettingsContext } from '../../contexts/settingsContext';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import FolderRoutes from '../routes/FolderRoutes';
+import VideoApp from '../video/VideoApp';
 import WorkspaceLinux from './linux/WorkspaceLinux';
 import WorkspaceMobile from './mobile/WorkspaceMobile';
 import WorkspaceWindows from './windows/WorkspaceWindows';
@@ -14,6 +15,7 @@ const WorkspaceApp = () => {
         isMobileSelected,
         selectWindowsOS,
         selectLinuxOS,
+        isVideoBgEnabled,
     } = useSettingsContext();
     const isMobile = useMediaQuery('(max-width: 450px)');
 
@@ -39,6 +41,7 @@ const WorkspaceApp = () => {
             {isLinuxSelected() && <WorkspaceLinux />}
             {isWindowsSelected() && <WorkspaceWindows />}
             {isMobileSelected() && <WorkspaceMobile />}
+            {isVideoBgEnabled && <VideoApp />}
         </>
     );
 };

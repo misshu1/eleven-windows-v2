@@ -159,6 +159,7 @@ zIndex = {
   Pages: 500, // section id='pages' inside index.html
   Taskbar: 300, // header id='taskbar' inside index.html
   Notification: 200, // div id='modal' inside index.html
+  Video: -100, // div id='video' inside index.html
   SpinnerApp: 1000,
   FolderApp: {
     default: 100,
@@ -206,6 +207,7 @@ export const folderStructureExample = `
 ---- routes // App routes 
 ---- style // Global styles
 ---- theme
+---- video
 ---- workspace/ 
 ------ linux/ // Only for Desktop
 -------- contexts

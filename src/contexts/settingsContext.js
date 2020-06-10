@@ -22,10 +22,12 @@ const THEME = {
 export const SettingsContext = createContext();
 export const SettingsProvider = ({ children }) => {
     const [currentOS, setCurrentOS] = useState(OS_THEME.windows);
-    const prevOS_Ref = useRef(null);
+    const [isVideoBgEnabled, setIsVideoBgEnabled] = useState(true);
+    const prevOSRef = useRef(null);
     const [theme, setTheme] = useState(DarkTheme);
     const [background, setBackground] = useState(backgrounds);
     const isMobile = useMediaQuery('(max-width: 450px)');
+    const isTablet = useMediaQuery('(max-width: 800px)');
 
     const getSelectedBackground = () => {
         const bg = background.find((item) => item.isSelected === true);
@@ -84,10 +86,16 @@ export const SettingsProvider = ({ children }) => {
                 return setTheme(LightTheme);
             default:
                 throw new Error(
-                    `THere is no theme with the name: ${themeName}`
+                    `There is no theme with the name: ${themeName}`
                 );
         }
     };
+
+    useLayoutEffect(() => {
+        if (isTablet) {
+            setIsVideoBgEnabled(false);
+        }
+    }, [isTablet]);
 
     useLayoutEffect(() => {
         checkLocalStorageTheme();
@@ -97,13 +105,13 @@ export const SettingsProvider = ({ children }) => {
 
     useLayoutEffect(() => {
         if (currentOS !== OS_THEME.mobile) {
-            // Store the old OS value in prevOS_Ref
-            prevOS_Ref.current = currentOS;
+            // Store the old OS value in prevOSRef
+            prevOSRef.current = currentOS;
         }
         if (isMobile) {
             setCurrentOS(OS_THEME.mobile);
         } else if (!isMobile && currentOS === OS_THEME.mobile) {
-            setCurrentOS(prevOS_Ref.current);
+            setCurrentOS(prevOSRef.current);
         }
     }, [currentOS, isMobile]);
 
@@ -166,6 +174,7 @@ export const SettingsProvider = ({ children }) => {
                 changeBackground,
                 theme,
                 background,
+                isVideoBgEnabled,
             }}
         >
             {children}

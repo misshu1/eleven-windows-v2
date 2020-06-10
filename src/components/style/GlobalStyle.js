@@ -156,6 +156,10 @@ body {
     position: relative;
 }
 
+#video {
+    z-index: -100;
+}
+
 @media only screen and (min-width: 1901px) {
     html {
         font-size: 16px;
