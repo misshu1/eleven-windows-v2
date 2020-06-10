@@ -24,6 +24,7 @@ export const SettingsProvider = ({ children }) => {
     const [currentOS, setCurrentOS] = useState(OS_THEME.windows);
     const [isVideoBgEnabled, setIsVideoBgEnabled] = useState(true);
     const prevOSRef = useRef(null);
+    const prevVideoRef = useRef(null);
     const [theme, setTheme] = useState(DarkTheme);
     const [background, setBackground] = useState(backgrounds);
     const isMobile = useMediaQuery('(max-width: 450px)');
@@ -92,10 +93,15 @@ export const SettingsProvider = ({ children }) => {
     };
 
     useLayoutEffect(() => {
+        if (isVideoBgEnabled) {
+            prevVideoRef.current = isVideoBgEnabled;
+        }
         if (isTablet) {
             setIsVideoBgEnabled(false);
+        } else if (!isTablet && !isVideoBgEnabled) {
+            setIsVideoBgEnabled(prevVideoRef.current);
         }
-    }, [isTablet]);
+    }, [isTablet, isVideoBgEnabled]);
 
     useLayoutEffect(() => {
         checkLocalStorageTheme();
@@ -149,6 +155,10 @@ export const SettingsProvider = ({ children }) => {
         return currentOS === OS_THEME.mobile;
     };
 
+    const isVideoSelectedOnDesktop = () => {
+        return !isTablet && isVideoBgEnabled;
+    };
+
     const selectWindowsOS = () => {
         setCurrentOS(OS_THEME.windows);
     };
@@ -174,7 +184,7 @@ export const SettingsProvider = ({ children }) => {
                 changeBackground,
                 theme,
                 background,
-                isVideoBgEnabled,
+                isVideoSelectedOnDesktop,
             }}
         >
             {children}

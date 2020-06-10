@@ -207,7 +207,7 @@ export const folderStructureExample = `
 ---- routes // App routes 
 ---- style // Global styles
 ---- theme
----- video
+---- video // Video background component
 ---- workspace/ 
 ------ linux/ // Only for Desktop
 -------- contexts

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 
 import { useSettingsContext } from '../../contexts/settingsContext';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import FolderRoutes from '../routes/FolderRoutes';
-import VideoApp from '../video/VideoApp';
+import SpinnerApp from '../style/SpinnerApp';
 import WorkspaceLinux from './linux/WorkspaceLinux';
 import WorkspaceMobile from './mobile/WorkspaceMobile';
 import WorkspaceWindows from './windows/WorkspaceWindows';
+
+const VideoApp = lazy(() => import('../video/VideoApp'));
 
 const WorkspaceApp = () => {
     const {
@@ -15,7 +17,7 @@ const WorkspaceApp = () => {
         isMobileSelected,
         selectWindowsOS,
         selectLinuxOS,
-        isVideoBgEnabled,
+        isVideoSelectedOnDesktop,
     } = useSettingsContext();
     const isMobile = useMediaQuery('(max-width: 450px)');
 
@@ -35,13 +37,17 @@ const WorkspaceApp = () => {
                     <button onClick={selectLinuxOS}>Linux OS</button>
                 </div>
             )}
-            {/* Render folder routes only when route '/' is rendered from Routes.js file */}
+            {/* Render folder routes only when the route '/' is rendered from Routes.js file */}
             {/* P.S: Don't move this '<FolderRoutes />' to 'App.js' */}
             <FolderRoutes />
             {isLinuxSelected() && <WorkspaceLinux />}
             {isWindowsSelected() && <WorkspaceWindows />}
             {isMobileSelected() && <WorkspaceMobile />}
-            {isVideoBgEnabled && <VideoApp />}
+            {isVideoSelectedOnDesktop() && (
+                <Suspense fallback={<SpinnerApp delay={200} />}>
+                    <VideoApp />
+                </Suspense>
+            )}
         </>
     );
 };
