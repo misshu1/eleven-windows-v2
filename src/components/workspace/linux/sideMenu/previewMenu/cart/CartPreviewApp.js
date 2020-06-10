@@ -135,7 +135,8 @@ const CartPreviewApp = () => {
                     {t('cart.title')}
                 </Typography>
             )}
-            {cartState.length !== 0 ? (
+            {cartState.length === 0 && emptryCart()}
+            {cartState.length !== 0 && (
                 <>
                     {isAuthOpen && <AuthApp onCancel={hideAuth} />}
                     {!isAuthOpen && (
@@ -192,8 +193,6 @@ const CartPreviewApp = () => {
                         </>
                     )}
                 </>
-            ) : (
-                emptryCart()
             )}
         </Container>
     );

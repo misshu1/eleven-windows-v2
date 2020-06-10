@@ -124,7 +124,8 @@ const CartApp = ({ cartMenuRef }) => {
 
     return ReactDOM.createPortal(
         <Container ref={cartMenuRef}>
-            {cartState.length !== 0 ? (
+            {cartState.length === 0 && emptryCart()}
+            {cartState.length !== 0 && (
                 <>
                     {isAuthOpen && <AuthApp onCancel={hideAuth} />}
                     {!isAuthOpen && (
@@ -181,8 +182,6 @@ const CartApp = ({ cartMenuRef }) => {
                         </>
                     )}
                 </>
-            ) : (
-                emptryCart()
             )}
         </Container>,
         document.getElementById('desktop')
