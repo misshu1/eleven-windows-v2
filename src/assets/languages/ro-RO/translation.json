@@ -65,7 +65,9 @@
             "notifications": "Notificări"
         },
         "backgroundButton": "Alege fundalul",
+        "videoBgButton": "Alege fundalul video",
         "themeButton": "Schimbă tema",
+        "enableVideoBgButton": "Activați fundalul video",
         "disableButton": "Dezactivați alertele de notificări.",
         "disableButtonInfo": "Le veți vedea în continuare în fereastra notificărilor."
     },

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const ThemePreview = styled.div`
     position: relative;
@@ -6,6 +6,13 @@ export const ThemePreview = styled.div`
     height: 8rem;
     background: ${(props) => props.background};
     margin: 0.5rem 0;
+
+    ${(props) =>
+        props.isVideoSelectedOnDesktop &&
+        css`
+            background: url(${props.getSelectedVideoPreview});
+            background-size: 100% 100%;
+        `}
 
     .calculator {
         position: absolute;

@@ -5,10 +5,10 @@ import { useSettingsContext } from '../../contexts/settingsContext';
 import { Video } from './style';
 
 const VideoApp = () => {
-    const { getSelectedVideoBg } = useSettingsContext();
+    const { getSelectedVideoBg, getSelectedVideoBgName } = useSettingsContext();
 
     return ReactDOM.createPortal(
-        <Video autoPlay muted loop>
+        <Video key={getSelectedVideoBgName()} autoPlay muted loop>
             <source src={getSelectedVideoBg().webm} type='video/webm' />
             <source src={getSelectedVideoBg().mp4} type='video/mp4' />
         </Video>,

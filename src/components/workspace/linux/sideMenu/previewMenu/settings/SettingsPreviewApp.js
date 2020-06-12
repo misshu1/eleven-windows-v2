@@ -11,6 +11,7 @@ import Scrollbar from 'react-scrollbars-custom';
 
 import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
+import useMediaQuery from '../../../../../../hooks/useMediaQuery';
 import { languages } from '../../../../../../services/translation/i18next';
 import Preview from '../../../../../apps/settings/Preview';
 import { FlagImgContainer } from '../../../../../apps/settings/style';
@@ -57,6 +58,12 @@ const SettingsPreviewApp = () => {
         selectLightTheme,
         selectDarkTheme,
         changeBackground,
+        isVideoSelectedOnDesktop,
+        isVideoBgEnabled,
+        videoBg,
+        changeVideoBg,
+        getSelectedVideoBgName,
+        enableVideoBg,
     } = useSettingsContext();
     const {
         disable,
@@ -65,28 +72,47 @@ const SettingsPreviewApp = () => {
     } = useNotificationsContext();
     const classes = useStyles(theme);
     const { t } = useTranslation();
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [bgMenuEl, setBgMenuEl] = useState(null);
+    const [videoMenuEl, setVideoMenuEl] = useState(null);
+    const isBgMenuOpen = Boolean(bgMenuEl);
+    const isVideoMenuOpen = Boolean(videoMenuEl);
     const containerRef = useRef(null);
-    const open = Boolean(anchorEl);
+    const isTablet = useMediaQuery('(max-width: 800px)');
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang);
     };
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleClickMenuVideo = (event) => {
+        setVideoMenuEl(event.currentTarget);
     };
 
-    const handleClose = () => {
-        setAnchorEl(null);
+    const handleCloseMenuVideo = () => {
+        setVideoMenuEl(null);
+    };
+
+    const handleClickMenuBg = (event) => {
+        setBgMenuEl(event.currentTarget);
+    };
+
+    const handleCloseMenuBg = () => {
+        setBgMenuEl(null);
     };
 
     const changeBg = useCallback(
         (selectedBg) => {
-            setAnchorEl(null);
+            setBgMenuEl(null);
             changeBackground(selectedBg);
         },
         [changeBackground]
+    );
+
+    const changeVideo = useCallback(
+        (selectedVideo) => {
+            setVideoMenuEl(null);
+            changeVideoBg(selectedVideo);
+        },
+        [changeVideoBg]
     );
 
     const renderImg = () => {
@@ -138,43 +164,109 @@ const SettingsPreviewApp = () => {
                                 {t('settings.themeButton')}
                             </Button>
                         )}
-                        <Button
-                            className={classes.btnStyle}
-                            aria-haspopup='true'
-                            aria-controls='background-menu'
-                            onClick={handleClick}
-                        >
-                            {t('settings.backgroundButton')}
-                        </Button>
-                        <Menu
-                            container={containerRef.current}
-                            id='background-menu'
-                            anchorEl={anchorEl}
-                            keepMounted
-                            open={open}
-                            onClose={handleClose}
-                            PaperProps={{
-                                style: {
-                                    maxHeight: ITEM_HEIGHT * 6.5,
-                                    width: 220,
-                                },
-                            }}
-                        >
-                            {background.map((item) => (
-                                <MenuItem
-                                    key={item.id}
-                                    onClick={() => changeBg(item.id)}
-                                    selected={
-                                        item.name ===
-                                        getSelectedBackgroundName()
-                                    }
+                        {!isVideoSelectedOnDesktop() && (
+                            <>
+                                <Button
+                                    className={classes.btnStyle}
+                                    aria-haspopup='true'
+                                    aria-controls='background-menu'
+                                    onClick={handleClickMenuBg}
                                 >
-                                    {item.name}
-                                </MenuItem>
-                            ))}
-                        </Menu>
+                                    {t('settings.backgroundButton')}
+                                </Button>
+                                <Menu
+                                    id='background-menu'
+                                    container={containerRef.current}
+                                    anchorEl={bgMenuEl}
+                                    keepMounted
+                                    open={isBgMenuOpen}
+                                    onClose={handleCloseMenuBg}
+                                    PaperProps={{
+                                        style: {
+                                            maxHeight: ITEM_HEIGHT * 6.5,
+                                            width: 220,
+                                        },
+                                    }}
+                                >
+                                    {background.map((item) => (
+                                        <MenuItem
+                                            key={item.id}
+                                            onClick={() => changeBg(item.id)}
+                                            selected={
+                                                item.name ===
+                                                getSelectedBackgroundName()
+                                            }
+                                        >
+                                            {item.name}
+                                        </MenuItem>
+                                    ))}
+                                </Menu>
+                            </>
+                        )}
+                        {isVideoSelectedOnDesktop() && (
+                            <>
+                                <Button
+                                    className={classes.btnStyle}
+                                    aria-haspopup='true'
+                                    aria-controls='video-menu'
+                                    onClick={handleClickMenuVideo}
+                                >
+                                    {t('settings.videoBgButton')}
+                                </Button>
+                                <Menu
+                                    id='video-menu'
+                                    container={containerRef.current}
+                                    anchorEl={videoMenuEl}
+                                    keepMounted
+                                    open={isVideoMenuOpen}
+                                    onClose={handleCloseMenuVideo}
+                                    PaperProps={{
+                                        style: {
+                                            maxHeight: ITEM_HEIGHT * 6.5,
+                                            width: 220,
+                                        },
+                                    }}
+                                >
+                                    {videoBg.map((item) => (
+                                        <MenuItem
+                                            key={item.id}
+                                            onClick={() => changeVideo(item.id)}
+                                            selected={
+                                                item.name ===
+                                                getSelectedVideoBgName()
+                                            }
+                                        >
+                                            {item.name}
+                                        </MenuItem>
+                                    ))}
+                                </Menu>
+                            </>
+                        )}
                     </div>
                     <Preview />
+                    {!isTablet && (
+                        <div style={{ display: 'flex' }}>
+                            <Switch
+                                checked={isVideoBgEnabled}
+                                onChange={enableVideoBg}
+                                value={isVideoBgEnabled}
+                                classes={{
+                                    switchBase: classes.switchBase,
+                                    track: classes.track,
+                                    thumb: classes.thumb,
+                                    checked: classes.checked,
+                                }}
+                            />
+                            <h4
+                                style={{
+                                    display: 'inline-block',
+                                    margin: 'auto 0',
+                                }}
+                            >
+                                {t('settings.enableVideoBgButton')}
+                            </h4>
+                        </div>
+                    )}
                 </Box>
                 <Typography
                     variant='h6'

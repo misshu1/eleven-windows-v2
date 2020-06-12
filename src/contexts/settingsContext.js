@@ -27,7 +27,6 @@ export const SettingsProvider = ({ children }) => {
     const [videoBg, setVideoBg] = useState(videoBackgrounds);
     const [background, setBackground] = useState(backgrounds);
     const [theme, setTheme] = useState(DarkTheme);
-    const prevVideoRef = useRef(null); // Here we keep the 'isVideoBgEnabled' old state
     const prevOSRef = useRef(null); // Here we keep the 'currentOS' old state
     const isMobile = useMediaQuery('(max-width: 450px)');
     const isTablet = useMediaQuery('(max-width: 800px)');
@@ -42,6 +41,11 @@ export const SettingsProvider = ({ children }) => {
         return vid.name;
     };
 
+    const getSelectedVideoPreview = () => {
+        const vid = videoBg.find((item) => item.isSelected === true);
+        return vid.preview;
+    };
+
     const getSelectedBackground = () => {
         const bg = background.find((item) => item.isSelected === true);
         return bg.bg;
@@ -50,6 +54,11 @@ export const SettingsProvider = ({ children }) => {
     const getSelectedBackgroundName = () => {
         const bg = background.find((item) => item.isSelected === true);
         return bg.name;
+    };
+
+    const enableVideoBg = (e) => {
+        localStorage.setItem('isVideoBgEnabled', e.target.checked);
+        setIsVideoBgEnabled(e.target.checked);
     };
 
     const changeBackground = (id) => {
@@ -63,6 +72,30 @@ export const SettingsProvider = ({ children }) => {
 
         if (!checkBackground.isSelected) {
             setBackground(filterBg);
+        }
+    };
+
+    const changeVideoBg = (id) => {
+        localStorage.setItem('videoBg', id);
+        const filterVideo = videoBg.map((item) =>
+            item.id === id
+                ? { ...item, isSelected: true }
+                : { ...item, isSelected: false }
+        );
+        const checkVideo = videoBg.find((item) => item.id === id);
+
+        if (!checkVideo.isSelected) {
+            setVideoBg(filterVideo);
+        }
+    };
+
+    const checkLocalStorageVideoBg = () => {
+        const videoBg = localStorage.getItem('videoBg');
+        if (!videoBg) {
+            localStorage.setItem('videoBg', 'vid1');
+            changeVideoBg('vid1');
+        } else {
+            changeVideoBg(videoBg);
         }
     };
 
@@ -105,19 +138,18 @@ export const SettingsProvider = ({ children }) => {
     };
 
     useLayoutEffect(() => {
-        if (isVideoBgEnabled) {
-            prevVideoRef.current = isVideoBgEnabled;
+        const isVideoBgEnabled = localStorage.getItem('isVideoBgEnabled');
+        if (!isVideoBgEnabled) {
+            localStorage.setItem('isVideoBgEnabled', false);
+        } else {
+            setIsVideoBgEnabled(JSON.parse(isVideoBgEnabled));
         }
-        if (isTablet) {
-            setIsVideoBgEnabled(false);
-        } else if (!isTablet && !isVideoBgEnabled) {
-            setIsVideoBgEnabled(prevVideoRef.current);
-        }
-    }, [isTablet, isVideoBgEnabled]);
+    }, []);
 
     useLayoutEffect(() => {
         checkLocalStorageTheme();
         checkLocalStorageBackground();
+        checkLocalStorageVideoBg();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -197,8 +229,13 @@ export const SettingsProvider = ({ children }) => {
                 theme,
                 background,
                 isVideoSelectedOnDesktop,
+                isVideoBgEnabled,
                 getSelectedVideoBg,
                 getSelectedVideoBgName,
+                changeVideoBg,
+                videoBg,
+                enableVideoBg,
+                getSelectedVideoPreview,
             }}
         >
             {children}
