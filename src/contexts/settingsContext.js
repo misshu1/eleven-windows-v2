@@ -5,6 +5,7 @@ import globeImg from '../assets/images/flags/globe.svg';
 import DarkTheme from '../components/theme/DarkTheme';
 import { backgrounds } from '../components/theme/DesktopBackground';
 import LightTheme from '../components/theme/LightTheme';
+import { videoBackgrounds } from '../components/theme/VideoBackgrounds';
 import useMediaQuery from '../hooks/useMediaQuery';
 import i18next, { languages } from '../services/translation/i18next';
 
@@ -23,12 +24,23 @@ export const SettingsContext = createContext();
 export const SettingsProvider = ({ children }) => {
     const [currentOS, setCurrentOS] = useState(OS_THEME.windows);
     const [isVideoBgEnabled, setIsVideoBgEnabled] = useState(false);
-    const prevOSRef = useRef(null);
-    const prevVideoRef = useRef(null);
-    const [theme, setTheme] = useState(DarkTheme);
+    const [videoBg, setVideoBg] = useState(videoBackgrounds);
     const [background, setBackground] = useState(backgrounds);
+    const [theme, setTheme] = useState(DarkTheme);
+    const prevVideoRef = useRef(null); // Here we keep the 'isVideoBgEnabled' old state
+    const prevOSRef = useRef(null); // Here we keep the 'currentOS' old state
     const isMobile = useMediaQuery('(max-width: 450px)');
     const isTablet = useMediaQuery('(max-width: 800px)');
+
+    const getSelectedVideoBg = () => {
+        const vid = videoBg.find((item) => item.isSelected === true);
+        return vid.video;
+    };
+
+    const getSelectedVideoBgName = () => {
+        const vid = videoBg.find((item) => item.isSelected === true);
+        return vid.name;
+    };
 
     const getSelectedBackground = () => {
         const bg = background.find((item) => item.isSelected === true);
@@ -185,6 +197,8 @@ export const SettingsProvider = ({ children }) => {
                 theme,
                 background,
                 isVideoSelectedOnDesktop,
+                getSelectedVideoBg,
+                getSelectedVideoBgName,
             }}
         >
             {children}

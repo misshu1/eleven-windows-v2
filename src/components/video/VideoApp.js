@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import vid from '../../assets/videos/Illidan_Stormrage.mp4';
+import { useSettingsContext } from '../../contexts/settingsContext';
 import { Video } from './style';
 
 const VideoApp = () => {
+    const { getSelectedVideoBg } = useSettingsContext();
+
     return ReactDOM.createPortal(
         <Video autoPlay muted loop>
-            {/* TODO Import video source from settings context */}
-            <source src={vid} type='video/mp4' />
+            <source src={getSelectedVideoBg().webm} type='video/webm' />
+            <source src={getSelectedVideoBg().mp4} type='video/mp4' />
         </Video>,
         document.getElementById('video')
     );
