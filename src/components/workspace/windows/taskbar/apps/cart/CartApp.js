@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import React, { useRef, useState } from 'react';
+import React, { lazy, Suspense, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Scrollbar from 'react-scrollbars-custom';
 
@@ -10,9 +10,11 @@ import { useCartContext, useDispatchCartContext } from '../../../../../../contex
 import { ICON_LOCATION, useDispatchFolderContext, useFolderContext } from '../../../../../../contexts/folderContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
 import { useAuth } from '../../../../../../hooks/useAuth';
-import AuthApp from '../../../../../auth/AuthApp';
+import SpinnerApp from '../../../../../style/SpinnerApp';
 import { useCartIconContext } from '../../contexts/cartIconContext';
 import { Container, Product } from './style';
+
+const AuthApp = lazy(() => import('../../../../../auth/AuthApp'));
 
 const useStyles = makeStyles({
     btnStyle: (theme) => ({
@@ -127,7 +129,11 @@ const CartApp = ({ cartMenuRef }) => {
             {cartState.length === 0 && emptryCart()}
             {cartState.length !== 0 && (
                 <>
-                    {isAuthOpen && <AuthApp onCancel={hideAuth} />}
+                    {isAuthOpen && (
+                        <Suspense fallback={<SpinnerApp delay={200} />}>
+                            <AuthApp onCancel={hideAuth} />
+                        </Suspense>
+                    )}
                     {!isAuthOpen && (
                         <>
                             <div className='products-container'>

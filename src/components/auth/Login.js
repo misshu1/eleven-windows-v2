@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Scrollbar from 'react-scrollbars-custom';
@@ -10,29 +12,18 @@ import useAuthValidation from './useAuthValidation';
 
 const useStyles = makeStyles(() => ({
     loginButton: (theme) => ({
-        backgroundColor: theme.material.accent.main,
-        color: theme.material.accent.contrast.main,
-        cursor: 'default',
-        border: 0,
-        margin: '.5rem',
-        borderRadius: 3,
-        '&:disabled': {
-            color: '#e3e3e3',
-            backgroundColor: theme.disableBg,
-        },
-        '&:hover': {
-            backgroundColor: theme.material.accent.main,
-        },
-    }),
-    cancelButton: (theme) => ({
-        backgroundColor: theme.material.warn.main,
+        backgroundColor: theme.material.primary.main,
         color: '#fff',
         cursor: 'default',
         border: 0,
         margin: '.5rem',
         borderRadius: 3,
+        '&:disabled': {
+            filter: 'grayscale(1)',
+            color: '#d6d8de',
+        },
         '&:hover': {
-            backgroundColor: theme.material.warn.main,
+            backgroundColor: theme.material.primary.darker,
         },
     }),
     changeViewButton: (theme) => ({
@@ -64,7 +55,18 @@ const Login = ({ onCancel, changeView }) => {
 
     return (
         <Container>
-            <h3>{t('auth.login')}</h3>
+            <div className='header-container'>
+                <h3>{t('auth.login')}</h3>
+                <Tooltip
+                    title={t('auth.cancel')}
+                    placement='bottom'
+                    enterDelay={500}
+                >
+                    <button className='close-btn' onClick={onCancel}>
+                        <FontAwesomeIcon icon={['fas', 'times']} size='lg' />
+                    </button>
+                </Tooltip>
+            </div>
             <Scrollbar
                 contentProps={{
                     style: {
@@ -113,15 +115,6 @@ const Login = ({ onCancel, changeView }) => {
                         className={classes.loginButton}
                     >
                         {t('auth.login')}
-                    </Button>
-                    <Button
-                        variant='contained'
-                        type='button'
-                        disabled={isSubmitting}
-                        className={classes.cancelButton}
-                        onClick={onCancel}
-                    >
-                        {t('auth.cancel')}
                     </Button>
                     <Button
                         type='button'

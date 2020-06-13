@@ -57,17 +57,17 @@ const useAuthValidation = (initialState) => {
         setSubmitting(true);
 
         if (!errors.email && !errors.password) {
-            try {
-                auth.login(values.email, values.password).then(() =>
+            auth.login(values.email, values.password)
+                .then(() =>
                     // Do something after user logged in
                     callback()
+                )
+                .catch((err) =>
+                    setErrors((prevState) => ({
+                        ...prevState,
+                        firebase: err.message,
+                    }))
                 );
-            } catch (err) {
-                setErrors((prevState) => ({
-                    ...prevState,
-                    firebase: err.message,
-                }));
-            }
         }
         setSubmitting(false);
     };
@@ -79,18 +79,17 @@ const useAuthValidation = (initialState) => {
         setSubmitting(true);
 
         if (!errors.name && !errors.email && !errors.password) {
-            try {
-                auth.register(values.name, values.email, values.password).then(
-                    () =>
-                        // Do something after user sign up
-                        callback()
+            auth.register(values.name, values.email, values.password)
+                .then(() =>
+                    // Do something after user sign up
+                    callback()
+                )
+                .catch((err) =>
+                    setErrors((prevState) => ({
+                        ...prevState,
+                        firebase: err.message,
+                    }))
                 );
-            } catch (err) {
-                setErrors((prevState) => ({
-                    ...prevState,
-                    firebase: err.message,
-                }));
-            }
         }
         setSubmitting(false);
     };
