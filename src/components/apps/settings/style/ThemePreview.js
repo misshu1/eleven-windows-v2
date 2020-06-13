@@ -8,7 +8,7 @@ export const ThemePreview = styled.div`
     margin: 0.5rem 0;
 
     ${(props) =>
-        props.isVideoSelectedOnDesktop &&
+        props.isVideoEnabledOnDesktop &&
         css`
             background: url(${props.getSelectedVideoPreview});
             background-size: 100% 100%;

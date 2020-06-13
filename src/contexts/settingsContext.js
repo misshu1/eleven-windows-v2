@@ -220,7 +220,7 @@ export const SettingsProvider = ({ children }) => {
         return currentOS === OS_THEME.mobile;
     };
 
-    const isVideoSelectedOnDesktop = () => {
+    const isVideoEnabledOnDesktop = () => {
         return !isTablet && isVideoBgEnabled;
     };
 
@@ -249,7 +249,7 @@ export const SettingsProvider = ({ children }) => {
                 changeBackground,
                 theme,
                 background,
-                isVideoSelectedOnDesktop,
+                isVideoEnabledOnDesktop,
                 isVideoBgEnabled,
                 getSelectedVideoBgMP4,
                 getSelectedVideoBgWEBM,

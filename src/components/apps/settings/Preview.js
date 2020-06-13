@@ -26,14 +26,14 @@ const Preview = () => {
     const {
         getSelectedBackground,
         getSelectedVideoPreview,
-        isVideoSelectedOnDesktop,
+        isVideoEnabledOnDesktop,
     } = useSettingsContext();
 
     return (
         <ThemePreview
             background={getSelectedBackground()}
             getSelectedVideoPreview={getSelectedVideoPreview()}
-            isVideoSelectedOnDesktop={isVideoSelectedOnDesktop()}
+            isVideoEnabledOnDesktop={isVideoEnabledOnDesktop()}
         >
             <div className='calculator'>
                 <div className='calculator-title'>

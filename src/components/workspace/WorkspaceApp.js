@@ -17,7 +17,7 @@ const WorkspaceApp = () => {
         isMobileSelected,
         selectWindowsOS,
         selectLinuxOS,
-        isVideoSelectedOnDesktop,
+        isVideoEnabledOnDesktop,
     } = useSettingsContext();
     const isMobile = useMediaQuery('(max-width: 450px)');
 
@@ -43,7 +43,7 @@ const WorkspaceApp = () => {
             {isLinuxSelected() && <WorkspaceLinux />}
             {isWindowsSelected() && <WorkspaceWindows />}
             {isMobileSelected() && <WorkspaceMobile />}
-            {isVideoSelectedOnDesktop() && (
+            {isVideoEnabledOnDesktop() && (
                 <Suspense fallback={<SpinnerApp delay={200} />}>
                     <VideoApp />
                 </Suspense>

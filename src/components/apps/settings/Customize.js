@@ -51,7 +51,7 @@ const Customize = () => {
         selectLightTheme,
         selectDarkTheme,
         changeBackground,
-        isVideoSelectedOnDesktop,
+        isVideoEnabledOnDesktop,
         isVideoBgEnabled,
         videoBg,
         changeVideoBg,
@@ -119,7 +119,7 @@ const Customize = () => {
                             {t('settings.themeButton')}
                         </Button>
                     )}
-                    {!isVideoSelectedOnDesktop() && (
+                    {!isVideoEnabledOnDesktop() && (
                         <>
                             <Button
                                 className={classes.btnStyle}
@@ -157,7 +157,7 @@ const Customize = () => {
                             </Menu>
                         </>
                     )}
-                    {isVideoSelectedOnDesktop() && (
+                    {isVideoEnabledOnDesktop() && (
                         <>
                             <Button
                                 className={classes.btnStyle}

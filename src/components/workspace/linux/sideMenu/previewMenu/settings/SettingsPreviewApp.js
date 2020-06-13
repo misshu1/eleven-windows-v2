@@ -58,7 +58,7 @@ const SettingsPreviewApp = () => {
         selectLightTheme,
         selectDarkTheme,
         changeBackground,
-        isVideoSelectedOnDesktop,
+        isVideoEnabledOnDesktop,
         isVideoBgEnabled,
         videoBg,
         changeVideoBg,
@@ -164,7 +164,7 @@ const SettingsPreviewApp = () => {
                                 {t('settings.themeButton')}
                             </Button>
                         )}
-                        {!isVideoSelectedOnDesktop() && (
+                        {!isVideoEnabledOnDesktop() && (
                             <>
                                 <Button
                                     className={classes.btnStyle}
@@ -203,7 +203,7 @@ const SettingsPreviewApp = () => {
                                 </Menu>
                             </>
                         )}
-                        {isVideoSelectedOnDesktop() && (
+                        {isVideoEnabledOnDesktop() && (
                             <>
                                 <Button
                                     className={classes.btnStyle}
