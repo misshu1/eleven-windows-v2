@@ -5,7 +5,6 @@ import DocsIcon from '../assets/images/icons/DocsIcon';
 import SettingsIcon from '../assets/images/icons/SettingsIcon';
 import StoreIcon from '../assets/images/icons/StoreIcon';
 import TaskIcon from '../assets/images/icons/TaskIcon';
-import useMediaQuery from '../hooks/useMediaQuery';
 
 const DocsApp = lazy(() => import('../components/apps/docs/DocsApp'));
 const SettingsApp = lazy(() =>
@@ -22,6 +21,7 @@ const TaskManagerApp = lazy(() =>
 const FOLDER_ACTIONS = {
     open: 'OPEN',
     close: 'CLOSE',
+    closeAll: 'CLOSE_ALL',
     active: 'ACTIVE',
     minimizeUp: 'MINIMIZE_UP',
     minimizeDown: 'MINIMIZE_DOWN',
@@ -132,13 +132,11 @@ const APPS_STATE = [
 ];
 
 const folderReducer = (state, action) => {
+    const app = state.apps.find((item) => item.id === action.payload);
+
     switch (action.type) {
         case FOLDER_ACTIONS.open:
-            const selectedOpenApp = state.apps.find(
-                (item) => item.id === action.payload
-            );
-
-            if (selectedOpenApp.isOpen === false) {
+            if (!app.isOpen) {
                 return {
                     ...state,
                     apps: state.apps.map((item) =>
@@ -148,18 +146,14 @@ const folderReducer = (state, action) => {
                     ),
                     openApps: [
                         ...state.openApps,
-                        { ...selectedOpenApp, openSince: new Date().getTime() },
+                        { ...app, openSince: new Date().getTime() },
                     ],
                 };
             } else {
                 return state;
             }
         case FOLDER_ACTIONS.close:
-            const selectedCloseApp = state.apps.find(
-                (item) => item.id === action.payload
-            );
-
-            if (selectedCloseApp.isOpen === true) {
+            if (app.isOpen === true) {
                 return {
                     ...state,
                     apps: state.apps.map((item) =>
@@ -181,11 +175,7 @@ const folderReducer = (state, action) => {
             }
 
         case FOLDER_ACTIONS.minimizeUp:
-            const selectedMinimizeUp = state.apps.find(
-                (item) => item.id === action.payload
-            );
-
-            if (selectedMinimizeUp.isMinimize === true) {
+            if (app.isMinimize === true) {
                 return {
                     ...state,
                     apps: state.apps.map((item) =>
@@ -199,11 +189,7 @@ const folderReducer = (state, action) => {
             }
 
         case FOLDER_ACTIONS.minimizeDown:
-            const selectedMinimizeDown = state.apps.find(
-                (item) => item.id === action.payload
-            );
-
-            if (selectedMinimizeDown.isMinimize !== true) {
+            if (app.isMinimize !== true) {
                 return {
                     ...state,
                     apps: state.apps.map((item) =>
@@ -217,11 +203,7 @@ const folderReducer = (state, action) => {
             }
 
         case FOLDER_ACTIONS.active:
-            const selectedActiveApp = state.apps.find(
-                (item) => item.id === action.payload
-            );
-
-            if (selectedActiveApp.appIndex !== 104) {
+            if (app.appIndex !== 104) {
                 return {
                     ...state,
                     apps: state.apps.map((item) =>
@@ -234,12 +216,14 @@ const folderReducer = (state, action) => {
                 return state;
             }
 
-        case FOLDER_ACTIONS.setIsAppOpen:
+        case FOLDER_ACTIONS.closeAll:
             return {
                 ...state,
                 apps: state.apps.map((item) => ({
                     ...item,
-                    isOpen: action.payload ? true : false,
+                    isOpen: null,
+                    isMinimize: null,
+                    appIndex: 100,
                 })),
                 openApps: [],
             };
@@ -252,26 +236,21 @@ const folderReducer = (state, action) => {
 const FolderContext = createContext();
 const DispatchFolderContext = createContext();
 export const FolderProvider = (props) => {
-    const isMobile = useMediaQuery('(max-width: 450px)');
-
     const [folderState, folderDispatch] = useReducer(folderReducer, {
         apps: APPS_STATE,
         openApps: [],
     });
 
-    // Set "isOpen" from APPS_STATE when user resizes the browser
-    // All apps are "open" on mobile and "close" on desktop
-    useLayoutEffect(() => {
-        folderDispatch({
-            type: FOLDER_ACTIONS.setIsAppOpen,
-            payload: isMobile,
-        });
-    }, [isMobile]);
-
     const openFolder = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.open,
             payload: appId,
+        });
+    };
+
+    const closeAllFolders = () => {
+        folderDispatch({
+            type: FOLDER_ACTIONS.closeAll,
         });
     };
 
@@ -330,6 +309,7 @@ export const FolderProvider = (props) => {
                     activeFolder,
                     minimizeUp,
                     minimizeDown,
+                    closeAllFolders,
                 }}
             >
                 {props.children}

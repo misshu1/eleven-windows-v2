@@ -8,7 +8,7 @@ import SpinnerApp from '../style/SpinnerApp';
 const FolderRoutes = () => {
     const [pathExists, setPathExists] = useState(true);
     const { folderState } = useFolderContext();
-    const { openFolder } = useDispatchFolderContext();
+    const { openFolder, closeAllFolders } = useDispatchFolderContext();
     const isMobile = useMediaQuery('(max-width: 450px)');
     const location = useLocation();
 
@@ -33,12 +33,13 @@ const FolderRoutes = () => {
     useEffect(() => {
         folderState.apps.map((app) => {
             if (location.pathname === app.link) {
+                closeAllFolders();
                 openFolder(app.id);
             }
             return undefined;
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [location.pathname]);
 
     return (
         <>

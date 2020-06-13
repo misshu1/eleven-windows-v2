@@ -8,9 +8,9 @@ import ProductApp from './product/ProductApp';
 import { Container } from './style';
 
 const StoreApp = () => {
-    const { firestore } = useFirebaseContext();
     const [products, setProducts] = useState([]);
     const { showError } = useNotificationsContext();
+    const { firestore } = useFirebaseContext();
     const getProducts = useRef(null);
 
     getProducts.current = async () => {
