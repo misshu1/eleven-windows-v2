@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect, useLayoutEffect, useState } from 'react';
 import { Redirect, Route, useLocation } from 'react-router-dom';
+import { useLastLocation } from 'react-router-last-location';
 
 import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
 import useMediaQuery from '../../hooks/useMediaQuery';
@@ -8,9 +9,10 @@ import SpinnerApp from '../style/SpinnerApp';
 const FolderRoutes = () => {
     const [pathExists, setPathExists] = useState(true);
     const { folderState } = useFolderContext();
-    const { openFolder, closeAllFolders } = useDispatchFolderContext();
-    const isMobile = useMediaQuery('(max-width: 450px)');
+    const { openFolder, closeFolder } = useDispatchFolderContext();
+    const lastLocation = useLastLocation();
     const location = useLocation();
+    const isMobile = useMediaQuery('(max-width: 450px)');
 
     // Check to see if the route exists in folderState if not user will be redirected to 404
     useLayoutEffect(() => {
@@ -31,11 +33,13 @@ const FolderRoutes = () => {
     // For example http://localhost:3000/docs if '/docs' is in the url we open Docs app
     useEffect(() => {
         folderState.apps.map((app) => {
+            // Only one folder can be open when navigating between routes
+            // Here we close the previous opened folder
+            // This will prevent keeping more than one folder opened on mobile
+            if (lastLocation?.pathname === app.link) {
+                closeFolder(app.id);
+            }
             if (location.pathname === app.link) {
-                // Only one folder can be open when navigating between routes
-                // That's why we use 'closeAllFolders'
-                // This will prevent keeping opened folders on mobile
-                closeAllFolders();
                 openFolder(app.id);
             }
             return undefined;
