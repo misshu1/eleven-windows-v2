@@ -1,4 +1,4 @@
-import React, { createContext, lazy, useContext, useLayoutEffect, useReducer } from 'react';
+import React, { createContext, lazy, useContext, useReducer } from 'react';
 
 import CalculatorIcon from '../assets/images/icons/CalculatorIcon';
 import DocsIcon from '../assets/images/icons/DocsIcon';

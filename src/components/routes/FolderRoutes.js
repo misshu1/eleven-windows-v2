@@ -26,13 +26,15 @@ const FolderRoutes = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // Route paths are only for mobile
     // Here we check the route path and check if it contains any folder routes specified in 'folderContext'
-    // and open the app if the url contains the folder route
+    // And open the app if the url contains the folder route
     // For example http://localhost:3000/docs if '/docs' is in the url we open Docs app
     useEffect(() => {
         folderState.apps.map((app) => {
             if (location.pathname === app.link) {
+                // Only one folder can be open when navigating between routes
+                // That's why we use 'closeAllFolders'
+                // This will prevent keeping opened folders on mobile
                 closeAllFolders();
                 openFolder(app.id);
             }
