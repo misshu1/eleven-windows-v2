@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import Scrollbar from 'react-scrollbars-custom';
 
 import { ICON_LOCATION, useFolderContext } from '../../../../../../../contexts/folderContext';
 import { Container } from './style';
@@ -39,14 +38,6 @@ const RightMenuApp = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return (
-        <Container>
-            <Scrollbar style={{ width: '100%', height: '100%' }}>
-                <div style={{ marginLeft: '.1rem', width: '99%' }}>
-                    {widgetIcons()}
-                </div>
-            </Scrollbar>
-        </Container>
-    );
+    return <Container>{widgetIcons()}</Container>;
 };
 export default RightMenuApp;

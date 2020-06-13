@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const slideUp = keyframes`
 0% {
@@ -14,6 +14,7 @@ const slideUp = keyframes`
 export const Container = styled.section`
     position: absolute;
     display: flex;
+    flex-direction: column;
     left: 0;
     top: 0;
     width: 100%;
@@ -24,6 +25,17 @@ export const Container = styled.section`
     z-index: 250;
     animation: ${slideUp} 0.4s ease-out 1 forwards;
     backdrop-filter: blur(4px);
+
+    ${(props) =>
+        props.isAuthOpen &&
+        css`
+            padding: 0.5rem;
+        `}
+
+    .menu-container {
+        display: flex;
+        flex: 1;
+    }
 
     @media only screen and (min-width: 450px) {
         max-width: 21.87rem;

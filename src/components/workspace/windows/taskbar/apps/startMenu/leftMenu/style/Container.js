@@ -9,6 +9,5 @@ export const Container = styled.div`
         justify-content: flex-end;
         align-items: center;
         width: 4.5rem;
-        margin-top: 3.5rem;
     }
 `;
