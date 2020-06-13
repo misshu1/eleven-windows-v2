@@ -1,17 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
 import React, { lazy, Suspense, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useTranslation } from 'react-i18next';
 import Scrollbar from 'react-scrollbars-custom';
 
+import PowerOffIcon from '../../../../../../assets/images/icons/PowerOffIcon';
+import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import SpinnerApp from '../../../../../style/SpinnerApp';
 import { useStartMenuContext } from '../../contexts/startMenuContext';
 import LeftMenuApp from './leftMenu/LeftMenuApp';
 import RightMenuApp from './rightMenu/RightMenuApp';
-import { Container, LoginContainer } from './style';
+import { Container, LoginContainer, Widget } from './style';
 
 const AuthApp = lazy(() => import('../../../../../auth/AuthApp'));
 
@@ -29,14 +33,23 @@ const useStyles = makeStyles({
             backgroundColor: theme.material.primary.darker,
         },
     }),
+    btnLabel: {
+        width: '100% !important',
+    },
 });
 
 const StartMenuApp = ({ startMenuRef }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const { closeStartMenu } = useStartMenuContext();
+    const { showError } = useNotificationsContext();
     const { theme } = useSettingsContext();
     const classes = useStyles(theme);
     const auth = useAuth();
+    const { t } = useTranslation();
+
+    const handleLogOut = () => {
+        auth.logout().catch((err) => showError('Error', err.message, 500));
+    };
 
     const showAuth = () => {
         setIsAuthOpen(true);
@@ -58,7 +71,10 @@ const StartMenuApp = ({ startMenuRef }) => {
                     <LoginContainer>
                         {!auth.user && (
                             <Button
-                                classes={{ root: classes.btnStyle }}
+                                classes={{
+                                    root: classes.btnStyle,
+                                    label: classes.btnLabel,
+                                }}
                                 fullWidth
                                 onClick={showAuth}
                             >
@@ -68,7 +84,7 @@ const StartMenuApp = ({ startMenuRef }) => {
                                         size='lg'
                                     />
                                 </div>
-                                Login
+                                {t('auth.login')}
                             </Button>
                         )}
                         {auth.user && (
@@ -80,6 +96,18 @@ const StartMenuApp = ({ startMenuRef }) => {
                                     />
                                 </span>
                                 <h4>Welcome {auth.user.displayName}.</h4>
+                                <Tooltip
+                                    title={t('tooltip.logout')}
+                                    placement='bottom'
+                                    enterDelay={500}
+                                >
+                                    <Widget onClick={handleLogOut}>
+                                        <PowerOffIcon
+                                            width='2rem'
+                                            height='2rem'
+                                        />
+                                    </Widget>
+                                </Tooltip>
                             </>
                         )}
                     </LoginContainer>

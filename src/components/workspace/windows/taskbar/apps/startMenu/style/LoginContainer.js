@@ -17,6 +17,10 @@ export const LoginContainer = styled.div`
 
     && h4 {
         margin: 0 0 0 0.5rem;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .icon {

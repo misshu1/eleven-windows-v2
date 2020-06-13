@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import React, { lazy, Suspense, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useTranslation } from 'react-i18next';
 import Scrollbar from 'react-scrollbars-custom';
 
 import StoreIcon from '../../../../../../assets/images/icons/StoreIcon';
@@ -66,6 +67,7 @@ const CartApp = ({ cartMenuRef }) => {
     const { closeCart } = useCartIconContext();
     const { folderState } = useFolderContext();
     const { theme } = useSettingsContext();
+    const { t } = useTranslation();
     const apps = useRef(folderState.apps);
     const classes = useStyles(theme);
     const auth = useAuth();
@@ -180,7 +182,7 @@ const CartApp = ({ cartMenuRef }) => {
                                                     size='lg'
                                                 />
                                             </div>
-                                            Login
+                                            {t('auth.login')}
                                         </Button>
                                     )}
                                 </div>

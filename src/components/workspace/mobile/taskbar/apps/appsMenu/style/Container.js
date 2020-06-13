@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const slideUp = keyframes`
 0% {
@@ -25,4 +25,25 @@ export const Container = styled.section`
     z-index: 250;
     animation: ${slideUp} 0.4s ease-out 1 forwards;
     backdrop-filter: blur(4px);
+
+    ${(props) =>
+        props.isAuthOpen &&
+        css`
+            padding: 0.5rem;
+        `}
+
+    .widgets-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 5.5rem);
+        grid-template-rows: repeat(auto-fill, 5.5rem);
+        grid-auto-flow: row;
+        grid-gap: 2rem;
+        justify-content: center;
+        align-content: center;
+        user-select: none;
+        color: #d6d8de;
+        height: 100%;
+        width: 100%;
+        padding: 1rem;
+    }
 `;

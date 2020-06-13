@@ -191,7 +191,7 @@ const CartPreviewApp = () => {
                                                     size='lg'
                                                 />
                                             </div>
-                                            Login
+                                            {t('auth.login')}
                                         </Button>
                                     )}
                                 </div>
