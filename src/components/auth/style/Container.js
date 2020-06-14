@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.section`
+export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,6 +11,7 @@ export const Container = styled.section`
     .header-container {
         display: flex;
         align-items: center;
+        position: relative;
         border-bottom: 1px solid ${(props) => props.theme.startMenuBorder};
         width: 100%;
         height: 4rem;
@@ -25,6 +26,11 @@ export const Container = styled.section`
         }
 
         .close-btn {
+            position: absolute;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: #fff;
             background: ${(props) => props.theme.material.primary.darker};
             border: none;
