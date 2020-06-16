@@ -5,11 +5,9 @@ import { useTranslation } from 'react-i18next';
 
 import CartIcon from '../../../../../../assets/images/icons/CartIcon';
 import { useCartContext } from '../../../../../../contexts/cartContext';
-import { useCartIconContext } from '../../contexts/cartIconContext';
 import { Container } from './style';
 
-export const CartIconApp = ({ cartIconRef }) => {
-    const { isCartOpen, toggleCart } = useCartIconContext();
+export const CartIconApp = ({ cartIconRef, toggleCart, isCartOpen }) => {
     const { cartState } = useCartContext();
     const { t } = useTranslation();
 

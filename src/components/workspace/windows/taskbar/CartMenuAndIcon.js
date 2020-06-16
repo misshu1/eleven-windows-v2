@@ -1,14 +1,13 @@
-import React, { lazy, Suspense, useRef } from 'react';
+import React, { lazy, Suspense, useCallback, useRef, useState } from 'react';
 
 import useOnClickOutside from '../../../../hooks/useOnClickOutside';
 import SpinnerGlobalApp from '../../../style/SpinnerGlobalApp';
-import { useCartIconContext } from './contexts/cartIconContext';
 import { CartIconApp } from './icons/cart/CartIconApp';
 
-const CartApp = lazy(() => import('./apps/cart/CartApp'));
+const CartWindowsApp = lazy(() => import('./apps/cart/CartWindowsApp'));
 
 const CartMenuAndIcon = () => {
-    const { isCartOpen, closeCart } = useCartIconContext();
+    const [isCartOpen, setIsCartOpen] = useState(false);
     const cartMenuRef = useRef(null);
     const cartIconRef = useRef(null);
 
@@ -17,11 +16,28 @@ const CartMenuAndIcon = () => {
         () => isCartOpen && closeCart()
     );
 
+    const toggleCart = useCallback(() => {
+        setIsCartOpen((prevState) => !prevState);
+    }, [setIsCartOpen]);
+
+    const closeCart = useCallback(() => {
+        setIsCartOpen(false);
+    }, [setIsCartOpen]);
+
     return (
         <>
-            <CartIconApp cartIconRef={cartIconRef} />
+            <CartIconApp
+                cartIconRef={cartIconRef}
+                toggleCart={toggleCart}
+                isCartOpen={isCartOpen}
+            />
             <Suspense fallback={<SpinnerGlobalApp delay={200} />}>
-                {isCartOpen && <CartApp cartMenuRef={cartMenuRef} />}
+                {isCartOpen && (
+                    <CartWindowsApp
+                        cartMenuRef={cartMenuRef}
+                        closeCart={closeCart}
+                    />
+                )}
             </Suspense>
         </>
     );

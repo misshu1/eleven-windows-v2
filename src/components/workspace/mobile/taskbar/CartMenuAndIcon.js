@@ -4,7 +4,7 @@ import useOnClickOutside from '../../../../hooks/useOnClickOutside';
 import SpinnerGlobalApp from '../../../style/SpinnerGlobalApp';
 import { CartIconApp } from './icons/cart/CartIconApp';
 
-const CartApp = lazy(() => import('./apps/cart/CartApp'));
+const CartMobileApp = lazy(() => import('./apps/cart/CartMobileApp'));
 
 const CartMenuAndIcon = () => {
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -33,7 +33,10 @@ const CartMenuAndIcon = () => {
             />
             <Suspense fallback={<SpinnerGlobalApp delay={200} />}>
                 {isCartOpen && (
-                    <CartApp cartMenuRef={cartMenuRef} closeCart={closeCart} />
+                    <CartMobileApp
+                        cartMenuRef={cartMenuRef}
+                        closeCart={closeCart}
+                    />
                 )}
             </Suspense>
         </>
