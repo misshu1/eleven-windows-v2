@@ -14,7 +14,6 @@ import { useNotificationsContext } from '../../../../../../contexts/notification
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import SpinnerApp from '../../../../../style/SpinnerApp';
-import { useStartMenuContext } from '../../../../windows/taskbar/contexts/startMenuContext';
 import { Container, LoginContainer, Widget } from './style';
 
 const AuthApp = lazy(() => import('../../../../../auth/AuthApp'));
@@ -38,16 +37,15 @@ const useStyles = makeStyles({
     },
 });
 
-const AppsMenu = ({ startMenuRef }) => {
+const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
-    const { showError } = useNotificationsContext();
-    const { closeStartMenu } = useStartMenuContext();
     const { folderState, sortByAppName } = useFolderContext();
+    const { showError } = useNotificationsContext();
+    const { theme } = useSettingsContext();
+    const { t } = useTranslation();
+    const classes = useStyles(theme);
     const apps = useRef(folderState.apps.sort(sortByAppName));
     const auth = useAuth();
-    const { t } = useTranslation();
-    const { theme } = useSettingsContext();
-    const classes = useStyles(theme);
 
     const handleLogOut = () => {
         auth.logout().catch((err) => showError('Error', err.message, 500));
@@ -66,7 +64,7 @@ const AppsMenu = ({ startMenuRef }) => {
             return app.iconLocation.map((location) => {
                 if (location === ICON_LOCATION.mobile.appsMenu) {
                     return (
-                        <Widget onClick={closeStartMenu} key={app.id}>
+                        <Widget onClick={closeAppsMenu} key={app.id}>
                             <Link to={app.link}>
                                 {app.widgetIcon}
                                 <div className='app-name'>{app.appName}</div>
@@ -77,10 +75,10 @@ const AppsMenu = ({ startMenuRef }) => {
                 return undefined;
             });
         });
-    }, [closeStartMenu]);
+    }, [closeAppsMenu]);
 
     return ReactDOM.createPortal(
-        <Container ref={startMenuRef} isAuthOpen={isAuthOpen}>
+        <Container ref={appsMenuRef} isAuthOpen={isAuthOpen}>
             {isAuthOpen && (
                 <Suspense fallback={<SpinnerApp delay={200} />}>
                     <AuthApp onCancel={hideAuth} />
