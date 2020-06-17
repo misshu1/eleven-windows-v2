@@ -108,7 +108,7 @@ const StoreButton = ({ onClick }) => {
                             onClick={() => openApp(app.id)}
                             key={app.id}
                         >
-                            <div className='icon'>
+                            <div className={classes.icon}>
                                 <StoreIcon width='1.5rem' height='1.5rem' />
                             </div>
                             Go to {app.appName}

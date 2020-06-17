@@ -7,7 +7,7 @@ import { Container } from './style';
 const CartMobileApp = ({ cartMenuRef, closeCart }) => {
     return ReactDOM.createPortal(
         <Container ref={cartMenuRef}>
-            <CartApp closeCart={closeCart} />
+            <CartApp onClick={closeCart} />
         </Container>,
         document.getElementById('desktop')
     );

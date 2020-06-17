@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useRef, useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import Scrollbar from 'react-scrollbars-custom';
 
 import { useCartContext } from '../../contexts/cartContext';
@@ -12,7 +12,7 @@ import { Container } from './style';
 
 const AuthApp = lazy(() => import('../auth/AuthApp'));
 
-const CartApp = ({ closeCart }) => {
+const CartApp = ({ onClick }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const { cartState, getCartTotalPrice } = useCartContext();
     const auth = useAuth();
@@ -21,7 +21,7 @@ const CartApp = ({ closeCart }) => {
         return (
             <div className='empty-cart'>
                 <h4>Your cart is empty add something.</h4>
-                <StoreButton onClick={closeCart} />
+                <StoreButton onClick={() => onClick && onClick()} />
             </div>
         );
     };

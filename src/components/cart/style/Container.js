@@ -1,15 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const slideUp = keyframes`
-0% {
-    opacity: 0;
-    transform: translate3d(0, 10%, 0);
-}
-100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-}
-`;
+import styled from 'styled-components';
 
 export const Container = styled.div`
     display: flex;
