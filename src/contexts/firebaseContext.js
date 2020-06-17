@@ -2,7 +2,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 import firebase from 'firebase/app';
-import React, { useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_KEY,
@@ -22,7 +22,7 @@ if (!firebase.apps.length) {
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
-const FirebaseContext = React.createContext(null);
+const FirebaseContext = createContext(null);
 export const FirebaseProvider = (props) => {
     return (
         <FirebaseContext.Provider value={{ auth, firestore }}>
