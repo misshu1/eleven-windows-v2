@@ -10,10 +10,6 @@ export const Folder = styled.section`
     color: ${(props) => props.theme.textColor};
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 
-    .ScrollbarsCustom-Content {
-        height: 100%;
-    }
-
     @media only screen and (min-width: 450px) {
         height: ${(props) => (props.height ? props.height : '44rem')};
         width: ${(props) => (props.width ? props.width : '44rem')};

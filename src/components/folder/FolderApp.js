@@ -15,7 +15,7 @@ import FolderToolbar from './toolbar/FolderToolbar';
 const FolderApp = forwardRef((props, ref) => {
     const [close, setClose] = useState(false);
     const [showDrawer, setShowDrawer] = useState(false);
-    const [handleDrag, setHandleDrag] = useState(false);
+    const [disableDrag, setDisableDrag] = useState(false);
     const { folderState } = useFolderContext();
     const {
         closeFolder,
@@ -25,6 +25,7 @@ const FolderApp = forwardRef((props, ref) => {
     const { isLinuxSelected } = useSettingsContext();
 
     const isMobile = useMediaQuery('(max-width: 450px)');
+    const isSmallHeight = useMediaQuery('(max-height: 650px)');
 
     const {
         appId,
@@ -37,7 +38,7 @@ const FolderApp = forwardRef((props, ref) => {
     } = props;
 
     useEffect(() => {
-        isMobile && setHandleDrag(true);
+        isMobile && setDisableDrag(true);
     }, [isMobile]);
 
     const quitApp = useCallback(() => {
@@ -55,10 +56,6 @@ const FolderApp = forwardRef((props, ref) => {
         activeFolder(appId);
     }, [activeFolder, appId]);
 
-    const handleClick = useCallback(() => {
-        active();
-    }, [active]);
-
     const toggleDrawer = useCallback(() => {
         setShowDrawer(!showDrawer);
     }, [showDrawer]);
@@ -74,13 +71,13 @@ const FolderApp = forwardRef((props, ref) => {
                     app.id === appId && (
                         <Draggable
                             key={app.id}
-                            axis='both'
+                            axis={isSmallHeight ? 'x' : 'both'}
                             handle='.handle'
-                            disabled={handleDrag}
+                            disabled={disableDrag}
                         >
                             <AnimateFadeInOut
                                 appIndex={app.appIndex}
-                                onClick={handleClick}
+                                onClick={active}
                                 open={app.isOpen}
                                 minimize={app.isMinimize}
                                 close={close}
@@ -118,14 +115,7 @@ const FolderApp = forwardRef((props, ref) => {
                                                 ref={ref}
                                             />
                                         )}
-                                        <Scrollbar
-                                            style={{
-                                                width: '100%',
-                                                height: '100%',
-                                            }}
-                                        >
-                                            {children}
-                                        </Scrollbar>
+                                        <Scrollbar>{children}</Scrollbar>
                                     </Content>
                                 </Folder>
                             </AnimateFadeInOut>
