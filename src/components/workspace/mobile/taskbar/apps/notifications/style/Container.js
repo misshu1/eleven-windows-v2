@@ -17,6 +17,7 @@ export const Container = styled.section`
     position: absolute;
     left: 0;
     bottom: 0;
+    padding: 0 0.5rem;
     height: 100%;
     width: 100%;
     z-index: 250;

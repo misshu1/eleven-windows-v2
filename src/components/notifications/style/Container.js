@@ -21,13 +21,9 @@ export const Container = styled.div`
         flex: 1;
     }
 
-    .clear {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 4rem;
-        font-size: 1.1rem;
-        color: ${(props) => props.theme.calendarTodayClock};
+    .btn-container {
+        border-top: 1px solid ${(props) => props.theme.startMenuBorder};
+        padding: 1rem;
     }
 
     .no-notifications {
@@ -38,18 +34,5 @@ export const Container = styled.div`
         height: 100%;
         animation: ${fadeIn} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1 forwards;
         animation-delay: 0.25s;
-    }
-
-    @media only screen and (min-width: 450px) {
-        .clear {
-            justify-content: flex-end;
-            padding-right: 1rem;
-            height: 3rem;
-            font-size: 0.9rem;
-        }
-
-        .clear:hover {
-            color: ${(props) => props.theme.calendarColorSecondary};
-        }
     }
 `;
