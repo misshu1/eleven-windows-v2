@@ -4,8 +4,8 @@ import useOnClickOutside from '../../../../hooks/useOnClickOutside';
 import SpinnerGlobalApp from '../../../style/SpinnerGlobalApp';
 import NotificationIconApp from './icons/notifications/NotificationIconApp';
 
-const NotificationsApp = lazy(() =>
-    import('./apps/notifications/NotificationsApp')
+const NotificationsMobileApp = lazy(() =>
+    import('./apps/notifications/NotificationsMobileApp')
 );
 
 const NotificationMenuAndIcon = () => {
@@ -35,7 +35,7 @@ const NotificationMenuAndIcon = () => {
             />
             <Suspense fallback={<SpinnerGlobalApp delay={200} />}>
                 {isNotificationMenuOpen && (
-                    <NotificationsApp
+                    <NotificationsMobileApp
                         notificationMenuRef={notificationMenuRef}
                     />
                 )}

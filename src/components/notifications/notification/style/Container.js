@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { NOTIFICATION_TYPE } from '../../../contexts/notificationsContext';
+import { NOTIFICATION_TYPE } from '../../../../contexts/notificationsContext';
 
 export const Container = styled.div`
     display: flex;
@@ -12,11 +12,16 @@ export const Container = styled.div`
     0px 1px 18px 0px rgba(0,0,0,0.12);
 
     ${(props) =>
-        props.showInComponent &&
+        !props.isModal &&
         css`
             margin: 1rem 0;
             box-shadow: none;
+
+            &&:hover {
+                box-shadow: ${(props) => props.theme.productCardBoxShadow};
+            }
         `}
+        
     ${(props) =>
         props.type === NOTIFICATION_TYPE.success &&
         css`
@@ -37,14 +42,6 @@ export const Container = styled.div`
         css`
             background: #2979ff;
         `}
-
-        ${(props) =>
-            props.showHoverEffect &&
-            css`
-                &&:hover {
-                    box-shadow: ${(props) => props.theme.productCardBoxShadow};
-                }
-            `}
 
     .icon {
         display: flex;
@@ -73,14 +70,15 @@ export const Container = styled.div`
         margin: 0.5rem 0;
     }
 
-.code {
-    font-weight: 900;
-}
+    .code {
+        font-weight: 900;
+    }
 
     @media only screen and (min-width: 450px) {
-        width: 21.87rem;   
+        width: 21.87rem;
+           
         ${(props) =>
-            props.showInComponent &&
+            !props.isModal &&
             css`
                 width: 100%;
             `}            

@@ -1,17 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IconButton from '@material-ui/core/IconButton';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-import { NOTIFICATION_TYPE, useNotificationsContext } from '../../contexts/notificationsContext';
+import { NOTIFICATION_TYPE } from '../../../contexts/notificationsContext';
 import { Container } from './style';
 
-// This component is used inside Notifications window(Windows) and Notifications Side Menu(Linux)
-// Similar to NotificationApp.js but without forwardRef
-const NotificationStaticApp = ({ id, message, title, code, type }) => {
-    const { closeNotification } = useNotificationsContext();
+const Notification = forwardRef((props, ref) => {
+    const { id, message, title, code, type, onClose, isModal } = props;
 
     return (
-        <Container type={type} showInComponent showHoverEffect>
+        <Container type={type} ref={ref} isModal={isModal}>
             <div className='icon'>
                 {type === NOTIFICATION_TYPE.success && (
                     <FontAwesomeIcon icon={['fas', 'check']} />
@@ -31,7 +29,7 @@ const NotificationStaticApp = ({ id, message, title, code, type }) => {
                     <h3>{title}</h3>
                     <IconButton
                         size='small'
-                        onClick={() => closeNotification(id)}
+                        onClick={() => onClose(id)}
                         style={{ padding: '0.5rem' }}
                     >
                         <FontAwesomeIcon
@@ -57,6 +55,6 @@ const NotificationStaticApp = ({ id, message, title, code, type }) => {
             </div>
         </Container>
     );
-};
+});
 
-export default NotificationStaticApp;
+export default Notification;

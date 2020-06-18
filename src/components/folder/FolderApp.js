@@ -72,7 +72,7 @@ const FolderApp = forwardRef((props, ref) => {
                         <Draggable
                             key={app.id}
                             axis={isSmallHeight ? 'x' : 'both'}
-                            handle='.handle'
+                            handle='.handle' // The handle is in 'toolbar' folder
                             disabled={disableDrag}
                         >
                             <AnimateFadeInOut
@@ -84,7 +84,7 @@ const FolderApp = forwardRef((props, ref) => {
                             >
                                 <Folder
                                     isLinuxSelected={isLinuxSelected()}
-                                    className='folder'
+                                    className='folder' // This class is used in 'AnimateFadeInOut'
                                     width={width}
                                     height={height}
                                     marginTop={marginTop}
@@ -98,22 +98,24 @@ const FolderApp = forwardRef((props, ref) => {
                                         toggleDrawer={toggleDrawer}
                                     />
                                     <Content>
-                                        <Backdrop
-                                            open={showDrawer}
-                                            style={{
-                                                zIndex: 500,
-                                                marginTop: isMobile
-                                                    ? '3.5rem'
-                                                    : '2.5rem',
-                                            }}
-                                            onClick={closeDrawer}
-                                        ></Backdrop>
                                         {showDrawer && (
-                                            <DrawerApp
-                                                toolbarMenu={toolbarMenu}
-                                                closeDrawer={closeDrawer}
-                                                ref={ref}
-                                            />
+                                            <>
+                                                <Backdrop
+                                                    open={showDrawer}
+                                                    style={{
+                                                        zIndex: 500,
+                                                        marginTop: isMobile
+                                                            ? '3.5rem'
+                                                            : '2.5rem',
+                                                    }}
+                                                    onClick={closeDrawer}
+                                                />
+                                                <DrawerApp
+                                                    toolbarMenu={toolbarMenu}
+                                                    closeDrawer={closeDrawer}
+                                                    ref={ref}
+                                                />
+                                            </>
                                         )}
                                         <Scrollbar>{children}</Scrollbar>
                                     </Content>

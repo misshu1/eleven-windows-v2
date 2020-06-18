@@ -1,29 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import Scrollbar from 'react-scrollbars-custom';
 
-import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
+import { useNotificationsContext } from '../../contexts/notificationsContext';
 import { Container } from './style';
 
-const NotificationsApp = ({ notificationMenuRef }) => {
-    const { t } = useTranslation();
+const NotificationsApp = () => {
     const {
         notificationsHistory,
         clearAllNotifications,
     } = useNotificationsContext();
+    const { t } = useTranslation();
 
-    return ReactDOM.createPortal(
-        <Container ref={notificationMenuRef}>
+    return (
+        <Container>
             {notificationsHistory.length > 0 ? (
-                <Scrollbar style={{ width: '100%', height: '100%' }}>
-                    <div
-                        style={{
-                            flex: 1,
-                            padding: '1rem',
-                            overflowY: 'auto',
-                        }}
-                    >
+                <Scrollbar>
+                    <div className='notifications-container'>
                         {notificationsHistory.map((item) => item.component)}
                     </div>
                 </Scrollbar>
@@ -37,8 +30,8 @@ const NotificationsApp = ({ notificationMenuRef }) => {
                     {t('notification.clear')}
                 </span>
             )}
-        </Container>,
-        document.getElementById('desktop')
+        </Container>
     );
 };
+
 export default NotificationsApp;

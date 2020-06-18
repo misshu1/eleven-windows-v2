@@ -5,8 +5,8 @@ import SpinnerGlobalApp from '../../../style/SpinnerGlobalApp';
 import { useNotificationsTaskbarContext } from './contexts/notificationsTaskbarContext';
 import NotificationIconApp from './icons/notifications/NotificationIconApp';
 
-const NotificationsApp = lazy(() =>
-    import('./apps/notifications/NotificationsApp')
+const NotificationsWindowsApp = lazy(() =>
+    import('./apps/notifications/NotificationsWindowsApp')
 );
 
 const NotificationMenuAndIcon = () => {
@@ -27,7 +27,7 @@ const NotificationMenuAndIcon = () => {
             <NotificationIconApp notificationIconRef={notificationIconRef} />
             <Suspense fallback={<SpinnerGlobalApp delay={200} />}>
                 {isNotificationMenuOpen && (
-                    <NotificationsApp
+                    <NotificationsWindowsApp
                         notificationMenuRef={notificationMenuRef}
                     />
                 )}

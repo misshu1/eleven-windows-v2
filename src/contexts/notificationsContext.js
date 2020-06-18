@@ -2,8 +2,7 @@ import { useSnackbar } from 'notistack';
 import React, { createContext, useContext, useLayoutEffect, useState } from 'react';
 import uuid from 'uuid';
 
-import NotificationApp from '../components/notification/NotificationApp';
-import NotificationStaticApp from '../components/notification/NotificationStaticApp';
+import Notification from '../components/notifications/notification/Notification';
 
 export const NOTIFICATION_TYPE = {
     success: 'SUCCESS',
@@ -53,12 +52,13 @@ export const NotificationsProvider = ({ children }) => {
             {
                 id: id,
                 component: (
-                    <NotificationStaticApp
+                    <Notification
                         key={id}
                         id={id}
                         message={message}
                         type={NOTIFICATION_TYPE.success}
                         title={title}
+                        onClose={closeNotification}
                     />
                 ),
             },
@@ -68,11 +68,13 @@ export const NotificationsProvider = ({ children }) => {
         if (!disable) {
             enqueueSnackbar(message, {
                 content: (key, message) => (
-                    <NotificationApp
+                    <Notification
                         id={key}
                         message={message}
                         type={NOTIFICATION_TYPE.success}
                         title={title}
+                        onClose={closeSnackbar}
+                        isModal={true}
                     />
                 ),
             });
@@ -85,12 +87,13 @@ export const NotificationsProvider = ({ children }) => {
             {
                 id: id,
                 component: (
-                    <NotificationStaticApp
+                    <Notification
                         key={id}
                         id={id}
                         message={message}
                         type={NOTIFICATION_TYPE.error}
                         title={title}
+                        onClose={closeNotification}
                         code={code}
                     />
                 ),
@@ -101,12 +104,14 @@ export const NotificationsProvider = ({ children }) => {
         if (!disable) {
             enqueueSnackbar(message, {
                 content: (key, message) => (
-                    <NotificationApp
+                    <Notification
                         id={key}
                         message={message}
                         type={NOTIFICATION_TYPE.error}
                         title={title}
                         code={code}
+                        onClose={closeSnackbar}
+                        isModal={true}
                     />
                 ),
             });
@@ -119,12 +124,13 @@ export const NotificationsProvider = ({ children }) => {
             {
                 id: id,
                 component: (
-                    <NotificationStaticApp
+                    <Notification
                         key={id}
                         id={id}
                         message={message}
                         type={NOTIFICATION_TYPE.warning}
                         title={title}
+                        onClose={closeNotification}
                         code={code}
                     />
                 ),
@@ -135,12 +141,14 @@ export const NotificationsProvider = ({ children }) => {
         if (!disable) {
             enqueueSnackbar(message, {
                 content: (key, message) => (
-                    <NotificationApp
+                    <Notification
                         id={key}
                         message={message}
                         type={NOTIFICATION_TYPE.warning}
                         title={title}
                         code={code}
+                        onClose={closeSnackbar}
+                        isModal={true}
                     />
                 ),
             });
@@ -153,12 +161,13 @@ export const NotificationsProvider = ({ children }) => {
             {
                 id: id,
                 component: (
-                    <NotificationStaticApp
+                    <Notification
                         key={id}
                         id={id}
                         message={message}
                         type={NOTIFICATION_TYPE.info}
                         title={title}
+                        onClose={closeNotification}
                     />
                 ),
             },
@@ -168,11 +177,13 @@ export const NotificationsProvider = ({ children }) => {
         if (!disable) {
             enqueueSnackbar(message, {
                 content: (key, message) => (
-                    <NotificationApp
+                    <Notification
                         id={key}
                         message={message}
                         type={NOTIFICATION_TYPE.info}
                         title={title}
+                        onClose={closeSnackbar}
+                        isModal={true}
                     />
                 ),
             });
