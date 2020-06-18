@@ -22,15 +22,17 @@ const CalendarApp = ({ calendarRef }) => {
     return ReactDOM.createPortal(
         <Container ref={calendarRef}>
             <Scrollbar>
-                <CalendarClock goToToday={goToToday} />
-                <CustomCalendarStyles>
-                    <Calendar
-                        onChange={changeDate}
-                        value={calendar.value}
-                        locale={i18n.language}
-                        showFixedNumberOfWeeks={true}
-                    />
-                </CustomCalendarStyles>
+                <div>
+                    <CalendarClock goToToday={goToToday} />
+                    <CustomCalendarStyles>
+                        <Calendar
+                            onChange={changeDate}
+                            value={calendar.value}
+                            locale={i18n.language}
+                            showFixedNumberOfWeeks={true}
+                        />
+                    </CustomCalendarStyles>
+                </div>
             </Scrollbar>
         </Container>,
         document.getElementById('desktop')

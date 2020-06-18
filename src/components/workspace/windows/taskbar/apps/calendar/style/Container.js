@@ -30,7 +30,7 @@ export const Container = styled.section`
     backdrop-filter: blur(4px);
 
     @media only screen and (min-width: 450px) {
-        max-height: 33rem;
+        max-height: 35rem;
         max-width: 21.87rem;
     }
 `;
