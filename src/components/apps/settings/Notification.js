@@ -40,7 +40,7 @@ const Notification = () => {
             <NotificationContainer>
                 <Switch
                     checked={disable}
-                    onChange={disableNotifications}
+                    onChange={(e) => disableNotifications(e.target.checked)}
                     value={disable}
                     classes={{
                         switchBase: classes.switchBase,

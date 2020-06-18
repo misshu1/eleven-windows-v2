@@ -9,37 +9,25 @@ import WorkspaceMobile from './mobile/WorkspaceMobile';
 import WorkspaceWindows from './windows/WorkspaceWindows';
 
 const VideoApp = lazy(() => import('../video/VideoApp'));
+const QuickAccessApp = lazy(() => import('../quickAccess/QuickAccessApp'));
 
 const WorkspaceApp = () => {
     const {
         isLinuxSelected,
         isWindowsSelected,
         isMobileSelected,
-        selectWindowsOS,
-        selectLinuxOS,
         isVideoEnabledOnDesktop,
     } = useSettingsContext();
     const isMobile = useMediaQuery('(max-width: 450px)');
 
     return (
         <>
-            {!isMobile && (
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: '6.5rem',
-                        right: 0,
-                        bottom: 'auto',
-                    }}
-                >
-                    <button onClick={selectWindowsOS}>Windows OS</button>
-                    <button onClick={selectLinuxOS}>Linux OS</button>
-                </div>
-            )}
             {/* Render folder routes only when the route '/' is rendered from Routes.js file */}
             {/* P.S: Don't move this '<FolderRoutes />' to 'App.js' */}
             <FolderRoutes />
+            <Suspense fallback={<SpinnerApp delay={200} />}>
+                {!isMobile && <QuickAccessApp />}
+            </Suspense>
             {isLinuxSelected() && <WorkspaceLinux />}
             {isWindowsSelected() && <WorkspaceWindows />}
             {isMobileSelected() && <WorkspaceMobile />}

@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import LogoIcon from '../../../../assets/images/icons/LogoIcon';
 import { useCartContext } from '../../../../contexts/cartContext';
 import { useNotificationsContext } from '../../../../contexts/notificationsContext';
-import { logoAnimations } from '../../../animations/animations';
+import { logoAnimations } from '../../../animations';
 import { useSideMenuContext } from '../contexts/sideMenuContext';
 import SideMenuApp from '../sideMenu/SideMenuApp';
 import { BorderLogo, Desktop, Logo, LogoContainer, SideMenu } from './style';

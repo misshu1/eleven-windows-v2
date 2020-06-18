@@ -1,8 +1,11 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUbuntu, faWindows } from '@fortawesome/free-brands-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import {
     faAngleDoubleRight,
     faArrowLeft,
+    faBell,
+    faBellSlash,
     faCheck,
     faCog,
     faEllipsisV,
@@ -10,10 +13,12 @@ import {
     faExclamationTriangle,
     faInfo,
     faLayerGroup,
+    faMoon,
     faShoppingCart,
     faSignInAlt,
     faSitemap,
     faSpinner,
+    faSun,
     faTh,
     faTimes,
     faTrashAlt,
@@ -53,7 +58,13 @@ library.add(
     faTrashAlt,
     faAngleDoubleRight,
     faSitemap,
-    faSignInAlt
+    faSignInAlt,
+    faWindows,
+    faUbuntu,
+    faMoon,
+    faSun,
+    faBellSlash,
+    faBell
 );
 
 const useStyles = makeStyles({

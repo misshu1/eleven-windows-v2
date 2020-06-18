@@ -28,10 +28,10 @@ export const NotificationsProvider = ({ children }) => {
         }
     }, []);
 
-    const disableNotifications = (e) => {
-        localStorage.setItem('disableNotifications', e.target.checked);
+    const disableNotifications = (boolean) => {
+        localStorage.setItem('disableNotifications', boolean);
         closeSnackbar();
-        setDesable(e.target.checked);
+        setDesable(boolean);
     };
 
     const closeNotification = (id) => {
@@ -44,6 +44,10 @@ export const NotificationsProvider = ({ children }) => {
         if (notificationsHistory.length > 0) {
             setNotificationsHistory([]);
         }
+    };
+
+    const areNotificationsDisabled = () => {
+        return disable;
     };
 
     const showSuccess = (title, message) => {
@@ -202,6 +206,7 @@ export const NotificationsProvider = ({ children }) => {
                 clearAllNotifications,
                 disableNotifications,
                 closeNotification,
+                areNotificationsDisabled,
             }}
         >
             {children}

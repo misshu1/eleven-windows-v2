@@ -78,7 +78,13 @@
         "language": "Language",
         "notifications": "new notifications",
         "emptyNotifications": "No new notifications",
-        "cart": "Cart"
+        "cart": "Cart",
+        "selectWindows": "Windows OS",
+        "selectLinux": "Linux OS",
+        "darkTheme": "Dark Theme",
+        "lightTheme": "Light Theme",
+        "disableNotifications": "Disable notifications",
+        "enableNotifications": "Enable notifications"
     },
     "cart": {
         "title": "Cart"

@@ -284,7 +284,7 @@ const SettingsPreviewApp = () => {
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Switch
                         checked={disable}
-                        onChange={disableNotifications}
+                        onChange={(e) => disableNotifications(e.target.checked)}
                         value={disable}
                         classes={{
                             switchBase: classes.switchBase,

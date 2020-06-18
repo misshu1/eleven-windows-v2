@@ -78,7 +78,13 @@
         "language": "Limbă",
         "notifications": "notificări noi",
         "emptyNotifications": "Nu sunt notificări noi",
-        "cart": "Coş"
+        "cart": "Coş",
+        "selectWindows": "Windows OS",
+        "selectLinux": "Linux OS",
+        "darkTheme": "Dark Theme",
+        "lightTheme": "Light Theme",
+        "disableNotifications": "Dezactivați notificările",
+        "enableNotifications": "Activați notificările"
     },
     "cart": {
         "title": "Coş"

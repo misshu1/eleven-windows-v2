@@ -208,6 +208,16 @@ export const SettingsProvider = ({ children }) => {
         i18n.changeLanguage(lang);
     };
 
+    const isDarkThemeSelected = () => {
+        const theme = localStorage.getItem('theme');
+        return theme === THEME.dark;
+    };
+
+    const isLightThemeSelected = () => {
+        const theme = localStorage.getItem('theme');
+        return theme === THEME.light;
+    };
+
     const isLinuxSelected = () => {
         return currentOS === OS_THEME.linux;
     };
@@ -238,6 +248,8 @@ export const SettingsProvider = ({ children }) => {
                 isLinuxSelected,
                 isWindowsSelected,
                 isMobileSelected,
+                isDarkThemeSelected,
+                isLightThemeSelected,
                 selectWindowsOS,
                 selectLinuxOS,
                 languageFlag,
