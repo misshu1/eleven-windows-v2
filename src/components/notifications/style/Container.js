@@ -23,7 +23,7 @@ export const Container = styled.div`
 
     .btn-container {
         border-top: 1px solid ${(props) => props.theme.startMenuBorder};
-        padding: 1rem;
+        padding: 1rem 0;
     }
 
     .no-notifications {
