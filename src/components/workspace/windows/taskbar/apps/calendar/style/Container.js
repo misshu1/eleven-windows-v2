@@ -20,11 +20,17 @@ export const Container = styled.section`
     border-left: 1px solid ${(props) => props.theme.calendarBorder};
     bottom: 0;
     right: 0;
-    width: 21.87rem;
+    width: 100%;
+    height: 100%;
     background: ${(props) => props.theme.calendarBg};
     animation: ${slideUp} 0.3s ease-out 1 forwards;
     box-shadow: -2px -2px 4px -1px rgba(0, 0, 0, 0.2),
         -4px -4px 5px 0px rgba(0, 0, 0, 0.14),
         -1px -1px 10px 0px rgba(0, 0, 0, 0.12);
     backdrop-filter: blur(4px);
+
+    @media only screen and (min-width: 450px) {
+        max-height: 33rem;
+        max-width: 21.87rem;
+    }
 `;
