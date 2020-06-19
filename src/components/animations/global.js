@@ -42,7 +42,7 @@ export const quickAccessToolbarCloseBtnAnimation = {
 
 export const quickAccessToolbarOpenBtnAnimation = {
     initial: {
-        opacity: 1,
+        opacity: 0,
     },
     open: {
         opacity: [0, 0, 1],

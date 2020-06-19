@@ -6,12 +6,10 @@ const ripple = (props) => keyframes`
     box-shadow: 0px 0px 15px 0px ${props.theme.accentBg},
     0px 0px 1px 0px ${props.theme.accentBg} 
 }
-
 50% {
     box-shadow: 1px -1px 35px 2px ${props.theme.accentBg},
     -3px 1px 4px 0px ${props.theme.accentBg}
 }
-
 100% {
     box-shadow: 0px 0px 15px 0px ${props.theme.accentBg},
     0px 0px 1px 0px ${props.theme.accentBg} 
@@ -45,7 +43,7 @@ export const Container = styled(motion.div)`
     ${(props) =>
         !props.isOpen &&
         css`
-            animation: ${ripple(props)} 1.5s ease-in infinite forwards;
+            animation: ${ripple(props)} 1.5s ease infinite forwards;
             animation-delay: 0.6s;
         `}
 `;
