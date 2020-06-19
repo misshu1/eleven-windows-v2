@@ -2,6 +2,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUbuntu, faWindows } from '@fortawesome/free-brands-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import {
+    faAngleDoubleLeft,
     faAngleDoubleRight,
     faArrowLeft,
     faBell,
@@ -57,6 +58,7 @@ library.add(
     faArrowLeft,
     faTrashAlt,
     faAngleDoubleRight,
+    faAngleDoubleLeft,
     faSitemap,
     faSignInAlt,
     faWindows,

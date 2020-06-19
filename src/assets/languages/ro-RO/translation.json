@@ -84,7 +84,9 @@
         "darkTheme": "Dark Theme",
         "lightTheme": "Light Theme",
         "disableNotifications": "Dezactivați notificările",
-        "enableNotifications": "Activați notificările"
+        "enableNotifications": "Activați notificările",
+        "open": "Deschide",
+        "close": "Închide"
     },
     "cart": {
         "title": "Coş"

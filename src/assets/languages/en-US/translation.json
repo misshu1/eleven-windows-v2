@@ -84,7 +84,9 @@
         "darkTheme": "Dark Theme",
         "lightTheme": "Light Theme",
         "disableNotifications": "Disable notifications",
-        "enableNotifications": "Enable notifications"
+        "enableNotifications": "Enable notifications",
+        "open": "Open",
+        "close": "Close"
     },
     "cart": {
         "title": "Cart"

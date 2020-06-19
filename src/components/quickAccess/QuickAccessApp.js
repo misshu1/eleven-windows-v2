@@ -1,81 +1,40 @@
-import React, { useCallback } from 'react';
+import React, { lazy, Suspense, useRef, useState } from 'react';
 
-import PowerOffIcon from '../../assets/images/icons/PowerOffIcon';
-import { useNotificationsContext } from '../../contexts/notificationsContext';
-import { useSettingsContext } from '../../contexts/settingsContext';
-import { useAuth } from '../../hooks/useAuth';
-import IconApp from './IconApp';
-import { Container } from './style';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
+import SpinnerApp from '../style/SpinnerApp';
+import OpenButton from './OpenButton';
+
+const Toolbar = lazy(() => import('./Toolbar'));
 
 const QuickAccessApp = () => {
-    const auth = useAuth();
-    const {
-        isLinuxSelected,
-        isWindowsSelected,
-        isDarkThemeSelected,
-        isLightThemeSelected,
-        selectLightTheme,
-        selectDarkTheme,
-        selectWindowsOS,
-        selectLinuxOS,
-    } = useSettingsContext();
-    const {
-        areNotificationsDisabled,
-        disableNotifications,
-    } = useNotificationsContext();
+    const toolbarRef = useRef(null);
+    const [isOpen, setIsOpen] = useState(false);
+
+    useOnClickOutside([toolbarRef], () => closeToolbar());
+
+    const openToolbar = () => {
+        setIsOpen(true);
+    };
+
+    const closeToolbar = () => {
+        setIsOpen(false);
+    };
 
     return (
-        <Container>
-            {isLinuxSelected() && (
-                <IconApp
-                    tooltip={'tooltip.selectWindows'}
-                    fontIcon={['fab', 'windows']}
-                    onClick={selectWindowsOS}
-                />
+        <>
+            {!isOpen && (
+                <OpenButton openToolbar={openToolbar} isOpen={isOpen} />
             )}
-            {isWindowsSelected() && (
-                <IconApp
-                    tooltip={'tooltip.selectLinux'}
-                    fontIcon={['fab', 'ubuntu']}
-                    onClick={selectLinuxOS}
-                />
-            )}
-            {isLightThemeSelected() && (
-                <IconApp
-                    tooltip={'tooltip.darkTheme'}
-                    fontIcon={['fas', 'moon']}
-                    onClick={selectDarkTheme}
-                />
-            )}
-            {isDarkThemeSelected() && (
-                <IconApp
-                    tooltip={'tooltip.lightTheme'}
-                    fontIcon={['fas', 'sun']}
-                    onClick={selectLightTheme}
-                />
-            )}
-            {areNotificationsDisabled() && (
-                <IconApp
-                    tooltip={'tooltip.enableNotifications'}
-                    fontIcon={['fas', 'bell-slash']}
-                    onClick={() => disableNotifications(false)}
-                />
-            )}
-            {!areNotificationsDisabled() && (
-                <IconApp
-                    tooltip={'tooltip.disableNotifications'}
-                    fontIcon={['fas', 'bell']}
-                    onClick={() => disableNotifications(true)}
-                />
-            )}
-            {auth.user && (
-                <IconApp
-                    tooltip={'tooltip.logout'}
-                    icon={<PowerOffIcon />}
-                    onClick={auth.logout}
-                />
-            )}
-        </Container>
+            <Suspense fallback={<SpinnerApp delay={200} />}>
+                {isOpen && (
+                    <Toolbar
+                        closeToolbar={closeToolbar}
+                        toolbarRef={toolbarRef}
+                        isOpen={isOpen}
+                    />
+                )}
+            </Suspense>
+        </>
     );
 };
 
