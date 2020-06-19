@@ -1,6 +1,6 @@
 export const quickAccessToolbarAnimation = {
     initial: {
-        x: '100%',
+        x: 'calc(100% - 3rem)',
         opacity: 0,
     },
     open: {

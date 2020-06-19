@@ -8,11 +8,7 @@ export const Icon = styled.div`
     height: 100%;
     color: ${(props) => props.theme.textColor};
     transition: color 0.2s ease-in-out;
-
-    &&:first-child {
-        border-bottom-left-radius: inherit;
-        border-top-left-radius: inherit;
-    }
+    border-radius: 100%;
 
     &&:hover,
     &&:focus {
