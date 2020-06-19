@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 import Scrollbar from 'react-scrollbars-custom';
 
 import PowerOffIcon from '../../../../../../assets/images/icons/PowerOffIcon';
-import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import SpinnerApp from '../../../../../style/SpinnerApp';
@@ -41,15 +40,10 @@ const useStyles = makeStyles({
 const StartMenuApp = ({ startMenuRef }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const { closeStartMenu } = useStartMenuContext();
-    const { showError } = useNotificationsContext();
     const { theme } = useSettingsContext();
     const classes = useStyles(theme);
     const auth = useAuth();
     const { t } = useTranslation();
-
-    const handleLogOut = () => {
-        auth.logout().catch((err) => showError('Error', err.message, 500));
-    };
 
     const showAuth = () => {
         setIsAuthOpen(true);
@@ -101,7 +95,7 @@ const StartMenuApp = ({ startMenuRef }) => {
                                     placement='bottom'
                                     enterDelay={500}
                                 >
-                                    <Widget onClick={handleLogOut}>
+                                    <Widget onClick={auth.logout}>
                                         <PowerOffIcon
                                             width='2rem'
                                             height='2rem'

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import { useFirebaseContext } from '../contexts/firebaseContext';
+import { useNotificationsContext } from '../contexts/notificationsContext';
 
 const AuthContext = createContext();
 export function AuthProvider(props) {
@@ -15,6 +16,7 @@ export function AuthProvider(props) {
 
 function useProvideAuth() {
     const { auth } = useFirebaseContext();
+    const { showError } = useNotificationsContext();
     const [user, setUser] = useState(null);
 
     const login = async (email, password) => {
@@ -42,7 +44,9 @@ function useProvideAuth() {
 
     const logout = async () => {
         setUser(null);
-        return await auth.signOut();
+        return await auth
+            .signOut()
+            .catch((err) => showError('Error', err.message, 500));
     };
 
     const sendPasswordResetEmail = async (email) => {

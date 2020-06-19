@@ -95,25 +95,25 @@ const App = () => {
                 horizontal: 'right',
             }}
         >
-            <FirebaseProvider>
-                <AuthProvider>
-                    <ThemeProvider theme={theme}>
-                        <GlobalStyle
-                            background={getSelectedBackground()}
-                            linux={isLinuxSelected()}
-                            windows={isWindowsSelected()}
-                            mobile={isMobileSelected()}
-                        />
-                        <CartProvider>
-                            <NotificationsProvider>
+            <NotificationsProvider>
+                <FirebaseProvider>
+                    <AuthProvider>
+                        <ThemeProvider theme={theme}>
+                            <GlobalStyle
+                                background={getSelectedBackground()}
+                                linux={isLinuxSelected()}
+                                windows={isWindowsSelected()}
+                                mobile={isMobileSelected()}
+                            />
+                            <CartProvider>
                                 <FolderProvider>
                                     <Routes />
                                 </FolderProvider>
-                            </NotificationsProvider>{' '}
-                        </CartProvider>
-                    </ThemeProvider>
-                </AuthProvider>
-            </FirebaseProvider>
+                            </CartProvider>
+                        </ThemeProvider>
+                    </AuthProvider>
+                </FirebaseProvider>
+            </NotificationsProvider>
         </SnackbarProvider>
     );
 };

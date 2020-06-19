@@ -10,7 +10,6 @@ import Scrollbar from 'react-scrollbars-custom';
 
 import PowerOffIcon from '../../../../../../assets/images/icons/PowerOffIcon';
 import { ICON_LOCATION, useFolderContext } from '../../../../../../contexts/folderContext';
-import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import SpinnerApp from '../../../../../style/SpinnerApp';
@@ -40,16 +39,11 @@ const useStyles = makeStyles({
 const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const { folderState, sortByAppName } = useFolderContext();
-    const { showError } = useNotificationsContext();
     const { theme } = useSettingsContext();
     const { t } = useTranslation();
     const classes = useStyles(theme);
     const apps = useRef(folderState.apps.sort(sortByAppName));
     const auth = useAuth();
-
-    const handleLogOut = () => {
-        auth.logout().catch((err) => showError('Error', err.message, 500));
-    };
 
     const showAuth = () => {
         setIsAuthOpen(true);
@@ -120,7 +114,7 @@ const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
                                     enterDelay={500}
                                 >
                                     <div
-                                        onClick={handleLogOut}
+                                        onClick={auth.logout}
                                         className='power-off'
                                     >
                                         <PowerOffIcon

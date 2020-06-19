@@ -20,14 +20,9 @@ const QuickAccessApp = () => {
         selectLinuxOS,
     } = useSettingsContext();
     const {
-        showError,
         areNotificationsDisabled,
         disableNotifications,
     } = useNotificationsContext();
-
-    const logOut = useCallback(() => {
-        auth.logout().catch((err) => showError('Error', err.message, 500));
-    }, [auth, showError]);
 
     return (
         <Container>
@@ -77,7 +72,7 @@ const QuickAccessApp = () => {
                 <IconApp
                     tooltip={'tooltip.logout'}
                     icon={<PowerOffIcon />}
-                    onClick={logOut}
+                    onClick={auth.logout}
                 />
             )}
         </Container>
