@@ -4,6 +4,7 @@ import PowerOffIcon from '../../assets/images/icons/PowerOffIcon';
 import { useNotificationsContext } from '../../contexts/notificationsContext';
 import { useSettingsContext } from '../../contexts/settingsContext';
 import { useAuth } from '../../hooks/useAuth';
+import { quickAccessToolbarAnimation, quickAccessToolbarCloseBtnAnimation } from '../animations';
 import IconApp from './IconApp';
 import { Container } from './style';
 
@@ -25,11 +26,26 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
     } = useNotificationsContext();
 
     return (
-        <Container ref={toolbarRef} isOpen={isOpen}>
+        <Container
+            ref={toolbarRef}
+            isOpen={isOpen}
+            style={{ zIndex: '150' }}
+            key='quickAccessToolbarAnimation'
+            initial='initial'
+            animate='open'
+            exit='close'
+            variants={quickAccessToolbarAnimation}
+        >
             <IconApp
                 tooltip={'tooltip.close'}
                 fontIcon={['fas', 'angle-double-right']}
                 onClick={closeToolbar}
+                motionProps={{
+                    key: 'quickAccessToolbarCloseBtnAnimation',
+                    animate: 'open',
+                    exit: 'close',
+                    variants: quickAccessToolbarCloseBtnAnimation,
+                }}
             />
             {isLinuxSelected() && (
                 <IconApp

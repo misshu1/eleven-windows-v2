@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion';
 import React, { lazy, Suspense, useRef, useState } from 'react';
 
 import useOnClickOutside from '../../hooks/useOnClickOutside';
@@ -26,13 +27,15 @@ const QuickAccessApp = () => {
                 <OpenButton openToolbar={openToolbar} isOpen={isOpen} />
             )}
             <Suspense fallback={<SpinnerApp delay={200} />}>
-                {isOpen && (
-                    <Toolbar
-                        closeToolbar={closeToolbar}
-                        toolbarRef={toolbarRef}
-                        isOpen={isOpen}
-                    />
-                )}
+                <AnimatePresence>
+                    {isOpen && (
+                        <Toolbar
+                            closeToolbar={closeToolbar}
+                            toolbarRef={toolbarRef}
+                            isOpen={isOpen}
+                        />
+                    )}
+                </AnimatePresence>
             </Suspense>
         </>
     );

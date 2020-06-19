@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tooltip from '@material-ui/core/Tooltip';
+import { motion } from 'framer-motion';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -7,15 +8,17 @@ import { Icon } from './style';
 
 const IconApp = (props) => {
     const { t } = useTranslation();
-    const { tooltip, onClick, icon, fontIcon } = props;
+    const { tooltip, onClick, icon, fontIcon, motionProps } = props;
 
     return (
-        <Tooltip title={t(tooltip)} placement='bottom' enterDelay={500}>
-            <Icon onClick={onClick}>
-                {icon && icon}
-                {fontIcon && <FontAwesomeIcon icon={fontIcon} size='lg' />}
-            </Icon>
-        </Tooltip>
+        <motion.div {...motionProps} className='motion-icon'>
+            <Tooltip title={t(tooltip)} placement='bottom' enterDelay={500}>
+                <Icon onClick={onClick}>
+                    {icon && icon}
+                    {fontIcon && <FontAwesomeIcon icon={fontIcon} size='lg' />}
+                </Icon>
+            </Tooltip>
+        </motion.div>
     );
 };
 
