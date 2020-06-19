@@ -7,14 +7,6 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
 
-    .heading-name {
-        height: 7rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: default;
-    }
-
     .apps-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);

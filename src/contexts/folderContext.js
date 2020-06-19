@@ -126,7 +126,10 @@ const APPS_STATE = [
         isOpen: null,
         isMinimize: null,
         appIndex: 100,
-        iconLocation: [ICON_LOCATION.windows.notificationsWindow],
+        iconLocation: [
+            ICON_LOCATION.windows.notificationsWindow,
+            ICON_LOCATION.linux.appsMenu,
+        ],
     },
 ];
 

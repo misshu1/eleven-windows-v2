@@ -139,9 +139,6 @@ const SettingsPreviewApp = () => {
 
     return (
         <Container ref={containerRef}>
-            <Typography variant='h5' component='h2' className='heading-name'>
-                {t('settings.title.name')}
-            </Typography>
             <Scrollbar>
                 <Typography variant='h6' style={{ textAlign: 'center' }}>
                     {t('settings.title.customize')}

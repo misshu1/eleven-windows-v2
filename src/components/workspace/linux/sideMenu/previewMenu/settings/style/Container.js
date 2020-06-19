@@ -6,12 +6,4 @@ export const Container = styled.div`
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
-
-    .heading-name {
-        height: 7rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: default;
-    }
 `;

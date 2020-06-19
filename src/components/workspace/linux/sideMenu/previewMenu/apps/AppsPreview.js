@@ -1,4 +1,3 @@
-import Typography from '@material-ui/core/Typography';
 import React, { useCallback, useMemo, useRef } from 'react';
 import Scrollbar from 'react-scrollbars-custom';
 
@@ -37,13 +36,6 @@ const AppsPreview = () => {
     return (
         <>
             <Container>
-                <Typography
-                    variant='h5'
-                    component='h2'
-                    className='heading-name'
-                >
-                    {menuName}
-                </Typography>
                 <Scrollbar>
                     <div className='apps-container'>{menuIcons()}</div>
                 </Scrollbar>
