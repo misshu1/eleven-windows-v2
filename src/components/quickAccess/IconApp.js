@@ -11,7 +11,7 @@ const IconApp = (props) => {
     const { tooltip, onClick, icon, fontIcon, motionProps } = props;
 
     return (
-        <motion.div {...motionProps} className='motion-icon'>
+        <motion.div {...motionProps}>
             <Tooltip title={t(tooltip)} placement='bottom' enterDelay={500}>
                 <Icon onClick={onClick}>
                     {icon && icon}

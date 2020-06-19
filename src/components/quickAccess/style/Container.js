@@ -27,11 +27,6 @@ export const Container = styled(motion.div)`
     border-bottom-left-radius: 16em;
     border-top-left-radius: 16em;
 
-    .motion-icon:first-child {
-        border-bottom-left-radius: inherit;
-        border-top-left-radius: inherit;
-    }
-
     ${(props) =>
         props.isOpen &&
         css`
