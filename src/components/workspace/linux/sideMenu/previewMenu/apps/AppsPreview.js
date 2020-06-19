@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import Scrollbar from 'react-scrollbars-custom';
 
 import { ICON_LOCATION, useFolderContext } from '../../../../../../contexts/folderContext';
@@ -8,7 +8,7 @@ import { Container } from './style';
 
 const AppsPreview = () => {
     const { folderState, sortByAppName } = useFolderContext();
-    const { sideMenuState, closeSideMenu } = useSideMenuContext();
+    const { closeSideMenu } = useSideMenuContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 
     const menuIcons = useCallback(() => {
@@ -28,10 +28,6 @@ const AppsPreview = () => {
             );
         });
     }, [closeSideMenu]);
-
-    const menuName = useMemo(() => {
-        return sideMenuState.map((app) => app.id === 1 && app.name);
-    }, [sideMenuState]);
 
     return (
         <>
