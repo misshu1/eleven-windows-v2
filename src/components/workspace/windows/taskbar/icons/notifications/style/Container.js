@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.li`
     width: 33.33%;
     height: 100%;
     display: flex;

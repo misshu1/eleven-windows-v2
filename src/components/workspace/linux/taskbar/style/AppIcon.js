@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const AppIcon = styled.div`
+export const AppIcon = styled.li`
     display: flex;
     justify-content: center;
     align-items: center;

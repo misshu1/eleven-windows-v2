@@ -157,7 +157,7 @@ export default ExampleApp;
 export const zIndexExample = `
 zIndex = {
   Pages: 500, // section id='pages' inside index.html
-  Taskbar: 300, // header id='taskbar' inside index.html
+  Taskbar: 300, // nav id='taskbar' inside index.html
   Notification: 200, // div id='modal' inside index.html
   Video: -100, // div id='video' inside index.html
   SpinnerApp: 1000,
@@ -191,24 +191,24 @@ zIndex = {
 export const folderStructureExample = `
 - src/
 -- assets
--- contexts
--- hooks
--- services
 -- components/
 ---- animations // Framer motion animations
 ---- apps // All folder apps are here
+---- auth
+---- cart
+---- emoji // Always fun 😊
 ---- folder/ // Folder component
 ------ drawer
 ------ style
 ------ toolbar
----- login
----- notification 
+---- notifications
 ---- pages // 401, 404
+---- quickAccess // Only for Desktop, the toolbar on top right
 ---- routes // App routes 
 ---- style // Global styles
 ---- theme
 ---- video // Video background component
----- workspace/ 
+---- workspace/
 ------ linux/ // Only for Desktop
 -------- contexts
 -------- desktop
@@ -220,4 +220,7 @@ export const folderStructureExample = `
 ------ windows/ // Only for Desktop
 -------- desktop
 -------- taskbar
+-- contexts
+-- hooks
+-- services
 `.trim();
