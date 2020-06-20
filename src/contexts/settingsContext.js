@@ -5,6 +5,7 @@ import globeImg from '../assets/images/flags/globe.svg';
 import DarkTheme from '../components/theme/DarkTheme';
 import { backgrounds } from '../components/theme/DesktopBackground';
 import LightTheme from '../components/theme/LightTheme';
+import { THEME } from '../components/theme/theme';
 import { videoBackgrounds } from '../components/theme/VideoBackgrounds';
 import useMediaQuery from '../hooks/useMediaQuery';
 import i18next, { languages } from '../services/translation/i18next';
@@ -13,11 +14,6 @@ const OS_THEME = {
     windows: 'WINDOWS',
     linux: 'LINUX',
     mobile: 'MOBILE',
-};
-
-const THEME = {
-    dark: 'DARK',
-    light: 'LIGHT',
 };
 
 export const SettingsContext = createContext();
@@ -209,13 +205,11 @@ export const SettingsProvider = ({ children }) => {
     };
 
     const isDarkThemeSelected = () => {
-        const theme = localStorage.getItem('theme');
-        return theme === THEME.dark;
+        return theme.id === THEME.dark;
     };
 
     const isLightThemeSelected = () => {
-        const theme = localStorage.getItem('theme');
-        return theme === THEME.light;
+        return theme.id === THEME.light;
     };
 
     const isLinuxSelected = () => {

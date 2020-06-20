@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useSettingsContext } from '../../../contexts/settingsContext';
 import useMediaQuery from '../../../hooks/useMediaQuery';
+import { THEME } from '../../theme/theme';
 import Preview from './Preview';
 import { Box, Spacer, Title } from './style';
 
@@ -103,7 +104,7 @@ const Customize = () => {
             <Title>{t('settings.title.customize')}</Title>
             <Box>
                 <div className='buttons-container'>
-                    {theme.id === 'light' && (
+                    {theme.id === THEME.light && (
                         <Button
                             className={classes.btnStyle}
                             onClick={selectDarkTheme}
@@ -111,7 +112,7 @@ const Customize = () => {
                             {t('settings.themeButton')}
                         </Button>
                     )}
-                    {theme.id === 'dark' && (
+                    {theme.id === THEME.dark && (
                         <Button
                             className={classes.btnStyle}
                             onClick={selectLightTheme}

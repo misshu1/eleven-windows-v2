@@ -1,5 +1,7 @@
+import { THEME } from './theme';
+
 const DarkTheme = {
-    id: 'dark',
+    id: THEME.dark,
 
     // Global colors
     textColor: '#d6d8de',

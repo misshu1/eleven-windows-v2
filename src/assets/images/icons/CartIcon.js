@@ -8,6 +8,7 @@ const CartIcon = (props) => {
 
     return (
         <svg
+            key={theme.id}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 600'
             width={width ? width : '100%'}
@@ -15,7 +16,7 @@ const CartIcon = (props) => {
         >
             <g
                 className='fill-color'
-                fill={theme.id === 'dark' ? '#af0138' : '#009BCE'}
+                fill={theme.accentBg}
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             >
                 <circle cx='202.41' cy='546.32' r='50.36' stroke='gray' />
@@ -24,7 +25,7 @@ const CartIcon = (props) => {
             <g
                 className='stroke-color'
                 strokeMiterlimit='10'
-                stroke={theme.id === 'dark' ? '#af0138' : '#009BCE'}
+                stroke={theme.accentBg}
                 style={{ transition: 'stroke 0.2s ease-in-out' }}
             >
                 <path

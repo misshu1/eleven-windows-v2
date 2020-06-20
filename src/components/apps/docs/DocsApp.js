@@ -10,6 +10,7 @@ import LogoIcon from '../../../assets/images/icons/LogoIcon';
 import { useNotificationsContext } from '../../../contexts/notificationsContext';
 import { useSettingsContext } from '../../../contexts/settingsContext';
 import FolderApp from '../../folder/FolderApp';
+import { THEME } from '../../theme/theme';
 import {
     folderMenuExample,
     folderStructureExample,
@@ -164,9 +165,9 @@ const DocsApp = () => {
     const folderStructureRef = useRef(null);
 
     useEffect(() => {
-        if (theme.id === 'dark') {
+        if (theme.id === THEME.dark) {
             setHighlightStyle(tomorrow);
-        } else if (theme.id === 'light') {
+        } else if (theme.id === THEME.light) {
             setHighlightStyle(vs);
         }
     }, [theme.id]);

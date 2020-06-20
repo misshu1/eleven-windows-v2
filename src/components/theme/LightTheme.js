@@ -1,5 +1,7 @@
+import { THEME } from './theme';
+
 const LightTheme = {
-    id: 'light',
+    id: THEME.light,
 
     // Global colors
     textColor: '#212121',

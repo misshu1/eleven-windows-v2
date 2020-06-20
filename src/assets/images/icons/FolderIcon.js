@@ -1,10 +1,14 @@
 import React from 'react';
 
-const FolderIcon = props => {
+import { useSettingsContext } from '../../../contexts/settingsContext';
+
+const FolderIcon = (props) => {
     const { width, height } = props;
+    const { theme } = useSettingsContext();
 
     return (
         <svg
+            key={theme.id}
             xmlns='http://www.w3.org/2000/svg'
             xmlnsXlink='http://www.w3.org/1999/xlink'
             enableBackground='new 0 0 730 730'

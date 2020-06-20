@@ -8,6 +8,7 @@ const TaskIcon = (props) => {
 
     return (
         <svg
+            key={theme.id}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 750'
             width={width ? width : '100%'}
@@ -15,7 +16,7 @@ const TaskIcon = (props) => {
         >
             <path
                 d='M707 728.5c0 11.9-11.6 21.5-26 21.5H71c-14.4 0-26-9.6-26-21.5V22.7C45 10.8 56.6 1.2 71 1.2h610c14.4 0 26 9.6 26 21.5v705.8z'
-                fill={theme.id === 'dark' ? '#af0138' : '#009BCE'}
+                fill={theme.accentBg}
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
             <linearGradient
@@ -353,7 +354,7 @@ const TaskIcon = (props) => {
             />
             <path
                 d='M545.4 190.7h16.9c4.5 0 8.2 5.3 8.2 11.8s-3.7 11.8-8.2 11.8h-16.9c-4.5 0-8.2-5.3-8.2-11.8s3.7-11.8 8.2-11.8z'
-                fill={theme.id === 'dark' ? '#af0138' : '#009BCE'}
+                fill={theme.accentBg}
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
             <path
@@ -362,18 +363,18 @@ const TaskIcon = (props) => {
             />
             <path
                 d='M537.9 595.5h16.9c4.5 0 8.2 5.5 8.2 12.3s-3.7 12.3-8.2 12.3h-16.9c-4.5 0-8.2-5.5-8.2-12.3s3.7-12.3 8.2-12.3zM158.2 124h45.6c4.5 0 8.2 5.3 8.2 11.8s-3.7 11.8-8.2 11.8h-45.6c-4.5 0-8.2-5.3-8.2-11.8s3.7-11.8 8.2-11.8zm0 68.3h155.7c4.5 0 8.2 5.3 8.2 11.8s-3.7 11.8-8.2 11.8H158.2c-4.5 0-8.2-5.3-8.2-11.8s3.7-11.8 8.2-11.8zm0 61.4h155.7c4.5 0 8.2 5.6 8.2 12.6 0 6.9-3.7 12.6-8.2 12.6H158.2c-4.5 0-8.2-5.6-8.2-12.6s3.7-12.6 8.2-12.6z'
-                fill={theme.id === 'dark' ? '#af0138' : '#009BCE'}
+                fill={theme.accentBg}
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
             <path
                 d='M158.2 327.5h45.6c4.5 0 8.2 5.2 8.2 11.6s-3.7 11.6-8.2 11.6h-45.6c-4.5 0-8.2-5.2-8.2-11.6 0-6.5 3.7-11.6 8.2-11.6zm0 60.1h112.1c4.5 0 8.2 6.3 8.2 14.1s-3.7 14.1-8.2 14.1H158.2c-4.5 0-8.2-6.3-8.2-14.1s3.7-14.1 8.2-14.1zm-4 69h155.7c4.5 0 8.2 5.8 8.2 13s-3.7 13-8.2 13H154.2c-4.5 0-8.2-5.8-8.2-13s3.7-13 8.2-13z'
                 opacity='.5'
-                fill={theme.id === 'dark' ? '#af0138' : '#009BCE'}
+                fill={theme.accentBg}
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
             <path
                 d='M158.2 536.6h45.6c4.5 0 8.2 5.3 8.2 11.9s-3.7 11.9-8.2 11.9h-45.6c-4.5 0-8.2-5.3-8.2-11.9s3.7-11.9 8.2-11.9zm-4 58.9h155.7c4.5 0 8.2 5.5 8.2 12.3s-3.7 12.3-8.2 12.3H154.2c-4.5 0-8.2-5.5-8.2-12.3s3.7-12.3 8.2-12.3zm4 59.8h90.6c4.5 0 8.2 5.3 8.2 11.9s-3.7 11.9-8.2 11.9h-90.6c-4.5 0-8.2-5.3-8.2-11.9s3.7-11.9 8.2-11.9z'
-                fill={theme.id === 'dark' ? '#af0138' : '#009BCE'}
+                fill={theme.accentBg}
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
             <path
@@ -391,7 +392,7 @@ const TaskIcon = (props) => {
             />
             <path
                 d='M529 415.9h-16.9c-4.5 0-8.2-5.3-8.2-11.8s3.7-11.8 8.2-11.8H529c4.5 0 8.2 5.3 8.2 11.8s-3.6 11.8-8.2 11.8z'
-                fill={theme.id === 'dark' ? '#af0138' : '#009BCE'}
+                fill={theme.accentBg}
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
         </svg>

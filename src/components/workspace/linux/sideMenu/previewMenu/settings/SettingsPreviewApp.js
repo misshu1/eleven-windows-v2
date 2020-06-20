@@ -15,6 +15,7 @@ import useMediaQuery from '../../../../../../hooks/useMediaQuery';
 import { languages } from '../../../../../../services/translation/i18next';
 import Preview from '../../../../../apps/settings/Preview';
 import { FlagImgContainer } from '../../../../../apps/settings/style';
+import { THEME } from '../../../../../theme/theme';
 import { FlagImg } from '../../../../windows/taskbar/icons/language/style/FlagImg';
 import { Box, Container } from './style';
 
@@ -145,7 +146,7 @@ const SettingsPreviewApp = () => {
                 </Typography>
                 <Box>
                     <div className='buttons-container'>
-                        {theme.id === 'light' && (
+                        {theme.id === THEME.light && (
                             <Button
                                 className={classes.btnStyle}
                                 onClick={selectDarkTheme}
@@ -153,7 +154,7 @@ const SettingsPreviewApp = () => {
                                 {t('settings.themeButton')}
                             </Button>
                         )}
-                        {theme.id === 'dark' && (
+                        {theme.id === THEME.dark && (
                             <Button
                                 className={classes.btnStyle}
                                 onClick={selectLightTheme}
