@@ -117,7 +117,15 @@ const FolderApp = forwardRef((props, ref) => {
                                                 />
                                             </>
                                         )}
-                                        <Scrollbar>{children}</Scrollbar>
+                                        <Scrollbar
+                                            contentProps={{
+                                                style: {
+                                                    height: '100%',
+                                                },
+                                            }}
+                                        >
+                                            {children}
+                                        </Scrollbar>
                                     </Content>
                                 </Folder>
                             </AnimateFadeInOut>
