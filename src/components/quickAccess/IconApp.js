@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { Icon } from './style';
 
 const IconApp = (props) => {
-    const { t } = useTranslation();
     const { tooltip, onClick, icon, fontIcon, motionProps } = props;
+    const { t } = useTranslation();
 
     return (
         <motion.div {...motionProps}>

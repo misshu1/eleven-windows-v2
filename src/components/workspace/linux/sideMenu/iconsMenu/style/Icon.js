@@ -9,7 +9,8 @@ export const Icon = styled.div`
     height: 3rem;
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
-    background: ${(props) => props.isActive && '#212736'};
+    background: ${(props) => props.isActive && props.theme.accentBg};
+    color: ${(props) => props.isActive && '#fff'};
 
     ${(props) =>
         props.close &&
