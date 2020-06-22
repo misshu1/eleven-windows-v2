@@ -67,15 +67,15 @@ const widthDescription = <span>Width of the folder.</span>;
 const heightDescription = <span>Height of the folder.</span>;
 const marginTopDescription = (
     <span>
-        Since the folder is position absolute margin-top is set by the
-        <span className='required'>{` top `}</span>
+        Since the folder is position absolute margin-top is set with
+        <span className='required'>{` translate `}</span>
         property in css.
     </span>
 );
 const marginLeftDescription = (
     <span>
-        Since the folder is position absolute margin-left is set by the
-        <span className='required'>{` left `}</span>
+        Since the folder is position absolute margin-left is set with
+        <span className='required'>{` translate `}</span>
         property in css.
     </span>
 );
@@ -95,8 +95,8 @@ const folderPropsTable = [
     createData('appId', true, 'Number', '-', appIdDescription),
     createData('width', false, 'String', '44rem', widthDescription),
     createData('height', false, 'String', '44rem', heightDescription),
-    createData('marginTop', false, 'String', '5rem', marginTopDescription),
-    createData('marginLeft', false, 'String', '5rem', marginLeftDescription),
+    createData('marginTop', false, 'Number', '60', marginTopDescription),
+    createData('marginLeft', false, 'Number', '60', marginLeftDescription),
     createData('toolbarMenu', false, 'Array', '-', toolbarMenuDescription),
     createData('ref', false, 'Object', '-', refDescription),
 ];

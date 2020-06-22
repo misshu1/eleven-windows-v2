@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const NameBar = styled.div`
     display: flex;
     z-index: 10;
-    position: sticky;
-    top: 0;
     width: 100%;
     height: 2.5rem;
     user-select: none;

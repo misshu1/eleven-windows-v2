@@ -7,8 +7,8 @@ const CalculatorApp = () => {
     return (
         <FolderApp
             appId={3}
-            marginLeft='8rem'
-            marginTop='8rem'
+            marginLeft={130}
+            marginTop={130}
             height='42rem'
             width='21.5rem'
         >

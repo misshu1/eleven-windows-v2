@@ -160,6 +160,12 @@ body {
     z-index: -100;
 }
 
+@media only screen and (min-width: 451px) {
+    #desktop {
+        padding: 0.5rem;
+    }
+}
+
 @media only screen and (min-width: 1901px) {
     html {
         font-size: 16px;

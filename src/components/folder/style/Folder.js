@@ -22,13 +22,7 @@ export const Folder = styled.section`
             `}
     }
 
-    @media only screen and (min-width: 800px) {
-        top: ${(props) => (props.marginTop ? props.marginTop : '5rem')};
-        left: ${(props) => (props.marginLeft ? props.marginLeft : '5rem')};
-    }
-
     @media only screen and (max-height: 700px) {
         height: 100%;
-        top: 0;
     }
 `;

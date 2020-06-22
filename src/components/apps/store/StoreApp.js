@@ -52,7 +52,7 @@ const StoreApp = () => {
     }, [products]);
 
     return (
-        <FolderApp appId={4} marginLeft='4rem' marginTop='4rem'>
+        <FolderApp appId={4} marginLeft={60} marginTop={60}>
             <Container>{renderProducts()}</Container>
         </FolderApp>
     );

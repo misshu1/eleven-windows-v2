@@ -8,7 +8,7 @@ import { Container } from './style';
 
 const SettingsApp = () => {
     return (
-        <FolderApp appId={1} marginLeft='6rem' marginTop='6rem'>
+        <FolderApp appId={1} marginLeft={100} marginTop={100}>
             <Container>
                 <Customize />
                 <Language />

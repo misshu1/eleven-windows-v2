@@ -100,7 +100,7 @@ const TaskManagerApp = () => {
     };
 
     return (
-        <FolderApp appId={5} marginLeft='7rem' marginTop='7rem'>
+        <FolderApp appId={5} marginLeft={110} marginTop={110}>
             <Container>
                 <Table>
                     <TableHead>
