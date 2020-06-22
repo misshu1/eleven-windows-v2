@@ -11,5 +11,5 @@ export const Desktop = styled.section`
     overflow: hidden;
     height: 100%;
     width: 100%;
-    padding: 0.5rem;
+    padding: 1rem;
 `;
