@@ -96,12 +96,12 @@ const FolderApp = forwardRef((props, ref) => {
                                 open={app.isOpen}
                                 minimize={app.isMinimize}
                                 close={close}
+                                width={width}
+                                height={height}
                             >
                                 <Folder
                                     isLinuxSelected={isLinuxSelected()}
                                     className='folder' // This class is used in 'AnimateFadeInOut'
-                                    width={width}
-                                    height={height}
                                 >
                                     <FolderToolbar
                                         toolbarMenu={toolbarMenu}

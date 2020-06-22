@@ -58,8 +58,9 @@ export const AnimateFadeInOut = styled.div`
     z-index: ${(props) => props.appIndex};
 
     @media only screen and (min-width: 450px) {
-        width: 0px;
-        height: 0px;
+        height: ${(props) => (props.height ? props.height : '44rem')};
+        width: ${(props) => (props.width ? props.width : '44rem')};
+        
         .folder {
             ${(props) =>
                 props.open === true &&
