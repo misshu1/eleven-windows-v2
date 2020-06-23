@@ -21,6 +21,7 @@ const TaskManagerApp = lazy(() =>
 const FOLDER_ACTIONS = {
     open: 'OPEN',
     close: 'CLOSE',
+    closeAll: 'CLOSE_ALL',
     active: 'ACTIVE',
     minimizeUp: 'MINIMIZE_UP',
     minimizeDown: 'MINIMIZE_DOWN',
@@ -177,7 +178,7 @@ const folderReducer = (state, action) => {
             }
 
         case FOLDER_ACTIONS.minimizeUp:
-            if (app.isMinimize === true) {
+            if (app.isMinimize) {
                 return {
                     ...state,
                     apps: state.apps.map((item) =>
@@ -218,6 +219,18 @@ const folderReducer = (state, action) => {
                 return state;
             }
 
+        case FOLDER_ACTIONS.closeAll:
+            return {
+                ...state,
+                apps: state.apps.map((item) => ({
+                    ...item,
+                    isOpen: false,
+                    isMinimize: null,
+                    appIndex: 100,
+                })),
+                openApps: [],
+            };
+
         default:
             throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -243,6 +256,10 @@ export const FolderProvider = (props) => {
             type: FOLDER_ACTIONS.close,
             payload: appId,
         });
+    };
+
+    const closeAllFolders = () => {
+        folderDispatch({ type: FOLDER_ACTIONS.closeAll });
     };
 
     const activeFolder = (appId) => {
@@ -290,6 +307,7 @@ export const FolderProvider = (props) => {
                 value={{
                     openFolder,
                     closeFolder,
+                    closeAllFolders,
                     activeFolder,
                     minimizeUp,
                     minimizeDown,

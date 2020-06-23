@@ -9,7 +9,7 @@ import SpinnerApp from '../style/SpinnerApp';
 const FolderRoutes = () => {
     const [pathExists, setPathExists] = useState(true);
     const { folderState } = useFolderContext();
-    const { openFolder, closeFolder } = useDispatchFolderContext();
+    const { openFolder, closeAllFolders } = useDispatchFolderContext();
     const lastLocation = useLastLocation();
     const location = useLocation();
     const isMobile = useMediaQuery('(max-width: 450px)');
@@ -34,10 +34,13 @@ const FolderRoutes = () => {
     useEffect(() => {
         folderState.apps.map((app) => {
             // Only one folder can be open when navigating between routes
-            // Here we close the previous opened folder
+            // Here we close the previous opened folders
             // This will prevent keeping more than one folder opened on mobile
-            if (lastLocation?.pathname === app.link) {
-                closeFolder(app.id);
+            if (
+                lastLocation?.pathname === app.link ||
+                location.pathname === '/'
+            ) {
+                closeAllFolders();
             }
             if (location.pathname === app.link) {
                 openFolder(app.id);
@@ -45,7 +48,7 @@ const FolderRoutes = () => {
             return undefined;
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [location.pathname]);
+    }, [location.pathname, isMobile]);
 
     return (
         <>
