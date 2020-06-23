@@ -11,8 +11,8 @@ export const Folder = styled.section`
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 
     @media only screen and (min-width: 450px) {
-        height: inherit;
-        width: inherit;
+        height: ${(props) => (props.height ? props.height : '44rem')};
+        width: ${(props) => (props.width ? props.width : '44rem')};
 
         ${(props) =>
             props.isLinuxSelected === true &&
@@ -22,7 +22,7 @@ export const Folder = styled.section`
             `}
     }
 
-    @media only screen and (max-height: 700px) {
+    @media only screen and (max-height: 650px) {
         height: 100%;
     }
 `;

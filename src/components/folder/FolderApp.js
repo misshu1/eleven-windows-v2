@@ -85,7 +85,7 @@ const FolderApp = forwardRef((props, ref) => {
                         <Draggable
                             key={app.id}
                             axis='both'
-                            handle='.handle' // The handle is in 'toolbar' folder
+                            handle='.handle' // The handle is in the 'toolbar' folder
                             disabled={disableDrag}
                             bounds='#desktop'
                             defaultPosition={defaultFolderPosition}
@@ -96,12 +96,12 @@ const FolderApp = forwardRef((props, ref) => {
                                 open={app.isOpen}
                                 minimize={app.isMinimize}
                                 close={close}
-                                width={width}
-                                height={height}
                             >
                                 <Folder
                                     isLinuxSelected={isLinuxSelected()}
                                     className='folder' // This class is used in 'AnimateFadeInOut'
+                                    width={width}
+                                    height={height}
                                 >
                                     <FolderToolbar
                                         toolbarMenu={toolbarMenu}

@@ -58,8 +58,8 @@ export const AnimateFadeInOut = styled.div`
     z-index: ${(props) => props.appIndex};
 
     @media only screen and (min-width: 450px) {
-        height: ${(props) => (props.height ? props.height : '44rem')};
-        width: ${(props) => (props.width ? props.width : '44rem')};
+        height: 0px;
+        width: 0px;
         
         .folder {
             ${(props) =>
@@ -91,7 +91,7 @@ export const AnimateFadeInOut = styled.div`
         }
     }
 
-    @media only screen and (max-height: 700px) {
+    @media only screen and (max-height: 650px) {
         height: 100%;
     }
 `;
