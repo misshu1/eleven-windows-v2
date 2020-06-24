@@ -18,6 +18,11 @@ const TaskManagerApp = lazy(() =>
     import('../components/apps/taskManager/TaskManagerApp')
 );
 
+export const FOLDER_Z_INDEX = {
+    default: 100,
+    active: 104,
+};
+
 const FOLDER_ACTIONS = {
     open: 'OPEN',
     close: 'CLOSE',
@@ -59,7 +64,7 @@ const APPS_STATE = [
         component: <SettingsApp />,
         isOpen: null,
         isMinimize: null,
-        appIndex: 100,
+        appIndex: FOLDER_Z_INDEX.default,
         iconLocation: [
             ICON_LOCATION.windows.desktop,
             ICON_LOCATION.windows.notificationsWindow,
@@ -76,7 +81,7 @@ const APPS_STATE = [
         component: <DocsApp />,
         isOpen: null,
         isMinimize: null,
-        appIndex: 100,
+        appIndex: FOLDER_Z_INDEX.default,
         iconLocation: [
             ICON_LOCATION.windows.desktop,
             ICON_LOCATION.windows.startMenu.right,
@@ -93,7 +98,7 @@ const APPS_STATE = [
         component: <CalculatorApp />,
         isOpen: null,
         isMinimize: null,
-        appIndex: 100,
+        appIndex: FOLDER_Z_INDEX.default,
         iconLocation: [
             ICON_LOCATION.windows.startMenu.right,
             ICON_LOCATION.linux.appsMenu,
@@ -108,7 +113,7 @@ const APPS_STATE = [
         component: <StoreApp />,
         isOpen: null,
         isMinimize: null,
-        appIndex: 100,
+        appIndex: FOLDER_Z_INDEX.default,
         iconLocation: [
             ICON_LOCATION.windows.desktop,
             ICON_LOCATION.windows.startMenu.right,
@@ -126,7 +131,7 @@ const APPS_STATE = [
         component: <TaskManagerApp />,
         isOpen: null,
         isMinimize: null,
-        appIndex: 100,
+        appIndex: FOLDER_Z_INDEX.default,
         iconLocation: [
             ICON_LOCATION.windows.notificationsWindow,
             ICON_LOCATION.linux.appsMenu,
@@ -144,8 +149,12 @@ const folderReducer = (state, action) => {
                     ...state,
                     apps: state.apps.map((item) =>
                         item.id === action.payload
-                            ? { ...item, isOpen: true, appIndex: 104 }
-                            : { ...item, appIndex: 100 }
+                            ? {
+                                  ...item,
+                                  isOpen: true,
+                                  appIndex: FOLDER_Z_INDEX.active,
+                              }
+                            : { ...item, appIndex: FOLDER_Z_INDEX.default }
                     ),
                     openApps: [
                         ...state.openApps,
@@ -165,7 +174,7 @@ const folderReducer = (state, action) => {
                                   ...item,
                                   isOpen: false,
                                   isMinimize: null,
-                                  appIndex: 100,
+                                  appIndex: FOLDER_Z_INDEX.default,
                               }
                             : item
                     ),
@@ -206,13 +215,13 @@ const folderReducer = (state, action) => {
             }
 
         case FOLDER_ACTIONS.active:
-            if (app.appIndex !== 104) {
+            if (app.appIndex !== FOLDER_Z_INDEX.active) {
                 return {
                     ...state,
                     apps: state.apps.map((item) =>
                         item.id === action.payload
-                            ? { ...item, appIndex: 104 }
-                            : { ...item, appIndex: 100 }
+                            ? { ...item, appIndex: FOLDER_Z_INDEX.active }
+                            : { ...item, appIndex: FOLDER_Z_INDEX.default }
                     ),
                 };
             } else {
@@ -224,9 +233,9 @@ const folderReducer = (state, action) => {
                 ...state,
                 apps: state.apps.map((item) => ({
                     ...item,
-                    isOpen: false,
+                    isOpen: null,
                     isMinimize: null,
-                    appIndex: 100,
+                    appIndex: FOLDER_Z_INDEX.default,
                 })),
                 openApps: [],
             };

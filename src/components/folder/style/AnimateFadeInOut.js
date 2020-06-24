@@ -1,5 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 
+import { FOLDER_Z_INDEX } from '../../../contexts/folderContext';
+
 const fadeIn = keyframes`
 0% {
     opacity: 0;
@@ -83,7 +85,7 @@ export const AnimateFadeInOut = styled.div`
                     animation: ${fadeOut} 0.2s ease 1 forwards;
                 `}
             ${(props) =>
-                props.appIndex === 104 &&
+                props.appIndex === FOLDER_Z_INDEX.active &&
                 css`
                     outline: 1px solid #01307c;
                     box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);

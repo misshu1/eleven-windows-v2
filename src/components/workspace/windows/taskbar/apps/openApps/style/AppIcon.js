@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import { FOLDER_Z_INDEX } from '../../../../../../../contexts/folderContext';
+
 export const AppIcon = styled.div`
     display: flex;
     justify-content: center;
@@ -22,7 +24,7 @@ export const AppIcon = styled.div`
     }
 
     ${(props) =>
-        props.appIndex === 104 &&
+        props.appIndex === FOLDER_Z_INDEX.active &&
         props.minimize !== true &&
         css`
             background: ${(props) => props.theme.iconBg};
