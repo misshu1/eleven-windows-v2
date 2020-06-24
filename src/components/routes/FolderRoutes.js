@@ -28,25 +28,30 @@ const FolderRoutes = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Only one folder can be open when navigating between routes
+    // Here we close the previous opened folders
+    // This will prevent keeping more than one folder opened on mobile
+    useEffect(() => {
+        folderState.apps.map((app) => {
+            if (
+                lastLocation?.pathname === app.link ||
+                (location.pathname === '/' &&
+                    lastLocation?.pathname === app.link)
+            ) {
+                closeAllFolders();
+            }
+            return undefined;
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.pathname, isMobile]);
+
     // Here we check the route path and check if it contains any folder routes specified in 'folderContext'
     // And open the app if the url contains the folder route
     // For example http://localhost:3000/docs if '/docs' is in the url we open Docs app
     useEffect(() => {
-        folderState.apps.map((app) => {
-            // Only one folder can be open when navigating between routes
-            // Here we close the previous opened folders
-            // This will prevent keeping more than one folder opened on mobile
-            if (
-                lastLocation?.pathname === app.link ||
-                location.pathname === '/'
-            ) {
-                closeAllFolders();
-            }
-            if (location.pathname === app.link) {
-                openFolder(app.id);
-            }
-            return undefined;
-        });
+        folderState.apps.map(
+            (app) => location.pathname === app.link && openFolder(app.id)
+        );
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location.pathname, isMobile]);
 
