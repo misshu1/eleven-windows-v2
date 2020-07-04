@@ -11,7 +11,7 @@ export const NameBar = styled.div`
         0px 4px 5px 0px rgba(0, 0, 0, 0.14),
         0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 
-    && .backBtn {
+    && .back-button {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -19,6 +19,9 @@ export const NameBar = styled.div`
         height: 100%;
         color: ${(props) => props.theme.accentBg};
         font-size: 1.4rem;
+        outline: none;
+        border: none;
+        background: transparent;
     }
 
     .menu {

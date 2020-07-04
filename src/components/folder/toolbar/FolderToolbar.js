@@ -7,7 +7,15 @@ import MobileToolbar from './mobile/MobileToolbar';
 import WindowsToolbar from './windows/WindowsToolbar';
 
 const FolderToolbar = (props) => {
-    const { folderName, minimize, quitApp, toolbarMenu, toggleDrawer } = props;
+    const {
+        folderName,
+        minimize,
+        quitApp,
+        toolbarMenu,
+        toggleDrawer,
+        setPage,
+        page,
+    } = props;
     const {
         isWindowsSelected,
         isLinuxSelected,
@@ -21,6 +29,8 @@ const FolderToolbar = (props) => {
                     folderName={folderName}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
+                    setPage={setPage}
+                    page={page}
                 />
             )}
             {isWindowsSelected() && (
@@ -30,6 +40,8 @@ const FolderToolbar = (props) => {
                     quitApp={quitApp}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
+                    setPage={setPage}
+                    page={page}
                 />
             )}
             {isLinuxSelected() && (
@@ -39,6 +51,8 @@ const FolderToolbar = (props) => {
                     quitApp={quitApp}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
+                    setPage={setPage}
+                    page={page}
                 />
             )}
         </>

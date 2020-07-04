@@ -3,13 +3,23 @@ import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import BackButton from './BackButton';
 import { Buttons, Name, NameBar } from './style';
 
 const WindowsToolbar = (props) => {
-    const { folderName, minimize, quitApp, toolbarMenu, toggleDrawer } = props;
+    const {
+        folderName,
+        minimize,
+        quitApp,
+        toolbarMenu,
+        toggleDrawer,
+        setPage,
+        page,
+    } = props;
 
     return (
         <NameBar>
+            {page && <BackButton setPage={setPage} page={page} />}
             {toolbarMenu && (
                 <Tooltip title='Menu' placement='top' enterDelay={500}>
                     <div className='menu' onClick={toggleDrawer}>
@@ -20,7 +30,7 @@ const WindowsToolbar = (props) => {
                     </div>
                 </Tooltip>
             )}
-            <Name className='handle' toolbarMenu={toolbarMenu}>
+            <Name className='handle' toolbarMenu={!!toolbarMenu} page={!!page}>
                 {folderName}
             </Name>
             <Buttons>

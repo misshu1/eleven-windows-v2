@@ -2,22 +2,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
+import BackButton from './BackButton';
 import { Name, NameBar } from './style';
 
 const MobileToolbar = (props) => {
-    const { folderName, toolbarMenu, toggleDrawer } = props;
-    const history = useHistory();
+    const { folderName, toolbarMenu, toggleDrawer, page, setPage } = props;
 
     return (
         <NameBar>
-            <Tooltip title='Back' placement='top' enterDelay={500}>
-                <div className='backBtn' onClick={() => history.push('/')}>
-                    <FontAwesomeIcon icon={['fas', 'arrow-left']} size='lg' />
-                </div>
-            </Tooltip>
-            <Name toolbarMenu={toolbarMenu}>{folderName}</Name>
+            <BackButton setPage={setPage} page={page} />
+            <Name>{folderName}</Name>
             {toolbarMenu && (
                 <Tooltip title='Menu' placement='top' enterDelay={500}>
                     <div className='menu' onClick={toggleDrawer}>

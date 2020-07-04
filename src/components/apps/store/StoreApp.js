@@ -4,11 +4,15 @@ import { useRef } from 'react';
 import { useFirebaseContext } from '../../../contexts/firebaseContext';
 import { useNotificationsContext } from '../../../contexts/notificationsContext';
 import FolderApp from '../../folder/FolderApp';
+import { folderPages } from '../../folder/folderPages';
 import ProductApp from './product/ProductApp';
+import ProductDetailsApp from './productDetails/ProductDetailsApp';
 import { Container } from './style';
 
 const StoreApp = () => {
     const [products, setProducts] = useState([]);
+    const [page, setPage] = useState(folderPages.level_1);
+    const [selectedProduct, setSelectedProduct] = useState({});
     const { showError } = useNotificationsContext();
     const { firestore } = useFirebaseContext();
     const getProducts = useRef(null);
@@ -47,13 +51,29 @@ const StoreApp = () => {
 
     const renderProducts = useCallback(() => {
         return products.map((product) => (
-            <ProductApp key={product.id} product={product} />
+            <ProductApp
+                key={product.id}
+                product={product}
+                setSelectedProduct={setSelectedProduct}
+                setPage={setPage}
+            />
         ));
     }, [products]);
 
     return (
-        <FolderApp appId={4} marginLeft={60} marginTop={60}>
-            <Container>{renderProducts()}</Container>
+        <FolderApp
+            appId={4}
+            marginLeft={60}
+            marginTop={60}
+            page={page}
+            setPage={setPage}
+        >
+            {page === folderPages.level_1 && (
+                <Container>{renderProducts()}</Container>
+            )}
+            {page === folderPages.level_2 && (
+                <ProductDetailsApp product={selectedProduct} />
+            )}
         </FolderApp>
     );
 };

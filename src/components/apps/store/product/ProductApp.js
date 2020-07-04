@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import CartIcon from '../../../../assets/images/icons/CartIcon';
 import { useCartContext, useDispatchCartContext } from '../../../../contexts/cartContext';
 import { useSettingsContext } from '../../../../contexts/settingsContext';
+import { folderPages } from '../../../folder/folderPages';
 import { Card } from './style';
 
 // const productSchema = {
@@ -41,7 +42,7 @@ const useStyles = makeStyles({
     }),
 });
 
-const ProductApp = ({ product }) => {
+const ProductApp = ({ product, setSelectedProduct, setPage }) => {
     const { imagePreview, newPrice, oldPrice, ratings, title } = product;
     const { addToCart } = useDispatchCartContext();
     const { isProductInCart } = useCartContext();
@@ -70,10 +71,24 @@ const ProductApp = ({ product }) => {
             {oldPrice && (
                 <div className='product-discount'>-{discountVal}%</div>
             )}
-            <div className='product-img-container'>
+            <div
+                className='product-img-container'
+                onClick={() => {
+                    setSelectedProduct(product);
+                    setPage(folderPages.level_2);
+                }}
+            >
                 <img src={imagePreview} alt={title} />
             </div>
-            <h3 className='product-name'>{title}</h3>
+            <h3
+                className='product-name'
+                onClick={() => {
+                    setSelectedProduct(product);
+                    setPage(folderPages.level_2);
+                }}
+            >
+                {title}
+            </h3>
             <div className='product-rating'>
                 {ratings && ratings?.length !== 0 && (
                     <Rating

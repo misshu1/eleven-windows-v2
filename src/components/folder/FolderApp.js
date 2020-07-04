@@ -36,6 +36,8 @@ const FolderApp = forwardRef((props, ref) => {
         marginLeft,
         marginTop,
         toolbarMenu,
+        setPage,
+        page,
     } = props;
 
     useEffect(() => {
@@ -109,6 +111,8 @@ const FolderApp = forwardRef((props, ref) => {
                                         minimize={minimize}
                                         quitApp={quitApp}
                                         toggleDrawer={toggleDrawer}
+                                        setPage={setPage}
+                                        page={page}
                                     />
                                     <Content>
                                         {showDrawer && (

@@ -21,4 +21,25 @@ export const NameBar = styled.div`
     && .menu:focus {
         background: ${(props) => props.theme.folderNameBarBtnHover};
     }
+
+    .back-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 3rem;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: inherit;
+    }
+
+    .back-button:disabled {
+        color: ${(props) => props.theme.accentBg};
+        filter: grayscale(1);
+    }
+
+    .back-button:not(:disabled):hover {
+        background: ${(props) => props.theme.folderNameBarBtnHover};
+    }
 `;

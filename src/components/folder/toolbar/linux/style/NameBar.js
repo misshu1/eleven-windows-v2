@@ -39,4 +39,28 @@ export const NameBar = styled.div`
             color: #fff;
         }
     }
+
+    .back-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 3rem;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: inherit;
+    }
+
+    .back-button:disabled {
+        color: ${(props) => props.theme.accentBg};
+        filter: grayscale(1);
+    }
+
+    .back-button:not(:disabled):hover {
+        .back-icon {
+            background: ${(props) => props.theme.accentBg};
+            color: #fff;
+        }
+    }
 `;
