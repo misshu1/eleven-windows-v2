@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Rating from '@material-ui/lab/Rating';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import CartIcon from '../../../../assets/images/icons/CartIcon';
 import { useCartContext, useDispatchCartContext } from '../../../../contexts/cartContext';
@@ -51,6 +51,11 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
     const [ratingVal, setRatingVal] = useState(0);
     const classes = useStyles(theme);
 
+    const selectProduct = useCallback(() => {
+        setSelectedProduct(product);
+        setPage(folderPages.level_2);
+    }, [product, setPage, setSelectedProduct]);
+
     useEffect(() => {
         if (oldPrice) {
             const val = (newPrice / oldPrice) * 100;
@@ -71,25 +76,13 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
             {oldPrice && (
                 <div className='product-discount'>-{discountVal}%</div>
             )}
-            <div
-                className='product-img-container'
-                onClick={() => {
-                    setSelectedProduct(product);
-                    setPage(folderPages.level_2);
-                }}
-            >
+            <div className='product-img-container' onClick={selectProduct}>
                 <img src={imagePreview} alt={title} />
             </div>
-            <h3
-                className='product-name'
-                onClick={() => {
-                    setSelectedProduct(product);
-                    setPage(folderPages.level_2);
-                }}
-            >
+            <h3 className='product-name' onClick={selectProduct}>
                 {title}
             </h3>
-            <div className='product-rating'>
+            <div className='product-rating' onClick={selectProduct}>
                 {ratings && ratings?.length !== 0 && (
                     <Rating
                         classes={{
@@ -100,8 +93,10 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
                     />
                 )}
             </div>
-            <p className='product-old-price'>{oldPrice && `${oldPrice} $`}</p>
-            <p className='product-new-price'>
+            <p className='product-old-price' onClick={selectProduct}>
+                {oldPrice && `${oldPrice} $`}
+            </p>
+            <p className='product-new-price' onClick={selectProduct}>
                 <strong>{newPrice && `${newPrice} $`}</strong>
             </p>
             <Button
