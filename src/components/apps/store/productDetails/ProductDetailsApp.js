@@ -1,3 +1,4 @@
+import Markdown from 'markdown-to-jsx';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useFirebaseContext } from '../../../../contexts/firebaseContext';
@@ -5,31 +6,34 @@ import { useNotificationsContext } from '../../../../contexts/notificationsConte
 
 const ProductDetailsApp = ({ product }) => {
     const [images, setImages] = useState([]);
+    const [description, setDescription] = useState('');
     const { storage } = useFirebaseContext();
     const { showError } = useNotificationsContext();
     const getImages = useRef(null);
+    const getProductDescription = useRef(null);
 
     getImages.current = async () => {
         try {
             const storeRef = await storage.ref('store');
             const productRef = await storeRef.child(product.id);
-            const productImagesRef = await productRef.listAll();
+            const productImagesRef = await productRef.child('images');
+            const productImagesList = await productImagesRef.listAll();
 
-            const promisesArray = productImagesRef.items.map(async (item) => {
-                return productRef.child(item.name).getDownloadURL();
+            const promisesArray = productImagesList.items.map(async (item) => {
+                return productImagesRef.child(item.name).getDownloadURL();
             });
 
             const settledImages = await Promise.allSettled(promisesArray);
 
             settledImages
                 .filter((item) => item.status === 'rejected')
-                .map((err) =>
+                .map((err) => {
                     showError(
                         'Error',
-                        `Failed to get image from database! ${err.reason}`,
+                        `Failed to get image from database! ${err.reason?.message}`,
                         500
-                    )
-                );
+                    );
+                });
 
             const dbImages = settledImages
                 .filter((item) => item.status === 'fulfilled')
@@ -45,22 +49,43 @@ const ProductDetailsApp = ({ product }) => {
         }
     };
 
+    getProductDescription.current = async () => {
+        try {
+            const storeRef = await storage.ref('store');
+            const productRef = await storeRef.child(product.id);
+            const productDescriptionRef = await productRef.child('description');
+            const productDescriptionList = await productDescriptionRef.list({
+                maxResults: 1,
+            });
+
+            const firstFileName = await productDescriptionList.items[0].name;
+            const urlPromise = await productDescriptionRef
+                .child(firstFileName)
+                .getDownloadURL();
+
+            const url = await urlPromise;
+            const data = await fetch(url);
+            const response = await data.text();
+
+            setDescription(response);
+        } catch (err) {
+            showError(
+                'Error',
+                'Failed to get product description from database!',
+                500
+            );
+        }
+    };
+
     useEffect(() => {
         getImages.current();
+        getProductDescription.current();
     }, []);
 
     return (
         <div>
             <h3>{product.title}</h3>
-            <p>This section its not done, yet</p>
-            {/* Need to be added in firebase */}
-            {/* {product.images} */}
-            {/* {product.newPrice} */}
-            {/* {product.oldPrice} */}
-            {/* {product.description} */}
-            {/* {product.description['list 2']?.map((item) => {
-                console.log(item);
-            })} */}
+            <Markdown options={{ forceBlock: true }}>{description}</Markdown>
         </div>
     );
 };

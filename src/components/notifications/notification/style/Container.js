@@ -68,6 +68,8 @@ export const Container = styled.div`
     
     p {
         margin: 0.5rem 0;
+        word-break: break-all;
+        word-break: break-word;
     }
 
     .code {
