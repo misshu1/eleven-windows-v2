@@ -3,8 +3,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import Scrollbar from 'react-scrollbars-custom';
 
+import ScrollbarApp from '../../../../../common/ScrollbarApp';
 import { ClockContainer, Container, CustomCalendarStyles } from './style';
 
 const CalendarApp = ({ calendarRef }) => {
@@ -21,7 +21,7 @@ const CalendarApp = ({ calendarRef }) => {
 
     return ReactDOM.createPortal(
         <Container ref={calendarRef}>
-            <Scrollbar>
+            <ScrollbarApp>
                 <div>
                     <CalendarClock goToToday={goToToday} />
                     <CustomCalendarStyles>
@@ -33,7 +33,7 @@ const CalendarApp = ({ calendarRef }) => {
                         />
                     </CustomCalendarStyles>
                 </div>
-            </Scrollbar>
+            </ScrollbarApp>
         </Container>,
         document.getElementById('desktop')
     );

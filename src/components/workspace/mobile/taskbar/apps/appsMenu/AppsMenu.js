@@ -6,12 +6,12 @@ import React, { lazy, Suspense, useCallback, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import Scrollbar from 'react-scrollbars-custom';
 
 import PowerOffIcon from '../../../../../../assets/images/icons/PowerOffIcon';
 import { ICON_LOCATION, useFolderContext } from '../../../../../../contexts/folderContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
 import { useAuth } from '../../../../../../hooks/useAuth';
+import ScrollbarApp from '../../../../../common/ScrollbarApp';
 import SpinnerApp from '../../../../../style/SpinnerApp';
 import { Container, LoginContainer, Widget } from './style';
 
@@ -126,9 +126,9 @@ const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
                             </>
                         )}
                     </LoginContainer>
-                    <Scrollbar>
+                    <ScrollbarApp>
                         <div className='widgets-container'>{widgetIcons()}</div>
-                    </Scrollbar>
+                    </ScrollbarApp>
                 </>
             )}
         </Container>,

@@ -3,11 +3,11 @@ import Badge from '@material-ui/core/Badge';
 import Tooltip from '@material-ui/core/Tooltip';
 import { motion } from 'framer-motion';
 import React from 'react';
-import Scrollbar from 'react-scrollbars-custom';
 
 import { useCartContext } from '../../../../../contexts/cartContext';
 import { useNotificationsContext } from '../../../../../contexts/notificationsContext';
 import { fadeAnimations, iconsMenuAnimations } from '../../../../animations';
+import ScrollbarApp from '../../../../common/ScrollbarApp';
 import { useSideMenuContext } from '../../contexts/sideMenuContext';
 import { Container, Icon, IconsMenu } from './style';
 
@@ -53,24 +53,17 @@ export const IconsMenuApp = () => {
                 exit='close'
                 variants={fadeAnimations}
             >
-                <Tooltip title='Close' placement='bottom' enterDelay={500}>
+                <Tooltip title='Close' placement='right' enterDelay={500}>
                     <Icon onClick={closeSideMenu} close>
                         <FontAwesomeIcon icon={['fas', 'times']} size='lg' />
                     </Icon>
                 </Tooltip>
-                <Scrollbar
-                    contentProps={{
-                        style: {
-                            display: 'flex',
-                            minHeight: 'calc(100% - 3rem)',
-                        },
-                    }}
-                >
+                <ScrollbarApp>
                     <IconsMenu>
                         {sideMenuState.map((app) => (
                             <Tooltip
                                 title={app.name}
-                                placement='top'
+                                placement='right'
                                 enterDelay={500}
                                 key={app.id}
                             >
@@ -102,7 +95,7 @@ export const IconsMenuApp = () => {
                             </Tooltip>
                         ))}
                     </IconsMenu>
-                </Scrollbar>
+                </ScrollbarApp>
             </motion.div>
         </Container>
     );

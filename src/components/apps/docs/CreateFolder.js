@@ -9,8 +9,8 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import { tomorrow, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-import Emoji from '../../../components/emoji/Emoji';
 import { useSettingsContext } from '../../../contexts/settingsContext';
+import Emoji from '../../common/Emoji';
 import { THEME } from '../../theme/theme';
 import { folderContextState, folderExample } from './CodeExamples';
 import { addWordBreak } from './DocsApp';
@@ -115,7 +115,7 @@ const CreateFolder = (props, ref) => {
     }, [theme.id]);
 
     return (
-        <React.Fragment>
+        <>
             <h2 ref={ref}>Create a new folder</h2>
 
             <p>
@@ -188,7 +188,7 @@ const CreateFolder = (props, ref) => {
                 And that was it, you've created your first folder
                 <Emoji symbol='🌞' label='sun' />.
             </p>
-        </React.Fragment>
+        </>
     );
 };
 

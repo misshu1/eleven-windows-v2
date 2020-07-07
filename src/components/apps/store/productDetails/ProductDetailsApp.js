@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { useFirebaseContext } from '../../../../contexts/firebaseContext';
 import { useNotificationsContext } from '../../../../contexts/notificationsContext';
+import { Container } from './style';
 
 const ProductDetailsApp = ({ product }) => {
     const [images, setImages] = useState([]);
@@ -27,13 +28,13 @@ const ProductDetailsApp = ({ product }) => {
 
             settledImages
                 .filter((item) => item.status === 'rejected')
-                .map((err) => {
+                .map((err) =>
                     showError(
                         'Error',
-                        `Failed to get image from database! ${err.reason?.message}`,
+                        `Failed to get image from the database! ${err.reason?.message}`,
                         500
-                    );
-                });
+                    )
+                );
 
             const dbImages = settledImages
                 .filter((item) => item.status === 'fulfilled')
@@ -43,7 +44,7 @@ const ProductDetailsApp = ({ product }) => {
         } catch (err) {
             showError(
                 'Error',
-                'Failed to get product images from database!',
+                'Failed to get product images from the database!',
                 500
             );
         }
@@ -71,7 +72,7 @@ const ProductDetailsApp = ({ product }) => {
         } catch (err) {
             showError(
                 'Error',
-                'Failed to get product description from database!',
+                `Failed to get product description for "${product.title}" from the database!`,
                 500
             );
         }
@@ -83,10 +84,10 @@ const ProductDetailsApp = ({ product }) => {
     }, []);
 
     return (
-        <div>
+        <Container>
             <h3>{product.title}</h3>
             <Markdown options={{ forceBlock: true }}>{description}</Markdown>
-        </div>
+        </Container>
     );
 };
 

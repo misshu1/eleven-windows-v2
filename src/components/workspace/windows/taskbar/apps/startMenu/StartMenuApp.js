@@ -5,11 +5,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React, { lazy, Suspense, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import Scrollbar from 'react-scrollbars-custom';
 
 import PowerOffIcon from '../../../../../../assets/images/icons/PowerOffIcon';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
 import { useAuth } from '../../../../../../hooks/useAuth';
+import ScrollbarApp from '../../../../../common/ScrollbarApp';
 import SpinnerApp from '../../../../../style/SpinnerApp';
 import { useStartMenuContext } from '../../contexts/startMenuContext';
 import LeftMenuApp from './leftMenu/LeftMenuApp';
@@ -107,9 +107,9 @@ const StartMenuApp = ({ startMenuRef }) => {
                     </LoginContainer>
                     <div className='menu-container'>
                         <LeftMenuApp closeStartMenu={closeStartMenu} />
-                        <Scrollbar>
+                        <ScrollbarApp>
                             <RightMenuApp closeStartMenu={closeStartMenu} />
-                        </Scrollbar>
+                        </ScrollbarApp>
                     </div>
                 </>
             )}

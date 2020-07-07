@@ -16,7 +16,9 @@ export const Container = styled.div`
     }
 
     .products-container {
-        flex: 1;
+        position: absolute;
+        width: 100%;
+        min-height: 100%;
     }
 
     .checkout-container {

@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
-import Scrollbar from 'react-scrollbars-custom';
 
 import { ICON_LOCATION, useFolderContext } from '../../../../../../contexts/folderContext';
+import ScrollbarApp from '../../../../../common/ScrollbarApp';
 import { useSideMenuContext } from '../../../contexts/sideMenuContext';
 import MenuAppIcon from './MenuAppIcon';
 import { Container } from './style';
@@ -30,13 +30,9 @@ const AppsPreview = () => {
     }, [closeSideMenu]);
 
     return (
-        <>
-            <Container>
-                <Scrollbar>
-                    <div className='apps-container'>{menuIcons()}</div>
-                </Scrollbar>
-            </Container>
-        </>
+        <ScrollbarApp>
+            <Container>{menuIcons()}</Container>
+        </ScrollbarApp>
     );
 };
 

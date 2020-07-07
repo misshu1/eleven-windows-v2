@@ -1,9 +1,9 @@
 import React, { lazy, Suspense, useState } from 'react';
-import Scrollbar from 'react-scrollbars-custom';
 
 import { useCartContext } from '../../contexts/cartContext';
 import { useAuth } from '../../hooks/useAuth';
 import LoginButton from '../auth/LoginButton';
+import ScrollbarApp from '../common/ScrollbarApp';
 import SpinnerApp from '../style/SpinnerApp';
 import CheckoutButton from './CheckoutButton';
 import Product from './Product';
@@ -52,9 +52,11 @@ const CartApp = ({ onClick }) => {
                     )}
                     {!isAuthOpen && (
                         <>
-                            <div className='products-container'>
-                                <Scrollbar>{renderCartProducts()}</Scrollbar>
-                            </div>
+                            <ScrollbarApp>
+                                <div className='products-container'>
+                                    {renderCartProducts()}
+                                </div>
+                            </ScrollbarApp>
                             <div className='checkout-container'>
                                 <div className='checkout-total'>
                                     <h3>Total</h3>

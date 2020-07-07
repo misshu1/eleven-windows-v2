@@ -4,9 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Scrollbar from 'react-scrollbars-custom';
 
 import { useSettingsContext } from '../../contexts/settingsContext';
+import ScrollbarApp from '../common/ScrollbarApp';
 import { Container, Form } from './style';
 import useAuthValidation from './useAuthValidation';
 
@@ -67,14 +67,7 @@ const Login = ({ onCancel, changeView }) => {
                     </button>
                 </Tooltip>
             </div>
-            <Scrollbar
-                contentProps={{
-                    style: {
-                        display: 'flex',
-                        padding: '2px',
-                    },
-                }}
-            >
+            <ScrollbarApp>
                 <Form
                     autoComplete='off'
                     onSubmit={(e) => handleLogin(e, onCancel)}
@@ -125,7 +118,7 @@ const Login = ({ onCancel, changeView }) => {
                         {t('auth.changeView.dontHaveAccount')}
                     </Button>
                 </Form>
-            </Scrollbar>
+            </ScrollbarApp>
         </Container>
     );
 };

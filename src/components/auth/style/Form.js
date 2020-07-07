@@ -5,8 +5,10 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 95%;
-    margin: 2rem auto;
+    position: absolute;
+    min-height: 100%;
+    width: 100%;
+    padding: 2rem 0.5rem;
 
     label {
         display: flex;

@@ -7,9 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React, { forwardRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import Scrollbar from 'react-scrollbars-custom';
 
 import { useSettingsContext } from '../../../contexts/settingsContext';
+import ScrollbarApp from '../../common/ScrollbarApp';
 import { Container } from './style';
 
 const useStyles = makeStyles({
@@ -43,21 +43,18 @@ const scrollToRef = (refObj, refName) => {
         return;
     }
 
-    refObj[refName].current.offsetParent.scrollTop =
+    refObj[refName].current.offsetParent.offsetParent.scrollTop =
         refObj[refName].current.offsetTop;
 };
 
-const ListItemLink = (props) => {
+const ListItemLink = ({ item, onClick }) => {
     const { theme } = useSettingsContext();
     const classes = useStyles(theme);
-    const { item, onClick } = props;
 
     return (
         <ListItem
             button
-            component={
-                item.link && ((props) => <Link to={item.link} {...props} />)
-            }
+            component={item.link && (() => <Link to={item.link} />)}
             className={classes.listItemStyle}
             onClick={onClick}
         >
@@ -108,11 +105,11 @@ const DrawerApp = forwardRef((props, ref) => {
 
     return (
         <Container>
-            <Scrollbar style={{ width: '100%', height: '100%' }}>
+            <ScrollbarApp>
                 <List component='nav' className={classes.root}>
                     {createDrawer()}
                 </List>
-            </Scrollbar>
+            </ScrollbarApp>
         </Container>
     );
 });

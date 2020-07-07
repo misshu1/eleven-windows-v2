@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import i18n from 'i18next';
 import React, { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Scrollbar from 'react-scrollbars-custom';
 
 import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
@@ -15,6 +14,7 @@ import useMediaQuery from '../../../../../../hooks/useMediaQuery';
 import { languages } from '../../../../../../services/translation/i18next';
 import Preview from '../../../../../apps/settings/Preview';
 import { FlagImgContainer } from '../../../../../apps/settings/style';
+import ScrollbarApp from '../../../../../common/ScrollbarApp';
 import { THEME } from '../../../../../theme/theme';
 import { FlagImg } from '../../../../windows/taskbar/icons/language/style/FlagImg';
 import { Box, Container } from './style';
@@ -139,8 +139,8 @@ const SettingsPreviewApp = () => {
     };
 
     return (
-        <Container ref={containerRef}>
-            <Scrollbar>
+        <ScrollbarApp>
+            <Container ref={containerRef}>
                 <Typography variant='h6' style={{ textAlign: 'center' }}>
                     {t('settings.title.customize')}
                 </Typography>
@@ -307,8 +307,8 @@ const SettingsPreviewApp = () => {
                     </strong>
                     {t('settings.disableButtonInfo')}
                 </p>
-            </Scrollbar>
-        </Container>
+            </Container>
+        </ScrollbarApp>
     );
 };
 

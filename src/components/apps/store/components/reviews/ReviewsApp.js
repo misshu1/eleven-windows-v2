@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
-import { ReviewsContainer } from './style';
-import CommentApp from './CommentApp';
-import Scrollbar from 'react-scrollbars-custom';
 
-const ReviewsApp = props => {
+import ScrollbarApp from '../../../../common/ScrollbarApp';
+import CommentApp from './CommentApp';
+import { ReviewsContainer } from './style';
+
+const ReviewsApp = (props) => {
     const { reviews } = props;
 
     const renderReviews = useCallback(() => {
-        return reviews.map(review => (
+        return reviews.map((review) => (
             <CommentApp
                 key={review.id}
                 userDisplayName={review.userDisplayName}
@@ -20,14 +21,7 @@ const ReviewsApp = props => {
 
     return (
         <ReviewsContainer>
-            <Scrollbar
-                style={{
-                    width: '100%',
-                    height: '100%'
-                }}
-            >
-                {renderReviews()}
-            </Scrollbar>
+            <ScrollbarApp>{renderReviews()}</ScrollbarApp>
         </ReviewsContainer>
     );
 };

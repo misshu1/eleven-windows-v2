@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Scrollbar from 'react-scrollbars-custom';
 
 import { useNotificationsContext } from '../../contexts/notificationsContext';
 import { useSettingsContext } from '../../contexts/settingsContext';
+import ScrollbarApp from '../common/ScrollbarApp';
 import { Container } from './style';
 
 const useStyles = makeStyles({
@@ -51,11 +51,11 @@ const NotificationsApp = () => {
     return (
         <Container>
             {notificationsHistory.length > 0 ? (
-                <Scrollbar>
+                <ScrollbarApp>
                     <div className='notifications-container'>
                         {notificationsHistory.map((item) => item.component)}
                     </div>
-                </Scrollbar>
+                </ScrollbarApp>
             ) : (
                 <div className='no-notifications'>
                     {t('notification.status')}

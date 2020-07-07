@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { useNotificationsContext } from '../../contexts/notificationsContext';
-import Emoji from '../emoji/Emoji';
+import Emoji from '../common/Emoji';
 import NotAuthorized from '../pages/401/NotAuthorized';
 import NotFound from '../pages/404/NotFound';
 import WorkspaceApp from '../workspace/WorkspaceApp';

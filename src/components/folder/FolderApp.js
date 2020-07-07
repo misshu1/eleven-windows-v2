@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import React, { forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Draggable from 'react-draggable';
-import Scrollbar from 'react-scrollbars-custom';
 
 import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
 import { useSettingsContext } from '../../contexts/settingsContext';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import ScrollbarApp from '../common/ScrollbarApp';
 import DrawerApp from './drawer/DrawerApp';
 import { AnimateFadeInOut, Content, Folder } from './style';
 import FolderToolbar from './toolbar/FolderToolbar';
@@ -134,15 +134,7 @@ const FolderApp = forwardRef((props, ref) => {
                                                 />
                                             </>
                                         )}
-                                        <Scrollbar
-                                            contentProps={{
-                                                style: {
-                                                    height: '100%',
-                                                },
-                                            }}
-                                        >
-                                            {children}
-                                        </Scrollbar>
+                                        <ScrollbarApp>{children}</ScrollbarApp>
                                     </Content>
                                 </Folder>
                             </AnimateFadeInOut>
