@@ -29,9 +29,13 @@ const useFolderScroll = (isLoading = false, page, scrollTop, setScrollTop) => {
     useEffect(() => {
         if (!isLoading) {
             if (scroll[lastPage] !== scroll[currentPage] || scrollTop === 0) {
-                if (scroll[lastPage] <= 1) {
+                if (scroll[lastPage] <= 10) {
                     // Prevent updating state unnecessary when scrolling up
-                    return;
+                    return setScrollTop((prevState) => {
+                        if (prevState > 0) {
+                            return 0;
+                        }
+                    });
                 }
 
                 // This will run when switching pages
