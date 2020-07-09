@@ -12,6 +12,46 @@ import { useSettingsContext } from '../../../contexts/settingsContext';
 import ScrollbarApp from '../../common/ScrollbarApp';
 import { Container } from './style';
 
+const Drawer = forwardRef((props, ref) => {
+    const { toolbarMenu, closeDrawer } = props;
+    const { theme } = useSettingsContext();
+    const classes = useStyles(theme);
+
+    const close = useCallback(() => {
+        setTimeout(() => {
+            closeDrawer();
+        }, 30);
+    }, [closeDrawer]);
+
+    const createDrawer = useCallback(() => {
+        let menu = [];
+        toolbarMenu.map(
+            (item) =>
+                (menu = [
+                    ...menu,
+                    <ListItemLink
+                        key={item.name}
+                        item={item}
+                        onClick={() => {
+                            item.scrollToRef &&
+                                scrollToRef(ref, item.scrollToRef);
+                            item.onClick && item.onClick();
+                            close();
+                        }}
+                    />,
+                ])
+        );
+
+        return menu;
+    }, [close, ref, toolbarMenu]);
+
+    return (
+        <List component='nav' className={classes.root}>
+            {createDrawer()}
+        </List>
+    );
+});
+
 const useStyles = makeStyles({
     root: (theme) => ({
         width: '100%',
@@ -42,7 +82,6 @@ const scrollToRef = (refObj, refName) => {
     if (!refObj && !refName) {
         return;
     }
-
     refObj[refName].current.offsetParent.offsetParent.scrollTop =
         refObj[refName].current.offsetTop;
 };
@@ -79,36 +118,15 @@ const ListItemLink = ({ item, onClick }) => {
 
 const DrawerApp = forwardRef((props, ref) => {
     const { toolbarMenu, closeDrawer } = props;
-    const { theme } = useSettingsContext();
-    const classes = useStyles(theme);
-
-    const createDrawer = useCallback(() => {
-        let menu = [];
-        toolbarMenu.map(
-            (item) =>
-                (menu = [
-                    ...menu,
-                    <ListItemLink
-                        key={item.name}
-                        item={item}
-                        onClick={() => {
-                            item.scrollToRef &&
-                                scrollToRef(ref, item.scrollToRef);
-                            item.onClick && item.onClick();
-                            closeDrawer();
-                        }}
-                    />,
-                ])
-        );
-        return menu;
-    }, [closeDrawer, ref, toolbarMenu]);
 
     return (
         <Container>
-            <ScrollbarApp>
-                <List component='nav' className={classes.root}>
-                    {createDrawer()}
-                </List>
+            <ScrollbarApp requireChildrenProps>
+                <Drawer
+                    toolbarMenu={toolbarMenu}
+                    closeDrawer={closeDrawer}
+                    ref={ref}
+                />
             </ScrollbarApp>
         </Container>
     );

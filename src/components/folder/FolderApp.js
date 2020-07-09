@@ -6,11 +6,20 @@ import Draggable from 'react-draggable';
 
 import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
 import { useSettingsContext } from '../../contexts/settingsContext';
+import useFolderScroll from '../../hooks/useFolderScroll';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import ScrollbarApp from '../common/ScrollbarApp';
 import DrawerApp from './drawer/DrawerApp';
 import { AnimateFadeInOut, Content, Folder } from './style';
 import FolderToolbar from './toolbar/FolderToolbar';
+
+const FolderContent = (props) => {
+    const { children, isLoading, page, scrollTop, setScrollTop } = props;
+
+    useFolderScroll(isLoading, page, scrollTop, setScrollTop);
+
+    return children;
+};
 
 const FolderApp = forwardRef((props, ref) => {
     const [close, setClose] = useState(false);
@@ -134,7 +143,11 @@ const FolderApp = forwardRef((props, ref) => {
                                                 />
                                             </>
                                         )}
-                                        <ScrollbarApp>{children}</ScrollbarApp>
+                                        <ScrollbarApp requireChildrenProps>
+                                            <FolderContent page={page}>
+                                                {children}
+                                            </FolderContent>
+                                        </ScrollbarApp>
                                     </Content>
                                 </Folder>
                             </AnimateFadeInOut>

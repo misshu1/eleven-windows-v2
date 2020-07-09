@@ -12,6 +12,7 @@ import { Container } from './style';
 const StoreApp = () => {
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(folderPages.level_1);
+    // const [loading, setLoading] = useState(true);
     const [selectedProduct, setSelectedProduct] = useState({});
     const { showError } = useNotificationsContext();
     const { firestore } = useFirebaseContext();
@@ -48,6 +49,12 @@ const StoreApp = () => {
     useEffect(() => {
         getProducts.current();
     }, []);
+
+    // useEffect(() => {
+    //     if (products && page === folderPages.level_1) {
+    //         setLoading(false);
+    //     }
+    // }, [page, products]);
 
     const renderProducts = useCallback(() => {
         return products.map((product) => (
