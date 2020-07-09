@@ -7,7 +7,7 @@ import usePrevious from './usePrevious';
 export const pageScrollName = (page) => `${page}_scroll`;
 const defaultFolderScrollState = {};
 
-// Use 'folderPages' Object.keys to create new ones using 'pageScrollName' and add them to 'defaultFolderScrollState'
+// Use 'folderPages' Object.keys to create new Object using 'pageScrollName' and add it to 'defaultFolderScrollState'
 Object.keys(folderPages).map(
     (page) => (defaultFolderScrollState[pageScrollName(page)] = 0)
 );
@@ -20,33 +20,34 @@ const getPageName = (page) => {
     return pageName[0];
 };
 
-const useFolderScroll = (
-    isLoading = false,
-    page,
-    lastScrollPosition,
-    setScrollTop
-) => {
+const useFolderScroll = (isLoading = false, page, scrollTop, setScrollTop) => {
     const [scroll, setScroll] = useState(defaultFolderScrollState);
     const prevPage = usePrevious(page);
+    const lastPage = getPageName(prevPage);
+    const currentPage = getPageName(page);
 
     useEffect(() => {
-        const lastPage = getPageName(prevPage);
-        const currentPage = getPageName(page);
-
-        // TODO Make 'isLoading' a promise and await it here
         if (!isLoading) {
-            if (scroll[lastPage] !== lastScrollPosition) {
-                // Update for each folder page the 'scrollTop' position in state
+            if (scroll[lastPage] !== scroll[currentPage] || scrollTop === 0) {
+                if (scroll[lastPage] <= 1) {
+                    // Prevent updating state unnecessary when scrolling up
+                    return;
+                }
+
+                // This will run when switching pages
+                // Go back to previous 'scrollTop' position when navigating between folder pages
+                setScrollTop(scroll[currentPage]);
+            } else if (scroll[lastPage] !== scrollTop && scrollTop !== 0) {
+                // This will run when scrolling
+                // Update folder page 'scrollTop' position when scrolling
                 setScroll((prevState) => ({
                     ...prevState,
-                    [lastPage]: lastScrollPosition,
+                    [lastPage]: scrollTop,
                 }));
-            } else if (scroll[lastPage] !== scroll[currentPage]) {
-                // Go back to previous folder 'scrollTop' position when navigating between folder pages
-                setScrollTop(scroll[currentPage]);
             }
         }
-    }, [isLoading, lastScrollPosition, page, prevPage, scroll, setScrollTop]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading, scrollTop, page]);
 };
 
 export default useFolderScroll;

@@ -18,7 +18,7 @@ const FolderContent = (props) => {
 
     useFolderScroll(isLoading, page, scrollTop, setScrollTop);
 
-    return children;
+    return <>{children}</>;
 };
 
 const FolderApp = forwardRef((props, ref) => {
