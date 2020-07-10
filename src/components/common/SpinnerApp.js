@@ -13,8 +13,31 @@ const Container = styled.div`
     transform: translate(-50%, -50%);
 `;
 
-const SpinnerGlobalApp = (props) => {
-    const { delay } = props;
+const SpinerLocal = ({ ready }) => {
+    return (
+        <>
+            {ready && (
+                <Container>
+                    <FontAwesomeIcon icon='spinner' size='2x' pulse />
+                </Container>
+            )}
+        </>
+    );
+};
+const SpinerGlobal = ({ ready }) => {
+    return ReactDOM.createPortal(
+        <>
+            {ready && (
+                <Container>
+                    <FontAwesomeIcon icon='spinner' size='2x' pulse />
+                </Container>
+            )}
+        </>,
+        document.getElementById('desktop')
+    );
+};
+
+const SpinnerApp = ({ delay, global }) => {
     const [ready, setReady] = useState(false);
 
     // Here we set a delay, so if the app loads faster then the specified delay, we will not display a loading indicator
@@ -28,20 +51,16 @@ const SpinnerGlobalApp = (props) => {
         };
     }, [delay]);
 
-    return ReactDOM.createPortal(
+    return (
         <>
-            {ready && (
-                <Container>
-                    <FontAwesomeIcon icon='spinner' size='2x' pulse />
-                </Container>
-            )}
-        </>,
-        document.getElementById('desktop')
+            {global && <SpinerGlobal ready={ready} />}
+            {!global && <SpinerLocal ready={ready} />}
+        </>
     );
 };
 
-export default SpinnerGlobalApp;
+export default SpinnerApp;
 
-SpinnerGlobalApp.propTypes = {
+SpinnerApp.propTypes = {
     delay: PropTypes.number,
 };

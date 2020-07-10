@@ -4,7 +4,7 @@ import { useLastLocation } from 'react-router-last-location';
 
 import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
 import useMediaQuery from '../../hooks/useMediaQuery';
-import SpinnerApp from '../style/SpinnerApp';
+import SpinnerApp from '../common/SpinnerApp';
 
 const FolderRoutes = () => {
     const [pathExists, setPathExists] = useState(true);
@@ -65,7 +65,9 @@ const FolderRoutes = () => {
                     path={isMobile ? app.link : '/'}
                     render={() =>
                         app.isOpen && (
-                            <Suspense fallback={<SpinnerApp delay={200} />}>
+                            <Suspense
+                                fallback={<SpinnerApp global delay={200} />}
+                            >
                                 {app.component}
                             </Suspense>
                         )

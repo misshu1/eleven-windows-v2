@@ -2,9 +2,9 @@ import React, { lazy, Suspense } from 'react';
 
 import { useSettingsContext } from '../../contexts/settingsContext';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import SpinnerApp from '../common/SpinnerApp';
 import QuickAccessApp from '../quickAccess/QuickAccessApp';
 import FolderRoutes from '../routes/FolderRoutes';
-import SpinnerApp from '../style/SpinnerApp';
 import WorkspaceLinux from './linux/WorkspaceLinux';
 import WorkspaceMobile from './mobile/WorkspaceMobile';
 import WorkspaceWindows from './windows/WorkspaceWindows';
@@ -30,7 +30,7 @@ const WorkspaceApp = () => {
             {isWindowsSelected() && <WorkspaceWindows />}
             {isMobileSelected() && <WorkspaceMobile />}
             {isVideoEnabledOnDesktop() && (
-                <Suspense fallback={<SpinnerApp delay={200} />}>
+                <Suspense fallback={<SpinnerApp global delay={200} />}>
                     <VideoApp />
                 </Suspense>
             )}

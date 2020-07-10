@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useRef } from 'react';
 
 import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import SpinnerGlobalApp from '../../../style/SpinnerGlobalApp';
+import SpinnerApp from '../../../common/SpinnerApp';
 import { useClockCalendarContext } from './contexts/clockCalendarContext';
 import ClockIconApp from './icons/clock/ClockIconApp';
 
@@ -20,7 +20,7 @@ const ClockAndCalendar = () => {
     return (
         <>
             <ClockIconApp clockRef={clockRef} />
-            <Suspense fallback={<SpinnerGlobalApp delay={200} />}>
+            <Suspense fallback={<SpinnerApp global delay={200} />}>
                 {isCalendarOpen && <CalendarApp calendarRef={calendarRef} />}
             </Suspense>
         </>

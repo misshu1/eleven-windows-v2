@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useCallback, useRef, useState } from 'react';
 
 import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import SpinnerGlobalApp from '../../../style/SpinnerGlobalApp';
+import SpinnerApp from '../../../common/SpinnerApp';
 import LogoIconApp from './icons/logo/LogoIconApp';
 
 const AppsMenu = lazy(() =>
@@ -33,7 +33,7 @@ const AppsMenuAndLogo = () => {
                 toggleAppsMenu={toggleAppsMenu}
                 isAppsMenuOpen={isAppsMenuOpen}
             />
-            <Suspense fallback={<SpinnerGlobalApp delay={200} />}>
+            <Suspense fallback={<SpinnerApp global delay={200} />}>
                 {isAppsMenuOpen && (
                     <AppsMenu
                         appsMenuRef={appsMenuRef}

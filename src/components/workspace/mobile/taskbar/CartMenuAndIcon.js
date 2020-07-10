@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useCallback, useRef, useState } from 'react';
 
 import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import SpinnerGlobalApp from '../../../style/SpinnerGlobalApp';
+import SpinnerApp from '../../../common/SpinnerApp';
 import { CartIconApp } from './icons/cart/CartIconApp';
 
 const CartMobileApp = lazy(() => import('./apps/cart/CartMobileApp'));
@@ -31,7 +31,7 @@ const CartMenuAndIcon = () => {
                 toggleCart={toggleCart}
                 isCartOpen={isCartOpen}
             />
-            <Suspense fallback={<SpinnerGlobalApp delay={200} />}>
+            <Suspense fallback={<SpinnerApp global delay={200} />}>
                 {isCartOpen && (
                     <CartMobileApp
                         cartMenuRef={cartMenuRef}

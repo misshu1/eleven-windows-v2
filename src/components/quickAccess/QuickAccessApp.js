@@ -2,7 +2,7 @@ import { AnimatePresence } from 'framer-motion';
 import React, { lazy, Suspense, useRef, useState } from 'react';
 
 import useOnClickOutside from '../../hooks/useOnClickOutside';
-import SpinnerApp from '../style/SpinnerApp';
+import SpinnerApp from '../common/SpinnerApp';
 import OpenButton from './OpenButton';
 
 const Toolbar = lazy(() => import('./Toolbar'));
@@ -26,7 +26,7 @@ const QuickAccessApp = () => {
             {!isOpen && (
                 <OpenButton openToolbar={openToolbar} isOpen={isOpen} />
             )}
-            <Suspense fallback={<SpinnerApp delay={200} />}>
+            <Suspense fallback={<SpinnerApp global delay={200} />}>
                 <AnimatePresence>
                     {isOpen && (
                         <Toolbar

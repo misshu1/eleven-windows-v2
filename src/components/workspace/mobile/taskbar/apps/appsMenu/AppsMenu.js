@@ -12,7 +12,7 @@ import { ICON_LOCATION, useFolderContext } from '../../../../../../contexts/fold
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import ScrollbarApp from '../../../../../common/ScrollbarApp';
-import SpinnerApp from '../../../../../style/SpinnerApp';
+import SpinnerApp from '../../../../../common/SpinnerApp';
 import { Container, LoginContainer, Widget } from './style';
 
 const AuthApp = lazy(() => import('../../../../../auth/AuthApp'));

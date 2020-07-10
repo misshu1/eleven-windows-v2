@@ -8,10 +8,14 @@ const ScrollbarWrapper = ({ children }) => {
 };
 
 const ScrollbarApp = ({ children, requireChildrenProps }) => {
+    // You might be wondering why is this initial state set to 1 instead of 0
+    // The folder menu 'DrawerApp' will not work unless you scroll down at least 1px
     const [scrollTop, setScrollTop] = useState(1);
     const { theme } = useSettingsContext();
 
     const handleScroll = (scrollValues, prevScrollState) => {
+        // There is a strange bug when content is loaded asynchronously
+        // The 'scrollTop' will reset back to 0
         if (scrollValues.scrollTop !== 0 && prevScrollState.scrollTop !== 0) {
             setScrollTop(scrollValues.scrollTop);
         }

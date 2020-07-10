@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useRef } from 'react';
 
 import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import SpinnerGlobalApp from '../../../style/SpinnerGlobalApp';
+import SpinnerApp from '../../../common/SpinnerApp';
 import { useNotificationsTaskbarContext } from './contexts/notificationsTaskbarContext';
 import NotificationIconApp from './icons/notifications/NotificationIconApp';
 
@@ -25,7 +25,7 @@ const NotificationMenuAndIcon = () => {
     return (
         <>
             <NotificationIconApp notificationIconRef={notificationIconRef} />
-            <Suspense fallback={<SpinnerGlobalApp delay={200} />}>
+            <Suspense fallback={<SpinnerApp global delay={200} />}>
                 {isNotificationMenuOpen && (
                     <NotificationsWindowsApp
                         notificationMenuRef={notificationMenuRef}

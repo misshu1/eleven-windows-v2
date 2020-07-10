@@ -1,13 +1,13 @@
 import React, { lazy, Suspense } from 'react';
 
-import SpinnerApp from '../../style/SpinnerApp';
+import SpinnerApp from '../../common/SpinnerApp';
 
 const TaskbarWindowsApp = lazy(() => import('./taskbar/TaskbarWindowsApp'));
 const DesktopWindowsApp = lazy(() => import('./desktop/DesktopWindowsApp'));
 
 const WorkspaceWindows = () => {
     return (
-        <Suspense fallback={<SpinnerApp delay={200} />}>
+        <Suspense fallback={<SpinnerApp global delay={200} />}>
             <DesktopWindowsApp />
             <TaskbarWindowsApp />
         </Suspense>

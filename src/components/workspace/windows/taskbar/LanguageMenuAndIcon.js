@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useRef } from 'react';
 
 import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import SpinnerGlobalApp from '../../../style/SpinnerGlobalApp';
+import SpinnerApp from '../../../common/SpinnerApp';
 import { useLanguageContext } from './contexts/languageContext';
 import LanguageIconApp from './icons/language/LanguageIconApp';
 
@@ -20,7 +20,7 @@ const LanguageMenuAndIcon = () => {
     return (
         <>
             <LanguageIconApp languageIconRef={languageIconRef} />
-            <Suspense fallback={<SpinnerGlobalApp delay={200} />}>
+            <Suspense fallback={<SpinnerApp global delay={200} />}>
                 {isLanguageOpen && (
                     <LanguageApp languageMenuRef={languageMenuRef} />
                 )}

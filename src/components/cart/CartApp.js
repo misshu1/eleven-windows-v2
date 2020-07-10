@@ -4,7 +4,7 @@ import { useCartContext } from '../../contexts/cartContext';
 import { useAuth } from '../../hooks/useAuth';
 import LoginButton from '../auth/LoginButton';
 import ScrollbarApp from '../common/ScrollbarApp';
-import SpinnerApp from '../style/SpinnerApp';
+import SpinnerApp from '../common/SpinnerApp';
 import CheckoutButton from './CheckoutButton';
 import Product from './Product';
 import StoreButton from './StoreButton';

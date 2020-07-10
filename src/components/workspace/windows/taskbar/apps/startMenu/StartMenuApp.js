@@ -10,7 +10,7 @@ import PowerOffIcon from '../../../../../../assets/images/icons/PowerOffIcon';
 import { useSettingsContext } from '../../../../../../contexts/settingsContext';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import ScrollbarApp from '../../../../../common/ScrollbarApp';
-import SpinnerApp from '../../../../../style/SpinnerApp';
+import SpinnerApp from '../../../../../common/SpinnerApp';
 import { useStartMenuContext } from '../../contexts/startMenuContext';
 import LeftMenuApp from './leftMenu/LeftMenuApp';
 import RightMenuApp from './rightMenu/RightMenuApp';
