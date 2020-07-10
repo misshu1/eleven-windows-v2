@@ -8,7 +8,7 @@ const ScrollbarWrapper = ({ children }) => {
 };
 
 const ScrollbarApp = ({ children, requireChildrenProps }) => {
-    const [scrollTop, setScrollTop] = useState(0);
+    const [scrollTop, setScrollTop] = useState(null);
     const { theme } = useSettingsContext();
 
     const childrenWithProps = Children.map(children, (child) => {
@@ -17,6 +17,12 @@ const ScrollbarApp = ({ children, requireChildrenProps }) => {
             setScrollTop,
         });
     });
+
+    const handleScroll = (scrollValues, prevScrollState) => {
+        if (scrollValues.scrollTop !== 0 && prevScrollState.scrollTop !== 0) {
+            setScrollTop(scrollValues.scrollTop);
+        }
+    };
 
     return (
         <Scrollbar
@@ -43,7 +49,7 @@ const ScrollbarApp = ({ children, requireChildrenProps }) => {
                     padding: 0,
                 },
             }}
-            onScroll={(e) => setScrollTop(e.scrollTop)}
+            onScroll={handleScroll}
             scrollTop={scrollTop}
         >
             {!requireChildrenProps && (

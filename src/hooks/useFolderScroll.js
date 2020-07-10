@@ -28,22 +28,15 @@ const useFolderScroll = (isLoading = false, page, scrollTop, setScrollTop) => {
 
     useEffect(() => {
         if (!isLoading) {
-            if (scroll[lastPage] !== scroll[currentPage] || scrollTop === 0) {
-                if (scroll[lastPage] <= 10) {
-                    // Prevent updating state unnecessary when scrolling up
-                    return setScrollTop((prevState) => {
-                        if (prevState > 0) {
-                            return 0;
-                        }
-                    });
-                }
-
+            if (scroll[lastPage] !== scroll[currentPage]) {
                 // This will run when switching pages
-                // Go back to previous 'scrollTop' position when navigating between folder pages
+                // Go back to previous 'scrollTop' position
+
                 setScrollTop(scroll[currentPage]);
             } else if (scroll[lastPage] !== scrollTop && scrollTop !== 0) {
                 // This will run when scrolling
-                // Update folder page 'scrollTop' position when scrolling
+                // Update folder page 'scrollTop' position
+
                 setScroll((prevState) => ({
                     ...prevState,
                     [lastPage]: scrollTop,
