@@ -4,23 +4,31 @@ import Scrollbar from 'react-scrollbars-custom';
 import { useSettingsContext } from '../../contexts/settingsContext';
 
 const ScrollbarWrapper = ({ children }) => {
-    return children;
+    return <>{children}</>;
 };
 
 const ScrollbarApp = ({ children, requireChildrenProps }) => {
-    const [scrollTop, setScrollTop] = useState(null);
+    const [scrollTop, setScrollTop] = useState(1);
     const { theme } = useSettingsContext();
-
-    const childrenWithProps = Children.map(children, (child) => {
-        return cloneElement(child, {
-            scrollTop,
-            setScrollTop,
-        });
-    });
 
     const handleScroll = (scrollValues, prevScrollState) => {
         if (scrollValues.scrollTop !== 0 && prevScrollState.scrollTop !== 0) {
             setScrollTop(scrollValues.scrollTop);
+        }
+    };
+
+    const checkChildren = () => {
+        if (requireChildrenProps) {
+            const childrenWithProps = Children.map(children, (child) => {
+                return cloneElement(child, {
+                    scrollTop,
+                    setScrollTop,
+                });
+            });
+
+            return childrenWithProps;
+        } else {
+            return <ScrollbarWrapper>{children}</ScrollbarWrapper>;
         }
     };
 
@@ -52,10 +60,7 @@ const ScrollbarApp = ({ children, requireChildrenProps }) => {
             onScroll={handleScroll}
             scrollTop={scrollTop}
         >
-            {!requireChildrenProps && (
-                <ScrollbarWrapper>{children}</ScrollbarWrapper>
-            )}
-            {requireChildrenProps && childrenWithProps}
+            {checkChildren()}
         </Scrollbar>
     );
 };
