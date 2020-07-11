@@ -107,7 +107,9 @@ const toolbarMenu = () => {
         {
             name: 'Add a menu to the folder',
             widgetIcon: null,
-            fontIcon: ['fas', 'ellipsis-v'],
+            fontIcon: {
+                icon: ['fas', 'ellipsis-v'],
+            },
             link: null,
             scrollToRef: 'addMenuToFolderRef',
             onClick: null,
@@ -123,7 +125,9 @@ const toolbarMenu = () => {
         {
             name: 'Create notifications',
             widgetIcon: null,
-            fontIcon: ['far', 'comment-alt'],
+            fontIcon: {
+                icon: ['far', 'comment-alt'],
+            },
             link: null,
             scrollToRef: 'createNotificationsRef',
             onClick: null,
@@ -131,7 +135,9 @@ const toolbarMenu = () => {
         {
             name: 'z-index',
             widgetIcon: null,
-            fontIcon: ['fas', 'layer-group'],
+            fontIcon: {
+                icon: ['fas', 'layer-group'],
+            },
             link: null,
             scrollToRef: 'zIndexRef',
             onClick: null,
@@ -139,11 +145,24 @@ const toolbarMenu = () => {
         {
             name: 'Folder Structure',
             widgetIcon: null,
-            fontIcon: ['fas', 'sitemap'],
+            fontIcon: {
+                icon: ['fas', 'sitemap'],
+            },
             link: null,
             scrollToRef: 'folderStructureRef',
             onClick: null,
         },
+        // {
+        //     name: 'Custom scrollbar',
+        //     widgetIcon: null,
+        //     fontIcon: {
+        //         icon: ['fas', 'exchange-alt'],
+        //         transform: { rotate: 90 },
+        //     },
+        //     link: null,
+        //     scrollToRef: 'scrollbarRef',
+        //     onClick: null,
+        // },
     ];
 };
 
@@ -163,6 +182,7 @@ const DocsApp = () => {
     const addMenuToFolderRef = useRef(null);
     const zIndexRef = useRef(null);
     const folderStructureRef = useRef(null);
+    const scrollbarRef = useRef(null);
 
     useEffect(() => {
         if (theme.id === THEME.dark) {
@@ -183,6 +203,7 @@ const DocsApp = () => {
                 addMenuToFolderRef,
                 zIndexRef,
                 folderStructureRef,
+                scrollbarRef,
             }}
         >
             <Container>
@@ -286,6 +307,17 @@ const DocsApp = () => {
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {folderStructureExample}
                 </SyntaxHighlighter>
+                {/* <h2 ref={scrollbarRef}>Custom scrollbar</h2> */}
+
+                {/* 
+                Folder scrolling
+                    - example how folder scrolling works
+                    - example how to add scrolling tracking to a component
+
+                Folder pagination
+                    - example how to add pages
+                    - example how to switch pages            
+                */}
             </Container>
         </FolderApp>
     );

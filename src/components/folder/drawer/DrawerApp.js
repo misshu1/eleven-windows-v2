@@ -102,11 +102,13 @@ const ListItemLink = ({ item, onClick }) => {
                     <>
                         {item.widgetIcon && item.widgetIcon}
                         {item.fontIcon && (
-                            <FontAwesomeIcon
-                                icon={item.fontIcon}
-                                size='lg'
-                                className={classes.fontIconStyle}
-                            />
+                            <>
+                                <FontAwesomeIcon
+                                    {...item.fontIcon}
+                                    size='lg'
+                                    className={classes.fontIconStyle}
+                                />
+                            </>
                         )}
                     </>
                 </ListItemIcon>

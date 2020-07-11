@@ -197,7 +197,7 @@ export const folderStructureExample = `
 ---- apps // All folder apps are here
 ---- auth
 ---- cart
----- emoji // Always fun 😊
+---- common
 ---- folder
 ---- notifications
 ---- pages // 401, 404

@@ -48,22 +48,18 @@ const ProductDetailsApp = ({ product }) => {
                 if (!isCanceled) {
                     setImages(dbImages);
                 } else {
-                    throw {
-                        code: 418,
-                        title: 'Request Canceled',
-                        message: 'Seems like you canceled the request!',
-                    };
-                }
-            } catch (err) {
-                if (err.code === 418) {
-                    showWarning(err.title, err.message, err.code);
-                } else {
-                    showError(
-                        'Error',
-                        'Failed to get product images from the database!',
-                        500
+                    showWarning(
+                        'Request Canceled',
+                        'Seems like you canceled the request!',
+                        418
                     );
                 }
+            } catch (err) {
+                showError(
+                    'Error',
+                    'Failed to get product images from the database!',
+                    500
+                );
             }
         };
 
@@ -103,22 +99,18 @@ const ProductDetailsApp = ({ product }) => {
                 if (!isCanceled) {
                     setDescription(response);
                 } else {
-                    throw {
-                        code: 418,
-                        title: 'Request Canceled',
-                        message: 'Seems like you canceled the request!',
-                    };
-                }
-            } catch (err) {
-                if (err.code === 418) {
-                    showWarning(err.title, err.message, err.code);
-                } else {
-                    showError(
-                        'Error',
-                        `Failed to get product description for "${product.title}" from the database!`,
-                        500
+                    showWarning(
+                        'Request Canceled',
+                        'Seems like you canceled the request!',
+                        418
                     );
                 }
+            } catch (err) {
+                showError(
+                    'Error',
+                    `Failed to get product description for "${product.title}" from the database!`,
+                    500
+                );
             }
         };
 

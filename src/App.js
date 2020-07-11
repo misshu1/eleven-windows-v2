@@ -10,6 +10,7 @@ import {
     faCheck,
     faCog,
     faEllipsisV,
+    faExchangeAlt,
     faExclamation,
     faExclamationTriangle,
     faInfo,
@@ -66,7 +67,8 @@ library.add(
     faMoon,
     faSun,
     faBellSlash,
-    faBell
+    faBell,
+    faExchangeAlt
 );
 
 const useStyles = makeStyles({

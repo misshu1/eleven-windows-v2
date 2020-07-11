@@ -12,6 +12,47 @@ Object.keys(folderPages).map(
     (page) => (defaultFolderScrollState[pageScrollName(page)] = 0)
 );
 
+// TODO The 'page' defalt state sould be changed to
+// {
+//     page: level_1,
+//     id: 'unique id' // this will match the scroll id
+//     isSelected: true
+// }
+// When switching pages add the 'isSelected' set to true alongside with the id
+// If there is no need for an id it should be set to a default value '1'
+
+// TODO The back button should check for the 'isSelected' flag
+// And return the slected object scroll position
+
+// TODO each key element from the 'defaultFolderScrollState'
+// should be an array of objects like the example bellow
+// level_1_scroll : [
+//     {
+//         id: 'unique id',
+//         scroll: 200,
+//         isSelected: true
+//     }
+// ],
+// level_2_scroll : [
+//     {
+//         id: 'unique id',
+//         scroll: 200
+//         isSelected: false
+//     },
+//     {
+//         id: 'unique id',
+//         scroll: 500
+//         isSelected: true
+//     },
+// ],
+// level_3_scroll : [
+//     {
+//         id: 'unique id',
+//         scroll: 200
+//         isSelected: true
+//     }
+// ]
+
 const getPageName = (page) => {
     const pageName = Object.entries(folderPages)
         .filter((item) => item[1] === page)
