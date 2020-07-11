@@ -14,9 +14,9 @@ import { AnimateFadeInOut, Content, Folder } from './style';
 import FolderToolbar from './toolbar/FolderToolbar';
 
 const FolderContent = (props) => {
-    const { children, isLoading, page, scrollTop, setScrollTop } = props;
+    const { children, page, scrollTop, setScrollTop } = props;
 
-    useFolderScroll(isLoading, page, scrollTop, setScrollTop);
+    useFolderScroll(page, scrollTop, setScrollTop);
 
     return <>{children}</>;
 };

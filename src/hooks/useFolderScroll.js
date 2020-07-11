@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { folderPages } from '../components/folder/folderPages';
 import usePrevious from './usePrevious';
@@ -20,31 +20,37 @@ const getPageName = (page) => {
     return pageName[0];
 };
 
-const useFolderScroll = (isLoading = false, page, scrollTop, setScrollTop) => {
+const useFolderScroll = (page, scrollTop, setScrollTop) => {
     const [scroll, setScroll] = useState(defaultFolderScrollState);
     const prevPage = usePrevious(page);
-    const lastPage = getPageName(prevPage);
-    const currentPage = getPageName(page);
+
+    const getPage = useCallback((page) => {
+        return getPageName(page);
+    }, []);
 
     useEffect(() => {
-        if (!isLoading) {
-            if (scroll[lastPage] !== scroll[currentPage]) {
+        // Only save 'scrollTop' data when folder have pagination
+        if (page) {
+            if (scroll[getPage(prevPage)] !== scroll[getPage(page)]) {
                 // This will run when switching pages
                 // Go back to previous 'scrollTop' position
 
-                setScrollTop(scroll[currentPage]);
-            } else if (scroll[lastPage] !== scrollTop && scrollTop !== 0) {
+                setScrollTop(scroll[getPage(page)]);
+            } else if (
+                scroll[getPage(prevPage)] !== scrollTop &&
+                scrollTop !== 0
+            ) {
                 // This will run when scrolling
-                // Update folder page 'scrollTop' position
+                // Save the 'scrollTop' position
 
                 setScroll((prevState) => ({
                     ...prevState,
-                    [lastPage]: scrollTop,
+                    [getPage(prevPage)]: scrollTop,
                 }));
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, scrollTop, page]);
+    }, [scrollTop, page]);
 };
 
 export default useFolderScroll;
