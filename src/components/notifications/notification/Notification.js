@@ -12,16 +12,19 @@ const Notification = forwardRef((props, ref) => {
         <Container type={type} ref={ref} isModal={isModal}>
             <div className='icon'>
                 {type === NOTIFICATION_TYPE.success && (
-                    <FontAwesomeIcon icon={['fas', 'check']} />
+                    <FontAwesomeIcon icon={['fas', 'check']} size='lg' />
                 )}
                 {type === NOTIFICATION_TYPE.error && (
-                    <FontAwesomeIcon icon={['fas', 'exclamation']} />
+                    <FontAwesomeIcon icon={['fas', 'exclamation']} size='lg' />
                 )}
                 {type === NOTIFICATION_TYPE.warning && (
-                    <FontAwesomeIcon icon={['fas', 'exclamation-triangle']} />
+                    <FontAwesomeIcon
+                        icon={['fas', 'exclamation-triangle']}
+                        size='lg'
+                    />
                 )}
                 {type === NOTIFICATION_TYPE.info && (
-                    <FontAwesomeIcon icon={['fas', 'info']} />
+                    <FontAwesomeIcon icon={['fas', 'info']} size='lg' />
                 )}
             </div>
             <div className='content'>
