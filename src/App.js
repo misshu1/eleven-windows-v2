@@ -32,7 +32,7 @@ import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { Routes } from './components/routes/Routes';
+import { RoutesApp } from './components/routes/Routes';
 import { GlobalStyle } from './components/style/GlobalStyle';
 import { CartProvider } from './contexts/cartContext';
 import { FirebaseProvider } from './contexts/firebaseContext';
@@ -111,7 +111,7 @@ const App = () => {
                             />
                             <CartProvider>
                                 <FolderProvider>
-                                    <Routes />
+                                    <RoutesApp />
                                 </FolderProvider>
                             </CartProvider>
                         </ThemeProvider>

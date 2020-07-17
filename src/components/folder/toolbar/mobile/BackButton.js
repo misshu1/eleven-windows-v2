@@ -1,20 +1,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { folderPages } from '../../folderPages';
 
 const BackButton = ({ page, setPage }) => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const goBack = () => {
         if (!page) {
-            return history.push('/');
+            return navigate('/');
         }
 
         switch (page) {
             case folderPages.level_1:
-                return history.push('/');
+                return navigate('/');
 
             case folderPages.level_2:
                 return setPage(folderPages.level_1);

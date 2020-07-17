@@ -1,17 +1,17 @@
 import React, { Suspense, useEffect, useLayoutEffect, useState } from 'react';
-import { Redirect, Route, useLocation } from 'react-router-dom';
-import { useLastLocation } from 'react-router-last-location';
+import { Navigate, Route, useLocation } from 'react-router-dom';
 
 import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import usePrevious from '../../hooks/usePrevious';
 import SpinnerApp from '../common/SpinnerApp';
 
 const FolderRoutes = () => {
     const [pathExists, setPathExists] = useState(true);
     const { folderState } = useFolderContext();
     const { openFolder, closeAllFolders } = useDispatchFolderContext();
-    const lastLocation = useLastLocation();
     const location = useLocation();
+    const prevLocation = usePrevious(location);
     const isMobile = useMediaQuery('(max-width: 450px)');
 
     // Check to see if the route exists in folderState if not user will be redirected to 404
@@ -34,9 +34,9 @@ const FolderRoutes = () => {
     useEffect(() => {
         folderState.apps.map((app) => {
             if (
-                lastLocation?.pathname === app.link ||
+                prevLocation?.pathname === app.link ||
                 (location.pathname === '/' &&
-                    lastLocation?.pathname === app.link)
+                    prevLocation?.pathname === app.link)
             ) {
                 closeAllFolders();
             }
@@ -57,21 +57,22 @@ const FolderRoutes = () => {
 
     return (
         <>
-            {!pathExists && <Redirect to='/404' />}
+            {!pathExists && <Navigate to='/404' />}
             {folderState.apps.map((app) => (
                 // TODO If app.requireAuth === true <Redirect to='/401' />
                 <Route
                     key={app.id}
-                    exact={isMobile ? true : false}
-                    path={isMobile ? app.link : '/'}
-                    render={() =>
-                        app.isOpen && (
-                            <Suspense
-                                fallback={<SpinnerApp global delay={200} />}
-                            >
-                                {app.component}
-                            </Suspense>
-                        )
+                    path={isMobile ? app.link : '/*'}
+                    element={
+                        <>
+                            {app.isOpen && (
+                                <Suspense
+                                    fallback={<SpinnerApp global delay={200} />}
+                                >
+                                    {app.component}
+                                </Suspense>
+                            )}
+                        </>
                     }
                 />
             ))}

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRef } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { useNotificationsContext } from '../../contexts/notificationsContext';
 import Emoji from '../common/Emoji';
@@ -33,7 +33,7 @@ const welcomeMessage = (
     </span>
 );
 
-export const Routes = () => {
+export const RoutesApp = () => {
     const { showInfo } = useNotificationsContext();
     const notification = useRef(() => showInfo(WelcomeTitle, welcomeMessage));
 
@@ -42,11 +42,11 @@ export const Routes = () => {
     }, []);
 
     return (
-        <Switch>
-            <Route exact path='/404' component={NotFound} />
-            <Route exact path='/401' component={NotAuthorized} />
+        <Routes>
+            <Route path='/404' element={<NotFound />} />
+            <Route path='/401' element={<NotAuthorized />} />
             {/* <Route exact path='/login' component={LoginApp} /> */}
-            <Route path='/' component={WorkspaceApp} />
-        </Switch>
+            <Route path='/*' element={<WorkspaceApp />} />
+        </Routes>
     );
 };
