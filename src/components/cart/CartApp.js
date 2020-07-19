@@ -15,7 +15,7 @@ const AuthApp = lazy(() => import('../auth/AuthApp'));
 const CartApp = ({ onClick }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const { cartState, getCartTotalPrice } = useCartContext();
-    const auth = useAuth();
+    const { user } = useAuth();
 
     const emptryCart = () => {
         return (
@@ -64,11 +64,9 @@ const CartApp = ({ onClick }) => {
                                         {getCartTotalPrice()} $
                                     </h3>
                                 </div>
-                                {auth.user && <CheckoutButton />}
+                                {user && <CheckoutButton />}
 
-                                {!auth.user && (
-                                    <LoginButton onClick={showAuth} />
-                                )}
+                                {!user && <LoginButton onClick={showAuth} />}
                             </div>
                         </>
                     )}

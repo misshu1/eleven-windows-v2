@@ -42,7 +42,7 @@ const StartMenuApp = ({ startMenuRef }) => {
     const { closeStartMenu } = useStartMenuContext();
     const { theme } = useSettingsContext();
     const classes = useStyles(theme);
-    const auth = useAuth();
+    const { user, logout } = useAuth();
     const { t } = useTranslation();
 
     const showAuth = () => {
@@ -63,7 +63,7 @@ const StartMenuApp = ({ startMenuRef }) => {
             {!isAuthOpen && (
                 <>
                     <LoginContainer>
-                        {!auth.user && (
+                        {!user && (
                             <Button
                                 classes={{
                                     root: classes.btnStyle,
@@ -81,7 +81,7 @@ const StartMenuApp = ({ startMenuRef }) => {
                                 {t('auth.login')}
                             </Button>
                         )}
-                        {auth.user && (
+                        {user && (
                             <>
                                 <span>
                                     <FontAwesomeIcon
@@ -89,13 +89,13 @@ const StartMenuApp = ({ startMenuRef }) => {
                                         size='2x'
                                     />
                                 </span>
-                                <h4>Welcome {auth.user.displayName}.</h4>
+                                <h4>Welcome {user.displayName}.</h4>
                                 <Tooltip
                                     title={t('tooltip.logout')}
                                     placement='bottom'
                                     enterDelay={500}
                                 >
-                                    <Widget onClick={auth.logout}>
+                                    <Widget onClick={logout}>
                                         <PowerOffIcon
                                             width='2rem'
                                             height='2rem'

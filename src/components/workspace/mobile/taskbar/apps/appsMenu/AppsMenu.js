@@ -43,7 +43,7 @@ const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
     const { t } = useTranslation();
     const classes = useStyles(theme);
     const apps = useRef(folderState.apps.sort(sortByAppName));
-    const auth = useAuth();
+    const { user, logout } = useAuth();
 
     const showAuth = () => {
         setIsAuthOpen(true);
@@ -81,7 +81,7 @@ const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
             {!isAuthOpen && (
                 <>
                     <LoginContainer>
-                        {!auth.user && (
+                        {!user && (
                             <Button
                                 classes={{
                                     root: classes.btnStyle,
@@ -99,7 +99,7 @@ const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
                                 {t('auth.login')}
                             </Button>
                         )}
-                        {auth.user && (
+                        {user && (
                             <>
                                 <span>
                                     <FontAwesomeIcon
@@ -107,16 +107,13 @@ const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
                                         size='2x'
                                     />
                                 </span>
-                                <h4>Welcome {auth.user.displayName}.</h4>
+                                <h4>Welcome {user.displayName}.</h4>
                                 <Tooltip
                                     title={t('tooltip.logout')}
                                     placement='bottom'
                                     enterDelay={500}
                                 >
-                                    <div
-                                        onClick={auth.logout}
-                                        className='power-off'
-                                    >
+                                    <div onClick={logout} className='power-off'>
                                         <PowerOffIcon
                                             width='2rem'
                                             height='2rem'

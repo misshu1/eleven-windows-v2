@@ -9,7 +9,7 @@ import IconApp from './IconApp';
 import { Container } from './style';
 
 const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
-    const auth = useAuth();
+    const { logout, user } = useAuth();
     const {
         isLinuxSelected,
         isWindowsSelected,
@@ -89,11 +89,11 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
                     onClick={() => disableNotifications(true)}
                 />
             )}
-            {auth.user && (
+            {user && (
                 <IconApp
                     tooltip={'tooltip.logout'}
                     icon={<PowerOffIcon />}
-                    onClick={auth.logout}
+                    onClick={logout}
                 />
             )}
         </Container>

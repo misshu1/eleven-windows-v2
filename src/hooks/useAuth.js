@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useFirebaseContext } from '../contexts/firebaseContext';
 import { useNotificationsContext } from '../contexts/notificationsContext';
@@ -18,6 +19,16 @@ function useProvideAuth() {
     const { auth } = useFirebaseContext();
     const { showError } = useNotificationsContext();
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+
+    const isUserLoggedIn = () => {
+        return !!user;
+    };
+
+    const isUserAdmin = () => {
+        // TODO Add admin role
+        return !!user && false;
+    };
 
     const login = async (email, password) => {
         return await auth
@@ -46,6 +57,7 @@ function useProvideAuth() {
         setUser(null);
         return await auth
             .signOut()
+            .then(() => navigate('/'))
             .catch((err) => showError('Error', err.message, 500));
     };
 
@@ -78,6 +90,8 @@ function useProvideAuth() {
         logout,
         sendPasswordResetEmail,
         confirmPasswordReset,
+        isUserLoggedIn,
+        isUserAdmin,
     };
 }
 

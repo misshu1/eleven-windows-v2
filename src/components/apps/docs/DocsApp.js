@@ -316,7 +316,18 @@ const DocsApp = () => {
 
                 Folder pagination
                     - example how to add pages
-                    - example how to switch pages            
+                    - example how to switch pages  
+
+                Folder permisions
+                    - requireLogin: true,
+                    - requireAdmin: true,
+                    
+                Spinner 
+                    - example how to use local and global spinner
+
+                Routing
+                    - explain how routing works
+                    - also explain requireAuth routes               
                 */}
             </Container>
         </FolderApp>

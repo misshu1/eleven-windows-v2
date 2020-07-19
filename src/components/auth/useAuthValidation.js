@@ -9,7 +9,7 @@ const useAuthValidation = (initialState) => {
     const [values, setValues] = useState(initialState);
     const [errors, setErrors] = useState({});
     const debouncedValues = useDebounce(values, 500);
-    const auth = useAuth();
+    const { register, login } = useAuth();
 
     const handleChange = (e) => {
         e.persist();
@@ -57,7 +57,7 @@ const useAuthValidation = (initialState) => {
         setSubmitting(true);
 
         if (!errors.email && !errors.password) {
-            auth.login(values.email, values.password)
+            login(values.email, values.password)
                 .then(() => {
                     if (callback) {
                         // Do something after user logged in
@@ -81,7 +81,7 @@ const useAuthValidation = (initialState) => {
         setSubmitting(true);
 
         if (!errors.name && !errors.email && !errors.password) {
-            auth.register(values.name, values.email, values.password)
+            register(values.name, values.email, values.password)
                 .then(() => {
                     if (callback) {
                         // Do something after user sign up

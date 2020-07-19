@@ -6,6 +6,7 @@ import { useNotificationsContext } from '../../contexts/notificationsContext';
 import Emoji from '../common/Emoji';
 import NotAuthorized from '../pages/401/NotAuthorized';
 import NotFound from '../pages/404/NotFound';
+import LoginPage from '../pages/login/LoginPage';
 import WorkspaceApp from '../workspace/WorkspaceApp';
 
 const WelcomeTitle = (
@@ -45,7 +46,7 @@ export const RoutesApp = () => {
         <Routes>
             <Route path='/404' element={<NotFound />} />
             <Route path='/401' element={<NotAuthorized />} />
-            {/* <Route exact path='/login' component={LoginApp} /> */}
+            <Route path='/login' element={<LoginPage />} />
             <Route path='/*' element={<WorkspaceApp />} />
         </Routes>
     );
