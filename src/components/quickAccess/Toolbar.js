@@ -1,6 +1,6 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import PowerOffIcon from '../../assets/images/icons/PowerOffIcon';
 import { useNotificationsContext } from '../../contexts/notificationsContext';
 import { useSettingsContext } from '../../contexts/settingsContext';
 import { useAuth } from '../../hooks/useAuth';
@@ -24,6 +24,8 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
         areNotificationsDisabled,
         disableNotifications,
     } = useNotificationsContext();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     return (
         <Container
@@ -92,8 +94,21 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
             {user && (
                 <IconApp
                     tooltip={'tooltip.logout'}
-                    icon={<PowerOffIcon />}
+                    fontIcon={['fas', 'power-off']}
                     onClick={logout}
+                />
+            )}
+            {!user && (
+                <IconApp
+                    tooltip={'tooltip.login'}
+                    fontIcon={['fas', 'sign-in-alt']}
+                    onClick={() =>
+                        navigate('/login', {
+                            state: {
+                                nextPathname: location.pathname,
+                            },
+                        })
+                    }
                 />
             )}
         </Container>

@@ -1,3 +1,4 @@
+import Backdrop from '@material-ui/core/Backdrop';
 import { AnimatePresence } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -17,13 +18,17 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     const onCancel = () => {
-        if (!isMobile) {
-            setShowAuth(false);
-            setTimeout(() => {
-                navigate('/');
-            }, 250);
-        } else {
-            navigate('/');
+        // If user is not logged in and cancels login
+        // Redirect user to previous route
+        if (!isUserLoggedIn() && !!location.state?.nextPathname) {
+            if (!isMobile) {
+                setShowAuth(false);
+                setTimeout(() => {
+                    navigate(location.state.nextPathname);
+                }, 250);
+            } else {
+                navigate(location.state.nextPathname);
+            }
         }
     };
 
@@ -38,6 +43,14 @@ const LoginPage = () => {
 
     return ReactDOM.createPortal(
         <Container>
+            <Backdrop
+                open={showAuth}
+                onClick={onCancel}
+                style={{
+                    zIndex: 50,
+                    background: 'rgba(0,0,0,0.35)',
+                }}
+            />
             <AnimatePresence>
                 {showAuth && (
                     <AuthContiner

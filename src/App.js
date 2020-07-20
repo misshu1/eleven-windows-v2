@@ -16,6 +16,7 @@ import {
     faInfo,
     faLayerGroup,
     faMoon,
+    faPowerOff,
     faShoppingCart,
     faSignInAlt,
     faSitemap,
@@ -69,7 +70,8 @@ library.add(
     faSun,
     faBellSlash,
     faBell,
-    faExchangeAlt
+    faExchangeAlt,
+    faPowerOff
 );
 
 const useStyles = makeStyles({
