@@ -7,7 +7,7 @@ export const AuthContiner = styled(motion.div)`
     padding: 0.5rem;
     width: 100%;
     height: 100%;
-    z-index: 1000;
+    z-index: 100;
 
     @media only screen and (min-width: 450px) {
         width: 25rem;

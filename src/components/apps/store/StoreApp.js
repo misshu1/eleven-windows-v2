@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useRef } from 'react';
 
 import { useFirebaseContext } from '../../../contexts/firebaseContext';
 import { useNotificationsContext } from '../../../contexts/notificationsContext';
@@ -12,40 +11,58 @@ const StoreApp = () => {
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(folderPages.level_1);
     const [selectedProduct, setSelectedProduct] = useState({});
-    const { showError } = useNotificationsContext();
+    const { showError, showWarning } = useNotificationsContext();
     const { firestore } = useFirebaseContext();
-    const getProducts = useRef(null);
-
-    getProducts.current = async () => {
-        let dbProducts = [];
-        try {
-            const productsRef = await firestore.collection('products').get();
-            if (!productsRef.size) {
-                showError(
-                    'Error',
-                    'The "products" collection was not found in the database!',
-                    404
-                );
-            }
-            await productsRef.forEach(
-                (doc) =>
-                    (dbProducts = [
-                        ...dbProducts,
-                        { id: doc.id, ...doc.data() },
-                    ])
-            );
-            setProducts(dbProducts);
-        } catch (err) {
-            showError(
-                'Error',
-                'Failed to get store products from database!',
-                500
-            );
-        }
-    };
 
     useEffect(() => {
-        getProducts.current();
+        let isCanceled = false;
+
+        const getProducts = async () => {
+            let dbProducts = [];
+
+            try {
+                const productsRef = await firestore
+                    .collection('products')
+                    .get();
+                if (!productsRef.size) {
+                    showError(
+                        'Error',
+                        'The "products" collection was not found in the database!',
+                        404
+                    );
+                }
+                await productsRef.forEach(
+                    (doc) =>
+                        (dbProducts = [
+                            ...dbProducts,
+                            { id: doc.id, ...doc.data() },
+                        ])
+                );
+
+                if (!isCanceled) {
+                    setProducts(dbProducts);
+                } else {
+                    showWarning(
+                        'Request Canceled',
+                        'Seems like you canceled the request!',
+                        418
+                    );
+                }
+            } catch (err) {
+                showError(
+                    'Error',
+                    'Failed to get store products from database!',
+                    500
+                );
+            }
+        };
+
+        getProducts();
+        return () => {
+            isCanceled = true;
+        };
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

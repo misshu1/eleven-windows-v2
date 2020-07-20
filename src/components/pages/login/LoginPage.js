@@ -1,9 +1,10 @@
 import Backdrop from '@material-ui/core/Backdrop';
 import { AnimatePresence } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useDispatchFolderContext } from '../../../contexts/folderContext';
 import { useAuth } from '../../../hooks/useAuth';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { loginPageAnimation } from '../../animations';
@@ -11,40 +12,55 @@ import AuthApp from '../../auth/AuthApp';
 import { AuthContiner, Container } from './style';
 
 const LoginPage = () => {
-    const [showAuth, setShowAuth] = useState(true);
     const { isUserLoggedIn } = useAuth();
+    const { closeAllFolders } = useDispatchFolderContext();
     const isMobile = useMediaQuery('(max-width: 450px)');
     const location = useLocation();
     const navigate = useNavigate();
+    const showAuth = useRef(true);
 
     const onCancel = () => {
         // If user is not logged in and cancels login
         // Redirect user to previous route
+        // Or redirect to '/' if no previous route
         if (!isUserLoggedIn() && !!location.state?.nextPathname) {
             if (!isMobile) {
-                setShowAuth(false);
+                showAuth.current = false;
                 setTimeout(() => {
                     navigate(location.state.nextPathname);
-                }, 250);
+                }, 300);
             } else {
                 navigate(location.state.nextPathname);
             }
+        } else if (!isUserLoggedIn() && !location.state?.nextPathname) {
+            navigate('/');
         }
     };
 
     useEffect(() => {
+        // Close all folders when navigating to '/login'
+        closeAllFolders();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.pathname]);
+
+    useEffect(() => {
+        // When folder route requires login
+        // And we navigate to the folder route directly from the address bar
+        // Redirect the user back after auto-login
         if (isUserLoggedIn() && !!location.state?.nextPathname) {
-            // When folder route requires login
-            // And we navigate to the folder route directly from the address bar
-            // Redirect the user back after auto-login
             navigate(location.state.nextPathname);
+        } else if (isUserLoggedIn() && !location.state?.nextPathname) {
+            navigate('/');
         }
-    }, [isUserLoggedIn, location.state, navigate]);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isUserLoggedIn]);
 
     return ReactDOM.createPortal(
         <Container>
             <Backdrop
-                open={showAuth}
+                open={showAuth.current}
                 onClick={onCancel}
                 style={{
                     zIndex: 50,
@@ -52,7 +68,7 @@ const LoginPage = () => {
                 }}
             />
             <AnimatePresence>
-                {showAuth && (
+                {showAuth.current && (
                     <AuthContiner
                         key='loginPageAnimation'
                         initial='initial'
