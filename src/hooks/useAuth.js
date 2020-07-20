@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useFirebaseContext } from '../contexts/firebaseContext';
 import { useNotificationsContext } from '../contexts/notificationsContext';
@@ -20,6 +20,7 @@ function useProvideAuth() {
     const { showError } = useNotificationsContext();
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const isUserLoggedIn = () => {
         return !!user;
@@ -57,7 +58,11 @@ function useProvideAuth() {
         setUser(null);
         return await auth
             .signOut()
-            .then(() => navigate('/'))
+            .then(() => {
+                if (location.pathname !== '/') {
+                    navigate('/');
+                }
+            })
             .catch((err) => showError('Error', err.message, 500));
     };
 

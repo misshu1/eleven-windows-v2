@@ -1,14 +1,31 @@
-import React, { useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../../../hooks/useAuth';
-import { Container } from './style';
+import useMediaQuery from '../../../hooks/useMediaQuery';
+import { loginPageAnimation } from '../../animations';
+import AuthApp from '../../auth/AuthApp';
+import { AuthContiner, Container } from './style';
 
 const LoginPage = () => {
+    const [showAuth, setShowAuth] = useState(true);
+    const { isUserLoggedIn } = useAuth();
+    const isMobile = useMediaQuery('(max-width: 450px)');
     const location = useLocation();
     const navigate = useNavigate();
-    const { isUserLoggedIn } = useAuth();
+
+    const onCancel = () => {
+        if (!isMobile) {
+            setShowAuth(false);
+            setTimeout(() => {
+                navigate('/');
+            }, 250);
+        } else {
+            navigate('/');
+        }
+    };
 
     useEffect(() => {
         if (isUserLoggedIn() && !!location.state?.nextPathname) {
@@ -21,9 +38,21 @@ const LoginPage = () => {
 
     return ReactDOM.createPortal(
         <Container>
-            <h1>This is the LOGIN Page, Needs some design work</h1>
+            <AnimatePresence>
+                {showAuth && (
+                    <AuthContiner
+                        key='loginPageAnimation'
+                        initial='initial'
+                        animate='open'
+                        exit='close'
+                        variants={!isMobile && loginPageAnimation}
+                    >
+                        <AuthApp onCancel={onCancel} />
+                    </AuthContiner>
+                )}
+            </AnimatePresence>
         </Container>,
-        document.getElementById('pages')
+        document.getElementById('desktop')
     );
 };
 

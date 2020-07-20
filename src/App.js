@@ -29,7 +29,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { SnackbarProvider } from 'notistack';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import { RoutesApp } from './components/routes/Routes';
@@ -78,6 +79,7 @@ const useStyles = makeStyles({
 });
 
 const App = () => {
+    const [renderStyles, setRenderStyles] = useState(false);
     const {
         theme,
         getSelectedBackground,
@@ -86,6 +88,19 @@ const App = () => {
         isMobileSelected,
     } = useSettingsContext();
     const classes = useStyles();
+    const location = useLocation();
+
+    // Disable the default 'desktop' and 'taskbar' styles when naviating to 'excludedRoutes'
+    useEffect(() => {
+        const excludedRoutes = ['/401', '/404', '/login'];
+        const routeMatch = excludedRoutes.includes(location.pathname);
+
+        if (!routeMatch) {
+            setRenderStyles(true);
+        } else {
+            setRenderStyles(false);
+        }
+    }, [location.pathname]);
 
     return (
         <SnackbarProvider
@@ -108,6 +123,7 @@ const App = () => {
                                 linux={isLinuxSelected()}
                                 windows={isWindowsSelected()}
                                 mobile={isMobileSelected()}
+                                renderStyles={renderStyles}
                             />
                             <CartProvider>
                                 <FolderProvider>

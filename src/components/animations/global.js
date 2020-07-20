@@ -53,3 +53,21 @@ export const quickAccessToolbarOpenBtnAnimation = {
         },
     },
 };
+
+export const loginPageAnimation = {
+    initial: {
+        opacity: 0,
+        scale: 0.7,
+    },
+    open: {
+        opacity: 1,
+        scale: 1,
+    },
+    close: {
+        opacity: 0,
+        scale: 0.7,
+        transition: {
+            duration: 0.2,
+        },
+    },
+};
