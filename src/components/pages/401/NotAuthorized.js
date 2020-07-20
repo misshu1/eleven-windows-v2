@@ -11,11 +11,7 @@ const NotAuthorized = () => {
     const { isUserAdmin } = useAuth();
 
     useEffect(() => {
-        if (
-            isUserAdmin() &&
-            !!location.state?.nextPathname &&
-            !!location.state?.requireAdmin
-        ) {
+        if (isUserAdmin() && !!location.state?.nextPathname) {
             // When folder route requires user to be admin
             // And we navigate to the folder route directly from the address bar
             // Redirect the user back after auto-login, if user is admin

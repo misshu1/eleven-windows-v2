@@ -59,7 +59,6 @@ const FolderRoutes = () => {
                         replace: true,
                         state: {
                             nextPathname: app.link,
-                            requireAdmin: app.requireAdmin,
                         },
                     });
                 } else if (app.requireLogin && !isUserLoggedIn()) {
@@ -67,7 +66,6 @@ const FolderRoutes = () => {
                         replace: true,
                         state: {
                             nextPathname: app.link,
-                            requireLogin: app.requireLogin,
                         },
                     });
                 } else {

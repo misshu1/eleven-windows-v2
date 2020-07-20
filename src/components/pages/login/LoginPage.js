@@ -11,11 +11,7 @@ const LoginPage = () => {
     const { isUserLoggedIn } = useAuth();
 
     useEffect(() => {
-        if (
-            isUserLoggedIn() &&
-            !!location.state?.nextPathname &&
-            !!location.state?.requireLogin
-        ) {
+        if (isUserLoggedIn() && !!location.state?.nextPathname) {
             // When folder route requires login
             // And we navigate to the folder route directly from the address bar
             // Redirect the user back after auto-login

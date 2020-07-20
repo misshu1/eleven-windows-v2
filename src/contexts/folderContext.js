@@ -30,7 +30,6 @@ const FOLDER_ACTIONS = {
     active: 'ACTIVE',
     minimizeUp: 'MINIMIZE_UP',
     minimizeDown: 'MINIMIZE_DOWN',
-    setIsAppOpen: 'SET_IS_APP_OPEN',
 };
 
 export const ICON_LOCATION = {
