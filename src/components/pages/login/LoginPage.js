@@ -34,7 +34,15 @@ const LoginPage = () => {
                 navigate(location.state.nextPathname);
             }
         } else if (!isUserLoggedIn() && !location.state?.nextPathname) {
-            navigate('/');
+            if (!isMobile) {
+                setShowAuth(false);
+
+                setTimeout(() => {
+                    navigate('/');
+                }, 300);
+            } else {
+                navigate('/');
+            }
         }
     };
 
