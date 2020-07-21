@@ -1,6 +1,6 @@
 import Backdrop from '@material-ui/core/Backdrop';
 import { AnimatePresence } from 'framer-motion';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -12,12 +12,12 @@ import AuthApp from '../../auth/AuthApp';
 import { AuthContiner, Container } from './style';
 
 const LoginPage = () => {
+    const [showAuth, setShowAuth] = useState(true);
     const { isUserLoggedIn } = useAuth();
     const { closeAllFolders } = useDispatchFolderContext();
     const isMobile = useMediaQuery('(max-width: 450px)');
     const location = useLocation();
     const navigate = useNavigate();
-    const showAuth = useRef(true);
 
     const onCancel = () => {
         // If user is not logged in and cancels login
@@ -25,7 +25,8 @@ const LoginPage = () => {
         // Or redirect to '/' if no previous route
         if (!isUserLoggedIn() && !!location.state?.nextPathname) {
             if (!isMobile) {
-                showAuth.current = false;
+                setShowAuth(false);
+
                 setTimeout(() => {
                     navigate(location.state.nextPathname);
                 }, 300);
@@ -42,16 +43,32 @@ const LoginPage = () => {
         closeAllFolders();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [location.pathname]);
+    }, []);
 
     useEffect(() => {
         // When folder route requires login
         // And we navigate to the folder route directly from the address bar
         // Redirect the user back after auto-login
         if (isUserLoggedIn() && !!location.state?.nextPathname) {
-            navigate(location.state.nextPathname);
+            if (!isMobile) {
+                setShowAuth(false);
+
+                setTimeout(() => {
+                    navigate(location.state.nextPathname);
+                }, 300);
+            } else {
+                navigate(location.state.nextPathname);
+            }
         } else if (isUserLoggedIn() && !location.state?.nextPathname) {
-            navigate('/');
+            if (!isMobile) {
+                setShowAuth(false);
+
+                setTimeout(() => {
+                    navigate('/');
+                }, 300);
+            } else {
+                navigate('/');
+            }
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,15 +77,16 @@ const LoginPage = () => {
     return ReactDOM.createPortal(
         <Container>
             <Backdrop
-                open={showAuth.current}
+                open={showAuth}
                 onClick={onCancel}
                 style={{
                     zIndex: 50,
                     background: 'rgba(0,0,0,0.35)',
+                    backdropFilter: 'blur(10px)',
                 }}
             />
             <AnimatePresence>
-                {showAuth.current && (
+                {showAuth && (
                     <AuthContiner
                         key='loginPageAnimation'
                         initial='initial'
