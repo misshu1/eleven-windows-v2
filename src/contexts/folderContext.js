@@ -1,4 +1,4 @@
-import React, { createContext, lazy, useContext, useReducer } from 'react';
+import React, { createContext, lazy, useContext, useMemo, useReducer } from 'react';
 
 import CalculatorIcon from '../assets/images/icons/CalculatorIcon';
 import DocsIcon from '../assets/images/icons/DocsIcon';
@@ -256,7 +256,7 @@ const folderReducer = (state, action) => {
 
 const FolderContext = createContext();
 const DispatchFolderContext = createContext();
-export const FolderProvider = (props) => {
+export const FolderProvider = ({ children }) => {
     const [folderState, folderDispatch] = useReducer(folderReducer, {
         apps: APPS_STATE,
         openApps: [],
@@ -314,24 +314,28 @@ export const FolderProvider = (props) => {
         return comparison;
     };
 
+    const folderContextValue = useMemo(() => {
+        return {
+            folderState,
+            sortByAppName,
+        };
+    }, [folderState]);
+
+    const dispatchFolderContextValue = useMemo(() => {
+        return {
+            openFolder,
+            closeFolder,
+            closeAllFolders,
+            activeFolder,
+            minimizeUp,
+            minimizeDown,
+        };
+    }, []);
+
     return (
-        <FolderContext.Provider
-            value={{
-                folderState,
-                sortByAppName,
-            }}
-        >
-            <DispatchFolderContext.Provider
-                value={{
-                    openFolder,
-                    closeFolder,
-                    closeAllFolders,
-                    activeFolder,
-                    minimizeUp,
-                    minimizeDown,
-                }}
-            >
-                {props.children}
+        <FolderContext.Provider value={folderContextValue}>
+            <DispatchFolderContext.Provider value={dispatchFolderContextValue}>
+                {children}
             </DispatchFolderContext.Provider>
         </FolderContext.Provider>
     );

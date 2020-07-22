@@ -1,6 +1,6 @@
 import Backdrop from '@material-ui/core/Backdrop';
 import { AnimatePresence } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -19,27 +19,30 @@ const LoginPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
+    const navigateWithAnimation = useCallback((path) => {
+        setShowAuth(false);
+
+        // setTimeout is used for unmount animation
+        setTimeout(() => {
+            navigate(path);
+        }, 300);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const onCancel = () => {
         // If user is not logged in and cancels login
         // Redirect user to previous route
         // Or redirect to '/' if no previous route
         if (!isUserLoggedIn() && !!location.state?.nextPathname) {
             if (!isMobile) {
-                setShowAuth(false);
-
-                setTimeout(() => {
-                    navigate(location.state.nextPathname);
-                }, 300);
+                navigateWithAnimation(location.state.nextPathname);
             } else {
                 navigate(location.state.nextPathname);
             }
         } else if (!isUserLoggedIn() && !location.state?.nextPathname) {
             if (!isMobile) {
-                setShowAuth(false);
-
-                setTimeout(() => {
-                    navigate('/');
-                }, 300);
+                navigateWithAnimation('/');
             } else {
                 navigate('/');
             }
@@ -59,21 +62,13 @@ const LoginPage = () => {
         // Redirect the user back after auto-login
         if (isUserLoggedIn() && !!location.state?.nextPathname) {
             if (!isMobile) {
-                setShowAuth(false);
-
-                setTimeout(() => {
-                    navigate(location.state.nextPathname);
-                }, 300);
+                navigateWithAnimation(location.state.nextPathname);
             } else {
                 navigate(location.state.nextPathname);
             }
         } else if (isUserLoggedIn() && !location.state?.nextPathname) {
             if (!isMobile) {
-                setShowAuth(false);
-
-                setTimeout(() => {
-                    navigate('/');
-                }, 300);
+                navigateWithAnimation('/');
             } else {
                 navigate('/');
             }
