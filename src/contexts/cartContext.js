@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
 
 const CART_ACTIONS = {
     add: 'ADD',
@@ -46,29 +46,36 @@ export const CartProvider = ({ children }) => {
         });
     };
 
-    const getCartTotalPrice = () => {
+    const getCartTotalPrice = useCallback(() => {
         const total = cartState.reduce((a, b) => a + b.newPrice, 0);
         return Math.round((total + Number.EPSILON) * 100) / 100;
-    };
+    }, [cartState]);
 
-    const isProductInCart = (productId) => {
-        return cartState.some((product) => product.id === productId);
-    };
+    const isProductInCart = useCallback(
+        (productId) => {
+            return cartState.some((product) => product.id === productId);
+        },
+        [cartState]
+    );
+
+    const cartValue = useMemo(() => {
+        return {
+            cartState,
+            getCartTotalPrice,
+            isProductInCart,
+        };
+    }, [cartState, getCartTotalPrice, isProductInCart]);
+
+    const cartDispatchValue = useMemo(() => {
+        return {
+            addToCart,
+            removeFromCart,
+        };
+    }, []);
 
     return (
-        <CartContext.Provider
-            value={{
-                cartState,
-                getCartTotalPrice,
-                isProductInCart,
-            }}
-        >
-            <DispatchCartContext.Provider
-                value={{
-                    addToCart,
-                    removeFromCart,
-                }}
-            >
+        <CartContext.Provider value={cartValue}>
+            <DispatchCartContext.Provider value={cartDispatchValue}>
                 {children}
             </DispatchCartContext.Provider>
         </CartContext.Provider>

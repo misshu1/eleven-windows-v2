@@ -30,10 +30,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { SnackbarProvider } from 'notistack';
-import React, { useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
+import SpinnerApp from './components/common/SpinnerApp';
 import { RoutesApp } from './components/routes/Routes';
 import { GlobalStyle } from './components/style/GlobalStyle';
 import { CartProvider } from './contexts/cartContext';
@@ -74,6 +75,22 @@ library.add(
     faPowerOff
 );
 
+const VideoApp = lazy(() => import('./components/video/VideoApp'));
+
+const VideoBackground = () => {
+    const { isVideoEnabledOnDesktop } = useSettingsContext();
+
+    return (
+        <>
+            {isVideoEnabledOnDesktop() && (
+                <Suspense fallback={<SpinnerApp global delay={200} />}>
+                    <VideoApp />
+                </Suspense>
+            )}
+        </>
+    );
+};
+
 const useStyles = makeStyles({
     margin: {
         bottom: '5rem',
@@ -92,7 +109,7 @@ const App = () => {
     const classes = useStyles();
     const location = useLocation();
 
-    // Disable the default 'desktop' and 'taskbar' styles when naviating to 'excludedRoutes'
+    // Disable the default styles for 'desktop' and 'taskbar' when naviating to 'excludedRoutes'
     useEffect(() => {
         const excludedRoutes = ['/401', '/404', '/login'];
         const routeMatch = excludedRoutes.includes(location.pathname);
@@ -130,6 +147,7 @@ const App = () => {
                             <CartProvider>
                                 <FolderProvider>
                                     <RoutesApp />
+                                    <VideoBackground />
                                 </FolderProvider>
                             </CartProvider>
                         </ThemeProvider>

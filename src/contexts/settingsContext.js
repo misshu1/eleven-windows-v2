@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-import React, { createContext, useContext, useLayoutEffect, useRef, useState } from 'react';
+import React, { createContext, useCallback, useContext, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import globeImg from '../assets/images/flags/globe.svg';
 import DarkTheme from '../components/theme/DarkTheme';
@@ -27,35 +27,35 @@ export const SettingsProvider = ({ children }) => {
     const isMobile = useMediaQuery('(max-width: 450px)');
     const isTablet = useMediaQuery('(max-width: 800px)');
 
-    const getSelectedVideoBgMP4 = () => {
+    const getSelectedVideoBgMP4 = useCallback(() => {
         const vid = videoBg.find((item) => item.isSelected === true);
         return vid.video.mp4;
-    };
+    }, [videoBg]);
 
-    const getSelectedVideoBgWEBM = () => {
+    const getSelectedVideoBgWEBM = useCallback(() => {
         const vid = videoBg.find((item) => item.isSelected === true);
         return vid.video.webm;
-    };
+    }, [videoBg]);
 
-    const getSelectedVideoBgName = () => {
+    const getSelectedVideoBgName = useCallback(() => {
         const vid = videoBg.find((item) => item.isSelected === true);
         return vid.name;
-    };
+    }, [videoBg]);
 
-    const getSelectedVideoPreview = () => {
+    const getSelectedVideoPreview = useCallback(() => {
         const vid = videoBg.find((item) => item.isSelected === true);
         return vid.preview;
-    };
+    }, [videoBg]);
 
-    const getSelectedBackground = () => {
+    const getSelectedBackground = useCallback(() => {
         const bg = background.find((item) => item.isSelected === true);
         return bg.bg;
-    };
+    }, [background]);
 
-    const getSelectedBackgroundName = () => {
+    const getSelectedBackgroundName = useCallback(() => {
         const bg = background.find((item) => item.isSelected === true);
         return bg.name;
-    };
+    }, [background]);
 
     const enableVideoBg = (e) => {
         localStorage.setItem('isVideoBgEnabled', e.target.checked);
@@ -63,40 +63,52 @@ export const SettingsProvider = ({ children }) => {
     };
 
     // New 'videoBg' state, this function is usled only in this file
-    const newVideoBgState = (id) => {
-        return videoBg.map((item) =>
-            item.id === id
-                ? { ...item, isSelected: true }
-                : { ...item, isSelected: false }
-        );
-    };
+    const newVideoBgState = useCallback(
+        (id) => {
+            return videoBg.map((item) =>
+                item.id === id
+                    ? { ...item, isSelected: true }
+                    : { ...item, isSelected: false }
+            );
+        },
+        [videoBg]
+    );
 
     // New 'background' state, this function is usled only in this file
-    const newBackgroundState = (id) => {
-        return background.map((item) =>
-            item.id === id
-                ? { ...item, isSelected: true }
-                : { ...item, isSelected: false }
-        );
-    };
+    const newBackgroundState = useCallback(
+        (id) => {
+            return background.map((item) =>
+                item.id === id
+                    ? { ...item, isSelected: true }
+                    : { ...item, isSelected: false }
+            );
+        },
+        [background]
+    );
 
-    const changeBackground = (id) => {
-        localStorage.setItem('background', id);
-        const checkBackground = background.find((item) => item.id === id);
+    const changeBackground = useCallback(
+        (id) => {
+            localStorage.setItem('background', id);
+            const checkBackground = background.find((item) => item.id === id);
 
-        if (!checkBackground.isSelected) {
-            setBackground(newBackgroundState(id));
-        }
-    };
+            if (!checkBackground.isSelected) {
+                setBackground(newBackgroundState(id));
+            }
+        },
+        [background, newBackgroundState]
+    );
 
-    const changeVideoBg = (id) => {
-        localStorage.setItem('videoBg', id);
-        const checkVideo = videoBg.find((item) => item.id === id);
+    const changeVideoBg = useCallback(
+        (id) => {
+            localStorage.setItem('videoBg', id);
+            const checkVideo = videoBg.find((item) => item.id === id);
 
-        if (!checkVideo.isSelected) {
-            setVideoBg(newVideoBgState(id));
-        }
-    };
+            if (!checkVideo.isSelected) {
+                setVideoBg(newVideoBgState(id));
+            }
+        },
+        [newVideoBgState, videoBg]
+    );
 
     const checkLocalStorageVideoBg = () => {
         const videoBgLocalStorage = localStorage.getItem('videoBg');
@@ -182,13 +194,13 @@ export const SettingsProvider = ({ children }) => {
         }
     }, [currentOS, isMobile]);
 
-    const selectDarkTheme = () => {
+    const selectDarkTheme = useCallback(() => {
         changeTheme(THEME.dark);
-    };
+    }, []);
 
-    const selectLightTheme = () => {
+    const selectLightTheme = useCallback(() => {
         changeTheme(THEME.light);
-    };
+    }, []);
 
     const languageFlag = () => {
         const locationLanguage = i18next.language;
@@ -204,29 +216,29 @@ export const SettingsProvider = ({ children }) => {
         i18n.changeLanguage(lang);
     };
 
-    const isDarkThemeSelected = () => {
+    const isDarkThemeSelected = useCallback(() => {
         return theme.id === THEME.dark;
-    };
+    }, [theme.id]);
 
-    const isLightThemeSelected = () => {
+    const isLightThemeSelected = useCallback(() => {
         return theme.id === THEME.light;
-    };
+    }, [theme.id]);
 
-    const isLinuxSelected = () => {
+    const isLinuxSelected = useCallback(() => {
         return currentOS === OS_THEME.linux;
-    };
+    }, [currentOS]);
 
-    const isWindowsSelected = () => {
+    const isWindowsSelected = useCallback(() => {
         return currentOS === OS_THEME.windows;
-    };
+    }, [currentOS]);
 
-    const isMobileSelected = () => {
+    const isMobileSelected = useCallback(() => {
         return currentOS === OS_THEME.mobile;
-    };
+    }, [currentOS]);
 
-    const isVideoEnabledOnDesktop = () => {
+    const isVideoEnabledOnDesktop = useCallback(() => {
         return !isTablet && isVideoBgEnabled;
-    };
+    }, [isTablet, isVideoBgEnabled]);
 
     const selectWindowsOS = () => {
         setCurrentOS(OS_THEME.windows);
@@ -236,36 +248,59 @@ export const SettingsProvider = ({ children }) => {
         setCurrentOS(OS_THEME.linux);
     };
 
+    const settingsValue = useMemo(() => {
+        return {
+            isLinuxSelected,
+            isWindowsSelected,
+            isMobileSelected,
+            isDarkThemeSelected,
+            isLightThemeSelected,
+            selectWindowsOS,
+            selectLinuxOS,
+            languageFlag,
+            changeLanguage,
+            selectLightTheme,
+            selectDarkTheme,
+            getSelectedBackgroundName,
+            getSelectedBackground,
+            changeBackground,
+            theme,
+            background,
+            isVideoEnabledOnDesktop,
+            isVideoBgEnabled,
+            getSelectedVideoBgMP4,
+            getSelectedVideoBgWEBM,
+            getSelectedVideoBgName,
+            changeVideoBg,
+            videoBg,
+            enableVideoBg,
+            getSelectedVideoPreview,
+        };
+    }, [
+        background,
+        changeBackground,
+        changeVideoBg,
+        getSelectedBackground,
+        getSelectedBackgroundName,
+        getSelectedVideoBgMP4,
+        getSelectedVideoBgName,
+        getSelectedVideoBgWEBM,
+        getSelectedVideoPreview,
+        isDarkThemeSelected,
+        isLightThemeSelected,
+        isLinuxSelected,
+        isMobileSelected,
+        isVideoBgEnabled,
+        isVideoEnabledOnDesktop,
+        isWindowsSelected,
+        selectDarkTheme,
+        selectLightTheme,
+        theme,
+        videoBg,
+    ]);
+
     return (
-        <SettingsContext.Provider
-            value={{
-                isLinuxSelected,
-                isWindowsSelected,
-                isMobileSelected,
-                isDarkThemeSelected,
-                isLightThemeSelected,
-                selectWindowsOS,
-                selectLinuxOS,
-                languageFlag,
-                changeLanguage,
-                selectLightTheme,
-                selectDarkTheme,
-                getSelectedBackgroundName,
-                getSelectedBackground,
-                changeBackground,
-                theme,
-                background,
-                isVideoEnabledOnDesktop,
-                isVideoBgEnabled,
-                getSelectedVideoBgMP4,
-                getSelectedVideoBgWEBM,
-                getSelectedVideoBgName,
-                changeVideoBg,
-                videoBg,
-                enableVideoBg,
-                getSelectedVideoPreview,
-            }}
-        >
+        <SettingsContext.Provider value={settingsValue}>
             {children}
         </SettingsContext.Provider>
     );

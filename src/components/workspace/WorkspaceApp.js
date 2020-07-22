@@ -1,22 +1,18 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 
 import { useSettingsContext } from '../../contexts/settingsContext';
 import useMediaQuery from '../../hooks/useMediaQuery';
-import SpinnerApp from '../common/SpinnerApp';
 import QuickAccessApp from '../quickAccess/QuickAccessApp';
 import FolderRoutes from '../routes/FolderRoutes';
 import WorkspaceLinux from './linux/WorkspaceLinux';
 import WorkspaceMobile from './mobile/WorkspaceMobile';
 import WorkspaceWindows from './windows/WorkspaceWindows';
 
-const VideoApp = lazy(() => import('../video/VideoApp'));
-
 const WorkspaceApp = () => {
     const {
         isLinuxSelected,
         isWindowsSelected,
         isMobileSelected,
-        isVideoEnabledOnDesktop,
     } = useSettingsContext();
     const isMobile = useMediaQuery('(max-width: 450px)');
 
@@ -29,11 +25,6 @@ const WorkspaceApp = () => {
             {isLinuxSelected() && <WorkspaceLinux />}
             {isWindowsSelected() && <WorkspaceWindows />}
             {isMobileSelected() && <WorkspaceMobile />}
-            {isVideoEnabledOnDesktop() && (
-                <Suspense fallback={<SpinnerApp global delay={200} />}>
-                    <VideoApp />
-                </Suspense>
-            )}
         </>
     );
 };

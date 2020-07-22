@@ -1,5 +1,5 @@
 import { useSnackbar } from 'notistack';
-import React, { createContext, useContext, useLayoutEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useLayoutEffect, useMemo, useState } from 'react';
 import uuid from 'uuid';
 
 import Notification from '../components/notifications/notification/Notification';
@@ -28,11 +28,14 @@ export const NotificationsProvider = ({ children }) => {
         }
     }, []);
 
-    const disableNotifications = (boolean) => {
-        localStorage.setItem('disableNotifications', boolean);
-        closeSnackbar();
-        setDesable(boolean);
-    };
+    const disableNotifications = useCallback(
+        (boolean) => {
+            localStorage.setItem('disableNotifications', boolean);
+            closeSnackbar();
+            setDesable(boolean);
+        },
+        [closeSnackbar]
+    );
 
     const closeNotification = (id) => {
         setNotificationsHistory((prevState) =>
@@ -40,175 +43,199 @@ export const NotificationsProvider = ({ children }) => {
         );
     };
 
-    const clearAllNotifications = () => {
+    const clearAllNotifications = useCallback(() => {
         if (notificationsHistory.length > 0) {
             setNotificationsHistory([]);
         }
-    };
+    }, [notificationsHistory.length]);
 
-    const areNotificationsDisabled = () => {
+    const areNotificationsDisabled = useCallback(() => {
         return disable;
-    };
+    }, [disable]);
 
-    const showSuccess = (title, message) => {
-        const id = uuid.v4();
-        setNotificationsHistory((prevState) => [
-            {
-                id: id,
-                component: (
-                    <Notification
-                        key={id}
-                        id={id}
-                        message={message}
-                        type={NOTIFICATION_TYPE.success}
-                        title={title}
-                        onClose={closeNotification}
-                    />
-                ),
-            },
-            ...prevState,
-        ]);
+    const showSuccess = useCallback(
+        (title, message) => {
+            const id = uuid.v4();
+            setNotificationsHistory((prevState) => [
+                {
+                    id: id,
+                    component: (
+                        <Notification
+                            key={id}
+                            id={id}
+                            message={message}
+                            type={NOTIFICATION_TYPE.success}
+                            title={title}
+                            onClose={closeNotification}
+                        />
+                    ),
+                },
+                ...prevState,
+            ]);
 
-        if (!disable) {
-            enqueueSnackbar(message, {
-                content: (key, message) => (
-                    <Notification
-                        id={key}
-                        message={message}
-                        type={NOTIFICATION_TYPE.success}
-                        title={title}
-                        onClose={closeSnackbar}
-                        isModal={true}
-                    />
-                ),
-            });
-        }
-    };
+            if (!disable) {
+                enqueueSnackbar(message, {
+                    content: (key, message) => (
+                        <Notification
+                            id={key}
+                            message={message}
+                            type={NOTIFICATION_TYPE.success}
+                            title={title}
+                            onClose={closeSnackbar}
+                            isModal={true}
+                        />
+                    ),
+                });
+            }
+        },
+        [closeSnackbar, disable, enqueueSnackbar]
+    );
 
-    const showError = (title, message, code) => {
-        const id = uuid.v4();
-        setNotificationsHistory((prevState) => [
-            {
-                id: id,
-                component: (
-                    <Notification
-                        key={id}
-                        id={id}
-                        message={message}
-                        type={NOTIFICATION_TYPE.error}
-                        title={title}
-                        onClose={closeNotification}
-                        code={code}
-                    />
-                ),
-            },
-            ...prevState,
-        ]);
+    const showError = useCallback(
+        (title, message, code) => {
+            const id = uuid.v4();
+            setNotificationsHistory((prevState) => [
+                {
+                    id: id,
+                    component: (
+                        <Notification
+                            key={id}
+                            id={id}
+                            message={message}
+                            type={NOTIFICATION_TYPE.error}
+                            title={title}
+                            onClose={closeNotification}
+                            code={code}
+                        />
+                    ),
+                },
+                ...prevState,
+            ]);
 
-        if (!disable) {
-            enqueueSnackbar(message, {
-                content: (key, message) => (
-                    <Notification
-                        id={key}
-                        message={message}
-                        type={NOTIFICATION_TYPE.error}
-                        title={title}
-                        code={code}
-                        onClose={closeSnackbar}
-                        isModal={true}
-                    />
-                ),
-            });
-        }
-    };
+            if (!disable) {
+                enqueueSnackbar(message, {
+                    content: (key, message) => (
+                        <Notification
+                            id={key}
+                            message={message}
+                            type={NOTIFICATION_TYPE.error}
+                            title={title}
+                            code={code}
+                            onClose={closeSnackbar}
+                            isModal={true}
+                        />
+                    ),
+                });
+            }
+        },
+        [closeSnackbar, disable, enqueueSnackbar]
+    );
 
-    const showWarning = (title, message, code) => {
-        const id = uuid.v4();
-        setNotificationsHistory((prevState) => [
-            {
-                id: id,
-                component: (
-                    <Notification
-                        key={id}
-                        id={id}
-                        message={message}
-                        type={NOTIFICATION_TYPE.warning}
-                        title={title}
-                        onClose={closeNotification}
-                        code={code}
-                    />
-                ),
-            },
-            ...prevState,
-        ]);
+    const showWarning = useCallback(
+        (title, message, code) => {
+            const id = uuid.v4();
+            setNotificationsHistory((prevState) => [
+                {
+                    id: id,
+                    component: (
+                        <Notification
+                            key={id}
+                            id={id}
+                            message={message}
+                            type={NOTIFICATION_TYPE.warning}
+                            title={title}
+                            onClose={closeNotification}
+                            code={code}
+                        />
+                    ),
+                },
+                ...prevState,
+            ]);
 
-        if (!disable) {
-            enqueueSnackbar(message, {
-                content: (key, message) => (
-                    <Notification
-                        id={key}
-                        message={message}
-                        type={NOTIFICATION_TYPE.warning}
-                        title={title}
-                        code={code}
-                        onClose={closeSnackbar}
-                        isModal={true}
-                    />
-                ),
-            });
-        }
-    };
+            if (!disable) {
+                enqueueSnackbar(message, {
+                    content: (key, message) => (
+                        <Notification
+                            id={key}
+                            message={message}
+                            type={NOTIFICATION_TYPE.warning}
+                            title={title}
+                            code={code}
+                            onClose={closeSnackbar}
+                            isModal={true}
+                        />
+                    ),
+                });
+            }
+        },
+        [closeSnackbar, disable, enqueueSnackbar]
+    );
 
-    const showInfo = (title, message) => {
-        const id = uuid.v4();
-        setNotificationsHistory((prevState) => [
-            {
-                id: id,
-                component: (
-                    <Notification
-                        key={id}
-                        id={id}
-                        message={message}
-                        type={NOTIFICATION_TYPE.info}
-                        title={title}
-                        onClose={closeNotification}
-                    />
-                ),
-            },
-            ...prevState,
-        ]);
+    const showInfo = useCallback(
+        (title, message) => {
+            const id = uuid.v4();
+            setNotificationsHistory((prevState) => [
+                {
+                    id: id,
+                    component: (
+                        <Notification
+                            key={id}
+                            id={id}
+                            message={message}
+                            type={NOTIFICATION_TYPE.info}
+                            title={title}
+                            onClose={closeNotification}
+                        />
+                    ),
+                },
+                ...prevState,
+            ]);
 
-        if (!disable) {
-            enqueueSnackbar(message, {
-                content: (key, message) => (
-                    <Notification
-                        id={key}
-                        message={message}
-                        type={NOTIFICATION_TYPE.info}
-                        title={title}
-                        onClose={closeSnackbar}
-                        isModal={true}
-                    />
-                ),
-            });
-        }
-    };
+            if (!disable) {
+                enqueueSnackbar(message, {
+                    content: (key, message) => (
+                        <Notification
+                            id={key}
+                            message={message}
+                            type={NOTIFICATION_TYPE.info}
+                            title={title}
+                            onClose={closeSnackbar}
+                            isModal={true}
+                        />
+                    ),
+                });
+            }
+        },
+        [closeSnackbar, disable, enqueueSnackbar]
+    );
+
+    const notificationsValue = useMemo(() => {
+        return {
+            disable,
+            notificationsHistory,
+            showSuccess,
+            showError,
+            showWarning,
+            showInfo,
+            clearAllNotifications,
+            disableNotifications,
+            closeNotification,
+            areNotificationsDisabled,
+        };
+    }, [
+        areNotificationsDisabled,
+        clearAllNotifications,
+        disable,
+        disableNotifications,
+        notificationsHistory,
+        showError,
+        showInfo,
+        showSuccess,
+        showWarning,
+    ]);
 
     return (
-        <NotificationsContext.Provider
-            value={{
-                disable,
-                notificationsHistory,
-                showSuccess,
-                showError,
-                showWarning,
-                showInfo,
-                clearAllNotifications,
-                disableNotifications,
-                closeNotification,
-                areNotificationsDisabled,
-            }}
-        >
+        <NotificationsContext.Provider value={notificationsValue}>
             {children}
         </NotificationsContext.Provider>
     );
