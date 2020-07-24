@@ -168,7 +168,7 @@ const toolbarMenu = () => {
 
 const DocsApp = () => {
     const [highlightStyle, setHighlightStyle] = useState(tomorrow);
-    const { theme } = useSettingsContext();
+    const { getTheme } = useSettingsContext();
     const {
         showSuccess,
         showError,
@@ -185,12 +185,12 @@ const DocsApp = () => {
     const scrollbarRef = useRef(null);
 
     useEffect(() => {
-        if (theme.id === THEME.dark) {
+        if (getTheme().id === THEME.dark) {
             setHighlightStyle(tomorrow);
-        } else if (theme.id === THEME.light) {
+        } else if (getTheme().id === THEME.light) {
             setHighlightStyle(vs);
         }
-    }, [theme.id]);
+    }, [getTheme]);
 
     return (
         <FolderApp

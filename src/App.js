@@ -100,7 +100,7 @@ const useStyles = makeStyles({
 const App = () => {
     const [renderStyles, setRenderStyles] = useState(false);
     const {
-        theme,
+        getTheme,
         getSelectedBackground,
         isLinuxSelected,
         isWindowsSelected,
@@ -136,7 +136,7 @@ const App = () => {
             <NotificationsProvider>
                 <FirebaseProvider>
                     <AuthProvider>
-                        <ThemeProvider theme={theme}>
+                        <ThemeProvider theme={getTheme()}>
                             <GlobalStyle
                                 background={getSelectedBackground()}
                                 linux={isLinuxSelected()}

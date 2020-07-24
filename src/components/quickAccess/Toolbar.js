@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useNotificationsContext } from '../../contexts/notificationsContext';
-import { useSettingsContext } from '../../contexts/settingsContext';
+import { useDispatchSettingsContext, useSettingsContext } from '../../contexts/settingsContext';
 import { useAuth } from '../../hooks/useAuth';
 import { quickAccessToolbarAnimation, quickAccessToolbarCloseBtnAnimation } from '../animations';
 import IconApp from './IconApp';
@@ -15,11 +15,13 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
         isWindowsSelected,
         isDarkThemeSelected,
         isLightThemeSelected,
+    } = useSettingsContext();
+    const {
         selectLightTheme,
         selectDarkTheme,
         selectWindowsOS,
         selectLinuxOS,
-    } = useSettingsContext();
+    } = useDispatchSettingsContext();
     const {
         areNotificationsDisabled,
         disableNotifications,

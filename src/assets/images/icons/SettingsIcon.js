@@ -4,18 +4,18 @@ import { useSettingsContext } from '../../../contexts/settingsContext';
 
 const SettingsIcon = (props) => {
     const { width, height } = props;
-    const { theme } = useSettingsContext();
+    const { getTheme } = useSettingsContext();
 
     return (
         <svg
-            key={theme.id}
+            key={getTheme().id}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 750'
             height={height ? height : '100%'}
             width={width ? width : '100%'}
         >
             <g
-                fill={theme.accentBg}
+                fill={getTheme().accentBg}
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             >
                 <path d='M375 135.9c132.1 0 239.2 107.1 239.2 239.2S507.1 614.2 375 614.2 135.8 507.1 135.8 375c.1-132.1 107.1-239.1 239.2-239.1m0-59.1C210.3 76.8 76.8 210.3 76.8 375S210.3 673.3 375 673.3s298.2-133.5 298.2-298.2C673 210.4 539.6 77 375 76.8z' />

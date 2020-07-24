@@ -24,12 +24,12 @@ const useStyles = makeStyles({
         overflow: 'hidden',
         paddingLeft: '3rem',
         cursor: 'default',
-        backgroundColor: theme.material.primary.main,
-        color: theme.material.primary.contrast.darker,
+        backgroundColor: theme().material.primary.main,
+        color: theme().material.primary.contrast.darker,
         margin: '0 1rem',
 
         '&:hover': {
-            backgroundColor: theme.material.primary.darker,
+            backgroundColor: theme().material.primary.darker,
         },
     }),
     btnLabel: {
@@ -40,8 +40,8 @@ const useStyles = makeStyles({
 const StartMenuApp = ({ startMenuRef }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const { closeStartMenu } = useStartMenuContext();
-    const { theme } = useSettingsContext();
-    const classes = useStyles(theme);
+    const { getTheme } = useSettingsContext();
+    const classes = useStyles(getTheme);
     const { user, logout } = useAuth();
     const { t } = useTranslation();
 

@@ -25,8 +25,8 @@ const useStyles = makeStyles({
         overflow: 'hidden',
         paddingLeft: '3rem',
         cursor: 'default',
-        backgroundColor: theme.material.primary.main,
-        color: theme.material.primary.contrast.darker,
+        backgroundColor: theme().material.primary.main,
+        color: theme().material.primary.contrast.darker,
 
         '&:disabled': {
             filter: 'grayscale(1)',
@@ -34,11 +34,11 @@ const useStyles = makeStyles({
         },
 
         '&:hover': {
-            backgroundColor: theme.material.primary.darker,
+            backgroundColor: theme().material.primary.darker,
         },
     }),
     ratingColor: (theme) => ({
-        color: theme.ratingColorEmpty,
+        color: theme().ratingColorEmpty,
     }),
 });
 
@@ -46,10 +46,10 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
     const { imagePreview, newPrice, oldPrice, ratings, title } = product;
     const { addToCart } = useDispatchCartContext();
     const { isProductInCart } = useCartContext();
-    const { theme } = useSettingsContext();
+    const { getTheme } = useSettingsContext();
     const [discountVal, setDiscountVal] = useState(0);
     const [ratingVal, setRatingVal] = useState(0);
-    const classes = useStyles(theme);
+    const classes = useStyles(getTheme);
 
     const selectProduct = useCallback(() => {
         setSelectedProduct(product);

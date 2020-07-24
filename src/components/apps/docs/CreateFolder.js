@@ -103,16 +103,16 @@ const folderPropsTable = [
 
 const CreateFolder = (props, ref) => {
     const [highlightStyle, setHighlightStyle] = useState(tomorrow);
-    const { theme } = useSettingsContext();
+    const { getTheme } = useSettingsContext();
     const classes = useStyles();
 
     useEffect(() => {
-        if (theme.id === THEME.dark) {
+        if (getTheme().id === THEME.dark) {
             setHighlightStyle(tomorrow);
-        } else if (theme.id === THEME.light) {
+        } else if (getTheme().id === THEME.light) {
             setHighlightStyle(vs);
         }
-    }, [theme.id]);
+    }, [getTheme]);
 
     return (
         <>

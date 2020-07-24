@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
-import { useSettingsContext } from '../../../../../../contexts/settingsContext';
+import { useDispatchSettingsContext } from '../../../../../../contexts/settingsContext';
 import { languages } from '../../../../../../services/translation/i18next';
 import { useLanguageContext } from '../../contexts/languageContext';
 import { Container as LanguageContainer, FlagImg } from '../../icons/language/style';
@@ -12,7 +12,7 @@ import { Container } from './style';
 const LanguageApp = ({ languageMenuRef }) => {
     const { showSuccess } = useNotificationsContext();
     const { closeLanguage } = useLanguageContext();
-    const { changeLanguage } = useSettingsContext();
+    const { changeLanguage } = useDispatchSettingsContext();
     const { t } = useTranslation();
 
     const showLanguages = useCallback(() => {

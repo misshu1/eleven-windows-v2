@@ -13,21 +13,21 @@ const useStyles = makeStyles({
         overflow: 'hidden',
         paddingLeft: '3rem',
         cursor: 'default',
-        backgroundColor: theme.material.primary.main,
-        color: theme.material.primary.contrast.darker,
+        backgroundColor: theme().material.primary.main,
+        color: theme().material.primary.contrast.darker,
 
         '&:hover': {
-            backgroundColor: theme.material.primary.darker,
+            backgroundColor: theme().material.primary.darker,
         },
     }),
     ratingColor: (theme) => ({
-        color: theme.ratingColorEmpty,
+        color: theme().ratingColorEmpty,
     }),
 });
 
 const DetailsApp = (props) => {
-    const { theme } = useSettingsContext();
-    const classes = useStyles(theme);
+    const { getTheme } = useSettingsContext();
+    const classes = useStyles(getTheme);
     const { title, image, content, price, discount } = props;
 
     return (

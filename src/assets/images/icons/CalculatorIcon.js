@@ -4,11 +4,11 @@ import { useSettingsContext } from '../../../contexts/settingsContext';
 
 const CalculatorIcon = (props) => {
     const { width, height } = props;
-    const { theme } = useSettingsContext();
+    const { getTheme } = useSettingsContext();
 
     return (
         <svg
-            key={theme.id}
+            key={getTheme().id}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 750'
             width={width ? width : '100%'}
@@ -21,7 +21,7 @@ const CalculatorIcon = (props) => {
             </g>
             <path
                 d='M375 375h375v375H375z'
-                fill={theme.accentBg}
+                fill={getTheme().accentBg}
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
             <g fill='none'>

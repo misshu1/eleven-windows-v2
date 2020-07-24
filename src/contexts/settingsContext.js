@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-import React, { createContext, useCallback, useContext, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { createContext, useCallback, useContext, useLayoutEffect, useMemo, useReducer, useRef } from 'react';
 
 import globeImg from '../assets/images/flags/globe.svg';
 import DarkTheme from '../components/theme/DarkTheme';
@@ -16,111 +16,202 @@ const OS_THEME = {
     mobile: 'MOBILE',
 };
 
+const SETTINGS_ACTIONS = {
+    changeOS: 'CHANGE_OS',
+    changeTheme: 'CHANGE_THEME',
+    changeBackground: 'CHANGE_BACKGROUND',
+    changeVideoBackground: 'CHANGE_VIDEO_BACKGROUND',
+    enableVideoBackground: 'ENABLE_VIDEO_BACKGROUND',
+};
+
+const SETTINGS_STATE = {
+    OS: OS_THEME.windows,
+    theme: DarkTheme,
+    background: backgrounds,
+    videoBackground: videoBackgrounds,
+    isVideoBackgroundEnabled: false,
+};
+
+const settingsReducer = (state, action) => {
+    switch (action.type) {
+        case SETTINGS_ACTIONS.changeOS:
+            if (state.OS !== action.payload) {
+                return {
+                    ...state,
+                    OS: action.payload,
+                };
+            } else {
+                return state;
+            }
+
+        case SETTINGS_ACTIONS.changeTheme:
+            if (state.theme !== action.payload) {
+                switch (action.payload) {
+                    case THEME.dark:
+                        localStorage.setItem('theme', THEME.dark);
+                        return {
+                            ...state,
+                            theme: DarkTheme,
+                        };
+                    case THEME.light:
+                        localStorage.setItem('theme', THEME.light);
+                        return {
+                            ...state,
+                            theme: LightTheme,
+                        };
+                    default:
+                        throw new Error(
+                            `There is no theme with the name: ${action.payload}`
+                        );
+                }
+            } else {
+                return state;
+            }
+
+        case SETTINGS_ACTIONS.changeBackground:
+            const isBackgroundSelected = state.background.map(
+                (item) => item.isSelected
+            );
+
+            if (isBackgroundSelected !== action.payload) {
+                return {
+                    ...state,
+                    background: state.background.map((item) =>
+                        item.id === action.payload
+                            ? { ...item, isSelected: true }
+                            : { ...item, isSelected: false }
+                    ),
+                };
+            } else {
+                return state;
+            }
+
+        case SETTINGS_ACTIONS.changeVideoBackground:
+            const isVideoSelected = state.videoBackground.map(
+                (item) => item.isSelected
+            );
+
+            if (isVideoSelected !== action.payload) {
+                return {
+                    ...state,
+                    videoBackground: state.videoBackground.map((item) =>
+                        item.id === action.payload
+                            ? { ...item, isSelected: true }
+                            : { ...item, isSelected: false }
+                    ),
+                };
+            } else {
+                return state;
+            }
+
+        case SETTINGS_ACTIONS.enableVideoBackground:
+            if (state.isVideoBackgroundEnabled !== action.payload) {
+                return {
+                    ...state,
+                    isVideoBackgroundEnabled: action.payload,
+                };
+            } else {
+                return state;
+            }
+
+        default:
+            throw new Error(`Unhandled action type: ${action.type}`);
+    }
+};
+
 export const SettingsContext = createContext();
+export const DispatchSettingsContext = createContext();
 export const SettingsProvider = ({ children }) => {
-    const [currentOS, setCurrentOS] = useState(OS_THEME.windows);
-    const [isVideoBgEnabled, setIsVideoBgEnabled] = useState(false);
-    const [videoBg, setVideoBg] = useState(videoBackgrounds);
-    const [background, setBackground] = useState(backgrounds);
-    const [theme, setTheme] = useState(DarkTheme);
+    const [settingsState, settingsDispatch] = useReducer(
+        settingsReducer,
+        SETTINGS_STATE
+    );
+
     const prevOSRef = useRef(null); // Here we keep the 'currentOS' old state
     const isMobile = useMediaQuery('(max-width: 450px)');
     const isTablet = useMediaQuery('(max-width: 800px)');
 
     const getSelectedVideoBgMP4 = useCallback(() => {
-        const vid = videoBg.find((item) => item.isSelected === true);
+        const vid = settingsState.videoBackground.find(
+            (item) => item.isSelected === true
+        );
         return vid.video.mp4;
-    }, [videoBg]);
+    }, [settingsState.videoBackground]);
 
     const getSelectedVideoBgWEBM = useCallback(() => {
-        const vid = videoBg.find((item) => item.isSelected === true);
+        const vid = settingsState.videoBackground.find(
+            (item) => item.isSelected === true
+        );
         return vid.video.webm;
-    }, [videoBg]);
+    }, [settingsState.videoBackground]);
 
     const getSelectedVideoBgName = useCallback(() => {
-        const vid = videoBg.find((item) => item.isSelected === true);
+        const vid = settingsState.videoBackground.find(
+            (item) => item.isSelected === true
+        );
         return vid.name;
-    }, [videoBg]);
+    }, [settingsState.videoBackground]);
 
     const getSelectedVideoPreview = useCallback(() => {
-        const vid = videoBg.find((item) => item.isSelected === true);
+        const vid = settingsState.videoBackground.find(
+            (item) => item.isSelected === true
+        );
         return vid.preview;
-    }, [videoBg]);
+    }, [settingsState.videoBackground]);
 
     const getSelectedBackground = useCallback(() => {
-        const bg = background.find((item) => item.isSelected === true);
+        const bg = settingsState.background.find(
+            (item) => item.isSelected === true
+        );
         return bg.bg;
-    }, [background]);
+    }, [settingsState.background]);
 
     const getSelectedBackgroundName = useCallback(() => {
-        const bg = background.find((item) => item.isSelected === true);
+        const bg = settingsState.background.find(
+            (item) => item.isSelected === true
+        );
         return bg.name;
-    }, [background]);
+    }, [settingsState.background]);
 
-    const enableVideoBg = (e) => {
-        localStorage.setItem('isVideoBgEnabled', e.target.checked);
-        setIsVideoBgEnabled(e.target.checked);
+    const enableVideoBg = (val) => {
+        localStorage.setItem('isVideoBgEnabled', val);
+        settingsDispatch({
+            type: SETTINGS_ACTIONS.enableVideoBackground,
+            payload: val,
+        });
     };
 
-    // New 'videoBg' state, this function is usled only in this file
-    const newVideoBgState = useCallback(
-        (id) => {
-            return videoBg.map((item) =>
-                item.id === id
-                    ? { ...item, isSelected: true }
-                    : { ...item, isSelected: false }
-            );
-        },
-        [videoBg]
-    );
+    const changeBackground = (id) => {
+        localStorage.setItem('background', id);
 
-    // New 'background' state, this function is usled only in this file
-    const newBackgroundState = useCallback(
-        (id) => {
-            return background.map((item) =>
-                item.id === id
-                    ? { ...item, isSelected: true }
-                    : { ...item, isSelected: false }
-            );
-        },
-        [background]
-    );
+        settingsDispatch({
+            type: SETTINGS_ACTIONS.changeBackground,
+            payload: id,
+        });
+    };
 
-    const changeBackground = useCallback(
-        (id) => {
-            localStorage.setItem('background', id);
-            const checkBackground = background.find((item) => item.id === id);
-
-            if (!checkBackground.isSelected) {
-                setBackground(newBackgroundState(id));
-            }
-        },
-        [background, newBackgroundState]
-    );
-
-    const changeVideoBg = useCallback(
-        (id) => {
-            localStorage.setItem('videoBg', id);
-            const checkVideo = videoBg.find((item) => item.id === id);
-
-            if (!checkVideo.isSelected) {
-                setVideoBg(newVideoBgState(id));
-            }
-        },
-        [newVideoBgState, videoBg]
-    );
+    const changeVideoBg = (id) => {
+        localStorage.setItem('videoBg', id);
+        settingsDispatch({
+            type: SETTINGS_ACTIONS.changeVideoBackground,
+            payload: id,
+        });
+    };
 
     const checkLocalStorageVideoBg = () => {
         const videoBgLocalStorage = localStorage.getItem('videoBg');
 
         // Set initial selected video in local storage
         if (!videoBgLocalStorage) {
-            const getSelectedVideo = videoBackgrounds.find(
+            const getSelectedVideo = settingsState.videoBackground.find(
                 (item) => item.isSelected === true
             );
             localStorage.setItem('videoBg', getSelectedVideo.id);
         } else {
-            setVideoBg(newVideoBgState(videoBgLocalStorage));
+            settingsDispatch({
+                type: SETTINGS_ACTIONS.changeVideoBackground,
+                payload: videoBgLocalStorage,
+            });
         }
     };
 
@@ -129,12 +220,15 @@ export const SettingsProvider = ({ children }) => {
 
         // Set initial selected background in local storage
         if (!bg) {
-            const getSelectedBackground = backgrounds.find(
+            const getSelectedBackground = settingsState.background.find(
                 (item) => item.isSelected === true
             );
             localStorage.setItem('background', getSelectedBackground.id);
         } else {
-            setBackground(newBackgroundState(bg));
+            settingsDispatch({
+                type: SETTINGS_ACTIONS.changeBackground,
+                payload: bg,
+            });
         }
     };
 
@@ -142,27 +236,22 @@ export const SettingsProvider = ({ children }) => {
         const theme = localStorage.getItem('theme');
         if (!theme) {
             localStorage.setItem('theme', THEME.dark);
-            setTheme(DarkTheme);
+            settingsDispatch({
+                type: SETTINGS_ACTIONS.changeTheme,
+                payload: DarkTheme,
+            });
         }
-        if (theme === THEME.dark) {
-            setTheme(DarkTheme);
-        } else if (theme === THEME.light) {
-            setTheme(LightTheme);
-        }
-    };
 
-    const changeTheme = (themeName) => {
-        switch (themeName) {
-            case THEME.dark:
-                localStorage.setItem('theme', THEME.dark);
-                return setTheme(DarkTheme);
-            case THEME.light:
-                localStorage.setItem('theme', THEME.light);
-                return setTheme(LightTheme);
-            default:
-                throw new Error(
-                    `There is no theme with the name: ${themeName}`
-                );
+        if (theme === THEME.dark) {
+            settingsDispatch({
+                type: SETTINGS_ACTIONS.changeTheme,
+                payload: DarkTheme,
+            });
+        } else if (theme === THEME.light) {
+            settingsDispatch({
+                type: SETTINGS_ACTIONS.changeTheme,
+                payload: LightTheme,
+            });
         }
     };
 
@@ -171,7 +260,10 @@ export const SettingsProvider = ({ children }) => {
         if (!isVideoBgEnabled) {
             localStorage.setItem('isVideoBgEnabled', false);
         } else {
-            setIsVideoBgEnabled(JSON.parse(isVideoBgEnabled));
+            settingsDispatch({
+                type: SETTINGS_ACTIONS.enableVideoBackground,
+                payload: JSON.parse(isVideoBgEnabled),
+            });
         }
     }, []);
 
@@ -183,24 +275,37 @@ export const SettingsProvider = ({ children }) => {
     }, []);
 
     useLayoutEffect(() => {
-        if (currentOS !== OS_THEME.mobile) {
+        if (settingsState.OS !== OS_THEME.mobile) {
             // Store the old OS value in prevOSRef
-            prevOSRef.current = currentOS;
+            prevOSRef.current = settingsState.OS;
         }
         if (isMobile) {
-            setCurrentOS(OS_THEME.mobile);
-        } else if (!isMobile && currentOS === OS_THEME.mobile) {
-            setCurrentOS(prevOSRef.current);
+            settingsDispatch({
+                type: SETTINGS_ACTIONS.changeOS,
+                payload: OS_THEME.mobile,
+            });
+        } else if (!isMobile && settingsState.OS === OS_THEME.mobile) {
+            settingsDispatch({
+                type: SETTINGS_ACTIONS.changeOS,
+                payload: prevOSRef.current,
+            });
         }
-    }, [currentOS, isMobile]);
+    }, [isMobile, settingsState.OS]);
 
-    const selectDarkTheme = useCallback(() => {
-        changeTheme(THEME.dark);
-    }, []);
+    const selectDarkTheme = () => {
+        settingsDispatch({
+            type: SETTINGS_ACTIONS.changeTheme,
+            payload: THEME.dark,
+        });
+    };
 
-    const selectLightTheme = useCallback(() => {
-        changeTheme(THEME.light);
-    }, []);
+    const selectLightTheme = () => {
+        console.log(THEME.light);
+        settingsDispatch({
+            type: SETTINGS_ACTIONS.changeTheme,
+            payload: THEME.light,
+        });
+    };
 
     const languageFlag = () => {
         const locationLanguage = i18next.language;
@@ -217,69 +322,80 @@ export const SettingsProvider = ({ children }) => {
     };
 
     const isDarkThemeSelected = useCallback(() => {
-        return theme.id === THEME.dark;
-    }, [theme.id]);
+        return settingsState.theme.id === THEME.dark;
+    }, [settingsState.theme.id]);
 
     const isLightThemeSelected = useCallback(() => {
-        return theme.id === THEME.light;
-    }, [theme.id]);
+        return settingsState.theme.id === THEME.light;
+    }, [settingsState.theme.id]);
 
     const isLinuxSelected = useCallback(() => {
-        return currentOS === OS_THEME.linux;
-    }, [currentOS]);
+        return settingsState.OS === OS_THEME.linux;
+    }, [settingsState.OS]);
 
     const isWindowsSelected = useCallback(() => {
-        return currentOS === OS_THEME.windows;
-    }, [currentOS]);
+        return settingsState.OS === OS_THEME.windows;
+    }, [settingsState.OS]);
 
     const isMobileSelected = useCallback(() => {
-        return currentOS === OS_THEME.mobile;
-    }, [currentOS]);
+        return settingsState.OS === OS_THEME.mobile;
+    }, [settingsState.OS]);
+
+    const isVideoBgEnabled = useCallback(() => {
+        return settingsState.isVideoBackgroundEnabled;
+    }, [settingsState.isVideoBackgroundEnabled]);
 
     const isVideoEnabledOnDesktop = useCallback(() => {
-        return !isTablet && isVideoBgEnabled;
-    }, [isTablet, isVideoBgEnabled]);
+        return !isTablet && settingsState.isVideoBackgroundEnabled;
+    }, [isTablet, settingsState.isVideoBackgroundEnabled]);
 
     const selectWindowsOS = () => {
-        setCurrentOS(OS_THEME.windows);
+        settingsDispatch({
+            type: SETTINGS_ACTIONS.changeOS,
+            payload: OS_THEME.windows,
+        });
     };
 
     const selectLinuxOS = () => {
-        setCurrentOS(OS_THEME.linux);
+        settingsDispatch({
+            type: SETTINGS_ACTIONS.changeOS,
+            payload: OS_THEME.linux,
+        });
     };
+
+    const getTheme = useCallback(() => {
+        return settingsState.theme;
+    }, [settingsState.theme]);
+
+    const getBackgrounds = useCallback(() => {
+        return settingsState.background;
+    }, [settingsState.background]);
+
+    const getVideoBackgrounds = useCallback(() => {
+        return settingsState.videoBackground;
+    }, [settingsState.videoBackground]);
 
     const settingsValue = useMemo(() => {
         return {
-            isLinuxSelected,
-            isWindowsSelected,
-            isMobileSelected,
-            isDarkThemeSelected,
-            isLightThemeSelected,
-            selectWindowsOS,
-            selectLinuxOS,
-            languageFlag,
-            changeLanguage,
-            selectLightTheme,
-            selectDarkTheme,
-            getSelectedBackgroundName,
-            getSelectedBackground,
-            changeBackground,
-            theme,
-            background,
             isVideoEnabledOnDesktop,
+            isMobileSelected,
+            isWindowsSelected,
+            isLinuxSelected,
+            isLightThemeSelected,
+            isDarkThemeSelected,
             isVideoBgEnabled,
+            getSelectedBackgroundName,
             getSelectedVideoBgMP4,
             getSelectedVideoBgWEBM,
             getSelectedVideoBgName,
-            changeVideoBg,
-            videoBg,
-            enableVideoBg,
             getSelectedVideoPreview,
+            getSelectedBackground,
+            getTheme,
+            getBackgrounds,
+            getVideoBackgrounds,
         };
     }, [
-        background,
-        changeBackground,
-        changeVideoBg,
+        getBackgrounds,
         getSelectedBackground,
         getSelectedBackgroundName,
         getSelectedVideoBgMP4,
@@ -293,19 +409,37 @@ export const SettingsProvider = ({ children }) => {
         isVideoBgEnabled,
         isVideoEnabledOnDesktop,
         isWindowsSelected,
-        selectDarkTheme,
-        selectLightTheme,
-        theme,
-        videoBg,
+        getTheme,
+        getVideoBackgrounds,
     ]);
+
+    const dispatchSettingsValue = useMemo(() => {
+        return {
+            selectWindowsOS,
+            selectLinuxOS,
+            selectLightTheme,
+            selectDarkTheme,
+            changeLanguage,
+            languageFlag,
+            enableVideoBg,
+            changeVideoBg,
+            changeBackground,
+        };
+    }, []);
 
     return (
         <SettingsContext.Provider value={settingsValue}>
-            {children}
+            <DispatchSettingsContext.Provider value={dispatchSettingsValue}>
+                {children}
+            </DispatchSettingsContext.Provider>
         </SettingsContext.Provider>
     );
 };
 
 export const useSettingsContext = () => {
     return useContext(SettingsContext);
+};
+
+export const useDispatchSettingsContext = () => {
+    return useContext(DispatchSettingsContext);
 };

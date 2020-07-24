@@ -12,7 +12,7 @@ import useAuthValidation from './useAuthValidation';
 
 const useStyles = makeStyles(() => ({
     loginButton: (theme) => ({
-        backgroundColor: theme.material.primary.main,
+        backgroundColor: theme().material.primary.main,
         color: '#fff',
         cursor: 'default',
         border: 0,
@@ -23,12 +23,12 @@ const useStyles = makeStyles(() => ({
             color: '#d6d8de',
         },
         '&:hover': {
-            backgroundColor: theme.material.primary.darker,
+            backgroundColor: theme().material.primary.darker,
         },
     }),
     changeViewButton: (theme) => ({
-        border: `1px solid ${theme.material.primary.main}`,
-        color: `${theme.whiteBlack}`,
+        border: `1px solid ${theme().material.primary.main}`,
+        color: `${theme().whiteBlack}`,
         cursor: 'default',
         margin: '.5rem',
         borderRadius: 3,
@@ -42,8 +42,8 @@ const INITIAL_STATE = {
 };
 
 const SignUp = ({ onCancel, changeView }) => {
-    const { theme } = useSettingsContext();
-    const classes = useStyles(theme);
+    const { getTheme } = useSettingsContext();
+    const classes = useStyles(getTheme);
     const { t } = useTranslation();
     const {
         handleBlur,

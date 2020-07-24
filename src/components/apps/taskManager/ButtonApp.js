@@ -8,25 +8,25 @@ import { BtnContainer } from './style';
 
 const useStyles = makeStyles(() => ({
     btnStyle: (theme) => ({
-        backgroundColor: theme.accentBg,
+        backgroundColor: theme().accentBg,
         color: '#fff',
         cursor: 'default',
         border: 0,
         borderRadius: 3,
         '&:disabled': {
             color: '#e3e3e3',
-            backgroundColor: theme.disableBg,
+            backgroundColor: theme().disableBg,
         },
         '&:hover': {
-            backgroundColor: theme.accentBg,
+            backgroundColor: theme().accentBg,
         },
     }),
 }));
 
 const ButtonApp = (props) => {
     const { closeSelectedApp, disableBtn } = props;
-    const { theme } = useSettingsContext();
-    const classes = useStyles(theme);
+    const { getTheme } = useSettingsContext();
+    const classes = useStyles(getTheme);
 
     return (
         <BtnContainer>

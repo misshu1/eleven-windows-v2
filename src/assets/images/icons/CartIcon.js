@@ -4,11 +4,11 @@ import { useSettingsContext } from '../../../contexts/settingsContext';
 
 const CartIcon = (props) => {
     const { width, height } = props;
-    const { theme } = useSettingsContext();
+    const { getTheme } = useSettingsContext();
 
     return (
         <svg
-            key={theme.id}
+            key={getTheme().id}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 600'
             width={width ? width : '100%'}
@@ -16,7 +16,7 @@ const CartIcon = (props) => {
         >
             <g
                 className='fill-color'
-                fill={theme.accentBg}
+                fill={getTheme().accentBg}
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             >
                 <circle cx='202.41' cy='546.32' r='50.36' stroke='gray' />
@@ -25,7 +25,7 @@ const CartIcon = (props) => {
             <g
                 className='stroke-color'
                 strokeMiterlimit='10'
-                stroke={theme.accentBg}
+                stroke={getTheme().accentBg}
                 style={{ transition: 'stroke 0.2s ease-in-out' }}
             >
                 <path

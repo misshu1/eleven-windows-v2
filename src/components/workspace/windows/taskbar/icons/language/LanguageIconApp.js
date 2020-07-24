@@ -2,13 +2,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useSettingsContext } from '../../../../../../contexts/settingsContext';
+import { useDispatchSettingsContext } from '../../../../../../contexts/settingsContext';
 import { useLanguageContext } from '../../contexts/languageContext';
 import { Container, FlagImg } from './style';
 
 const LanguageIconApp = ({ languageIconRef }) => {
     const { t } = useTranslation();
-    const { languageFlag } = useSettingsContext();
+    const { languageFlag } = useDispatchSettingsContext();
     const { isLanguageOpen, toggleLanguage } = useLanguageContext();
 
     return (

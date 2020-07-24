@@ -9,28 +9,28 @@ import { NotificationContainer, NotificationText, Spacer, Title } from './style'
 
 const useStyles = makeStyles({
     switchBase: (theme) => ({
-        color: theme.accentBg,
+        color: theme().accentBg,
         '&$checked': {
-            color: theme.accentBg,
+            color: theme().accentBg,
         },
         '&$checked + $track': {
-            backgroundColor: theme.accentBg,
+            backgroundColor: theme().accentBg,
         },
     }),
     checked: (theme) => ({
-        color: theme.accentBg,
+        color: theme().accentBg,
     }),
     track: (theme) => ({
-        color: theme.accentBg,
+        color: theme().accentBg,
     }),
     thumb: (theme) => ({
-        color: theme.switchColor,
+        color: theme().switchColor,
     }),
 });
 
 const Notification = () => {
-    const { theme } = useSettingsContext();
-    const classes = useStyles(theme);
+    const { getTheme } = useSettingsContext();
+    const classes = useStyles(getTheme);
     const { t } = useTranslation();
     const { disable, disableNotifications } = useNotificationsContext();
 

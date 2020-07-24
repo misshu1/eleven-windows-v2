@@ -11,7 +11,7 @@ const ScrollbarApp = ({ children, requireChildrenProps }) => {
     // You might be wondering why is this initial state set to 1 instead of 0
     // The folder menu 'DrawerApp' will not work unless you scroll down at least 1px
     const [scrollTop, setScrollTop] = useState(1);
-    const { theme } = useSettingsContext();
+    const { getTheme } = useSettingsContext();
 
     const handleScroll = (scrollValues, prevScrollState) => {
         // There is a strange bug when content is loaded asynchronously
@@ -40,10 +40,10 @@ const ScrollbarApp = ({ children, requireChildrenProps }) => {
         <Scrollbar
             style={{ width: '100%', height: '100%' }}
             thumbYProps={{
-                style: { background: theme.accentBg, cursor: 'default' },
+                style: { background: getTheme().accentBg, cursor: 'default' },
             }}
             thumbXProps={{
-                style: { background: theme.accentBg, cursor: 'default' },
+                style: { background: getTheme().accentBg, cursor: 'default' },
             }}
             trackYProps={{
                 style: {

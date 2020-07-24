@@ -11,12 +11,12 @@ const useStyles = makeStyles({
         overflow: 'hidden',
         paddingLeft: '3rem',
         cursor: 'default',
-        backgroundColor: theme.material.primary.main,
-        color: theme.material.primary.contrast.darker,
+        backgroundColor: theme().material.primary.main,
+        color: theme().material.primary.contrast.darker,
         flex: '1',
 
         '&:hover': {
-            backgroundColor: theme.material.primary.darker,
+            backgroundColor: theme().material.primary.darker,
         },
     }),
     icon: (theme) => ({
@@ -31,13 +31,13 @@ const useStyles = makeStyles({
         transition: 'background 0.2s ease-in-out',
         borderTopRightRadius: '0 0',
         borderBottomRightRadius: '37% 100%',
-        background: theme.material.accent.main,
+        background: theme().material.accent.main,
     }),
 });
 
 const CheckoutButton = () => {
-    const { theme } = useSettingsContext();
-    const classes = useStyles(theme);
+    const { getTheme } = useSettingsContext();
+    const classes = useStyles(getTheme);
 
     return (
         <Button classes={{ root: classes.btnStyle }} fullWidth>

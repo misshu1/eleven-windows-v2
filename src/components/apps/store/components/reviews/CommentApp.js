@@ -9,7 +9,7 @@ import { Comment } from './style';
 
 const useStyles = makeStyles({
     ratingColor: (theme) => ({
-        color: theme.ratingColorEmpty,
+        color: theme().ratingColorEmpty,
     }),
 });
 
@@ -40,8 +40,8 @@ const timeSince = (previous) => {
 
 const CommentApp = (props) => {
     const { userDisplayName, rating, date, content } = props;
-    const { theme } = useSettingsContext();
-    const classes = useStyles(theme);
+    const { getTheme } = useSettingsContext();
+    const classes = useStyles(getTheme);
 
     return (
         <Comment>

@@ -14,8 +14,8 @@ import { Container } from './style';
 
 const Drawer = forwardRef((props, ref) => {
     const { toolbarMenu, closeDrawer } = props;
-    const { theme } = useSettingsContext();
-    const classes = useStyles(theme);
+    const { getTheme } = useSettingsContext();
+    const classes = useStyles(getTheme);
 
     const close = useCallback(() => {
         setTimeout(() => {
@@ -57,7 +57,7 @@ const useStyles = makeStyles({
         width: '100%',
         maxWidth: '100%',
         backgroundColor: 'transparent',
-        color: theme.textColor,
+        color: theme().textColor,
     }),
     listItemStyle: {
         '&:hover': {
@@ -66,7 +66,7 @@ const useStyles = makeStyles({
         },
     },
     fontIconStyle: (theme) => ({
-        color: theme.accentBg,
+        color: theme().accentBg,
     }),
     listIconStyle: {
         marginRight: '1rem',
@@ -87,8 +87,8 @@ const scrollToRef = (refObj, refName) => {
 };
 
 const ListItemLink = ({ item, onClick }) => {
-    const { theme } = useSettingsContext();
-    const classes = useStyles(theme);
+    const { getTheme } = useSettingsContext();
+    const classes = useStyles(getTheme);
 
     return (
         <ListItem

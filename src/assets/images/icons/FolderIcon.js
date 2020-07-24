@@ -4,11 +4,11 @@ import { useSettingsContext } from '../../../contexts/settingsContext';
 
 const FolderIcon = (props) => {
     const { width, height } = props;
-    const { theme } = useSettingsContext();
+    const { getTheme } = useSettingsContext();
 
     return (
         <svg
-            key={theme.id}
+            key={getTheme().id}
             xmlns='http://www.w3.org/2000/svg'
             xmlnsXlink='http://www.w3.org/1999/xlink'
             enableBackground='new 0 0 730 730'

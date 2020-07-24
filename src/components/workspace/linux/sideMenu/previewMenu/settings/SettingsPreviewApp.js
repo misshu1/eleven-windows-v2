@@ -9,7 +9,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
-import { useSettingsContext } from '../../../../../../contexts/settingsContext';
+import { useDispatchSettingsContext, useSettingsContext } from '../../../../../../contexts/settingsContext';
 import useMediaQuery from '../../../../../../hooks/useMediaQuery';
 import { languages } from '../../../../../../services/translation/i18next';
 import Preview from '../../../../../apps/settings/Preview';
@@ -22,30 +22,30 @@ import { Box, Container } from './style';
 const useStyles = makeStyles({
     btnStyle: (theme) => ({
         cursor: 'default',
-        backgroundColor: theme.material.primary.main,
-        color: theme.material.primary.contrast.darker,
+        backgroundColor: theme().material.primary.main,
+        color: theme().material.primary.contrast.darker,
 
         '&:hover': {
-            backgroundColor: theme.material.primary.darker,
+            backgroundColor: theme().material.primary.darker,
         },
     }),
     switchBase: (theme) => ({
-        color: theme.accentBg,
+        color: theme().accentBg,
         '&$checked': {
-            color: theme.accentBg,
+            color: theme().accentBg,
         },
         '&$checked + $track': {
-            backgroundColor: theme.accentBg,
+            backgroundColor: theme().accentBg,
         },
     }),
     checked: (theme) => ({
-        color: theme.accentBg,
+        color: theme().accentBg,
     }),
     track: (theme) => ({
-        color: theme.accentBg,
+        color: theme().accentBg,
     }),
     thumb: (theme) => ({
-        color: theme.switchColor,
+        color: theme().switchColor,
     }),
 });
 
@@ -53,25 +53,28 @@ const ITEM_HEIGHT = 48;
 
 const SettingsPreviewApp = () => {
     const {
-        theme,
-        background,
+        getTheme,
+        getBackgrounds,
         getSelectedBackgroundName,
+        isVideoEnabledOnDesktop,
+        isVideoBgEnabled,
+        getVideoBackgrounds,
+        getSelectedVideoBgName,
+    } = useSettingsContext();
+
+    const {
+        enableVideoBg,
+        changeVideoBg,
         selectLightTheme,
         selectDarkTheme,
         changeBackground,
-        isVideoEnabledOnDesktop,
-        isVideoBgEnabled,
-        videoBg,
-        changeVideoBg,
-        getSelectedVideoBgName,
-        enableVideoBg,
-    } = useSettingsContext();
+    } = useDispatchSettingsContext();
     const {
         disable,
         disableNotifications,
         showSuccess,
     } = useNotificationsContext();
-    const classes = useStyles(theme);
+    const classes = useStyles(getTheme);
     const { t } = useTranslation();
     const [bgMenuEl, setBgMenuEl] = useState(null);
     const [videoMenuEl, setVideoMenuEl] = useState(null);
@@ -146,7 +149,7 @@ const SettingsPreviewApp = () => {
                 </Typography>
                 <Box>
                     <div className='buttons-container'>
-                        {theme.id === THEME.light && (
+                        {getTheme().id === THEME.light && (
                             <Button
                                 className={classes.btnStyle}
                                 onClick={selectDarkTheme}
@@ -154,7 +157,7 @@ const SettingsPreviewApp = () => {
                                 {t('settings.themeButton')}
                             </Button>
                         )}
-                        {theme.id === THEME.dark && (
+                        {getTheme().id === THEME.dark && (
                             <Button
                                 className={classes.btnStyle}
                                 onClick={selectLightTheme}
@@ -186,7 +189,7 @@ const SettingsPreviewApp = () => {
                                         },
                                     }}
                                 >
-                                    {background.map((item) => (
+                                    {getBackgrounds().map((item) => (
                                         <MenuItem
                                             key={item.id}
                                             onClick={() => changeBg(item.id)}
@@ -225,7 +228,7 @@ const SettingsPreviewApp = () => {
                                         },
                                     }}
                                 >
-                                    {videoBg.map((item) => (
+                                    {getVideoBackgrounds().map((item) => (
                                         <MenuItem
                                             key={item.id}
                                             onClick={() => changeVideo(item.id)}
@@ -245,9 +248,11 @@ const SettingsPreviewApp = () => {
                     {!isTablet && (
                         <div style={{ display: 'flex' }}>
                             <Switch
-                                checked={isVideoBgEnabled}
-                                onChange={enableVideoBg}
-                                value={isVideoBgEnabled}
+                                checked={isVideoBgEnabled()}
+                                onChange={(e) =>
+                                    enableVideoBg(e.target.checked)
+                                }
+                                value={isVideoBgEnabled()}
                                 classes={{
                                     switchBase: classes.switchBase,
                                     track: classes.track,

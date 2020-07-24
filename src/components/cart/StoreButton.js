@@ -14,11 +14,11 @@ const useStyles = makeStyles({
         overflow: 'hidden',
         paddingLeft: '3rem',
         cursor: 'default',
-        backgroundColor: theme.material.primary.main,
-        color: theme.material.primary.contrast.darker,
+        backgroundColor: theme().material.primary.main,
+        color: theme().material.primary.contrast.darker,
 
         '&:hover': {
-            backgroundColor: theme.material.primary.darker,
+            backgroundColor: theme().material.primary.darker,
         },
     }),
     btnStyleMobile: (theme) => ({
@@ -33,11 +33,11 @@ const useStyles = makeStyles({
         borderRadius: '4px',
         letterSpacing: '0.02857em',
         textTransform: 'uppercase',
-        background: theme.material.primary.main,
-        color: theme.material.primary.contrast.darker,
+        background: theme().material.primary.main,
+        color: theme().material.primary.contrast.darker,
 
         '&:hover': {
-            background: theme.material.primary.darker,
+            background: theme().material.primary.darker,
         },
     }),
     btnStyleMobileText: {
@@ -56,16 +56,16 @@ const useStyles = makeStyles({
         transition: 'background 0.2s ease-in-out',
         borderTopRightRadius: '0 0',
         borderBottomRightRadius: '37% 100%',
-        background: theme.material.accent.main,
+        background: theme().material.accent.main,
     }),
 });
 
 const StoreButton = ({ onClick }) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { folderState } = useFolderContext();
-    const { theme } = useSettingsContext();
+    const { getTheme } = useSettingsContext();
     const apps = useRef(folderState.apps);
-    const classes = useStyles(theme);
+    const classes = useStyles(getTheme);
     const isMobile = useMediaQuery('(max-width: 450px)');
 
     const openApp = (appId) => {

@@ -16,11 +16,11 @@ const useStyles = makeStyles({
         width: '100%',
         paddingLeft: '3rem',
         cursor: 'default',
-        backgroundColor: theme.material.primary.main,
-        color: theme.material.primary.contrast.darker,
+        backgroundColor: theme().material.primary.main,
+        color: theme().material.primary.contrast.darker,
 
         '&:hover': {
-            backgroundColor: theme.material.primary.darker,
+            backgroundColor: theme().material.primary.darker,
         },
     }),
     icon: (theme) => ({
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
         transition: 'background 0.2s ease-in-out',
         borderTopRightRadius: '0 0',
         borderBottomRightRadius: '37% 100%',
-        background: theme.material.accent.main,
+        background: theme().material.accent.main,
     }),
 });
 
@@ -44,8 +44,8 @@ const NotificationsApp = () => {
         notificationsHistory,
         clearAllNotifications,
     } = useNotificationsContext();
-    const { theme } = useSettingsContext();
-    const classes = useStyles(theme);
+    const { getTheme } = useSettingsContext();
+    const classes = useStyles(getTheme);
     const { t } = useTranslation();
 
     return (
