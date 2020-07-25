@@ -94,7 +94,7 @@ const settingsReducer = (state, action) => {
             if (!video.isSelected) {
                 return {
                     ...state,
-                    VideoBackgrounds: state.videoBackgrounds.map((item) =>
+                    videoBackgrounds: state.videoBackgrounds.map((item) =>
                         item.id === action.payload
                             ? { ...item, isSelected: true }
                             : { ...item, isSelected: false }
@@ -135,6 +135,7 @@ export const SettingsProvider = ({ children }) => {
         const vid = settingsState.videoBackgrounds.find(
             (item) => item.isSelected === true
         );
+
         return vid.video.mp4;
     }, [settingsState.videoBackgrounds]);
 
@@ -142,6 +143,7 @@ export const SettingsProvider = ({ children }) => {
         const vid = settingsState.videoBackgrounds.find(
             (item) => item.isSelected === true
         );
+
         return vid.video.webm;
     }, [settingsState.videoBackgrounds]);
 
@@ -149,6 +151,7 @@ export const SettingsProvider = ({ children }) => {
         const vid = settingsState.videoBackgrounds.find(
             (item) => item.isSelected === true
         );
+
         return vid.name;
     }, [settingsState.videoBackgrounds]);
 
@@ -156,6 +159,7 @@ export const SettingsProvider = ({ children }) => {
         const vid = settingsState.videoBackgrounds.find(
             (item) => item.isSelected === true
         );
+
         return vid.preview;
     }, [settingsState.videoBackgrounds]);
 
@@ -163,6 +167,7 @@ export const SettingsProvider = ({ children }) => {
         const bg = settingsState.backgrounds.find(
             (item) => item.isSelected === true
         );
+
         return bg.bg;
     }, [settingsState.backgrounds]);
 
@@ -170,6 +175,7 @@ export const SettingsProvider = ({ children }) => {
         const bg = settingsState.backgrounds.find(
             (item) => item.isSelected === true
         );
+
         return bg.name;
     }, [settingsState.backgrounds]);
 

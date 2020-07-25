@@ -82,7 +82,6 @@ const FolderRoutes = () => {
         <>
             {!pathExists && <Navigate to='/404' />}
             {folderState.apps.map((app) => (
-                // TODO If app.requireAuth === true <Redirect to='/401' />
                 <Route
                     key={app.id}
                     path={isMobile ? app.link : '/*'}
