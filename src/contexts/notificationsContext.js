@@ -24,7 +24,12 @@ export const NotificationsProvider = ({ children }) => {
         if (!disableNotifications) {
             localStorage.setItem('disableNotifications', false);
         } else {
-            setDesable(JSON.parse(disableNotifications));
+            const localStorageVal =
+                disableNotifications !== 'undefined'
+                    ? disableNotifications
+                    : null;
+
+            setDesable(!!JSON.parse(localStorageVal));
         }
     }, []);
 

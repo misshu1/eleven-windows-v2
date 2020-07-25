@@ -27,8 +27,8 @@ const SETTINGS_ACTIONS = {
 const SETTINGS_STATE = {
     OS: OS_THEME.windows,
     theme: DarkTheme,
-    background: backgrounds,
-    videoBackground: videoBackgrounds,
+    backgrounds: backgrounds,
+    videoBackgrounds: videoBackgrounds,
     isVideoBackgroundEnabled: false,
 };
 
@@ -69,14 +69,14 @@ const settingsReducer = (state, action) => {
             }
 
         case SETTINGS_ACTIONS.changeBackground:
-            const isBackgroundSelected = state.background.map(
-                (item) => item.isSelected
+            const background = state.backgrounds.find(
+                (item) => item.id === action.payload
             );
 
-            if (isBackgroundSelected !== action.payload) {
+            if (!background.isSelected) {
                 return {
                     ...state,
-                    background: state.background.map((item) =>
+                    backgrounds: state.backgrounds.map((item) =>
                         item.id === action.payload
                             ? { ...item, isSelected: true }
                             : { ...item, isSelected: false }
@@ -87,14 +87,14 @@ const settingsReducer = (state, action) => {
             }
 
         case SETTINGS_ACTIONS.changeVideoBackground:
-            const isVideoSelected = state.videoBackground.map(
-                (item) => item.isSelected
+            const video = state.videoBackgrounds.find(
+                (item) => item.id === action.payload
             );
 
-            if (isVideoSelected !== action.payload) {
+            if (!video.isSelected) {
                 return {
                     ...state,
-                    videoBackground: state.videoBackground.map((item) =>
+                    VideoBackgrounds: state.videoBackgrounds.map((item) =>
                         item.id === action.payload
                             ? { ...item, isSelected: true }
                             : { ...item, isSelected: false }
@@ -132,46 +132,46 @@ export const SettingsProvider = ({ children }) => {
     const isTablet = useMediaQuery('(max-width: 800px)');
 
     const getSelectedVideoBgMP4 = useCallback(() => {
-        const vid = settingsState.videoBackground.find(
+        const vid = settingsState.videoBackgrounds.find(
             (item) => item.isSelected === true
         );
         return vid.video.mp4;
-    }, [settingsState.videoBackground]);
+    }, [settingsState.videoBackgrounds]);
 
     const getSelectedVideoBgWEBM = useCallback(() => {
-        const vid = settingsState.videoBackground.find(
+        const vid = settingsState.videoBackgrounds.find(
             (item) => item.isSelected === true
         );
         return vid.video.webm;
-    }, [settingsState.videoBackground]);
+    }, [settingsState.videoBackgrounds]);
 
     const getSelectedVideoBgName = useCallback(() => {
-        const vid = settingsState.videoBackground.find(
+        const vid = settingsState.videoBackgrounds.find(
             (item) => item.isSelected === true
         );
         return vid.name;
-    }, [settingsState.videoBackground]);
+    }, [settingsState.videoBackgrounds]);
 
     const getSelectedVideoPreview = useCallback(() => {
-        const vid = settingsState.videoBackground.find(
+        const vid = settingsState.videoBackgrounds.find(
             (item) => item.isSelected === true
         );
         return vid.preview;
-    }, [settingsState.videoBackground]);
+    }, [settingsState.videoBackgrounds]);
 
     const getSelectedBackground = useCallback(() => {
-        const bg = settingsState.background.find(
+        const bg = settingsState.backgrounds.find(
             (item) => item.isSelected === true
         );
         return bg.bg;
-    }, [settingsState.background]);
+    }, [settingsState.backgrounds]);
 
     const getSelectedBackgroundName = useCallback(() => {
-        const bg = settingsState.background.find(
+        const bg = settingsState.backgrounds.find(
             (item) => item.isSelected === true
         );
         return bg.name;
-    }, [settingsState.background]);
+    }, [settingsState.backgrounds]);
 
     const enableVideoBg = (val) => {
         localStorage.setItem('isVideoBgEnabled', val);
@@ -203,7 +203,7 @@ export const SettingsProvider = ({ children }) => {
 
         // Set initial selected video in local storage
         if (!videoBgLocalStorage) {
-            const getSelectedVideo = settingsState.videoBackground.find(
+            const getSelectedVideo = settingsState.videoBackgrounds.find(
                 (item) => item.isSelected === true
             );
             localStorage.setItem('videoBg', getSelectedVideo.id);
@@ -220,7 +220,7 @@ export const SettingsProvider = ({ children }) => {
 
         // Set initial selected background in local storage
         if (!bg) {
-            const getSelectedBackground = settingsState.background.find(
+            const getSelectedBackground = settingsState.backgrounds.find(
                 (item) => item.isSelected === true
             );
             localStorage.setItem('background', getSelectedBackground.id);
@@ -260,9 +260,12 @@ export const SettingsProvider = ({ children }) => {
         if (!isVideoBgEnabled) {
             localStorage.setItem('isVideoBgEnabled', false);
         } else {
+            const localStorageVal =
+                isVideoBgEnabled !== 'undefined' ? isVideoBgEnabled : null;
+
             settingsDispatch({
                 type: SETTINGS_ACTIONS.enableVideoBackground,
-                payload: JSON.parse(isVideoBgEnabled),
+                payload: !!JSON.parse(localStorageVal),
             });
         }
     }, []);
@@ -300,7 +303,6 @@ export const SettingsProvider = ({ children }) => {
     };
 
     const selectLightTheme = () => {
-        console.log(THEME.light);
         settingsDispatch({
             type: SETTINGS_ACTIONS.changeTheme,
             payload: THEME.light,
@@ -368,12 +370,12 @@ export const SettingsProvider = ({ children }) => {
     }, [settingsState.theme]);
 
     const getBackgrounds = useCallback(() => {
-        return settingsState.background;
-    }, [settingsState.background]);
+        return settingsState.backgrounds;
+    }, [settingsState.backgrounds]);
 
     const getVideoBackgrounds = useCallback(() => {
-        return settingsState.videoBackground;
-    }, [settingsState.videoBackground]);
+        return settingsState.videoBackgrounds;
+    }, [settingsState.videoBackgrounds]);
 
     const settingsValue = useMemo(() => {
         return {
