@@ -1,8 +1,10 @@
 import Markdown from 'markdown-to-jsx';
+import { CarouselProvider } from 'pure-react-carousel';
 import React, { useEffect, useState } from 'react';
 
 import { useFirebaseContext } from '../../../../contexts/firebaseContext';
 import { useNotificationsContext } from '../../../../contexts/notificationsContext';
+import CarouselApp from './carousel/CarouselApp';
 import { Container } from './style';
 
 const ProductDetailsApp = ({ product }) => {
@@ -124,6 +126,14 @@ const ProductDetailsApp = ({ product }) => {
     return (
         <Container>
             <h3>{product.title}</h3>
+            <CarouselProvider
+                naturalSlideWidth={16}
+                naturalSlideHeight={9}
+                totalSlides={images.length}
+            >
+                <CarouselApp images={images} />
+            </CarouselProvider>
+
             <Markdown options={{ forceBlock: true }}>{description}</Markdown>
         </Container>
     );

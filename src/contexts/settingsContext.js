@@ -244,19 +244,19 @@ export const SettingsProvider = ({ children }) => {
             localStorage.setItem('theme', THEME.dark);
             settingsDispatch({
                 type: SETTINGS_ACTIONS.changeTheme,
-                payload: DarkTheme,
+                payload: THEME.dark,
             });
         }
 
         if (theme === THEME.dark) {
             settingsDispatch({
                 type: SETTINGS_ACTIONS.changeTheme,
-                payload: DarkTheme,
+                payload: THEME.dark,
             });
         } else if (theme === THEME.light) {
             settingsDispatch({
                 type: SETTINGS_ACTIONS.changeTheme,
-                payload: LightTheme,
+                payload: THEME.light,
             });
         }
     };

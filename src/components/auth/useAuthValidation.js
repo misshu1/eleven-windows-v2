@@ -59,7 +59,7 @@ const useAuthValidation = (initialState) => {
         if (!errors.email && !errors.password) {
             login(values.email, values.password)
                 .then(() => {
-                    if (callback) {
+                    if (!!callback) {
                         // Do something after user logged in
                         callback();
                     }

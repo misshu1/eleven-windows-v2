@@ -17,6 +17,7 @@
         "i18next-browser-languagedetector": "^5.0.0",
         "markdown-to-jsx": "^6.11.4",
         "notistack": "^0.9.17",
+        "pure-react-carousel": "^1.27.1",
         "react": "^16.13.1",
         "react-calendar": "^2.19.2",
         "react-dom": "^16.13.1",
