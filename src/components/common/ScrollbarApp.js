@@ -7,7 +7,7 @@ const ScrollbarWrapper = ({ children }) => {
     return <>{children}</>;
 };
 
-const ScrollbarApp = ({ children, requireChildrenProps }) => {
+const ScrollbarApp = ({ children, requireChildrenProps, ...props }) => {
     // You might be wondering why is this initial state set to 1 instead of 0
     // The folder menu 'DrawerApp' will not work unless you scroll down at least 1px
     const [scrollTop, setScrollTop] = useState(1);
@@ -63,6 +63,7 @@ const ScrollbarApp = ({ children, requireChildrenProps }) => {
             }}
             onScroll={handleScroll}
             scrollTop={scrollTop}
+            {...props}
         >
             {checkChildren()}
         </Scrollbar>

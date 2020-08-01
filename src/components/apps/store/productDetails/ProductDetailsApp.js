@@ -125,15 +125,16 @@ const ProductDetailsApp = ({ product }) => {
 
     return (
         <Container>
-            <h3>{product.title}</h3>
             <CarouselProvider
                 naturalSlideWidth={16}
                 naturalSlideHeight={9}
                 totalSlides={images.length}
+                hasMasterSpinner
             >
                 <CarouselApp images={images} />
             </CarouselProvider>
 
+            <h3>{product.title}</h3>
             <Markdown options={{ forceBlock: true }}>{description}</Markdown>
         </Container>
     );

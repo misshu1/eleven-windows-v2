@@ -4,6 +4,17 @@ export const Container = styled.div`
     max-width: 50rem;
     margin: 0 auto;
 
+    .carousel__master-spinner-container {
+        background: inherit;
+    }
+
+    .slide-image {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center center;
+    }
+
     .dots-container {
         display: flex;
         justify-content: center;
@@ -33,7 +44,7 @@ export const Container = styled.div`
         grid-auto-flow: column;
         justify-content: center;
         align-items: center;
-        grid-auto-rows: 6remrem;
+        grid-auto-rows: 3rem;
         grid-gap: 1rem;
         width: 100%;
         padding: 1rem;
@@ -48,10 +59,21 @@ export const Container = styled.div`
         display: grid;
         grid-template-columns: 3rem;
         grid-template-rows: 3rem;
+        background: ${(props) => props.theme.accentBg};
         border: none;
         outline: none;
         padding: 0;
         margin: 0;
-        background: transparent;
+    }
+
+    .thumbnail-img {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    @media only screen and (min-width: 450px) {
+        padding: 0.5rem;
     }
 `;

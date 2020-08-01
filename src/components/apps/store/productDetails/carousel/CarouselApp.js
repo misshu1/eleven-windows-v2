@@ -1,10 +1,11 @@
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
-import { CarouselContext, Dot, Slide, Slider } from 'pure-react-carousel';
+import { CarouselContext, Dot, Image, Slide, Slider } from 'pure-react-carousel';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import useMediaQuery from '../../../../../hooks/useMediaQuery';
-import { Container, Image, Thumbnail } from './style';
+import SpinnerApp from '../../../../common/SpinnerApp';
+import { Container } from './style';
 
 const CarouselApp = ({ images }) => {
     const carouselContext = useContext(CarouselContext);
@@ -34,10 +35,16 @@ const CarouselApp = ({ images }) => {
 
     return (
         <Container>
-            <Slider>
+            <Slider spinner={() => <SpinnerApp style={{ color: 'inherit' }} />}>
                 {images.map((url, index) => (
                     <Slide key={index} index={index}>
-                        <Image url={url} />
+                        <Image
+                            src={url}
+                            hasMasterSpinner
+                            isBgImage
+                            tag='div'
+                            className='slide-image'
+                        />
                     </Slide>
                 ))}
             </Slider>
@@ -63,10 +70,14 @@ const CarouselApp = ({ images }) => {
                             className={`thumbnail ${
                                 index === currentSlide && 'thumbnail-selected'
                             }`}
+                            onMouseEnter={() => changeSlide(index)}
                         >
-                            <Thumbnail
-                                url={url}
-                                onMouseEnter={() => changeSlide(index)}
+                            <Image
+                                src={url}
+                                hasMasterSpinner
+                                isBgImage
+                                tag='div'
+                                className='thumbnail-img'
                             />
                         </Dot>
                     ))}
