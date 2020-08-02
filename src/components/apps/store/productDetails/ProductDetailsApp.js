@@ -130,6 +130,7 @@ const ProductDetailsApp = ({ product }) => {
                 naturalSlideHeight={9}
                 totalSlides={images.length}
                 hasMasterSpinner
+                dragEnabled={false}
             >
                 <CarouselApp images={images} />
             </CarouselProvider>

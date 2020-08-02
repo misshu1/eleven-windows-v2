@@ -44,7 +44,8 @@ export const Container = styled.div`
         grid-auto-flow: column;
         justify-content: center;
         align-items: center;
-        grid-auto-rows: 3rem;
+        grid-template-rows: 3rem;
+        grid-template-columns: 3rem;
         grid-gap: 1rem;
         width: 100%;
         padding: 1rem;
