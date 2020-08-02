@@ -48,17 +48,32 @@ export const RoutesApp = () => {
 
     return (
         <Routes>
-            <Suspense fallback={<SpinnerApp delay={200} global />}>
-                <Route path='/404' element={<NotFound />} />
-            </Suspense>
+            <Route
+                path='/404'
+                element={
+                    <Suspense fallback={<SpinnerApp delay={200} global />}>
+                        <NotFound />
+                    </Suspense>
+                }
+            />
 
-            <Suspense fallback={<SpinnerApp delay={200} global />}>
-                <Route path='/401' element={<NotAuthorized />} />
-            </Suspense>
+            <Route
+                path='/401'
+                element={
+                    <Suspense fallback={<SpinnerApp delay={200} global />}>
+                        <NotAuthorized />
+                    </Suspense>
+                }
+            />
 
-            <Suspense fallback={<SpinnerApp delay={200} global />}>
-                <Route path='/login' element={<LoginPage />} />
-            </Suspense>
+            <Route
+                path='/login'
+                element={
+                    <Suspense fallback={<SpinnerApp delay={200} global />}>
+                        <LoginPage />
+                    </Suspense>
+                }
+            />
 
             <Route path='/*' element={<WorkspaceApp />} />
         </Routes>
