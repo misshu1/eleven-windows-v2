@@ -8,6 +8,7 @@ import {
     faBell,
     faBellSlash,
     faCheck,
+    faClone,
     faCog,
     faEllipsisV,
     faExchangeAlt,
@@ -21,6 +22,7 @@ import {
     faSignInAlt,
     faSitemap,
     faSpinner,
+    faSquare,
     faSun,
     faTh,
     faTimes,
@@ -72,7 +74,9 @@ library.add(
     faBellSlash,
     faBell,
     faExchangeAlt,
-    faPowerOff
+    faPowerOff,
+    faClone,
+    faSquare
 );
 
 const VideoApp = lazy(() => import('./components/video/VideoApp'));

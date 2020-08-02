@@ -3,16 +3,19 @@ import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { useFolderContext } from '../../../../contexts/folderContext';
 import BackButton from './BackButton';
 import { Name, NameBar } from './style';
 
 const MobileToolbar = (props) => {
-    const { folderName, toolbarMenu, toggleDrawer, page, setPage } = props;
+    const { getFolder } = useFolderContext();
+    const { appId, toolbarMenu, toggleDrawer, page, setPage } = props;
+    const folder = getFolder(appId);
 
     return (
         <NameBar>
             <BackButton setPage={setPage} page={page} />
-            <Name>{folderName}</Name>
+            <Name>{folder.appName}</Name>
             {toolbarMenu && (
                 <Tooltip title='Menu' placement='top' enterDelay={500}>
                     <div className='menu' onClick={toggleDrawer}>
@@ -30,7 +33,7 @@ const MobileToolbar = (props) => {
 export default MobileToolbar;
 
 MobileToolbar.propTypes = {
-    folderName: PropTypes.string.isRequired,
+    appId: PropTypes.number.isRequired,
     toolbarMenu: PropTypes.array,
     toggleDrawer: PropTypes.func,
 };

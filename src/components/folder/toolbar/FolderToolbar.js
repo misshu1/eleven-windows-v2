@@ -7,15 +7,7 @@ import MobileToolbar from './mobile/MobileToolbar';
 import WindowsToolbar from './windows/WindowsToolbar';
 
 const FolderToolbar = (props) => {
-    const {
-        folderName,
-        minimize,
-        quitApp,
-        toolbarMenu,
-        toggleDrawer,
-        setPage,
-        page,
-    } = props;
+    const { appId, quitApp, toolbarMenu, toggleDrawer, setPage, page } = props;
     const {
         isWindowsSelected,
         isLinuxSelected,
@@ -26,7 +18,7 @@ const FolderToolbar = (props) => {
         <>
             {isMobileSelected() && (
                 <MobileToolbar
-                    folderName={folderName}
+                    appId={appId}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
                     setPage={setPage}
@@ -35,8 +27,7 @@ const FolderToolbar = (props) => {
             )}
             {isWindowsSelected() && (
                 <WindowsToolbar
-                    folderName={folderName}
-                    minimize={minimize}
+                    appId={appId}
                     quitApp={quitApp}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
@@ -46,8 +37,7 @@ const FolderToolbar = (props) => {
             )}
             {isLinuxSelected() && (
                 <LinuxToolbar
-                    folderName={folderName}
-                    minimize={minimize}
+                    appId={appId}
                     quitApp={quitApp}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
@@ -62,8 +52,6 @@ const FolderToolbar = (props) => {
 export default FolderToolbar;
 
 FolderToolbar.propTypes = {
-    folderName: PropTypes.string.isRequired,
-    minimize: PropTypes.func.isRequired,
     quitApp: PropTypes.func.isRequired,
     toolbarMenu: PropTypes.array,
     toggleDrawer: PropTypes.func,

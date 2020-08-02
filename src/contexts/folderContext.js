@@ -1,4 +1,4 @@
-import React, { createContext, lazy, useContext, useMemo, useReducer } from 'react';
+import React, { createContext, lazy, useCallback, useContext, useMemo, useReducer } from 'react';
 
 import CalculatorIcon from '../assets/images/icons/CalculatorIcon';
 import DocsIcon from '../assets/images/icons/DocsIcon';
@@ -30,6 +30,8 @@ const FOLDER_ACTIONS = {
     active: 'ACTIVE',
     minimizeUp: 'MINIMIZE_UP',
     minimizeDown: 'MINIMIZE_DOWN',
+    maximizeUp: 'MAXIMIZE_UP',
+    maximizeDown: 'MAXIMIZE_DOWN',
 };
 
 export const ICON_LOCATION = {
@@ -65,6 +67,8 @@ const APPS_STATE = [
         requireAdmin: false,
         isOpen: null,
         isMinimize: null,
+        isMaximize: null,
+        allowMaximize: true,
         appIndex: FOLDER_Z_INDEX.default,
         iconLocation: [
             ICON_LOCATION.windows.desktop,
@@ -84,6 +88,8 @@ const APPS_STATE = [
         requireAdmin: false,
         isOpen: null,
         isMinimize: null,
+        isMaximize: null,
+        allowMaximize: true,
         appIndex: FOLDER_Z_INDEX.default,
         iconLocation: [
             ICON_LOCATION.windows.desktop,
@@ -103,6 +109,8 @@ const APPS_STATE = [
         requireAdmin: false,
         isOpen: null,
         isMinimize: null,
+        isMaximize: null,
+        allowMaximize: false,
         appIndex: FOLDER_Z_INDEX.default,
         iconLocation: [
             ICON_LOCATION.windows.startMenu.right,
@@ -120,6 +128,8 @@ const APPS_STATE = [
         requireAdmin: false,
         isOpen: null,
         isMinimize: null,
+        isMaximize: null,
+        allowMaximize: true,
         appIndex: FOLDER_Z_INDEX.default,
         iconLocation: [
             ICON_LOCATION.windows.desktop,
@@ -140,6 +150,8 @@ const APPS_STATE = [
         requireAdmin: false,
         isOpen: null,
         isMinimize: null,
+        isMaximize: null,
+        allowMaximize: true,
         appIndex: FOLDER_Z_INDEX.default,
         iconLocation: [
             ICON_LOCATION.windows.notificationsWindow,
@@ -216,6 +228,34 @@ const folderReducer = (state, action) => {
                     apps: state.apps.map((item) =>
                         item.id === action.payload
                             ? { ...item, isMinimize: true }
+                            : item
+                    ),
+                };
+            } else {
+                return state;
+            }
+
+        case FOLDER_ACTIONS.maximizeUp:
+            if (app.isMaximize !== true) {
+                return {
+                    ...state,
+                    apps: state.apps.map((item) =>
+                        item.id === action.payload
+                            ? { ...item, isMaximize: true }
+                            : item
+                    ),
+                };
+            } else {
+                return state;
+            }
+
+        case FOLDER_ACTIONS.maximizeDown:
+            if (app.isMaximize) {
+                return {
+                    ...state,
+                    apps: state.apps.map((item) =>
+                        item.id === action.payload
+                            ? { ...item, isMaximize: false }
                             : item
                     ),
                 };
@@ -301,6 +341,20 @@ export const FolderProvider = ({ children }) => {
         });
     };
 
+    const maximizeUp = (appId) => {
+        folderDispatch({
+            type: FOLDER_ACTIONS.maximizeUp,
+            payload: appId,
+        });
+    };
+
+    const maximizeDown = (appId) => {
+        folderDispatch({
+            type: FOLDER_ACTIONS.maximizeDown,
+            payload: appId,
+        });
+    };
+
     const sortByAppName = (a, b) => {
         const nameA = a.appName.toUpperCase();
         const nameB = b.appName.toUpperCase();
@@ -314,12 +368,20 @@ export const FolderProvider = ({ children }) => {
         return comparison;
     };
 
+    const getFolder = useCallback(
+        (appId) => {
+            return folderState.apps.find((item) => item.id === appId);
+        },
+        [folderState]
+    );
+
     const folderContextValue = useMemo(() => {
         return {
             folderState,
             sortByAppName,
+            getFolder,
         };
-    }, [folderState]);
+    }, [folderState, getFolder]);
 
     const dispatchFolderContextValue = useMemo(() => {
         return {
@@ -329,6 +391,8 @@ export const FolderProvider = ({ children }) => {
             activeFolder,
             minimizeUp,
             minimizeDown,
+            maximizeUp,
+            maximizeDown,
         };
     }, []);
 

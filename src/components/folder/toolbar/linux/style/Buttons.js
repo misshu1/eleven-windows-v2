@@ -43,4 +43,13 @@ export const Buttons = styled.div`
             outline: none;
         }
     }
+
+    && .maximizeBtn:hover,
+    && .maximizeBtn:focus {
+        .maximize {
+            background: var(--linuxMaximizeBtn);
+            color: #fff;
+            outline: none;
+        }
+    }
 `;

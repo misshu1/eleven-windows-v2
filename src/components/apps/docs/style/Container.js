@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     padding: 0 1rem;
+    max-width: 80rem;
+    margin: 0 auto;
 
     h1,
     h2 {
@@ -21,12 +23,12 @@ export const Container = styled.div`
 
     .text-highlight {
         font-weight: 900;
-        color: ${props => props.theme.accentBgLight};
-        border-bottom: 1px solid ${props => props.theme.accentBgLight};
+        color: ${(props) => props.theme.accentBgLight};
+        border-bottom: 1px solid ${(props) => props.theme.accentBgLight};
     }
 
     .required {
-        color: ${props => props.theme.accentBgLight};
+        color: ${(props) => props.theme.accentBgLight};
         font-weight: 900;
         font-size: 0.8rem;
     }

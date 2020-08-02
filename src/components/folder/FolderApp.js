@@ -25,13 +25,9 @@ const FolderApp = forwardRef((props, ref) => {
     const [close, setClose] = useState(false);
     const [showDrawer, setShowDrawer] = useState(false);
     const [disableDrag, setDisableDrag] = useState(false);
-    const { folderState } = useFolderContext();
-    const {
-        closeFolder,
-        activeFolder,
-        minimizeDown,
-    } = useDispatchFolderContext();
     const { isLinuxSelected } = useSettingsContext();
+    const { closeFolder, activeFolder } = useDispatchFolderContext();
+    const { getFolder } = useFolderContext();
 
     const isMobile = useMediaQuery('(max-width: 450px)');
     const isTablet = useMediaQuery('(max-width: 800px)');
@@ -49,20 +45,23 @@ const FolderApp = forwardRef((props, ref) => {
         page,
     } = props;
 
+    const folder = getFolder(appId);
+
     useEffect(() => {
-        isMobile && setDisableDrag(true);
-    }, [isMobile]);
+        if (isMobile || folder.isMaximize) {
+            setDisableDrag(true);
+        } else {
+            setDisableDrag(false);
+        }
+    }, [folder, isMobile]);
 
     const quitApp = useCallback(() => {
         setClose(true);
         setTimeout(() => {
             closeFolder(appId);
         }, 200);
-    }, [appId, closeFolder]);
-
-    const minimize = useCallback(() => {
-        minimizeDown(appId);
-    }, [minimizeDown, appId]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const active = useCallback(() => {
         activeFolder(appId);
@@ -90,70 +89,68 @@ const FolderApp = forwardRef((props, ref) => {
 
     return ReactDOM.createPortal(
         <>
-            {folderState.apps.map(
-                (app) =>
-                    app.id === appId && (
-                        <Draggable
-                            key={app.id}
-                            axis='both'
-                            handle='.handle' // The handle is in the 'toolbar' folder
-                            disabled={disableDrag}
-                            bounds='#desktop'
-                            defaultPosition={defaultFolderPosition}
-                        >
-                            <AnimateFadeInOut
-                                appIndex={app.appIndex}
-                                onClick={active}
-                                open={app.isOpen}
-                                minimize={app.isMinimize}
-                                close={close}
-                            >
-                                <Folder
-                                    isLinuxSelected={isLinuxSelected()}
-                                    className='folder' // This class is used in 'AnimateFadeInOut'
-                                    width={width}
-                                    height={height}
-                                >
-                                    <FolderToolbar
-                                        toolbarMenu={toolbarMenu}
-                                        folderName={app.appName}
-                                        minimize={minimize}
-                                        quitApp={quitApp}
-                                        toggleDrawer={toggleDrawer}
-                                        setPage={setPage}
-                                        page={page}
+            <Draggable
+                key={folder.id}
+                axis='both'
+                handle='.handle' // The handle is in the 'toolbar' folder
+                disabled={disableDrag}
+                bounds='#desktop'
+                defaultPosition={defaultFolderPosition}
+            >
+                <AnimateFadeInOut
+                    appIndex={folder.appIndex}
+                    onClick={active}
+                    open={folder.isOpen}
+                    minimize={folder.isMinimize}
+                    close={close}
+                    isMaximize={folder.isMaximize}
+                    width={width}
+                    height={height}
+                >
+                    <Folder
+                        isLinuxSelected={isLinuxSelected()}
+                        className='folder' // This class is used in 'AnimateFadeInOut'
+                        width={width}
+                        height={height}
+                        isMaximize={folder.isMaximize}
+                    >
+                        <FolderToolbar
+                            appId={appId}
+                            toolbarMenu={toolbarMenu}
+                            quitApp={quitApp}
+                            toggleDrawer={toggleDrawer}
+                            setPage={setPage}
+                            page={page}
+                        />
+                        <Content>
+                            {showDrawer && (
+                                <>
+                                    <Backdrop
+                                        open={showDrawer}
+                                        style={{
+                                            zIndex: 500,
+                                            marginTop: isMobile
+                                                ? '3.5rem'
+                                                : '2.5rem',
+                                        }}
+                                        onClick={closeDrawer}
                                     />
-                                    <Content>
-                                        {showDrawer && (
-                                            <>
-                                                <Backdrop
-                                                    open={showDrawer}
-                                                    style={{
-                                                        zIndex: 500,
-                                                        marginTop: isMobile
-                                                            ? '3.5rem'
-                                                            : '2.5rem',
-                                                    }}
-                                                    onClick={closeDrawer}
-                                                />
-                                                <DrawerApp
-                                                    toolbarMenu={toolbarMenu}
-                                                    closeDrawer={closeDrawer}
-                                                    ref={ref}
-                                                />
-                                            </>
-                                        )}
-                                        <ScrollbarApp requireChildrenProps>
-                                            <FolderContent page={page}>
-                                                {children}
-                                            </FolderContent>
-                                        </ScrollbarApp>
-                                    </Content>
-                                </Folder>
-                            </AnimateFadeInOut>
-                        </Draggable>
-                    )
-            )}
+                                    <DrawerApp
+                                        toolbarMenu={toolbarMenu}
+                                        closeDrawer={closeDrawer}
+                                        ref={ref}
+                                    />
+                                </>
+                            )}
+                            <ScrollbarApp requireChildrenProps>
+                                <FolderContent page={page}>
+                                    {children}
+                                </FolderContent>
+                            </ScrollbarApp>
+                        </Content>
+                    </Folder>
+                </AnimateFadeInOut>
+            </Draggable>
         </>,
         document.getElementById('desktop')
     );

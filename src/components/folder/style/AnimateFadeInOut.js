@@ -32,7 +32,6 @@ const minimizeDown = keyframes`
 }
 100% {
     opacity: 0;
-    display: none;
     transform: scale3d(0, 1, 1) translate3d(0, 55rem, 0);
 }
 `;
@@ -40,7 +39,6 @@ const minimizeDown = keyframes`
 const minimizeUp = keyframes`
 0% {
     opacity: 0;
-    display: block;
     transform: scale3d(0, 1, 1) translate3d(0, 55rem, 0);
     transform-origin: 50% 100%;
 }
@@ -48,6 +46,17 @@ const minimizeUp = keyframes`
     opacity: 1;
     transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
     transform-origin: 50% 100%;
+}
+`;
+
+const hide = keyframes`
+0% {
+    width: 100%;
+    height: 100%;    
+}
+100% {
+    height: 0px;
+    width: 0px;
 }
 `;
 
@@ -60,9 +69,26 @@ export const AnimateFadeInOut = styled.div`
     z-index: ${(props) => props.appIndex};
 
     @media only screen and (min-width: 450px) {
-        height: 0px;
-        width: 0px;
-        
+        ${(props) =>
+            !props.isMaximize &&
+            css`
+                height: ${(props) => (props.height ? props.height : '44rem')};
+                width: ${(props) => (props.width ? props.width : '44rem')};
+            `}
+
+        ${(props) =>
+            props.isMaximize &&
+            css`
+                transform: translate(0, 0) !important;
+            `}
+
+        ${(props) =>
+            props.minimize &&
+            css`
+                animation: ${hide} 0s 1 forwards;
+                animation-delay: 0.3s;
+            `}
+
         .folder {
             ${(props) =>
                 props.open === true &&
