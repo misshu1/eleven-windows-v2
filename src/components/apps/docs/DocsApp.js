@@ -9,13 +9,17 @@ import FolderIcon from '../../../assets/images/icons/FolderIcon';
 import LogoIcon from '../../../assets/images/icons/LogoIcon';
 import { useNotificationsContext } from '../../../contexts/notificationsContext';
 import { useSettingsContext } from '../../../contexts/settingsContext';
+import Emoji from '../../common/Emoji';
 import FolderApp from '../../folder/FolderApp';
 import { THEME } from '../../theme/theme';
 import {
+    customScrollbarExample,
+    customScrollbarWithScrollTopExample,
     folderMenuExample,
     folderStructureExample,
     loadingLogoExample,
     notificationExample,
+    spinnerExample,
     zIndexExample
 } from './CodeExamples';
 import CreateFolder from './CreateFolder';
@@ -152,17 +156,38 @@ const toolbarMenu = () => {
             scrollToRef: 'folderStructureRef',
             onClick: null,
         },
-        // {
-        //     name: 'Custom scrollbar',
-        //     widgetIcon: null,
-        //     fontIcon: {
-        //         icon: ['fas', 'exchange-alt'],
-        //         transform: { rotate: 90 },
-        //     },
-        //     link: null,
-        //     scrollToRef: 'scrollbarRef',
-        //     onClick: null,
-        // },
+        {
+            name: 'Custom scrollbar',
+            widgetIcon: null,
+            fontIcon: {
+                icon: ['fas', 'exchange-alt'],
+                transform: { rotate: 90 },
+            },
+            link: null,
+            scrollToRef: 'scrollbarRef',
+            onClick: null,
+        },
+        {
+            name: 'Routing',
+            widgetIcon: null,
+            fontIcon: {
+                icon: ['fas', 'route'],
+            },
+            link: null,
+            scrollToRef: 'routingRef',
+            onClick: null,
+        },
+        {
+            name: 'Spinner',
+            widgetIcon: null,
+            fontIcon: {
+                icon: ['fas', 'spinner'],
+                pulse: true,
+            },
+            link: null,
+            scrollToRef: 'spinnerRef',
+            onClick: null,
+        },
     ];
 };
 
@@ -183,6 +208,8 @@ const DocsApp = () => {
     const zIndexRef = useRef(null);
     const folderStructureRef = useRef(null);
     const scrollbarRef = useRef(null);
+    const routingRef = useRef(null);
+    const spinnerRef = useRef(null);
 
     useEffect(() => {
         if (getTheme().id === THEME.dark) {
@@ -204,6 +231,8 @@ const DocsApp = () => {
                 zIndexRef,
                 folderStructureRef,
                 scrollbarRef,
+                routingRef,
+                spinnerRef,
             }}
         >
             <Container>
@@ -307,12 +336,85 @@ const DocsApp = () => {
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {folderStructureExample}
                 </SyntaxHighlighter>
-                {/* <h2 ref={scrollbarRef}>Custom scrollbar</h2> */}
+                <h2 ref={scrollbarRef}>Custom scrollbar</h2>
 
+                <p>
+                    This project uses
+                    <span className='text-highlight'>{` react-scrollbars-custom `}</span>
+                    and was set up in the
+                    <span className='text-highlight'>{` ScrollbarApp `}</span>
+                    to avoid customization on every usage.
+                </p>
+                <p>
+                    You can pass any props from the
+                    <span className='text-highlight'>{` react-scrollbars-custom `}</span>
+                    library to
+                    <span className='text-highlight'>{` ScrollbarApp `}</span>
+                </p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {customScrollbarExample}
+                </SyntaxHighlighter>
+
+                <p>
+                    When you need to track scroll position use the
+                    <span className='text-highlight'>{` requireChildrenProps `}</span>
+                    prop. Like the example below.
+                </p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {customScrollbarWithScrollTopExample}
+                </SyntaxHighlighter>
+
+                <h2 ref={routingRef}>Routing</h2>
+
+                <p>
+                    Every folder can be oppened when navigating to the
+                    <span className='text-highlight'>{` link `}</span>property
+                    declared in the
+                    <span className='text-highlight'>{` APPS_STATE `}</span>from
+                    <span className='text-highlight'>{` folderContext `}</span>.
+                    If there is no matching folder route user will be redirected
+                    to 404.
+                </p>
+
+                <p>
+                    Some folders may require a login or admin role. Those icons
+                    won't be visible if the user doesn't meet the requirements,
+                    and accessing the folder directly from the address bar will
+                    not work, it will be redirected to
+                    <span className='text-highlight'>{` /login `}</span>or
+                    <span className='text-highlight'>{` 401 `}</span>.
+                </p>
+
+                <h2 ref={spinnerRef}>Spinner</h2>
+
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {spinnerExample}
+                </SyntaxHighlighter>
+
+                <p>
+                    <Emoji symbol='📝' label='note' /> Note that The
+                    <span className='text-highlight'>{` SpinnerApp `}</span>
+                    props are not required.
+                    <br />
+                    <span className='text-highlight'>{` SpinnerApp `}</span>will
+                    not be visible if the component loads faster than the
+                    specified<span className='text-highlight'>{` delay `}</span>
+                    prop.
+                </p>
+                <p>
+                    When
+                    <span className='text-highlight'>{` global `}</span>prop is
+                    used the spinner will be rendered with
+                    <span className='text-highlight'>{` React.createPortal() `}</span>
+                    to the element with id
+                    <span className='text-highlight'>{` desktop `}</span>, if
+                    not specified the spinner will be visible inside the current
+                    component.
+                </p>
                 {/* 
-                Folder scrolling
-                    - example how folder scrolling works
-                    - example how to add scrolling tracking to a component
+                // Folder scrolling
+                //     - example how folder scrolling works
+                //     - example how to add scrolling tracking to a component
 
                 Folder pagination
                     - example how to add pages
@@ -322,12 +424,12 @@ const DocsApp = () => {
                     - requireLogin: true,
                     - requireAdmin: true,
                     
-                Spinner 
-                    - example how to use local and global spinner
+                // Spinner 
+                //     - example how to use local and global spinner
 
-                Routing
-                    - explain how routing works
-                    - also explain requireAuth routes               
+                // Routing
+                //     - explain how routing works
+                //     - also explain requireAuth routes               
                 */}
             </Container>
         </FolderApp>

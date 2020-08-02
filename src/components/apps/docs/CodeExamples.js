@@ -12,8 +12,14 @@ const APPS_STATE = [
     widgetIcon: exampleIcon,
     link: '/example',
     component: <ExampleApp />,
+    requireLogin: false,
+    requireAdmin: false, // This will also check if user is logged in
     isOpen: null,
     isMinimize: null,
+    isMaximize: null,
+    // If 'allowMaximize' set to false 
+    // The folder will not have maximize icon
+    allowMaximize: true, 
     appIndex: 100,
     iconLocation: [
       ICON_LOCATION.windows.desktop,
@@ -35,7 +41,7 @@ const ExampleApp = () => {
     <FolderApp
       appId={1234}
     >
-    {/* Add folder content here */}
+      {/* Add folder content here */}
     </FolderApp>
   );
 }
@@ -120,7 +126,11 @@ const toolbarMenu = () => {
     {
       name: 'And so on',
       widgetIcon: null,
-      fontIcon: ['far', 'comment-alt'],
+      fontIcon: {
+        // You can pass any props from react-fontawesome library here
+        icon: ['far', 'comment-alt'],
+        transform: { rotate: 90 },
+      },
       link: null,
       scrollToRef: 'andSoOnRef',
       onClick: null
@@ -213,4 +223,62 @@ export const folderStructureExample = `
 -- contexts
 -- hooks
 -- services
+`.trim();
+
+export const customScrollbarExample = `
+import ScrollbarApp from 'src/common/ScrollbarApp';
+
+// The 'ScrollbarApp' should have a single child
+<ScrollbarApp>
+  <div>
+  {/* Add content here */}
+  </div>
+</ScrollbarApp>
+`.trim();
+
+export const customScrollbarWithScrollTopExample = `
+import ScrollbarApp from 'src/common/ScrollbarApp';
+import useFolderScroll from 'src/hooks/useFolderScroll';
+
+const FolderContent = (props) => {
+  // When the 'ScrollbarApp' have 'requireChildrenProps' prop
+  // We have access to scroll position
+  // 'scrollTop' and 'setScrollTop' are coming from 'ScrollbarApp'
+  const { children, page, scrollTop, setScrollTop } = props;
+
+  useFolderScroll(page, scrollTop, setScrollTop);
+
+  return <>{children}</>;
+};
+
+
+<ScrollbarApp requireChildrenProps>
+  <FolderContent page={page}>
+    {children}
+  </FolderContent>
+</ScrollbarApp>
+`.trim();
+
+export const spinnerExample = `
+import React, { Suspense, lazy } from 'react';
+import FolderApp from 'src/components/folder/FolderApp';
+
+const AuthApp = lazy(() => import('src/components/auth/AuthApp'));
+
+const ExampleApp = ({ isAuthOpen }) => {
+  return (
+    <FolderApp
+      appId={1234}
+    >
+      {isAuthOpen && (
+        <Suspense fallback={
+          <SpinnerApp delay={200} global style={{ color: 'red' }} />
+        }>
+            <AuthApp onCancel={hideAuth} />
+        </Suspense>
+      )}
+    </FolderApp>
+}
+
+export default ExampleApp;
 `.trim();

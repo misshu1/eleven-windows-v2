@@ -18,6 +18,7 @@ import {
     faLayerGroup,
     faMoon,
     faPowerOff,
+    faRoute,
     faShoppingCart,
     faSignInAlt,
     faSitemap,
@@ -76,7 +77,8 @@ library.add(
     faExchangeAlt,
     faPowerOff,
     faClone,
-    faSquare
+    faSquare,
+    faRoute
 );
 
 const VideoApp = lazy(() => import('./components/video/VideoApp'));

@@ -1,13 +1,17 @@
-import React, { useEffect } from 'react';
-import { useRef } from 'react';
+import React, { lazy, Suspense, useEffect, useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { useNotificationsContext } from '../../contexts/notificationsContext';
 import Emoji from '../common/Emoji';
-import NotAuthorized from '../pages/401/NotAuthorized';
-import NotFound from '../pages/404/NotFound';
-import LoginPage from '../pages/login/LoginPage';
+import SpinnerApp from '../common/SpinnerApp';
 import WorkspaceApp from '../workspace/WorkspaceApp';
+
+// import NotAuthorized from '../pages/401/NotAuthorized';
+// import NotFound from '../pages/404/NotFound';
+// import LoginPage from '../pages/login/LoginPage';
+const LoginPage = lazy(() => import('../pages/login/LoginPage'));
+const NotFound = lazy(() => import('../pages/404/NotFound'));
+const NotAuthorized = lazy(() => import('../pages/401/NotAuthorized'));
 
 const WelcomeTitle = (
     <span>
@@ -44,9 +48,18 @@ export const RoutesApp = () => {
 
     return (
         <Routes>
-            <Route path='/404' element={<NotFound />} />
-            <Route path='/401' element={<NotAuthorized />} />
-            <Route path='/login' element={<LoginPage />} />
+            <Suspense fallback={<SpinnerApp delay={200} global />}>
+                <Route path='/404' element={<NotFound />} />
+            </Suspense>
+
+            <Suspense fallback={<SpinnerApp delay={200} global />}>
+                <Route path='/401' element={<NotAuthorized />} />
+            </Suspense>
+
+            <Suspense fallback={<SpinnerApp delay={200} global />}>
+                <Route path='/login' element={<LoginPage />} />
+            </Suspense>
+
             <Route path='/*' element={<WorkspaceApp />} />
         </Routes>
     );
