@@ -6,14 +6,19 @@ import DesktopIconApp from './DesktopIconApp';
 import { Desktop } from './style';
 
 const DesktopWindowsApp = () => {
-    const { folderState, sortByAppName } = useFolderContext();
+    const {
+        folderState,
+        sortByAppName,
+        checkUserPermisions,
+    } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 
     const desktopIcons = useCallback(() => {
         return apps.current.map((app) => {
             return app.iconLocation.map(
                 (location) =>
-                    location === ICON_LOCATION.windows.desktop && (
+                    location === ICON_LOCATION.windows.desktop &&
+                    checkUserPermisions(app) && (
                         <DesktopIconApp
                             key={app.id}
                             appId={app.id}
@@ -23,7 +28,8 @@ const DesktopWindowsApp = () => {
                     )
             );
         });
-    }, []);
+    }, [checkUserPermisions]);
+
     return ReactDOM.createPortal(
         <Desktop>{desktopIcons()}</Desktop>,
         document.getElementById('desktop')

@@ -5,7 +5,7 @@ import { useDispatchFolderContext, useFolderContext } from '../../../../../../co
 import { AppIcon, Container } from './style';
 
 const OpenApps = () => {
-    const { folderState } = useFolderContext();
+    const { checkUserPermisions, folderState } = useFolderContext();
     const {
         activeFolder,
         minimizeUp,
@@ -16,6 +16,7 @@ const OpenApps = () => {
         return folderState.openApps.map((openApp) => {
             return folderState.apps.map(
                 (app) =>
+                    checkUserPermisions(app) &&
                     app.id === openApp.id && (
                         <Tooltip
                             title={app.appName}

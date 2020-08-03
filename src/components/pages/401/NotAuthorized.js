@@ -10,6 +10,10 @@ const NotAuthorized = () => {
     const navigate = useNavigate();
     const { isUserAdmin } = useAuth();
 
+    const goHome = () => {
+        navigate('/');
+    };
+
     useEffect(() => {
         if (isUserAdmin() && !!location.state?.nextPathname) {
             // When folder route requires user to be admin
@@ -22,8 +26,9 @@ const NotAuthorized = () => {
     return ReactDOM.createPortal(
         <Container>
             <h1>This is 401 Page, Needs some design work</h1>
+            <button onClick={goHome}>Home</button>
         </Container>,
-        document.getElementById('pages')
+        document.getElementById('desktop')
     );
 };
 

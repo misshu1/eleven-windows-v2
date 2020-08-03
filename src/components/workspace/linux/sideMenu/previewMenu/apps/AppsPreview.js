@@ -7,7 +7,11 @@ import MenuAppIcon from './MenuAppIcon';
 import { Container } from './style';
 
 const AppsPreview = () => {
-    const { folderState, sortByAppName } = useFolderContext();
+    const {
+        checkUserPermisions,
+        folderState,
+        sortByAppName,
+    } = useFolderContext();
     const { closeSideMenu } = useSideMenuContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 
@@ -15,7 +19,8 @@ const AppsPreview = () => {
         return apps.current.map((app) => {
             return app.iconLocation.map(
                 (location) =>
-                    location === ICON_LOCATION.linux.appsMenu && (
+                    location === ICON_LOCATION.linux.appsMenu &&
+                    checkUserPermisions(app) && (
                         <MenuAppIcon
                             key={app.id}
                             appId={app.id}
@@ -27,7 +32,7 @@ const AppsPreview = () => {
                     )
             );
         });
-    }, [closeSideMenu]);
+    }, [checkUserPermisions, closeSideMenu]);
 
     return (
         <ScrollbarApp>

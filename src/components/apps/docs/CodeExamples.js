@@ -166,7 +166,6 @@ export default ExampleApp;
 
 export const zIndexExample = `
 zIndex = {
-  Pages: 500, // section id='pages' inside index.html
   Desktop: 0, // main id='desktop' inside index.html
   Taskbar: 300, // nav id='taskbar' inside index.html
   Notification: 200, // div id='modal' inside index.html

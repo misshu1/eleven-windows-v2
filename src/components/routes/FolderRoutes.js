@@ -9,7 +9,7 @@ import SpinnerApp from '../common/SpinnerApp';
 
 const FolderRoutes = () => {
     const [pathExists, setPathExists] = useState(true);
-    const { folderState } = useFolderContext();
+    const { checkUserPermisions, folderState } = useFolderContext();
     const { openFolder, closeAllFolders } = useDispatchFolderContext();
     const navigate = useNavigate();
     const location = useLocation();
@@ -17,7 +17,8 @@ const FolderRoutes = () => {
     const isMobile = useMediaQuery('(max-width: 450px)');
     const { isUserAdmin, isUserLoggedIn } = useAuth();
 
-    // Check to see if the route exists in folderState if not user will be redirected to 404
+    // Check to see if the route exists in folderState
+    // If not the user will be redirected to 404
     useLayoutEffect(() => {
         const folderPaths = folderState.apps.some(
             (app) => location.pathname === app.link
@@ -87,7 +88,7 @@ const FolderRoutes = () => {
                     path={isMobile ? app.link : '/*'}
                     element={
                         <>
-                            {app.isOpen && !app.requireAuth && (
+                            {app.isOpen && checkUserPermisions(app) && (
                                 <Suspense
                                     fallback={<SpinnerApp global delay={200} />}
                                 >

@@ -6,7 +6,7 @@ import { useDispatchFolderContext, useFolderContext } from '../../../../contexts
 import { AppIcon, Container } from './style';
 
 const TaskbarLinuxApp = () => {
-    const { folderState } = useFolderContext();
+    const { checkUserPermisions, folderState } = useFolderContext();
     const {
         activeFolder,
         minimizeUp,
@@ -17,7 +17,8 @@ const TaskbarLinuxApp = () => {
         return folderState.openApps.map((openApp) => {
             return folderState.apps.map(
                 (app) =>
-                    app.id === openApp.id && (
+                    app.id === openApp.id &&
+                    checkUserPermisions(app) && (
                         <Tooltip
                             title={app.appName}
                             placement='top'
@@ -47,8 +48,8 @@ const TaskbarLinuxApp = () => {
         });
     }, [
         activeFolder,
-        folderState.apps,
-        folderState.openApps,
+        checkUserPermisions,
+        folderState,
         minimizeDown,
         minimizeUp,
     ]);

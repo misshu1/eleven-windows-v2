@@ -38,7 +38,11 @@ const useStyles = makeStyles({
 
 const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
-    const { folderState, sortByAppName } = useFolderContext();
+    const {
+        checkUserPermisions,
+        folderState,
+        sortByAppName,
+    } = useFolderContext();
     const { getTheme } = useSettingsContext();
     const { t } = useTranslation();
     const classes = useStyles(getTheme);
@@ -58,18 +62,22 @@ const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
             return app.iconLocation.map((location) => {
                 if (location === ICON_LOCATION.mobile.appsMenu) {
                     return (
-                        <Widget onClick={closeAppsMenu} key={app.id}>
-                            <Link to={app.link}>
-                                {app.widgetIcon}
-                                <div className='app-name'>{app.appName}</div>
-                            </Link>
-                        </Widget>
+                        checkUserPermisions(app) && (
+                            <Widget onClick={closeAppsMenu} key={app.id}>
+                                <Link to={app.link}>
+                                    {app.widgetIcon}
+                                    <div className='app-name'>
+                                        {app.appName}
+                                    </div>
+                                </Link>
+                            </Widget>
+                        )
                     );
                 }
                 return undefined;
             });
         });
-    }, [closeAppsMenu]);
+    }, [checkUserPermisions, closeAppsMenu]);
 
     return ReactDOM.createPortal(
         <Container ref={appsMenuRef} isAuthOpen={isAuthOpen}>

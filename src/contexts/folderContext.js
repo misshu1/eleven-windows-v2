@@ -5,6 +5,7 @@ import DocsIcon from '../assets/images/icons/DocsIcon';
 import SettingsIcon from '../assets/images/icons/SettingsIcon';
 import StoreIcon from '../assets/images/icons/StoreIcon';
 import TaskIcon from '../assets/images/icons/TaskIcon';
+import { useAuth } from '../hooks/useAuth';
 
 const DocsApp = lazy(() => import('../components/apps/docs/DocsApp'));
 const SettingsApp = lazy(() =>
@@ -297,6 +298,7 @@ const folderReducer = (state, action) => {
 const FolderContext = createContext();
 const DispatchFolderContext = createContext();
 export const FolderProvider = ({ children }) => {
+    const { isUserAdmin, isUserLoggedIn } = useAuth();
     const [folderState, folderDispatch] = useReducer(folderReducer, {
         apps: APPS_STATE,
         openApps: [],
@@ -375,13 +377,27 @@ export const FolderProvider = ({ children }) => {
         [folderState]
     );
 
+    const checkUserPermisions = useCallback(
+        (app) => {
+            if (app.requireAdmin && !isUserAdmin()) {
+                return false;
+            } else if (app.requireLogin && !isUserLoggedIn()) {
+                return false;
+            } else {
+                return true;
+            }
+        },
+        [isUserAdmin, isUserLoggedIn]
+    );
+
     const folderContextValue = useMemo(() => {
         return {
             folderState,
             sortByAppName,
             getFolder,
+            checkUserPermisions,
         };
-    }, [folderState, getFolder]);
+    }, [checkUserPermisions, folderState, getFolder]);
 
     const dispatchFolderContextValue = useMemo(() => {
         return {

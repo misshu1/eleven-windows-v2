@@ -7,7 +7,11 @@ import WidgetApp from './WidgetApp';
 let ANIMATION_DURATION = 0;
 
 const RightMenuApp = () => {
-    const { folderState, sortByAppName } = useFolderContext();
+    const {
+        checkUserPermisions,
+        folderState,
+        sortByAppName,
+    } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 
     useEffect(() => {
@@ -22,21 +26,22 @@ const RightMenuApp = () => {
                 if (location === ICON_LOCATION.windows.startMenu.right) {
                     ANIMATION_DURATION++;
                     return (
-                        <WidgetApp
-                            key={app.id}
-                            animationDuration={ANIMATION_DURATION / 10}
-                            appId={app.id}
-                            link={app.link}
-                            widgetIcon={app.widgetIcon}
-                            iconDisplayName={app.appName}
-                        />
+                        checkUserPermisions(app) && (
+                            <WidgetApp
+                                key={app.id}
+                                animationDuration={ANIMATION_DURATION / 10}
+                                appId={app.id}
+                                link={app.link}
+                                widgetIcon={app.widgetIcon}
+                                iconDisplayName={app.appName}
+                            />
+                        )
                     );
                 }
                 return undefined;
             });
         });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [checkUserPermisions]);
 
     return <Container>{widgetIcons()}</Container>;
 };

@@ -6,19 +6,24 @@ import { useNotificationsTaskbarContext } from '../../../contexts/notificationsT
 import { Container, Widget } from './style';
 
 const WidgetsApp = () => {
-    const { folderState, sortByAppName } = useFolderContext();
+    const {
+        checkUserPermisions,
+        folderState,
+        sortByAppName,
+    } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 
     const widgetIcons = () => {
-        return apps.current.map((item) => {
-            return item.iconLocation.map(
+        return apps.current.map((app) => {
+            return app.iconLocation.map(
                 (location) =>
-                    location === ICON_LOCATION.windows.notificationsWindow && (
+                    location === ICON_LOCATION.windows.notificationsWindow &&
+                    checkUserPermisions(app) && (
                         <WidgetApp
-                            key={item.id}
-                            appId={item.id}
-                            iconDisplayName={item.appName}
-                            widgetIcon={item.widgetIcon}
+                            key={app.id}
+                            appId={app.id}
+                            iconDisplayName={app.appName}
+                            widgetIcon={app.widgetIcon}
                         />
                     )
             );

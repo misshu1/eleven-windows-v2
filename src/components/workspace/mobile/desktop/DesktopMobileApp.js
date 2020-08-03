@@ -19,14 +19,19 @@ const DesktopIconApp = (props) => {
 };
 
 const DesktopMobileApp = () => {
-    const { folderState, sortByAppName } = useFolderContext();
+    const {
+        checkUserPermisions,
+        folderState,
+        sortByAppName,
+    } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 
     const desktopIcons = useCallback(() => {
         return apps.current.map((app) => {
             return app.iconLocation.map(
                 (location) =>
-                    location === ICON_LOCATION.mobile.homeScreen && (
+                    location === ICON_LOCATION.mobile.homeScreen &&
+                    checkUserPermisions(app) && (
                         <DesktopIconApp
                             key={app.id}
                             iconName={app.appName}
@@ -36,7 +41,7 @@ const DesktopMobileApp = () => {
                     )
             );
         });
-    }, []);
+    }, [checkUserPermisions]);
 
     return (
         <Container>

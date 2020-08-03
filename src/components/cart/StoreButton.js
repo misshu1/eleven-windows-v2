@@ -62,7 +62,7 @@ const useStyles = makeStyles({
 
 const StoreButton = ({ onClick }) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
-    const { folderState } = useFolderContext();
+    const { checkUserPermisions, folderState } = useFolderContext();
     const { getTheme } = useSettingsContext();
     const apps = useRef(folderState.apps);
     const classes = useStyles(getTheme);
@@ -79,7 +79,8 @@ const StoreButton = ({ onClick }) => {
         return apps.current.map((app) => {
             return app.iconLocation.map(
                 (location) =>
-                    location === ICON_LOCATION.cart.cartApp && (
+                    location === ICON_LOCATION.cart.cartApp &&
+                    checkUserPermisions(app) && (
                         <Link
                             to={app.link}
                             key={app.id}
@@ -102,7 +103,8 @@ const StoreButton = ({ onClick }) => {
         return apps.current.map((app) => {
             return app.iconLocation.map(
                 (location) =>
-                    location === ICON_LOCATION.cart.cartApp && (
+                    location === ICON_LOCATION.cart.cartApp &&
+                    checkUserPermisions(app) && (
                         <Button
                             classes={{ root: classes.btnStyle }}
                             onClick={() => openApp(app.id)}

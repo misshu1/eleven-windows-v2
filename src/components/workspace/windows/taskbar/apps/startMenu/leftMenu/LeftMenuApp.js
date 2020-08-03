@@ -1,18 +1,23 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 
 import { ICON_LOCATION, useFolderContext } from '../../../../../../../contexts/folderContext';
 import { Container } from './style';
 import WidgetApp from './WidgetApp';
 
 const LeftMenuApp = () => {
-    const { folderState, sortByAppName } = useFolderContext();
+    const {
+        checkUserPermisions,
+        folderState,
+        sortByAppName,
+    } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 
-    const widgetIcons = () => {
+    const widgetIcons = useCallback(() => {
         return apps.current.map((app) => {
             return app.iconLocation.map(
                 (location) =>
-                    location === ICON_LOCATION.windows.startMenu.left && (
+                    location === ICON_LOCATION.windows.startMenu.left &&
+                    checkUserPermisions(app) && (
                         <WidgetApp
                             key={app.id}
                             appId={app.id}
@@ -22,7 +27,7 @@ const LeftMenuApp = () => {
                     )
             );
         });
-    };
+    }, [checkUserPermisions]);
 
     return <Container>{widgetIcons()}</Container>;
 };
