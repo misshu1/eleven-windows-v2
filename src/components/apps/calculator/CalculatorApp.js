@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Emoji from '../../common/Emoji';
 import FolderApp from '../../folder/FolderApp';
 import { ButtonsContainer, Container, NumberPad, Operators } from './style';
 
@@ -13,7 +14,19 @@ const CalculatorApp = () => {
             width='21.5rem'
         >
             <Container>
-                <div style={{ flex: 1 }}></div>
+                <div style={{ flex: 1, minHeight: '15rem' }}>
+                    <h3
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '100%',
+                        }}
+                    >
+                        <Emoji symbol='📝' label='desert' /> Don't touch this,
+                        it's not working.
+                    </h3>
+                </div>
                 <ButtonsContainer>
                     <NumberPad>
                         <button>7</button>
