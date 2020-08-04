@@ -1,14 +1,46 @@
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
 import { CarouselContext, Dot, Image, Slide, Slider } from 'pure-react-carousel';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
+import { useSettingsContext } from '../../../../../contexts/settingsContext';
 import useMediaQuery from '../../../../../hooks/useMediaQuery';
-import ScrollbarApp from '../../../../common/ScrollbarApp';
 import SpinnerApp from '../../../../common/SpinnerApp';
 import { Container } from './style';
 
+const useStyles = makeStyles({
+    thumbnailsContainer: {
+        width: '100%',
+        marginTop: '1rem',
+    },
+    scroller: {
+        display: 'flex',
+    },
+    flexContainer: { margin: '0 auto' },
+    thumbnail: {
+        padding: 0,
+        minWidth: 0,
+        width: '3rem',
+        height: '3rem',
+        backgroundSize: 'cover !important',
+        backgroundPosition: 'center center !important',
+        margin: '0.5rem',
+        cursor: 'default',
+    },
+    selectedThumbnail: (theme) => ({
+        boxShadow: `0px 0px 4px 2px ${theme().accentBg}`,
+    }),
+    indicator: {
+        display: 'none',
+    },
+});
+
 const CarouselApp = ({ images }) => {
+    const { getTheme } = useSettingsContext();
+    const classes = useStyles(getTheme);
     const carouselContext = useContext(CarouselContext);
     const [currentSlide, setCurrentSlide] = useState(
         carouselContext.state.currentSlide
@@ -63,37 +95,31 @@ const CarouselApp = ({ images }) => {
                 </div>
             )}
             {!isTablet && images.length !== 0 && (
-                <ScrollbarApp
-                    style={{ width: '100%', height: '6rem' }}
-                    contentProps={{
-                        style: {
-                            padding: 0,
-                            width: 'fit-content',
-                        },
+                <Tabs
+                    value={currentSlide}
+                    variant='scrollable'
+                    scrollButtons='on'
+                    classes={{
+                        root: classes.thumbnailsContainer,
+                        indicator: classes.indicator,
+                        scroller: classes.scroller,
+                        flexContainer: classes.flexContainer,
                     }}
                 >
-                    <div className='thumbnail-container'>
-                        {images.map((url, index) => (
-                            <Dot
-                                key={index}
-                                slide={index}
-                                className={`thumbnail ${
-                                    index === currentSlide &&
-                                    'thumbnail-selected'
-                                }`}
-                                onMouseEnter={() => changeSlide(index)}
-                            >
-                                <Image
-                                    src={url}
-                                    hasMasterSpinner
-                                    isBgImage
-                                    tag='div'
-                                    className='thumbnail-img'
-                                />
-                            </Dot>
-                        ))}
-                    </div>
-                </ScrollbarApp>
+                    {images.map((url, index) => (
+                        <Tab
+                            key={index}
+                            value={index}
+                            disableRipple
+                            onMouseEnter={() => changeSlide(index)}
+                            classes={{
+                                root: classes.thumbnail,
+                                selected: classes.selectedThumbnail,
+                            }}
+                            style={{ background: `url(${url})` }}
+                        />
+                    ))}
+                </Tabs>
             )}
         </Container>
     );
