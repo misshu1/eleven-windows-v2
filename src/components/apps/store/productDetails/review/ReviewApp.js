@@ -2,14 +2,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Rating from '@material-ui/lab/Rating';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useSettingsContext } from '../../../../../contexts/settingsContext';
-import { Comment } from './style';
+import { Container } from './style';
 
 const useStyles = makeStyles({
-    ratingColor: (theme) => ({
+    ratingColorEmpty: (theme) => ({
         color: theme().ratingColorEmpty,
+    }),
+    ratingColor: (theme) => ({
+        color: theme().accentBg,
     }),
 });
 
@@ -38,14 +42,14 @@ const timeSince = (previous) => {
     }
 };
 
-const CommentApp = (props) => {
-    const { userDisplayName, rating, date, content } = props;
+const ReviewApp = (props) => {
+    const { userDisplayName, rating, publishDate, content } = props;
     const { getTheme } = useSettingsContext();
     const classes = useStyles(getTheme);
 
     return (
-        <Comment>
-            <div className='comment-header'>
+        <Container>
+            <div className='review-header'>
                 <div className='left'>
                     <FontAwesomeIcon
                         className='icon'
@@ -60,23 +64,33 @@ const CommentApp = (props) => {
                     <Rating
                         className='rating'
                         classes={{
-                            iconEmpty: classes.ratingColor,
+                            iconEmpty: classes.ratingColorEmpty,
+                            iconFilled: classes.ratingColor,
                         }}
                         value={rating}
                         readOnly={true}
                     />
-                    <span className='date'>{timeSince(date.toDate())}</span>
+                    <span className='date'>
+                        {timeSince(publishDate.toDate())}
+                    </span>
                 </div>
             </div>
             <Typography
                 variant='subtitle2'
                 component='h2'
-                className='comment-content'
+                className='review-content'
             >
                 {content}
             </Typography>
-        </Comment>
+        </Container>
     );
 };
 
-export default CommentApp;
+export default ReviewApp;
+
+ReviewApp.propTypes = {
+    content: PropTypes.string.isRequired,
+    userDisplayName: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    publishDate: PropTypes.object.isRequired,
+};

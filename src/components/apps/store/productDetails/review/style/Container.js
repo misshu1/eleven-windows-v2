@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
-export const Comment = styled.div`
+export const Container = styled.div`
     margin: 2rem 0.5rem;
-    border: 1px solid ${props => props.theme.reviewBorder};
+    border: 1px solid ${(props) => props.theme.reviewBorder};
     border-radius: 4px;
 
-    .comment-header {
+    .review-header {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
         padding: 0.5rem;
-        border-bottom: 1px solid ${props => props.theme.reviewBorder};
+        border-bottom: 1px solid ${(props) => props.theme.reviewBorder};
     }
 
     .left {
@@ -37,7 +37,7 @@ export const Comment = styled.div`
         white-space: nowrap;
     }
 
-    .comment-content {
+    .review-content {
         display: inline-block;
         padding: 1rem;
     }

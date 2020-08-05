@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useFirebaseContext } from '../../../../contexts/firebaseContext';
 import { useNotificationsContext } from '../../../../contexts/notificationsContext';
 import CarouselApp from './carousel/CarouselApp';
+import ReviewsListApp from './reviewsList/ReviewsListApp';
 import { Container } from './style';
 
 const ProductDetailsApp = ({ product }) => {
@@ -137,6 +138,7 @@ const ProductDetailsApp = ({ product }) => {
 
             <h3>{product.title}</h3>
             <Markdown options={{ forceBlock: true }}>{description}</Markdown>
+            <ReviewsListApp productId={product.id} />
         </Container>
     );
 };
