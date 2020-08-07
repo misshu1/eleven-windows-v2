@@ -44,12 +44,12 @@ export const Form = styled.form`
     }
 
     textarea:hover {
-        box-shadow: 0 0 0 2px ${(props) => props.theme.startMenuBorder};
+        box-shadow: 0 0 0 1px ${(props) => props.theme.startMenuBorder};
         border: 1px solid ${(props) => props.theme.startMenuBorder};
     }
 
     textarea:focus {
-        box-shadow: 0 0 0 2px ${(props) => props.theme.accentBgLight};
+        box-shadow: 0 0 0 1px ${(props) => props.theme.accentBgLight};
         border: 1px solid ${(props) => props.theme.accentBgLight};
         textarea:hover {
             border: 1px solid ${(props) => props.theme.accentBgLight};
@@ -67,7 +67,7 @@ export const Form = styled.form`
         ${(props) =>
             props.errors.review &&
             css`
-                box-shadow: 0 0 0 2px red;
+                box-shadow: 0 0 0 1px red;
                 border: 1px solid red;
             `}
     }

@@ -12,14 +12,14 @@ const ReviewsListApp = ({ productId }) => {
     const [showAddReveiw, setShowAddReveiw] = useState(false);
     const { firestore } = useFirebaseContext();
     const { showError, showWarning } = useNotificationsContext();
-    const { user } = useAuth();
+    const { user, isUserLoggedIn } = useAuth();
 
     const addTempReview = useCallback((review) => {
         setReviews((prevState) => [review, ...prevState]);
     }, []);
 
     useEffect(() => {
-        if (!!user) {
+        if (isUserLoggedIn()) {
             const userPostedReview = reviews.find(
                 (review) => review.userId === user.uid
             );
@@ -30,7 +30,7 @@ const ReviewsListApp = ({ productId }) => {
                 setShowAddReveiw(true);
             }
         }
-    }, [reviews, user]);
+    }, [reviews, isUserLoggedIn, user]);
 
     useEffect(() => {
         let isCanceled = false;

@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 export const ProductContainer = styled.div`
     display: flex;
     background: ${(props) => props.theme.productCardBg};
+    box-shadow: ${(props) => props.theme.productCardBoxShadow};
     margin: 1rem 0.5rem;
     padding: 1rem 0.5rem;
     border-radius: 0.5rem;
@@ -19,10 +20,6 @@ export const ProductContainer = styled.div`
         css`
             background: ${(props) => props.theme.productCardBg};
         `}
-        
-        &&:hover {
-        box-shadow: ${(props) => props.theme.productCardBoxShadow};
-    }
 
     .img-container {
         display: flex;

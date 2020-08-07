@@ -8,9 +8,10 @@ export const Card = styled.div`
     text-align: center;
     width: 12.5rem;
     padding: 0.5rem;
-    background: ${(props) => props.theme.productCardBg};
     user-select: none;
     border-radius: 0.5rem;
+    background: ${(props) => props.theme.productCardBg};
+    box-shadow: ${(props) => props.theme.productCardBoxShadow};
 
     ${(props) =>
         props.type === 'donation' &&
@@ -22,10 +23,6 @@ export const Card = styled.div`
         css`
             background: ${(props) => props.theme.productCardBg};
         `}
-
-    &&:hover {
-        box-shadow: ${(props) => props.theme.productCardBoxShadow};
-    }
 
     p {
         margin: 0;
