@@ -1,5 +1,5 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUbuntu, faWindows } from '@fortawesome/free-brands-svg-icons';
+import { faTelegramPlane, faUbuntu, faWindows } from '@fortawesome/free-brands-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import {
     faAngleDoubleLeft,
@@ -78,7 +78,8 @@ library.add(
     faPowerOff,
     faClone,
     faSquare,
-    faRoute
+    faRoute,
+    faTelegramPlane
 );
 
 const VideoApp = lazy(() => import('./components/video/VideoApp'));

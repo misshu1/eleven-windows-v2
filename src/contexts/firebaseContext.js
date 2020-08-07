@@ -26,8 +26,20 @@ const storage = firebase.storage();
 
 const FirebaseContext = createContext(null);
 export const FirebaseProvider = (props) => {
+    const firebaseTimestamp = firebase.firestore.Timestamp.now;
+    const firestoreTimestampFromDate = (date) =>
+        firebase.firestore.Timestamp.fromDate(date);
+    // const firebaseTimestamp = firebase.firestore.FieldValue.serverTimestamp;
     return (
-        <FirebaseContext.Provider value={{ auth, firestore, storage }}>
+        <FirebaseContext.Provider
+            value={{
+                auth,
+                firestore,
+                storage,
+                firebaseTimestamp,
+                firestoreTimestampFromDate,
+            }}
+        >
             {props.children}
         </FirebaseContext.Provider>
     );

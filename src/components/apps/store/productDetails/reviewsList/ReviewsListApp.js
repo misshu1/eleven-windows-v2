@@ -2,13 +2,35 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { useFirebaseContext } from '../../../../../contexts/firebaseContext';
 import { useNotificationsContext } from '../../../../../contexts/notificationsContext';
+import { useAuth } from '../../../../../hooks/useAuth';
+import AddReviewApp from '../addReview/AddReviewApp';
 import ReviewApp from '../review/ReviewApp';
 import { Container } from './style';
 
 const ReviewsListApp = ({ productId }) => {
     const [reviews, setReviews] = useState([]);
+    const [showAddReveiw, setShowAddReveiw] = useState(false);
     const { firestore } = useFirebaseContext();
     const { showError, showWarning } = useNotificationsContext();
+    const { user } = useAuth();
+
+    const addTempReview = useCallback((review) => {
+        setReviews((prevState) => [review, ...prevState]);
+    }, []);
+
+    useEffect(() => {
+        if (!!user) {
+            const userPostedReview = reviews.find(
+                (review) => review.userId === user.uid
+            );
+
+            if (userPostedReview) {
+                setShowAddReveiw(false);
+            } else {
+                setShowAddReveiw(true);
+            }
+        }
+    }, [reviews, user]);
 
     useEffect(() => {
         let isCanceled = false;
@@ -20,6 +42,7 @@ const ReviewsListApp = ({ productId }) => {
                 const reviewsRef = await firestore
                     .collection('reviews')
                     .where('productId', '==', productId)
+                    .orderBy('publishDate', 'desc')
                     .get();
 
                 if (!reviewsRef.size) {
@@ -61,18 +84,30 @@ const ReviewsListApp = ({ productId }) => {
     }, []);
 
     const renderReviews = useCallback(() => {
-        return reviews.map((review) => (
+        return reviews.map((review, index) => (
             <ReviewApp
-                key={review.id}
+                key={review.id || index}
                 userDisplayName={review.userDisplayName}
                 rating={review.rating}
                 publishDate={review.publishDate}
                 content={review.content}
+                userId={review.userId}
             />
         ));
     }, [reviews]);
 
-    return <Container>{renderReviews()}</Container>;
+    return (
+        <Container>
+            {showAddReveiw && (
+                <AddReviewApp
+                    productId={productId}
+                    addTempReview={addTempReview}
+                />
+            )}
+
+            {renderReviews()}
+        </Container>
+    );
 };
 
 export default ReviewsListApp;

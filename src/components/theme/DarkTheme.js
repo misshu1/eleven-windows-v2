@@ -67,7 +67,7 @@ const DarkTheme = {
     ratingColorEmpty: 'rgba(255, 255, 255, 0.4)',
     tabsBg: 'rgba(255, 255, 255, 0.07)',
     reviewBorder: 'rgba(255, 255, 255, 0.1)',
-    productCardBg: 'rgba(255, 255, 255, 0.1)',
+    productCardBg: 'rgba(150, 150, 150, 0.1)',
     productCardBoxShadow: '0px 0px 10px 1px rgba(255, 255, 255, 0.3)',
 
     // Settings App

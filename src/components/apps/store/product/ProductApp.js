@@ -37,8 +37,11 @@ const useStyles = makeStyles({
             backgroundColor: theme().material.primary.darker,
         },
     }),
-    ratingColor: (theme) => ({
+    ratingColorEmpty: (theme) => ({
         color: theme().ratingColorEmpty,
+    }),
+    ratingColor: (theme) => ({
+        color: theme().accentBg,
     }),
 });
 
@@ -86,7 +89,8 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
                 {ratings && ratings?.length !== 0 && (
                     <Rating
                         classes={{
-                            iconEmpty: classes.ratingColor,
+                            iconEmpty: classes.ratingColorEmpty,
+                            iconFilled: classes.ratingColor,
                         }}
                         value={ratingVal}
                         readOnly

@@ -43,14 +43,14 @@ export const Form = styled.form`
 
         input:hover {
             box-shadow: 0 0 0 2px ${(props) => props.theme.startMenuBorder};
-            border: 1px solid transparent;
+            border: 1px solid ${(props) => props.theme.startMenuBorder};
         }
 
         input:focus {
             box-shadow: 0 0 0 2px ${(props) => props.theme.accentBgLight};
-            border: 1px solid transparent;
+            border: 1px solid ${(props) => props.theme.accentBgLight};
             input:hover {
-                border: 1px solid transparent;
+                border: 1px solid ${(props) => props.theme.accentBgLight};
             }
         }
 
@@ -59,7 +59,7 @@ export const Form = styled.form`
                 (props.errors.name || props.errors.firebase) &&
                 css`
                     box-shadow: 0 0 0 2px red;
-                    border: 1px solid transparent;
+                    border: 1px solid red;
                 `}
         }
 
@@ -68,7 +68,7 @@ export const Form = styled.form`
                 (props.errors.email || props.errors.firebase) &&
                 css`
                     box-shadow: 0 0 0 2px red;
-                    border: 1px solid transparent;
+                    border: 1px solid red;
                 `}
         }
 
@@ -77,7 +77,7 @@ export const Form = styled.form`
                 (props.errors.password || props.errors.firebase) &&
                 css`
                     box-shadow: 0 0 0 2px red;
-                    border: 1px solid transparent;
+                    border: 1px solid red;
                 `}
         }
     }
