@@ -6,7 +6,7 @@ export const NameBar = styled.div`
     width: 100%;
     height: 2.5rem;
     user-select: none;
-    background: ${(props) => props.theme.folderNameBarBg};
+    background-color: var(--backgroundLight);
     transition: background 0.2s ease-in-out;
 
     .menu {
@@ -19,7 +19,7 @@ export const NameBar = styled.div`
 
     && .menu:hover,
     && .menu:focus {
-        background: ${(props) => props.theme.folderNameBarBtnHover};
+        background-color: var(--backgroundHover);
     }
 
     .back-button {
@@ -35,11 +35,11 @@ export const NameBar = styled.div`
     }
 
     .back-button:disabled {
-        color: ${(props) => props.theme.accentBg};
+        color: var(--primary);
         filter: grayscale(1);
     }
 
     .back-button:not(:disabled):hover {
-        background: ${(props) => props.theme.folderNameBarBtnHover};
+        background-color: var(--backgroundHover);
     }
 `;

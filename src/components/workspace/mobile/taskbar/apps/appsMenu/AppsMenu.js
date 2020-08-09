@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 
 import PowerOffIcon from '../../../../../../assets/images/icons/PowerOffIcon';
 import { ICON_LOCATION, useFolderContext } from '../../../../../../contexts/folderContext';
-import { useSettingsContext } from '../../../../../../contexts/settingsContext';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import ScrollbarApp from '../../../../../common/ScrollbarApp';
 import SpinnerApp from '../../../../../common/SpinnerApp';
@@ -18,19 +17,20 @@ import { Container, LoginContainer, Widget } from './style';
 const AuthApp = lazy(() => import('../../../../../auth/AuthApp'));
 
 const useStyles = makeStyles({
-    btnStyle: (theme) => ({
+    btnStyle: {
         position: 'relative',
         overflow: 'hidden',
         paddingLeft: '3rem',
         cursor: 'default',
-        backgroundColor: theme().material.primary.main,
-        color: theme().material.primary.contrast.darker,
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
         margin: '0 1rem',
+        width: '100%',
 
         '&:hover': {
-            backgroundColor: theme().material.primary.darker,
+            backgroundColor: 'var(--primaryDark)',
         },
-    }),
+    },
     btnLabel: {
         width: '100% !important',
     },
@@ -43,9 +43,8 @@ const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
         folderState,
         sortByAppName,
     } = useFolderContext();
-    const { getTheme } = useSettingsContext();
     const { t } = useTranslation();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
     const apps = useRef(folderState.apps.sort(sortByAppName));
     const { user, logout } = useAuth();
 

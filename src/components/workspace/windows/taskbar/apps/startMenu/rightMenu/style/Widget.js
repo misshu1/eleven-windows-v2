@@ -15,14 +15,14 @@ export const Widget = styled.div`
     width: 100%;
     padding: 0.2rem;
     margin: 0.4rem 0;
-    background: ${(props) => props.theme.folderHoverBg};
-    outline: 1px solid ${(props) => props.theme.folderHoverOutline};
+    background-color: var(--backgroundCard);
+    outline: 1px solid var(--borderCard);
 
     && a {
         display: flex;
         align-items: center;
         width: 100%;
-        color: ${(props) => props.theme.startMenuColor};
+        color: var(--colorDefault);
         text-decoration: none;
     }
 
@@ -45,8 +45,8 @@ export const Widget = styled.div`
             ease-out 1 forwards;
 
         &&:hover {
-            background: ${(props) => props.theme.folderHoverBg};
-            outline: 1px solid ${(props) => props.theme.folderHoverOutline};
+            background-color: var(--backgroundCard);
+            outline: 1px solid var(--border);
             transition: background 0.05s ease-in-out;
         }
     }

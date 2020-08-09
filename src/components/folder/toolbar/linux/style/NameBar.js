@@ -6,9 +6,11 @@ export const NameBar = styled.div`
     width: 100%;
     height: 2.5rem;
     user-select: none;
-    background: ${(props) => props.theme.folderNameBarBg};
-    background-image: ${(props) =>
-        `linear-gradient(${props.theme.folderNameBarBg}, ${props.theme.background})`};
+    background-color: var(--backgroundLight);
+    background-image: linear-gradient(
+        var(--backgroundLight),
+        var(--background)
+    );
     transition: background 0.2s ease-in-out;
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
@@ -21,7 +23,7 @@ export const NameBar = styled.div`
         width: 1.3rem;
         height: 1.3rem;
         font-size: 0.8rem;
-        background: ${(props) => props.theme.folderLinuxButtonsBg};
+        background-color: var(--backgroundHover);
     }
 
     .menuBtn {
@@ -35,7 +37,7 @@ export const NameBar = styled.div`
     && .menuBtn:hover,
     && .menuBtn:focus {
         .menu {
-            background: ${(props) => props.theme.accentBg};
+            background: var(--primary);
             color: #fff;
         }
     }
@@ -53,13 +55,13 @@ export const NameBar = styled.div`
     }
 
     .back-button:disabled {
-        color: ${(props) => props.theme.accentBg};
+        color: var(--primary);
         filter: grayscale(1);
     }
 
     .back-button:not(:disabled):hover {
         .back-icon {
-            background: ${(props) => props.theme.accentBg};
+            background: var(--primary);
             color: #fff;
         }
     }

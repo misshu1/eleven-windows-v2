@@ -16,13 +16,13 @@ export const Container = styled.section`
     user-select: none;
     z-index: 250;
     position: absolute;
-    border-top: 1px solid ${(props) => props.theme.calendarBorder};
-    border-left: 1px solid ${(props) => props.theme.calendarBorder};
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
     bottom: 0;
     right: 0;
     width: 100%;
     height: 100%;
-    background: ${(props) => props.theme.calendarBg};
+    background-color: var(--background);
     animation: ${slideUp} 0.3s ease-out 1 forwards;
     box-shadow: -2px -2px 4px -1px rgba(0, 0, 0, 0.2),
         -4px -4px 5px 0px rgba(0, 0, 0, 0.14),

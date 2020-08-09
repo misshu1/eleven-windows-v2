@@ -23,12 +23,12 @@ export const Container = styled.div`
 
     .text-highlight {
         font-weight: 900;
-        color: ${(props) => props.theme.accentBgLight};
-        border-bottom: 1px solid ${(props) => props.theme.accentBgLight};
+        color: var(--primaryText);
+        border-bottom: 1px solid var(--primaryText);
     }
 
     .required {
-        color: ${(props) => props.theme.accentBgLight};
+        color: var(--primaryText);
         font-weight: 900;
         font-size: 0.8rem;
     }

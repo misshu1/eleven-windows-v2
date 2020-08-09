@@ -6,13 +6,13 @@ export const Icon = styled.div`
     align-items: center;
     width: 3rem;
     height: 100%;
-    color: ${(props) => props.theme.textColor};
+    color: var(--colorDefault);
     transition: color 0.2s ease-in-out;
     border-radius: 100%;
 
     &&:hover,
     &&:focus {
-        background: ${(props) => props.theme.clockHover};
+        background-color: var(--backgroundHover);
     }
 
     svg {

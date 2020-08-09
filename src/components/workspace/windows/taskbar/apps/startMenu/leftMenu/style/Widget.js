@@ -15,6 +15,6 @@ export const Widget = styled.div`
     }
 
     &&:hover {
-        background: ${props => props.theme.startLeftMenuHover};
+        background-color: var(--backgroundHover);
     }
 `;

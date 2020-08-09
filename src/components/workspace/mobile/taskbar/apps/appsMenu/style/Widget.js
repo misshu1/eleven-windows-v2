@@ -10,7 +10,7 @@ export const Widget = styled.div`
         display: block;
         width: 100%;
         height: 100%;
-        color: ${(props) => props.theme.startMenuColor};
+        color: var(--colorDefault);
         cursor: default;
         text-align: center;
         text-decoration: none;

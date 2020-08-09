@@ -5,11 +5,12 @@ export const Container = styled.li`
     justify-content: center;
     align-items: center;
     cursor: default;
-    width: 33.33%;
-    height: 100%;
     font-size: 1.5rem;
     outline: none;
-    background: ${(props) => props.open && props.theme.clockHover};
+    height: 100%;
+    width: 3.5rem;
+    color: var(--colorDefault);
+    background-color: ${(props) => props.open && 'var(--backgroundHover)'};
 
     svg {
         width: 1.7rem;
@@ -17,26 +18,16 @@ export const Container = styled.li`
         border-radius: 0.2rem;
     }
 
-    @media only screen and (max-width: 450px) {
-        order: 3;
+    svg .fill-color {
+        fill: var(--colorDefault);
     }
 
-    @media only screen and (min-width: 451px) {
-        height: 100%;
-        width: 3.5rem;
-        color: ${(props) => props.theme.textColor};
+    svg .stroke-color {
+        stroke: var(--colorDefault);
+    }
 
-        svg .fill-color {
-            fill: ${(props) => props.theme.textColor};
-        }
-
-        svg .stroke-color {
-            stroke: ${(props) => props.theme.textColor};
-        }
-
-        &&:hover,
-        &&:focus {
-            background: ${(props) => props.theme.clockHover};
-        }
+    &&:hover,
+    &&:focus {
+        background-color: var(--backgroundHover);
     }
 `;

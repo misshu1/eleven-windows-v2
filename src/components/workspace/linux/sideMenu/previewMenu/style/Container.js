@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const Container = styled(motion.div)`
-    background: ${(props) => props.theme.startMenuBg};
+    background-color: var(--backgroundTransparent);
     overflow-y: auto;
     z-index: 149;
     width: 100%;

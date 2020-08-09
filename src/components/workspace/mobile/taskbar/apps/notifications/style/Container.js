@@ -23,7 +23,7 @@ export const Container = styled.section`
     z-index: 250;
     cursor: default;
     user-select: none;
-    background: ${(props) => props.theme.notificationBg};
+    background-color: var(--backgroundTransparent);
     animation: ${slideUp} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1 forwards;
     backdrop-filter: blur(4px);
 `;

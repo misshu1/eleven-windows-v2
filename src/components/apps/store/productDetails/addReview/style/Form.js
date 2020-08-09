@@ -35,24 +35,24 @@ export const Form = styled.form`
         max-height: 8rem;
         width: 100%;
         outline: none;
-        background: ${(props) => props.theme.background};
-        color: ${(props) => props.theme.textColor};
-        border: 1px solid ${(props) => props.theme.startMenuBorder};
+        background-color: var(--background);
+        color: var(--colorDefault);
+        border: 1px solid var(--border);
         border-radius: 0.3em;
         padding: 0.5rem;
         margin-bottom: 0.2rem;
     }
 
     textarea:hover {
-        box-shadow: 0 0 0 1px ${(props) => props.theme.startMenuBorder};
-        border: 1px solid ${(props) => props.theme.startMenuBorder};
+        box-shadow: 0 0 0 1px var(--border);
+        border: 1px solid var(--border);
     }
 
     textarea:focus {
-        box-shadow: 0 0 0 1px ${(props) => props.theme.accentBgLight};
-        border: 1px solid ${(props) => props.theme.accentBgLight};
+        box-shadow: 0 0 0 1px var(--primaryLight);
+        border: 1px solid var(--primaryLight);
         textarea:hover {
-            border: 1px solid ${(props) => props.theme.accentBgLight};
+            border: 1px solid var(--primaryLight);
         }
     }
 

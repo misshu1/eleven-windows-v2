@@ -23,7 +23,7 @@ export const ThemePreview = styled.div`
         transform: translate(-50%, -50%);
         width: 2.5rem;
         height: 5rem;
-        background: ${(props) => props.theme.background};
+        background-color: var(--background);
         transition: background 0.2s ease-in-out;
         font-size: 0.15rem;
 
@@ -33,7 +33,7 @@ export const ThemePreview = styled.div`
             .folder-name {
                 display: block;
                 height: 0.3rem;
-                background: ${(props) => props.theme.folderNameBarBg};
+                background: var(--backgroundLight);
                 transition: background 0.2s ease-in-out;
             }
         }
@@ -48,12 +48,12 @@ export const ThemePreview = styled.div`
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background: ${(props) => props.theme.calcNumButtonBg};
+                background-color: var(--backgroundCard);
                 transition: background 0.2s ease-in-out;
             }
             span:last-child {
                 color: #fff;
-                background: ${(props) => props.theme.accentBg};
+                background-color: var(--primary);
                 transition: background 0.2s ease-in-out;
             }
         }
@@ -65,7 +65,7 @@ export const ThemePreview = styled.div`
         left: 0;
         right: 0;
         height: 0.5rem;
-        background: ${(props) => props.theme.folderNameBarBg};
+        background: var(--backgroundLight);
         transition: background 0.2s ease-in-out;
 
         .left {
@@ -94,11 +94,11 @@ export const ThemePreview = styled.div`
 
             svg {
                 .fill-color {
-                    fill: ${(props) => props.theme.textColor};
+                    fill: var(--colorDefault);
                 }
 
                 .stroke-color {
-                    stroke: ${(props) => props.theme.textColor};
+                    stroke: var(--colorDefault);
                 }
             }
 

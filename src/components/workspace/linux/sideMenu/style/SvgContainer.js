@@ -3,13 +3,13 @@ import styled, { keyframes } from 'styled-components';
 
 const animateSVGGradiant = keyframes`
 0% {
-    stop-color: ${(props) => props.theme.accentBg};
+    stop-color: var(--primary);
 }
 50% {
     stop-color: transparent;
 }
 100% {
-    stop-color: ${(props) => props.theme.accentBg};
+    stop-color: var(--primary);
 }
 `;
 

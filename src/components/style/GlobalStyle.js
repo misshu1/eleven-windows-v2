@@ -4,76 +4,6 @@ import { normalize } from 'styled-normalize';
 export const GlobalStyle = createGlobalStyle`
 ${normalize}
 
-:root {
-    --linuxCloseBtn: #ff605c;
-    --linuxMinimizeBtn: #00ca4e;
-    --linuxMaximizeBtn: #ffbd44;
-
-    --white: #ffffff;
-    --white95: #fafafa;
-    --white90: #f5f5f5;
-    --white85: #f2f2f2;
-    --white80: #e6e6e8;
-    --white60: #d6d8de;
-    --white40: #c9ccd4;
-
-    --black: #000000;
-    --black95: #0f0f0f;
-    --black90: #101010;
-    --black85: #212121;
-    --black80: #202020;
-    --black60: #363636;
-    --black40: #444444;
-
-    --grey80: #787878;
-    --grey60: #878686;
-    --grey40: #969696;
-    --grey20: #bababa;
-
-    --hoverBgLight: rgba(255, 255, 255, 0.1);
-    --hoverBgLight80: rgba(200, 200, 200, 0.2);
-    --hoverBgLight60: rgba(100, 100, 100, 0.3);
-    --hoverBgDark: rgba(0, 0, 0, 0.3);
-    --hoverBgBlue: rgba(0, 21, 255, 0.2);
-
-    --almostRed: #AF0138;
-    --almostRed60: #9e0938;
-    --almostRed40: #910d37;
-    --almostRedLight: #d7809b;
-    --almostRedDark: #960124;
-
-    --almostBlue: #009BCE;
-    --almostBlue60: #0892bf;
-    --almostBlue40: #006edc;
-    --almostBlueLight: #99aeff;
-    --almostBlueDark: #0668c9;
-
-    --almostOrange: #CF6900;
-    --almostOrange60: #BD4C00;
-    --almostOrange40: #ab4602;
-    --almostOrangeLight: #F1D2B3;
-    --almostOrangeDark: #7a3100;
-
-    --almostGreen: #26c11b;
-    --almostGreen60: #14851E;
-    --almostGreen40: #209c17;
-    --almostGreenLight: #B9DABC;
-    --almostGreenDark: #0B6812;
-
-    --almostPink: #FF0352;
-    --almostPink60: #e3003a;
-    --almostPink40: #DB1654;
-    --almostPinkLight: #FFB3CB;
-    --almostPinkDark: #bf1d50;
-
-    /* TaskBar */
-    /* Folder */
-    /* Desktop */
-    /* Buttons */
-    /* Font */
-}
-
-
 * {
     box-sizing: border-box;
 }
@@ -124,7 +54,7 @@ body {
     ${(props) =>
         props.renderStyles &&
         css`
-            background: ${(props) => props.theme.background};
+            background-color: var(--background);
             z-index: 300;
             height: 3.5rem;
             user-select: none;

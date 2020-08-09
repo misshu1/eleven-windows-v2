@@ -34,11 +34,11 @@ const slideFromRight = keyframes`
 
 export const Container = styled.div`
     position: absolute;
-    color: ${(props) => props.theme.textColor};
-    background: ${(props) => props.theme.background};
+    color: var(--colorDefault);
+    background: var(--background);
     width: 20rem;
     height: 100%;
-    border-left: 1px solid ${(props) => props.theme.folderBorder};
+    border-left: 1px solid var(--border);
     z-index: 1000;
     right: 0;
     top: 0;
@@ -61,7 +61,7 @@ export const Container = styled.div`
         left: 0;
         animation: ${slideFromLeft} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1
             forwards;
-        border-right: 1px solid ${(props) => props.theme.folderBorder};
+        border-right: 1px solid var(--border);
         border-left: none;
     }
 `;

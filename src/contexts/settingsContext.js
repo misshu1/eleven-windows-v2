@@ -2,9 +2,7 @@ import i18n from 'i18next';
 import React, { createContext, useCallback, useContext, useLayoutEffect, useMemo, useReducer, useRef } from 'react';
 
 import globeImg from '../assets/images/flags/globe.svg';
-import DarkTheme from '../components/theme/DarkTheme';
 import { backgrounds } from '../components/theme/DesktopBackground';
-import LightTheme from '../components/theme/LightTheme';
 import { THEME } from '../components/theme/theme';
 import { videoBackgrounds } from '../components/theme/VideoBackgrounds';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -26,7 +24,7 @@ const SETTINGS_ACTIONS = {
 
 const SETTINGS_STATE = {
     OS: OS_THEME.windows,
-    theme: DarkTheme,
+    theme: THEME.dark,
     backgrounds: backgrounds,
     videoBackgrounds: videoBackgrounds,
     isVideoBackgroundEnabled: false,
@@ -49,15 +47,19 @@ const settingsReducer = (state, action) => {
                 switch (action.payload) {
                     case THEME.dark:
                         localStorage.setItem('theme', THEME.dark);
+                        document.body.classList.remove('light');
+                        document.body.classList.add('dark');
                         return {
                             ...state,
-                            theme: DarkTheme,
+                            theme: THEME.dark,
                         };
                     case THEME.light:
                         localStorage.setItem('theme', THEME.light);
+                        document.body.classList.remove('dark');
+                        document.body.classList.add('light');
                         return {
                             ...state,
-                            theme: LightTheme,
+                            theme: THEME.light,
                         };
                     default:
                         throw new Error(
@@ -330,12 +332,12 @@ export const SettingsProvider = ({ children }) => {
     };
 
     const isDarkThemeSelected = useCallback(() => {
-        return settingsState.theme.id === THEME.dark;
-    }, [settingsState.theme.id]);
+        return settingsState.theme === THEME.dark;
+    }, [settingsState.theme]);
 
     const isLightThemeSelected = useCallback(() => {
-        return settingsState.theme.id === THEME.light;
-    }, [settingsState.theme.id]);
+        return settingsState.theme === THEME.light;
+    }, [settingsState.theme]);
 
     const isLinuxSelected = useCallback(() => {
         return settingsState.OS === OS_THEME.linux;

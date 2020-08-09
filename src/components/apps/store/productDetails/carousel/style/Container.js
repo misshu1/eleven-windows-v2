@@ -28,7 +28,7 @@ export const Container = styled.div`
         width: 0.5rem;
         height: 0.5rem;
         padding: 0.5rem;
-        background: ${(props) => props.theme.accentBg};
+        background-color: var(--primary);
         border: none;
         outline: none;
         border-radius: 100%;
@@ -36,7 +36,7 @@ export const Container = styled.div`
     }
 
     .custom-dot-selected {
-        background: ${(props) => props.theme.accentBgLight};
+        background-color: var(--primaryLight);
     }
 
     @media only screen and (min-width: 450px) {

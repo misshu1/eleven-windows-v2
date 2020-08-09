@@ -1,6 +1,7 @@
+import './components/theme/themeColors.css';
 import './services/translation/i18next';
 
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -9,11 +10,13 @@ import { SettingsProvider } from './contexts/settingsContext';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-    <BrowserRouter>
-        <SettingsProvider>
-            <App />
-        </SettingsProvider>
-    </BrowserRouter>,
+    <StrictMode>
+        <BrowserRouter>
+            <SettingsProvider>
+                <App />
+            </SettingsProvider>
+        </BrowserRouter>
+    </StrictMode>,
     document.getElementById('desktop')
 );
 

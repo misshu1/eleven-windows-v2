@@ -1,6 +1,6 @@
 import Backdrop from '@material-ui/core/Backdrop';
 import PropTypes from 'prop-types';
-import React, { forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Draggable from 'react-draggable';
 
@@ -28,6 +28,7 @@ const FolderApp = forwardRef((props, ref) => {
     const { isLinuxSelected } = useSettingsContext();
     const { closeFolder, activeFolder } = useDispatchFolderContext();
     const { getFolder } = useFolderContext();
+    const draggableFirstChildRef = useRef(null);
 
     const isMobile = useMediaQuery('(max-width: 450px)');
     const isTablet = useMediaQuery('(max-width: 800px)');
@@ -96,6 +97,7 @@ const FolderApp = forwardRef((props, ref) => {
                 disabled={disableDrag}
                 bounds='#desktop'
                 defaultPosition={defaultFolderPosition}
+                nodeRef={draggableFirstChildRef}
             >
                 <AnimateFadeInOut
                     appIndex={folder.appIndex}
@@ -106,6 +108,7 @@ const FolderApp = forwardRef((props, ref) => {
                     isMaximize={folder.isMaximize}
                     width={width}
                     height={height}
+                    ref={draggableFirstChildRef}
                 >
                     <Folder
                         isLinuxSelected={isLinuxSelected()}

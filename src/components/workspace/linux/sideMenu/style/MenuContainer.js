@@ -7,7 +7,7 @@ export const MenuContainer = styled.section`
     top: 0;
     left: 0;
     width: 100%;
-    color: ${(props) => props.theme.textColor};
+    color: var(--colorDefault);
     z-index: 400;
     user-select: none;
 

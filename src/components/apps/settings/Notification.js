@@ -4,33 +4,31 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useNotificationsContext } from '../../../contexts/notificationsContext';
-import { useSettingsContext } from '../../../contexts/settingsContext';
 import { NotificationContainer, NotificationText, Spacer, Title } from './style';
 
 const useStyles = makeStyles({
-    switchBase: (theme) => ({
-        color: theme().accentBg,
+    switchBase: {
+        color: 'var(--primary)',
         '&$checked': {
-            color: theme().accentBg,
+            color: 'var(--primary)',
         },
         '&$checked + $track': {
-            backgroundColor: theme().accentBg,
+            backgroundColor: 'var(--primary)',
         },
-    }),
-    checked: (theme) => ({
-        color: theme().accentBg,
-    }),
-    track: (theme) => ({
-        color: theme().accentBg,
-    }),
-    thumb: (theme) => ({
-        color: theme().switchColor,
-    }),
+    },
+    checked: {
+        color: 'var(--primary)',
+    },
+    track: {
+        color: 'var(--primary)',
+    },
+    thumb: {
+        color: 'var(--primaryDark)',
+    },
 });
 
 const Notification = () => {
-    const { getTheme } = useSettingsContext();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
     const { t } = useTranslation();
     const { disable, disableNotifications } = useNotificationsContext();
 

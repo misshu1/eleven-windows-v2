@@ -14,7 +14,7 @@ export const Container = styled.div`
     flex-direction: column;
     width: 100%;
     height: 100%;
-    color: ${(props) => props.theme.notificationColor};
+    color: var(--colorDefault);
 
     .notifications-container {
         padding: 0.6rem;
@@ -22,7 +22,7 @@ export const Container = styled.div`
     }
 
     .btn-container {
-        border-top: 1px solid ${(props) => props.theme.startMenuBorder};
+        border-top: 1px solid var(--border);
         padding: 1rem 0;
     }
 

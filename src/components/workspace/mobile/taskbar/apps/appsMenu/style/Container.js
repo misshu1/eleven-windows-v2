@@ -19,8 +19,8 @@ export const Container = styled.section`
     top: 0;
     width: 100%;
     height: 100%;
-    background: ${(props) => props.theme.startMenuBg};
-    color: ${(props) => props.theme.startMenuColor};
+    background-color: var(--backgroundTransparent);
+    color: var(--colorDefault);
     user-select: none;
     z-index: 250;
     animation: ${slideUp} 0.4s ease-out 1 forwards;

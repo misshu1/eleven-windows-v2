@@ -13,7 +13,7 @@ export const AppIcon = styled.div`
 
     &&::after {
         content: '';
-        background: ${(props) => props.theme.accentBg};
+        background-color: var(--primary);
         position: absolute;
         bottom: 0;
         left: 15%;
@@ -27,7 +27,7 @@ export const AppIcon = styled.div`
         props.appIndex === FOLDER_Z_INDEX.active &&
         props.minimize !== true &&
         css`
-            background: ${(props) => props.theme.iconBg};
+            background-color: var(--backgroundActive);
             &&::after {
                 left: 0;
                 width: 100%;
@@ -47,7 +47,7 @@ export const AppIcon = styled.div`
     }
 
     &&:hover {
-        background: ${(props) => props.theme.iconBgHover};
+        background-color: var(--backgroundHover);
         transition: all 0.2s;
     }
 `;

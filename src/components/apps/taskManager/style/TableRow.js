@@ -6,15 +6,15 @@ export const TableRow = styled.div`
     grid-template-rows: minmax(2rem, 2.5rem);
     outline: none;
     user-select: none;
-    border-left: 1px solid ${props => props.theme.folderHoverOutline};
-    border-bottom: 1px solid ${props => props.theme.folderHoverOutline};
+    border-left: 1px solid var(--backgroundHover);
+    border-bottom: 1px solid var(--backgroundHover);
 
     .stats {
         display: flex;
         justify-content: center;
         align-items: center;
         padding-right: 0.2rem;
-        border-right: 1px solid ${props => props.theme.folderHoverOutline};
+        border-right: 1px solid var(--backgroundHover);
     }
 
     .app-name {
@@ -22,11 +22,11 @@ export const TableRow = styled.div`
         justify-content: flex-start;
         align-items: center;
         padding-right: 0.2rem;
-        border-right: 1px solid ${props => props.theme.folderHoverOutline};
+        border-right: 1px solid var(--backgroundHover);
     }
 
     &&:hover {
-        background: ${props => props.theme.folderHoverBg};
+        background-color: var(--backgroundHover);
         transition: background 0.05s ease-in-out;
         border-bottom: 1px solid transparent;
         border-left: 1px solid transparent;
@@ -37,10 +37,10 @@ export const TableRow = styled.div`
         }
     }
 
-    ${props =>
+    ${(props) =>
         props.selectedApp &&
         css`
-            background: ${props => props.theme.folderFocusBg};
+            background-color: var(--backgroundActive);
             border-bottom: 1px solid transparent;
             border-left: 1px solid transparent;
 
@@ -50,7 +50,7 @@ export const TableRow = styled.div`
             }
 
             &&:hover {
-                background: ${props => props.theme.folderFocusBg};
+                background-color: var(--backgroundActive);
             }
         `}
 `;

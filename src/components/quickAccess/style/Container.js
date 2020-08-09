@@ -1,18 +1,18 @@
 import { motion } from 'framer-motion';
 import styled, { css, keyframes } from 'styled-components';
 
-const ripple = (props) => keyframes`
+const ripple = keyframes`
 0% {
-    box-shadow: 0px 0px 15px 0px ${props.theme.accentBg},
-    0px 0px 1px 0px ${props.theme.accentBg} 
+    box-shadow: 0px 0px 15px 0px var(--primary),
+    0px 0px 1px 0px var(--primary) 
 }
 50% {
-    box-shadow: 1px -1px 35px 2px ${props.theme.accentBg},
-    -3px 1px 4px 0px ${props.theme.accentBg}
+    box-shadow: 1px -1px 35px 2px var(--primary),
+    -3px 1px 4px 0px var(--primary)
 }
 100% {
-    box-shadow: 0px 0px 15px 0px ${props.theme.accentBg},
-    0px 0px 1px 0px ${props.theme.accentBg} 
+    box-shadow: 0px 0px 15px 0px var(--primary),
+    0px 0px 1px 0px var(--primary) 
 }
 `;
 
@@ -23,7 +23,7 @@ export const Container = styled(motion.div)`
     right: 0;
     height: 3rem;
     max-width: 21.87rem;
-    background: ${(props) => props.theme.background};
+    background-color: var(--background);
     border-bottom-left-radius: 16em;
     border-top-left-radius: 16em;
 
@@ -38,7 +38,7 @@ export const Container = styled(motion.div)`
     ${(props) =>
         !props.isOpen &&
         css`
-            animation: ${ripple(props)} 1.5s ease infinite forwards;
+            animation: ${ripple} 1.5s ease infinite forwards;
             animation-delay: 0.6s;
         `}
 `;

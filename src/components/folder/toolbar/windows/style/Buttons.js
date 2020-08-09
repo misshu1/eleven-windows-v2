@@ -4,7 +4,7 @@ export const Buttons = styled.div`
     display: flex;
     height: 100%;
     width: fit-content;
-    color: ${(props) => props.theme.textColor};
+    color: var(--colorDefault);
     transition: color 0.2s ease-in-out;
 
     && div {
@@ -17,12 +17,12 @@ export const Buttons = styled.div`
 
     && div:hover,
     && div:focus {
-        background: ${(props) => props.theme.folderNameBarBtnHover};
+        background-color: var(--backgroundHover);
     }
 
     && .closeBtn:hover,
     && .closeBtn:focus {
-        background: ${(props) => props.theme.folderCloseBtn};
+        background-color: var(--primary);
         color: #fff;
         outline: none;
     }

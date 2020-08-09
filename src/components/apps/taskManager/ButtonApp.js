@@ -3,30 +3,29 @@ import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { useSettingsContext } from '../../../contexts/settingsContext';
 import { BtnContainer } from './style';
 
 const useStyles = makeStyles(() => ({
-    btnStyle: (theme) => ({
-        backgroundColor: theme().accentBg,
+    btnStyle: {
+        backgroundColor: 'var(--primary)',
         color: '#fff',
         cursor: 'default',
         border: 0,
         borderRadius: 3,
         '&:disabled': {
-            color: '#e3e3e3',
-            backgroundColor: theme().disableBg,
+            backgroundColor: 'var(--primary)',
+            filter: 'grayscale(1)',
+            color: 'var(--colorDefault)',
         },
         '&:hover': {
-            backgroundColor: theme().accentBg,
+            backgroundColor: 'var(--primaryDark)',
         },
-    }),
+    },
 }));
 
 const ButtonApp = (props) => {
     const { closeSelectedApp, disableBtn } = props;
-    const { getTheme } = useSettingsContext();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
 
     return (
         <BtnContainer>

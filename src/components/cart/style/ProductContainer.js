@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components';
 
 export const ProductContainer = styled.div`
     display: flex;
-    background: ${(props) => props.theme.productCardBg};
-    box-shadow: ${(props) => props.theme.productCardBoxShadow};
+    background-color: var(--backgroundCard);
+    box-shadow: 0px 0px 10px -7px var(--boxShadow);
     margin: 1rem 0.5rem;
     padding: 1rem 0.5rem;
     border-radius: 0.5rem;
@@ -18,7 +18,7 @@ export const ProductContainer = styled.div`
     ${(props) =>
         props.type === 'product' &&
         css`
-            background: ${(props) => props.theme.productCardBg};
+            background-color: var(--backgroundCard);
         `}
 
     .img-container {
@@ -59,7 +59,7 @@ export const ProductContainer = styled.div`
         right: 0;
         bottom: 0;
         left: auto;
-        background: ${(props) => props.theme.accentBg};
+        background-color: var(--primary);
         color: #fff;
         width: 3rem;
         border-top-right-radius: inherit;

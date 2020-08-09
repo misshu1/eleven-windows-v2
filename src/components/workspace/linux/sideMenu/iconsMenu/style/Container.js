@@ -5,12 +5,12 @@ export const Container = styled(motion.div)`
     z-index: 150;
     height: 100%;
     width: 3.5rem;
-    background: ${(props) => props.theme.startMenuBg};
+    background-color: var(--backgroundTransparent);
 
     .left-menu {
         height: 100%;
         width: 100%;
-        background: ${(props) => props.theme.background};
+        background-color: var(--background);
         border-top-right-radius: 2em;
         border-bottom-right-radius: 2em;
         box-shadow: 2px -2px 4px -1px rgba(0, 0, 0, 0.2),

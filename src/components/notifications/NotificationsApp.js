@@ -5,25 +5,24 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useNotificationsContext } from '../../contexts/notificationsContext';
-import { useSettingsContext } from '../../contexts/settingsContext';
 import ScrollbarApp from '../common/ScrollbarApp';
 import { Container } from './style';
 
 const useStyles = makeStyles({
-    btnStyle: (theme) => ({
+    btnStyle: {
         position: 'relative',
         overflow: 'hidden',
         width: '100%',
         paddingLeft: '3rem',
         cursor: 'default',
-        backgroundColor: theme().material.primary.main,
-        color: theme().material.primary.contrast.darker,
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
 
         '&:hover': {
-            backgroundColor: theme().material.primary.darker,
+            backgroundColor: 'var(--primaryDark)',
         },
-    }),
-    icon: (theme) => ({
+    },
+    icon: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -35,8 +34,8 @@ const useStyles = makeStyles({
         transition: 'background 0.2s ease-in-out',
         borderTopRightRadius: '0 0',
         borderBottomRightRadius: '37% 100%',
-        background: theme().material.accent.main,
-    }),
+        background: 'var(--secondary)',
+    },
 });
 
 const NotificationsApp = () => {
@@ -44,8 +43,7 @@ const NotificationsApp = () => {
         notificationsHistory,
         clearAllNotifications,
     } = useNotificationsContext();
-    const { getTheme } = useSettingsContext();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
     const { t } = useTranslation();
 
     return (

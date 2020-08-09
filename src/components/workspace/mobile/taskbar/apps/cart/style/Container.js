@@ -18,10 +18,10 @@ export const Container = styled.section`
     bottom: 0;
     right: 0;
     z-index: 250;
-    background: ${(props) => props.theme.calendarBg};
+    background-color: var(--backgroundTransparent);
     width: 100%;
     height: 100%;
-    color: ${(props) => props.theme.startMenuColor};
+    color: var(--colorDefault);
     animation: ${slideUp} 0.4s ease-out 1 forwards;
     padding: 0.5rem;
     backdrop-filter: blur(4px);

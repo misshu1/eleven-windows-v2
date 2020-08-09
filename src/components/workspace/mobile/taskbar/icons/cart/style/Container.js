@@ -7,7 +7,7 @@ export const Container = styled.li`
     cursor: default;
     font-size: 1.5rem;
     outline: none;
-    background: ${(props) => props.open && props.theme.clockHover};
+    background-color: ${(props) => props.open && 'var(--backgroundHover)'};
 
     svg {
         width: 1.7rem;

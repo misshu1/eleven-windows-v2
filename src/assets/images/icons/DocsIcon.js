@@ -8,7 +8,7 @@ const DocsIcon = (props) => {
 
     return (
         <svg
-            key={getTheme().id}
+            key={getTheme()}
             xmlns='http://www.w3.org/2000/svg'
             enableBackground='new 0 0 855 855'
             viewBox='0 0 855 855'
@@ -30,7 +30,7 @@ const DocsIcon = (props) => {
             />
             <path
                 d='m128.6 197.4h-53.2c-1.2 0-2.3-4-2.3-9s1-9 2.3-9h53.1c1.2 0 2.3 4 2.3 9 0 4.9-1 9-2.2 9z'
-                fill={getTheme().accentBg}
+                fill='var(--primary)'
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
             <path
@@ -43,12 +43,12 @@ const DocsIcon = (props) => {
             />
             <path
                 d='m333.3 299.6-129.5 127.9 129.5 127.9 29.2-29.1-98-98 98.8-98.7z'
-                fill={getTheme().accentBg}
+                fill='var(--primary)'
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
             <path
                 d='m539.7 313.7 127.3 125.8-127.3 125.7-28.7-28.6 96.4-96.3-97.1-97.1z'
-                fill={getTheme().accentBg}
+                fill='var(--primary)'
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
             <circle cx='675' cy='50.2' fill='#fff800' r='21' />
@@ -56,7 +56,7 @@ const DocsIcon = (props) => {
             <circle
                 cx='782.8'
                 cy='48.9'
-                fill={getTheme().accentBg}
+                fill='var(--primary)'
                 style={{ transition: 'fill 0.2s ease-in-out' }}
                 r='20.2'
             />
@@ -89,7 +89,7 @@ const DocsIcon = (props) => {
                 fill='#f2f2f2'
             />
             <g
-                fill={getTheme().accentBg}
+                fill='var(--primary)'
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             >
                 <path d='m768 717.6h-79c-.5 0-1-4.8-1-10.7s.4-10.7 1-10.7h79c.5 0 1 4.8 1 10.7-.1 5.9-.5 10.7-1 10.7z' />

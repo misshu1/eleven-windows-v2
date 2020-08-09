@@ -5,17 +5,16 @@ import Rating from '@material-ui/lab/Rating';
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
 
-import { useSettingsContext } from '../../../../../contexts/settingsContext';
 import { useAuth } from '../../../../../hooks/useAuth';
 import { Container } from './style';
 
 const useStyles = makeStyles({
-    ratingColorEmpty: (theme) => ({
-        color: theme().ratingColorEmpty,
-    }),
-    ratingColor: (theme) => ({
-        color: theme().accentBg,
-    }),
+    ratingColorEmpty: {
+        color: 'var(--grey60)',
+    },
+    ratingColor: {
+        color: 'var(--primary)',
+    },
 });
 
 const timeSince = (previous) => {
@@ -45,8 +44,7 @@ const timeSince = (previous) => {
 
 const ReviewApp = (props) => {
     const { userDisplayName, userId, rating, publishDate, content } = props;
-    const { getTheme } = useSettingsContext();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
     const { user } = useAuth();
 
     const isOwnReview = useCallback(() => {

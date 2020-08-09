@@ -20,33 +20,33 @@ import { FlagImg } from '../../../../windows/taskbar/icons/language/style/FlagIm
 import { Box, Container } from './style';
 
 const useStyles = makeStyles({
-    btnStyle: (theme) => ({
+    btnStyle: {
         cursor: 'default',
-        backgroundColor: theme().material.primary.main,
-        color: theme().material.primary.contrast.darker,
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
 
         '&:hover': {
-            backgroundColor: theme().material.primary.darker,
+            backgroundColor: 'var(--primaryDark)',
         },
-    }),
-    switchBase: (theme) => ({
-        color: theme().accentBg,
+    },
+    switchBase: {
+        color: 'var(--primary)',
         '&$checked': {
-            color: theme().accentBg,
+            color: 'var(--primary)',
         },
         '&$checked + $track': {
-            backgroundColor: theme().accentBg,
+            backgroundColor: 'var(--primary)',
         },
-    }),
-    checked: (theme) => ({
-        color: theme().accentBg,
-    }),
-    track: (theme) => ({
-        color: theme().accentBg,
-    }),
-    thumb: (theme) => ({
-        color: theme().switchColor,
-    }),
+    },
+    checked: {
+        color: 'var(--primary)',
+    },
+    track: {
+        color: 'var(--primary)',
+    },
+    thumb: {
+        color: 'var(--primaryDark)',
+    },
 });
 
 const ITEM_HEIGHT = 48;
@@ -74,7 +74,7 @@ const SettingsPreviewApp = () => {
         disableNotifications,
         showSuccess,
     } = useNotificationsContext();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
     const { t } = useTranslation();
     const [bgMenuEl, setBgMenuEl] = useState(null);
     const [videoMenuEl, setVideoMenuEl] = useState(null);
@@ -149,7 +149,7 @@ const SettingsPreviewApp = () => {
                 </Typography>
                 <Box>
                     <div className='buttons-container'>
-                        {getTheme().id === THEME.light && (
+                        {getTheme() === THEME.light && (
                             <Button
                                 className={classes.btnStyle}
                                 onClick={selectDarkTheme}
@@ -157,7 +157,7 @@ const SettingsPreviewApp = () => {
                                 {t('settings.themeButton')}
                             </Button>
                         )}
-                        {getTheme().id === THEME.dark && (
+                        {getTheme() === THEME.dark && (
                             <Button
                                 className={classes.btnStyle}
                                 onClick={selectLightTheme}

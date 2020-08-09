@@ -9,7 +9,7 @@ export const AppIcon = styled.div`
     width: 100%;
     border-radius: 1.5em;
     transition: all 0.2s;
-    color: ${(props) => props.theme.textColor};
+    color: var(--colorDefault);
 
     a {
         display: flex;
@@ -21,7 +21,7 @@ export const AppIcon = styled.div`
         border-radius: 1.5em;
         transition: all 0.2s;
         text-decoration: none;
-        color: ${(props) => props.theme.textColor};
+        color: var(--colorDefault);
     }
     .name {
         margin-top: 0.5rem;
@@ -34,7 +34,7 @@ export const AppIcon = styled.div`
     }
 
     &&:hover {
-        background: ${(props) => props.theme.iconBgHover};
+        background-color: var(--backgroundHover);
         transition: all 0.2s;
     }
 `;

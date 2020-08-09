@@ -25,7 +25,7 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         height: fit-content;
-        border-top: 1px solid ${(props) => props.theme.startMenuBorder};
+        border-top: 1px solid var(--border);
         padding: 1rem;
 
         .checkout-total {

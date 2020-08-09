@@ -6,7 +6,6 @@ import Tabs from '@material-ui/core/Tabs';
 import { CarouselContext, Dot, Image, Slide, Slider } from 'pure-react-carousel';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
-import { useSettingsContext } from '../../../../../contexts/settingsContext';
 import useMediaQuery from '../../../../../hooks/useMediaQuery';
 import SpinnerApp from '../../../../common/SpinnerApp';
 import { Container } from './style';
@@ -31,17 +30,16 @@ const useStyles = makeStyles({
         backgroundSize: 'cover !important',
         backgroundPosition: 'center center !important',
     },
-    selectedThumbnail: (theme) => ({
-        boxShadow: `0px 0px 4px 2px ${theme().accentBg}`,
-    }),
+    selectedThumbnail: {
+        boxShadow: `0px 0px 4px 2px var(--primary)`,
+    },
     indicator: {
         display: 'none',
     },
 });
 
 const CarouselApp = ({ images }) => {
-    const { getTheme } = useSettingsContext();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
     const carouselContext = useContext(CarouselContext);
     const [currentSlide, setCurrentSlide] = useState(
         carouselContext.state.currentSlide

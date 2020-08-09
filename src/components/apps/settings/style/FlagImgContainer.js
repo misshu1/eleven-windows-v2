@@ -12,7 +12,7 @@ export const FlagImgContainer = styled.div`
 
     &&:hover,
     :focus {
-        background: ${props => props.theme.clockHover};
+        background-color: var(--backgroundHover);
         outline: none;
     }
 `;

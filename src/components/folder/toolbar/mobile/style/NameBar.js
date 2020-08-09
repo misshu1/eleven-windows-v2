@@ -17,7 +17,7 @@ export const NameBar = styled.div`
         justify-content: center;
         width: 4rem;
         height: 100%;
-        color: ${(props) => props.theme.accentBg};
+        color: var(--primary);
         font-size: 1.4rem;
         outline: none;
         border: none;
@@ -35,6 +35,6 @@ export const NameBar = styled.div`
 
     && .menu:hover,
     && .menu:focus {
-        background: ${(props) => props.theme.folderNameBarBtnHover};
+        background-color: var(--backgroundHover);
     }
 `;

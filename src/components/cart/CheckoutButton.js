@@ -3,23 +3,21 @@ import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import React from 'react';
 
-import { useSettingsContext } from '../../contexts/settingsContext';
-
 const useStyles = makeStyles({
-    btnStyle: (theme) => ({
+    btnStyle: {
         position: 'relative',
         overflow: 'hidden',
         paddingLeft: '3rem',
         cursor: 'default',
-        backgroundColor: theme().material.primary.main,
-        color: theme().material.primary.contrast.darker,
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
         flex: '1',
 
         '&:hover': {
-            backgroundColor: theme().material.primary.darker,
+            backgroundColor: 'var(--primaryDark)',
         },
-    }),
-    icon: (theme) => ({
+    },
+    icon: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -31,13 +29,12 @@ const useStyles = makeStyles({
         transition: 'background 0.2s ease-in-out',
         borderTopRightRadius: '0 0',
         borderBottomRightRadius: '37% 100%',
-        background: theme().material.accent.main,
-    }),
+        background: 'var(--secondary)',
+    },
 });
 
 const CheckoutButton = () => {
-    const { getTheme } = useSettingsContext();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
 
     return (
         <Button classes={{ root: classes.btnStyle }} fullWidth>

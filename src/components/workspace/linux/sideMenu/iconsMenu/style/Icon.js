@@ -9,7 +9,7 @@ export const Icon = styled.div`
     height: 3rem;
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
-    background: ${(props) => props.isActive && props.theme.accentBg};
+    background: ${(props) => props.isActive && 'var(--primary)'};
     color: ${(props) => props.isActive && '#fff'};
 
     ${(props) =>
@@ -19,7 +19,7 @@ export const Icon = styled.div`
             border-radius: 0;
             border-top-right-radius: inherit;
             &&:hover {
-                background: ${props.theme.accentBg};
+                background: ${'var(--primary)'};
                 color: #fff;
             }
         `}

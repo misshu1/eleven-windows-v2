@@ -6,8 +6,8 @@ export const Folder = styled.section`
     position: absolute;
     width: 100%;
     height: 100%;
-    background: ${(props) => props.theme.background};
-    color: ${(props) => props.theme.textColor};
+    background-color: var(--background);
+    color: var(--colorDefault);
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 
     @media only screen and (min-width: 450px) {

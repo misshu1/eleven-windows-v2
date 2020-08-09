@@ -35,7 +35,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { SnackbarProvider } from 'notistack';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
 
 import SpinnerApp from './components/common/SpinnerApp';
 import { RoutesApp } from './components/routes/Routes';
@@ -107,7 +106,6 @@ const useStyles = makeStyles({
 const App = () => {
     const [renderStyles, setRenderStyles] = useState(false);
     const {
-        getTheme,
         getSelectedBackground,
         isLinuxSelected,
         isWindowsSelected,
@@ -143,21 +141,19 @@ const App = () => {
             <NotificationsProvider>
                 <FirebaseProvider>
                     <AuthProvider>
-                        <ThemeProvider theme={getTheme()}>
-                            <GlobalStyle
-                                background={getSelectedBackground()}
-                                linux={isLinuxSelected()}
-                                windows={isWindowsSelected()}
-                                mobile={isMobileSelected()}
-                                renderStyles={renderStyles}
-                            />
-                            <CartProvider>
-                                <FolderProvider>
-                                    <RoutesApp />
-                                    <VideoBackground />
-                                </FolderProvider>
-                            </CartProvider>
-                        </ThemeProvider>
+                        <GlobalStyle
+                            background={getSelectedBackground()}
+                            linux={isLinuxSelected()}
+                            windows={isWindowsSelected()}
+                            mobile={isMobileSelected()}
+                            renderStyles={renderStyles}
+                        />
+                        <CartProvider>
+                            <FolderProvider>
+                                <RoutesApp />
+                                <VideoBackground />
+                            </FolderProvider>
+                        </CartProvider>
                     </AuthProvider>
                 </FirebaseProvider>
             </NotificationsProvider>

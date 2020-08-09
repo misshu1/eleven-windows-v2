@@ -15,7 +15,7 @@ export const Container = styled.div`
         !props.isModal &&
         css`
             margin: 1rem 0;
-            box-shadow: ${(props) => props.theme.productCardBoxShadow};
+            box-shadow: 0px 0px 10px -7px var(--boxShadow);
         `}
         
     ${(props) =>

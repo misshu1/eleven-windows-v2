@@ -6,8 +6,8 @@ export const NumberPad = styled.div`
     grid-template-columns: repeat(3, 1fr);
 
     && button {
-        background: ${(props) => props.theme.calcNumButtonBg};
-        color: ${(props) => props.theme.textColor};
+        background-color: var(--backgroundCard);
+        color: var(--colorDefault);
         transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
         font-size: 1.8rem;
         margin: 1px;
@@ -18,8 +18,8 @@ export const NumberPad = styled.div`
 
     && button:hover,
     button:focus {
-        border: 1px solid ${(props) => props.theme.folderBorder};
-        background: ${(props) => props.theme.calcNumButtonHover};
-        color: ${(props) => props.theme.textColor};
+        border: 1px solid var(--border);
+        background-color: var(--backgroundHover);
+        color: var(--colorDefault);
     }
 `;

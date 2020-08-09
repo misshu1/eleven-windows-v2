@@ -1,0 +1,141 @@
+:root {
+    --linuxCloseBtn: #ff605c;
+    --linuxMinimizeBtn: #00ca4e;
+    --linuxMaximizeBtn: #ffbd44;
+
+    --white: #ffffff;
+    --white95: #fafafa;
+    --white90: #f5f5f5;
+    --white85: #f2f2f2;
+    --white80: #e6e6e8;
+    --white60: #d6d8de;
+    --white40: #c9ccd4;
+    --whiteTransparent: rgba(255, 255, 255, 0.5);
+    --whiteTransparent90: rgba(255, 255, 255, 0.1);
+    --white40: rgba(255, 255, 255, 0.5);
+
+    --black: #000000;
+    --black95: #0f0f0f;
+    --black90: #101010;
+    --black85: #212121;
+    --black80: #202020;
+    --black60: #363636;
+    --black40: #444444;
+    --black80Transparent: rgba(32, 32, 32, 0.95);
+    --blackTransparent: rgba(0, 0, 0, 0.5);
+    --blackTransparent90: rgba(0, 0, 0, 0.1);
+
+    --grey80: #787878;
+    --grey60: #878686;
+    --grey40: #969696;
+    --grey20: #bababa;
+
+    --hoverBgLight: rgba(255, 255, 255, 0.1);
+    --hoverBgLight80: rgba(200, 200, 200, 0.2);
+    --hoverBgLight60: rgba(100, 100, 100, 0.3);
+    --hoverBgDark: rgba(0, 0, 0, 0.3);
+    --hoverBgBlue: rgba(0, 21, 255, 0.2);
+    --hoverBgLightBlue: rgba(0, 21, 255, 0.1);
+
+    --almostRed: #af0138;
+    --almostRed60: #9e0938;
+    --almostRed40: #910d37;
+    --almostRedLight: #d7809b;
+    --almostRedDark: #960124;
+
+    --almostBlue: #009bce;
+    --almostBlue90: #c4d9fc;
+    --almostBlue80: #b1c9f2;
+    --almostBlue60: #0892bf;
+    --almostBlue40: #006edc;
+    --almostBlueLight: #99aeff;
+    --almostBlueDark: #0668c9;
+    --almostBlue90Translarent: rgba(196, 217, 252, 0.95);
+
+    --almostOrange: #cf6900;
+    --almostOrange60: #bd4c00;
+    --almostOrange40: #ab4602;
+    --almostOrangeLight: #f1d2b3;
+    --almostOrangeDark: #7a3100;
+
+    --almostGreen: #26c11b;
+    --almostGreen60: #14851e;
+    --almostGreen40: #209c17;
+    --almostGreenLight: #b9dabc;
+    --almostGreenDark: #0b6812;
+
+    --almostPink: #ff0352;
+    --almostPink60: #e3003a;
+    --almostPink40: #db1654;
+    --almostPinkLight: #ffb3cb;
+    --almostPinkDark: #bf1d50;
+
+    /* 
+        --defaultFontSize: 16px
+        font-size: calc(var(--defaultFontSize) * 1) // 1rem
+        font-size: calc(var(--defaultFontSize) * 2.5) // 2.5rem
+    */
+}
+
+.dark {
+    --border: var(--black40);
+    --boxShadow: var(--whiteTransparent);
+    --borderCard: var(--whiteTransparent90);
+    --backgroundCard: var(--black60);
+
+    /* Folder Background */
+    --background: var(--black80);
+    /* Background for StartMenu, Notifications, etc. */
+    --backgroundTransparent: var(--black80Transparent);
+    /* Folder NameBar */
+    --backgroundLight: var(--black40);
+    /* Folder Icons inside the taskbar */
+    --backgroundHover: var(--hoverBgLight80);
+    --backgroundFocus: var(--hoverBgLight80);
+    --backgroundActive: var(--hoverBgLight);
+
+    /* Text colors */
+    --colorDefault: var(--white60);
+    --colorError: red;
+    --colorSuccess: var(--almostGreen);
+
+    --whiteBlack: var(--white);
+
+    --primary: var(--almostRed);
+    --primaryDark: var(--almostRedDark);
+    --primaryLight: var(--almostRedLight);
+    --primaryText: var(--almostRedLight);
+
+    --secondary: var(--almostGreen60);
+    --secondaryDark: var(--almostGreenDark);
+    --secondaryLight: var(--almostGreenLight);
+}
+
+.light {
+    --border: var(--black80);
+    --boxShadow: var(--blackTransparent);
+    --borderCard: var(--blackTransparent90);
+    --backgroundCard: var(--almostBlue80);
+
+    --background: var(--almostBlue90);
+    --backgroundTransparent: var(--almostBlue90Translarent);
+    --backgroundLight: var(--almostBlueLight);
+    --backgroundHover: var(--hoverBgBlue);
+    --backgroundFocus: var(--hoverBgDark);
+    --backgroundActive: var(--hoverBgLightBlue);
+
+    --colorDefault: var(--black85);
+    --colorError: red;
+    --colorSuccess: var(--almostGreen);
+
+    --whiteBlack: var(--black);
+
+    --primary: var(--almostBlue);
+    --primaryDark: var(--almostBlueDark);
+    --primaryLight: var(--almostBlueLight);
+    --primaryText: var(--almostBlueDark);
+
+    --secondary: var(--almostOrange);
+    --secondaryDark: var(--almostOrange60);
+    --secondaryLight: var(--almostOrangeLight);
+}

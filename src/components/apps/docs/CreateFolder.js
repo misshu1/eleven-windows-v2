@@ -107,9 +107,9 @@ const CreateFolder = (props, ref) => {
     const classes = useStyles();
 
     useEffect(() => {
-        if (getTheme().id === THEME.dark) {
+        if (getTheme() === THEME.dark) {
             setHighlightStyle(tomorrow);
-        } else if (getTheme().id === THEME.light) {
+        } else if (getTheme() === THEME.light) {
             setHighlightStyle(vs);
         }
     }, [getTheme]);

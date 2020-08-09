@@ -69,7 +69,7 @@ export const BorderLogo = styled.div`
         position: absolute;
         width: 100%;
         height: 2px;
-        background: ${(props) => props.theme.logoBorder};
+        background-color: var(--primary);
         animation: ${animate} 3s linear infinite;
         transition: background 0.2s ease-in-out;
         border-radius: 1em;

@@ -5,14 +5,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useSettingsContext } from '../../contexts/settingsContext';
 import ScrollbarApp from '../common/ScrollbarApp';
 import { Container, Form } from './style';
 import useAuthValidation from './useAuthValidation';
 
 const useStyles = makeStyles(() => ({
-    loginButton: (theme) => ({
-        backgroundColor: theme().material.primary.main,
+    loginButton: {
+        backgroundColor: 'var(--primary)',
         color: '#fff',
         cursor: 'default',
         border: 0,
@@ -23,16 +22,16 @@ const useStyles = makeStyles(() => ({
             color: '#d6d8de',
         },
         '&:hover': {
-            backgroundColor: theme().material.primary.darker,
+            backgroundColor: 'var(--primaryDark)',
         },
-    }),
-    changeViewButton: (theme) => ({
-        border: `1px solid ${theme().material.primary.main}`,
-        color: `${theme().whiteBlack}`,
+    },
+    changeViewButton: {
+        border: '1px solid var(--primary)',
+        color: 'var(--whiteBlack)',
         cursor: 'default',
         margin: '.5rem',
         borderRadius: 3,
-    }),
+    },
 }));
 
 const INITIAL_STATE = {
@@ -41,8 +40,7 @@ const INITIAL_STATE = {
 };
 
 const Login = ({ onCancel, changeView }) => {
-    const { getTheme } = useSettingsContext();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
     const { t } = useTranslation();
     const {
         handleBlur,

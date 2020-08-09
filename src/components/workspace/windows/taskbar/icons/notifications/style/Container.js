@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.li`
-    width: 33.33%;
+    width: 3.5rem;
     height: 100%;
     display: flex;
     align-items: center;
@@ -9,22 +9,12 @@ export const Container = styled.li`
     transition: color 0.2s ease-in-out;
     font-size: 1.5rem;
     margin: 0 1px;
-    color: ${(props) => props.theme.accentBg};
-    background: ${(props) => props.open && props.theme.clockHover};
     outline: none;
+    background-color: ${(props) => props.open && 'var(--backgroundHover)'};
+    color: var(--colorDefault);
 
-    @media only screen and (max-width: 450px) {
-        order: 1;
-    }
-
-    @media only screen and (min-width: 451px) {
-        height: 100%;
-        width: 3.5rem;
-        color: ${(props) => props.theme.textColor};
-
-        &&:hover,
-        &&:focus {
-            background: ${(props) => props.theme.clockHover};
-        }
+    &&:hover,
+    &&:focus {
+        background-color: var(--backgroundHover);
     }
 `;

@@ -12,7 +12,7 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         position: relative;
-        border-bottom: 1px solid ${(props) => props.theme.startMenuBorder};
+        border-bottom: 1px solid var(--border);
         width: 100%;
         height: 4rem;
 
@@ -32,7 +32,7 @@ export const Container = styled.div`
             justify-content: center;
             align-items: center;
             color: #fff;
-            background: ${(props) => props.theme.material.primary.darker};
+            background-color: var(--primaryDark);
             border: none;
             outline: none;
             border-radius: 100%;

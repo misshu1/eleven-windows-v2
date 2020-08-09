@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Name = styled.h2`
     font-family: 'Roboto', sans-serif;
-    color: ${(props) => props.theme.textColor};
+    color: var(--colorDefault);
     flex: 1;
     display: flex;
     align-items: center;

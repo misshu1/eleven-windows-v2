@@ -12,11 +12,11 @@ export const Container = styled.li`
         margin: 0 1px;
         transition: color 0.2s ease-in-out;
         outline: none;
-        background: ${(props) => props.open && props.theme.clockHover};
+        background-color: ${(props) => props.open && 'var(--backgroundHover)'};
 
         &&:hover,
         &&:focus {
-            background: ${(props) => props.theme.clockHover};
+            background-color: var(--backgroundHover);
         }
     }
 `;

@@ -13,33 +13,33 @@ import Preview from './Preview';
 import { Box, Spacer, Title } from './style';
 
 const useStyles = makeStyles({
-    btnStyle: (theme) => ({
+    btnStyle: {
         cursor: 'default',
-        backgroundColor: theme().material.primary.main,
-        color: theme().material.primary.contrast.darker,
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
 
         '&:hover': {
-            backgroundColor: theme().material.primary.darker,
+            backgroundColor: 'var(--primaryDark)',
         },
-    }),
-    switchBase: (theme) => ({
-        color: theme().accentBg,
+    },
+    switchBase: {
+        color: 'var(--primary)',
         '&$checked': {
-            color: theme().accentBg,
+            color: 'var(--primary)',
         },
         '&$checked + $track': {
-            backgroundColor: theme().accentBg,
+            backgroundColor: 'var(--primary)',
         },
-    }),
-    checked: (theme) => ({
-        color: theme().accentBg,
-    }),
-    track: (theme) => ({
-        color: theme().accentBg,
-    }),
-    thumb: (theme) => ({
-        color: theme().switchColor,
-    }),
+    },
+    checked: {
+        color: 'var(--primary)',
+    },
+    track: {
+        color: 'var(--primary)',
+    },
+    thumb: {
+        color: 'var(--primaryDark)',
+    },
 });
 
 const ITEM_HEIGHT = 48;
@@ -66,7 +66,7 @@ const Customize = () => {
     const [videoMenuEl, setVideoMenuEl] = useState(null);
     const isBgMenuOpen = Boolean(bgMenuEl);
     const isVideoMenuOpen = Boolean(videoMenuEl);
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
     const isTablet = useMediaQuery('(max-width: 800px)');
 
     const handleClickMenuVideo = (event) => {
@@ -106,7 +106,7 @@ const Customize = () => {
             <Title>{t('settings.title.customize')}</Title>
             <Box>
                 <div className='buttons-container'>
-                    {getTheme().id === THEME.light && (
+                    {getTheme() === THEME.light && (
                         <Button
                             className={classes.btnStyle}
                             onClick={selectDarkTheme}
@@ -114,7 +114,7 @@ const Customize = () => {
                             {t('settings.themeButton')}
                         </Button>
                     )}
-                    {getTheme().id === THEME.dark && (
+                    {getTheme() === THEME.dark && (
                         <Button
                             className={classes.btnStyle}
                             onClick={selectLightTheme}

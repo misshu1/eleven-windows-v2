@@ -6,6 +6,6 @@ export const LogoContainer = styled.div`
     justify-content: center;
     height: 3.5rem;
     width: 3.5rem;
-    background: ${(props) => props.theme.background};
+    background-color: var(--background);
     border-radius: 0.5rem;
 `;

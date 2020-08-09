@@ -7,7 +7,6 @@ import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 import PowerOffIcon from '../../../../../../assets/images/icons/PowerOffIcon';
-import { useSettingsContext } from '../../../../../../contexts/settingsContext';
 import { useAuth } from '../../../../../../hooks/useAuth';
 import ScrollbarApp from '../../../../../common/ScrollbarApp';
 import SpinnerApp from '../../../../../common/SpinnerApp';
@@ -19,19 +18,20 @@ import { Container, LoginContainer, Widget } from './style';
 const AuthApp = lazy(() => import('../../../../../auth/AuthApp'));
 
 const useStyles = makeStyles({
-    btnStyle: (theme) => ({
+    btnStyle: {
         position: 'relative',
         overflow: 'hidden',
         paddingLeft: '3rem',
         cursor: 'default',
-        backgroundColor: theme().material.primary.main,
-        color: theme().material.primary.contrast.darker,
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
         margin: '0 1rem',
+        width: '100%',
 
         '&:hover': {
-            backgroundColor: theme().material.primary.darker,
+            backgroundColor: 'var(--primaryDark)',
         },
-    }),
+    },
     btnLabel: {
         width: '100% !important',
     },
@@ -40,8 +40,7 @@ const useStyles = makeStyles({
 const StartMenuApp = ({ startMenuRef }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const { closeStartMenu } = useStartMenuContext();
-    const { getTheme } = useSettingsContext();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
     const { user, logout } = useAuth();
     const { t } = useTranslation();
 

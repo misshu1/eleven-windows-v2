@@ -5,7 +5,7 @@ export const LoginContainer = styled.div`
     align-items: center;
     height: 3.5rem;
     width: 100%;
-    border-bottom: 1px solid ${(props) => props.theme.startMenuBorder};
+    border-bottom: 1px solid var(--border);
 
     && span {
         display: block;
@@ -35,7 +35,7 @@ export const LoginContainer = styled.div`
         }
     }
     .power-off:hover {
-        background: ${(props) => props.theme.startLeftMenuHover};
+        background-color: var(--backgroundHover);
     }
 
     .icon {
@@ -47,7 +47,7 @@ export const LoginContainer = styled.div`
         top: 0;
         bottom: 0;
         width: 2.5rem;
-        background: ${(props) => props.theme.material.accent.main};
+        background-color: var(--secondary);
         transition: background 0.2s ease-in-out;
         border-top-right-radius: 0 0;
         border-bottom-right-radius: 37% 100%;

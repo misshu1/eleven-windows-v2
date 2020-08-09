@@ -212,9 +212,9 @@ const DocsApp = () => {
     const spinnerRef = useRef(null);
 
     useEffect(() => {
-        if (getTheme().id === THEME.dark) {
+        if (getTheme() === THEME.dark) {
             setHighlightStyle(tomorrow);
-        } else if (getTheme().id === THEME.light) {
+        } else if (getTheme() === THEME.light) {
             setHighlightStyle(vs);
         }
     }, [getTheme]);

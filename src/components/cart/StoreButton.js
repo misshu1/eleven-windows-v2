@@ -5,23 +5,22 @@ import { Link } from 'react-router-dom';
 
 import StoreIcon from '../../assets/images/icons/StoreIcon';
 import { ICON_LOCATION, useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
-import { useSettingsContext } from '../../contexts/settingsContext';
 import useMediaQuery from '../../hooks/useMediaQuery';
 
 const useStyles = makeStyles({
-    btnStyle: (theme) => ({
+    btnStyle: {
         position: 'relative',
         overflow: 'hidden',
         paddingLeft: '3rem',
         cursor: 'default',
-        backgroundColor: theme().material.primary.main,
-        color: theme().material.primary.contrast.darker,
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
 
         '&:hover': {
-            backgroundColor: theme().material.primary.darker,
+            backgroundColor: 'var(--primaryDark)',
         },
-    }),
-    btnStyleMobile: (theme) => ({
+    },
+    btnStyleMobile: {
         display: 'inline-block',
         textDecoration: 'none',
         position: 'relative',
@@ -33,18 +32,18 @@ const useStyles = makeStyles({
         borderRadius: '4px',
         letterSpacing: '0.02857em',
         textTransform: 'uppercase',
-        background: theme().material.primary.main,
-        color: theme().material.primary.contrast.darker,
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
 
         '&:hover': {
-            background: theme().material.primary.darker,
+            backgroundColor: 'var(--primaryDark)',
         },
-    }),
+    },
     btnStyleMobileText: {
         display: 'inline-block',
         padding: '6px 8px',
     },
-    icon: (theme) => ({
+    icon: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -56,16 +55,15 @@ const useStyles = makeStyles({
         transition: 'background 0.2s ease-in-out',
         borderTopRightRadius: '0 0',
         borderBottomRightRadius: '37% 100%',
-        background: theme().material.accent.main,
-    }),
+        background: 'var(--secondary)',
+    },
 });
 
 const StoreButton = ({ onClick }) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { checkUserPermisions, folderState } = useFolderContext();
-    const { getTheme } = useSettingsContext();
     const apps = useRef(folderState.apps);
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
     const isMobile = useMediaQuery('(max-width: 450px)');
 
     const openApp = (appId) => {

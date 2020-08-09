@@ -10,18 +10,18 @@ export const Operators = styled.div`
         border: none;
         outline: none;
         font-size: 1.8rem;
-        background: ${props => props.theme.calcOperatorButtonBg};
-        color: ${props => props.theme.textColor};
+        background-color: var(--backgroundLight);
+        color: var(--colorDefault);
         transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
     }
     && button:hover,
     button:focus {
-        border: 1px solid ${props => props.theme.folderBorder};
-        background: ${props => props.theme.calcOperatorButtonHover};
-        color: ${props => props.theme.textColor};
+        border: 1px solid var(--border);
+        background-color: var(--backgroundHover);
+        color: var(--colorDefault);
     }
     && button:nth-child(5) {
-        background: ${props => props.theme.accentBg};
+        background-color: var(--primary);
         color: #fff;
     }
 `;

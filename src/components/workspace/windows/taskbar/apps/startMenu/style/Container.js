@@ -19,8 +19,8 @@ export const Container = styled.section`
     top: 0;
     width: 100%;
     height: 100%;
-    background: ${(props) => props.theme.startMenuBg};
-    color: ${(props) => props.theme.startMenuColor};
+    background-color: var(--backgroundTransparent);
+    color: var(--colorDefault);
     user-select: none;
     z-index: 250;
     animation: ${slideUp} 0.4s ease-out 1 forwards;
@@ -42,8 +42,8 @@ export const Container = styled.section`
         max-height: 45.5rem;
         top: auto;
         bottom: 0;
-        border-top: 1px solid ${(props) => props.theme.startMenuBorder};
-        border-right: 1px solid ${(props) => props.theme.startMenuBorder};
+        border-top: 1px solid var(--border);
+        border-right: 1px solid var(--border);
         box-shadow: 2px -2px 4px -1px rgba(0, 0, 0, 0.2),
             4px -4px 5px 0px rgba(0, 0, 0, 0.14),
             1px -1px 10px 0px rgba(0, 0, 0, 0.12);

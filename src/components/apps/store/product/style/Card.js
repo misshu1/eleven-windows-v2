@@ -10,18 +10,18 @@ export const Card = styled.div`
     padding: 0.5rem;
     user-select: none;
     border-radius: 0.5rem;
-    background: ${(props) => props.theme.productCardBg};
-    box-shadow: ${(props) => props.theme.productCardBoxShadow};
+    background-color: var(--backgroundCard);
+    box-shadow: 0px 0px 10px -7px var(--boxShadow);
 
     ${(props) =>
         props.type === 'donation' &&
         css`
-            background: rgba(70, 143, 97, 0.5);
+            background-color: rgba(70, 143, 97, 0.5);
         `}
     ${(props) =>
         props.type === 'product' &&
         css`
-            background: ${(props) => props.theme.productCardBg};
+            background-color: var(--backgroundCard);
         `}
 
     p {
@@ -47,7 +47,7 @@ export const Card = styled.div`
         left: -5px;
         top: 0.5rem;
         width: 4rem;
-        background: ${(props) => props.theme.material.primary.main};
+        background-color: var(--primary);
         padding: 0.2rem;
         border-top-right-radius: 0.2rem;
         border-bottom-right-radius: 0.2rem;
@@ -62,8 +62,7 @@ export const Card = styled.div`
         height: 0;
         border-style: solid;
         border-width: 0 5px 5px 0;
-        border-color: ${(props) =>
-            `transparent ${props.theme.material.primary.darker} transparent transparent`};
+        border-color: transparent var(--primaryLight) transparent transparent;
         bottom: -5px;
         left: 0;
     }
@@ -122,7 +121,7 @@ export const Card = styled.div`
         top: 0;
         bottom: 0;
         width: 2.5rem;
-        background: ${(props) => props.theme.material.accent.main};
+        background-color: var(--secondary);
         transition: background 0.2s ease-in-out;
         border-top-right-radius: 0 0;
         border-bottom-right-radius: 37% 100%;

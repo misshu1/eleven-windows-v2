@@ -5,5 +5,5 @@ export const Container = styled.li`
     align-items: center;
     justify-content: center;
     outline: none;
-    background: ${(props) => props.open && props.theme.clockHover};
+    background-color: ${(props) => props.open && 'var(--backgroundHover)'};
 `;

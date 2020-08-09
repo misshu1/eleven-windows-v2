@@ -11,8 +11,6 @@ export const BtnContainer = styled.div`
     width: 100%;
     height: 3rem;
     z-index: 20;
-    background: ${props => props.theme.bottomBg};
-    transition: background 0.2s ease-in-out;
     padding-right: 1rem;
     box-shadow: 0px -2px 4px -1px rgba(0, 0, 0, 0.2),
         0px -4px 5px 0px rgba(0, 0, 0, 0.14),

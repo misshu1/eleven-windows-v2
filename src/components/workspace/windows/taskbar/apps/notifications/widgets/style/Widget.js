@@ -6,8 +6,8 @@ export const Widget = styled.div`
     width: 6rem;
     height: 4rem;
     margin: 0.5rem;
-    background: ${(props) => props.theme.notificationWidgetBg};
-    border: 1px solid ${(props) => props.theme.notificationBorder};
+    background-color: var(--backgroundActive);
+    border: 1px solid var(--border);
     padding: 0.2rem;
     transition: background 0.2s ease-in-out;
 
@@ -18,7 +18,7 @@ export const Widget = styled.div`
     }
 
     &&:hover {
-        background: ${(props) => props.theme.widgetHover};
+        background-color: var(--backgroundHover);
     }
 
     .icon {

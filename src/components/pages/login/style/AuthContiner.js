@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const AuthContiner = styled(motion.div)`
-    color: ${(props) => props.theme.textColor};
-    background: ${(props) => props.theme.background};
+    color: var(--colorDefault);
+    background-color: var(--background);
     padding: 0.5rem;
     width: 100%;
     height: 100%;

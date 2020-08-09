@@ -8,7 +8,7 @@ const CalculatorIcon = (props) => {
 
     return (
         <svg
-            key={getTheme().id}
+            key={getTheme()}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 750'
             width={width ? width : '100%'}
@@ -21,7 +21,7 @@ const CalculatorIcon = (props) => {
             </g>
             <path
                 d='M375 375h375v375H375z'
-                fill={getTheme().accentBg}
+                fill='var(--primary)'
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
             <g fill='none'>

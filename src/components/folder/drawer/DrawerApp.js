@@ -8,14 +8,12 @@ import PropTypes from 'prop-types';
 import React, { forwardRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useSettingsContext } from '../../../contexts/settingsContext';
 import ScrollbarApp from '../../common/ScrollbarApp';
 import { Container } from './style';
 
 const Drawer = forwardRef((props, ref) => {
     const { toolbarMenu, closeDrawer } = props;
-    const { getTheme } = useSettingsContext();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
 
     const close = useCallback(() => {
         setTimeout(() => {
@@ -53,21 +51,21 @@ const Drawer = forwardRef((props, ref) => {
 });
 
 const useStyles = makeStyles({
-    root: (theme) => ({
+    root: {
         width: '100%',
         maxWidth: '100%',
         backgroundColor: 'transparent',
-        color: theme().textColor,
-    }),
+        color: 'var(--colorDefault)',
+    },
     listItemStyle: {
         '&:hover': {
             cursor: 'default',
             background: 'rgba(0, 0, 0, 0.2)',
         },
     },
-    fontIconStyle: (theme) => ({
-        color: theme().accentBg,
-    }),
+    fontIconStyle: {
+        color: 'var(--primary)',
+    },
     listIconStyle: {
         marginRight: '1rem',
         width: '2rem',
@@ -87,8 +85,7 @@ const scrollToRef = (refObj, refName) => {
 };
 
 const ListItemLink = ({ item, onClick }) => {
-    const { getTheme } = useSettingsContext();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
 
     return (
         <ListItem

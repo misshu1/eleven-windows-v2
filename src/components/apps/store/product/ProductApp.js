@@ -5,7 +5,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import CartIcon from '../../../../assets/images/icons/CartIcon';
 import { useCartContext, useDispatchCartContext } from '../../../../contexts/cartContext';
-import { useSettingsContext } from '../../../../contexts/settingsContext';
 import { folderPages } from '../../../folder/folderPages';
 import { Card } from './style';
 
@@ -25,8 +24,8 @@ const useStyles = makeStyles({
         overflow: 'hidden',
         paddingLeft: '3rem',
         cursor: 'default',
-        backgroundColor: theme().material.primary.main,
-        color: theme().material.primary.contrast.darker,
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
 
         '&:disabled': {
             filter: 'grayscale(1)',
@@ -34,25 +33,24 @@ const useStyles = makeStyles({
         },
 
         '&:hover': {
-            backgroundColor: theme().material.primary.darker,
+            backgroundColor: 'var(--primaryDark)',
         },
     }),
     ratingColorEmpty: (theme) => ({
-        color: theme().ratingColorEmpty,
+        color: 'var(--grey60)',
     }),
-    ratingColor: (theme) => ({
-        color: theme().accentBg,
-    }),
+    ratingColor: {
+        color: 'var(--primary)',
+    },
 });
 
 const ProductApp = ({ product, setSelectedProduct, setPage }) => {
     const { imagePreview, newPrice, oldPrice, ratings, title } = product;
     const { addToCart } = useDispatchCartContext();
     const { isProductInCart } = useCartContext();
-    const { getTheme } = useSettingsContext();
     const [discountVal, setDiscountVal] = useState(0);
     const [ratingVal, setRatingVal] = useState(0);
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
 
     const selectProduct = useCallback(() => {
         setSelectedProduct(product);

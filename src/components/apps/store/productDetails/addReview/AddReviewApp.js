@@ -4,13 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import React from 'react';
 
-import { useSettingsContext } from '../../../../../contexts/settingsContext';
 import { Container, Form } from './style';
 import useReviewValidation from './useReviewValidation';
 
 const useStyles = makeStyles(() => ({
-    submitButton: (theme) => ({
-        backgroundColor: theme().material.primary.main,
+    submitButton: {
+        backgroundColor: 'var(--primary)',
         color: '#fff',
         cursor: 'default',
         border: 0,
@@ -22,29 +21,29 @@ const useStyles = makeStyles(() => ({
             color: '#d6d8de',
         },
         '&:hover': {
-            backgroundColor: theme().material.primary.darker,
+            backgroundColor: 'var(--primaryDark)',
         },
-    }),
-    btnStyle: (theme) => ({
+    },
+    btnStyle: {
         position: 'relative',
         overflow: 'hidden',
         paddingLeft: '3rem',
         cursor: 'default',
         margin: 0,
         alignSelf: 'flex-end',
-        backgroundColor: theme().material.primary.main,
-        color: theme().material.primary.contrast.darker,
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
 
         '&:hover': {
-            backgroundColor: theme().material.primary.darker,
+            backgroundColor: 'var(--primaryDark)',
         },
 
         '&:disabled': {
             filter: 'grayscale(1)',
             color: '#d6d8de',
         },
-    }),
-    icon: (theme) => ({
+    },
+    icon: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -56,14 +55,14 @@ const useStyles = makeStyles(() => ({
         transition: 'background 0.2s ease-in-out',
         borderTopRightRadius: '0 0',
         borderBottomRightRadius: '37% 100%',
-        background: theme().material.accent.main,
-    }),
-    ratingColorEmpty: (theme) => ({
-        color: theme().ratingColorEmpty,
-    }),
-    ratingColor: (theme) => ({
-        color: theme().accentBg,
-    }),
+        background: 'var(--secondary)',
+    },
+    ratingColorEmpty: {
+        color: 'var(--grey60)',
+    },
+    ratingColor: {
+        color: 'var(--primary)',
+    },
     ratingIcon: {
         margin: 0,
     },
@@ -75,8 +74,7 @@ const INITIAL_STATE = {
 };
 
 const AddReviewApp = ({ productId, addTempReview }) => {
-    const { getTheme } = useSettingsContext();
-    const classes = useStyles(getTheme);
+    const classes = useStyles();
     const {
         handleBlur,
         handleChange,
