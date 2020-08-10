@@ -15,7 +15,6 @@ import { languages } from '../../../../../../services/translation/i18next';
 import Preview from '../../../../../apps/settings/Preview';
 import { FlagImgContainer } from '../../../../../apps/settings/style';
 import ScrollbarApp from '../../../../../common/ScrollbarApp';
-import { THEME } from '../../../../../theme/theme';
 import { FlagImg } from '../../../../windows/taskbar/icons/language/style/FlagImg';
 import { Box, Container } from './style';
 
@@ -53,21 +52,21 @@ const ITEM_HEIGHT = 48;
 
 const SettingsPreviewApp = () => {
     const {
-        getTheme,
         getBackgrounds,
         getSelectedBackgroundName,
         isVideoEnabledOnDesktop,
         isVideoBgEnabled,
         getVideoBackgrounds,
         getSelectedVideoBgName,
+        getThemes,
+        getSelectedThemeName,
     } = useSettingsContext();
 
     const {
         enableVideoBg,
         changeVideoBg,
-        selectLightTheme,
-        selectDarkTheme,
         changeBackground,
+        changeTheme,
     } = useDispatchSettingsContext();
     const {
         disable,
@@ -77,14 +76,25 @@ const SettingsPreviewApp = () => {
     const classes = useStyles();
     const { t } = useTranslation();
     const [bgMenuEl, setBgMenuEl] = useState(null);
+    const [themeMenuEl, setThemeMenuEl] = useState(null);
+
     const [videoMenuEl, setVideoMenuEl] = useState(null);
     const isBgMenuOpen = Boolean(bgMenuEl);
+    const isThemeMenuOpen = Boolean(themeMenuEl);
     const isVideoMenuOpen = Boolean(videoMenuEl);
     const containerRef = useRef(null);
     const isTablet = useMediaQuery('(max-width: 800px)');
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang);
+    };
+
+    const handleClickMenuTheme = (event) => {
+        setThemeMenuEl(event.currentTarget);
+    };
+
+    const handleCloseMenuTheme = () => {
+        setThemeMenuEl(null);
     };
 
     const handleClickMenuVideo = (event) => {
@@ -102,6 +112,14 @@ const SettingsPreviewApp = () => {
     const handleCloseMenuBg = () => {
         setBgMenuEl(null);
     };
+
+    const changeCurrentTheme = useCallback(
+        (selectedTheme) => {
+            setThemeMenuEl(null);
+            changeTheme(selectedTheme);
+        },
+        [changeTheme]
+    );
 
     const changeBg = useCallback(
         (selectedBg) => {
@@ -149,22 +167,40 @@ const SettingsPreviewApp = () => {
                 </Typography>
                 <Box>
                     <div className='buttons-container'>
-                        {getTheme() === THEME.light && (
-                            <Button
-                                className={classes.btnStyle}
-                                onClick={selectDarkTheme}
-                            >
-                                {t('settings.themeButton')}
-                            </Button>
-                        )}
-                        {getTheme() === THEME.dark && (
-                            <Button
-                                className={classes.btnStyle}
-                                onClick={selectLightTheme}
-                            >
-                                {t('settings.themeButton')}
-                            </Button>
-                        )}
+                        <Button
+                            className={classes.btnStyle}
+                            aria-haspopup='true'
+                            aria-controls='themes-menu'
+                            onClick={handleClickMenuTheme}
+                        >
+                            {t('settings.themeButton')}
+                        </Button>
+                        <Menu
+                            id='themes-menu'
+                            anchorEl={themeMenuEl}
+                            container={containerRef.current}
+                            keepMounted
+                            open={isThemeMenuOpen}
+                            onClose={handleCloseMenuTheme}
+                            PaperProps={{
+                                style: {
+                                    maxHeight: ITEM_HEIGHT * 6.5,
+                                    width: 220,
+                                },
+                            }}
+                        >
+                            {getThemes().map((item) => (
+                                <MenuItem
+                                    key={item.id}
+                                    onClick={() => changeCurrentTheme(item.id)}
+                                    selected={
+                                        item.name === getSelectedThemeName()
+                                    }
+                                >
+                                    {item.name}
+                                </MenuItem>
+                            ))}
+                        </Menu>
                         {!isVideoEnabledOnDesktop() && (
                             <>
                                 <Button

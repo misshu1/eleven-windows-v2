@@ -1,15 +1,14 @@
 import React from 'react';
 
-import { THEME } from '../../../components/theme/theme';
 import { useSettingsContext } from '../../../contexts/settingsContext';
 
 const StoreIcon = (props) => {
     const { width, height } = props;
-    const { getTheme } = useSettingsContext();
+    const { getSelectedThemeName } = useSettingsContext();
 
     return (
         <svg
-            key={getTheme()}
+            key={getSelectedThemeName()}
             xmlns='http://www.w3.org/2000/svg'
             enableBackground='new 0 0 750 750'
             viewBox='0 0 750 750'
@@ -79,12 +78,12 @@ const StoreIcon = (props) => {
             </g>
             <path
                 d='m343.3 532.2v8.4c0 5.1 4.2 9.4 9.4 9.4h45.6c5.2 0 9.4-4.2 9.4-9.4v-8.4c0-5.2-4.2-9.4-9.4-9.4h-45.6c-5.2.1-9.4 4.3-9.4 9.4z'
-                fill={getTheme() === THEME.dark ? '#b20a88' : '#00B140'}
+                fill='var(--primaryDark)'
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
             <path
                 d='m374.9 476.1-7.8 3.2c-4.8 1.9-7.1 7.4-5.2 12.2l21.5 53.3c1.9 4.8 7.4 7.1 12.2 5.2l7.8-3.2c4.8-1.9 7.1-7.4 5.2-12.2l-21.6-53.4c-1.9-4.7-7.4-7.1-12.1-5.1z'
-                fill={getTheme() === THEME.dark ? '#b20a88' : '#00B140'}
+                fill='var(--primaryDark)'
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             />
         </svg>

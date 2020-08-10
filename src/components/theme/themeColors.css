@@ -46,11 +46,21 @@
     --almostBlue: #009bce;
     --almostBlue90: #c4d9fc;
     --almostBlue80: #b1c9f2;
+    --almostBlue70: #4fafe8;
     --almostBlue60: #0892bf;
     --almostBlue40: #006edc;
     --almostBlueLight: #99aeff;
     --almostBlueDark: #0668c9;
     --almostBlue90Translarent: rgba(196, 217, 252, 0.95);
+
+    --almostDarkBlue: #16192e;
+    --almostDarkblue90: #545c91;
+    --almostDarkblue80: #1d2a52;
+    --almostDarkblue60: #253669;
+    --almostDarkblue40: #1b274d;
+    --almostDarkBlue90Transparent: rgba(22, 25, 46, 0.9);
+    --almostDarkBlue50Transparent: rgba(22, 25, 46, 0.5);
+    --almostDarkBlueLight: #090d1c;
 
     --almostOrange: #cf6900;
     --almostOrange60: #bd4c00;
@@ -77,7 +87,7 @@
     */
 }
 
-.dark {
+.theme-not-so-dark {
     --border: var(--black40);
     --boxShadow: var(--whiteTransparent);
     --borderCard: var(--whiteTransparent90);
@@ -111,7 +121,7 @@
     --secondaryLight: var(--almostGreenLight);
 }
 
-.light {
+.theme-light-blue {
     --border: var(--black80);
     --boxShadow: var(--blackTransparent);
     --borderCard: var(--blackTransparent90);
@@ -134,6 +144,35 @@
     --primaryDark: var(--almostBlueDark);
     --primaryLight: var(--almostBlueLight);
     --primaryText: var(--almostBlueDark);
+
+    --secondary: var(--almostOrange);
+    --secondaryDark: var(--almostOrange60);
+    --secondaryLight: var(--almostOrangeLight);
+}
+
+.theme-dark-blue {
+    --border: var(--almostDarkblue90);
+    --boxShadow: var(--whiteTransparent);
+    --borderCard: var(--almostDarkBlue90Transparent);
+    --backgroundCard: var(--almostDarkblue80);
+
+    --background: var(--almostDarkBlue);
+    --backgroundTransparent: var(--almostDarkBlue90Transparent);
+    --backgroundLight: var(--almostDarkBlueLight);
+    --backgroundHover: var(--almostDarkblue60);
+    --backgroundFocus: var(--hoverBgDark);
+    --backgroundActive: var(--almostDarkblue40);
+
+    --colorDefault: var(--white60);
+    --colorError: red;
+    --colorSuccess: var(--almostGreen);
+
+    --whiteBlack: var(--white);
+
+    --primary: var(--almostBlue);
+    --primaryDark: var(--almostBlueDark);
+    --primaryLight: var(--almostBlueLight);
+    --primaryText: var(--almostBlue70);
 
     --secondary: var(--almostOrange);
     --secondaryDark: var(--almostOrange60);

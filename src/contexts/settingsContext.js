@@ -3,7 +3,7 @@ import React, { createContext, useCallback, useContext, useLayoutEffect, useMemo
 
 import globeImg from '../assets/images/flags/globe.svg';
 import { backgrounds } from '../components/theme/DesktopBackground';
-import { THEME } from '../components/theme/theme';
+import { THEME_TYPE, themes } from '../components/theme/themes';
 import { videoBackgrounds } from '../components/theme/VideoBackgrounds';
 import useMediaQuery from '../hooks/useMediaQuery';
 import i18next, { languages } from '../services/translation/i18next';
@@ -24,7 +24,7 @@ const SETTINGS_ACTIONS = {
 
 const SETTINGS_STATE = {
     OS: OS_THEME.windows,
-    theme: THEME.dark,
+    themes: themes,
     backgrounds: backgrounds,
     videoBackgrounds: videoBackgrounds,
     isVideoBackgroundEnabled: false,
@@ -43,29 +43,26 @@ const settingsReducer = (state, action) => {
             }
 
         case SETTINGS_ACTIONS.changeTheme:
-            if (state.theme !== action.payload) {
-                switch (action.payload) {
-                    case THEME.dark:
-                        localStorage.setItem('theme', THEME.dark);
-                        document.body.classList.remove('light');
-                        document.body.classList.add('dark');
-                        return {
-                            ...state,
-                            theme: THEME.dark,
-                        };
-                    case THEME.light:
-                        localStorage.setItem('theme', THEME.light);
-                        document.body.classList.remove('dark');
-                        document.body.classList.add('light');
-                        return {
-                            ...state,
-                            theme: THEME.light,
-                        };
-                    default:
-                        throw new Error(
-                            `There is no theme with the name: ${action.payload}`
-                        );
-                }
+            const theme = state.themes.find(
+                (item) => item.id === action.payload
+            );
+
+            if (!theme.isSelected) {
+                state.themes.forEach((theme) => {
+                    if (document.body.classList.contains(theme.className)) {
+                        document.body.classList.remove(theme.className);
+                    }
+                });
+
+                document.body.classList.add(theme.className);
+                return {
+                    ...state,
+                    themes: state.themes.map((item) =>
+                        item.id === action.payload
+                            ? { ...item, isSelected: true }
+                            : { ...item, isSelected: false }
+                    ),
+                };
             } else {
                 return state;
             }
@@ -165,6 +162,30 @@ export const SettingsProvider = ({ children }) => {
         return vid.preview;
     }, [settingsState.videoBackgrounds]);
 
+    const getSelectedTheme = useCallback(() => {
+        const theme = settingsState.themes.find(
+            (item) => item.isSelected === true
+        );
+
+        return theme.className;
+    }, [settingsState.themes]);
+
+    const getSelectedThemeName = useCallback(() => {
+        const theme = settingsState.themes.find(
+            (item) => item.isSelected === true
+        );
+
+        return theme.name;
+    }, [settingsState.themes]);
+
+    const getSelectedThemeType = useCallback(() => {
+        const theme = settingsState.themes.find(
+            (item) => item.isSelected === true
+        );
+
+        return theme.themeType;
+    }, [settingsState.themes]);
+
     const getSelectedBackground = useCallback(() => {
         const bg = settingsState.backgrounds.find(
             (item) => item.isSelected === true
@@ -186,6 +207,15 @@ export const SettingsProvider = ({ children }) => {
         settingsDispatch({
             type: SETTINGS_ACTIONS.enableVideoBackground,
             payload: val,
+        });
+    };
+
+    const changeTheme = (id) => {
+        localStorage.setItem('currentTheme', id);
+
+        settingsDispatch({
+            type: SETTINGS_ACTIONS.changeTheme,
+            payload: id,
         });
     };
 
@@ -241,24 +271,18 @@ export const SettingsProvider = ({ children }) => {
     };
 
     const checkLocalStorageTheme = () => {
-        const theme = localStorage.getItem('theme');
-        if (!theme) {
-            localStorage.setItem('theme', THEME.dark);
-            settingsDispatch({
-                type: SETTINGS_ACTIONS.changeTheme,
-                payload: THEME.dark,
-            });
-        }
+        const theme = localStorage.getItem('currentTheme');
 
-        if (theme === THEME.dark) {
+        // Set initial selected background in local storage
+        if (!theme) {
+            const getSelectedTheme = settingsState.themes.find(
+                (item) => item.isSelected === true
+            );
+            localStorage.setItem('currentTheme', getSelectedTheme.id);
+        } else {
             settingsDispatch({
                 type: SETTINGS_ACTIONS.changeTheme,
-                payload: THEME.dark,
-            });
-        } else if (theme === THEME.light) {
-            settingsDispatch({
-                type: SETTINGS_ACTIONS.changeTheme,
-                payload: THEME.light,
+                payload: theme,
             });
         }
     };
@@ -303,20 +327,6 @@ export const SettingsProvider = ({ children }) => {
         }
     }, [isMobile, settingsState.OS]);
 
-    const selectDarkTheme = () => {
-        settingsDispatch({
-            type: SETTINGS_ACTIONS.changeTheme,
-            payload: THEME.dark,
-        });
-    };
-
-    const selectLightTheme = () => {
-        settingsDispatch({
-            type: SETTINGS_ACTIONS.changeTheme,
-            payload: THEME.light,
-        });
-    };
-
     const languageFlag = () => {
         const locationLanguage = i18next.language;
         const lang = languages.find((item) => item.lang === i18next.language);
@@ -332,12 +342,12 @@ export const SettingsProvider = ({ children }) => {
     };
 
     const isDarkThemeSelected = useCallback(() => {
-        return settingsState.theme === THEME.dark;
-    }, [settingsState.theme]);
+        return getSelectedThemeType() === THEME_TYPE.dark;
+    }, [getSelectedThemeType]);
 
     const isLightThemeSelected = useCallback(() => {
-        return settingsState.theme === THEME.light;
-    }, [settingsState.theme]);
+        return getSelectedThemeType() === THEME_TYPE.light;
+    }, [getSelectedThemeType]);
 
     const isLinuxSelected = useCallback(() => {
         return settingsState.OS === OS_THEME.linux;
@@ -373,9 +383,9 @@ export const SettingsProvider = ({ children }) => {
         });
     };
 
-    const getTheme = useCallback(() => {
-        return settingsState.theme;
-    }, [settingsState.theme]);
+    const getThemes = useCallback(() => {
+        return settingsState.themes;
+    }, [settingsState.themes]);
 
     const getBackgrounds = useCallback(() => {
         return settingsState.backgrounds;
@@ -400,9 +410,11 @@ export const SettingsProvider = ({ children }) => {
             getSelectedVideoBgName,
             getSelectedVideoPreview,
             getSelectedBackground,
-            getTheme,
             getBackgrounds,
             getVideoBackgrounds,
+            getSelectedTheme,
+            getSelectedThemeName,
+            getThemes,
         };
     }, [
         getBackgrounds,
@@ -419,21 +431,22 @@ export const SettingsProvider = ({ children }) => {
         isVideoBgEnabled,
         isVideoEnabledOnDesktop,
         isWindowsSelected,
-        getTheme,
         getVideoBackgrounds,
+        getSelectedTheme,
+        getSelectedThemeName,
+        getThemes,
     ]);
 
     const dispatchSettingsValue = useMemo(() => {
         return {
             selectWindowsOS,
             selectLinuxOS,
-            selectLightTheme,
-            selectDarkTheme,
             changeLanguage,
             languageFlag,
             enableVideoBg,
             changeVideoBg,
             changeBackground,
+            changeTheme,
         };
     }, []);
 

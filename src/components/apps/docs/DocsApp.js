@@ -11,7 +11,6 @@ import { useNotificationsContext } from '../../../contexts/notificationsContext'
 import { useSettingsContext } from '../../../contexts/settingsContext';
 import Emoji from '../../common/Emoji';
 import FolderApp from '../../folder/FolderApp';
-import { THEME } from '../../theme/theme';
 import {
     customScrollbarExample,
     customScrollbarWithScrollTopExample,
@@ -193,7 +192,7 @@ const toolbarMenu = () => {
 
 const DocsApp = () => {
     const [highlightStyle, setHighlightStyle] = useState(tomorrow);
-    const { getTheme } = useSettingsContext();
+    const { isLightThemeSelected, isDarkThemeSelected } = useSettingsContext();
     const {
         showSuccess,
         showError,
@@ -212,12 +211,12 @@ const DocsApp = () => {
     const spinnerRef = useRef(null);
 
     useEffect(() => {
-        if (getTheme() === THEME.dark) {
+        if (isDarkThemeSelected()) {
             setHighlightStyle(tomorrow);
-        } else if (getTheme() === THEME.light) {
+        } else if (isLightThemeSelected()) {
             setHighlightStyle(vs);
         }
-    }, [getTheme]);
+    }, [isDarkThemeSelected, isLightThemeSelected]);
 
     return (
         <FolderApp

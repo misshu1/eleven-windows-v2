@@ -16,7 +16,7 @@ import {
     faExclamationTriangle,
     faInfo,
     faLayerGroup,
-    faMoon,
+    faPalette,
     faPowerOff,
     faRoute,
     faShoppingCart,
@@ -24,7 +24,6 @@ import {
     faSitemap,
     faSpinner,
     faSquare,
-    faSun,
     faTh,
     faTimes,
     faTrashAlt,
@@ -69,8 +68,6 @@ library.add(
     faSignInAlt,
     faWindows,
     faUbuntu,
-    faMoon,
-    faSun,
     faBellSlash,
     faBell,
     faExchangeAlt,
@@ -78,7 +75,8 @@ library.add(
     faClone,
     faSquare,
     faRoute,
-    faTelegramPlane
+    faTelegramPlane,
+    faPalette
 );
 
 const VideoApp = lazy(() => import('./components/video/VideoApp'));

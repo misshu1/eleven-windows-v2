@@ -6,6 +6,12 @@ export const Container = styled.div`
     background: var(--backgroundCard);
     box-shadow: 0px 0px 10px -7px var(--boxShadow);
 
+    &&:hover {
+        box-shadow: 0px 0px 0px -2px var(--boxShadow),
+            0px 0px 0px -7px var(--boxShadow),
+            0px 0px 10px -2px var(--boxShadow);
+    }
+
     .review-header {
         display: flex;
         align-items: center;

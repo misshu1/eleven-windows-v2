@@ -13,6 +13,12 @@ export const Card = styled.div`
     background-color: var(--backgroundCard);
     box-shadow: 0px 0px 10px -7px var(--boxShadow);
 
+    &&:hover {
+        box-shadow: 0px 0px 0px -2px var(--boxShadow),
+            0px 0px 0px -7px var(--boxShadow),
+            0px 0px 10px -2px var(--boxShadow);
+    }
+
     ${(props) =>
         props.type === 'donation' &&
         css`
@@ -62,7 +68,7 @@ export const Card = styled.div`
         height: 0;
         border-style: solid;
         border-width: 0 5px 5px 0;
-        border-color: transparent var(--primaryLight) transparent transparent;
+        border-color: transparent var(--primaryDark) transparent transparent;
         bottom: -5px;
         left: 0;
     }

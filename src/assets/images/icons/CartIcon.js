@@ -4,11 +4,11 @@ import { useSettingsContext } from '../../../contexts/settingsContext';
 
 const CartIcon = (props) => {
     const { width, height } = props;
-    const { getTheme } = useSettingsContext();
+    const { getSelectedThemeName } = useSettingsContext();
 
     return (
         <svg
-            key={getTheme()}
+            key={getSelectedThemeName()}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 600'
             width={width ? width : '100%'}

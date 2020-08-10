@@ -11,7 +11,6 @@ import { tomorrow, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import { useSettingsContext } from '../../../contexts/settingsContext';
 import Emoji from '../../common/Emoji';
-import { THEME } from '../../theme/theme';
 import { folderContextState, folderExample } from './CodeExamples';
 import { addWordBreak } from './DocsApp';
 
@@ -103,16 +102,16 @@ const folderPropsTable = [
 
 const CreateFolder = (props, ref) => {
     const [highlightStyle, setHighlightStyle] = useState(tomorrow);
-    const { getTheme } = useSettingsContext();
+    const { isLightThemeSelected, isDarkThemeSelected } = useSettingsContext();
     const classes = useStyles();
 
     useEffect(() => {
-        if (getTheme() === THEME.dark) {
+        if (isDarkThemeSelected()) {
             setHighlightStyle(tomorrow);
-        } else if (getTheme() === THEME.light) {
+        } else if (isLightThemeSelected()) {
             setHighlightStyle(vs);
         }
-    }, [getTheme]);
+    }, [isDarkThemeSelected, isLightThemeSelected]);
 
     return (
         <>
