@@ -31,6 +31,13 @@ const useStyles = makeStyles(() => ({
         cursor: 'default',
         margin: '.5rem',
         borderRadius: 3,
+        '&:disabled': {
+            filter: 'grayscale(1)',
+            color: '#d6d8de',
+        },
+        '&:hover': {
+            border: '1px solid var(--primaryDark)',
+        },
     },
 }));
 
@@ -115,8 +122,8 @@ const SignUp = ({ onCancel, changeView }) => {
                         <p className='error'>{errors.password}</p>
                     </label>
                     <Button
-                        variant='contained'
                         type='submit'
+                        variant='contained'
                         disabled={isSubmitting}
                         className={classes.loginButton}
                     >
@@ -125,6 +132,7 @@ const SignUp = ({ onCancel, changeView }) => {
                     <Button
                         type='button'
                         variant='outlined'
+                        disabled={isSubmitting}
                         className={classes.changeViewButton}
                         onClick={changeView}
                     >

@@ -31,6 +31,13 @@ const useStyles = makeStyles(() => ({
         cursor: 'default',
         margin: '.5rem',
         borderRadius: 3,
+        '&:disabled': {
+            filter: 'grayscale(1)',
+            color: '#d6d8de',
+        },
+        '&:hover': {
+            border: '1px solid var(--primaryDark)',
+        },
     },
 }));
 
@@ -108,8 +115,9 @@ const Login = ({ onCancel, changeView }) => {
                         {t('auth.login')}
                     </Button>
                     <Button
-                        type='button'
                         variant='outlined'
+                        type='button'
+                        disabled={isSubmitting}
                         className={classes.changeViewButton}
                         onClick={changeView}
                     >

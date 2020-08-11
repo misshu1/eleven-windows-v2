@@ -59,19 +59,20 @@ const useAuthValidation = (initialState) => {
         if (!errors.email && !errors.password) {
             login(values.email, values.password)
                 .then(() => {
+                    setSubmitting(false);
                     if (!!callback) {
                         // Do something after user logged in
                         callback();
                     }
                 })
-                .catch((err) =>
+                .catch((err) => {
+                    setSubmitting(false);
                     setErrors((prevState) => ({
                         ...prevState,
                         firebase: err.message,
-                    }))
-                );
+                    }));
+                });
         }
-        setSubmitting(false);
     };
 
     const handleRegister = (e, callback) => {
@@ -83,19 +84,20 @@ const useAuthValidation = (initialState) => {
         if (!errors.name && !errors.email && !errors.password) {
             register(values.name, values.email, values.password)
                 .then(() => {
+                    setSubmitting(false);
                     if (callback) {
                         // Do something after user sign up
                         callback();
                     }
                 })
-                .catch((err) =>
+                .catch((err) => {
+                    setSubmitting(false);
                     setErrors((prevState) => ({
                         ...prevState,
                         firebase: err.message,
-                    }))
-                );
+                    }));
+                });
         }
-        setSubmitting(false);
     };
 
     return {

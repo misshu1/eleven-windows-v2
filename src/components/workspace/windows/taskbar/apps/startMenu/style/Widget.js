@@ -5,8 +5,7 @@ export const Widget = styled.div`
     justify-content: center;
     align-items: center;
     width: 3.5rem;
-    height: 3.5rem;
-    margin: 0.1rem 0;
+    height: 100%;
 
     svg {
         width: 2rem;

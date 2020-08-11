@@ -84,14 +84,15 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
                     .doc(`${user.uid}_${productId}`)
                     .set(newReview)
                     .then(() => {
+                        setSubmitting(false);
                         setValues(initialState);
                         addTempReview(newReview);
                     });
             } catch (err) {
+                setSubmitting(false);
                 showError('Error', 'Failed to send review!', 500);
             }
         }
-        setSubmitting(false);
     };
 
     return {

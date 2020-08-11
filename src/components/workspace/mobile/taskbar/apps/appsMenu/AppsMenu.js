@@ -1,6 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { makeStyles } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import React, { lazy, Suspense, useCallback, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -10,31 +8,12 @@ import { Link } from 'react-router-dom';
 import PowerOffIcon from '../../../../../../assets/images/icons/PowerOffIcon';
 import { ICON_LOCATION, useFolderContext } from '../../../../../../contexts/folderContext';
 import { useAuth } from '../../../../../../hooks/useAuth';
+import LoginButton from '../../../../../auth/LoginButton';
 import ScrollbarApp from '../../../../../common/ScrollbarApp';
 import SpinnerApp from '../../../../../common/SpinnerApp';
 import { Container, LoginContainer, Widget } from './style';
 
 const AuthApp = lazy(() => import('../../../../../auth/AuthApp'));
-
-const useStyles = makeStyles({
-    btnStyle: {
-        position: 'relative',
-        overflow: 'hidden',
-        paddingLeft: '3rem',
-        cursor: 'default',
-        backgroundColor: 'var(--primary)',
-        color: '#fff',
-        margin: '0 1rem',
-        width: '100%',
-
-        '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
-        },
-    },
-    btnLabel: {
-        width: '100% !important',
-    },
-});
 
 const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -44,7 +23,6 @@ const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
         sortByAppName,
     } = useFolderContext();
     const { t } = useTranslation();
-    const classes = useStyles();
     const apps = useRef(folderState.apps.sort(sortByAppName));
     const { user, logout } = useAuth();
 
@@ -87,33 +65,15 @@ const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
             )}
             {!isAuthOpen && (
                 <>
-                    <LoginContainer>
-                        {!user && (
-                            <Button
-                                classes={{
-                                    root: classes.btnStyle,
-                                    label: classes.btnLabel,
-                                }}
-                                fullWidth
-                                onClick={showAuth}
-                            >
-                                <div className='icon'>
-                                    <FontAwesomeIcon
-                                        icon={['fas', 'sign-in-alt']}
-                                        size='lg'
-                                    />
-                                </div>
-                                {t('auth.login')}
-                            </Button>
-                        )}
+                    <LoginContainer isLoginButtonVisible={!user}>
+                        {!user && <LoginButton onClick={showAuth} />}
                         {user && (
                             <>
-                                <span>
-                                    <FontAwesomeIcon
-                                        icon={['fas', 'user-circle']}
-                                        size='2x'
-                                    />
-                                </span>
+                                <FontAwesomeIcon
+                                    icon={['fas', 'user-circle']}
+                                    size='2x'
+                                    style={{ margin: '0 .5rem' }}
+                                />
                                 <h4>Welcome {user.displayName}.</h4>
                                 <Tooltip
                                     title={t('tooltip.logout')}
@@ -121,10 +81,7 @@ const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
                                     enterDelay={500}
                                 >
                                     <div onClick={logout} className='power-off'>
-                                        <PowerOffIcon
-                                            width='2rem'
-                                            height='2rem'
-                                        />
+                                        <PowerOffIcon />
                                     </div>
                                 </Tooltip>
                             </>
