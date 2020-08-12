@@ -44,12 +44,12 @@ const ScrollbarApp = ({ children, requireChildrenProps, ...props }) => {
             }}
             trackYProps={{
                 style: {
-                    width: '5px',
+                    width: '8px',
                 },
             }}
             trackXProps={{
                 style: {
-                    height: '5px',
+                    height: '8px',
                 },
             }}
             contentProps={{
