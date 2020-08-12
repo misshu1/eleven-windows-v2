@@ -46,7 +46,12 @@ const BackButton = ({ page, setPage }) => {
     };
 
     return (
-        <button className='back-button' onClick={goBack} type='button'>
+        <button
+            className='back-button'
+            onClick={goBack}
+            type='button'
+            aria-label='go back'
+        >
             <FontAwesomeIcon icon={['fas', 'arrow-left']} size='lg' />
         </button>
     );

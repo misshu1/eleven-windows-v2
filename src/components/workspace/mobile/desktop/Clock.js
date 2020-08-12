@@ -66,7 +66,7 @@ const Clock = () => {
         return function () {
             clearInterval(update);
         };
-    }, [setClock]);
+    }, []);
 
     return (
         <Container>

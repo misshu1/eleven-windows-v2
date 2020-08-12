@@ -37,7 +37,11 @@ const CheckoutButton = () => {
     const classes = useStyles();
 
     return (
-        <Button classes={{ root: classes.btnStyle }} fullWidth>
+        <Button
+            aria-label='checkout'
+            classes={{ root: classes.btnStyle }}
+            fullWidth
+        >
             <div className={classes.icon}>
                 <FontAwesomeIcon
                     icon={['fas', 'angle-double-right']}

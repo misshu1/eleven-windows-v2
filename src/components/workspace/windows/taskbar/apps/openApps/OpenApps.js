@@ -5,7 +5,11 @@ import { useDispatchFolderContext, useFolderContext } from '../../../../../../co
 import { AppIcon, Container } from './style';
 
 const OpenApps = () => {
-    const { checkUserPermisions, folderState } = useFolderContext();
+    const {
+        checkUserPermisions,
+        folderState,
+        isFolderActive,
+    } = useFolderContext();
     const {
         activeFolder,
         minimizeUp,
@@ -26,7 +30,7 @@ const OpenApps = () => {
                         >
                             <AppIcon
                                 minimize={app.isMinimize}
-                                appIndex={app.appIndex}
+                                isActive={isFolderActive(app.id)}
                                 onClick={() => {
                                     if (app.isMinimize === true) {
                                         minimizeUp(app.id);

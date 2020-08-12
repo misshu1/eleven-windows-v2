@@ -21,6 +21,12 @@ export const ProductContainer = styled.div`
             background-color: var(--backgroundCard);
         `}
 
+    &&:hover {
+        box-shadow: 0px 0px 0px -2px var(--boxShadow),
+            0px 0px 0px -7px var(--boxShadow),
+            0px 0px 10px -2px var(--boxShadow);
+    }
+
     .img-container {
         display: flex;
         justify-content: center;

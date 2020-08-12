@@ -44,7 +44,7 @@ export const Container = styled.section`
     backdrop-filter: blur(4px);
 
     @media only screen and (min-width: 450px) {
-        width: 21.87rem;
+        width: 22rem;
         border-left: 1px solid var(--border);
         box-shadow: -2px 0px 4px -1px rgba(0, 0, 0, 0.2),
             -4px 0px 5px 0px rgba(0, 0, 0, 0.14),

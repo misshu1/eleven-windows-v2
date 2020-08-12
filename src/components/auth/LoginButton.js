@@ -43,6 +43,7 @@ const LoginButton = ({ onClick }) => {
             classes={{ root: classes.btnStyle }}
             fullWidth
             onClick={onClick}
+            aria-label='go to login'
         >
             <div className={classes.icon}>
                 <FontAwesomeIcon icon={['fas', 'sign-in-alt']} size='lg' />

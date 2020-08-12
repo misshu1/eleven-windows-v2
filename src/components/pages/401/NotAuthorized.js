@@ -26,7 +26,9 @@ const NotAuthorized = () => {
     return ReactDOM.createPortal(
         <Container>
             <h1>This is 401 Page, Needs some design work</h1>
-            <button onClick={goHome}>Home</button>
+            <button onClick={goHome} aria-label='go to homepage'>
+                Home
+            </button>
         </Container>,
         document.getElementById('desktop')
     );

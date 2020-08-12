@@ -127,6 +127,7 @@ const Customize = () => {
                         className={classes.btnStyle}
                         aria-haspopup='true'
                         aria-controls='themes-menu'
+                        aria-label='change theme'
                         onClick={handleClickMenuTheme}
                     >
                         {t('settings.themeButton')}
@@ -160,6 +161,7 @@ const Customize = () => {
                                 className={classes.btnStyle}
                                 aria-haspopup='true'
                                 aria-controls='background-menu'
+                                aria-label='change background'
                                 onClick={handleClickMenuBg}
                             >
                                 {t('settings.backgroundButton')}
@@ -198,6 +200,7 @@ const Customize = () => {
                                 className={classes.btnStyle}
                                 aria-haspopup='true'
                                 aria-controls='video-menu'
+                                aria-label='change video background'
                                 onClick={handleClickMenuVideo}
                             >
                                 {t('settings.videoBgButton')}

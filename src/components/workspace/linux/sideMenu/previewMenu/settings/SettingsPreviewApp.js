@@ -172,6 +172,7 @@ const SettingsPreviewApp = () => {
                             aria-haspopup='true'
                             aria-controls='themes-menu'
                             onClick={handleClickMenuTheme}
+                            aria-label='change theme'
                         >
                             {t('settings.themeButton')}
                         </Button>
@@ -208,6 +209,7 @@ const SettingsPreviewApp = () => {
                                     aria-haspopup='true'
                                     aria-controls='background-menu'
                                     onClick={handleClickMenuBg}
+                                    aria-label='change background'
                                 >
                                     {t('settings.backgroundButton')}
                                 </Button>
@@ -247,6 +249,7 @@ const SettingsPreviewApp = () => {
                                     aria-haspopup='true'
                                     aria-controls='video-menu'
                                     onClick={handleClickMenuVideo}
+                                    aria-label='change video background'
                                 >
                                     {t('settings.videoBgButton')}
                                 </Button>

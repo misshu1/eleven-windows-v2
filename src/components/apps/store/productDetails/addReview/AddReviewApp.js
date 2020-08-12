@@ -120,6 +120,7 @@ const AddReviewApp = ({ productId, addTempReview }) => {
                 <p className='error'>{errors.rating}</p>
                 <Button
                     classes={{ root: classes.btnStyle }}
+                    aria-label='send review'
                     type='submit'
                     disabled={isSubmitting}
                 >

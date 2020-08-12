@@ -68,7 +68,11 @@ const SignUp = ({ onCancel, changeView }) => {
                     placement='bottom'
                     enterDelay={500}
                 >
-                    <button className='close-btn' onClick={onCancel}>
+                    <button
+                        className='close-btn'
+                        onClick={onCancel}
+                        aria-label='cancel sign up'
+                    >
                         <FontAwesomeIcon icon={['fas', 'times']} size='lg' />
                     </button>
                 </Tooltip>
@@ -124,6 +128,7 @@ const SignUp = ({ onCancel, changeView }) => {
                     <Button
                         type='submit'
                         variant='contained'
+                        aria-label='sign up'
                         disabled={isSubmitting}
                         className={classes.loginButton}
                     >
@@ -132,6 +137,7 @@ const SignUp = ({ onCancel, changeView }) => {
                     <Button
                         type='button'
                         variant='outlined'
+                        aria-label='go to login'
                         disabled={isSubmitting}
                         className={classes.changeViewButton}
                         onClick={changeView}

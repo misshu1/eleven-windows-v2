@@ -22,7 +22,7 @@ export const Container = styled.section`
     border-left: 1px solid var(--border);
     bottom: 0;
     right: 0;
-    width: 21.87rem;
+    width: 22rem;
     background-color: var(--backgroundTransparent);
     animation: ${slideUp} 0.3s ease-out 1 forwards;
     box-shadow: -2px -2px 4px -1px rgba(0, 0, 0, 0.2),

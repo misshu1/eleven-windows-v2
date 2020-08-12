@@ -275,6 +275,7 @@ const DocsApp = () => {
                                 'Notification info contante.'
                             );
                         }}
+                        aria-label='show info alert'
                     >
                         show info
                     </Button>
@@ -287,6 +288,7 @@ const DocsApp = () => {
                                 'Notification success info.'
                             );
                         }}
+                        aria-label='show success alert'
                     >
                         show success
                     </Button>
@@ -299,6 +301,7 @@ const DocsApp = () => {
                                 400
                             );
                         }}
+                        aria-label='show warn allert'
                     >
                         show warn
                     </Button>
@@ -311,6 +314,7 @@ const DocsApp = () => {
                                 503
                             );
                         }}
+                        aria-label='show error alert'
                     >
                         show error
                     </Button>

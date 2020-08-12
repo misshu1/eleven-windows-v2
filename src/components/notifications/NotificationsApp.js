@@ -64,6 +64,7 @@ const NotificationsApp = () => {
                     <Button
                         classes={{ root: classes.btnStyle }}
                         onClick={clearAllNotifications}
+                        aria-label='clear notifications'
                     >
                         <div className={classes.icon}>
                             <FontAwesomeIcon

@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components';
 export const LoginContainer = styled.div`
     display: flex;
     align-items: center;
-    height: 3.5rem;
+    height: 100%;
     width: 100%;
+    max-height: 3.5rem;
     border-bottom: 1px solid var(--border);
 
     ${(props) =>

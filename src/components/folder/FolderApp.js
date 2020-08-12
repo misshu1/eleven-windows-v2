@@ -27,7 +27,7 @@ const FolderApp = forwardRef((props, ref) => {
     const [disableDrag, setDisableDrag] = useState(false);
     const { isLinuxSelected } = useSettingsContext();
     const { closeFolder, activeFolder } = useDispatchFolderContext();
-    const { getFolder } = useFolderContext();
+    const { getFolder, isFolderActive } = useFolderContext();
     const draggableFirstChildRef = useRef(null);
 
     const isMobile = useMediaQuery('(max-width: 450px)');
@@ -46,15 +46,15 @@ const FolderApp = forwardRef((props, ref) => {
         page,
     } = props;
 
-    const folder = getFolder(appId);
+    const app = getFolder(appId);
 
     useEffect(() => {
-        if (isMobile || folder.isMaximize) {
+        if (isMobile || app.isMaximize) {
             setDisableDrag(true);
         } else {
             setDisableDrag(false);
         }
-    }, [folder, isMobile]);
+    }, [app, isMobile]);
 
     const quitApp = useCallback(() => {
         setClose(true);
@@ -91,7 +91,7 @@ const FolderApp = forwardRef((props, ref) => {
     return ReactDOM.createPortal(
         <>
             <Draggable
-                key={folder.id}
+                key={app.id}
                 axis='both'
                 handle='.handle' // The handle is in the 'toolbar' folder
                 disabled={disableDrag}
@@ -100,12 +100,13 @@ const FolderApp = forwardRef((props, ref) => {
                 nodeRef={draggableFirstChildRef}
             >
                 <AnimateFadeInOut
-                    appIndex={folder.appIndex}
+                    isActive={isFolderActive(app.id)}
+                    appIndex={app.appIndex}
                     onClick={active}
-                    open={folder.isOpen}
-                    minimize={folder.isMinimize}
+                    open={app.isOpen}
+                    minimize={app.isMinimize}
                     close={close}
-                    isMaximize={folder.isMaximize}
+                    isMaximize={app.isMaximize}
                     width={width}
                     height={height}
                     ref={draggableFirstChildRef}
@@ -115,7 +116,7 @@ const FolderApp = forwardRef((props, ref) => {
                         className='folder' // This class is used in 'AnimateFadeInOut'
                         width={width}
                         height={height}
-                        isMaximize={folder.isMaximize}
+                        isMaximize={app.isMaximize}
                     >
                         <FolderToolbar
                             appId={appId}

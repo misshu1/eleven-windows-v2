@@ -16,6 +16,12 @@ export const Container = styled.div`
         css`
             margin: 1rem 0;
             box-shadow: 0px 0px 10px -7px var(--boxShadow);
+
+            &&:hover {
+                box-shadow: 0px 0px 0px -2px var(--boxShadow),
+                    0px 0px 0px -7px var(--boxShadow),
+                    0px 0px 10px -2px var(--boxShadow);
+            }
         `}
         
     ${(props) =>
@@ -55,6 +61,10 @@ export const Container = styled.div`
         padding: .4rem .5rem .4rem 0;
     }
 
+    .message {
+        line-height: 1.4;
+    }
+
     h3 {
         display: flex;
         align-items: center;
@@ -73,7 +83,7 @@ export const Container = styled.div`
     }
 
     @media only screen and (min-width: 450px) {
-        width: 21.87rem;
+        width: 22rem;
            
         ${(props) =>
             !props.isModal &&

@@ -12,8 +12,6 @@ const slideUp = keyframes`
 `;
 
 export const Container = styled.section`
-    display: flex;
-    flex-direction: column;
     position: absolute;
     left: 0;
     bottom: 0;

@@ -103,6 +103,7 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
             </p>
             <Button
                 className='product-add-to-cart'
+                aria-label='add product to cart'
                 classes={{ root: classes.cartButton }}
                 onClick={() => {
                     addToCart(product);

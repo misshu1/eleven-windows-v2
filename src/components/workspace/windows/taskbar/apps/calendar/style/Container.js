@@ -31,6 +31,6 @@ export const Container = styled.section`
 
     @media only screen and (min-width: 450px) {
         max-height: 35rem;
-        max-width: 21.87rem;
+        max-width: 22rem;
     }
 `;

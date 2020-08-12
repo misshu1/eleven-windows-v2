@@ -51,6 +51,7 @@ const BackButton = ({ page, setPage }) => {
             disabled={isDisabled}
             onClick={goBack}
             type='button'
+            aria-label='go back'
         >
             <FontAwesomeIcon icon={['fas', 'arrow-left']} size='lg' />
         </button>

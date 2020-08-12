@@ -162,21 +162,21 @@ const APPS_STATE = [
 ];
 
 const folderReducer = (state, action) => {
-    const app = state.apps.find((item) => item.id === action.payload);
+    const app = state.apps.find((app) => app.id === action.payload);
 
     switch (action.type) {
         case FOLDER_ACTIONS.open:
             if (!app.isOpen) {
                 return {
                     ...state,
-                    apps: state.apps.map((item) =>
-                        item.id === action.payload
+                    apps: state.apps.map((app) =>
+                        app.id === action.payload
                             ? {
-                                  ...item,
+                                  ...app,
                                   isOpen: true,
                                   appIndex: FOLDER_Z_INDEX.active,
                               }
-                            : { ...item, appIndex: FOLDER_Z_INDEX.default }
+                            : { ...app, appIndex: FOLDER_Z_INDEX.default }
                     ),
                     openApps: [
                         ...state.openApps,
@@ -190,18 +190,18 @@ const folderReducer = (state, action) => {
             if (app.isOpen === true) {
                 return {
                     ...state,
-                    apps: state.apps.map((item) =>
-                        item.id === action.payload
+                    apps: state.apps.map((app) =>
+                        app.id === action.payload
                             ? {
-                                  ...item,
+                                  ...app,
                                   isOpen: false,
                                   isMinimize: null,
                                   appIndex: FOLDER_Z_INDEX.default,
                               }
-                            : item
+                            : app
                     ),
                     openApps: state.openApps.filter(
-                        (item) => item.id !== action.payload
+                        (app) => app.id !== action.payload
                     ),
                 };
             } else {
@@ -212,10 +212,10 @@ const folderReducer = (state, action) => {
             if (app.isMinimize) {
                 return {
                     ...state,
-                    apps: state.apps.map((item) =>
-                        item.id === action.payload
-                            ? { ...item, isMinimize: false }
-                            : item
+                    apps: state.apps.map((app) =>
+                        app.id === action.payload
+                            ? { ...app, isMinimize: false }
+                            : app
                     ),
                 };
             } else {
@@ -226,10 +226,10 @@ const folderReducer = (state, action) => {
             if (app.isMinimize !== true) {
                 return {
                     ...state,
-                    apps: state.apps.map((item) =>
-                        item.id === action.payload
-                            ? { ...item, isMinimize: true }
-                            : item
+                    apps: state.apps.map((app) =>
+                        app.id === action.payload
+                            ? { ...app, isMinimize: true }
+                            : app
                     ),
                 };
             } else {
@@ -240,10 +240,10 @@ const folderReducer = (state, action) => {
             if (app.isMaximize !== true) {
                 return {
                     ...state,
-                    apps: state.apps.map((item) =>
-                        item.id === action.payload
-                            ? { ...item, isMaximize: true }
-                            : item
+                    apps: state.apps.map((app) =>
+                        app.id === action.payload
+                            ? { ...app, isMaximize: true }
+                            : app
                     ),
                 };
             } else {
@@ -254,10 +254,10 @@ const folderReducer = (state, action) => {
             if (app.isMaximize) {
                 return {
                     ...state,
-                    apps: state.apps.map((item) =>
-                        item.id === action.payload
-                            ? { ...item, isMaximize: false }
-                            : item
+                    apps: state.apps.map((app) =>
+                        app.id === action.payload
+                            ? { ...app, isMaximize: false }
+                            : app
                     ),
                 };
             } else {
@@ -268,10 +268,10 @@ const folderReducer = (state, action) => {
             if (app.appIndex !== FOLDER_Z_INDEX.active) {
                 return {
                     ...state,
-                    apps: state.apps.map((item) =>
-                        item.id === action.payload
-                            ? { ...item, appIndex: FOLDER_Z_INDEX.active }
-                            : { ...item, appIndex: FOLDER_Z_INDEX.default }
+                    apps: state.apps.map((app) =>
+                        app.id === action.payload
+                            ? { ...app, appIndex: FOLDER_Z_INDEX.active }
+                            : { ...app, appIndex: FOLDER_Z_INDEX.default }
                     ),
                 };
             } else {
@@ -281,8 +281,8 @@ const folderReducer = (state, action) => {
         case FOLDER_ACTIONS.closeAll:
             return {
                 ...state,
-                apps: state.apps.map((item) => ({
-                    ...item,
+                apps: state.apps.map((app) => ({
+                    ...app,
                     isOpen: null,
                     isMinimize: null,
                     appIndex: FOLDER_Z_INDEX.default,
@@ -372,7 +372,16 @@ export const FolderProvider = ({ children }) => {
 
     const getFolder = useCallback(
         (appId) => {
-            return folderState.apps.find((item) => item.id === appId);
+            return folderState.apps.find((app) => app.id === appId);
+        },
+        [folderState]
+    );
+
+    const isFolderActive = useCallback(
+        (appId) => {
+            const app = folderState.apps.find((app) => app.id === appId);
+
+            return app.appIndex === FOLDER_Z_INDEX.active;
         },
         [folderState]
     );
@@ -396,8 +405,9 @@ export const FolderProvider = ({ children }) => {
             sortByAppName,
             getFolder,
             checkUserPermisions,
+            isFolderActive,
         };
-    }, [checkUserPermisions, folderState, getFolder]);
+    }, [checkUserPermisions, folderState, getFolder, isFolderActive]);
 
     const dispatchFolderContextValue = useMemo(() => {
         return {

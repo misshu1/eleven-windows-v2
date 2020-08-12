@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const CustomCalendarStyles = styled.div`
     .react-calendar {
         padding: 1.5rem;
-        width: 21.87rem;
+        width: 22rem;
         max-width: 100%;
         border-top: 1px solid var(--border);
         font-family: Arial, Helvetica, sans-serif;

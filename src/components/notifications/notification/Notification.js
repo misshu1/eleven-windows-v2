@@ -34,6 +34,7 @@ const Notification = forwardRef((props, ref) => {
                         size='small'
                         onClick={() => onClose(id)}
                         style={{ padding: '0.5rem' }}
+                        aria-label='hide notification'
                     >
                         <FontAwesomeIcon
                             icon={['fas', 'times']}
@@ -41,7 +42,7 @@ const Notification = forwardRef((props, ref) => {
                         />
                     </IconButton>
                 </span>
-                <p>{message}</p>
+                <p className='message'>{message}</p>
                 {code && type === NOTIFICATION_TYPE.error && (
                     <p>
                         {`Error code `}

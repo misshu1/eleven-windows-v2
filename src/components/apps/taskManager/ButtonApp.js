@@ -35,6 +35,7 @@ const ButtonApp = (props) => {
                 className={classes.btnStyle}
                 onClick={closeSelectedApp}
                 disabled={disableBtn}
+                aria-label='close folder app'
             >
                 End Task
             </Button>

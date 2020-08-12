@@ -14,19 +14,15 @@ const animateSVGGradiant = keyframes`
 `;
 
 export const SvgContainer = styled(motion.div)`
-    display: none;
+    z-index: 145;
+    display: block;
+    width: 0px;
 
-    @media only screen and (min-width: 450px) {
-        z-index: 145;
-        display: block;
-        width: 0px;
-
-        svg {
-            height: 100%;
-            #gradiant {
-                stop {
-                    animation: ${animateSVGGradiant} 3s infinite;
-                }
+    svg {
+        height: 100%;
+        #gradiant {
+            stop {
+                animation: ${animateSVGGradiant} 3s infinite;
             }
         }
     }

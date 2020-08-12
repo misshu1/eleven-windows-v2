@@ -104,6 +104,7 @@ const StoreButton = ({ onClick }) => {
                     location === ICON_LOCATION.cart.cartApp &&
                     checkUserPermisions(app) && (
                         <Button
+                            aria-label={`go to ${app.appName}`}
                             classes={{ root: classes.btnStyle }}
                             onClick={() => openApp(app.id)}
                             key={app.id}

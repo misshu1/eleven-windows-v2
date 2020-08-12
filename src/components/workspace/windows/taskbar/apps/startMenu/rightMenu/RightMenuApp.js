@@ -31,7 +31,6 @@ const RightMenuApp = () => {
                                 key={app.id}
                                 animationDuration={ANIMATION_DURATION / 10}
                                 appId={app.id}
-                                link={app.link}
                                 widgetIcon={app.widgetIcon}
                                 iconDisplayName={app.appName}
                             />
