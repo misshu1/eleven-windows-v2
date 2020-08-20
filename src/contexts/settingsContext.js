@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import React, { createContext, useCallback, useContext, useLayoutEffect, useMemo, useReducer, useRef } from 'react';
 
 import globeImg from '../assets/images/flags/globe.svg';
-import { backgrounds } from '../components/theme/DesktopBackground';
+import { backgrounds } from '../components/theme/DesktopBackgrounds';
 import { THEME_TYPE, themes } from '../components/theme/themes';
 import { videoBackgrounds } from '../components/theme/VideoBackgrounds';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -191,8 +191,16 @@ export const SettingsProvider = ({ children }) => {
             (item) => item.isSelected === true
         );
 
+        if (bg.type === 'image') {
+            if (isMobile) {
+                return bg.bg.mobile;
+            } else {
+                return bg.bg.desktop;
+            }
+        }
+
         return bg.bg;
-    }, [settingsState.backgrounds]);
+    }, [isMobile, settingsState.backgrounds]);
 
     const getSelectedBackgroundName = useCallback(() => {
         const bg = settingsState.backgrounds.find(

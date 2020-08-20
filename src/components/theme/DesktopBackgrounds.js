@@ -1,4 +1,17 @@
+import lakeSunset from '../../assets/images/bg/nature_lake_sunset.png';
+import lakeSunsetMobile from '../../assets/images/bg/nature_lake_sunset_mobile.png';
+
 export const backgrounds = [
+    {
+        id: 'bg0',
+        type: 'image',
+        name: 'Lake Sunset',
+        isSelected: true,
+        bg: {
+            desktop: `url(${lakeSunset})`,
+            mobile: `url(${lakeSunsetMobile})`,
+        },
+    },
     {
         id: 'bg1',
         name: 'Backgorund 1',
@@ -72,7 +85,7 @@ export const backgrounds = [
     {
         id: 'bg11',
         name: 'Backgorund 11',
-        isSelected: true,
+        isSelected: false,
         bg:
             'linear-gradient(135deg, rgb(59, 72, 175) 0%, rgb(59, 72, 175) 31%,rgb(55, 66, 150) 31%, rgb(55, 66, 150) 46%,rgb(51, 60, 126) 46%, rgb(51, 60, 126) 56%,rgb(48, 54, 101) 56%, rgb(48, 54, 101) 83%,rgb(44, 48, 77) 83%, rgb(44, 48, 77) 93%,rgb(40, 42, 52) 93%, rgb(40, 42, 52) 100%)',
     },

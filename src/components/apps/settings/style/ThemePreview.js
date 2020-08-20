@@ -5,6 +5,9 @@ export const ThemePreview = styled.div`
     width: 15rem;
     height: 8rem;
     background: ${(props) => props.background};
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     margin: 0.5rem 0;
 
     ${(props) =>

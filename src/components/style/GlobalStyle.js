@@ -20,7 +20,10 @@ body {
     padding: 0;
     height: 100%;
     width: 100%;
-    background: ${(props) => props.background};
+    background: ${(props) => props.background} var(--black80);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 #pages {
