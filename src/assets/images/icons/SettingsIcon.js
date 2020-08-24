@@ -4,11 +4,11 @@ import { useSettingsContext } from '../../../contexts/settingsContext';
 
 const SettingsIcon = (props) => {
     const { width, height } = props;
-    const { getSelectedThemeName } = useSettingsContext();
+    const { getSelectedTheme } = useSettingsContext();
 
     return (
         <svg
-            key={getSelectedThemeName()}
+            key={getSelectedTheme().id}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 750'
             height={height ? height : '100%'}

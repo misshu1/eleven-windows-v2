@@ -25,14 +25,14 @@ const calculatorButtons = () => {
 const Preview = () => {
     const {
         getSelectedBackground,
-        getSelectedVideoPreview,
+        getSelectedVideo,
         isVideoEnabledOnDesktop,
     } = useSettingsContext();
 
     return (
         <ThemePreview
             background={getSelectedBackground()}
-            getSelectedVideoPreview={getSelectedVideoPreview()}
+            getSelectedVideoPreview={getSelectedVideo().preview}
             isVideoEnabledOnDesktop={isVideoEnabledOnDesktop()}
         >
             <div className='calculator'>

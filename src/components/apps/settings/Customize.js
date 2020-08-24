@@ -50,9 +50,9 @@ const Customize = () => {
         isVideoEnabledOnDesktop,
         isVideoBgEnabled,
         getVideoBackgrounds,
-        getSelectedVideoBgName,
+        getSelectedVideo,
         getThemes,
-        getSelectedThemeName,
+        getSelectedTheme,
     } = useSettingsContext();
     const {
         changeBackground,
@@ -149,7 +149,7 @@ const Customize = () => {
                             <MenuItem
                                 key={item.id}
                                 onClick={() => changeCurrentTheme(item.id)}
-                                selected={item.name === getSelectedThemeName()}
+                                selected={item.name === getSelectedTheme().name}
                             >
                                 {item.name}
                             </MenuItem>
@@ -224,7 +224,7 @@ const Customize = () => {
                                         onClick={() => changeVideo(item.id)}
                                         selected={
                                             item.name ===
-                                            getSelectedVideoBgName()
+                                            getSelectedVideo().name
                                         }
                                     >
                                         {item.name}

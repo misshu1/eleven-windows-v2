@@ -379,7 +379,9 @@ export const FolderProvider = ({ children }) => {
 
     const isFolderActive = useCallback(
         (appId) => {
-            const app = folderState.apps.find((app) => app.id === appId);
+            const app = folderState.apps.find(
+                (folderApp) => folderApp.id === appId
+            );
 
             return app.appIndex === FOLDER_Z_INDEX.active;
         },

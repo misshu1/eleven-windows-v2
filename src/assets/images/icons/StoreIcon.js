@@ -4,11 +4,11 @@ import { useSettingsContext } from '../../../contexts/settingsContext';
 
 const StoreIcon = (props) => {
     const { width, height } = props;
-    const { getSelectedThemeName } = useSettingsContext();
+    const { getSelectedTheme } = useSettingsContext();
 
     return (
         <svg
-            key={getSelectedThemeName()}
+            key={getSelectedTheme().id}
             xmlns='http://www.w3.org/2000/svg'
             enableBackground='new 0 0 750 750'
             viewBox='0 0 750 750'

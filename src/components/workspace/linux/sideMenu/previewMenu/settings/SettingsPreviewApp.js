@@ -57,9 +57,9 @@ const SettingsPreviewApp = () => {
         isVideoEnabledOnDesktop,
         isVideoBgEnabled,
         getVideoBackgrounds,
-        getSelectedVideoBgName,
+        getSelectedVideo,
         getThemes,
-        getSelectedThemeName,
+        getSelectedTheme,
     } = useSettingsContext();
 
     const {
@@ -195,7 +195,7 @@ const SettingsPreviewApp = () => {
                                     key={item.id}
                                     onClick={() => changeCurrentTheme(item.id)}
                                     selected={
-                                        item.name === getSelectedThemeName()
+                                        item.name === getSelectedTheme().name
                                     }
                                 >
                                     {item.name}
@@ -273,7 +273,7 @@ const SettingsPreviewApp = () => {
                                             onClick={() => changeVideo(item.id)}
                                             selected={
                                                 item.name ===
-                                                getSelectedVideoBgName()
+                                                getSelectedVideo().name
                                             }
                                         >
                                             {item.name}

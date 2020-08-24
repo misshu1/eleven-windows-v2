@@ -130,36 +130,12 @@ export const SettingsProvider = ({ children }) => {
     const isMobile = useMediaQuery('(max-width: 450px)');
     const isTablet = useMediaQuery('(max-width: 800px)');
 
-    const getSelectedVideoBgMP4 = useCallback(() => {
+    const getSelectedVideo = useCallback(() => {
         const vid = settingsState.videoBackgrounds.find(
             (item) => item.isSelected === true
         );
 
-        return vid.video.mp4;
-    }, [settingsState.videoBackgrounds]);
-
-    const getSelectedVideoBgWEBM = useCallback(() => {
-        const vid = settingsState.videoBackgrounds.find(
-            (item) => item.isSelected === true
-        );
-
-        return vid.video.webm;
-    }, [settingsState.videoBackgrounds]);
-
-    const getSelectedVideoBgName = useCallback(() => {
-        const vid = settingsState.videoBackgrounds.find(
-            (item) => item.isSelected === true
-        );
-
-        return vid.name;
-    }, [settingsState.videoBackgrounds]);
-
-    const getSelectedVideoPreview = useCallback(() => {
-        const vid = settingsState.videoBackgrounds.find(
-            (item) => item.isSelected === true
-        );
-
-        return vid.preview;
+        return vid;
     }, [settingsState.videoBackgrounds]);
 
     const getSelectedTheme = useCallback(() => {
@@ -167,23 +143,7 @@ export const SettingsProvider = ({ children }) => {
             (item) => item.isSelected === true
         );
 
-        return theme.className;
-    }, [settingsState.themes]);
-
-    const getSelectedThemeName = useCallback(() => {
-        const theme = settingsState.themes.find(
-            (item) => item.isSelected === true
-        );
-
-        return theme.name;
-    }, [settingsState.themes]);
-
-    const getSelectedThemeType = useCallback(() => {
-        const theme = settingsState.themes.find(
-            (item) => item.isSelected === true
-        );
-
-        return theme.themeType;
+        return theme;
     }, [settingsState.themes]);
 
     const getSelectedBackground = useCallback(() => {
@@ -249,10 +209,7 @@ export const SettingsProvider = ({ children }) => {
 
         // Set initial selected video in local storage
         if (!videoBgLocalStorage) {
-            const getSelectedVideo = settingsState.videoBackgrounds.find(
-                (item) => item.isSelected === true
-            );
-            localStorage.setItem('videoBg', getSelectedVideo.id);
+            localStorage.setItem('videoBg', getSelectedVideo().id);
         } else {
             settingsDispatch({
                 type: SETTINGS_ACTIONS.changeVideoBackground,
@@ -266,10 +223,10 @@ export const SettingsProvider = ({ children }) => {
 
         // Set initial selected background in local storage
         if (!bg) {
-            const getSelectedBackground = settingsState.backgrounds.find(
+            const selectedBackground = settingsState.backgrounds.find(
                 (item) => item.isSelected === true
             );
-            localStorage.setItem('background', getSelectedBackground.id);
+            localStorage.setItem('background', selectedBackground.id);
         } else {
             settingsDispatch({
                 type: SETTINGS_ACTIONS.changeBackground,
@@ -283,10 +240,7 @@ export const SettingsProvider = ({ children }) => {
 
         // Set initial selected background in local storage
         if (!theme) {
-            const getSelectedTheme = settingsState.themes.find(
-                (item) => item.isSelected === true
-            );
-            localStorage.setItem('currentTheme', getSelectedTheme.id);
+            localStorage.setItem('currentTheme', getSelectedTheme().id);
         } else {
             settingsDispatch({
                 type: SETTINGS_ACTIONS.changeTheme,
@@ -350,12 +304,12 @@ export const SettingsProvider = ({ children }) => {
     };
 
     const isDarkThemeSelected = useCallback(() => {
-        return getSelectedThemeType() === THEME_TYPE.dark;
-    }, [getSelectedThemeType]);
+        return getSelectedTheme.themeType() === THEME_TYPE.dark;
+    }, [getSelectedTheme]);
 
     const isLightThemeSelected = useCallback(() => {
-        return getSelectedThemeType() === THEME_TYPE.light;
-    }, [getSelectedThemeType]);
+        return getSelectedTheme.themeType() === THEME_TYPE.light;
+    }, [getSelectedTheme]);
 
     const isLinuxSelected = useCallback(() => {
         return settingsState.OS === OS_THEME.linux;
@@ -413,25 +367,18 @@ export const SettingsProvider = ({ children }) => {
             isDarkThemeSelected,
             isVideoBgEnabled,
             getSelectedBackgroundName,
-            getSelectedVideoBgMP4,
-            getSelectedVideoBgWEBM,
-            getSelectedVideoBgName,
-            getSelectedVideoPreview,
+            getSelectedVideo,
             getSelectedBackground,
             getBackgrounds,
             getVideoBackgrounds,
             getSelectedTheme,
-            getSelectedThemeName,
             getThemes,
         };
     }, [
         getBackgrounds,
         getSelectedBackground,
         getSelectedBackgroundName,
-        getSelectedVideoBgMP4,
-        getSelectedVideoBgName,
-        getSelectedVideoBgWEBM,
-        getSelectedVideoPreview,
+        getSelectedVideo,
         isDarkThemeSelected,
         isLightThemeSelected,
         isLinuxSelected,
@@ -441,7 +388,6 @@ export const SettingsProvider = ({ children }) => {
         isWindowsSelected,
         getVideoBackgrounds,
         getSelectedTheme,
-        getSelectedThemeName,
         getThemes,
     ]);
 

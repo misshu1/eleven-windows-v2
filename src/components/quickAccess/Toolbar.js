@@ -21,7 +21,7 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
         isLinuxSelected,
         isWindowsSelected,
         getThemes,
-        getSelectedThemeName,
+        getSelectedTheme,
     } = useSettingsContext();
     const {
         selectWindowsOS,
@@ -112,7 +112,7 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
                     <MenuItem
                         key={item.id}
                         onClick={() => changeCurrentTheme(item.id)}
-                        selected={item.name === getSelectedThemeName()}
+                        selected={item.name === getSelectedTheme().name}
                     >
                         {item.name}
                     </MenuItem>

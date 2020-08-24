@@ -80,7 +80,7 @@ export const NotificationsProvider = ({ children }) => {
 
             if (!disable) {
                 enqueueSnackbar(message, {
-                    content: (key, message) => (
+                    content: (key) => (
                         <Notification
                             id={key}
                             message={message}
@@ -119,7 +119,7 @@ export const NotificationsProvider = ({ children }) => {
 
             if (!disable) {
                 enqueueSnackbar(message, {
-                    content: (key, message) => (
+                    content: (key) => (
                         <Notification
                             id={key}
                             message={message}
@@ -159,7 +159,7 @@ export const NotificationsProvider = ({ children }) => {
 
             if (!disable) {
                 enqueueSnackbar(message, {
-                    content: (key, message) => (
+                    content: (key) => (
                         <Notification
                             id={key}
                             message={message}
@@ -198,7 +198,7 @@ export const NotificationsProvider = ({ children }) => {
 
             if (!disable) {
                 enqueueSnackbar(message, {
-                    content: (key, message) => (
+                    content: (key) => (
                         <Notification
                             id={key}
                             message={message}
