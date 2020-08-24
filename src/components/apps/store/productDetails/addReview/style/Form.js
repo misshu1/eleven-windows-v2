@@ -17,6 +17,7 @@ export const Form = styled.form`
     .error {
         display: block;
         text-align: center;
+        font-weight: 900;
         color: red;
         margin: 0.5rem 0 0 0;
         min-height: 1.5rem;

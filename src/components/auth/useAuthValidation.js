@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useAuth } from '../../hooks/useAuth';
 import useDebounce from '../../hooks/useDebounce';
-import validateInput from './validationRules';
+import validationRules from './validationRules';
 
 const useAuthValidation = (initialState) => {
     const [isSubmitting, setSubmitting] = useState(null);
@@ -25,7 +25,7 @@ const useAuthValidation = (initialState) => {
             Object.keys(debouncedValues).map((val) => {
                 // Check to see if the input is not empty
                 if (debouncedValues[val]) {
-                    const validationErrors = validateInput({
+                    const validationErrors = validationRules({
                         [val]: debouncedValues[val],
                     });
                     setErrors((prevState) => ({
@@ -41,7 +41,7 @@ const useAuthValidation = (initialState) => {
     const handleBlur = (e) => {
         e.persist();
         const inputName = e.target.name;
-        const validationErrors = validateInput(values);
+        const validationErrors = validationRules(values);
         if (!errors[inputName]) {
             setErrors((prevState) => ({
                 ...prevState,
@@ -52,7 +52,7 @@ const useAuthValidation = (initialState) => {
 
     const handleLogin = (e, callback) => {
         e.preventDefault();
-        const validationErrors = validateInput(values);
+        const validationErrors = validationRules(values);
         setErrors(validationErrors);
         setSubmitting(true);
 
@@ -77,7 +77,7 @@ const useAuthValidation = (initialState) => {
 
     const handleRegister = (e, callback) => {
         e.preventDefault();
-        const validationErrors = validateInput(values);
+        const validationErrors = validationRules(values);
         setErrors(validationErrors);
         setSubmitting(true);
 

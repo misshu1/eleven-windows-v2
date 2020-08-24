@@ -1,4 +1,4 @@
-const validateInput = (values) => {
+const validationRules = (values) => {
     let errors = {};
 
     // Review Errors
@@ -13,4 +13,4 @@ const validateInput = (values) => {
     return errors;
 };
 
-export default validateInput;
+export default validationRules;

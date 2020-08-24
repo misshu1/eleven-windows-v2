@@ -1,6 +1,6 @@
 import { useSnackbar } from 'notistack';
 import React, { createContext, useCallback, useContext, useLayoutEffect, useMemo, useState } from 'react';
-import uuid from 'uuid';
+import uuid from 'uuid/v4';
 
 import Notification from '../components/notifications/notification/Notification';
 
@@ -18,15 +18,15 @@ export const NotificationsProvider = ({ children }) => {
     const [disable, setDesable] = useState(false);
 
     useLayoutEffect(() => {
-        const disableNotifications = localStorage.getItem(
+        const notificationsDisabled = localStorage.getItem(
             'disableNotifications'
         );
-        if (!disableNotifications) {
+        if (!notificationsDisabled) {
             localStorage.setItem('disableNotifications', false);
         } else {
             const localStorageVal =
-                disableNotifications !== 'undefined'
-                    ? disableNotifications
+                notificationsDisabled !== 'undefined'
+                    ? notificationsDisabled
                     : null;
 
             setDesable(!!JSON.parse(localStorageVal));
@@ -60,7 +60,7 @@ export const NotificationsProvider = ({ children }) => {
 
     const showSuccess = useCallback(
         (title, message) => {
-            const id = uuid.v4();
+            const id = uuid();
             setNotificationsHistory((prevState) => [
                 {
                     id: id,
@@ -98,7 +98,7 @@ export const NotificationsProvider = ({ children }) => {
 
     const showError = useCallback(
         (title, message, code) => {
-            const id = uuid.v4();
+            const id = uuid();
             setNotificationsHistory((prevState) => [
                 {
                     id: id,
@@ -138,7 +138,7 @@ export const NotificationsProvider = ({ children }) => {
 
     const showWarning = useCallback(
         (title, message, code) => {
-            const id = uuid.v4();
+            const id = uuid();
             setNotificationsHistory((prevState) => [
                 {
                     id: id,
@@ -178,7 +178,7 @@ export const NotificationsProvider = ({ children }) => {
 
     const showInfo = useCallback(
         (title, message) => {
-            const id = uuid.v4();
+            const id = uuid();
             setNotificationsHistory((prevState) => [
                 {
                     id: id,

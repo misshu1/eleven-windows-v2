@@ -4,7 +4,7 @@ import { useFirebaseContext } from '../../../../../contexts/firebaseContext';
 import { useNotificationsContext } from '../../../../../contexts/notificationsContext';
 import { useAuth } from '../../../../../hooks/useAuth';
 import useDebounce from '../../../../../hooks/useDebounce';
-import validateInput from './validationRules';
+import validationRules from './validationRules';
 
 const useReviewValidation = (initialState, productId, addTempReview) => {
     const [isSubmitting, setSubmitting] = useState(null);
@@ -37,7 +37,7 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
             Object.keys(debouncedValues).map((val) => {
                 // Check to see if the input is not empty
                 if (debouncedValues[val]) {
-                    const validationErrors = validateInput({
+                    const validationErrors = validationRules({
                         [val]: debouncedValues[val],
                     });
                     setErrors((prevState) => ({
@@ -53,7 +53,7 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
     const handleBlur = (e) => {
         e.persist();
         const inputName = e.target.name;
-        const validationErrors = validateInput(values);
+        const validationErrors = validationRules(values);
         if (!errors[inputName]) {
             setErrors((prevState) => ({
                 ...prevState,
@@ -64,7 +64,7 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const validationErrors = validateInput(values);
+        const validationErrors = validationRules(values);
         setErrors(validationErrors);
         setSubmitting(true);
 

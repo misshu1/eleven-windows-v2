@@ -14,8 +14,8 @@ export const Folder = styled.section`
         ${(props) =>
             !props.isMaximize &&
             css`
-                height: ${(props) => (props.height ? props.height : '44rem')};
-                width: ${(props) => (props.width ? props.width : '44rem')};
+                height: ${props.height ? props.height : '44rem'};
+                width: ${props.width ? props.width : '44rem'};
             `}
 
         ${(props) =>

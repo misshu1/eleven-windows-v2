@@ -162,11 +162,11 @@ const APPS_STATE = [
 ];
 
 const folderReducer = (state, action) => {
-    const app = state.apps.find((app) => app.id === action.payload);
+    const currentApp = state.apps.find((app) => app.id === action.payload);
 
     switch (action.type) {
         case FOLDER_ACTIONS.open:
-            if (!app.isOpen) {
+            if (!currentApp.isOpen) {
                 return {
                     ...state,
                     apps: state.apps.map((app) =>
@@ -180,14 +180,14 @@ const folderReducer = (state, action) => {
                     ),
                     openApps: [
                         ...state.openApps,
-                        { ...app, openSince: new Date().getTime() },
+                        { ...currentApp, openSince: new Date().getTime() },
                     ],
                 };
             } else {
                 return state;
             }
         case FOLDER_ACTIONS.close:
-            if (app.isOpen === true) {
+            if (currentApp.isOpen === true) {
                 return {
                     ...state,
                     apps: state.apps.map((app) =>
@@ -209,7 +209,7 @@ const folderReducer = (state, action) => {
             }
 
         case FOLDER_ACTIONS.minimizeUp:
-            if (app.isMinimize) {
+            if (currentApp.isMinimize) {
                 return {
                     ...state,
                     apps: state.apps.map((app) =>
@@ -223,7 +223,7 @@ const folderReducer = (state, action) => {
             }
 
         case FOLDER_ACTIONS.minimizeDown:
-            if (app.isMinimize !== true) {
+            if (currentApp.isMinimize !== true) {
                 return {
                     ...state,
                     apps: state.apps.map((app) =>
@@ -237,7 +237,7 @@ const folderReducer = (state, action) => {
             }
 
         case FOLDER_ACTIONS.maximizeUp:
-            if (app.isMaximize !== true) {
+            if (currentApp.isMaximize !== true) {
                 return {
                     ...state,
                     apps: state.apps.map((app) =>
@@ -251,7 +251,7 @@ const folderReducer = (state, action) => {
             }
 
         case FOLDER_ACTIONS.maximizeDown:
-            if (app.isMaximize) {
+            if (currentApp.isMaximize) {
                 return {
                     ...state,
                     apps: state.apps.map((app) =>
@@ -265,7 +265,7 @@ const folderReducer = (state, action) => {
             }
 
         case FOLDER_ACTIONS.active:
-            if (app.appIndex !== FOLDER_Z_INDEX.active) {
+            if (currentApp.appIndex !== FOLDER_Z_INDEX.active) {
                 return {
                     ...state,
                     apps: state.apps.map((app) =>

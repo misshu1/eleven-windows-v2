@@ -43,24 +43,24 @@ const settingsReducer = (state, action) => {
             }
 
         case SETTINGS_ACTIONS.changeTheme:
-            const theme = state.themes.find(
+            const currentTheme = state.themes.find(
                 (item) => item.id === action.payload
             );
 
-            if (!theme.isSelected) {
+            if (!currentTheme.isSelected) {
                 state.themes.forEach((theme) => {
                     if (document.body.classList.contains(theme.className)) {
                         document.body.classList.remove(theme.className);
                     }
                 });
 
-                document.body.classList.add(theme.className);
+                document.body.classList.add(currentTheme.className);
                 return {
                     ...state,
-                    themes: state.themes.map((item) =>
-                        item.id === action.payload
-                            ? { ...item, isSelected: true }
-                            : { ...item, isSelected: false }
+                    themes: state.themes.map((theme) =>
+                        theme.id === action.payload
+                            ? { ...theme, isSelected: true }
+                            : { ...theme, isSelected: false }
                     ),
                 };
             } else {

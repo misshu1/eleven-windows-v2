@@ -97,8 +97,8 @@ const ListItemLink = ({ item, onClick }) => {
             {(item.widgetIcon || item.fontIcon) && (
                 <ListItemIcon className={classes.listIconStyle}>
                     <>
-                        {item.widgetIcon && item.widgetIcon}
-                        {item.fontIcon && (
+                        {!!item.widgetIcon && item.widgetIcon}
+                        {!!item.fontIcon && (
                             <>
                                 <FontAwesomeIcon
                                     {...item.fontIcon}

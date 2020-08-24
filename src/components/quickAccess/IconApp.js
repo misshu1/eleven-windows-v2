@@ -14,8 +14,10 @@ const IconApp = (props) => {
         <motion.div {...motionProps}>
             <Tooltip title={t(tooltip)} placement='bottom' enterDelay={500}>
                 <Icon onClick={onClick}>
-                    {icon && icon}
-                    {fontIcon && <FontAwesomeIcon icon={fontIcon} size='lg' />}
+                    {!!icon && icon}
+                    {!!fontIcon && (
+                        <FontAwesomeIcon icon={fontIcon} size='lg' />
+                    )}
                 </Icon>
             </Tooltip>
         </motion.div>
