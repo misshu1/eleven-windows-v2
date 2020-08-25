@@ -8,6 +8,7 @@ export const Container = styled.div`
     .product-title {
         margin: 0;
         margin-bottom: 1.5rem;
+        text-transform: capitalize;
     }
 
     .product-rating {

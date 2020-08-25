@@ -98,6 +98,8 @@ const ReviewsListApp = ({ productId }) => {
 
     return (
         <Container>
+            <h2 className='title'>Reviews</h2>
+
             {showAddReveiw && (
                 <AddReviewApp
                     productId={productId}

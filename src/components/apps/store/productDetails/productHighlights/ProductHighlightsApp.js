@@ -15,7 +15,6 @@ const useStyles = makeStyles({
         cursor: 'default',
         backgroundColor: 'var(--primary)',
         color: '#fff',
-        maxWidth: '25rem',
 
         '&:disabled': {
             filter: 'grayscale(1)',
