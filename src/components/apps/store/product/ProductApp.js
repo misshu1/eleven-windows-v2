@@ -19,7 +19,7 @@ import { Card } from './style';
 // }
 
 const useStyles = makeStyles({
-    cartButton: (theme) => ({
+    cartButton: {
         position: 'relative',
         overflow: 'hidden',
         paddingLeft: '3rem',
@@ -35,10 +35,10 @@ const useStyles = makeStyles({
         '&:hover': {
             backgroundColor: 'var(--primaryDark)',
         },
-    }),
-    ratingColorEmpty: (theme) => ({
+    },
+    ratingColorEmpty: {
         color: 'var(--grey60)',
-    }),
+    },
     ratingColor: {
         color: 'var(--primary)',
     },
@@ -47,7 +47,7 @@ const useStyles = makeStyles({
 const ProductApp = ({ product, setSelectedProduct, setPage }) => {
     const { imagePreview, newPrice, oldPrice, ratings, title } = product;
     const { addToCart } = useDispatchCartContext();
-    const { isProductInCart } = useCartContext();
+    const { getProductDiscount, isProductInCart } = useCartContext();
     const [discountVal, setDiscountVal] = useState(0);
     const [ratingVal, setRatingVal] = useState(0);
     const classes = useStyles();
@@ -58,11 +58,9 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
     }, [product, setPage, setSelectedProduct]);
 
     useEffect(() => {
-        if (oldPrice) {
-            const val = (newPrice / oldPrice) * 100;
-            setDiscountVal(Math.round(val));
-        }
-    }, [newPrice, oldPrice, setDiscountVal]);
+        const discount = getProductDiscount(newPrice, oldPrice);
+        setDiscountVal(discount);
+    }, [getProductDiscount, newPrice, oldPrice, setDiscountVal]);
 
     useEffect(() => {
         if (ratings) {
@@ -96,10 +94,10 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
                 )}
             </div>
             <p className='product-old-price' onClick={selectProduct}>
-                {oldPrice && `${oldPrice} $`}
+                {!!oldPrice && `$${oldPrice}`}
             </p>
             <p className='product-new-price' onClick={selectProduct}>
-                <strong>{newPrice && `${newPrice} $`}</strong>
+                <strong>{!!newPrice && `$${newPrice}`}</strong>
             </p>
             <Button
                 className='product-add-to-cart'

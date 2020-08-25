@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useFirebaseContext } from '../../../../contexts/firebaseContext';
 import { useNotificationsContext } from '../../../../contexts/notificationsContext';
 import CarouselApp from './carousel/CarouselApp';
+import ProductHighlightsApp from './productHighlights/ProductHighlightsApp';
 import ReviewsListApp from './reviewsList/ReviewsListApp';
 import { Container } from './style';
 
@@ -126,18 +127,23 @@ const ProductDetailsApp = ({ product }) => {
 
     return (
         <Container>
-            <CarouselProvider
-                naturalSlideWidth={16}
-                naturalSlideHeight={9}
-                totalSlides={images.length}
-                hasMasterSpinner
-                dragEnabled={false}
-            >
-                <CarouselApp images={images} />
-            </CarouselProvider>
+            <div className='carousel-container'>
+                <CarouselProvider
+                    naturalSlideWidth={16}
+                    naturalSlideHeight={9}
+                    totalSlides={images.length}
+                    hasMasterSpinner
+                    dragEnabled={false}
+                >
+                    <CarouselApp images={images} />
+                </CarouselProvider>
+                <ProductHighlightsApp product={product} />
+            </div>
 
-            <h3>{product.title}</h3>
-            <Markdown options={{ forceBlock: true }}>{description}</Markdown>
+            <Markdown className='description' options={{ forceBlock: true }}>
+                {description}
+            </Markdown>
+
             <ReviewsListApp productId={product.id} />
         </Container>
     );

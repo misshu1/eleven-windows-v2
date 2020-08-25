@@ -58,13 +58,27 @@ export const CartProvider = ({ children }) => {
         [cartState]
     );
 
+    const getProductDiscount = useCallback((newPrice, oldPrice) => {
+        let discount = 0;
+
+        if (!oldPrice) {
+            return discount;
+        }
+
+        const val = (newPrice / oldPrice) * 100;
+        discount = Math.round(val);
+
+        return discount;
+    }, []);
+
     const cartValue = useMemo(() => {
         return {
             cartState,
             getCartTotalPrice,
+            getProductDiscount,
             isProductInCart,
         };
-    }, [cartState, getCartTotalPrice, isProductInCart]);
+    }, [cartState, getCartTotalPrice, getProductDiscount, isProductInCart]);
 
     const cartDispatchValue = useMemo(() => {
         return {
