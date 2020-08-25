@@ -304,11 +304,11 @@ export const SettingsProvider = ({ children }) => {
     };
 
     const isDarkThemeSelected = useCallback(() => {
-        return getSelectedTheme().themeType() === THEME_TYPE.dark;
+        return getSelectedTheme().themeType === THEME_TYPE.dark;
     }, [getSelectedTheme]);
 
     const isLightThemeSelected = useCallback(() => {
-        return getSelectedTheme().themeType() === THEME_TYPE.light;
+        return getSelectedTheme().themeType === THEME_TYPE.light;
     }, [getSelectedTheme]);
 
     const isLinuxSelected = useCallback(() => {
