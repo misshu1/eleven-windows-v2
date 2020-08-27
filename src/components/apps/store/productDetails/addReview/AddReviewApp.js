@@ -17,6 +17,7 @@ const useStyles = makeStyles(() => ({
         borderRadius: 3,
         alignSelf: 'flex-end',
         '&:disabled': {
+            backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
             color: '#d6d8de',
         },
@@ -39,6 +40,7 @@ const useStyles = makeStyles(() => ({
         },
 
         '&:disabled': {
+            backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
             color: '#d6d8de',
         },

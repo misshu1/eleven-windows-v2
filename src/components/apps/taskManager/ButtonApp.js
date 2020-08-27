@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
         border: 0,
         borderRadius: 3,
         '&:disabled': {
-            backgroundColor: 'var(--primary)',
+            backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
             color: 'var(--colorDefault)',
         },

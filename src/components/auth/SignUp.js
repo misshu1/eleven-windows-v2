@@ -10,7 +10,7 @@ import { Container, Form } from './style';
 import useAuthValidation from './useAuthValidation';
 
 const useStyles = makeStyles(() => ({
-    loginButton: (theme) => ({
+    loginButton: {
         backgroundColor: 'var(--primary)',
         color: '#fff',
         cursor: 'default',
@@ -18,13 +18,14 @@ const useStyles = makeStyles(() => ({
         margin: '.5rem',
         borderRadius: 3,
         '&:disabled': {
+            backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
             color: '#d6d8de',
         },
         '&:hover': {
             backgroundColor: 'var(--primaryDark)',
         },
-    }),
+    },
     changeViewButton: {
         border: '1px solid var(--primary)',
         color: 'var(--whiteBlack)',
@@ -32,6 +33,7 @@ const useStyles = makeStyles(() => ({
         margin: '.5rem',
         borderRadius: 3,
         '&:disabled': {
+            backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
             color: '#d6d8de',
         },

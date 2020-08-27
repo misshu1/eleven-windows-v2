@@ -24,20 +24,19 @@ export const Container = styled.div`
 
     .custom-dot {
         cursor: default;
+        user-select: none;
         display: inline-block;
         margin: 0 0.2rem;
-        width: 0.5rem;
-        height: 0.5rem;
-        padding: 0.5rem;
-        background-color: var(--primary);
+        width: 1.3rem;
+        height: 0.8rem;
         border: none;
+        border-radius: 0.2rem;
         outline: none;
-        border-radius: 100%;
-        user-select: none;
+        background-color: var(--primaryLight);
     }
 
     .custom-dot-selected {
-        background-color: var(--primaryLight);
+        background-color: var(--primary);
     }
 
     @media only screen and (min-width: 450px) {

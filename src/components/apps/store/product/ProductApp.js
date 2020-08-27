@@ -28,6 +28,7 @@ const useStyles = makeStyles({
         color: '#fff',
 
         '&:disabled': {
+            backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
             color: '#d6d8de',
         },

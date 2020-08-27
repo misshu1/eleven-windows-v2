@@ -18,6 +18,7 @@ const useStyles = makeStyles(() => ({
         margin: '.5rem',
         borderRadius: 3,
         '&:disabled': {
+            backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
             color: '#d6d8de',
         },
@@ -32,6 +33,7 @@ const useStyles = makeStyles(() => ({
         margin: '.5rem',
         borderRadius: 3,
         '&:disabled': {
+            backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
             color: '#d6d8de',
         },
