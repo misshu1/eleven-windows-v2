@@ -20,15 +20,14 @@ const ProductDetailsApp = ({ product }) => {
 
         const getImages = async () => {
             try {
-                const storeRef = await storage.ref('store');
-                const productRef = await storeRef.child(product.id);
-                const productImagesRef = await productRef.child('images');
-                const productImagesList = await productImagesRef.listAll();
+                const productImagesListRef = await storage
+                    .ref(`store/${product.id}/images`)
+                    .list({ maxResults: 10 });
 
-                const promisesArray = productImagesList.items.map(
+                const promisesArray = productImagesListRef.items.map(
                     async (item) => {
-                        return productImagesRef
-                            .child(item.name)
+                        return storage
+                            .ref(`store/${product.id}/images/${item.name}`)
                             .getDownloadURL();
                     }
                 );
@@ -79,21 +78,15 @@ const ProductDetailsApp = ({ product }) => {
 
         const getProductDescription = async () => {
             try {
-                const storeRef = await storage.ref('store');
-                const productRef = await storeRef.child(product.id);
-                const productDescriptionRef = await productRef.child(
-                    'description'
-                );
-                const productDescriptionList = await productDescriptionRef.list(
-                    {
-                        maxResults: 1,
-                    }
-                );
+                const productDescriptionListRef = await storage
+                    .ref(`store/${product.id}/description`)
+                    .list({ maxResults: 1 });
 
-                const firstFileName = await productDescriptionList.items[0]
+                const firstFileName = await productDescriptionListRef.items[0]
                     .name;
-                const urlPromise = await productDescriptionRef
-                    .child(firstFileName)
+
+                const urlPromise = await storage
+                    .ref(`store/${product.id}/description/${firstFileName}`)
                     .getDownloadURL();
 
                 const url = await urlPromise;

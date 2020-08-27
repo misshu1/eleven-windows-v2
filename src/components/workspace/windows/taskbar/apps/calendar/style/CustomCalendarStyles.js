@@ -6,7 +6,6 @@ export const CustomCalendarStyles = styled.div`
         width: 22rem;
         max-width: 100%;
         border-top: 1px solid var(--border);
-        font-family: Arial, Helvetica, sans-serif;
         line-height: 1.12rem;
         box-sizing: border-box;
         color: var(--colorDefault);

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const TableHead = styled.div`
-    font-family: 'Roboto', sans-serif;
     display: grid;
     grid-template-columns: 4fr 2fr;
     grid-template-rows: minmax(2rem, 2.5rem);

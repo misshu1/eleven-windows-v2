@@ -5,11 +5,6 @@ export const Container = styled.div`
     max-width: 80rem;
     margin: 0 auto;
 
-    h1,
-    h2 {
-        font-family: 'Roboto', sans-serif;
-    }
-
     h2 {
         display: flex;
         align-items: flex-end;

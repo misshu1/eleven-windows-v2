@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Name = styled.h2`
-    font-family: 'Roboto', sans-serif;
     color: var(--colorDefault);
     flex: 1;
     display: flex;

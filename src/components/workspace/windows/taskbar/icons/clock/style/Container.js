@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.li`
-    font-family: 'Roboto', sans-serif;
     cursor: default;
     display: flex;
     align-items: center;

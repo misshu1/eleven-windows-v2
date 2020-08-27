@@ -14,7 +14,6 @@ const Container = styled.div`
     padding: 5rem 0;
 
     h2 {
-        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
         font-weight: 300;
         margin: 0;
         font-size: 4rem;

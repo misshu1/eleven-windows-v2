@@ -31,6 +31,7 @@ const StoreApp = () => {
                         404
                     );
                 }
+
                 await productsRef.forEach(
                     (doc) =>
                         (dbProducts = [

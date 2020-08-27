@@ -12,7 +12,6 @@ const slideUp = keyframes`
 `;
 
 export const Container = styled.section`
-    font-family: 'Roboto', sans-serif;
     user-select: none;
     z-index: 250;
     position: absolute;
