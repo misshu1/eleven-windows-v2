@@ -18,6 +18,7 @@ export const Container = styled.div`
 
     .description {
         margin: 4rem 0;
+        padding: 0 0.5rem;
 
         p,
         li {

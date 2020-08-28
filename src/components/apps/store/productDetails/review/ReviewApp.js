@@ -17,11 +17,11 @@ const useStyles = makeStyles({
 });
 
 const timeSince = (previous) => {
-    const msPerMinute = 60000;
-    const msPerHour = 3600000;
-    const msPerDay = 86400000;
-    const msPerMonth = 2592000000;
-    const msPerYear = 946080000000;
+    const msPerMinute = 60 * 1000;
+    const msPerHour = 60 * msPerMinute;
+    const msPerDay = 24 * msPerHour;
+    const msPerMonth = 30 * msPerDay;
+    const msPerYear = 365 * msPerDay;
 
     const currentDay = new Date().getTime();
     const elapsed = currentDay - new Date(previous).getTime();

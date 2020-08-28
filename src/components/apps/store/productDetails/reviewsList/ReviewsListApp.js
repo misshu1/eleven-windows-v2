@@ -48,9 +48,7 @@ const ReviewsListApp = ({ product }) => {
 
     useEffect(() => {
         setReviews(product?.reviews?.last5 || []);
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [product]);
 
     useEffect(() => {
         // If the user makes a request to firebase and closes the folder
@@ -66,13 +64,17 @@ const ReviewsListApp = ({ product }) => {
                 (review) => review.userId === user.uid
             );
 
-            if (userPostedReview) {
+            const tempPostedReview = reviews.find(
+                (review) => review.userId === user.uid
+            );
+
+            if (userPostedReview || tempPostedReview) {
                 setShowAddReveiw(false);
             } else {
                 setShowAddReveiw(true);
             }
         }
-    }, [isUserLoggedIn, user, product]);
+    }, [isUserLoggedIn, user, product, reviews]);
 
     const getReviews = async () => {
         let dbReviews = [];
@@ -146,7 +148,7 @@ const ReviewsListApp = ({ product }) => {
 
             {renderReviews()}
             {!reviewsLoaded && isLoading && showReviewsSkeletons()}
-            {!product?.reviews && <p className='no-reviews'>No reviews</p>}
+            {reviews.length === 0 && <p className='no-reviews'>No reviews</p>}
 
             {product?.reviews?.total > 5 && !reviewsLoaded && (
                 <Button

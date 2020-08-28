@@ -15,56 +15,36 @@ const StoreApp = () => {
     const { firestore } = useFirebaseContext();
 
     useEffect(() => {
-        let isCanceled = false;
+        getProducts();
 
-        const getProducts = async () => {
-            let dbProducts = [];
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-            try {
-                const productsRef = await firestore
-                    .collection('products')
-                    .get();
-                if (!productsRef.size) {
-                    showError(
+    const getProducts = async () => {
+        try {
+            await firestore.collection('products').onSnapshot((snapshot) => {
+                if (!snapshot.size) {
+                    return showError(
                         'Error',
                         'The "products" collection was not found in the database!',
                         404
                     );
                 }
 
-                await productsRef.forEach(
-                    (doc) =>
-                        (dbProducts = [
-                            ...dbProducts,
-                            { id: doc.id, ...doc.data() },
-                        ])
-                );
+                const dbProducts = snapshot.docs.map((doc) => {
+                    return { id: doc.id, ...doc.data() };
+                });
 
-                if (!isCanceled) {
-                    setProducts(dbProducts);
-                } else {
-                    showWarning(
-                        'Request Canceled',
-                        'Seems like you canceled the request!',
-                        418
-                    );
-                }
-            } catch (err) {
-                showError(
-                    'Error',
-                    'Failed to get store products from database!',
-                    500
-                );
-            }
-        };
-
-        getProducts();
-        return () => {
-            isCanceled = true;
-        };
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+                setProducts(dbProducts);
+            });
+        } catch (err) {
+            showError(
+                'Error',
+                'Failed to get store products from database!',
+                500
+            );
+        }
+    };
 
     return (
         <FolderApp
