@@ -10,9 +10,7 @@ import { Card } from './style';
 
 // const productSchema = {
 //     title: String,
-//     description: String,
 //     imagePreview: String,
-//     images: Array<String>,
 //     type: String, // 'product' || 'donation'
 //     newPrice: Number,
 //     oldPrice: Number || null
@@ -46,7 +44,7 @@ const useStyles = makeStyles({
 });
 
 const ProductApp = ({ product, setSelectedProduct, setPage }) => {
-    const { imagePreview, newPrice, oldPrice, ratings, title } = product;
+    const { imagePreview, newPrice, oldPrice, reviews, title } = product;
     const { addToCart } = useDispatchCartContext();
     const { getProductDiscount, isProductInCart } = useCartContext();
     const [discountVal, setDiscountVal] = useState(0);
@@ -64,12 +62,13 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
     }, [getProductDiscount, newPrice, oldPrice, setDiscountVal]);
 
     useEffect(() => {
-        if (ratings) {
+        if (reviews) {
+            const ratings = reviews.ratings.map((review) => review.rating);
             const sumOfRatings = ratings.reduce((a, b) => a + b, 0);
             const rating = sumOfRatings / ratings.length;
             setRatingVal(rating);
         }
-    }, [ratings]);
+    }, [reviews]);
 
     return (
         <Card type={product.type}>
@@ -83,7 +82,7 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
                 {title}
             </h3>
             <div className='product-rating' onClick={selectProduct}>
-                {ratings && ratings?.length !== 0 && (
+                {reviews && (
                     <Rating
                         classes={{
                             iconEmpty: classes.ratingColorEmpty,

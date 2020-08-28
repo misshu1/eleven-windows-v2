@@ -1,26 +1,68 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useFirebaseContext } from '../../../../../contexts/firebaseContext';
 import { useNotificationsContext } from '../../../../../contexts/notificationsContext';
 import { useAuth } from '../../../../../hooks/useAuth';
+import ReviewSkeleton from '../../skeletons/ReviewSkeleton';
 import AddReviewApp from '../addReview/AddReviewApp';
 import ReviewApp from '../review/ReviewApp';
 import { Container } from './style';
 
-const ReviewsListApp = ({ productId }) => {
+const useStyles = makeStyles({
+    button: {
+        cursor: 'default',
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
+        margin: '2rem auto',
+        display: 'block',
+        maxWidth: '20rem',
+
+        '&:disabled': {
+            backgroundColor: 'var(--primary) !important',
+            filter: 'grayscale(1)',
+            color: '#d6d8de',
+        },
+
+        '&:hover': {
+            backgroundColor: 'var(--primaryDark)',
+        },
+    },
+});
+
+const ReviewsListApp = ({ product }) => {
     const [reviews, setReviews] = useState([]);
     const [showAddReveiw, setShowAddReveiw] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [reviewsLoaded, setReviewsLoaded] = useState(false);
     const { firestore } = useFirebaseContext();
     const { showError, showWarning } = useNotificationsContext();
     const { user, isUserLoggedIn } = useAuth();
+    const isCanceled = useRef(false);
+    const classes = useStyles();
 
     const addTempReview = useCallback((review) => {
         setReviews((prevState) => [review, ...prevState]);
     }, []);
 
     useEffect(() => {
+        setReviews(product?.reviews?.last5 || []);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
+        // If the user makes a request to firebase and closes the folder
+        // We will not update the state anymore
+        return () => {
+            isCanceled.current = true;
+        };
+    }, []);
+
+    useEffect(() => {
         if (isUserLoggedIn()) {
-            const userPostedReview = reviews.find(
+            const userPostedReview = product?.reviews?.ratings.find(
                 (review) => review.userId === user.uid
             );
 
@@ -30,58 +72,48 @@ const ReviewsListApp = ({ productId }) => {
                 setShowAddReveiw(true);
             }
         }
-    }, [reviews, isUserLoggedIn, user]);
+    }, [isUserLoggedIn, user, product]);
 
-    useEffect(() => {
-        let isCanceled = false;
+    const getReviews = async () => {
+        let dbReviews = [];
+        setIsLoading(true);
 
-        const getReviews = async () => {
-            let dbReviews = [];
+        try {
+            const reviewsRef = await firestore
+                .collection('reviews')
+                .where('productId', '==', product.id)
+                .orderBy('publishDate', 'desc')
+                .get();
 
-            try {
-                const reviewsRef = await firestore
-                    .collection('reviews')
-                    .where('productId', '==', productId)
-                    .orderBy('publishDate', 'desc')
-                    .get();
+            if (!reviewsRef.size) {
+                return;
+            }
+            await reviewsRef.forEach(
+                (doc) =>
+                    (dbReviews = [...dbReviews, { id: doc.id, ...doc.data() }])
+            );
 
-                if (!reviewsRef.size) {
-                    // TODO UI for no reviews
-                    return console.log('no reviews');
-                }
-                await reviewsRef.forEach(
-                    (doc) =>
-                        (dbReviews = [
-                            ...dbReviews,
-                            { id: doc.id, ...doc.data() },
-                        ])
-                );
-
-                if (!isCanceled) {
-                    setReviews(dbReviews);
-                } else {
-                    showWarning(
-                        'Request Canceled',
-                        'Seems like you canceled the request!',
-                        418
-                    );
-                }
-            } catch (err) {
-                showError(
-                    'Error',
-                    'Failed to get product reviews from database!',
-                    500
+            if (!isCanceled.current) {
+                setReviews(dbReviews);
+                setIsLoading(false);
+                setReviewsLoaded(true);
+            } else {
+                showWarning(
+                    'Request Canceled',
+                    'Seems like you canceled the request!',
+                    418
                 );
             }
-        };
-
-        getReviews();
-        return () => {
-            isCanceled = true;
-        };
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        } catch (err) {
+            setIsLoading(false);
+            setReviewsLoaded(false);
+            showError(
+                'Error',
+                'Failed to get product reviews from database!',
+                500
+            );
+        }
+    };
 
     const renderReviews = useCallback(() => {
         return reviews.map((review, index) => (
@@ -91,10 +123,15 @@ const ReviewsListApp = ({ productId }) => {
                 rating={review.rating}
                 publishDate={review.publishDate}
                 content={review.content}
-                userId={review.userId}
             />
         ));
     }, [reviews]);
+
+    const showReviewsSkeletons = useCallback(() => {
+        return product?.reviews?.ratings.map((_, index) => (
+            <ReviewSkeleton key={index} />
+        ));
+    }, [product]);
 
     return (
         <Container>
@@ -102,12 +139,26 @@ const ReviewsListApp = ({ productId }) => {
 
             {showAddReveiw && (
                 <AddReviewApp
-                    productId={productId}
+                    productId={product.id}
                     addTempReview={addTempReview}
                 />
             )}
 
             {renderReviews()}
+            {!reviewsLoaded && isLoading && showReviewsSkeletons()}
+            {!product?.reviews && <p className='no-reviews'>No reviews</p>}
+
+            {product?.reviews?.total > 5 && !reviewsLoaded && (
+                <Button
+                    aria-label='show all reviews'
+                    classes={{ root: classes.button }}
+                    onClick={getReviews}
+                    disabled={isLoading}
+                    fullWidth
+                >
+                    show all reviews
+                </Button>
+            )}
         </Container>
     );
 };

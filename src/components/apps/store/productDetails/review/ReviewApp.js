@@ -3,9 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Rating from '@material-ui/lab/Rating';
 import PropTypes from 'prop-types';
-import React, { useCallback } from 'react';
+import React from 'react';
 
-import { useAuth } from '../../../../../hooks/useAuth';
 import { Container } from './style';
 
 const useStyles = makeStyles({
@@ -43,16 +42,11 @@ const timeSince = (previous) => {
 };
 
 const ReviewApp = (props) => {
-    const { userDisplayName, userId, rating, publishDate, content } = props;
+    const { userDisplayName, rating, publishDate, content } = props;
     const classes = useStyles();
-    const { user } = useAuth();
-
-    const isOwnReview = useCallback(() => {
-        return user?.uid === userId;
-    }, [user, userId]);
 
     return (
-        <Container isOwnReview={isOwnReview()}>
+        <Container>
             <div className='review-header'>
                 <div className='left'>
                     <FontAwesomeIcon

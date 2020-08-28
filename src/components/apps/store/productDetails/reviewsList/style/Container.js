@@ -6,4 +6,10 @@ export const Container = styled.div`
     .title {
         margin: 0;
     }
+
+    .no-reviews {
+        display: flex;
+        justify-content: center;
+        margin: 2rem auto;
+    }
 `;

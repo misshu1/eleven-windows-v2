@@ -19,6 +19,11 @@ export const Container = styled.div`
     .description {
         margin: 4rem 0;
 
+        p,
+        li {
+            line-height: 1.4;
+        }
+
         .title {
             margin: 0 0 2rem 0;
         }

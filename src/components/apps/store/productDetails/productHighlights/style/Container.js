@@ -22,6 +22,10 @@ export const Container = styled.div`
         font-size: 1.1rem;
     }
 
+    .product-average-rating {
+        margin-left: 0.5rem;
+    }
+
     .price-container {
         margin: 1.5rem 0;
     }

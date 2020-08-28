@@ -36,10 +36,20 @@ const useStyles = makeStyles({
 
 function ProductHighlightsApp({ product }) {
     const [discountVal, setDiscountVal] = useState(0);
-    const { imagePreview, newPrice, oldPrice, ratings, title } = product;
+    const [ratingVal, setRatingVal] = useState(0);
+    const { newPrice, oldPrice, reviews, title } = product;
     const { addToCart } = useDispatchCartContext();
     const { getProductDiscount, isProductInCart } = useCartContext();
     const classes = useStyles();
+
+    useEffect(() => {
+        if (reviews) {
+            const ratings = reviews.ratings.map((review) => review.rating);
+            const sumOfRatings = ratings.reduce((a, b) => a + b, 0);
+            const rating = sumOfRatings / ratings.length;
+            setRatingVal(rating);
+        }
+    }, [reviews]);
 
     useEffect(() => {
         const discount = getProductDiscount(newPrice, oldPrice);
@@ -55,14 +65,17 @@ function ProductHighlightsApp({ product }) {
                         iconEmpty: classes.ratingColorEmpty,
                         iconFilled: classes.ratingColor,
                     }}
-                    // TODO: Update rating
-                    value={5}
+                    value={ratingVal}
                     readOnly
                 />
-                {/* Average rating */}
-                <span className='product-average-rating'>4.8</span>
+                <span className='product-average-rating'>
+                    {ratingVal.toFixed(2)}
+                </span>
             </div>
-            <p className='product-reviews-count'>2 reviews</p>
+            <p className='product-reviews-count'>
+                {reviews && `${reviews.total} reviews`}
+                {!reviews && `no reviews`}
+            </p>
 
             <div className='price-container'>
                 <p className='product-old-price'>

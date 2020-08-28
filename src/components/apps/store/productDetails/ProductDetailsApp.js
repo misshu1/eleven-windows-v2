@@ -137,7 +137,7 @@ const ProductDetailsApp = ({ product }) => {
                 {description}
             </Markdown>
 
-            <ReviewsListApp productId={product.id} />
+            <ReviewsListApp product={product} />
         </Container>
     );
 };
