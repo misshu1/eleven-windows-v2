@@ -12,8 +12,7 @@ const DocsIcon = (props) => {
             xmlns='http://www.w3.org/2000/svg'
             enableBackground='new 0 0 855 855'
             viewBox='0 0 855 855'
-            width={width ? width : '100%'}
-            height={height ? height : '100%'}
+            style={{ width, height }}
         >
             <path d='m0 0h855v855h-855z' fill='#12125e' />
             <path

@@ -11,8 +11,7 @@ const PowerOffIcon = (props) => {
             key={getSelectedTheme().id}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 750'
-            width={width ? width : '100%'}
-            height={height ? height : '100%'}
+            style={{ width, height }}
         >
             <path
                 d='M374.9 74.3C541 74.3 675.7 209 675.7 375.1S541 675.7 374.9 675.7 74.2 541 74.2 374.9c.1-166.1 134.6-300.6 300.7-300.6m0-74.3C167.9 0 0 167.8 0 374.9S167.9 750 374.9 750s374.9-167.9 374.9-374.9C749.6 168 581.9.2 374.9 0z'

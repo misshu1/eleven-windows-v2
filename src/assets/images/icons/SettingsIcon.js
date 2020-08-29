@@ -11,8 +11,7 @@ const SettingsIcon = (props) => {
             key={getSelectedTheme().id}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 750'
-            height={height ? height : '100%'}
-            width={width ? width : '100%'}
+            style={{ width, height }}
         >
             <g
                 fill='var(--primary)'

@@ -11,8 +11,7 @@ const LogoIcon = (props) => {
             key={getSelectedTheme().id}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 618.38 748.53'
-            width={width ? width : '100%'}
-            height={height ? height : '100%'}
+            style={{ width, height }}
         >
             <g
                 fill='var(--primary)'

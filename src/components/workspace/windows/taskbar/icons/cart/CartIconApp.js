@@ -25,7 +25,11 @@ export const CartIconApp = ({ cartIconRef, toggleCart, isCartOpen }) => {
                     anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
                     showZero={false}
                 >
-                    <CartIcon />
+                    <CartIcon
+                        width='1.7rem'
+                        height='1.7rem'
+                        color='var(--colorDefault)'
+                    />
                 </Badge>
             </Container>
         </Tooltip>

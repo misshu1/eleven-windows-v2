@@ -12,20 +12,6 @@ export const Container = styled.li`
     color: var(--colorDefault);
     background-color: ${(props) => props.open && 'var(--backgroundHover)'};
 
-    svg {
-        width: 1.7rem;
-        height: 1.7rem;
-        border-radius: 0.2rem;
-    }
-
-    svg .fill-color {
-        fill: var(--colorDefault);
-    }
-
-    svg .stroke-color {
-        stroke: var(--colorDefault);
-    }
-
     &&:hover,
     &&:focus {
         background-color: var(--backgroundHover);

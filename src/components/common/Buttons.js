@@ -2,6 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import CartIcon from '../../assets/images/icons/CartIcon';
+import { useCartContext } from '../../contexts/cartContext';
 
 const useStyles = makeStyles({
     btnStyle: {
@@ -11,10 +15,15 @@ const useStyles = makeStyles({
         cursor: 'default',
         backgroundColor: 'var(--primary)',
         color: '#fff',
-        flex: '1',
 
         '&:hover': {
             backgroundColor: 'var(--primaryDark)',
+        },
+
+        '&:disabled': {
+            backgroundColor: 'var(--primary) !important',
+            filter: 'grayscale(1)',
+            color: '#d6d8de',
         },
     },
     icon: {
@@ -33,13 +42,14 @@ const useStyles = makeStyles({
     },
 });
 
-const CheckoutButton = () => {
+export const CheckoutButton = () => {
     const classes = useStyles();
 
     return (
         <Button
             aria-label='checkout'
             classes={{ root: classes.btnStyle }}
+            style={{ flex: 1 }}
             fullWidth
         >
             <div className={classes.icon}>
@@ -53,4 +63,25 @@ const CheckoutButton = () => {
     );
 };
 
-export default CheckoutButton;
+export const AddToCartButton = ({ onClick, productId }) => {
+    const { isProductInCart } = useCartContext();
+    const { t } = useTranslation();
+    const classes = useStyles();
+
+    return (
+        <Button
+            aria-label='add product to cart'
+            classes={{ root: classes.btnStyle }}
+            disabled={isProductInCart(productId)}
+            onClick={onClick}
+            fullWidth
+        >
+            <div className={classes.icon}>
+                <CartIcon width='1.5rem' height='1.5rem' />
+            </div>
+            {isProductInCart(productId)
+                ? t('store.addedToCart')
+                : t('store.addToCart')}
+        </Button>
+    );
+};

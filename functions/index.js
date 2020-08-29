@@ -10,7 +10,7 @@ const admin = require('firebase-admin');
 // });
 
 admin.initializeApp();
-const firestore = admin.firestore();
+const firestore = admin.firestore;
 
 exports.addProductReview = functions.firestore
     .document('reviews/{reviewId}')
@@ -20,7 +20,8 @@ exports.addProductReview = functions.firestore
         // The 'reviews' object will be added to product after posting a review
         let reviews = null;
 
-        const productRef = firestore.doc(`products/${review.productId}`);
+        const productRef = firestore().doc(`products/${review.productId}`);
+        const increment = firestore.FieldValue.increment(1);
         let productData = null;
 
         await productRef
@@ -38,7 +39,7 @@ exports.addProductReview = functions.firestore
 
         if (productData.reviews) {
             reviews = {
-                total: productData.reviews.total + 1,
+                total: increment,
                 last5: [review, ...productData.reviews.last5.splice(0, 4)],
                 ratings: [
                     { userId: review.userId, rating: review.rating },

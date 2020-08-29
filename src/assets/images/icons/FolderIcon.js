@@ -13,8 +13,7 @@ const FolderIcon = (props) => {
             xmlnsXlink='http://www.w3.org/1999/xlink'
             enableBackground='new 0 0 730 730'
             viewBox='0 0 730 730'
-            width={width ? width : '100%'}
-            height={height ? height : '100%'}
+            style={{ width, height }}
         >
             <linearGradient id='a'>
                 <stop offset='0' stopColor='#e8b65d' />

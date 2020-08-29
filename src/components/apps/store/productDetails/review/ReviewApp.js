@@ -5,6 +5,7 @@ import Rating from '@material-ui/lab/Rating';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import useTimeSince from '../../../../../hooks/useTimeSince';
 import { Container } from './style';
 
 const useStyles = makeStyles({
@@ -16,33 +17,9 @@ const useStyles = makeStyles({
     },
 });
 
-const timeSince = (previous) => {
-    const msPerMinute = 60 * 1000;
-    const msPerHour = 60 * msPerMinute;
-    const msPerDay = 24 * msPerHour;
-    const msPerMonth = 30 * msPerDay;
-    const msPerYear = 365 * msPerDay;
-
-    const currentDay = new Date().getTime();
-    const elapsed = currentDay - new Date(previous).getTime();
-
-    if (elapsed < msPerMinute) {
-        return ' less than a minute ago';
-    } else if (elapsed < msPerHour) {
-        return Math.round(elapsed / msPerMinute) + ' minutes ago';
-    } else if (elapsed < msPerDay) {
-        return Math.round(elapsed / msPerHour) + ' hours ago';
-    } else if (elapsed < msPerMonth) {
-        return Math.round(elapsed / msPerDay) + ' days ago';
-    } else if (elapsed < msPerYear) {
-        return Math.round(elapsed / msPerMonth) + ' months ago';
-    } else {
-        return Math.round(elapsed / msPerYear) + ' years ago';
-    }
-};
-
 const ReviewApp = (props) => {
     const { userDisplayName, rating, publishDate, content } = props;
+    const timeSince = useTimeSince(publishDate.toDate());
     const classes = useStyles();
 
     return (
@@ -68,9 +45,7 @@ const ReviewApp = (props) => {
                         value={rating}
                         readOnly={true}
                     />
-                    <span className='date'>
-                        {timeSince(publishDate.toDate())}
-                    </span>
+                    <span className='date'>{timeSince}</span>
                 </div>
             </div>
             <p className='review-content'>{content}</p>

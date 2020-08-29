@@ -11,8 +11,7 @@ const TaskIcon = (props) => {
             key={getSelectedTheme().id}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 750'
-            width={width ? width : '100%'}
-            height={height ? height : '100%'}
+            style={{ width, height }}
         >
             <path
                 d='M707 728.5c0 11.9-11.6 21.5-26 21.5H71c-14.4 0-26-9.6-26-21.5V22.7C45 10.8 56.6 1.2 71 1.2h610c14.4 0 26 9.6 26 21.5v705.8z'

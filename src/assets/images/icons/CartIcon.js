@@ -3,7 +3,7 @@ import React from 'react';
 import { useSettingsContext } from '../../../contexts/settingsContext';
 
 const CartIcon = (props) => {
-    const { width, height } = props;
+    const { width, height, color } = props;
     const { getSelectedTheme } = useSettingsContext();
 
     return (
@@ -11,21 +11,18 @@ const CartIcon = (props) => {
             key={getSelectedTheme().id}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 600'
-            width={width ? width : '100%'}
-            height={height ? height : '100%'}
+            style={{ width, height }}
         >
             <g
-                className='fill-color'
-                fill='var(--primary)'
+                fill={color ? color : '#fff'}
                 style={{ transition: 'fill 0.2s ease-in-out' }}
             >
                 <circle cx='202.41' cy='546.32' r='50.36' stroke='gray' />
                 <circle cx='449.66' cy='544.77' r='48.81' />
             </g>
             <g
-                className='stroke-color'
                 strokeMiterlimit='10'
-                stroke='var(--primary)'
+                stroke={color ? color : '#fff'}
                 style={{ transition: 'stroke 0.2s ease-in-out' }}
             >
                 <path

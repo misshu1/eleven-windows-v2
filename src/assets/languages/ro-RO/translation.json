@@ -39,7 +39,7 @@
         },
         "dayAbrev": {
             "1": "Dum",
-            "2": "Lu",
+            "2": "Lun",
             "3": "Mar",
             "4": "Mie",
             "5": "Joi",
@@ -70,6 +70,14 @@
         "enableVideoBgButton": "Activați fundalul video",
         "disableButton": "Dezactivați alertele de notificări.",
         "disableButtonInfo": "Le veți vedea în continuare în fereastra notificărilor."
+    },
+    "store": {
+        "addToCart": "Adaugă in coş",
+        "addedToCart": "Adăugat",
+        "review": "Review",
+        "reviews": "Review-uri",
+        "noReviews": "Nu sunt review-uri",
+        "description": "Descriere"
     },
     "tooltip": {
         "login": "Autentificare",
@@ -103,5 +111,13 @@
             "haveAccount": "Ai deja un cont?",
             "dontHaveAccount": "Creați un cont nou"
         }
+    },
+    "timeSince": {
+        "justNow": "chiar acum",
+        "minutes": "minute în urmă",
+        "hours": "ore în urmă",
+        "days": "zile în urmă",
+        "months": "luni în urmă",
+        "years": "ani în urmă"
     }
 }

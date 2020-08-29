@@ -66,28 +66,4 @@ export const Container = styled.div`
         margin-left: 0.5rem;
         letter-spacing: 1px;
     }
-
-    .svg-bg {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 2.5rem;
-        background-color: var(--secondary);
-        transition: background 0.2s ease-in-out;
-        border-top-right-radius: 0 0;
-        border-bottom-right-radius: 37% 100%;
-
-        svg {
-            .fill-color {
-                fill: #fff;
-            }
-            .stroke-color {
-                stroke: #fff;
-            }
-        }
-    }
 `;

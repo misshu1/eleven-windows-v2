@@ -23,10 +23,13 @@ export const AppIcon = styled.div`
         text-decoration: none;
         color: var(--colorDefault);
     }
+
     .name {
         margin-top: 0.5rem;
         cursor: default;
+        text-align: center;
     }
+
     && svg {
         width: 2rem;
         height: 2rem;

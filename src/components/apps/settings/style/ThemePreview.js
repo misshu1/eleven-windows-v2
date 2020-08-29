@@ -95,16 +95,6 @@ export const ThemePreview = styled.div`
             margin: 0 0.1rem;
             font-size: 0.25rem;
 
-            svg {
-                .fill-color {
-                    fill: var(--colorDefault);
-                }
-
-                .stroke-color {
-                    stroke: var(--colorDefault);
-                }
-            }
-
             img {
                 width: 0.25rem;
                 height: 0.25rem;

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Widget, TableRow } from './style';
+import React from 'react';
 
-const WidgetApp = props => {
-    const [openSince, setOpenSince] = useState();
+import useTimeSince from '../../../hooks/useTimeSince';
+import { TableRow, Widget } from './style';
+
+const WidgetApp = (props) => {
     const {
         appId,
         widgetIcon,
@@ -11,19 +12,9 @@ const WidgetApp = props => {
         handleSelectApp,
         getSelectedApp,
         openTime,
-        timeSince
     } = props;
     const selected = getSelectedApp(appId);
-
-    useEffect(() => {
-        const time = setTimeout(() => {
-            setOpenSince(timeSince(openTime));
-        }, 1000);
-
-        return () => {
-            clearInterval(time);
-        };
-    }, [openSince, setOpenSince, openTime, timeSince]);
+    const timeSince = useTimeSince(openTime);
 
     return (
         <TableRow
@@ -35,7 +26,7 @@ const WidgetApp = props => {
                 {widgetIcon}
                 <span>{iconDisplayName}</span>
             </Widget>
-            <div className='stats'>{openSince}</div>
+            <div className='stats'>{timeSince}</div>
         </TableRow>
     );
 };
@@ -48,6 +39,5 @@ WidgetApp.propTypes = {
     iconDisplayName: PropTypes.string.isRequired,
     handleSelectApp: PropTypes.func.isRequired,
     openTime: PropTypes.number.isRequired,
-    timeSince: PropTypes.func.isRequired,
-    getSelectedApp: PropTypes.func.isRequired
+    getSelectedApp: PropTypes.func.isRequired,
 };

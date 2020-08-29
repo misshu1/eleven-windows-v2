@@ -1,40 +1,13 @@
 import { makeStyles } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import Rating from '@material-ui/lab/Rating';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import CartIcon from '../../../../assets/images/icons/CartIcon';
 import { useCartContext, useDispatchCartContext } from '../../../../contexts/cartContext';
+import { AddToCartButton } from '../../../common';
 import { folderPages } from '../../../folder/folderPages';
 import { Card } from './style';
 
-// const productSchema = {
-//     title: String,
-//     imagePreview: String,
-//     type: String, // 'product' || 'donation'
-//     newPrice: Number,
-//     oldPrice: Number || null
-// }
-
 const useStyles = makeStyles({
-    cartButton: {
-        position: 'relative',
-        overflow: 'hidden',
-        paddingLeft: '3rem',
-        cursor: 'default',
-        backgroundColor: 'var(--primary)',
-        color: '#fff',
-
-        '&:disabled': {
-            backgroundColor: 'var(--primary) !important',
-            filter: 'grayscale(1)',
-            color: '#d6d8de',
-        },
-
-        '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
-        },
-    },
     ratingColorEmpty: {
         color: 'var(--grey60)',
     },
@@ -46,7 +19,7 @@ const useStyles = makeStyles({
 const ProductApp = ({ product, setSelectedProduct, setPage }) => {
     const { imagePreview, newPrice, oldPrice, reviews, title } = product;
     const { addToCart } = useDispatchCartContext();
-    const { getProductDiscount, isProductInCart } = useCartContext();
+    const { getProductDiscount } = useCartContext();
     const [discountVal, setDiscountVal] = useState(0);
     const [ratingVal, setRatingVal] = useState(0);
     const classes = useStyles();
@@ -99,21 +72,12 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
             <p className='product-new-price' onClick={selectProduct}>
                 <strong>{!!newPrice && `$${newPrice}`}</strong>
             </p>
-            <Button
-                className='product-add-to-cart'
-                aria-label='add product to cart'
-                classes={{ root: classes.cartButton }}
+            <AddToCartButton
                 onClick={() => {
                     addToCart(product);
                 }}
-                disabled={isProductInCart(product.id)}
-                fullWidth
-            >
-                <div className='svg-bg'>
-                    <CartIcon width='1.5rem' height='1.5rem' />
-                </div>
-                {isProductInCart(product.id) ? 'Added' : 'Add to cart'}
-            </Button>
+                productId={product.id}
+            />
         </Card>
     );
 };

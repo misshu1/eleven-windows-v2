@@ -52,7 +52,11 @@ const Preview = () => {
                     <CalculatorIcon width='0.4rem' height='0.4rem' />
                 </span>
                 <span className='right'>
-                    <CartIcon width='0.3rem' height='0.3rem' />
+                    <CartIcon
+                        width='0.3rem'
+                        height='0.3rem'
+                        color='var(--colorDefault)'
+                    />
                     <img src={globeIcon} alt='language' draggable={false} />
                     <FontAwesomeIcon icon={['far', 'comment-alt']} />
                 </span>

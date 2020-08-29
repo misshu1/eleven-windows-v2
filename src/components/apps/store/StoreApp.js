@@ -11,7 +11,7 @@ const StoreApp = () => {
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(folderPages.level_1);
     const [selectedProduct, setSelectedProduct] = useState({});
-    const { showError, showWarning } = useNotificationsContext();
+    const { showError } = useNotificationsContext();
     const { firestore } = useFirebaseContext();
 
     useEffect(() => {

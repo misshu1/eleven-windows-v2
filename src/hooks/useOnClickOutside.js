@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-function useOnClickOutside([...refs], handler) {
+const useOnClickOutside = ([...refs], handler) => {
     const calbackHandler = useCallback(
         (event) => {
             handler(event);
@@ -32,6 +32,6 @@ function useOnClickOutside([...refs], handler) {
             document.removeEventListener('touchstart', listener);
         };
     }, [refs, handler, calbackHandler]);
-}
+};
 
 export default useOnClickOutside;

@@ -12,8 +12,7 @@ const StoreIcon = (props) => {
             xmlns='http://www.w3.org/2000/svg'
             enableBackground='new 0 0 750 750'
             viewBox='0 0 750 750'
-            width={width ? width : '100%'}
-            height={height ? height : '100%'}
+            style={{ width, height }}
         >
             <path
                 d='m287.9 215.4c-.2-6.7-7.5-12.1-16.5-12s-16.1 5.7-15.9 12.4c.2 6.8 7.5 12.1 16.5 12s16.1-5.6 15.9-12.4z'

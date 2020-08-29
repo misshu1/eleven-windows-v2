@@ -11,8 +11,7 @@ const CalculatorIcon = (props) => {
             key={getSelectedTheme().id}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 750 750'
-            width={width ? width : '100%'}
-            height={height ? height : '100%'}
+            style={{ width, height }}
         >
             <g fill='#fff'>
                 <path d='M0 0h375v375H0z' />
