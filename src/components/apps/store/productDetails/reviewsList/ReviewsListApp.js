@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useFirebaseContext } from '../../../../../contexts/firebaseContext';
 import { useNotificationsContext } from '../../../../../contexts/notificationsContext';
@@ -39,6 +40,7 @@ const ReviewsListApp = ({ product }) => {
     const { firestore } = useFirebaseContext();
     const { showError, showWarning } = useNotificationsContext();
     const { user, isUserLoggedIn } = useAuth();
+    const { t } = useTranslation();
     const isCanceled = useRef(false);
     const classes = useStyles();
 
@@ -137,7 +139,7 @@ const ReviewsListApp = ({ product }) => {
 
     return (
         <Container>
-            <h2 className='title'>Reviews</h2>
+            <h2 className='title'>{t('store.reviews')}</h2>
 
             {showAddReveiw && (
                 <AddReviewApp
@@ -148,7 +150,9 @@ const ReviewsListApp = ({ product }) => {
 
             {renderReviews()}
             {!reviewsLoaded && isLoading && showReviewsSkeletons()}
-            {reviews.length === 0 && <p className='no-reviews'>No reviews</p>}
+            {reviews.length === 0 && (
+                <p className='no-reviews'>{t('store.noReviews')}</p>
+            )}
 
             {product?.reviews?.total > 5 && !reviewsLoaded && (
                 <Button
@@ -158,7 +162,7 @@ const ReviewsListApp = ({ product }) => {
                     disabled={isLoading}
                     fullWidth
                 >
-                    show all reviews
+                    {t('store.showAllReviews')}
                 </Button>
             )}
         </Container>

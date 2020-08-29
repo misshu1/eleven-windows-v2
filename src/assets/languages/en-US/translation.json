@@ -77,6 +77,8 @@
         "review": "Review",
         "reviews": "Reviews",
         "noReviews": "No Reviews",
+        "addReview": "Add Review",
+        "showAllReviews": "Show All Reviews",
         "description": "Description"
     },
     "tooltip": {

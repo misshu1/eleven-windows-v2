@@ -72,6 +72,8 @@ const useAuthValidation = (initialState) => {
                         firebase: err.message,
                     }));
                 });
+        } else {
+            setSubmitting(false);
         }
     };
 
@@ -97,6 +99,8 @@ const useAuthValidation = (initialState) => {
                         firebase: err.message,
                     }));
                 });
+        } else {
+            setSubmitting(false);
         }
     };
 

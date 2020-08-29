@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Container, Form } from './style';
 import useReviewValidation from './useReviewValidation';
@@ -76,7 +77,6 @@ const INITIAL_STATE = {
 };
 
 const AddReviewApp = ({ productId, addTempReview }) => {
-    const classes = useStyles();
     const {
         handleBlur,
         handleChange,
@@ -86,6 +86,8 @@ const AddReviewApp = ({ productId, addTempReview }) => {
         handleSubmit,
         handleUpdateRating,
     } = useReviewValidation(INITIAL_STATE, productId, addTempReview);
+    const { t } = useTranslation();
+    const classes = useStyles();
 
     return (
         <Container>
@@ -132,7 +134,7 @@ const AddReviewApp = ({ productId, addTempReview }) => {
                             size='lg'
                         />
                     </div>
-                    Send Review
+                    {t('store.addReview')}
                 </Button>
             </Form>
         </Container>

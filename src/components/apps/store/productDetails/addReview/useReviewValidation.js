@@ -92,6 +92,8 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
                 setSubmitting(false);
                 showError('Error', 'Failed to send review!', 500);
             }
+        } else {
+            setSubmitting(false);
         }
     };
 

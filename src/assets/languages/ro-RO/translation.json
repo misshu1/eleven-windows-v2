@@ -77,6 +77,8 @@
         "review": "Review",
         "reviews": "Review-uri",
         "noReviews": "Nu sunt review-uri",
+        "addReview": "Adaugă Review",
+        "showAllReviews": "Afişează toate review-urile",
         "description": "Descriere"
     },
     "tooltip": {
