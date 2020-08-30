@@ -12,8 +12,9 @@ export const Container = styled.div`
     .slide-image {
         width: 100%;
         height: 100%;
-        background-size: cover;
+        background-color: var(--backgroundActive);
         background-position: center center;
+        background-size: cover;
     }
 
     .dots-container {
@@ -37,6 +38,14 @@ export const Container = styled.div`
 
     .custom-dot-selected {
         background-color: var(--primary);
+    }
+
+    .no-images {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: 0;
+        transform: translate(-50%, -50%);
     }
 
     @media only screen and (min-width: 450px) {

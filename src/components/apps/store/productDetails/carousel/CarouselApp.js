@@ -5,6 +5,7 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import { CarouselContext, Dot, Image, Slide, Slider } from 'pure-react-carousel';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import useMediaQuery from '../../../../../hooks/useMediaQuery';
 import SpinnerApp from '../../../../common/SpinnerApp';
@@ -27,8 +28,9 @@ const useStyles = makeStyles({
         padding: 0,
         margin: '0.5rem',
         cursor: 'default',
-        backgroundSize: 'cover !important',
+        backgroundColor: 'var(--backgroundActive)',
         backgroundPosition: 'center center !important',
+        backgroundSize: 'cover !important',
     },
     selectedThumbnail: {
         boxShadow: `0px 0px 4px 2px var(--primary)`,
@@ -45,6 +47,7 @@ const CarouselApp = ({ images }) => {
         carouselContext.state.currentSlide
     );
     const isTablet = useMediaQuery('(max-width: 800px)');
+    const { t } = useTranslation();
 
     const changeSlide = useCallback(
         (slideValue) => {
@@ -77,6 +80,11 @@ const CarouselApp = ({ images }) => {
                             tag='div'
                             className='slide-image'
                         />
+                        {url === 'none' && (
+                            <p className='no-images'>
+                                {t('store.noImagesFound')}
+                            </p>
+                        )}
                     </Slide>
                 ))}
             </Slider>
@@ -115,7 +123,7 @@ const CarouselApp = ({ images }) => {
                                 root: classes.thumbnail,
                                 selected: classes.selectedThumbnail,
                             }}
-                            style={{ background: `url(${url})` }}
+                            style={{ backgroundImage: `url(${url})` }}
                         />
                     ))}
                 </Tabs>

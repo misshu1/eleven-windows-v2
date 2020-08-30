@@ -79,7 +79,8 @@
         "noReviews": "Nu sunt review-uri",
         "addReview": "Adaugă Review",
         "showAllReviews": "Afişează toate review-urile",
-        "description": "Descriere"
+        "description": "Descriere",
+        "noImagesFound": "Nu au fost găsite imagini."
     },
     "tooltip": {
         "login": "Autentificare",

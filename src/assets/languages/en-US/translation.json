@@ -79,7 +79,8 @@
         "noReviews": "No Reviews",
         "addReview": "Add Review",
         "showAllReviews": "Show All Reviews",
-        "description": "Description"
+        "description": "Description",
+        "noImagesFound": "No Images Found."
     },
     "tooltip": {
         "login": "Login",

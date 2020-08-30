@@ -10,7 +10,9 @@ import ReviewsListApp from './reviewsList/ReviewsListApp';
 import { Container } from './style';
 
 const ProductDetailsApp = ({ product }) => {
-    const [images, setImages] = useState([]);
+    // Using empty string to prevent the carousel from shifting size
+    // after images loading from the database
+    const [images, setImages] = useState(['']);
     const [description, setDescription] = useState('');
     const { storage } = useFirebaseContext();
     const { showError, showWarning } = useNotificationsContext();
@@ -49,7 +51,8 @@ const ProductDetailsApp = ({ product }) => {
                     .map((item) => item.value);
 
                 if (!isCanceled) {
-                    setImages(dbImages);
+                    dbImages.length === 0 && setImages(['none']);
+                    dbImages.length !== 0 && setImages(dbImages);
                 } else {
                     showWarning(
                         'Request Canceled',
