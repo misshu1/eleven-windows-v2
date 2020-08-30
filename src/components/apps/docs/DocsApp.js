@@ -102,7 +102,7 @@ const toolbarMenu = () => {
     return [
         {
             name: 'Create a new folder',
-            widgetIcon: <FolderIcon />,
+            widgetIcon: <FolderIcon width='100%' height='100%' />,
             fontIcon: null,
             link: null,
             scrollToRef: 'createFolderRef',
@@ -120,7 +120,7 @@ const toolbarMenu = () => {
         },
         {
             name: 'Change loading logo',
-            widgetIcon: <LogoIcon />,
+            widgetIcon: <LogoIcon width='100%' height='100%' />,
             fontIcon: null,
             link: null,
             scrollToRef: 'changeLoadingLogoRef',

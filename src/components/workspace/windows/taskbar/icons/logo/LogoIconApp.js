@@ -24,7 +24,7 @@ const LogoIconApp = ({ logoRef }) => {
                     <span />
                     <span />
                     <Logo>
-                        <LogoIcon />
+                        <LogoIcon width='100%' height='100%' />
                     </Logo>
                 </BorderLogo>
             </Container>

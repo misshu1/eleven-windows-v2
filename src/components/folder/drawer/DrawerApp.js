@@ -11,6 +11,40 @@ import { Link } from 'react-router-dom';
 import ScrollbarApp from '../../common/ScrollbarApp';
 import { Container } from './style';
 
+const useStyles = makeStyles({
+    root: {
+        width: '100%',
+        maxWidth: '100%',
+        backgroundColor: 'transparent',
+        color: 'var(--colorDefault)',
+    },
+    listItemStyle: {
+        '&:hover': {
+            cursor: 'default',
+            background: 'rgba(0, 0, 0, 0.2)',
+        },
+    },
+    fontIconStyle: {
+        color: 'var(--primary)',
+    },
+    listIconStyle: {
+        marginRight: '1rem',
+        width: '2rem',
+        height: '2rem',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minWidth: 'unset',
+    },
+});
+
+const scrollToRef = (refObj, refName) => {
+    if (!refObj && !refName) {
+        return;
+    }
+    refObj[refName].current.offsetParent.offsetParent.scrollTop =
+        refObj[refName].current.offsetTop;
+};
+
 const Drawer = forwardRef((props, ref) => {
     const { toolbarMenu, closeDrawer } = props;
     const classes = useStyles();
@@ -49,40 +83,6 @@ const Drawer = forwardRef((props, ref) => {
         </List>
     );
 });
-
-const useStyles = makeStyles({
-    root: {
-        width: '100%',
-        maxWidth: '100%',
-        backgroundColor: 'transparent',
-        color: 'var(--colorDefault)',
-    },
-    listItemStyle: {
-        '&:hover': {
-            cursor: 'default',
-            background: 'rgba(0, 0, 0, 0.2)',
-        },
-    },
-    fontIconStyle: {
-        color: 'var(--primary)',
-    },
-    listIconStyle: {
-        marginRight: '1rem',
-        width: '2rem',
-        height: '2rem',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minWidth: 'unset',
-    },
-});
-
-const scrollToRef = (refObj, refName) => {
-    if (!refObj && !refName) {
-        return;
-    }
-    refObj[refName].current.offsetParent.offsetParent.scrollTop =
-        refObj[refName].current.offsetTop;
-};
 
 const ListItemLink = ({ item, onClick }) => {
     const classes = useStyles();

@@ -28,12 +28,8 @@ export const LoginContainer = styled.div`
         align-items: center;
         width: 3.5rem;
         height: 100%;
-
-        svg {
-            width: 2rem;
-            height: 2rem;
-        }
     }
+
     .power-off:hover {
         background-color: var(--backgroundHover);
     }

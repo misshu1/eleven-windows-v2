@@ -47,11 +47,6 @@ export const Container = styled.div`
     animation: ${slideFromRight} 0.3s cubic-bezier(0.68, 0.62, 0.7, 0.98) 1
         forwards;
 
-    && img {
-        height: 2rem;
-        width: 2rem;
-    }
-
     @media only screen and (max-width: 320px) {
         width: 100%;
     }

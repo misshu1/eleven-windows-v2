@@ -23,6 +23,7 @@ export const BorderLogo = styled.div`
     position: relative;
     width: 3rem;
     height: 3rem;
+
     && span {
         position: absolute;
         top: 0;

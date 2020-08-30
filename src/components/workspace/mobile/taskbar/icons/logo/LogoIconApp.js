@@ -21,7 +21,7 @@ const LogoIconApp = ({ logoRef, isAppsMenuOpen, toggleAppsMenu }) => {
                     <span />
                     <span />
                     <span />
-                    <LogoIcon />
+                    <LogoIcon width='100%' height='100%' />
                 </BorderLogo>
             </Container>
         </Tooltip>

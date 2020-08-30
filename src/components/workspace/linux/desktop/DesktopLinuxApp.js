@@ -49,7 +49,7 @@ const DesktopLinuxApp = () => {
                                     <span />
                                     <span />
                                     <Logo>
-                                        <LogoIcon />
+                                        <LogoIcon width='100%' height='100%' />
                                     </Logo>
                                 </BorderLogo>
                             </LogoContainer>

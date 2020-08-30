@@ -81,7 +81,10 @@ const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
                                     enterDelay={500}
                                 >
                                     <div onClick={logout} className='power-off'>
-                                        <PowerOffIcon />
+                                        <PowerOffIcon
+                                            width='2rem'
+                                            height='2rem'
+                                        />
                                     </div>
                                 </Tooltip>
                             </>

@@ -55,7 +55,10 @@ const StartMenuApp = ({ startMenuRef }) => {
                                     enterDelay={500}
                                 >
                                     <Widget onClick={logout}>
-                                        <PowerOffIcon />
+                                        <PowerOffIcon
+                                            width='2rem'
+                                            height='2rem'
+                                        />
                                     </Widget>
                                 </Tooltip>
                             </>
