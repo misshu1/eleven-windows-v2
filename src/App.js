@@ -116,7 +116,7 @@ const App = () => {
 
     // Disable the default styles for 'desktop' and 'taskbar' when naviating to 'excludedRoutes'
     useEffect(() => {
-        const excludedRoutes = ['/401', '/404', '/login', '/checkout'];
+        const excludedRoutes = ['/401', '/404', '/500', '/login', '/checkout'];
         const routeMatch = excludedRoutes.includes(location.pathname);
 
         if (!routeMatch) {
