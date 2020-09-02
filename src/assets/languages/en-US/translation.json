@@ -122,5 +122,20 @@
         "days": "days ago",
         "months": "months ago",
         "years": "years ago"
+    },
+    "errors": {
+        "home": "Home",
+        "404": {
+            "title": "Sorry!",
+            "message": "The page you're looking for does not exist."
+        },
+        "401": {
+            "title": "Not authorized!",
+            "message": "You do not have permission to view this page."
+        },
+        "500": {
+            "title": "Internal Server Error!",
+            "message": "Oops, something went very wrong."
+        }
     }
 }

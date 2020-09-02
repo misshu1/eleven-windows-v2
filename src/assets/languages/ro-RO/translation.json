@@ -122,5 +122,20 @@
         "days": "zile în urmă",
         "months": "luni în urmă",
         "years": "ani în urmă"
+    },
+    "errors": {
+        "home": "Acasă",
+        "404": {
+            "title": "Scuze!",
+            "message": "Pagina care o căutaţi nu există."
+        },
+        "401": {
+            "title": "Neautorizat!",
+            "message": "Nu aveţi permisiunea de a vizualiza această pagină."
+        },
+        "500": {
+            "title": "Eroare interna a serverului!",
+            "message": "Oops, ceva nu a mers foarte bine."
+        }
     }
 }

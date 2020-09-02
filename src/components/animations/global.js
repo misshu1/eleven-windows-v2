@@ -54,7 +54,7 @@ export const quickAccessToolbarOpenBtnAnimation = {
     },
 };
 
-export const loginPageAnimation = {
+export const modalPageAnimation = {
     initial: {
         opacity: 0,
         scale: 0.7,

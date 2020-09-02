@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatchFolderContext } from '../../../contexts/folderContext';
 import { useAuth } from '../../../hooks/useAuth';
 import useMediaQuery from '../../../hooks/useMediaQuery';
-import { loginPageAnimation } from '../../animations';
+import { modalPageAnimation } from '../../animations';
 import AuthApp from '../../auth/AuthApp';
 import { AuthContiner, Container } from './style';
 
@@ -91,11 +91,11 @@ const LoginPage = () => {
             <AnimatePresence>
                 {showAuth && (
                     <AuthContiner
-                        key='loginPageAnimation'
+                        key='modalPageAnimation'
                         initial='initial'
                         animate='open'
                         exit='close'
-                        variants={!isMobile && loginPageAnimation}
+                        variants={!isMobile && modalPageAnimation}
                     >
                         <AuthApp onCancel={onCancel} />
                     </AuthContiner>

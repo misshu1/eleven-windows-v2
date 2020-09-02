@@ -6,12 +6,9 @@ import Emoji from '../common/Emoji';
 import SpinnerApp from '../common/SpinnerApp';
 import WorkspaceApp from '../workspace/WorkspaceApp';
 
-// import NotAuthorized from '../pages/401/NotAuthorized';
-// import NotFound from '../pages/404/NotFound';
-// import LoginPage from '../pages/login/LoginPage';
 const LoginPage = lazy(() => import('../pages/login/LoginPage'));
-const NotFound = lazy(() => import('../pages/404/NotFound'));
-const NotAuthorized = lazy(() => import('../pages/401/NotAuthorized'));
+const ErrorPageApp = lazy(() => import('../pages/errorPage/ErrorPageApp'));
+const CheckoutApp = lazy(() => import('../pages/checkout/CheckoutApp'));
 
 const WelcomeTitle = (
     <span>
@@ -52,7 +49,7 @@ export const RoutesApp = () => {
                 path='/404'
                 element={
                     <Suspense fallback={<SpinnerApp delay={200} global />}>
-                        <NotFound />
+                        <ErrorPageApp />
                     </Suspense>
                 }
             />
@@ -61,7 +58,16 @@ export const RoutesApp = () => {
                 path='/401'
                 element={
                     <Suspense fallback={<SpinnerApp delay={200} global />}>
-                        <NotAuthorized />
+                        <ErrorPageApp />
+                    </Suspense>
+                }
+            />
+
+            <Route
+                path='/500'
+                element={
+                    <Suspense fallback={<SpinnerApp delay={200} global />}>
+                        <ErrorPageApp />
                     </Suspense>
                 }
             />
@@ -71,6 +77,15 @@ export const RoutesApp = () => {
                 element={
                     <Suspense fallback={<SpinnerApp delay={200} global />}>
                         <LoginPage />
+                    </Suspense>
+                }
+            />
+
+            <Route
+                path='/checkout'
+                element={
+                    <Suspense fallback={<SpinnerApp delay={200} global />}>
+                        <CheckoutApp />
                     </Suspense>
                 }
             />

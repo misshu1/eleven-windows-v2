@@ -14,6 +14,7 @@ import {
     faExchangeAlt,
     faExclamation,
     faExclamationTriangle,
+    faHome,
     faInfo,
     faLayerGroup,
     faPalette,
@@ -76,7 +77,8 @@ library.add(
     faSquare,
     faRoute,
     faTelegramPlane,
-    faPalette
+    faPalette,
+    faHome
 );
 
 const VideoApp = lazy(() => import('./components/video/VideoApp'));
@@ -114,7 +116,7 @@ const App = () => {
 
     // Disable the default styles for 'desktop' and 'taskbar' when naviating to 'excludedRoutes'
     useEffect(() => {
-        const excludedRoutes = ['/401', '/404', '/login'];
+        const excludedRoutes = ['/401', '/404', '/login', '/checkout'];
         const routeMatch = excludedRoutes.includes(location.pathname);
 
         if (!routeMatch) {
