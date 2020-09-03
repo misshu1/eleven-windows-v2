@@ -165,7 +165,7 @@ const folderReducer = (state, action) => {
     const currentApp = state.apps.find((app) => app.id === action.payload);
 
     switch (action.type) {
-        case FOLDER_ACTIONS.open:
+        case FOLDER_ACTIONS.open: {
             if (!currentApp.isOpen) {
                 return {
                     ...state,
@@ -186,7 +186,9 @@ const folderReducer = (state, action) => {
             } else {
                 return state;
             }
-        case FOLDER_ACTIONS.close:
+        }
+
+        case FOLDER_ACTIONS.close: {
             if (currentApp.isOpen === true) {
                 return {
                     ...state,
@@ -207,8 +209,9 @@ const folderReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        case FOLDER_ACTIONS.minimizeUp:
+        case FOLDER_ACTIONS.minimizeUp: {
             if (currentApp.isMinimize) {
                 return {
                     ...state,
@@ -221,8 +224,9 @@ const folderReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        case FOLDER_ACTIONS.minimizeDown:
+        case FOLDER_ACTIONS.minimizeDown: {
             if (currentApp.isMinimize !== true) {
                 return {
                     ...state,
@@ -235,8 +239,9 @@ const folderReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        case FOLDER_ACTIONS.maximizeUp:
+        case FOLDER_ACTIONS.maximizeUp: {
             if (currentApp.isMaximize !== true) {
                 return {
                     ...state,
@@ -249,8 +254,9 @@ const folderReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        case FOLDER_ACTIONS.maximizeDown:
+        case FOLDER_ACTIONS.maximizeDown: {
             if (currentApp.isMaximize) {
                 return {
                     ...state,
@@ -263,8 +269,9 @@ const folderReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        case FOLDER_ACTIONS.active:
+        case FOLDER_ACTIONS.active: {
             if (currentApp.appIndex !== FOLDER_Z_INDEX.active) {
                 return {
                     ...state,
@@ -277,8 +284,9 @@ const folderReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        case FOLDER_ACTIONS.closeAll:
+        case FOLDER_ACTIONS.closeAll: {
             return {
                 ...state,
                 apps: state.apps.map((app) => ({
@@ -289,9 +297,11 @@ const folderReducer = (state, action) => {
                 })),
                 openApps: [],
             };
+        }
 
-        default:
+        default: {
             throw new Error(`Unhandled action type: ${action.type}`);
+        }
     }
 };
 

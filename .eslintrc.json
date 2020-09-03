@@ -1,7 +1,22 @@
 {
+    "plugins": ["react", "react-hooks"],
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "settings": {
+        "react": {
+            "version": "detect",
+            "flowVersion": "0.53" // Flow version
+        },
+        "linkComponents": [
+            // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
+            "Hyperlink",
+            { "name": "Link", "linkAttribute": "to" }
+        ]
+    },
     "parser": "babel-eslint",
     "env": {
         "browser": true,
+        "node": true,
+        "jest": true,
         "es6": true
     },
     "globals": {
@@ -15,9 +30,11 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": ["react", "react-hooks"],
     "rules": {
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn"
+        "react-hooks/exhaustive-deps": "warn",
+        "react/prop-types": "off",
+        "react/display-name": "off",
+        "react/no-unescaped-entities": "off"
     }
 }

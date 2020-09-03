@@ -32,7 +32,7 @@ const SETTINGS_STATE = {
 
 const settingsReducer = (state, action) => {
     switch (action.type) {
-        case SETTINGS_ACTIONS.changeOS:
+        case SETTINGS_ACTIONS.changeOS: {
             if (state.OS !== action.payload) {
                 return {
                     ...state,
@@ -41,8 +41,9 @@ const settingsReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        case SETTINGS_ACTIONS.changeTheme:
+        case SETTINGS_ACTIONS.changeTheme: {
             const currentTheme = state.themes.find(
                 (item) => item.id === action.payload
             );
@@ -66,8 +67,9 @@ const settingsReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        case SETTINGS_ACTIONS.changeBackground:
+        case SETTINGS_ACTIONS.changeBackground: {
             const background = state.backgrounds.find(
                 (item) => item.id === action.payload
             );
@@ -84,8 +86,9 @@ const settingsReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        case SETTINGS_ACTIONS.changeVideoBackground:
+        case SETTINGS_ACTIONS.changeVideoBackground: {
             const video = state.videoBackgrounds.find(
                 (item) => item.id === action.payload
             );
@@ -102,8 +105,9 @@ const settingsReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        case SETTINGS_ACTIONS.enableVideoBackground:
+        case SETTINGS_ACTIONS.enableVideoBackground: {
             if (state.isVideoBackgroundEnabled !== action.payload) {
                 return {
                     ...state,
@@ -112,9 +116,11 @@ const settingsReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        default:
+        default: {
             throw new Error(`Unhandled action type: ${action.type}`);
+        }
     }
 };
 

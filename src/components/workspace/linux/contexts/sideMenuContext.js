@@ -53,7 +53,7 @@ const SIDE_MENU_STATE = [
 
 const sideMenuReducer = (state, action) => {
     switch (action.type) {
-        case MENU_ACTIONS.active:
+        case MENU_ACTIONS.active: {
             const selected = state.find((item) => item.id === action.payload);
 
             if (!selected.isActive) {
@@ -65,9 +65,11 @@ const sideMenuReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        default:
+        default: {
             return state;
+        }
     }
 };
 

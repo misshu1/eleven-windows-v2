@@ -8,7 +8,7 @@ const CART_ACTIONS = {
 
 const cartReducer = (state, action) => {
     switch (action.type) {
-        case CART_ACTIONS.add:
+        case CART_ACTIONS.add: {
             const productExistsInCart = state.some(
                 (item) => item.id === action.payload.id
             );
@@ -18,12 +18,15 @@ const cartReducer = (state, action) => {
             } else {
                 return state;
             }
+        }
 
-        case CART_ACTIONS.remove:
+        case CART_ACTIONS.remove: {
             return state.filter((item) => item.id !== action.payload);
+        }
 
-        default:
+        default: {
             throw new Error(`Unhandled action type: ${action.type}`);
+        }
     }
 };
 
