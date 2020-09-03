@@ -20,6 +20,7 @@ export const ErrorContainer = styled(motion.div)`
     }
 
     .error-code {
+        letter-spacing: 5px;
         font-size: 6rem;
         margin: 0;
     }

@@ -25,7 +25,7 @@ const LoginPage = () => {
         // setTimeout is used for unmount animation
         setTimeout(() => {
             navigate(path);
-        }, 300);
+        }, 210);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
