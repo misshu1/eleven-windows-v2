@@ -35,7 +35,7 @@ const welcomeMessage = (
     </span>
 );
 
-export const RoutesApp = () => {
+const RoutesApp = () => {
     const { showInfo } = useNotificationsContext();
     const notification = useRef(() => showInfo(WelcomeTitle, welcomeMessage));
 
@@ -94,3 +94,5 @@ export const RoutesApp = () => {
         </Routes>
     );
 };
+
+export default RoutesApp;

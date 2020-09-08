@@ -37,7 +37,7 @@ import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import SpinnerApp from './components/common/SpinnerApp';
-import { RoutesApp } from './components/routes/Routes';
+import RoutesApp from './components/routes/Routes';
 import { GlobalStyle } from './components/style/GlobalStyle';
 import { CartProvider } from './contexts/cartContext';
 import { FirebaseProvider } from './contexts/firebaseContext';
