@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import CartIcon from '../../assets/images/icons/CartIcon';
 import { useCartContext } from '../../contexts/cartContext';
@@ -44,6 +45,7 @@ const useStyles = makeStyles({
 
 export const CheckoutButton = () => {
     const classes = useStyles();
+    const navigate = useNavigate();
 
     return (
         <Button
@@ -51,6 +53,7 @@ export const CheckoutButton = () => {
             classes={{ root: classes.btnStyle }}
             style={{ flex: 1 }}
             fullWidth
+            onClick={() => navigate('/checkout')}
         >
             <div className={classes.icon}>
                 <FontAwesomeIcon

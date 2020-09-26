@@ -8,7 +8,7 @@ import WorkspaceApp from '../workspace/WorkspaceApp';
 
 const LoginPage = lazy(() => import('../pages/login/LoginPage'));
 const ErrorPageApp = lazy(() => import('../pages/errorPage/ErrorPageApp'));
-const CheckoutApp = lazy(() => import('../pages/checkout/CheckoutApp'));
+const CheckoutPageApp = lazy(() => import('../pages/checkout/CheckoutPageApp'));
 
 const WelcomeTitle = (
     <span>
@@ -85,7 +85,7 @@ const RoutesApp = () => {
                 path='/checkout'
                 element={
                     <Suspense fallback={<SpinnerApp delay={200} global />}>
-                        <CheckoutApp />
+                        <CheckoutPageApp />
                     </Suspense>
                 }
             />
