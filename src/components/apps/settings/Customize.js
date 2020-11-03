@@ -6,7 +6,10 @@ import Switch from '@material-ui/core/Switch';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useDispatchSettingsContext, useSettingsContext } from '../../../contexts/settingsContext';
+import {
+    useDispatchSettingsContext,
+    useSettingsContext,
+} from '../../../contexts/settingsContext';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import Preview from './Preview';
 import { Box, Spacer, Title } from './style';

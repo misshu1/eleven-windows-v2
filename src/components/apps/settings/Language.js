@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useNotificationsContext } from '../../../contexts/notificationsContext';
-import { languages } from '../../../services/translation/i18next';
+import { languages } from '../../../i18next';
 import { FlagImg } from '../../workspace/windows/taskbar/icons/language/style/FlagImg';
 import { Box, FlagImgContainer, Spacer, Title } from './style';
 

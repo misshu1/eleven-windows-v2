@@ -221,7 +221,6 @@ export const folderStructureExample = `
 ------ windows // Only for Desktop
 -- contexts
 -- hooks
--- services
 `.trim();
 
 export const customScrollbarExample = `

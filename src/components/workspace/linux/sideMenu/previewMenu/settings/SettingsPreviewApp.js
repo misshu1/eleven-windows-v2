@@ -9,9 +9,12 @@ import React, { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
-import { useDispatchSettingsContext, useSettingsContext } from '../../../../../../contexts/settingsContext';
+import {
+    useDispatchSettingsContext,
+    useSettingsContext,
+} from '../../../../../../contexts/settingsContext';
 import useMediaQuery from '../../../../../../hooks/useMediaQuery';
-import { languages } from '../../../../../../services/translation/i18next';
+import { languages } from '../../../../../../i18next';
 import Preview from '../../../../../apps/settings/Preview';
 import { FlagImgContainer } from '../../../../../apps/settings/style';
 import ScrollbarApp from '../../../../../common/ScrollbarApp';

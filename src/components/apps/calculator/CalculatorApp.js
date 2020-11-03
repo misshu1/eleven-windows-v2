@@ -1,7 +1,7 @@
 import React from 'react';
+import Emoji from 'components/common/Emoji';
+import FolderApp from 'components/folder/FolderApp';
 
-import Emoji from '../../common/Emoji';
-import FolderApp from '../../folder/FolderApp';
 import { ButtonsContainer, Container, NumberPad, Operators } from './style';
 
 const CalculatorApp = () => {

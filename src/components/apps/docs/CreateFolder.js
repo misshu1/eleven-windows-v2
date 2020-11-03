@@ -4,14 +4,14 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Emoji from 'components/common/Emoji';
 import React, { forwardRef, useEffect, useState } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import { tomorrow, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-import { useSettingsContext } from '../../../contexts/settingsContext';
-import Emoji from '../../common/Emoji';
 import { folderContextState, folderExample } from './CodeExamples';
+import { useSettingsContext } from 'contexts/settingsContext';
 import { addWordBreak } from './DocsApp';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);

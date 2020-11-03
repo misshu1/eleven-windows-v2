@@ -4,9 +4,12 @@ import { useTranslation } from 'react-i18next';
 
 import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
 import { useDispatchSettingsContext } from '../../../../../../contexts/settingsContext';
-import { languages } from '../../../../../../services/translation/i18next';
+import { languages } from '../../../../../../i18next';
 import { useLanguageContext } from '../../contexts/languageContext';
-import { Container as LanguageContainer, FlagImg } from '../../icons/language/style';
+import {
+    Container as LanguageContainer,
+    FlagImg,
+} from '../../icons/language/style';
 import { Container } from './style';
 
 const LanguageApp = ({ languageMenuRef }) => {

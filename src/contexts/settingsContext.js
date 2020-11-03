@@ -1,12 +1,20 @@
 import i18n from 'i18next';
-import React, { createContext, useCallback, useContext, useLayoutEffect, useMemo, useReducer, useRef } from 'react';
+import React, {
+    createContext,
+    useCallback,
+    useContext,
+    useLayoutEffect,
+    useMemo,
+    useReducer,
+    useRef,
+} from 'react';
 
 import globeImg from '../assets/images/flags/globe.svg';
 import { backgrounds } from '../components/theme/DesktopBackgrounds';
 import { THEME_TYPE, themes } from '../components/theme/themes';
 import { videoBackgrounds } from '../components/theme/VideoBackgrounds';
 import useMediaQuery from '../hooks/useMediaQuery';
-import i18next, { languages } from '../services/translation/i18next';
+import i18next, { languages } from '../i18next';
 
 const OS_THEME = {
     windows: 'WINDOWS',
