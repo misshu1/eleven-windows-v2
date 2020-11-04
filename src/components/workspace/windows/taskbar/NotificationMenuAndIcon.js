@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useRef } from 'react';
 
-import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import SpinnerApp from '../../../common/SpinnerApp';
+import { useOnClickOutside } from 'hooks';
+import SpinnerApp from 'components/common/SpinnerApp';
 import { useNotificationsTaskbarContext } from './contexts/notificationsTaskbarContext';
 import NotificationIconApp from './icons/notifications/NotificationIconApp';
 
@@ -12,7 +12,7 @@ const NotificationsWindowsApp = lazy(() =>
 const NotificationMenuAndIcon = () => {
     const {
         closeNotificationMenu,
-        isNotificationMenuOpen,
+        isNotificationMenuOpen
     } = useNotificationsTaskbarContext();
     const notificationMenuRef = useRef(null);
     const notificationIconRef = useRef(null);

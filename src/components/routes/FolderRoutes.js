@@ -1,11 +1,9 @@
 import React, { Suspense, useEffect, useLayoutEffect, useState } from 'react';
 import { Navigate, Route, useLocation, useNavigate } from 'react-router-dom';
 
-import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
-import { useAuth } from '../../hooks/useAuth';
-import useMediaQuery from '../../hooks/useMediaQuery';
-import usePrevious from '../../hooks/usePrevious';
-import SpinnerApp from '../common/SpinnerApp';
+import { useDispatchFolderContext, useFolderContext } from 'contexts';
+import { useAuth, useMediaQuery, usePrevious } from 'hooks';
+import SpinnerApp from 'components/common/SpinnerApp';
 
 const FolderRoutes = () => {
     const [pathExists, setPathExists] = useState(true);
@@ -59,15 +57,15 @@ const FolderRoutes = () => {
                     navigate('/401', {
                         replace: true,
                         state: {
-                            nextPathname: app.link,
-                        },
+                            nextPathname: app.link
+                        }
                     });
                 } else if (app.requireLogin && !isUserLoggedIn()) {
                     navigate('/login', {
                         replace: true,
                         state: {
-                            nextPathname: app.link,
-                        },
+                            nextPathname: app.link
+                        }
                     });
                 } else {
                     openFolder(app.id);

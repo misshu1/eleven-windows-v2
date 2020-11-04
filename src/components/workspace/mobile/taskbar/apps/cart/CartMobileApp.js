@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import CartApp from '../../../../../cart/CartApp';
+import CartApp from 'components/cart/CartApp';
 import { Container } from './style';
 
 const CartMobileApp = ({ cartMenuRef, closeCart }) => {

@@ -1,14 +1,21 @@
 import { useSnackbar } from 'notistack';
-import React, { createContext, useCallback, useContext, useLayoutEffect, useMemo, useState } from 'react';
+import React, {
+    createContext,
+    useCallback,
+    useContext,
+    useLayoutEffect,
+    useMemo,
+    useState
+} from 'react';
 import uuid from 'uuid/v4';
 
-import Notification from '../components/notifications/notification/Notification';
+import Notification from 'components/notifications/notification/Notification';
 
 export const NOTIFICATION_TYPE = {
     success: 'SUCCESS',
     error: 'ERROR',
     warning: 'WARNING',
-    info: 'INFO',
+    info: 'INFO'
 };
 
 const NotificationsContext = createContext();
@@ -73,9 +80,9 @@ export const NotificationsProvider = ({ children }) => {
                             title={title}
                             onClose={closeNotification}
                         />
-                    ),
+                    )
                 },
-                ...prevState,
+                ...prevState
             ]);
 
             if (!disable) {
@@ -89,7 +96,7 @@ export const NotificationsProvider = ({ children }) => {
                             onClose={closeSnackbar}
                             isModal={true}
                         />
-                    ),
+                    )
                 });
             }
         },
@@ -112,9 +119,9 @@ export const NotificationsProvider = ({ children }) => {
                             onClose={closeNotification}
                             code={code}
                         />
-                    ),
+                    )
                 },
-                ...prevState,
+                ...prevState
             ]);
 
             if (!disable) {
@@ -129,7 +136,7 @@ export const NotificationsProvider = ({ children }) => {
                             onClose={closeSnackbar}
                             isModal={true}
                         />
-                    ),
+                    )
                 });
             }
         },
@@ -152,9 +159,9 @@ export const NotificationsProvider = ({ children }) => {
                             onClose={closeNotification}
                             code={code}
                         />
-                    ),
+                    )
                 },
-                ...prevState,
+                ...prevState
             ]);
 
             if (!disable) {
@@ -169,7 +176,7 @@ export const NotificationsProvider = ({ children }) => {
                             onClose={closeSnackbar}
                             isModal={true}
                         />
-                    ),
+                    )
                 });
             }
         },
@@ -191,9 +198,9 @@ export const NotificationsProvider = ({ children }) => {
                             title={title}
                             onClose={closeNotification}
                         />
-                    ),
+                    )
                 },
-                ...prevState,
+                ...prevState
             ]);
 
             if (!disable) {
@@ -207,7 +214,7 @@ export const NotificationsProvider = ({ children }) => {
                             onClose={closeSnackbar}
                             isModal={true}
                         />
-                    ),
+                    )
                 });
             }
         },
@@ -225,7 +232,7 @@ export const NotificationsProvider = ({ children }) => {
             clearAllNotifications,
             disableNotifications,
             closeNotification,
-            areNotificationsDisabled,
+            areNotificationsDisabled
         };
     }, [
         areNotificationsDisabled,
@@ -236,7 +243,7 @@ export const NotificationsProvider = ({ children }) => {
         showError,
         showInfo,
         showSuccess,
-        showWarning,
+        showWarning
     ]);
 
     return (

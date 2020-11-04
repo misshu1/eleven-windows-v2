@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { useAuth } from '../../hooks/useAuth';
-import useDebounce from '../../hooks/useDebounce';
+import { useAuth, useDebounce } from 'hooks';
+
 import validationRules from './validationRules';
 
 const useAuthValidation = (initialState) => {
@@ -15,7 +15,7 @@ const useAuthValidation = (initialState) => {
         e.persist();
         setValues((previousValues) => ({
             ...previousValues,
-            [e.target.name]: e.target.value,
+            [e.target.name]: e.target.value
         }));
     };
 
@@ -26,11 +26,11 @@ const useAuthValidation = (initialState) => {
                 // Check to see if the input is not empty
                 if (debouncedValues[val]) {
                     const validationErrors = validationRules({
-                        [val]: debouncedValues[val],
+                        [val]: debouncedValues[val]
                     });
                     setErrors((prevState) => ({
                         ...prevState,
-                        [val]: validationErrors[val],
+                        [val]: validationErrors[val]
                     }));
                 }
                 return undefined;
@@ -45,7 +45,7 @@ const useAuthValidation = (initialState) => {
         if (!errors[inputName]) {
             setErrors((prevState) => ({
                 ...prevState,
-                [inputName]: validationErrors[inputName],
+                [inputName]: validationErrors[inputName]
             }));
         }
     };
@@ -69,7 +69,7 @@ const useAuthValidation = (initialState) => {
                     setSubmitting(false);
                     setErrors((prevState) => ({
                         ...prevState,
-                        firebase: err.message,
+                        firebase: err.message
                     }));
                 });
         } else {
@@ -96,7 +96,7 @@ const useAuthValidation = (initialState) => {
                     setSubmitting(false);
                     setErrors((prevState) => ({
                         ...prevState,
-                        firebase: err.message,
+                        firebase: err.message
                     }));
                 });
         } else {
@@ -111,7 +111,7 @@ const useAuthValidation = (initialState) => {
         handleRegister,
         handleChange,
         handleLogin,
-        handleBlur,
+        handleBlur
     };
 };
 

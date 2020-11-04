@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { useSettingsContext } from '../../../contexts/settingsContext';
+import { useSettingsContext } from 'contexts';
 
-const PowerOffIcon = (props) => {
-    const { width, height } = props;
+export function PowerOffIcon({ width, height }) {
     const { getSelectedTheme } = useSettingsContext();
 
     return (
@@ -31,6 +30,4 @@ const PowerOffIcon = (props) => {
             </g>
         </svg>
     );
-};
-
-export default PowerOffIcon;
+}

@@ -1,89 +1,19 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faTelegramPlane,
-    faUbuntu,
-    faWindows
-} from '@fortawesome/free-brands-svg-icons';
-import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
-import {
-    faAngleDoubleLeft,
-    faAngleDoubleRight,
-    faArrowLeft,
-    faBell,
-    faBellSlash,
-    faCheck,
-    faClone,
-    faCog,
-    faEllipsisV,
-    faExchangeAlt,
-    faExclamation,
-    faExclamationTriangle,
-    faHome,
-    faInfo,
-    faLayerGroup,
-    faPalette,
-    faPowerOff,
-    faRoute,
-    faShoppingCart,
-    faSignInAlt,
-    faSitemap,
-    faSpinner,
-    faSquare,
-    faTh,
-    faTimes,
-    faTrashAlt,
-    faUserCircle,
-    faWindowMinimize
-} from '@fortawesome/free-solid-svg-icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { SnackbarProvider } from 'notistack';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import SpinnerApp from './components/common/SpinnerApp';
-import RoutesApp from './components/routes/Routes';
-import { GlobalStyle } from './components/style/GlobalStyle';
-import { CartProvider } from './contexts/cartContext';
-import { FirebaseProvider } from './contexts/firebaseContext';
-import { FolderProvider } from './contexts/folderContext';
-import { NotificationsProvider } from './contexts/notificationsContext';
-import { useSettingsContext } from './contexts/settingsContext';
-import { AuthProvider } from './hooks/useAuth';
-
-library.add(
-    faCommentAlt,
-    faCheck,
-    faExclamation,
-    faTimes,
-    faWindowMinimize,
-    faUserCircle,
-    faSpinner,
-    faExclamationTriangle,
-    faEllipsisV,
-    faLayerGroup,
-    faTh,
-    faCog,
-    faInfo,
-    faShoppingCart,
-    faArrowLeft,
-    faTrashAlt,
-    faAngleDoubleRight,
-    faAngleDoubleLeft,
-    faSitemap,
-    faSignInAlt,
-    faWindows,
-    faUbuntu,
-    faBellSlash,
-    faBell,
-    faExchangeAlt,
-    faPowerOff,
-    faClone,
-    faSquare,
-    faRoute,
-    faTelegramPlane,
-    faPalette,
-    faHome
-);
+import SpinnerApp from 'components/common/SpinnerApp';
+import RoutesApp from 'components/routes/Routes';
+import { GlobalStyle } from 'components/style';
+import {
+    CartProvider,
+    FirebaseProvider,
+    FolderProvider,
+    NotificationsProvider,
+    useSettingsContext
+} from 'contexts';
+import { AuthProvider } from 'hooks';
 
 const VideoApp = lazy(() => import('./components/video/VideoApp'));
 
@@ -107,7 +37,7 @@ const useStyles = makeStyles({
     }
 });
 
-const App = () => {
+export function App() {
     const [renderStyles, setRenderStyles] = useState(false);
     const {
         getSelectedBackground,
@@ -163,6 +93,4 @@ const App = () => {
             </NotificationsProvider>
         </SnackbarProvider>
     );
-};
-
-export default App;
+}

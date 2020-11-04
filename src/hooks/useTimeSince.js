@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-const useTimeSince = (previousDate) => {
+export const useTimeSince = (previousDate) => {
     const { t } = useTranslation();
 
     const msPerMinute = 60 * 1000;
@@ -26,5 +26,3 @@ const useTimeSince = (previousDate) => {
         return Math.round(elapsed / msPerYear) + ` ${t('timeSince.years')}`;
     }
 };
-
-export default useTimeSince;

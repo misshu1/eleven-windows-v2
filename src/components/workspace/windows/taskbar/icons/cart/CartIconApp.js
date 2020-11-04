@@ -3,8 +3,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import CartIcon from '../../../../../../assets/images/icons/CartIcon';
-import { useCartContext } from '../../../../../../contexts/cartContext';
+import { CartIcon } from 'assets/images/icons';
+import { useCartContext } from 'contexts';
 import { Container } from './style';
 
 export const CartIconApp = ({ cartIconRef, toggleCart, isCartOpen }) => {

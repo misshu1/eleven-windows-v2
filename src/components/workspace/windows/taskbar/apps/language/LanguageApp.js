@@ -2,13 +2,12 @@ import React, { useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
-import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
-import { useDispatchSettingsContext } from '../../../../../../contexts/settingsContext';
+import { useNotificationsContext, useDispatchSettingsContext } from 'contexts';
 import { languages } from '../../../../../../i18next';
 import { useLanguageContext } from '../../contexts/languageContext';
 import {
     Container as LanguageContainer,
-    FlagImg,
+    FlagImg
 } from '../../icons/language/style';
 import { Container } from './style';
 

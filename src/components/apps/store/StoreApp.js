@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import { useFirebaseContext } from '../../../contexts/firebaseContext';
-import { useNotificationsContext } from '../../../contexts/notificationsContext';
-import FolderApp from '../../folder/FolderApp';
-import { folderPages } from '../../folder/folderPages';
+import { useFirebaseContext, useNotificationsContext } from 'contexts';
+import FolderApp from 'components/folder/FolderApp';
+import { folderPages } from 'components/folder/folderPages';
 import ProductDetailsApp from './productDetails/ProductDetailsApp';
 import ProductsListApp from './productsList/ProductsListApp';
 

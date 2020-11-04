@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import useMediaQuery from '../../../../../../hooks/useMediaQuery';
-import NotificationsApp from '../../../../../notifications/NotificationsApp';
+import { useMediaQuery } from 'hooks';
+import NotificationsApp from 'components/notifications/NotificationsApp';
 import { Container } from './style';
 import WidgetsApp from './widgets/WidgetsApp';
 

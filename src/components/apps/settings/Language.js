@@ -1,10 +1,9 @@
-import i18n from 'i18next';
+import i18n, { languages } from '../../../i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useNotificationsContext } from '../../../contexts/notificationsContext';
-import { languages } from '../../../i18next';
-import { FlagImg } from '../../workspace/windows/taskbar/icons/language/style/FlagImg';
+import { useNotificationsContext } from 'contexts';
+import { FlagImg } from 'components/workspace/windows/taskbar/icons/language/style/FlagImg';
 import { Box, FlagImgContainer, Spacer, Title } from './style';
 
 const Language = () => {

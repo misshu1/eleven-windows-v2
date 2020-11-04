@@ -6,11 +6,8 @@ import Switch from '@material-ui/core/Switch';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-    useDispatchSettingsContext,
-    useSettingsContext,
-} from '../../../contexts/settingsContext';
-import useMediaQuery from '../../../hooks/useMediaQuery';
+import { useDispatchSettingsContext, useSettingsContext } from 'contexts';
+import { useMediaQuery } from 'hooks';
 import Preview from './Preview';
 import { Box, Spacer, Title } from './style';
 
@@ -21,27 +18,27 @@ const useStyles = makeStyles({
         color: '#fff',
 
         '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
-        },
+            backgroundColor: 'var(--primaryDark)'
+        }
     },
     switchBase: {
         color: 'var(--primary)',
         '&$checked': {
-            color: 'var(--primary)',
+            color: 'var(--primary)'
         },
         '&$checked + $track': {
-            backgroundColor: 'var(--primary)',
-        },
+            backgroundColor: 'var(--primary)'
+        }
     },
     checked: {
-        color: 'var(--primary)',
+        color: 'var(--primary)'
     },
     track: {
-        color: 'var(--primary)',
+        color: 'var(--primary)'
     },
     thumb: {
-        color: 'var(--primaryDark)',
-    },
+        color: 'var(--primaryDark)'
+    }
 });
 
 const ITEM_HEIGHT = 48;
@@ -55,13 +52,13 @@ const Customize = () => {
         getVideoBackgrounds,
         getSelectedVideo,
         getThemes,
-        getSelectedTheme,
+        getSelectedTheme
     } = useSettingsContext();
     const {
         changeBackground,
         changeVideoBg,
         enableVideoBg,
-        changeTheme,
+        changeTheme
     } = useDispatchSettingsContext();
     const { t } = useTranslation();
     const [bgMenuEl, setBgMenuEl] = useState(null);
@@ -144,8 +141,8 @@ const Customize = () => {
                         PaperProps={{
                             style: {
                                 maxHeight: ITEM_HEIGHT * 6.5,
-                                width: 220,
-                            },
+                                width: 220
+                            }
                         }}
                     >
                         {getThemes().map((item) => (
@@ -178,8 +175,8 @@ const Customize = () => {
                                 PaperProps={{
                                     style: {
                                         maxHeight: ITEM_HEIGHT * 6.5,
-                                        width: 220,
-                                    },
+                                        width: 220
+                                    }
                                 }}
                             >
                                 {getBackgrounds().map((item) => (
@@ -217,8 +214,8 @@ const Customize = () => {
                                 PaperProps={{
                                     style: {
                                         maxHeight: ITEM_HEIGHT * 6.5,
-                                        width: 220,
-                                    },
+                                        width: 220
+                                    }
                                 }}
                             >
                                 {getVideoBackgrounds().map((item) => (
@@ -249,7 +246,7 @@ const Customize = () => {
                             switchBase: classes.switchBase,
                             track: classes.track,
                             thumb: classes.thumb,
-                            checked: classes.checked,
+                            checked: classes.checked
                         }}
                     />
                     <h4 style={{ display: 'inline-block', margin: 'auto 0' }}>

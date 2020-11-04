@@ -5,10 +5,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
-import LogoIcon from '../../../../assets/images/icons/LogoIcon';
-import { useCartContext } from '../../../../contexts/cartContext';
-import { useNotificationsContext } from '../../../../contexts/notificationsContext';
-import { logoAnimations } from '../../../animations';
+import { LogoIcon } from 'assets/images/icons';
+import { useCartContext, useNotificationsContext } from 'contexts';
+import { logoAnimations } from 'components/animations';
 import { useSideMenuContext } from '../contexts/sideMenuContext';
 import SideMenuApp from '../sideMenu/SideMenuApp';
 import { BorderLogo, Desktop, Logo, LogoContainer, SideMenu } from './style';
@@ -38,7 +37,7 @@ const DesktopLinuxApp = () => {
                             color='error'
                             anchorOrigin={{
                                 vertical: 'top',
-                                horizontal: 'right',
+                                horizontal: 'right'
                             }}
                             showZero={false}
                         >

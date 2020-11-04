@@ -3,28 +3,33 @@ import Switch from '@material-ui/core/Switch';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useNotificationsContext } from '../../../contexts/notificationsContext';
-import { NotificationContainer, NotificationText, Spacer, Title } from './style';
+import { useNotificationsContext } from 'contexts';
+import {
+    NotificationContainer,
+    NotificationText,
+    Spacer,
+    Title
+} from './style';
 
 const useStyles = makeStyles({
     switchBase: {
         color: 'var(--primary)',
         '&$checked': {
-            color: 'var(--primary)',
+            color: 'var(--primary)'
         },
         '&$checked + $track': {
-            backgroundColor: 'var(--primary)',
-        },
+            backgroundColor: 'var(--primary)'
+        }
     },
     checked: {
-        color: 'var(--primary)',
+        color: 'var(--primary)'
     },
     track: {
-        color: 'var(--primary)',
+        color: 'var(--primary)'
     },
     thumb: {
-        color: 'var(--primaryDark)',
-    },
+        color: 'var(--primaryDark)'
+    }
 });
 
 const Notification = () => {
@@ -44,7 +49,7 @@ const Notification = () => {
                         switchBase: classes.switchBase,
                         track: classes.track,
                         thumb: classes.thumb,
-                        checked: classes.checked,
+                        checked: classes.checked
                     }}
                 />
                 <h4>{t('settings.disableButton')}</h4>

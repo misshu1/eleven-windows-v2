@@ -1,18 +1,18 @@
 import React from 'react';
 
-import { useSettingsContext } from '../../contexts/settingsContext';
-import useMediaQuery from '../../hooks/useMediaQuery';
-import QuickAccessApp from '../quickAccess/QuickAccessApp';
-import FolderRoutes from '../routes/FolderRoutes';
-import WorkspaceLinux from './linux/WorkspaceLinux';
-import WorkspaceMobile from './mobile/WorkspaceMobile';
-import WorkspaceWindows from './windows/WorkspaceWindows';
+import { useSettingsContext } from 'contexts';
+import { useMediaQuery } from 'hooks';
+import QuickAccessApp from 'components/quickAccess/QuickAccessApp';
+import FolderRoutes from 'components/routes/FolderRoutes';
+import WorkspaceLinux from 'components/workspace/linux/WorkspaceLinux';
+import WorkspaceMobile from 'components/workspace/mobile/WorkspaceMobile';
+import WorkspaceWindows from 'components/workspace/windows/WorkspaceWindows';
 
 const WorkspaceApp = () => {
     const {
         isLinuxSelected,
         isWindowsSelected,
-        isMobileSelected,
+        isMobileSelected
     } = useSettingsContext();
     const isMobile = useMediaQuery('(max-width: 450px)');
 

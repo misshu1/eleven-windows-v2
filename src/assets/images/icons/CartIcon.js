@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { useSettingsContext } from '../../../contexts/settingsContext';
+import { useSettingsContext } from 'contexts';
 
-const CartIcon = (props) => {
-    const { width, height, color } = props;
+export function CartIcon({ width, height, color }) {
     const { getSelectedTheme } = useSettingsContext();
 
     return (
@@ -40,6 +39,4 @@ const CartIcon = (props) => {
             </g>
         </svg>
     );
-};
-
-export default CartIcon;
+}

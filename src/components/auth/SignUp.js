@@ -5,7 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import ScrollbarApp from '../common/ScrollbarApp';
+import ScrollbarApp from 'components/common/ScrollbarApp';
 import { Container, Form } from './style';
 import useAuthValidation from './useAuthValidation';
 
@@ -20,11 +20,11 @@ const useStyles = makeStyles(() => ({
         '&:disabled': {
             backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
-            color: '#d6d8de',
+            color: '#d6d8de'
         },
         '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
-        },
+            backgroundColor: 'var(--primaryDark)'
+        }
     },
     changeViewButton: {
         border: '1px solid var(--primary)',
@@ -35,18 +35,18 @@ const useStyles = makeStyles(() => ({
         '&:disabled': {
             backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
-            color: '#d6d8de',
+            color: '#d6d8de'
         },
         '&:hover': {
-            border: '1px solid var(--primaryDark)',
-        },
-    },
+            border: '1px solid var(--primaryDark)'
+        }
+    }
 }));
 
 const INITIAL_STATE = {
     name: '',
     email: '',
-    password: '',
+    password: ''
 };
 
 const SignUp = ({ onCancel, changeView }) => {
@@ -58,7 +58,7 @@ const SignUp = ({ onCancel, changeView }) => {
         values,
         errors,
         isSubmitting,
-        handleRegister,
+        handleRegister
     } = useAuthValidation(INITIAL_STATE);
 
     return (

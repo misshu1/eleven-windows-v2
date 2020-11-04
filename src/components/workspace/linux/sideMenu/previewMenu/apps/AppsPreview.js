@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 
-import { ICON_LOCATION, useFolderContext } from '../../../../../../contexts/folderContext';
-import ScrollbarApp from '../../../../../common/ScrollbarApp';
+import { ICON_LOCATION, useFolderContext } from 'contexts';
+import ScrollbarApp from 'components/common/ScrollbarApp';
 import { useSideMenuContext } from '../../../contexts/sideMenuContext';
 import MenuAppIcon from './MenuAppIcon';
 import { Container } from './style';
@@ -10,7 +10,7 @@ const AppsPreview = () => {
     const {
         checkUserPermisions,
         folderState,
-        sortByAppName,
+        sortByAppName
     } = useFolderContext();
     const { closeSideMenu } = useSideMenuContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));

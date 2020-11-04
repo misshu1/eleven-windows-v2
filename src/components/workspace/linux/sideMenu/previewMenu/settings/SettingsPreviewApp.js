@@ -8,17 +8,18 @@ import i18n from 'i18next';
 import React, { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
 import {
+    useNotificationsContext,
     useDispatchSettingsContext,
-    useSettingsContext,
-} from '../../../../../../contexts/settingsContext';
-import useMediaQuery from '../../../../../../hooks/useMediaQuery';
+    useSettingsContext
+} from 'contexts';
+
+import { useMediaQuery } from 'hooks';
 import { languages } from '../../../../../../i18next';
-import Preview from '../../../../../apps/settings/Preview';
-import { FlagImgContainer } from '../../../../../apps/settings/style';
-import ScrollbarApp from '../../../../../common/ScrollbarApp';
-import { FlagImg } from '../../../../windows/taskbar/icons/language/style/FlagImg';
+import Preview from 'components/apps/settings/Preview';
+import { FlagImgContainer } from 'components/apps/settings/style';
+import ScrollbarApp from 'components/common/ScrollbarApp';
+import { FlagImg } from 'components/workspace/windows/taskbar/icons/language/style/FlagImg';
 import { Box, Container } from './style';
 
 const useStyles = makeStyles({
@@ -28,27 +29,27 @@ const useStyles = makeStyles({
         color: '#fff',
 
         '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
-        },
+            backgroundColor: 'var(--primaryDark)'
+        }
     },
     switchBase: {
         color: 'var(--primary)',
         '&$checked': {
-            color: 'var(--primary)',
+            color: 'var(--primary)'
         },
         '&$checked + $track': {
-            backgroundColor: 'var(--primary)',
-        },
+            backgroundColor: 'var(--primary)'
+        }
     },
     checked: {
-        color: 'var(--primary)',
+        color: 'var(--primary)'
     },
     track: {
-        color: 'var(--primary)',
+        color: 'var(--primary)'
     },
     thumb: {
-        color: 'var(--primaryDark)',
-    },
+        color: 'var(--primaryDark)'
+    }
 });
 
 const ITEM_HEIGHT = 48;
@@ -62,19 +63,19 @@ const SettingsPreviewApp = () => {
         getVideoBackgrounds,
         getSelectedVideo,
         getThemes,
-        getSelectedTheme,
+        getSelectedTheme
     } = useSettingsContext();
 
     const {
         enableVideoBg,
         changeVideoBg,
         changeBackground,
-        changeTheme,
+        changeTheme
     } = useDispatchSettingsContext();
     const {
         disable,
         disableNotifications,
-        showSuccess,
+        showSuccess
     } = useNotificationsContext();
     const classes = useStyles();
     const { t } = useTranslation();
@@ -189,8 +190,8 @@ const SettingsPreviewApp = () => {
                             PaperProps={{
                                 style: {
                                     maxHeight: ITEM_HEIGHT * 6.5,
-                                    width: 220,
-                                },
+                                    width: 220
+                                }
                             }}
                         >
                             {getThemes().map((item) => (
@@ -226,8 +227,8 @@ const SettingsPreviewApp = () => {
                                     PaperProps={{
                                         style: {
                                             maxHeight: ITEM_HEIGHT * 6.5,
-                                            width: 220,
-                                        },
+                                            width: 220
+                                        }
                                     }}
                                 >
                                     {getBackgrounds().map((item) => (
@@ -266,8 +267,8 @@ const SettingsPreviewApp = () => {
                                     PaperProps={{
                                         style: {
                                             maxHeight: ITEM_HEIGHT * 6.5,
-                                            width: 220,
-                                        },
+                                            width: 220
+                                        }
                                     }}
                                 >
                                     {getVideoBackgrounds().map((item) => (
@@ -299,13 +300,13 @@ const SettingsPreviewApp = () => {
                                     switchBase: classes.switchBase,
                                     track: classes.track,
                                     thumb: classes.thumb,
-                                    checked: classes.checked,
+                                    checked: classes.checked
                                 }}
                             />
                             <h4
                                 style={{
                                     display: 'inline-block',
-                                    margin: 'auto 0',
+                                    margin: 'auto 0'
                                 }}
                             >
                                 {t('settings.enableVideoBgButton')}
@@ -335,7 +336,7 @@ const SettingsPreviewApp = () => {
                             switchBase: classes.switchBase,
                             track: classes.track,
                             thumb: classes.thumb,
-                            checked: classes.checked,
+                            checked: classes.checked
                         }}
                     />
                     <h4 style={{ display: 'inline-block', margin: 'auto 0' }}>
@@ -346,7 +347,7 @@ const SettingsPreviewApp = () => {
                     style={{
                         margin: '0 0.5rem',
                         fontSize: '0.9rem',
-                        textAlign: 'center',
+                        textAlign: 'center'
                     }}
                 >
                     <strong style={{ color: 'red', fontSize: '1.1rem' }}>

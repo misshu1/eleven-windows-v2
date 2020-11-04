@@ -2,7 +2,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 
-import { useDispatchFolderContext } from '../../../../../../../contexts/folderContext';
+import { useDispatchFolderContext } from 'contexts';
 import { useStartMenuContext } from '../../../contexts/startMenuContext';
 import { Widget } from './style';
 
@@ -36,5 +36,5 @@ export default WidgetApp;
 WidgetApp.propTypes = {
     iconDisplayName: PropTypes.string.isRequired,
     widgetIcon: PropTypes.node.isRequired,
-    appId: PropTypes.number.isRequired,
+    appId: PropTypes.number.isRequired
 };

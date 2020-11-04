@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { useSettingsContext } from '../../../contexts/settingsContext';
+import { useSettingsContext } from 'contexts';
 
-const TaskIcon = (props) => {
-    const { width, height } = props;
+export function TaskIcon({ width, height }) {
     const { getSelectedTheme } = useSettingsContext();
 
     return (
@@ -396,6 +395,4 @@ const TaskIcon = (props) => {
             />
         </svg>
     );
-};
-
-export default TaskIcon;
+}

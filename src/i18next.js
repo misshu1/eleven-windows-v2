@@ -1,31 +1,31 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import flagRO from './assets/images/flags/ro.svg';
-import flagUS from './assets/images/flags/us.svg';
-import translationUS from './assets/languages/en.json';
-import translationRO from './assets/languages/ro.json';
+import flagUS from 'assets/images/flags/us.svg';
+import flagRO from 'assets/images/flags/ro.svg';
+import translationUS from 'assets/languages/en.json';
+import translationRO from 'assets/languages/ro.json';
 
 export const languages = [
     {
         name: 'us',
         lang: 'en',
-        flag: flagUS,
+        flag: flagUS
     },
     {
         name: 'ro',
         lang: 'ro',
-        flag: flagRO,
-    },
+        flag: flagRO
+    }
 ];
 
 const resources = {
     en: {
-        translation: translationUS,
+        translation: translationUS
     },
     ro: {
-        translation: translationRO,
-    },
+        translation: translationRO
+    }
 };
 
 i18n.use(initReactI18next).init({
@@ -35,8 +35,8 @@ i18n.use(initReactI18next).init({
     debug: false,
     keySeparator: '.',
     interpolation: {
-        escapeValue: false,
-    },
+        escapeValue: false
+    }
 });
 
 export default i18n;

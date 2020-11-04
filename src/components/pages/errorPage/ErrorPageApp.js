@@ -8,9 +8,8 @@ import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useAuth } from '../../../hooks/useAuth';
-import useMediaQuery from '../../../hooks/useMediaQuery';
-import { modalPageAnimation } from '../../animations';
+import { useAuth, useMediaQuery } from 'hooks';
+import { modalPageAnimation } from 'components/animations';
 import { Container, ErrorContainer } from './style';
 
 const useStyles = makeStyles({
@@ -25,8 +24,8 @@ const useStyles = makeStyles({
         minWidth: '10rem',
 
         '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
-        },
+            backgroundColor: 'var(--primaryDark)'
+        }
     },
     icon: {
         display: 'flex',
@@ -40,26 +39,26 @@ const useStyles = makeStyles({
         transition: 'background 0.2s ease-in-out',
         borderTopRightRadius: '0 0',
         borderBottomRightRadius: '37% 100%',
-        background: 'var(--secondary)',
-    },
+        background: 'var(--secondary)'
+    }
 });
 
 const ERRORS_LIST = [
     {
         code: 404,
         title: 'errors.404.title',
-        message: 'errors.404.message',
+        message: 'errors.404.message'
     },
     {
         code: 401,
         title: 'errors.401.title',
-        message: 'errors.401.message',
+        message: 'errors.401.message'
     },
     {
         code: 500,
         title: 'errors.500.title',
-        message: 'errors.500.message',
-    },
+        message: 'errors.500.message'
+    }
 ];
 
 const ErrorPageApp = () => {
@@ -137,7 +136,7 @@ const ErrorPageApp = () => {
                 style={{
                     zIndex: 50,
                     background: 'rgba(0,0,0,0.35)',
-                    backdropFilter: 'blur(10px)',
+                    backdropFilter: 'blur(10px)'
                 }}
             />
             <AnimatePresence>

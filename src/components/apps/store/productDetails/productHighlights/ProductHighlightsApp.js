@@ -3,17 +3,17 @@ import Rating from '@material-ui/lab/Rating';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useCartContext, useDispatchCartContext } from '../../../../../contexts/cartContext';
-import { AddToCartButton } from '../../../../common';
+import { useCartContext, useDispatchCartContext } from 'contexts';
+import { AddToCartButton } from 'components/common';
 import { Container } from './style';
 
 const useStyles = makeStyles({
     ratingColorEmpty: {
-        color: 'var(--grey60)',
+        color: 'var(--grey60)'
     },
     ratingColor: {
-        color: 'var(--primary)',
-    },
+        color: 'var(--primary)'
+    }
 });
 
 function ProductHighlightsApp({ product }) {
@@ -46,7 +46,7 @@ function ProductHighlightsApp({ product }) {
                 <Rating
                     classes={{
                         iconEmpty: classes.ratingColorEmpty,
-                        iconFilled: classes.ratingColor,
+                        iconFilled: classes.ratingColor
                     }}
                     value={ratingVal}
                     readOnly

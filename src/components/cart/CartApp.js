@@ -1,11 +1,11 @@
 import React, { lazy, Suspense, useState } from 'react';
 
-import { useCartContext } from '../../contexts/cartContext';
-import { useAuth } from '../../hooks/useAuth';
-import LoginButton from '../auth/LoginButton';
-import { CheckoutButton } from '../common';
-import ScrollbarApp from '../common/ScrollbarApp';
-import SpinnerApp from '../common/SpinnerApp';
+import { useCartContext } from 'contexts';
+import { useAuth } from 'hooks';
+import LoginButton from 'components/auth/LoginButton';
+import { CheckoutButton } from 'components/common';
+import ScrollbarApp from 'components/common/ScrollbarApp';
+import SpinnerApp from 'components/common/SpinnerApp';
 import Product from './Product';
 import StoreButton from './StoreButton';
 import { Container } from './style';

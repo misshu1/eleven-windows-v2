@@ -3,9 +3,13 @@ import Button from '@material-ui/core/Button';
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-import StoreIcon from '../../assets/images/icons/StoreIcon';
-import { ICON_LOCATION, useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
-import useMediaQuery from '../../hooks/useMediaQuery';
+import { StoreIcon } from 'assets/images/icons';
+import {
+    ICON_LOCATION,
+    useDispatchFolderContext,
+    useFolderContext
+} from 'contexts';
+import { useMediaQuery } from 'hooks';
 
 const useStyles = makeStyles({
     btnStyle: {
@@ -17,8 +21,8 @@ const useStyles = makeStyles({
         color: '#fff',
 
         '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
-        },
+            backgroundColor: 'var(--primaryDark)'
+        }
     },
     btnStyleMobile: {
         display: 'inline-block',
@@ -36,12 +40,12 @@ const useStyles = makeStyles({
         color: '#fff',
 
         '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
-        },
+            backgroundColor: 'var(--primaryDark)'
+        }
     },
     btnStyleMobileText: {
         display: 'inline-block',
-        padding: '6px 8px',
+        padding: '6px 8px'
     },
     icon: {
         display: 'flex',
@@ -55,8 +59,8 @@ const useStyles = makeStyles({
         transition: 'background 0.2s ease-in-out',
         borderTopRightRadius: '0 0',
         borderBottomRightRadius: '37% 100%',
-        background: 'var(--secondary)',
-    },
+        background: 'var(--secondary)'
+    }
 });
 
 const StoreButton = ({ onClick }) => {

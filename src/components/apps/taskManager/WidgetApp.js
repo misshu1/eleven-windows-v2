@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import useTimeSince from '../../../hooks/useTimeSince';
+import { useTimeSince } from 'hooks';
 import { TableRow, Widget } from './style';
 
 const WidgetApp = (props) => {
@@ -11,7 +11,7 @@ const WidgetApp = (props) => {
         iconDisplayName,
         handleSelectApp,
         getSelectedApp,
-        openTime,
+        openTime
     } = props;
     const selected = getSelectedApp(appId);
     const timeSince = useTimeSince(openTime);
@@ -39,5 +39,5 @@ WidgetApp.propTypes = {
     iconDisplayName: PropTypes.string.isRequired,
     handleSelectApp: PropTypes.func.isRequired,
     openTime: PropTypes.number.isRequired,
-    getSelectedApp: PropTypes.func.isRequired,
+    getSelectedApp: PropTypes.func.isRequired
 };

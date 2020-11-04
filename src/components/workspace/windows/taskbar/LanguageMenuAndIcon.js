@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useRef } from 'react';
 
-import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import SpinnerApp from '../../../common/SpinnerApp';
+import { useOnClickOutside } from 'hooks';
+import SpinnerApp from 'components/common/SpinnerApp';
 import { useLanguageContext } from './contexts/languageContext';
 import LanguageIconApp from './icons/language/LanguageIconApp';
 

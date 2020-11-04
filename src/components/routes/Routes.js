@@ -1,14 +1,18 @@
 import React, { lazy, Suspense, useEffect, useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { useNotificationsContext } from '../../contexts/notificationsContext';
-import Emoji from '../common/Emoji';
-import SpinnerApp from '../common/SpinnerApp';
-import WorkspaceApp from '../workspace/WorkspaceApp';
+import { useNotificationsContext } from 'contexts';
+import Emoji from 'components/common/Emoji';
+import SpinnerApp from 'components/common/SpinnerApp';
+import WorkspaceApp from 'components/workspace/WorkspaceApp';
 
-const LoginPage = lazy(() => import('../pages/login/LoginPage'));
-const ErrorPageApp = lazy(() => import('../pages/errorPage/ErrorPageApp'));
-const CheckoutPageApp = lazy(() => import('../pages/checkout/CheckoutPageApp'));
+const LoginPage = lazy(() => import('components/pages/login/LoginPage'));
+const ErrorPageApp = lazy(() =>
+    import('components/pages/errorPage/ErrorPageApp')
+);
+const CheckoutPageApp = lazy(() =>
+    import('components/pages/checkout/CheckoutPageApp')
+);
 
 const WelcomeTitle = (
     <span>
@@ -27,7 +31,7 @@ const welcomeMessage = (
             style={{
                 color: 'inherit',
                 fontSize: '1.1rem',
-                fontStyle: 'italic',
+                fontStyle: 'italic'
             }}
         >
             Github Profile

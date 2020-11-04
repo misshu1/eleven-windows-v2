@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { useFirebaseContext } from '../../../../../contexts/firebaseContext';
-import { useNotificationsContext } from '../../../../../contexts/notificationsContext';
-import { useAuth } from '../../../../../hooks/useAuth';
-import useDebounce from '../../../../../hooks/useDebounce';
+import { useAuth, useDebounce } from 'hooks';
+import { useFirebaseContext, useNotificationsContext } from 'contexts';
 import validationRules from './validationRules';
 
 const useReviewValidation = (initialState, productId, addTempReview) => {
@@ -19,7 +17,7 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
         e.persist();
         setValues((previousValues) => ({
             ...previousValues,
-            [e.target.name]: +e.target.value,
+            [e.target.name]: +e.target.value
         }));
     };
 
@@ -27,7 +25,7 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
         e.persist();
         setValues((previousValues) => ({
             ...previousValues,
-            [e.target.name]: e.target.value,
+            [e.target.name]: e.target.value
         }));
     };
 
@@ -38,11 +36,11 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
                 // Check to see if the input is not empty
                 if (debouncedValues[val]) {
                     const validationErrors = validationRules({
-                        [val]: debouncedValues[val],
+                        [val]: debouncedValues[val]
                     });
                     setErrors((prevState) => ({
                         ...prevState,
-                        [val]: validationErrors[val],
+                        [val]: validationErrors[val]
                     }));
                 }
                 return undefined;
@@ -57,7 +55,7 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
         if (!errors[inputName]) {
             setErrors((prevState) => ({
                 ...prevState,
-                [inputName]: validationErrors[inputName],
+                [inputName]: validationErrors[inputName]
             }));
         }
     };
@@ -75,7 +73,7 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
                 productId: productId,
                 rating: values.rating,
                 userDisplayName: user.displayName,
-                publishDate: firebaseTimestamp(),
+                publishDate: firebaseTimestamp()
             };
 
             try {
@@ -104,7 +102,7 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
         handleChange,
         handleSubmit,
         handleBlur,
-        handleUpdateRating,
+        handleUpdateRating
     };
 };
 

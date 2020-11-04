@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
-import { ICON_LOCATION, useFolderContext } from '../../../../../../../contexts/folderContext';
+import { ICON_LOCATION, useFolderContext } from 'contexts';
 import { Container } from './style';
 import WidgetApp from './WidgetApp';
 
@@ -10,7 +10,7 @@ const RightMenuApp = () => {
     const {
         checkUserPermisions,
         folderState,
-        sortByAppName,
+        sortByAppName
     } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 

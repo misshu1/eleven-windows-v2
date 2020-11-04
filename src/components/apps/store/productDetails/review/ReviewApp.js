@@ -5,16 +5,16 @@ import Rating from '@material-ui/lab/Rating';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import useTimeSince from '../../../../../hooks/useTimeSince';
+import { useTimeSince } from 'hooks';
 import { Container } from './style';
 
 const useStyles = makeStyles({
     ratingColorEmpty: {
-        color: 'var(--grey60)',
+        color: 'var(--grey60)'
     },
     ratingColor: {
-        color: 'var(--primary)',
-    },
+        color: 'var(--primary)'
+    }
 });
 
 const ReviewApp = (props) => {
@@ -40,7 +40,7 @@ const ReviewApp = (props) => {
                         className='rating'
                         classes={{
                             iconEmpty: classes.ratingColorEmpty,
-                            iconFilled: classes.ratingColor,
+                            iconFilled: classes.ratingColor
                         }}
                         value={rating}
                         readOnly={true}
@@ -59,5 +59,5 @@ ReviewApp.propTypes = {
     content: PropTypes.string.isRequired,
     userDisplayName: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    publishDate: PropTypes.object.isRequired,
+    publishDate: PropTypes.object.isRequired
 };

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { memo, useRef } from 'react';
 
-import { useDispatchFolderContext } from '../../../../contexts/folderContext';
+import { useDispatchFolderContext } from 'contexts';
 import { IconContainer } from './style';
 
 const DesktopIconApp = memo((props) => {

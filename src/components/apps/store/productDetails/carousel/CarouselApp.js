@@ -3,21 +3,27 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
-import { CarouselContext, Dot, Image, Slide, Slider } from 'pure-react-carousel';
+import {
+    CarouselContext,
+    Dot,
+    Image,
+    Slide,
+    Slider
+} from 'pure-react-carousel';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import useMediaQuery from '../../../../../hooks/useMediaQuery';
-import SpinnerApp from '../../../../common/SpinnerApp';
+import { useMediaQuery } from 'hooks';
+import SpinnerApp from 'components/common/SpinnerApp';
 import { Container } from './style';
 
 const useStyles = makeStyles({
     thumbnailsContainer: {
         width: '100%',
-        marginTop: '1rem',
+        marginTop: '1rem'
     },
     scroller: {
-        display: 'flex',
+        display: 'flex'
     },
     flexContainer: { margin: '0 auto' },
     thumbnail: {
@@ -30,14 +36,14 @@ const useStyles = makeStyles({
         cursor: 'default',
         backgroundColor: 'var(--backgroundActive)',
         backgroundPosition: 'center center !important',
-        backgroundSize: 'cover !important',
+        backgroundSize: 'cover !important'
     },
     selectedThumbnail: {
-        boxShadow: `0px 0px 4px 2px var(--primary)`,
+        boxShadow: `0px 0px 4px 2px var(--primary)`
     },
     indicator: {
-        display: 'none',
-    },
+        display: 'none'
+    }
 });
 
 const CarouselApp = ({ images }) => {
@@ -52,7 +58,7 @@ const CarouselApp = ({ images }) => {
     const changeSlide = useCallback(
         (slideValue) => {
             carouselContext.setStoreState({
-                currentSlide: slideValue,
+                currentSlide: slideValue
             });
         },
         [carouselContext]
@@ -110,7 +116,7 @@ const CarouselApp = ({ images }) => {
                         root: classes.thumbnailsContainer,
                         indicator: classes.indicator,
                         scroller: classes.scroller,
-                        flexContainer: classes.flexContainer,
+                        flexContainer: classes.flexContainer
                     }}
                 >
                     {images.map((url, index) => (
@@ -121,7 +127,7 @@ const CarouselApp = ({ images }) => {
                             onMouseEnter={() => changeSlide(index)}
                             classes={{
                                 root: classes.thumbnail,
-                                selected: classes.selectedThumbnail,
+                                selected: classes.selectedThumbnail
                             }}
                             style={{ backgroundImage: `url(${url})` }}
                         />

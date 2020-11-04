@@ -1,9 +1,9 @@
 import React, { lazy, Suspense, useRef } from 'react';
 
-import { useSettingsContext } from '../../../../contexts/settingsContext';
-import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import SpinnerApp from '../../../common/SpinnerApp';
+import { useSettingsContext } from 'contexts';
+import { useOnClickOutside } from 'hooks';
 import { useStartMenuContext } from './contexts/startMenuContext';
+import SpinnerApp from 'components/common/SpinnerApp';
 import LogoIconApp from './icons/logo/LogoIconApp';
 
 const StartMenuApp = lazy(() => import('./apps/startMenu/StartMenuApp'));

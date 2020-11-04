@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { useSettingsContext } from '../../../contexts/settingsContext';
+import { useSettingsContext } from 'contexts';
 
-const FolderIcon = (props) => {
-    const { width, height } = props;
+export function FolderIcon({ width, height }) {
     const { getSelectedTheme } = useSettingsContext();
 
     return (
@@ -150,6 +149,4 @@ const FolderIcon = (props) => {
             <path d='m700.9 729.9h-32.9v-591h61.6z' fill='url(#d)' />
         </svg>
     );
-};
-
-export default FolderIcon;
+}

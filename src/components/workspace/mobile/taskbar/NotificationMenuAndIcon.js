@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useCallback, useRef, useState } from 'react';
 
-import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import SpinnerApp from '../../../common/SpinnerApp';
+import { useOnClickOutside } from 'hooks';
+import SpinnerApp from 'components/common/SpinnerApp';
 import NotificationIconApp from './icons/notifications/NotificationIconApp';
 
 const NotificationsMobileApp = lazy(() =>

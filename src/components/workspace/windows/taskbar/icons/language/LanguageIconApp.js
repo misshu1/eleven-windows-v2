@@ -2,7 +2,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useDispatchSettingsContext } from '../../../../../../contexts/settingsContext';
+import { useDispatchSettingsContext } from 'contexts';
 import { useLanguageContext } from '../../contexts/languageContext';
 import { Container, FlagImg } from './style';
 

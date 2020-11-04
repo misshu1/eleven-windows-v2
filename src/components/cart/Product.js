@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-import { useDispatchCartContext } from '../../contexts/cartContext';
+import { useDispatchCartContext } from 'contexts';
 import { ProductContainer } from './style';
 
 const Product = ({ product }) => {

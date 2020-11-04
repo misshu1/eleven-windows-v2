@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NotificationsApp from '../../../../../notifications/NotificationsApp';
+import NotificationsApp from 'components/notifications/NotificationsApp';
 import { Container } from './style';
 
 const NotificationsPreviewApp = () => {

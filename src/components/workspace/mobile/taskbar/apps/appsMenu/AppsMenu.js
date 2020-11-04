@@ -5,22 +5,22 @@ import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import PowerOffIcon from '../../../../../../assets/images/icons/PowerOffIcon';
-import { ICON_LOCATION, useFolderContext } from '../../../../../../contexts/folderContext';
-import { useAuth } from '../../../../../../hooks/useAuth';
-import LoginButton from '../../../../../auth/LoginButton';
-import ScrollbarApp from '../../../../../common/ScrollbarApp';
-import SpinnerApp from '../../../../../common/SpinnerApp';
+import { PowerOffIcon } from 'assets/images/icons';
+import { ICON_LOCATION, useFolderContext } from 'contexts';
+import { useAuth } from 'hooks';
+import LoginButton from 'components/auth/LoginButton';
+import ScrollbarApp from 'components/common/ScrollbarApp';
+import SpinnerApp from 'components/common/SpinnerApp';
 import { Container, LoginContainer, Widget } from './style';
 
-const AuthApp = lazy(() => import('../../../../../auth/AuthApp'));
+const AuthApp = lazy(() => import('components/auth/AuthApp'));
 
 const AppsMenu = ({ appsMenuRef, closeAppsMenu }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const {
         checkUserPermisions,
         folderState,
-        sortByAppName,
+        sortByAppName
     } = useFolderContext();
     const { t } = useTranslation();
     const apps = useRef(folderState.apps.sort(sortByAppName));

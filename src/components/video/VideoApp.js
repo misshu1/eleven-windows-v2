@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { useSettingsContext } from '../../contexts/settingsContext';
+import { useSettingsContext } from 'contexts';
 import { Video } from './style';
 
 const VideoApp = () => {

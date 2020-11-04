@@ -5,8 +5,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import CartIcon from '../../assets/images/icons/CartIcon';
-import { useCartContext } from '../../contexts/cartContext';
+import { CartIcon } from 'assets/images/icons';
+import { useCartContext } from 'contexts';
 
 const useStyles = makeStyles({
     btnStyle: {
@@ -18,14 +18,14 @@ const useStyles = makeStyles({
         color: '#fff',
 
         '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
+            backgroundColor: 'var(--primaryDark)'
         },
 
         '&:disabled': {
             backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
-            color: '#d6d8de',
-        },
+            color: '#d6d8de'
+        }
     },
     icon: {
         display: 'flex',
@@ -39,8 +39,8 @@ const useStyles = makeStyles({
         transition: 'background 0.2s ease-in-out',
         borderTopRightRadius: '0 0',
         borderBottomRightRadius: '37% 100%',
-        background: 'var(--secondary)',
-    },
+        background: 'var(--secondary)'
+    }
 });
 
 export const CheckoutButton = () => {

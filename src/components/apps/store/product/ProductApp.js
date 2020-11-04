@@ -2,18 +2,18 @@ import { makeStyles } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { useCartContext, useDispatchCartContext } from '../../../../contexts/cartContext';
-import { AddToCartButton } from '../../../common';
-import { folderPages } from '../../../folder/folderPages';
+import { useCartContext, useDispatchCartContext } from 'contexts';
+import { AddToCartButton } from 'components/common';
+import { folderPages } from 'components/folder/folderPages';
 import { Card } from './style';
 
 const useStyles = makeStyles({
     ratingColorEmpty: {
-        color: 'var(--grey60)',
+        color: 'var(--grey60)'
     },
     ratingColor: {
-        color: 'var(--primary)',
-    },
+        color: 'var(--primary)'
+    }
 });
 
 const ProductApp = ({ product, setSelectedProduct, setPage }) => {
@@ -59,7 +59,7 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
                     <Rating
                         classes={{
                             iconEmpty: classes.ratingColorEmpty,
-                            iconFilled: classes.ratingColor,
+                            iconFilled: classes.ratingColor
                         }}
                         value={ratingVal}
                         readOnly

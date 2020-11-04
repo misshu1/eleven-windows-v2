@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-import { ICON_LOCATION, useFolderContext } from '../../../../contexts/folderContext';
+import { ICON_LOCATION, useFolderContext } from 'contexts';
 import DesktopIconApp from './DesktopIconApp';
 import { Desktop } from './style';
 
@@ -9,7 +9,7 @@ const DesktopWindowsApp = () => {
     const {
         folderState,
         sortByAppName,
-        checkUserPermisions,
+        checkUserPermisions
     } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 

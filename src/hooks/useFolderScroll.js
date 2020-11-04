@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { folderPages } from '../components/folder/folderPages';
-import usePrevious from './usePrevious';
+import { folderPages } from 'components/folder/folderPages';
+import { usePrevious } from 'hooks';
 
 // Used as an object key for 'defaultFolderScrollState' object
 export const pageScrollName = (page) => `${page}_scroll`;
@@ -61,7 +61,7 @@ const getPageName = (page) => {
     return pageName[0];
 };
 
-const useFolderScroll = (page, scrollTop, setScrollTop) => {
+export const useFolderScroll = (page, scrollTop, setScrollTop) => {
     const [scroll, setScroll] = useState(defaultFolderScrollState);
     const prevPage = usePrevious(page);
 
@@ -86,12 +86,10 @@ const useFolderScroll = (page, scrollTop, setScrollTop) => {
 
                 setScroll((prevState) => ({
                     ...prevState,
-                    [getPage(prevPage)]: scrollTop,
+                    [getPage(prevPage)]: scrollTop
                 }));
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [scrollTop, page]);
 };
-
-export default useFolderScroll;

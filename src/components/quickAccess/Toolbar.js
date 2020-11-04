@@ -3,10 +3,16 @@ import MenuItem from '@material-ui/core/MenuItem';
 import React, { useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useNotificationsContext } from '../../contexts/notificationsContext';
-import { useDispatchSettingsContext, useSettingsContext } from '../../contexts/settingsContext';
-import { useAuth } from '../../hooks/useAuth';
-import { quickAccessToolbarAnimation, quickAccessToolbarCloseBtnAnimation } from '../animations';
+import {
+    useDispatchSettingsContext,
+    useSettingsContext,
+    useNotificationsContext
+} from 'contexts';
+import {
+    quickAccessToolbarAnimation,
+    quickAccessToolbarCloseBtnAnimation
+} from 'components/animations';
+import { useAuth } from 'hooks';
 import IconApp from './IconApp';
 import { Container } from './style';
 
@@ -21,16 +27,16 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
         isLinuxSelected,
         isWindowsSelected,
         getThemes,
-        getSelectedTheme,
+        getSelectedTheme
     } = useSettingsContext();
     const {
         selectWindowsOS,
         selectLinuxOS,
-        changeTheme,
+        changeTheme
     } = useDispatchSettingsContext();
     const {
         areNotificationsDisabled,
-        disableNotifications,
+        disableNotifications
     } = useNotificationsContext();
     const navigate = useNavigate();
     const location = useLocation();
@@ -70,7 +76,7 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
                     key: 'quickAccessToolbarCloseBtnAnimation',
                     animate: 'open',
                     exit: 'close',
-                    variants: quickAccessToolbarCloseBtnAnimation,
+                    variants: quickAccessToolbarCloseBtnAnimation
                 }}
             />
             {isLinuxSelected() && (
@@ -104,8 +110,8 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
                 PaperProps={{
                     style: {
                         maxHeight: ITEM_HEIGHT * 6.5,
-                        width: 220,
-                    },
+                        width: 220
+                    }
                 }}
             >
                 {getThemes().map((item) => (
@@ -146,8 +152,8 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
                     onClick={() =>
                         navigate('/login', {
                             state: {
-                                nextPathname: location.pathname,
-                            },
+                                nextPathname: location.pathname
+                            }
                         })
                     }
                 />

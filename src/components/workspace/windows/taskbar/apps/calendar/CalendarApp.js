@@ -4,7 +4,7 @@ import Calendar from 'react-calendar/dist/entry.nostyle';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
-import ScrollbarApp from '../../../../../common/ScrollbarApp';
+import ScrollbarApp from 'components/common/ScrollbarApp';
 import { ClockContainer, Container, CustomCalendarStyles } from './style';
 
 const CalendarApp = ({ calendarRef }) => {
@@ -47,7 +47,7 @@ function CalendarClock({ goToToday }) {
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
         day: new Date().getDate(),
-        wDay: new Date().getDay(),
+        wDay: new Date().getDay()
     });
     const { hour, minute, second, year, month, day, wDay } = clock;
     const { t } = useTranslation();
@@ -80,7 +80,7 @@ function CalendarClock({ goToToday }) {
                 year: new Date().getFullYear(),
                 month: new Date().getMonth(),
                 day: new Date().getDate(),
-                wDay: new Date().getDay(),
+                wDay: new Date().getDay()
             });
         }, 1000);
 
@@ -103,7 +103,7 @@ function CalendarClock({ goToToday }) {
 }
 
 CalendarClock.propTypes = {
-    goToToday: PropTypes.func.isRequired,
+    goToToday: PropTypes.func.isRequired
 };
 
 export default CalendarApp;

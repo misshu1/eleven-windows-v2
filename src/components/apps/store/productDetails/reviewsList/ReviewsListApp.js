@@ -3,9 +3,8 @@ import Button from '@material-ui/core/Button';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useFirebaseContext } from '../../../../../contexts/firebaseContext';
-import { useNotificationsContext } from '../../../../../contexts/notificationsContext';
-import { useAuth } from '../../../../../hooks/useAuth';
+import { useFirebaseContext, useNotificationsContext } from 'contexts';
+import { useAuth } from 'hooks';
 import ReviewSkeleton from '../../skeletons/ReviewSkeleton';
 import AddReviewApp from '../addReview/AddReviewApp';
 import ReviewApp from '../review/ReviewApp';
@@ -23,13 +22,13 @@ const useStyles = makeStyles({
         '&:disabled': {
             backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
-            color: '#d6d8de',
+            color: '#d6d8de'
         },
 
         '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
-        },
-    },
+            backgroundColor: 'var(--primaryDark)'
+        }
+    }
 });
 
 const ReviewsListApp = ({ product }) => {

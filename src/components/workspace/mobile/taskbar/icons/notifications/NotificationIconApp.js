@@ -7,7 +7,7 @@ import { useSnackbar } from 'notistack';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useNotificationsContext } from '../../../../../../contexts/notificationsContext';
+import { useNotificationsContext } from 'contexts';
 import { Container } from './style';
 
 library.add(faCommentAlt);
@@ -19,7 +19,7 @@ const NotificationIconApp = (props) => {
     const {
         notificationIconRef,
         toggleNotificationMenu,
-        isNotificationMenuOpen,
+        isNotificationMenuOpen
     } = props;
 
     const start = useCallback(() => {

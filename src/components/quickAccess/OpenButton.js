@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { quickAccessToolbarOpenBtnAnimation } from '../animations';
+import { quickAccessToolbarOpenBtnAnimation } from 'components/animations';
 import IconApp from './IconApp';
 import { Container } from './style';
 
@@ -15,7 +15,7 @@ const OpenButton = ({ openToolbar, isOpen }) => {
                     key: 'quickAccessToolbarOpenBtnAnimation',
                     initial: 'initial',
                     animate: 'open',
-                    variants: quickAccessToolbarOpenBtnAnimation,
+                    variants: quickAccessToolbarOpenBtnAnimation
                 }}
             />
         </Container>

@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 
-import SpinnerApp from '../../common/SpinnerApp';
+import SpinnerApp from 'components/common/SpinnerApp';
 
 const TaskbarMobileApp = lazy(() => import('./taskbar/TaskbarMobileApp'));
 const DesktopMobileApp = lazy(() => import('./desktop/DesktopMobileApp'));

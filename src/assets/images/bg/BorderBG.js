@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BorderBG = (props) => {
+export function BorderBG(props) {
     return (
         <svg viewBox='0 0 60 600' {...props}>
             <path
@@ -32,6 +32,4 @@ const BorderBG = (props) => {
             />
         </svg>
     );
-};
-
-export default BorderBG;
+}

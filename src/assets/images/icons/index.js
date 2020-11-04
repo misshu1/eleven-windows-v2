@@ -1,0 +1,9 @@
+export { CalculatorIcon } from './CalculatorIcon';
+export { CartIcon } from './CartIcon';
+export { DocsIcon } from './DocsIcon';
+export { FolderIcon } from './FolderIcon';
+export { LogoIcon } from './LogoIcon';
+export { PowerOffIcon } from './PowerOffIcon';
+export { SettingsIcon } from './SettingsIcon';
+export { StoreIcon } from './StoreIcon';
+export { TaskIcon } from './TaskIcon';

@@ -2,9 +2,9 @@ import { AnimatePresence } from 'framer-motion';
 import React, { useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-import BorderBG from '../../../../assets/images/bg/BorderBG';
-import useOnClickOutside from '../../../../hooks/useOnClickOutside';
-import { SVGMenuAnimations } from '../../../animations';
+import { BorderBG } from 'assets/images/bg/BorderBG';
+import { useOnClickOutside } from 'hooks';
+import { SVGMenuAnimations } from 'components/animations';
 import { useSideMenuContext } from '../contexts/sideMenuContext';
 import { IconsMenuApp } from './iconsMenu/IconsMenuApp';
 import { PreviewMenuApp } from './previewMenu/PreviewMenuApp';

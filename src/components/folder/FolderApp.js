@@ -1,13 +1,22 @@
 import Backdrop from '@material-ui/core/Backdrop';
 import PropTypes from 'prop-types';
-import React, { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+    forwardRef,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState
+} from 'react';
 import ReactDOM from 'react-dom';
 import Draggable from 'react-draggable';
 
-import { useDispatchFolderContext, useFolderContext } from '../../contexts/folderContext';
-import { useSettingsContext } from '../../contexts/settingsContext';
-import useFolderScroll from '../../hooks/useFolderScroll';
-import useMediaQuery from '../../hooks/useMediaQuery';
+import {
+    useDispatchFolderContext,
+    useFolderContext,
+    useSettingsContext
+} from 'contexts';
+import { useFolderScroll, useMediaQuery } from 'hooks';
 import ScrollbarApp from '../common/ScrollbarApp';
 import DrawerApp from './drawer/DrawerApp';
 import { AnimateFadeInOut, Content, Folder } from './style';
@@ -43,7 +52,7 @@ const FolderApp = forwardRef((props, ref) => {
         marginTop,
         toolbarMenu,
         setPage,
-        page,
+        page
     } = props;
 
     const app = getFolder(appId);
@@ -84,7 +93,7 @@ const FolderApp = forwardRef((props, ref) => {
 
         return {
             x: isTablet ? 0 : left,
-            y: smallScreen ? 0 : top,
+            y: smallScreen ? 0 : top
         };
     }, [isMobile, isSmallHeight, isTablet, marginLeft, marginTop]);
 
@@ -135,7 +144,7 @@ const FolderApp = forwardRef((props, ref) => {
                                             zIndex: 500,
                                             marginTop: isMobile
                                                 ? '3.5rem'
-                                                : '2.5rem',
+                                                : '2.5rem'
                                         }}
                                         onClick={closeDrawer}
                                     />
@@ -168,5 +177,5 @@ FolderApp.propTypes = {
     height: PropTypes.string,
     marginTop: PropTypes.number,
     marginLeft: PropTypes.number,
-    toolbarMenu: PropTypes.array,
+    toolbarMenu: PropTypes.array
 };

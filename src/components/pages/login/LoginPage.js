@@ -4,11 +4,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useDispatchFolderContext } from '../../../contexts/folderContext';
-import { useAuth } from '../../../hooks/useAuth';
-import useMediaQuery from '../../../hooks/useMediaQuery';
-import { modalPageAnimation } from '../../animations';
-import AuthApp from '../../auth/AuthApp';
+import { useDispatchFolderContext } from 'contexts';
+import { useAuth, useMediaQuery } from 'hooks';
+import { modalPageAnimation } from 'components/animations';
+import AuthApp from 'components/auth/AuthApp';
 import { AuthContiner, Container } from './style';
 
 const LoginPage = () => {
@@ -85,7 +84,7 @@ const LoginPage = () => {
                 style={{
                     zIndex: 50,
                     background: 'rgba(0,0,0,0.35)',
-                    backdropFilter: 'blur(10px)',
+                    backdropFilter: 'blur(10px)'
                 }}
             />
             <AnimatePresence>

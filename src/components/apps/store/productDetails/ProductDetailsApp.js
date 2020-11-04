@@ -2,8 +2,7 @@ import Markdown from 'markdown-to-jsx';
 import { CarouselProvider } from 'pure-react-carousel';
 import React, { useEffect, useState } from 'react';
 
-import { useFirebaseContext } from '../../../../contexts/firebaseContext';
-import { useNotificationsContext } from '../../../../contexts/notificationsContext';
+import { useFirebaseContext, useNotificationsContext } from 'contexts';
 import CarouselApp from './carousel/CarouselApp';
 import ProductHighlightsApp from './productHighlights/ProductHighlightsApp';
 import ReviewsListApp from './reviewsList/ReviewsListApp';

@@ -6,12 +6,10 @@ import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import { tomorrow, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import uuid from 'uuid/v4';
 
-import FolderIcon from '../../../assets/images/icons/FolderIcon';
-import LogoIcon from '../../../assets/images/icons/LogoIcon';
-import { useNotificationsContext } from '../../../contexts/notificationsContext';
-import { useSettingsContext } from '../../../contexts/settingsContext';
-import Emoji from '../../common/Emoji';
-import FolderApp from '../../folder/FolderApp';
+import { FolderIcon, LogoIcon } from 'assets/images/icons';
+import { useNotificationsContext, useSettingsContext } from 'contexts';
+import Emoji from 'components/common/Emoji';
+import FolderApp from 'components/folder/FolderApp';
 import {
     customScrollbarExample,
     customScrollbarWithScrollTopExample,
@@ -37,8 +35,8 @@ const useStyles = makeStyles({
         margin: 'auto 0',
         cursor: 'default',
         '&:hover': {
-            backgroundColor: '#43a047',
-        },
+            backgroundColor: '#43a047'
+        }
     },
     warnButton: {
         backgroundColor: '#ffa000',
@@ -49,8 +47,8 @@ const useStyles = makeStyles({
         margin: 'auto 0',
         cursor: 'default',
         '&:hover': {
-            backgroundColor: '#ffa000',
-        },
+            backgroundColor: '#ffa000'
+        }
     },
     errorButton: {
         backgroundColor: '#d32f2f',
@@ -61,8 +59,8 @@ const useStyles = makeStyles({
         margin: 'auto 0',
         cursor: 'default',
         '&:hover': {
-            backgroundColor: '#d32f2f',
-        },
+            backgroundColor: '#d32f2f'
+        }
     },
     infoButton: {
         backgroundColor: '#2979ff',
@@ -73,9 +71,9 @@ const useStyles = makeStyles({
         margin: 'auto 0',
         cursor: 'default',
         '&:hover': {
-            backgroundColor: '#2979ff',
-        },
-    },
+            backgroundColor: '#2979ff'
+        }
+    }
 });
 
 const addWordBreak = (str) => {
@@ -92,7 +90,7 @@ const addWordBreak = (str) => {
             <span key={uuid()} className='text-highlight'>
                 {m[0]}
                 <wbr />
-            </span>,
+            </span>
         ];
     }
     return newStringArray;
@@ -106,17 +104,17 @@ const toolbarMenu = () => {
             fontIcon: null,
             link: null,
             scrollToRef: 'createFolderRef',
-            onClick: null,
+            onClick: null
         },
         {
             name: 'Add a menu to the folder',
             widgetIcon: null,
             fontIcon: {
-                icon: ['fas', 'ellipsis-v'],
+                icon: ['fas', 'ellipsis-v']
             },
             link: null,
             scrollToRef: 'addMenuToFolderRef',
-            onClick: null,
+            onClick: null
         },
         {
             name: 'Change loading logo',
@@ -124,70 +122,70 @@ const toolbarMenu = () => {
             fontIcon: null,
             link: null,
             scrollToRef: 'changeLoadingLogoRef',
-            onClick: null,
+            onClick: null
         },
         {
             name: 'Create notifications',
             widgetIcon: null,
             fontIcon: {
-                icon: ['far', 'comment-alt'],
+                icon: ['far', 'comment-alt']
             },
             link: null,
             scrollToRef: 'createNotificationsRef',
-            onClick: null,
+            onClick: null
         },
         {
             name: 'z-index',
             widgetIcon: null,
             fontIcon: {
-                icon: ['fas', 'layer-group'],
+                icon: ['fas', 'layer-group']
             },
             link: null,
             scrollToRef: 'zIndexRef',
-            onClick: null,
+            onClick: null
         },
         {
             name: 'Folder Structure',
             widgetIcon: null,
             fontIcon: {
-                icon: ['fas', 'sitemap'],
+                icon: ['fas', 'sitemap']
             },
             link: null,
             scrollToRef: 'folderStructureRef',
-            onClick: null,
+            onClick: null
         },
         {
             name: 'Custom scrollbar',
             widgetIcon: null,
             fontIcon: {
                 icon: ['fas', 'exchange-alt'],
-                transform: { rotate: 90 },
+                transform: { rotate: 90 }
             },
             link: null,
             scrollToRef: 'scrollbarRef',
-            onClick: null,
+            onClick: null
         },
         {
             name: 'Routing',
             widgetIcon: null,
             fontIcon: {
-                icon: ['fas', 'route'],
+                icon: ['fas', 'route']
             },
             link: null,
             scrollToRef: 'routingRef',
-            onClick: null,
+            onClick: null
         },
         {
             name: 'Spinner',
             widgetIcon: null,
             fontIcon: {
                 icon: ['fas', 'spinner'],
-                pulse: true,
+                pulse: true
             },
             link: null,
             scrollToRef: 'spinnerRef',
-            onClick: null,
-        },
+            onClick: null
+        }
     ];
 };
 
@@ -198,7 +196,7 @@ const DocsApp = () => {
         showSuccess,
         showError,
         showWarning,
-        showInfo,
+        showInfo
     } = useNotificationsContext();
     const classes = useStyles();
     const changeLoadingLogoRef = useRef(null);
@@ -232,7 +230,7 @@ const DocsApp = () => {
                 folderStructureRef,
                 scrollbarRef,
                 routingRef,
-                spinnerRef,
+                spinnerRef
             }}
         >
             <Container>

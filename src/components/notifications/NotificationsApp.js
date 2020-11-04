@@ -4,8 +4,8 @@ import Button from '@material-ui/core/Button';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useNotificationsContext } from '../../contexts/notificationsContext';
-import ScrollbarApp from '../common/ScrollbarApp';
+import { useNotificationsContext } from 'contexts';
+import ScrollbarApp from 'components/common/ScrollbarApp';
 import { Container } from './style';
 
 const useStyles = makeStyles({
@@ -19,8 +19,8 @@ const useStyles = makeStyles({
         color: '#fff',
 
         '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
-        },
+            backgroundColor: 'var(--primaryDark)'
+        }
     },
     icon: {
         display: 'flex',
@@ -34,14 +34,14 @@ const useStyles = makeStyles({
         transition: 'background 0.2s ease-in-out',
         borderTopRightRadius: '0 0',
         borderBottomRightRadius: '37% 100%',
-        background: 'var(--secondary)',
-    },
+        background: 'var(--secondary)'
+    }
 });
 
 const NotificationsApp = () => {
     const {
         notificationsHistory,
-        clearAllNotifications,
+        clearAllNotifications
     } = useNotificationsContext();
     const classes = useStyles();
     const { t } = useTranslation();

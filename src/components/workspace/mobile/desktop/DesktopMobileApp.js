@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ICON_LOCATION, useFolderContext } from '../../../../contexts/folderContext';
+import { ICON_LOCATION, useFolderContext } from 'contexts';
 import Clock from './Clock';
 import { Container, Desktop, IconContainer } from './style';
 
@@ -22,7 +22,7 @@ const DesktopMobileApp = () => {
     const {
         checkUserPermisions,
         folderState,
-        sortByAppName,
+        sortByAppName
     } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 

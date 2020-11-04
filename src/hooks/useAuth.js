@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useFirebaseContext } from '../contexts/firebaseContext';
-import { useNotificationsContext } from '../contexts/notificationsContext';
+import { useFirebaseContext, useNotificationsContext } from 'contexts';
 
 const AuthContext = createContext();
 export function AuthProvider(props) {
@@ -47,7 +46,7 @@ function useProvideAuth() {
         );
 
         await newUser.user.updateProfile({
-            displayName: name,
+            displayName: name
         });
 
         setUser(newUser.user);
@@ -96,7 +95,7 @@ function useProvideAuth() {
         sendPasswordResetEmail,
         confirmPasswordReset,
         isUserLoggedIn,
-        isUserAdmin,
+        isUserAdmin
     };
 }
 

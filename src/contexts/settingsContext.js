@@ -6,20 +6,20 @@ import React, {
     useLayoutEffect,
     useMemo,
     useReducer,
-    useRef,
+    useRef
 } from 'react';
 
-import globeImg from '../assets/images/flags/globe.svg';
-import { backgrounds } from '../components/theme/DesktopBackgrounds';
-import { THEME_TYPE, themes } from '../components/theme/themes';
-import { videoBackgrounds } from '../components/theme/VideoBackgrounds';
-import useMediaQuery from '../hooks/useMediaQuery';
+import globeImg from 'assets/images/flags/globe.svg';
+import { backgrounds } from 'components/theme/DesktopBackgrounds';
+import { THEME_TYPE, themes } from 'components/theme/themes';
+import { videoBackgrounds } from 'components/theme/VideoBackgrounds';
+import { useMediaQuery } from 'hooks';
 import i18next, { languages } from '../i18next';
 
 const OS_THEME = {
     windows: 'WINDOWS',
     linux: 'LINUX',
-    mobile: 'MOBILE',
+    mobile: 'MOBILE'
 };
 
 const SETTINGS_ACTIONS = {
@@ -27,7 +27,7 @@ const SETTINGS_ACTIONS = {
     changeTheme: 'CHANGE_THEME',
     changeBackground: 'CHANGE_BACKGROUND',
     changeVideoBackground: 'CHANGE_VIDEO_BACKGROUND',
-    enableVideoBackground: 'ENABLE_VIDEO_BACKGROUND',
+    enableVideoBackground: 'ENABLE_VIDEO_BACKGROUND'
 };
 
 const SETTINGS_STATE = {
@@ -35,7 +35,7 @@ const SETTINGS_STATE = {
     themes: themes,
     backgrounds: backgrounds,
     videoBackgrounds: videoBackgrounds,
-    isVideoBackgroundEnabled: false,
+    isVideoBackgroundEnabled: false
 };
 
 const settingsReducer = (state, action) => {
@@ -44,7 +44,7 @@ const settingsReducer = (state, action) => {
             if (state.OS !== action.payload) {
                 return {
                     ...state,
-                    OS: action.payload,
+                    OS: action.payload
                 };
             } else {
                 return state;
@@ -70,7 +70,7 @@ const settingsReducer = (state, action) => {
                         theme.id === action.payload
                             ? { ...theme, isSelected: true }
                             : { ...theme, isSelected: false }
-                    ),
+                    )
                 };
             } else {
                 return state;
@@ -89,7 +89,7 @@ const settingsReducer = (state, action) => {
                         item.id === action.payload
                             ? { ...item, isSelected: true }
                             : { ...item, isSelected: false }
-                    ),
+                    )
                 };
             } else {
                 return state;
@@ -108,7 +108,7 @@ const settingsReducer = (state, action) => {
                         item.id === action.payload
                             ? { ...item, isSelected: true }
                             : { ...item, isSelected: false }
-                    ),
+                    )
                 };
             } else {
                 return state;
@@ -119,7 +119,7 @@ const settingsReducer = (state, action) => {
             if (state.isVideoBackgroundEnabled !== action.payload) {
                 return {
                     ...state,
-                    isVideoBackgroundEnabled: action.payload,
+                    isVideoBackgroundEnabled: action.payload
                 };
             } else {
                 return state;
@@ -188,7 +188,7 @@ export const SettingsProvider = ({ children }) => {
         localStorage.setItem('isVideoBgEnabled', val);
         settingsDispatch({
             type: SETTINGS_ACTIONS.enableVideoBackground,
-            payload: val,
+            payload: val
         });
     };
 
@@ -197,7 +197,7 @@ export const SettingsProvider = ({ children }) => {
 
         settingsDispatch({
             type: SETTINGS_ACTIONS.changeTheme,
-            payload: id,
+            payload: id
         });
     };
 
@@ -206,7 +206,7 @@ export const SettingsProvider = ({ children }) => {
 
         settingsDispatch({
             type: SETTINGS_ACTIONS.changeBackground,
-            payload: id,
+            payload: id
         });
     };
 
@@ -214,7 +214,7 @@ export const SettingsProvider = ({ children }) => {
         localStorage.setItem('videoBg', id);
         settingsDispatch({
             type: SETTINGS_ACTIONS.changeVideoBackground,
-            payload: id,
+            payload: id
         });
     };
 
@@ -227,7 +227,7 @@ export const SettingsProvider = ({ children }) => {
         } else {
             settingsDispatch({
                 type: SETTINGS_ACTIONS.changeVideoBackground,
-                payload: videoBgLocalStorage,
+                payload: videoBgLocalStorage
             });
         }
     };
@@ -244,7 +244,7 @@ export const SettingsProvider = ({ children }) => {
         } else {
             settingsDispatch({
                 type: SETTINGS_ACTIONS.changeBackground,
-                payload: bg,
+                payload: bg
             });
         }
     };
@@ -258,7 +258,7 @@ export const SettingsProvider = ({ children }) => {
         } else {
             settingsDispatch({
                 type: SETTINGS_ACTIONS.changeTheme,
-                payload: theme,
+                payload: theme
             });
         }
     };
@@ -273,7 +273,7 @@ export const SettingsProvider = ({ children }) => {
 
             settingsDispatch({
                 type: SETTINGS_ACTIONS.enableVideoBackground,
-                payload: !!JSON.parse(localStorageVal),
+                payload: !!JSON.parse(localStorageVal)
             });
         }
     }, []);
@@ -293,12 +293,12 @@ export const SettingsProvider = ({ children }) => {
         if (isMobile) {
             settingsDispatch({
                 type: SETTINGS_ACTIONS.changeOS,
-                payload: OS_THEME.mobile,
+                payload: OS_THEME.mobile
             });
         } else if (!isMobile && settingsState.OS === OS_THEME.mobile) {
             settingsDispatch({
                 type: SETTINGS_ACTIONS.changeOS,
-                payload: prevOSRef.current,
+                payload: prevOSRef.current
             });
         }
     }, [isMobile, settingsState.OS]);
@@ -348,14 +348,14 @@ export const SettingsProvider = ({ children }) => {
     const selectWindowsOS = () => {
         settingsDispatch({
             type: SETTINGS_ACTIONS.changeOS,
-            payload: OS_THEME.windows,
+            payload: OS_THEME.windows
         });
     };
 
     const selectLinuxOS = () => {
         settingsDispatch({
             type: SETTINGS_ACTIONS.changeOS,
-            payload: OS_THEME.linux,
+            payload: OS_THEME.linux
         });
     };
 
@@ -386,7 +386,7 @@ export const SettingsProvider = ({ children }) => {
             getBackgrounds,
             getVideoBackgrounds,
             getSelectedTheme,
-            getThemes,
+            getThemes
         };
     }, [
         getBackgrounds,
@@ -402,7 +402,7 @@ export const SettingsProvider = ({ children }) => {
         isWindowsSelected,
         getVideoBackgrounds,
         getSelectedTheme,
-        getThemes,
+        getThemes
     ]);
 
     const dispatchSettingsValue = useMemo(() => {
@@ -414,7 +414,7 @@ export const SettingsProvider = ({ children }) => {
             enableVideoBg,
             changeVideoBg,
             changeBackground,
-            changeTheme,
+            changeTheme
         };
     }, []);
 

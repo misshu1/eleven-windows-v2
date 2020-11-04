@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { useDispatchFolderContext, useFolderContext } from '../../../contexts/folderContext';
-import FolderApp from '../../folder/FolderApp';
+import { useDispatchFolderContext, useFolderContext } from 'contexts';
+import FolderApp from 'components/folder/FolderApp';
 import ButtonApp from './ButtonApp';
 import { Container, Table, TableHead } from './style';
 import WidgetApp from './WidgetApp';

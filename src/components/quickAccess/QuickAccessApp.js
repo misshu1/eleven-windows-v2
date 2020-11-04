@@ -1,8 +1,8 @@
 import { AnimatePresence } from 'framer-motion';
 import React, { lazy, Suspense, useRef, useState } from 'react';
 
-import useOnClickOutside from '../../hooks/useOnClickOutside';
-import SpinnerApp from '../common/SpinnerApp';
+import { useOnClickOutside } from 'hooks';
+import SpinnerApp from 'components/common/SpinnerApp';
 import OpenButton from './OpenButton';
 
 const Toolbar = lazy(() => import('./Toolbar'));

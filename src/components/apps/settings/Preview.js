@@ -1,12 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-import globeIcon from '../../../assets/images/flags/globe.svg';
-import CalculatorIcon from '../../../assets/images/icons/CalculatorIcon';
-import CartIcon from '../../../assets/images/icons/CartIcon';
-import FolderIcon from '../../../assets/images/icons/FolderIcon';
-import LogoIcon from '../../../assets/images/icons/LogoIcon';
-import { useSettingsContext } from '../../../contexts/settingsContext';
+import globeIcon from 'assets/images/flags/globe.svg';
+import {
+    CalculatorIcon,
+    CartIcon,
+    FolderIcon,
+    LogoIcon
+} from 'assets/images/icons';
+import { useSettingsContext } from 'contexts';
 import { ThemePreview } from './style';
 
 const calculatorButtons = () => {
@@ -26,7 +28,7 @@ const Preview = () => {
     const {
         getSelectedBackground,
         getSelectedVideo,
-        isVideoEnabledOnDesktop,
+        isVideoEnabledOnDesktop
     } = useSettingsContext();
 
     return (

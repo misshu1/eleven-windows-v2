@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 
-import { useCartContext } from '../../../contexts/cartContext';
-import useMediaQuery from '../../../hooks/useMediaQuery';
-import { modalPageAnimation } from '../../animations';
-import Product from '../../cart/Product';
-import StoreButton from '../../cart/StoreButton';
-import ScrollbarApp from '../../common/ScrollbarApp';
+import { useCartContext } from 'contexts';
+import { useMediaQuery } from 'hooks';
+import { modalPageAnimation } from 'components/animations';
+import Product from 'components/cart/Product';
+import StoreButton from 'components/cart/StoreButton';
+import ScrollbarApp from 'components/common/ScrollbarApp';
 import CheckoutApp from './CheckoutApp';
 import { CheckoutContainer, Container } from './style';
 
@@ -57,7 +57,7 @@ const CheckoutPageApp = () => {
                 style={{
                     zIndex: 50,
                     background: 'rgba(0,0,0,0.35)',
-                    backdropFilter: 'blur(10px)',
+                    backdropFilter: 'blur(10px)'
                 }}
             />
             <AnimatePresence>

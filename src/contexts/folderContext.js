@@ -1,27 +1,34 @@
-import React, { createContext, lazy, useCallback, useContext, useMemo, useReducer } from 'react';
+import React, {
+    createContext,
+    lazy,
+    useCallback,
+    useContext,
+    useMemo,
+    useReducer
+} from 'react';
 
-import CalculatorIcon from '../assets/images/icons/CalculatorIcon';
-import DocsIcon from '../assets/images/icons/DocsIcon';
-import SettingsIcon from '../assets/images/icons/SettingsIcon';
-import StoreIcon from '../assets/images/icons/StoreIcon';
-import TaskIcon from '../assets/images/icons/TaskIcon';
-import { useAuth } from '../hooks/useAuth';
+import {
+    CalculatorIcon,
+    DocsIcon,
+    SettingsIcon,
+    StoreIcon,
+    TaskIcon
+} from 'assets/images/icons';
+import { useAuth } from 'hooks';
 
-const DocsApp = lazy(() => import('../components/apps/docs/DocsApp'));
-const SettingsApp = lazy(() =>
-    import('../components/apps/settings/SettingsApp')
-);
-const StoreApp = lazy(() => import('../components/apps/store/StoreApp'));
+const DocsApp = lazy(() => import('components/apps/docs/DocsApp'));
+const SettingsApp = lazy(() => import('components/apps/settings/SettingsApp'));
+const StoreApp = lazy(() => import('components/apps/store/StoreApp'));
 const CalculatorApp = lazy(() =>
-    import('../components/apps/calculator/CalculatorApp')
+    import('components/apps/calculator/CalculatorApp')
 );
 const TaskManagerApp = lazy(() =>
-    import('../components/apps/taskManager/TaskManagerApp')
+    import('components/apps/taskManager/TaskManagerApp')
 );
 
 export const FOLDER_Z_INDEX = {
     default: 100,
-    active: 104,
+    active: 104
 };
 
 const FOLDER_ACTIONS = {
@@ -32,7 +39,7 @@ const FOLDER_ACTIONS = {
     minimizeUp: 'MINIMIZE_UP',
     minimizeDown: 'MINIMIZE_DOWN',
     maximizeUp: 'MAXIMIZE_UP',
-    maximizeDown: 'MAXIMIZE_DOWN',
+    maximizeDown: 'MAXIMIZE_DOWN'
 };
 
 export const ICON_LOCATION = {
@@ -41,20 +48,20 @@ export const ICON_LOCATION = {
         notificationsWindow: 'WINDOWS_NOTIFICATIONS_WINDOW',
         startMenu: {
             left: 'WINDOWS_STARTMENU_LEFT',
-            right: 'WINDOWS_STARTMENU_RIGHT',
-        },
+            right: 'WINDOWS_STARTMENU_RIGHT'
+        }
     },
     linux: {
         desktop: 'LINUX_DESKTOP',
-        appsMenu: 'LINUX_APPS_MENU',
+        appsMenu: 'LINUX_APPS_MENU'
     },
     mobile: {
         homeScreen: 'MOBILE_HOME_SCREEN',
-        appsMenu: 'MOBILE_APPS_MENU',
+        appsMenu: 'MOBILE_APPS_MENU'
     },
     cart: {
-        cartApp: 'CART_APP',
-    },
+        cartApp: 'CART_APP'
+    }
 };
 
 const APPS_STATE = [
@@ -76,8 +83,8 @@ const APPS_STATE = [
             ICON_LOCATION.windows.notificationsWindow,
             ICON_LOCATION.windows.startMenu.left,
             ICON_LOCATION.mobile.homeScreen,
-            ICON_LOCATION.mobile.appsMenu,
-        ],
+            ICON_LOCATION.mobile.appsMenu
+        ]
     },
     {
         id: 2,
@@ -97,8 +104,8 @@ const APPS_STATE = [
             ICON_LOCATION.windows.startMenu.right,
             ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.mobile.appsMenu,
-            ICON_LOCATION.linux.appsMenu,
-        ],
+            ICON_LOCATION.linux.appsMenu
+        ]
     },
     {
         id: 3,
@@ -116,8 +123,8 @@ const APPS_STATE = [
         iconLocation: [
             ICON_LOCATION.windows.startMenu.right,
             ICON_LOCATION.linux.appsMenu,
-            ICON_LOCATION.mobile.appsMenu,
-        ],
+            ICON_LOCATION.mobile.appsMenu
+        ]
     },
     {
         id: 4,
@@ -138,8 +145,8 @@ const APPS_STATE = [
             ICON_LOCATION.linux.appsMenu,
             ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.mobile.appsMenu,
-            ICON_LOCATION.cart.cartApp,
-        ],
+            ICON_LOCATION.cart.cartApp
+        ]
     },
     {
         id: 5,
@@ -156,9 +163,9 @@ const APPS_STATE = [
         appIndex: FOLDER_Z_INDEX.default,
         iconLocation: [
             ICON_LOCATION.windows.notificationsWindow,
-            ICON_LOCATION.linux.appsMenu,
-        ],
-    },
+            ICON_LOCATION.linux.appsMenu
+        ]
+    }
 ];
 
 const folderReducer = (state, action) => {
@@ -174,14 +181,14 @@ const folderReducer = (state, action) => {
                             ? {
                                   ...app,
                                   isOpen: true,
-                                  appIndex: FOLDER_Z_INDEX.active,
+                                  appIndex: FOLDER_Z_INDEX.active
                               }
                             : { ...app, appIndex: FOLDER_Z_INDEX.default }
                     ),
                     openApps: [
                         ...state.openApps,
-                        { ...currentApp, openSince: new Date().getTime() },
-                    ],
+                        { ...currentApp, openSince: new Date().getTime() }
+                    ]
                 };
             } else {
                 return state;
@@ -198,13 +205,13 @@ const folderReducer = (state, action) => {
                                   ...app,
                                   isOpen: false,
                                   isMinimize: null,
-                                  appIndex: FOLDER_Z_INDEX.default,
+                                  appIndex: FOLDER_Z_INDEX.default
                               }
                             : app
                     ),
                     openApps: state.openApps.filter(
                         (app) => app.id !== action.payload
-                    ),
+                    )
                 };
             } else {
                 return state;
@@ -219,7 +226,7 @@ const folderReducer = (state, action) => {
                         app.id === action.payload
                             ? { ...app, isMinimize: false }
                             : app
-                    ),
+                    )
                 };
             } else {
                 return state;
@@ -234,7 +241,7 @@ const folderReducer = (state, action) => {
                         app.id === action.payload
                             ? { ...app, isMinimize: true }
                             : app
-                    ),
+                    )
                 };
             } else {
                 return state;
@@ -249,7 +256,7 @@ const folderReducer = (state, action) => {
                         app.id === action.payload
                             ? { ...app, isMaximize: true }
                             : app
-                    ),
+                    )
                 };
             } else {
                 return state;
@@ -264,7 +271,7 @@ const folderReducer = (state, action) => {
                         app.id === action.payload
                             ? { ...app, isMaximize: false }
                             : app
-                    ),
+                    )
                 };
             } else {
                 return state;
@@ -279,7 +286,7 @@ const folderReducer = (state, action) => {
                         app.id === action.payload
                             ? { ...app, appIndex: FOLDER_Z_INDEX.active }
                             : { ...app, appIndex: FOLDER_Z_INDEX.default }
-                    ),
+                    )
                 };
             } else {
                 return state;
@@ -293,9 +300,9 @@ const folderReducer = (state, action) => {
                     ...app,
                     isOpen: null,
                     isMinimize: null,
-                    appIndex: FOLDER_Z_INDEX.default,
+                    appIndex: FOLDER_Z_INDEX.default
                 })),
-                openApps: [],
+                openApps: []
             };
         }
 
@@ -311,20 +318,20 @@ export const FolderProvider = ({ children }) => {
     const { isUserAdmin, isUserLoggedIn } = useAuth();
     const [folderState, folderDispatch] = useReducer(folderReducer, {
         apps: APPS_STATE,
-        openApps: [],
+        openApps: []
     });
 
     const openFolder = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.open,
-            payload: appId,
+            payload: appId
         });
     };
 
     const closeFolder = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.close,
-            payload: appId,
+            payload: appId
         });
     };
 
@@ -335,35 +342,35 @@ export const FolderProvider = ({ children }) => {
     const activeFolder = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.active,
-            payload: appId,
+            payload: appId
         });
     };
 
     const minimizeUp = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.minimizeUp,
-            payload: appId,
+            payload: appId
         });
     };
 
     const minimizeDown = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.minimizeDown,
-            payload: appId,
+            payload: appId
         });
     };
 
     const maximizeUp = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.maximizeUp,
-            payload: appId,
+            payload: appId
         });
     };
 
     const maximizeDown = (appId) => {
         folderDispatch({
             type: FOLDER_ACTIONS.maximizeDown,
-            payload: appId,
+            payload: appId
         });
     };
 
@@ -417,7 +424,7 @@ export const FolderProvider = ({ children }) => {
             sortByAppName,
             getFolder,
             checkUserPermisions,
-            isFolderActive,
+            isFolderActive
         };
     }, [checkUserPermisions, folderState, getFolder, isFolderActive]);
 
@@ -430,7 +437,7 @@ export const FolderProvider = ({ children }) => {
             minimizeUp,
             minimizeDown,
             maximizeUp,
-            maximizeDown,
+            maximizeDown
         };
     }, []);
 

@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from 'react';
 
-const useMediaQuery = (mediaQuery) => {
+export const useMediaQuery = (mediaQuery) => {
     const [matches, setMatches] = useState(
         () => window.matchMedia(mediaQuery).matches
     );
@@ -16,5 +16,3 @@ const useMediaQuery = (mediaQuery) => {
 
     return matches;
 };
-
-export default useMediaQuery;

@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useDispatchFolderContext } from '../../../../../../contexts/folderContext';
-import useMediaQuery from '../../../../../../hooks/useMediaQuery';
+import { useDispatchFolderContext } from 'contexts';
+import { useMediaQuery } from 'hooks';
 import { AppIcon } from './style';
 
 const MenuAppIcon = (props) => {
@@ -47,5 +47,5 @@ MenuAppIcon.propTypes = {
     link: PropTypes.string.isRequired,
     widgetIcon: PropTypes.node.isRequired,
     iconName: PropTypes.node.isRequired,
-    closeSideMenu: PropTypes.func.isRequired,
+    closeSideMenu: PropTypes.func.isRequired
 };

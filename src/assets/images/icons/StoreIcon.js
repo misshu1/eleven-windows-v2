@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { useSettingsContext } from '../../../contexts/settingsContext';
+import { useSettingsContext } from 'contexts';
 
-const StoreIcon = (props) => {
-    const { width, height } = props;
+export function StoreIcon({ width, height }) {
     const { getSelectedTheme } = useSettingsContext();
 
     return (
@@ -87,6 +86,4 @@ const StoreIcon = (props) => {
             />
         </svg>
     );
-};
-
-export default StoreIcon;
+}

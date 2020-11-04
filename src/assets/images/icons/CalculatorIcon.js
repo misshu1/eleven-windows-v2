@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { useSettingsContext } from '../../../contexts/settingsContext';
+import { useSettingsContext } from 'contexts';
 
-const CalculatorIcon = (props) => {
-    const { width, height } = props;
+export function CalculatorIcon({ width, height }) {
     const { getSelectedTheme } = useSettingsContext();
 
     return (
@@ -45,6 +44,4 @@ const CalculatorIcon = (props) => {
             </g>
         </svg>
     );
-};
-
-export default CalculatorIcon;
+}

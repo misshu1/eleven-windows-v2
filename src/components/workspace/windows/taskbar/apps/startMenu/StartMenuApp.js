@@ -4,17 +4,17 @@ import React, { lazy, Suspense, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
-import PowerOffIcon from '../../../../../../assets/images/icons/PowerOffIcon';
-import { useAuth } from '../../../../../../hooks/useAuth';
-import LoginButton from '../../../../../auth/LoginButton';
-import ScrollbarApp from '../../../../../common/ScrollbarApp';
-import SpinnerApp from '../../../../../common/SpinnerApp';
+import { PowerOffIcon } from 'assets/images/icons';
+import { useAuth } from 'hooks';
+import LoginButton from 'components/auth/LoginButton';
+import ScrollbarApp from 'components/common/ScrollbarApp';
+import SpinnerApp from 'components/common/SpinnerApp';
 import { useStartMenuContext } from '../../contexts/startMenuContext';
 import LeftMenuApp from './leftMenu/LeftMenuApp';
 import RightMenuApp from './rightMenu/RightMenuApp';
 import { Container, LoginContainer, Widget } from './style';
 
-const AuthApp = lazy(() => import('../../../../../auth/AuthApp'));
+const AuthApp = lazy(() => import('components/auth/AuthApp'));
 
 const StartMenuApp = ({ startMenuRef }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);

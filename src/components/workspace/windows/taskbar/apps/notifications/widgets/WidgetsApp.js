@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 
-import { ICON_LOCATION, useDispatchFolderContext, useFolderContext } from '../../../../../../../contexts/folderContext';
+import {
+    ICON_LOCATION,
+    useDispatchFolderContext,
+    useFolderContext
+} from 'contexts';
 import { useNotificationsTaskbarContext } from '../../../contexts/notificationsTaskbarContext';
 import { Container, Widget } from './style';
 
@@ -9,7 +13,7 @@ const WidgetsApp = () => {
     const {
         checkUserPermisions,
         folderState,
-        sortByAppName,
+        sortByAppName
     } = useFolderContext();
     const apps = useRef(folderState.apps.sort(sortByAppName));
 
@@ -61,7 +65,7 @@ const WidgetApp = ({ iconDisplayName, widgetIcon, appId }) => {
 WidgetApp.propTypes = {
     iconDisplayName: PropTypes.string.isRequired,
     widgetIcon: PropTypes.node.isRequired,
-    appId: PropTypes.number.isRequired,
+    appId: PropTypes.number.isRequired
 };
 
 export default WidgetsApp;

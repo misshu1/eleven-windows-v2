@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 
-import { useDispatchFolderContext } from '../../../../../../../contexts/folderContext';
+import { useDispatchFolderContext } from 'contexts';
 import { useStartMenuContext } from '../../../contexts/startMenuContext';
 import { Widget } from './style';
 
@@ -38,5 +38,5 @@ WidgetApp.propTypes = {
     appId: PropTypes.number.isRequired,
     widgetIcon: PropTypes.node.isRequired,
     iconDisplayName: PropTypes.string.isRequired,
-    animationDuration: PropTypes.number.isRequired,
+    animationDuration: PropTypes.number.isRequired
 };
