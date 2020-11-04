@@ -2,7 +2,9 @@
     "parser": "babel-eslint",
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "node": true,
+        "jest/globals": true
     },
     "globals": {
         "Atomics": "readonly",
@@ -13,13 +15,20 @@
             "jsx": true
         },
         "ecmaVersion": 2018,
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": "jsconfig.json"
     },
-    "plugins": ["react", "react-hooks"],
+    "plugins": ["react", "react-hooks", "jest"],
     "rules": {
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn"
+        "react-hooks/exhaustive-deps": "warn",
+        "react/prop-types": 0,
+        "react/no-unescaped-entities": 0,
+        "react/display-name": 0,
+        "no-unused-vars": 0,
+        "max-nested-callbacks": ["error", 3]
     },
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "settings": {
         "import/resolver": {
             "node": {

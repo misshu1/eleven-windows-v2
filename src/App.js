@@ -1,5 +1,9 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTelegramPlane, faUbuntu, faWindows } from '@fortawesome/free-brands-svg-icons';
+import {
+    faTelegramPlane,
+    faUbuntu,
+    faWindows
+} from '@fortawesome/free-brands-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import {
     faAngleDoubleLeft,
@@ -99,8 +103,8 @@ const VideoBackground = () => {
 
 const useStyles = makeStyles({
     margin: {
-        bottom: '5rem',
-    },
+        bottom: '5rem'
+    }
 });
 
 const App = () => {
@@ -109,7 +113,7 @@ const App = () => {
         getSelectedBackground,
         isLinuxSelected,
         isWindowsSelected,
-        isMobileSelected,
+        isMobileSelected
     } = useSettingsContext();
     const classes = useStyles();
     const location = useLocation();
@@ -131,11 +135,11 @@ const App = () => {
             dense
             domRoot={document.getElementById('modal')}
             classes={{
-                containerAnchorOriginBottomRight: classes.margin,
+                containerAnchorOriginBottomRight: classes.margin
             }}
             anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'right',
+                horizontal: 'right'
             }}
         >
             <NotificationsProvider>

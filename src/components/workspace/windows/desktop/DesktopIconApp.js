@@ -44,5 +44,5 @@ export default DesktopIconApp;
 DesktopIconApp.propTypes = {
     appId: PropTypes.number.isRequired,
     widgetIcon: PropTypes.node.isRequired,
-    iconName: PropTypes.node.isRequired,
+    iconName: PropTypes.node.isRequired
 };

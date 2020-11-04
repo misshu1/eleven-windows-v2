@@ -3,7 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 
 export class ErrorBoundary extends React.Component {
     state = {
-        error: false,
+        error: false
     };
 
     componentDidCatch(error, info) {
