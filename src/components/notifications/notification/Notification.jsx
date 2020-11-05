@@ -7,7 +7,7 @@ import { Container } from './style';
 
 const Notification = forwardRef((props, ref) => {
     const { id, message, title, code, type, onClose, isModal } = props;
-    console.log(id);
+
     return (
         <Container type={type} ref={ref} isModal={isModal}>
             <div className='icon'>

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
-import Calendar from 'react-calendar/dist/entry.nostyle';
+import Calendar from 'react-calendar';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -8,16 +8,19 @@ import { ScrollbarApp } from 'components/common';
 import { ClockContainer, Container, CustomCalendarStyles } from './style';
 
 const CalendarApp = ({ calendarRef }) => {
-    const [calendar, setCalendar] = useState({ value: new Date() });
+    const [calendar, setCalendar] = useState({
+        value: new Date(),
+        startDate: new Date()
+    });
     const { i18n } = useTranslation();
 
     const changeDate = (value) => {
-        setCalendar({ value });
+        setCalendar({ value, startDate: null });
     };
 
     const goToToday = useCallback(() => {
-        setCalendar({ value: new Date() });
-    }, [setCalendar]);
+        setCalendar({ value: new Date(), startDate: new Date() });
+    }, []);
 
     return ReactDOM.createPortal(
         <Container ref={calendarRef}>
@@ -26,10 +29,14 @@ const CalendarApp = ({ calendarRef }) => {
                     <CalendarClock goToToday={goToToday} />
                     <CustomCalendarStyles>
                         <Calendar
-                            onChange={changeDate}
                             value={calendar.value}
+                            onChange={changeDate}
                             locale={i18n.language}
                             showFixedNumberOfWeeks={true}
+                            activeStartDate={calendar.startDate}
+                            onActiveStartDateChange={(e) =>
+                                changeDate(e.activeStartDate)
+                            }
                         />
                     </CustomCalendarStyles>
                 </div>

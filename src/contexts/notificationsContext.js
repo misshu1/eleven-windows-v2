@@ -7,7 +7,7 @@ import React, {
     useMemo,
     useState
 } from 'react';
-import uuid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 
 import Notification from 'components/notifications/notification/Notification';
 
@@ -67,7 +67,7 @@ export const NotificationsProvider = ({ children }) => {
 
     const showSuccess = useCallback(
         (title, message) => {
-            const id = uuid();
+            const id = uuidv4();
             setNotificationsHistory((prevState) => [
                 {
                     id: id,
@@ -105,7 +105,7 @@ export const NotificationsProvider = ({ children }) => {
 
     const showError = useCallback(
         (title, message, code) => {
-            const id = uuid();
+            const id = uuidv4();
             setNotificationsHistory((prevState) => [
                 {
                     id: id,
@@ -145,7 +145,7 @@ export const NotificationsProvider = ({ children }) => {
 
     const showWarning = useCallback(
         (title, message, code) => {
-            const id = uuid();
+            const id = uuidv4();
             setNotificationsHistory((prevState) => [
                 {
                     id: id,
@@ -185,7 +185,7 @@ export const NotificationsProvider = ({ children }) => {
 
     const showInfo = useCallback(
         (title, message) => {
-            const id = uuid();
+            const id = uuidv4();
             setNotificationsHistory((prevState) => [
                 {
                     id: id,

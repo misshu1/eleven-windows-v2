@@ -4,8 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import { tomorrow, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import uuid from 'uuid/v4';
-
+import { v4 as uuidv4 } from 'uuid';
 import { FolderIcon, LogoIcon } from 'assets/images/icons';
 import { useNotificationsContext, useSettingsContext } from 'contexts';
 import { Emoji } from 'components/common';
@@ -87,7 +86,7 @@ const addWordBreak = (str) => {
         }
         newStringArray = [
             ...newStringArray,
-            <span key={uuid()} className='text-highlight'>
+            <span key={uuidv4()} className='text-highlight'>
                 {m[0]}
                 <wbr />
             </span>
