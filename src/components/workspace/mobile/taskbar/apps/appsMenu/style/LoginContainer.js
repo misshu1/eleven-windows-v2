@@ -8,8 +8,8 @@ export const LoginContainer = styled.div`
     max-height: 3.5rem;
     border-bottom: 1px solid var(--border);
 
-    ${(props) =>
-        props.isLoginButtonVisible &&
+    ${({ isLoginButtonVisible }) =>
+        isLoginButtonVisible &&
         css`
             padding: 0 0.5rem;
         `}

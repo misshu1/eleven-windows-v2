@@ -9,7 +9,7 @@ export const Container = styled.li`
     height: 100%;
     width: 7rem;
     color: var(--colorDefault);
-    background: ${(props) => props.open && 'var(--backgroundHover)'};
+    background: ${({ open }) => open && 'var(--backgroundHover)'};
     transition: color 0.2s ease-in-out;
     outline: none;
 

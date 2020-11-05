@@ -35,8 +35,8 @@ export const Container = styled.section`
         4px -4px 5px 0px rgba(0, 0, 0, 0.14),
         1px -1px 10px 0px rgba(0, 0, 0, 0.12);
 
-    ${(props) =>
-        props.isAuthOpen &&
+    ${({ isAuthOpen }) =>
+        isAuthOpen &&
         css`
             padding: 0.5rem;
         `}

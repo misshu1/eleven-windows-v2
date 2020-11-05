@@ -10,8 +10,7 @@ export const Container = styled.li`
     margin: 0 1px;
     transition: color 0.2s ease-in-out;
     outline: none;
-    background-color: ${(props) => props.open && 'var(--backgroundHover)'};
-
+    background-color: ${({ open }) => open && 'var(--backgroundHover)'};
     &&:hover,
     &&:focus {
         background-color: var(--backgroundHover);

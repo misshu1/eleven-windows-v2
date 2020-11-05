@@ -16,8 +16,9 @@ export const Widget = styled.div`
     padding: 0.2rem;
     margin: 0.4rem 0;
     outline: none;
-    animation: ${slideUp} ${(props) => props.animationDuration + 0.3 + 's'}
-        ease-out 1 forwards;
+    animation: ${slideUp}
+        ${({ animationDuration }) => animationDuration + 0.3 + 's'} ease-out 1
+        forwards;
 
     &&:hover {
         background-color: var(--backgroundCard);

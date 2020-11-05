@@ -56,8 +56,8 @@ export const Form = styled.form`
         }
 
         #name {
-            ${(props) =>
-                (props.errors.name || props.errors.firebase) &&
+            ${({ errors }) =>
+                (errors.name || errors.firebase) &&
                 css`
                     box-shadow: 0 0 0 1px var(--colorError);
                     border: 1px solid var(--colorError);
@@ -65,8 +65,8 @@ export const Form = styled.form`
         }
 
         #email {
-            ${(props) =>
-                (props.errors.email || props.errors.firebase) &&
+            ${({ errors }) =>
+                (errors.email || errors.firebase) &&
                 css`
                     box-shadow: 0 0 0 1px var(--colorError);
                     border: 1px solid var(--colorError);
@@ -74,8 +74,8 @@ export const Form = styled.form`
         }
 
         #password {
-            ${(props) =>
-                (props.errors.password || props.errors.firebase) &&
+            ${({ errors }) =>
+                (errors.password || errors.firebase) &&
                 css`
                     box-shadow: 0 0 0 1px var(--colorError);
                     border: 1px solid var(--colorError);

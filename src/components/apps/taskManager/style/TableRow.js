@@ -37,8 +37,8 @@ export const TableRow = styled.div`
         }
     }
 
-    ${(props) =>
-        props.selectedApp &&
+    ${({ selectedApp }) =>
+        selectedApp &&
         css`
             background-color: var(--backgroundActive);
             border-bottom: 1px solid transparent;

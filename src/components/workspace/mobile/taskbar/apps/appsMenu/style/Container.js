@@ -27,8 +27,8 @@ export const Container = styled.section`
     animation: ${slideUp} 0.4s ease-out 1 forwards;
     backdrop-filter: blur(4px);
 
-    ${(props) =>
-        props.isAuthOpen &&
+    ${({ isAuthOpen }) =>
+        isAuthOpen &&
         css`
             padding: 0.5rem;
         `}

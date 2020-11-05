@@ -21,7 +21,7 @@ body {
     padding: 0;
     height: 100%;
     width: 100%;
-    background: ${(props) => props.background} var(--black80);
+    background: ${({ background }) => background} var(--black80);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -33,14 +33,14 @@ body {
     width: 100%;
     height: 100%;
 
-    ${(props) =>
-        props.renderStyles &&
+    ${({ renderStyles, linux, windows, mobile }) =>
+        renderStyles &&
         css`
-            ${props.linux &&
+            ${linux &&
             css`
                 height: 100%;
             `}
-            ${(props.windows || props.mobile) &&
+            ${(windows || mobile) &&
             css`
                 height: calc(100% - 3.5rem);
             `}
@@ -48,8 +48,8 @@ body {
 }
 
 #taskbar {
-    ${(props) =>
-        props.renderStyles &&
+    ${({ renderStyles, linux, windows, mobile }) =>
+        renderStyles &&
         css`
             background-color: var(--background);
             z-index: ${zIndex.taskbar};
@@ -57,7 +57,7 @@ body {
             user-select: none;
             overflow: hidden;
 
-            ${props.linux &&
+            ${linux &&
             css`
                 position: absolute;
                 bottom: 0.5rem;
@@ -71,7 +71,7 @@ body {
                     0px 0px 12px 0px rgba(0, 0, 0, 0.12);
             `}
 
-            ${(props.windows || props.mobile) &&
+            ${(windows || mobile) &&
             css`
                 position: fixed;
                 bottom: 0;
@@ -85,8 +85,8 @@ body {
 }
 
 #modal {
-    z-index: ${zIndex.modal};
     position: relative;
+    z-index: ${zIndex.modal};
 }
 
 #video {

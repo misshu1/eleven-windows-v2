@@ -21,9 +21,9 @@ export const AppIcon = styled.div`
         border-radius: 1rem;
     }
 
-    ${(props) =>
-        props.isActive &&
-        props.minimize !== true &&
+    ${({ isActive, minimize }) =>
+        isActive &&
+        minimize !== true &&
         css`
             background-color: var(--backgroundActive);
             &&::after {

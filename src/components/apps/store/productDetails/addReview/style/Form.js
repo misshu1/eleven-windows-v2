@@ -65,8 +65,8 @@ export const Form = styled.form`
     }
 
     #review {
-        ${(props) =>
-            props.errors.review &&
+        ${({ errors }) =>
+            errors.review &&
             css`
                 box-shadow: 0 0 0 1px red;
                 border: 1px solid red;

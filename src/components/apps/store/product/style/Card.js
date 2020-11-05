@@ -19,13 +19,13 @@ export const Card = styled.div`
             0px 0px 10px -2px var(--boxShadow);
     }
 
-    ${(props) =>
-        props.type === 'donation' &&
+    ${({ type }) =>
+        type === 'donation' &&
         css`
             background-color: rgba(70, 143, 97, 0.5);
         `}
-    ${(props) =>
-        props.type === 'product' &&
+    ${({ type }) =>
+        type === 'product' &&
         css`
             background-color: var(--backgroundCard);
         `}

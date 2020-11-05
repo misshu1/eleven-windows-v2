@@ -4,7 +4,7 @@ export const ThemePreview = styled.div`
     position: relative;
     width: 15rem;
     height: 8rem;
-    background: ${(props) => props.background};
+    background: ${({ background }) => background};
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -13,10 +13,10 @@ export const ThemePreview = styled.div`
         0px 0px 5px 0px rgba(0, 0, 0, 0.14),
         0px 0px 10px 0px rgba(0, 0, 0, 0.12);
 
-    ${(props) =>
-        props.isVideoEnabledOnDesktop &&
+    ${({ isVideoEnabledOnDesktop, getSelectedVideoPreview }) =>
+        isVideoEnabledOnDesktop &&
         css`
-            background: url(${props.getSelectedVideoPreview});
+            background: url(${getSelectedVideoPreview});
             background-size: 100% 100%;
         `}
 

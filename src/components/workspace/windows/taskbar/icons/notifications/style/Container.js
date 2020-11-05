@@ -10,7 +10,7 @@ export const Container = styled.li`
     font-size: 1.5rem;
     margin: 0 1px;
     outline: none;
-    background-color: ${(props) => props.open && 'var(--backgroundHover)'};
+    background-color: ${({ open }) => open && 'var(--backgroundHover)'};
     color: var(--colorDefault);
 
     &&:hover,

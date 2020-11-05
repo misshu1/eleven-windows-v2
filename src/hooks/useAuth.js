@@ -4,14 +4,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useFirebaseContext, useNotificationsContext } from 'contexts';
 
 const AuthContext = createContext();
-export function AuthProvider(props) {
+export function AuthProvider({ children }) {
     const auth = useProvideAuth();
 
-    return (
-        <AuthContext.Provider value={auth}>
-            {props.children}
-        </AuthContext.Provider>
-    );
+    return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
 
 function useProvideAuth() {

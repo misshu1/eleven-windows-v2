@@ -7,5 +7,5 @@ export const Container = styled.li`
     cursor: default;
     font-size: 1.5rem;
     outline: none;
-    background-color: ${(props) => props.open && 'var(--backgroundHover)'};
+    background-color: ${({ open }) => open && 'var(--backgroundHover)'};
 `;

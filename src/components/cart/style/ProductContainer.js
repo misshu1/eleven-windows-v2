@@ -9,14 +9,14 @@ export const ProductContainer = styled.div`
     border-radius: 0.5rem;
     position: relative;
 
-    ${(props) =>
-        props.type === 'donation' &&
+    ${({ type }) =>
+        type === 'donation' &&
         css`
             background: rgba(70, 143, 97, 0.5);
         `}
 
-    ${(props) =>
-        props.type === 'product' &&
+    ${({ type }) =>
+        type === 'product' &&
         css`
             background-color: var(--backgroundCard);
         `}

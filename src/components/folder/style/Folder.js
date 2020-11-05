@@ -11,15 +11,15 @@ export const Folder = styled.section`
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 
     @media only screen and (min-width: 450px) {
-        ${(props) =>
-            !props.isMaximize &&
+        ${({ isMaximize, height, width }) =>
+            !isMaximize &&
             css`
-                height: ${props.height ? props.height : '44rem'};
-                width: ${props.width ? props.width : '44rem'};
+                height: ${height ? height : '44rem'};
+                width: ${width ? width : '44rem'};
             `}
 
-        ${(props) =>
-            props.isLinuxSelected === true &&
+        ${({ isLinuxSelected }) =>
+            isLinuxSelected === true &&
             css`
                 border-top-left-radius: 1em;
                 border-top-right-radius: 1em;

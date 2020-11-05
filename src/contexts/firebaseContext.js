@@ -13,7 +13,7 @@ const firebaseConfig = {
     storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
     appId: process.env.REACT_APP_FIREBASE_APP_ID,
-    measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 if (!firebase.apps.length) {
@@ -25,7 +25,7 @@ const firestore = firebase.firestore();
 const storage = firebase.storage();
 
 const FirebaseContext = createContext(null);
-export const FirebaseProvider = (props) => {
+export const FirebaseProvider = ({ children }) => {
     const firebaseTimestamp = firebase.firestore.Timestamp.now;
     const firestoreTimestampFromDate = (date) =>
         firebase.firestore.Timestamp.fromDate(date);
@@ -37,10 +37,10 @@ export const FirebaseProvider = (props) => {
                 firestore,
                 storage,
                 firebaseTimestamp,
-                firestoreTimestampFromDate,
+                firestoreTimestampFromDate
             }}
         >
-            {props.children}
+            {children}
         </FirebaseContext.Provider>
     );
 };

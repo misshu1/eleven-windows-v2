@@ -7,7 +7,7 @@ export const Container = styled.li`
     width: 4rem;
     height: 100%;
     outline: none;
-    background-color: ${(props) => props.open && 'var(--backgroundHover)'};
+    background-color: ${({ open }) => open && 'var(--backgroundHover)'};
 
     &&:hover,
     &&:focus {

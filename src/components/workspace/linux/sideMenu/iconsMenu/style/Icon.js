@@ -9,11 +9,11 @@ export const Icon = styled.div`
     height: 3rem;
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
-    background: ${(props) => props.isActive && 'var(--primary)'};
-    color: ${(props) => props.isActive && '#fff'};
+    background: ${({ isActive }) => isActive && 'var(--primary)'};
+    color: ${({ isActive }) => isActive && '#fff'};
 
-    ${(props) =>
-        props.close &&
+    ${({ close }) =>
+        close &&
         css`
             font-size: 1rem;
             border-radius: 0;
