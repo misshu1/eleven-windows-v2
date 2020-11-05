@@ -115,7 +115,7 @@ const ListItemLink = ({ item, onClick }) => {
     );
 };
 
-const DrawerApp = forwardRef((props, ref) => {
+export const DrawerApp = forwardRef((props, ref) => {
     const { toolbarMenu, closeDrawer } = props;
 
     return (
@@ -131,7 +131,8 @@ const DrawerApp = forwardRef((props, ref) => {
     );
 });
 
-export default DrawerApp;
+Drawer.displayName = 'Drawer';
+DrawerApp.displayName = 'Drawer';
 
 DrawerApp.propTypes = {
     toolbarMenu: PropTypes.array.isRequired,

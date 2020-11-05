@@ -18,7 +18,7 @@ import {
 } from 'contexts';
 import { useFolderScroll, useMediaQuery } from 'hooks';
 import { ScrollbarApp } from 'components/common';
-import DrawerApp from './drawer/DrawerApp';
+import { DrawerApp } from './drawer/DrawerApp';
 import { AnimateFadeInOut, Content, Folder } from './style';
 import FolderToolbar from './toolbar/FolderToolbar';
 import { zIndex } from 'components/theme/zIndex';
@@ -172,6 +172,8 @@ const FolderApp = forwardRef((props, ref) => {
 });
 
 export default FolderApp;
+
+FolderApp.displayName = 'FolderApp';
 
 FolderApp.propTypes = {
     appId: PropTypes.number.isRequired,

@@ -12,7 +12,7 @@ const ClockIconApp = ({ clockRef }) => {
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
         day: new Date().getDate(),
-        wDay: new Date().getDay(),
+        wDay: new Date().getDay()
     });
     const { hour, minute, year, month, day, wDay } = clock;
     const { toggleCalendar, isCalendarOpen } = useClockCalendarContext();
@@ -22,7 +22,7 @@ const ClockIconApp = ({ clockRef }) => {
     let hours = hour;
     let minutes = minute;
     let session = ' AM';
-    let currentMonth = month + 1;
+    const currentMonth = month + 1;
 
     if (currentDay < 10) {
         currentDay = '0' + day;
@@ -45,7 +45,7 @@ const ClockIconApp = ({ clockRef }) => {
                 minute: new Date().getMinutes(),
                 year: new Date().getFullYear(),
                 month: new Date().getMonth(),
-                day: new Date().getDate(),
+                day: new Date().getDate()
             }));
         }, 1000);
 

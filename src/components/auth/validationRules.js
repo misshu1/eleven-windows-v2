@@ -1,5 +1,5 @@
 const validationRules = (values) => {
-    let errors = {};
+    const errors = {};
 
     // Name Errors
     if (!values.name) {

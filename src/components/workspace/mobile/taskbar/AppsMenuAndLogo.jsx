@@ -5,7 +5,7 @@ import { SpinnerApp } from 'components/common';
 import LogoIconApp from './icons/logo/LogoIconApp';
 
 const AppsMenu = lazy(() =>
-    import('../../mobile/taskbar/apps/appsMenu/AppsMenu')
+    import('components/workspace/mobile/taskbar/apps/appsMenu/AppsMenu')
 );
 
 const AppsMenuAndLogo = () => {

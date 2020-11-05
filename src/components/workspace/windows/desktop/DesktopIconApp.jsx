@@ -39,6 +39,8 @@ function checkProps(prevState, nextState) {
     );
 }
 
+DesktopIconApp.displayName = 'DesktopIconApp';
+
 export default DesktopIconApp;
 
 DesktopIconApp.propTypes = {

@@ -12,7 +12,7 @@ import { useSettingsContext } from 'contexts';
 import { ThemePreview } from './style';
 
 const calculatorButtons = () => {
-    let arr = [];
+    const arr = [];
     for (let i = 0; i < 16; i++) {
         arr.push(
             <span key={i}>

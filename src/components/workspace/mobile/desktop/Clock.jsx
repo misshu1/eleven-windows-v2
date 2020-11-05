@@ -30,7 +30,7 @@ const Clock = () => {
         minute: new Date().getMinutes(),
         month: new Date().getMonth(),
         day: new Date().getDate(),
-        wDay: new Date().getDay(),
+        wDay: new Date().getDay()
     });
     const { hour, minute, month, day, wDay } = clock;
     const { t } = useTranslation();
@@ -38,7 +38,7 @@ const Clock = () => {
     let currentDay = day;
     let hours = hour;
     let minutes = minute;
-    let currentMonth = month + 1;
+    const currentMonth = month + 1;
 
     if (hour < 10) {
         hours = '0' + hour;
@@ -58,7 +58,7 @@ const Clock = () => {
                 hour: new Date().getHours(),
                 minute: new Date().getMinutes(),
                 month: new Date().getMonth(),
-                day: new Date().getDate(),
+                day: new Date().getDate()
             }));
         }, 1000);
 

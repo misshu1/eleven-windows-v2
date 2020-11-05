@@ -56,7 +56,7 @@ function CalendarClock({ goToToday }) {
     let minutes = minute;
     let seconds = second;
     let session = ' AM';
-    let currentMonth = month + 1;
+    const currentMonth = month + 1;
 
     if (minutes < 10) {
         minutes = '0' + minutes;
