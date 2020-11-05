@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import SpinnerApp from 'components/common/SpinnerApp';
+import { SpinnerApp } from 'components/common';
 
 const TaskbarWindowsApp = lazy(() => import('./taskbar/TaskbarWindowsApp'));
 const DesktopWindowsApp = lazy(() => import('./desktop/DesktopWindowsApp'));

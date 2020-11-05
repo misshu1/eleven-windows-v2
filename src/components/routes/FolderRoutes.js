@@ -3,7 +3,7 @@ import { Navigate, Route, useLocation, useNavigate } from 'react-router-dom';
 
 import { useDispatchFolderContext, useFolderContext } from 'contexts';
 import { useAuth, useMediaQuery, usePrevious } from 'hooks';
-import SpinnerApp from 'components/common/SpinnerApp';
+import { SpinnerApp } from 'components/common';
 
 const FolderRoutes = () => {
     const [pathExists, setPathExists] = useState(true);

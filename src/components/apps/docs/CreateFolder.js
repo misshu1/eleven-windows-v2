@@ -4,7 +4,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Emoji from 'components/common/Emoji';
+import { Emoji } from 'components/common';
 import React, { forwardRef, useEffect, useState } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
@@ -19,41 +19,41 @@ SyntaxHighlighter.registerLanguage('jsx', jsx);
 const StyledTableCell = withStyles({
     root: {
         borderBottom: '1px solid rgba(0, 0, 0, 0.5)',
-        color: 'inherit',
+        color: 'inherit'
     },
     head: {
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
-        fontWeight: 900,
-    },
+        fontWeight: 900
+    }
 })(TableCell);
 
 const StyledTableRow = withStyles({
     root: {
-        backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    },
+        backgroundColor: 'rgba(0, 0, 0, 0.1)'
+    }
 })(TableRow);
 
 const useStyles = makeStyles({
     root: {
         width: '100%',
-        overflowX: 'auto',
+        overflowX: 'auto'
     },
     table: {
         display: 'table',
         '@media only screen and (max-width: 450px)': {
-            display: 'block',
+            display: 'block'
         },
-        overflowX: 'auto',
+        overflowX: 'auto'
     },
     name: {
-        whiteSpace: 'nowrap',
+        whiteSpace: 'nowrap'
     },
     description: {
         '@media only screen and (max-width: 450px)': {
             display: 'block',
-            width: '20rem',
-        },
-    },
+            width: '20rem'
+        }
+    }
 });
 
 const appIdDescription = (
@@ -97,7 +97,7 @@ const folderPropsTable = [
     createData('marginTop', false, 'Number', '60', marginTopDescription),
     createData('marginLeft', false, 'Number', '60', marginLeftDescription),
     createData('toolbarMenu', false, 'Array', '-', toolbarMenuDescription),
-    createData('ref', false, 'Object', '-', refDescription),
+    createData('ref', false, 'Object', '-', refDescription)
 ];
 
 const CreateFolder = (props, ref) => {

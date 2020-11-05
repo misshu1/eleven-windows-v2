@@ -8,7 +8,7 @@ import uuid from 'uuid/v4';
 
 import { FolderIcon, LogoIcon } from 'assets/images/icons';
 import { useNotificationsContext, useSettingsContext } from 'contexts';
-import Emoji from 'components/common/Emoji';
+import { Emoji } from 'components/common';
 import FolderApp from 'components/folder/FolderApp';
 import {
     customScrollbarExample,

@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 
 import { expandedMenuAnimations } from 'components/animations';
-import SpinnerApp from 'components/common/SpinnerApp';
+import { SpinnerApp } from 'components/common';
 import { useSideMenuContext } from '../../contexts/sideMenuContext';
 import { Container } from './style';
 

@@ -14,7 +14,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useMediaQuery } from 'hooks';
-import SpinnerApp from 'components/common/SpinnerApp';
+import { SpinnerApp } from 'components/common';
 import { Container } from './style';
 
 const useStyles = makeStyles({

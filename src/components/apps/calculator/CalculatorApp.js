@@ -1,5 +1,5 @@
 import React from 'react';
-import Emoji from 'components/common/Emoji';
+import { Emoji } from 'components/common';
 import FolderApp from 'components/folder/FolderApp';
 
 import { ButtonsContainer, Container, NumberPad, Operators } from './style';
@@ -20,7 +20,7 @@ const CalculatorApp = () => {
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            height: '100%',
+                            height: '100%'
                         }}
                     >
                         <Emoji symbol='📝' label='desert' /> Don't touch this,

@@ -9,7 +9,7 @@ import { useMediaQuery } from 'hooks';
 import { modalPageAnimation } from 'components/animations';
 import Product from 'components/cart/Product';
 import StoreButton from 'components/cart/StoreButton';
-import ScrollbarApp from 'components/common/ScrollbarApp';
+import { ScrollbarApp } from 'components/common';
 import CheckoutApp from './CheckoutApp';
 import { CheckoutContainer, Container } from './style';
 

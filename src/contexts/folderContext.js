@@ -7,13 +7,11 @@ import React, {
     useReducer
 } from 'react';
 
-import {
-    CalculatorIcon,
-    DocsIcon,
-    SettingsIcon,
-    StoreIcon,
-    TaskIcon
-} from 'assets/images/icons';
+import { CalculatorIcon } from 'assets/images/icons/CalculatorIcon';
+import { SettingsIcon } from 'assets/images/icons/SettingsIcon';
+import { DocsIcon } from 'assets/images/icons/DocsIcon';
+import { TaskIcon } from 'assets/images/icons/TaskIcon';
+import { StoreIcon } from 'assets/images/icons/StoreIcon';
 import { useAuth } from 'hooks';
 
 const DocsApp = lazy(() => import('components/apps/docs/DocsApp'));

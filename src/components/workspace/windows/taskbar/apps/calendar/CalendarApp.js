@@ -4,7 +4,7 @@ import Calendar from 'react-calendar/dist/entry.nostyle';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
-import ScrollbarApp from 'components/common/ScrollbarApp';
+import { ScrollbarApp } from 'components/common';
 import { ClockContainer, Container, CustomCalendarStyles } from './style';
 
 const CalendarApp = ({ calendarRef }) => {

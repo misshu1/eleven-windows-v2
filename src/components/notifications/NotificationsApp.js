@@ -5,7 +5,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useNotificationsContext } from 'contexts';
-import ScrollbarApp from 'components/common/ScrollbarApp';
+import { ScrollbarApp } from 'components/common';
 import { Container } from './style';
 
 const useStyles = makeStyles({

@@ -3,7 +3,7 @@ import { SnackbarProvider } from 'notistack';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import SpinnerApp from 'components/common/SpinnerApp';
+import { SpinnerApp } from 'components/common';
 import RoutesApp from 'components/routes/Routes';
 import { GlobalStyle } from 'components/style';
 import {

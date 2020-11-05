@@ -17,7 +17,7 @@ import {
     useSettingsContext
 } from 'contexts';
 import { useFolderScroll, useMediaQuery } from 'hooks';
-import ScrollbarApp from '../common/ScrollbarApp';
+import { ScrollbarApp } from 'components/common';
 import DrawerApp from './drawer/DrawerApp';
 import { AnimateFadeInOut, Content, Folder } from './style';
 import FolderToolbar from './toolbar/FolderToolbar';

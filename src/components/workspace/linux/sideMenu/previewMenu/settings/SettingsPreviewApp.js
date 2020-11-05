@@ -4,7 +4,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
-import i18n from 'i18next';
 import React, { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -15,10 +14,10 @@ import {
 } from 'contexts';
 
 import { useMediaQuery } from 'hooks';
-import { languages } from '../../../../../../i18next';
+import i18n, { languages } from '../../../../../../i18next';
 import Preview from 'components/apps/settings/Preview';
 import { FlagImgContainer } from 'components/apps/settings/style';
-import ScrollbarApp from 'components/common/ScrollbarApp';
+import { ScrollbarApp } from 'components/common';
 import { FlagImg } from 'components/workspace/windows/taskbar/icons/language/style/FlagImg';
 import { Box, Container } from './style';
 

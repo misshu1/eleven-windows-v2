@@ -9,8 +9,7 @@ import { PowerOffIcon } from 'assets/images/icons';
 import { ICON_LOCATION, useFolderContext } from 'contexts';
 import { useAuth } from 'hooks';
 import LoginButton from 'components/auth/LoginButton';
-import ScrollbarApp from 'components/common/ScrollbarApp';
-import SpinnerApp from 'components/common/SpinnerApp';
+import { ScrollbarApp, SpinnerApp } from 'components/common';
 import { Container, LoginContainer, Widget } from './style';
 
 const AuthApp = lazy(() => import('components/auth/AuthApp'));

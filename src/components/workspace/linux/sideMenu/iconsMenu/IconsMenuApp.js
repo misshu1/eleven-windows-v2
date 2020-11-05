@@ -6,7 +6,7 @@ import React from 'react';
 
 import { useNotificationsContext, useCartContext } from 'contexts';
 import { fadeAnimations, iconsMenuAnimations } from 'components/animations';
-import ScrollbarApp from 'components/common/ScrollbarApp';
+import { ScrollbarApp } from 'components/common';
 import { useSideMenuContext } from '../../contexts/sideMenuContext';
 import { Container, Icon, IconsMenu } from './style';
 

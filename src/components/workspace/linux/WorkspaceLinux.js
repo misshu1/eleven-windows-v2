@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 
-import SpinnerApp from 'components/common/SpinnerApp';
+import { SpinnerApp } from 'components/common';
 import { SideMenuProvider } from './contexts/sideMenuContext';
 
 const TaskbarLinuxApp = lazy(() => import('./taskbar/TaskbarLinuxApp'));

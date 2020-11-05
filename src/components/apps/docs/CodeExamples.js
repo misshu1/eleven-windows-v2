@@ -224,7 +224,7 @@ export const folderStructureExample = `
 `.trim();
 
 export const customScrollbarExample = `
-import ScrollbarApp from 'src/common/ScrollbarApp';
+import { ScrollbarApp } from 'src/common';
 
 // The 'ScrollbarApp' should have a single child
 <ScrollbarApp>
@@ -235,7 +235,7 @@ import ScrollbarApp from 'src/common/ScrollbarApp';
 `.trim();
 
 export const customScrollbarWithScrollTopExample = `
-import ScrollbarApp from 'src/common/ScrollbarApp';
+import { ScrollbarApp } from 'src/common';
 import useFolderScroll from 'src/hooks/useFolderScroll';
 
 const FolderContent = (props) => {

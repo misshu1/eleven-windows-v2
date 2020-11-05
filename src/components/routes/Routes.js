@@ -2,8 +2,7 @@ import React, { lazy, Suspense, useEffect, useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { useNotificationsContext } from 'contexts';
-import Emoji from 'components/common/Emoji';
-import SpinnerApp from 'components/common/SpinnerApp';
+import { Emoji, SpinnerApp } from 'components/common';
 import WorkspaceApp from 'components/workspace/WorkspaceApp';
 
 const LoginPage = lazy(() => import('components/pages/login/LoginPage'));

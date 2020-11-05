@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useCallback, useRef, useState } from 'react';
 
 import { useOnClickOutside } from 'hooks';
-import SpinnerApp from 'components/common/SpinnerApp';
+import { SpinnerApp } from 'components/common';
 import { CartIconApp } from './icons/cart/CartIconApp';
 
 const CartMobileApp = lazy(() => import('./apps/cart/CartMobileApp'));

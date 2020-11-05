@@ -5,7 +5,7 @@ const ScrollbarWrapper = ({ children }) => {
     return <>{children}</>;
 };
 
-const ScrollbarApp = ({ children, requireChildrenProps, ...props }) => {
+export function ScrollbarApp({ children, requireChildrenProps, ...props }) {
     // You might be wondering why is this initial state set to 1 instead of 0
     // The folder menu 'DrawerApp' will not work unless you scroll down at least 1px
     const [scrollTop, setScrollTop] = useState(1);
@@ -23,7 +23,7 @@ const ScrollbarApp = ({ children, requireChildrenProps, ...props }) => {
             const childrenWithProps = Children.map(children, (child) => {
                 return cloneElement(child, {
                     scrollTop,
-                    setScrollTop,
+                    setScrollTop
                 });
             });
 
@@ -37,26 +37,26 @@ const ScrollbarApp = ({ children, requireChildrenProps, ...props }) => {
         <Scrollbar
             style={{ width: '100%', height: '100%' }}
             thumbYProps={{
-                style: { background: 'var(--primary)', cursor: 'default' },
+                style: { background: 'var(--primary)', cursor: 'default' }
             }}
             thumbXProps={{
-                style: { background: 'var(--primary)', cursor: 'default' },
+                style: { background: 'var(--primary)', cursor: 'default' }
             }}
             trackYProps={{
                 style: {
-                    width: '8px',
-                },
+                    width: '8px'
+                }
             }}
             trackXProps={{
                 style: {
-                    height: '8px',
-                },
+                    height: '8px'
+                }
             }}
             contentProps={{
                 style: {
                     position: 'relative',
-                    padding: 0,
-                },
+                    padding: 0
+                }
             }}
             onScroll={handleScroll}
             scrollTop={scrollTop}
@@ -65,6 +65,4 @@ const ScrollbarApp = ({ children, requireChildrenProps, ...props }) => {
             {checkChildren()}
         </Scrollbar>
     );
-};
-
-export default ScrollbarApp;
+}

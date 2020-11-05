@@ -37,7 +37,7 @@ const SpinerGlobal = ({ ready, style }) => {
     );
 };
 
-const SpinnerApp = ({ delay = 0, global, style }) => {
+export function SpinnerApp({ delay = 0, global, style }) {
     const [ready, setReady] = useState(false);
 
     // Here we set a delay, so if the app loads faster then the specified delay, we will not display a loading indicator
@@ -57,10 +57,8 @@ const SpinnerApp = ({ delay = 0, global, style }) => {
             {!global && <SpinerLocal ready={ready} style={style} />}
         </>
     );
-};
-
-export default SpinnerApp;
+}
 
 SpinnerApp.propTypes = {
-    delay: PropTypes.number,
+    delay: PropTypes.number
 };

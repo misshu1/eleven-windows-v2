@@ -5,7 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import ScrollbarApp from 'components/common/ScrollbarApp';
+import { ScrollbarApp } from 'components/common';
 import { Container, Form } from './style';
 import useAuthValidation from './useAuthValidation';
 

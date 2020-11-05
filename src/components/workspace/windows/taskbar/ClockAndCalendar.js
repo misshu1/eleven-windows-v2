@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useRef } from 'react';
 
 import { useOnClickOutside } from 'hooks';
-import SpinnerApp from 'components/common/SpinnerApp';
+import { SpinnerApp } from 'components/common';
 import { useClockCalendarContext } from './contexts/clockCalendarContext';
 import ClockIconApp from './icons/clock/ClockIconApp';
 

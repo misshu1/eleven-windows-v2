@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import React, { forwardRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-import ScrollbarApp from '../../common/ScrollbarApp';
+import { ScrollbarApp } from 'components/common';
 import { Container } from './style';
 
 const useStyles = makeStyles({
@@ -16,16 +16,16 @@ const useStyles = makeStyles({
         width: '100%',
         maxWidth: '100%',
         backgroundColor: 'transparent',
-        color: 'var(--colorDefault)',
+        color: 'var(--colorDefault)'
     },
     listItemStyle: {
         '&:hover': {
             cursor: 'default',
-            background: 'rgba(0, 0, 0, 0.2)',
-        },
+            background: 'rgba(0, 0, 0, 0.2)'
+        }
     },
     fontIconStyle: {
-        color: 'var(--primary)',
+        color: 'var(--primary)'
     },
     listIconStyle: {
         marginRight: '1rem',
@@ -33,8 +33,8 @@ const useStyles = makeStyles({
         height: '2rem',
         justifyContent: 'center',
         alignItems: 'center',
-        minWidth: 'unset',
-    },
+        minWidth: 'unset'
+    }
 });
 
 const scrollToRef = (refObj, refName) => {
@@ -70,7 +70,7 @@ const Drawer = forwardRef((props, ref) => {
                             item.onClick && item.onClick();
                             close();
                         }}
-                    />,
+                    />
                 ])
         );
 
@@ -135,5 +135,5 @@ export default DrawerApp;
 
 DrawerApp.propTypes = {
     toolbarMenu: PropTypes.array.isRequired,
-    closeDrawer: PropTypes.func.isRequired,
+    closeDrawer: PropTypes.func.isRequired
 };

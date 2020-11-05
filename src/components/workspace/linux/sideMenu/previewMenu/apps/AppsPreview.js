@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 
 import { ICON_LOCATION, useFolderContext } from 'contexts';
-import ScrollbarApp from 'components/common/ScrollbarApp';
+import { ScrollbarApp } from 'components/common';
 import { useSideMenuContext } from '../../../contexts/sideMenuContext';
 import MenuAppIcon from './MenuAppIcon';
 import { Container } from './style';
