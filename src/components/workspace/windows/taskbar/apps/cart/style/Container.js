@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { zIndex } from 'components/theme/zIndex';
 
 const slideUp = keyframes`
 0% {
@@ -12,7 +13,7 @@ const slideUp = keyframes`
 `;
 
 export const Container = styled.section`
-    z-index: 250;
+    z-index: ${zIndex.windows.cart};
     position: absolute;
     user-select: none;
     top: 0;

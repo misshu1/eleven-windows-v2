@@ -12,6 +12,7 @@ import { SettingsIcon } from 'assets/images/icons/SettingsIcon';
 import { DocsIcon } from 'assets/images/icons/DocsIcon';
 import { TaskIcon } from 'assets/images/icons/TaskIcon';
 import { StoreIcon } from 'assets/images/icons/StoreIcon';
+import { zIndex } from 'components/theme/zIndex';
 import { useAuth } from 'hooks';
 
 const DocsApp = lazy(() => import('components/apps/docs/DocsApp'));
@@ -23,11 +24,6 @@ const CalculatorApp = lazy(() =>
 const TaskManagerApp = lazy(() =>
     import('components/apps/taskManager/TaskManagerApp')
 );
-
-export const FOLDER_Z_INDEX = {
-    default: 100,
-    active: 104
-};
 
 const FOLDER_ACTIONS = {
     open: 'OPEN',
@@ -75,7 +71,7 @@ const APPS_STATE = [
         isMinimize: null,
         isMaximize: null,
         allowMaximize: true,
-        appIndex: FOLDER_Z_INDEX.default,
+        appIndex: zIndex.folder.default,
         iconLocation: [
             ICON_LOCATION.windows.desktop,
             ICON_LOCATION.windows.notificationsWindow,
@@ -96,7 +92,7 @@ const APPS_STATE = [
         isMinimize: null,
         isMaximize: null,
         allowMaximize: true,
-        appIndex: FOLDER_Z_INDEX.default,
+        appIndex: zIndex.folder.default,
         iconLocation: [
             ICON_LOCATION.windows.desktop,
             ICON_LOCATION.windows.startMenu.right,
@@ -117,7 +113,7 @@ const APPS_STATE = [
         isMinimize: null,
         isMaximize: null,
         allowMaximize: false,
-        appIndex: FOLDER_Z_INDEX.default,
+        appIndex: zIndex.folder.default,
         iconLocation: [
             ICON_LOCATION.windows.startMenu.right,
             ICON_LOCATION.linux.appsMenu,
@@ -136,7 +132,7 @@ const APPS_STATE = [
         isMinimize: null,
         isMaximize: null,
         allowMaximize: true,
-        appIndex: FOLDER_Z_INDEX.default,
+        appIndex: zIndex.folder.default,
         iconLocation: [
             ICON_LOCATION.windows.desktop,
             ICON_LOCATION.windows.startMenu.right,
@@ -158,7 +154,7 @@ const APPS_STATE = [
         isMinimize: null,
         isMaximize: null,
         allowMaximize: true,
-        appIndex: FOLDER_Z_INDEX.default,
+        appIndex: zIndex.folder.default,
         iconLocation: [
             ICON_LOCATION.windows.notificationsWindow,
             ICON_LOCATION.linux.appsMenu
@@ -179,9 +175,9 @@ const folderReducer = (state, action) => {
                             ? {
                                   ...app,
                                   isOpen: true,
-                                  appIndex: FOLDER_Z_INDEX.active
+                                  appIndex: zIndex.folder.active
                               }
-                            : { ...app, appIndex: FOLDER_Z_INDEX.default }
+                            : { ...app, appIndex: zIndex.folder.default }
                     ),
                     openApps: [
                         ...state.openApps,
@@ -203,7 +199,7 @@ const folderReducer = (state, action) => {
                                   ...app,
                                   isOpen: false,
                                   isMinimize: null,
-                                  appIndex: FOLDER_Z_INDEX.default
+                                  appIndex: zIndex.folder.default
                               }
                             : app
                     ),
@@ -277,13 +273,13 @@ const folderReducer = (state, action) => {
         }
 
         case FOLDER_ACTIONS.active: {
-            if (currentApp.appIndex !== FOLDER_Z_INDEX.active) {
+            if (currentApp.appIndex !== zIndex.folder.active) {
                 return {
                     ...state,
                     apps: state.apps.map((app) =>
                         app.id === action.payload
-                            ? { ...app, appIndex: FOLDER_Z_INDEX.active }
-                            : { ...app, appIndex: FOLDER_Z_INDEX.default }
+                            ? { ...app, appIndex: zIndex.folder.active }
+                            : { ...app, appIndex: zIndex.folder.default }
                     )
                 };
             } else {
@@ -298,7 +294,7 @@ const folderReducer = (state, action) => {
                     ...app,
                     isOpen: null,
                     isMinimize: null,
-                    appIndex: FOLDER_Z_INDEX.default
+                    appIndex: zIndex.folder.default
                 })),
                 openApps: []
             };
@@ -398,7 +394,7 @@ export const FolderProvider = ({ children }) => {
                 (folderApp) => folderApp.id === appId
             );
 
-            return app.appIndex === FOLDER_Z_INDEX.active;
+            return app.appIndex === zIndex.folder.active;
         },
         [folderState]
     );

@@ -15,6 +15,7 @@ import {
 import { useAuth } from 'hooks';
 import IconApp from './IconApp';
 import { Container } from './style';
+import { zIndex } from 'components/theme/zIndex';
 
 const ITEM_HEIGHT = 48;
 
@@ -61,7 +62,7 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
         <Container
             ref={toolbarRef}
             isOpen={isOpen}
-            style={{ zIndex: '150' }}
+            style={{ zIndex: zIndex.quickAccessToolbar }}
             key='quickAccessToolbarAnimation'
             initial='initial'
             animate='open'

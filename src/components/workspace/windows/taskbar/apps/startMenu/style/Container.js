@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
+import { zIndex } from 'components/theme/zIndex';
 
 const slideUp = keyframes`
 0% {
@@ -28,7 +29,7 @@ export const Container = styled.section`
     backdrop-filter: blur(4px);
     color: var(--colorDefault);
     user-select: none;
-    z-index: 250;
+    z-index: ${zIndex.windows.startMenu};
     animation: ${slideUp} 0.4s ease-out 1 forwards;
     box-shadow: 2px -2px 4px -1px rgba(0, 0, 0, 0.2),
         4px -4px 5px 0px rgba(0, 0, 0, 0.14),

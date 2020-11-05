@@ -1,5 +1,6 @@
 import { createGlobalStyle, css } from 'styled-components';
 import { normalize } from 'styled-normalize';
+import { zIndex } from 'components/theme/zIndex';
 
 export const GlobalStyle = createGlobalStyle`
 ${normalize}
@@ -24,11 +25,6 @@ body {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-}
-
-#pages {
-    position: relative;
-    z-index: 500;
 }
 
 #desktop {
@@ -56,7 +52,7 @@ body {
         props.renderStyles &&
         css`
             background-color: var(--background);
-            z-index: 300;
+            z-index: ${zIndex.taskbar};
             height: 3.5rem;
             user-select: none;
             overflow: hidden;
@@ -89,12 +85,13 @@ body {
 }
 
 #modal {
-    z-index: 200;
+    z-index: ${zIndex.modal};
     position: relative;
 }
 
 #video {
-    z-index: -100;
+    position: relative;
+    z-index: ${zIndex.video};
 }
 
 @media only screen and (min-width: 1901px) {

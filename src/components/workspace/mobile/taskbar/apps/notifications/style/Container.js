@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { zIndex } from 'components/theme/zIndex';
 
 const slideUp = keyframes`
 0% {
@@ -18,7 +19,7 @@ export const Container = styled.section`
     padding: 0 0.5rem;
     height: 100%;
     width: 100%;
-    z-index: 250;
+    z-index: ${zIndex.mobile.notifications};
     cursor: default;
     user-select: none;
     background-color: var(--backgroundTransparent);

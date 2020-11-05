@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import { zIndex } from 'components/theme/zIndex';
 
 const Container = styled.div`
     color: #d6d8de;
-    z-index: 1000;
+    z-index: ${zIndex.spinner};
     position: absolute;
     top: 50%;
     left: 50%;

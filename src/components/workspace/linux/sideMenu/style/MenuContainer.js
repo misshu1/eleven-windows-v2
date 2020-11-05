@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { zIndex } from 'components/theme/zIndex';
 
 export const MenuContainer = styled.section`
     display: flex;
@@ -7,6 +8,6 @@ export const MenuContainer = styled.section`
     top: 0;
     left: 0;
     color: var(--colorDefault);
-    z-index: 400;
+    z-index: ${zIndex.linux.sideMenu.body};
     user-select: none;
 `;

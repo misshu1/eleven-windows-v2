@@ -9,6 +9,7 @@ import { useAuth, useMediaQuery } from 'hooks';
 import { modalPageAnimation } from 'components/animations';
 import AuthApp from 'components/auth/AuthApp';
 import { AuthContiner, Container } from './style';
+import { zIndex } from 'components/theme/zIndex';
 
 const LoginPage = () => {
     const [showAuth, setShowAuth] = useState(true);
@@ -82,7 +83,7 @@ const LoginPage = () => {
                 open={showAuth}
                 onClick={onCancel}
                 style={{
-                    zIndex: 50,
+                    zIndex: zIndex.page.backdrop,
                     background: 'rgba(0,0,0,0.35)',
                     backdropFilter: 'blur(10px)'
                 }}

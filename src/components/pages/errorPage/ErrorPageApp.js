@@ -11,6 +11,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth, useMediaQuery } from 'hooks';
 import { modalPageAnimation } from 'components/animations';
 import { Container, ErrorContainer } from './style';
+import { zIndex } from 'components/theme/zIndex';
 
 const useStyles = makeStyles({
     btnStyle: {
@@ -134,7 +135,7 @@ const ErrorPageApp = () => {
                 open={showError}
                 onClick={goHome}
                 style={{
-                    zIndex: 50,
+                    zIndex: zIndex.page.backdrop,
                     background: 'rgba(0,0,0,0.35)',
                     backdropFilter: 'blur(10px)'
                 }}

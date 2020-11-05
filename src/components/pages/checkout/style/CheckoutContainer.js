@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { zIndex } from 'components/theme/zIndex';
 
 export const CheckoutContainer = styled(motion.div)`
     color: var(--colorDefault);
@@ -8,7 +9,7 @@ export const CheckoutContainer = styled(motion.div)`
     width: 100%;
     height: 100%;
     max-width: 80rem;
-    z-index: 100;
+    z-index: ${zIndex.page.body};
 
     @media only screen and (min-width: 450px) {
         border-radius: 0.5em;

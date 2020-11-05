@@ -9,6 +9,9 @@ export const ThemePreview = styled.div`
     background-position: center center;
     background-repeat: no-repeat;
     margin: 0.5rem 0;
+    box-shadow: 0px 0px 4px -1px rgba(0, 0, 0, 0.2),
+        0px 0px 5px 0px rgba(0, 0, 0, 0.14),
+        0px 0px 10px 0px rgba(0, 0, 0, 0.12);
 
     ${(props) =>
         props.isVideoEnabledOnDesktop &&

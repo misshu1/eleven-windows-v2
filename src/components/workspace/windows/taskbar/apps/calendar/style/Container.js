@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { zIndex } from 'components/theme/zIndex';
 
 const slideUp = keyframes`
 0% {
@@ -13,7 +14,7 @@ const slideUp = keyframes`
 
 export const Container = styled.section`
     user-select: none;
-    z-index: 250;
+    z-index: ${zIndex.windows.calendar};
     position: absolute;
     border-top: 1px solid var(--border);
     border-left: 1px solid var(--border);

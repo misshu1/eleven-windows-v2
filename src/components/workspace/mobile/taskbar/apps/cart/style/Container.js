@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { zIndex } from 'components/theme/zIndex';
 
 const slideUp = keyframes`
 0% {
@@ -17,7 +18,7 @@ export const Container = styled.section`
     left: 0;
     bottom: 0;
     right: 0;
-    z-index: 250;
+    z-index: ${zIndex.mobile.cart};
     background-color: var(--backgroundTransparent);
     width: 100%;
     height: 100%;

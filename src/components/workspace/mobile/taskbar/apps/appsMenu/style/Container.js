@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
+import { zIndex } from 'components/theme/zIndex';
 
 const slideUp = keyframes`
 0% {
@@ -22,7 +23,7 @@ export const Container = styled.section`
     background-color: var(--backgroundTransparent);
     color: var(--colorDefault);
     user-select: none;
-    z-index: 250;
+    z-index: ${zIndex.mobile.appsMenu};
     animation: ${slideUp} 0.4s ease-out 1 forwards;
     backdrop-filter: blur(4px);
 

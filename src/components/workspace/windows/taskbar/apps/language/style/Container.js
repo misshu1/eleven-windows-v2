@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { zIndex } from 'components/theme/zIndex';
 
 const slideUp = keyframes`
 0% {
@@ -15,7 +16,7 @@ export const Container = styled.section`
     display: flex;
     flex-wrap: wrap;
     max-height: 20rem;
-    z-index: 250;
+    z-index: ${zIndex.windows.language};
     position: absolute;
     user-select: none;
     border-top: 1px solid var(--border);

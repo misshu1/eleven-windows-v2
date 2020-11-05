@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { zIndex } from 'components/theme/zIndex';
 
 const slideFromLeft = keyframes`
 0% {
@@ -39,7 +40,7 @@ export const Container = styled.div`
     width: 20rem;
     height: 100%;
     border-left: 1px solid var(--border);
-    z-index: 1000;
+    z-index: ${zIndex.folder.drawer};
     right: 0;
     top: 0;
     bottom: 0;

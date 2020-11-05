@@ -21,6 +21,7 @@ import { ScrollbarApp } from 'components/common';
 import DrawerApp from './drawer/DrawerApp';
 import { AnimateFadeInOut, Content, Folder } from './style';
 import FolderToolbar from './toolbar/FolderToolbar';
+import { zIndex } from 'components/theme/zIndex';
 
 const FolderContent = (props) => {
     const { children, page, scrollTop, setScrollTop } = props;
@@ -141,7 +142,8 @@ const FolderApp = forwardRef((props, ref) => {
                                     <Backdrop
                                         open={showDrawer}
                                         style={{
-                                            zIndex: 500,
+                                            zIndex:
+                                                zIndex.folder.drawerBackdrop,
                                             marginTop: isMobile
                                                 ? '3.5rem'
                                                 : '2.5rem'

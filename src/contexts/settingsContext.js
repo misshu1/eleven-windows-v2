@@ -10,7 +10,10 @@ import React, {
 } from 'react';
 
 import globeImg from 'assets/images/flags/globe.svg';
-import { backgrounds } from 'components/theme/DesktopBackgrounds';
+import {
+    backgrounds,
+    BACKGROUND_TYPE
+} from 'components/theme/DesktopBackgrounds';
 import { THEME_TYPE, themes } from 'components/theme/themes';
 import { videoBackgrounds } from 'components/theme/VideoBackgrounds';
 import { useMediaQuery } from 'hooks';
@@ -165,7 +168,7 @@ export const SettingsProvider = ({ children }) => {
             (item) => item.isSelected === true
         );
 
-        if (bg.type === 'image') {
+        if (bg.type === BACKGROUND_TYPE.image) {
             if (isMobile) {
                 return bg.bg.mobile;
             } else {

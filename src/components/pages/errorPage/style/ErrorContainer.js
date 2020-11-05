@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { zIndex } from 'components/theme/zIndex';
 
 export const ErrorContainer = styled(motion.div)`
     display: flex;
@@ -11,7 +12,7 @@ export const ErrorContainer = styled(motion.div)`
     padding: 0.5rem;
     width: 100%;
     height: 100%;
-    z-index: 100;
+    z-index: ${zIndex.page.body};
 
     .error-code,
     .error-title,

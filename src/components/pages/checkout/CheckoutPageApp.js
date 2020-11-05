@@ -12,6 +12,7 @@ import StoreButton from 'components/cart/StoreButton';
 import { ScrollbarApp } from 'components/common';
 import CheckoutApp from './CheckoutApp';
 import { CheckoutContainer, Container } from './style';
+import { zIndex } from 'components/theme/zIndex';
 
 const CheckoutPageApp = () => {
     const [showCheckout] = useState(true);
@@ -55,7 +56,7 @@ const CheckoutPageApp = () => {
             <Backdrop
                 open={showCheckout}
                 style={{
-                    zIndex: 50,
+                    zIndex: zIndex.page.backdrop,
                     background: 'rgba(0,0,0,0.35)',
                     backdropFilter: 'blur(10px)'
                 }}
