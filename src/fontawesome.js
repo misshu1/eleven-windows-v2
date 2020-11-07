@@ -33,7 +33,9 @@ import {
     faTimes,
     faTrashAlt,
     faUserCircle,
-    faWindowMinimize
+    faWindowMinimize,
+    faChevronRight,
+    faChevronLeft
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -68,5 +70,7 @@ library.add(
     faRoute,
     faTelegramPlane,
     faPalette,
-    faHome
+    faHome,
+    faChevronRight,
+    faChevronLeft
 );

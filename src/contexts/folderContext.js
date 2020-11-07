@@ -24,6 +24,7 @@ const CalculatorApp = lazy(() =>
 const TaskManagerApp = lazy(() =>
     import('components/apps/taskManager/TaskManagerApp')
 );
+const CalendarApp = lazy(() => import('components/apps/calendar/CalendarApp'));
 
 const FOLDER_ACTIONS = {
     open: 'OPEN',
@@ -158,6 +159,27 @@ const APPS_STATE = [
         iconLocation: [
             ICON_LOCATION.windows.notificationsWindow,
             ICON_LOCATION.linux.appsMenu
+        ]
+    },
+    {
+        id: 6,
+        appName: 'Calendar',
+        widgetIcon: <CalculatorIcon />,
+        link: '/calendar',
+        component: <CalendarApp />,
+        requireLogin: true,
+        requireAdmin: false,
+        isOpen: null,
+        isMinimize: null,
+        isMaximize: null,
+        allowMaximize: true,
+        appIndex: zIndex.folder.default,
+        iconLocation: [
+            ICON_LOCATION.windows.desktop,
+            ICON_LOCATION.windows.startMenu.right,
+            ICON_LOCATION.linux.appsMenu,
+            ICON_LOCATION.mobile.homeScreen,
+            ICON_LOCATION.mobile.appsMenu
         ]
     }
 ];

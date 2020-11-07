@@ -3,7 +3,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
 
-import { useDispatchFolderContext, useFolderContext } from '../../../../contexts/folderContext';
+import {
+    useDispatchFolderContext,
+    useFolderContext
+} from '../../../../contexts/folderContext';
 import BackButton from './BackButton';
 import { Buttons, Name, NameBar } from './style';
 
@@ -12,7 +15,7 @@ const LinuxToolbar = (props) => {
     const {
         maximizeUp,
         maximizeDown,
-        minimizeDown,
+        minimizeDown
     } = useDispatchFolderContext();
     const { appId, quitApp, toolbarMenu, toggleDrawer, setPage, page } = props;
 
@@ -33,8 +36,14 @@ const LinuxToolbar = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const toggleMaximize = useCallback(() => {
+        if (folder.allowMaximize) {
+            folder.isMaximize ? maximizeFolderDown() : maximizeFolderUp();
+        }
+    }, [folder, maximizeFolderDown, maximizeFolderUp]);
+
     return (
-        <NameBar>
+        <NameBar onDoubleClick={toggleMaximize}>
             {page && <BackButton setPage={setPage} page={page} />}
             {toolbarMenu && (
                 <Tooltip title='Menu' placement='top' enterDelay={500}>
@@ -96,7 +105,7 @@ const LinuxToolbar = (props) => {
                                         <FontAwesomeIcon
                                             icon={['fas', 'clone']}
                                             transform={{
-                                                rotate: 180,
+                                                rotate: 180
                                             }}
                                         />
                                     </span>
@@ -126,5 +135,5 @@ LinuxToolbar.propTypes = {
     appId: PropTypes.number.isRequired,
     quitApp: PropTypes.func.isRequired,
     toolbarMenu: PropTypes.array,
-    toggleDrawer: PropTypes.func,
+    toggleDrawer: PropTypes.func
 };
