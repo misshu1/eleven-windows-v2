@@ -1,3 +1,5 @@
+import { useNotificationsContext } from 'contexts';
+
 const gapi = window.gapi;
 
 const initClient = () => {
@@ -12,19 +14,29 @@ const initClient = () => {
 };
 
 export function useCalendarApi() {
+    const { showError } = useNotificationsContext();
+
     const initCalendar = async () => {
         await gapi.load('client:auth2', initClient);
     };
 
-    const getCalendarEvents = async (calendarId = 'primary') => {
+    const getCalendarEvents = async (
+        calendarId = 'primary',
+        fromToday = true
+    ) => {
         if (gapi) {
-            return await gapi.client.calendar.events
+            const date = new Date();
+            if (!fromToday) {
+                date.setDate(date.getDate() - 30);
+            }
+
+            const events = await gapi.client.calendar.events
                 .list({
                     calendarId,
-                    timeMin: new Date().toISOString(),
+                    timeMin: date.toISOString(),
                     showDeleted: false,
                     singleEvents: true,
-                    maxResults: 10,
+                    maxResults: 50,
                     orderBy: 'startTime'
                 })
                 .then((data) => {
@@ -32,15 +44,22 @@ export function useCalendarApi() {
 
                     return events;
                 })
-                .catch((error) => {
-                    console.log(error);
+                .catch((err) => {
+                    showError(
+                        'Error',
+                        `Failed to get the calendar events from the database! ${err.reason?.message}`,
+                        500
+                    );
                 });
+
+            return events;
         } else {
             console.log('Error: gapi not loaded');
         }
     };
 
     const getCalendarEvent = async (id) => {
+        // TODO Update this
         const { data } = fetch(
             `https://www.googleapis.com/calendar/v3/calendars/primary/events/${id}`
         );
@@ -53,6 +72,59 @@ export function useCalendarApi() {
             calendarId: calendarId,
             resource: calendarEvent
         });
+    };
+
+    const getCalendarList = async () => {
+        if (gapi) {
+            const calendars = await gapi.client.calendar.calendarList
+                .list()
+                .then((data) => data.result.items)
+                .catch((err) => {
+                    showError(
+                        'Error',
+                        `Failed to get the calendar list from the database! ${err.reason?.message}`,
+                        500
+                    );
+                });
+
+            return calendars;
+        } else {
+            console.log('Error: gapi not loaded');
+        }
+    };
+
+    const getAllCalendarsEcents = async () => {
+        if (gapi) {
+            const calendarList = await getCalendarList();
+            const promisesArray = await calendarList.map((item) => {
+                return getCalendarEvents(item.id, false);
+            });
+
+            const settledCalendars = await Promise.allSettled(promisesArray);
+
+            settledCalendars
+                .filter((item) => item.status === 'rejected')
+                .map((err) => {
+                    showError(
+                        'Error',
+                        `Failed to get the calendar events from the database! ${err.reason?.message}`,
+                        500
+                    );
+                });
+
+            const dbCalendars = settledCalendars
+                .filter((item) => item.status === 'fulfilled')
+                .map((item) => item.value);
+
+            const calendarEvents = [];
+            dbCalendars.map((calendar) => {
+                calendar.map((events) => calendarEvents.push(events));
+            });
+
+            return calendarEvents;
+        } else {
+            console.log('Error: gapi not loaded');
+        }
     };
 
     const signin = async () => {
@@ -87,23 +159,9 @@ export function useCalendarApi() {
         getCalendarEvents,
         getCalendarEvent,
         createEvent,
+        getCalendarList,
+        getAllCalendarsEcents,
         signin,
         signout
     };
 }
-
-// same order as the image above
-// switch ($event->getColorId()) {
-//     case 9: $color="#5484ED"; break;
-//     case 1: $color="#A4BDFC"; break;
-//     case 7: $color="#46D6DB"; break;
-//     case 2: $color="#7AE7BF"; break;
-//     case 10: $color="#51B749"; break;
-//     case 5: $color="#FBD75B"; break;
-//     case 6: $color="#FFB878"; break;
-//     case 4: $color="#FF887C"; break;
-//     case 11: $color="#DC2127"; break;
-//     case 3: $color="#DBADFF"; break;
-//     case 8: $color="#E1E1E1"; break;
-//     default: $color="#AC725E"; // the first one in the picture, the one that is checked
-//   }
