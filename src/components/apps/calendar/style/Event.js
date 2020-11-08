@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { eventColors } from './eventColors';
+import { eventColors } from './colors';
 
 export const Event = styled.div`
     overflow: hidden;
@@ -7,9 +7,9 @@ export const Event = styled.div`
     padding: 2px;
     margin-left: 2px;
     background-color: ${({ colorId }) =>
-        colorId ? eventColors[colorId].background : eventColors[16].background};
+        colorId ? eventColors[colorId].background : eventColors[9].background};
     color: ${({ colorId }) =>
-        colorId ? eventColors[colorId].foreground : eventColors[16].foreground};
+        colorId ? eventColors[colorId].foreground : eventColors[9].foreground};
     border-radius: 2px;
     height: 1.3rem;
     font-size: 0.9rem;
