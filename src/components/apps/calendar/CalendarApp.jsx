@@ -9,23 +9,7 @@ import { useCalendarApi } from './useCalendarApi';
 function CalendarApp() {
     const [events, setEvents] = useState([]);
     const [calendar, setCalendar] = useState({ value: new Date() });
-    const {
-        checkSignIn,
-        initCalendar,
-        getAllCalendarsEvents,
-        signin,
-        isLoggedIn
-    } = useCalendarApi();
-    console.log(isLoggedIn);
-    useEffect(() => {
-        initCalendar();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    useEffect(() => {
-        checkSignIn();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const { getAllCalendarsEvents, signin, isLoggedIn } = useCalendarApi();
 
     useEffect(() => {
         if (isLoggedIn && events.length === 0) {
