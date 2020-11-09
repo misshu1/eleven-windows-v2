@@ -9,7 +9,12 @@ import { useCalendarApi } from './useCalendarApi';
 function CalendarApp() {
     const [events, setEvents] = useState([]);
     const [calendar, setCalendar] = useState({ value: new Date() });
-    const { getAllCalendarsEvents, signin, isLoggedIn } = useCalendarApi();
+    const {
+        getAllCalendarsEvents,
+        signin,
+        signout,
+        isLoggedIn
+    } = useCalendarApi();
 
     useEffect(() => {
         if (isLoggedIn && events.length === 0) {
@@ -20,6 +25,8 @@ function CalendarApp() {
     const test = async () => {
         if (!isLoggedIn) {
             await signin();
+        } else {
+            await signout().then(() => setEvents([]));
         }
     };
 

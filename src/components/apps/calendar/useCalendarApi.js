@@ -156,13 +156,30 @@ export function useCalendarApi() {
 
     const signin = async () => {
         if (scriptStatus === status.ready) {
-            await window.gapi.auth2.getAuthInstance().signIn();
+            try {
+                return await window.gapi.auth2
+                    .getAuthInstance()
+                    .signIn()
+                    .then(() => setIsLoggedIn(true));
+            } catch (err) {
+                if (err.error === 'popup_closed_by_user') {
+                    return;
+                }
+                showError('Error', 'Failed to sign in!', 500);
+            }
         }
     };
 
     const signout = async () => {
         if (scriptStatus === status.ready) {
-            await window.gapi.auth2.getAuthInstance().signOut();
+            try {
+                return await window.gapi.auth2
+                    .getAuthInstance()
+                    .signOut()
+                    .then(() => setIsLoggedIn(false));
+            } catch (err) {
+                showError('Error', 'Failed to sign out!', 500);
+            }
         }
     };
 
