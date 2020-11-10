@@ -11,7 +11,8 @@ import {
     FirebaseProvider,
     FolderProvider,
     NotificationsProvider,
-    useSettingsContext
+    useSettingsContext,
+    GapiProvider
 } from 'contexts';
 import { AuthProvider } from 'hooks';
 
@@ -74,21 +75,23 @@ export function App() {
         >
             <NotificationsProvider>
                 <FirebaseProvider>
-                    <AuthProvider>
-                        <GlobalStyle
-                            background={getSelectedBackground()}
-                            linux={isLinuxSelected()}
-                            windows={isWindowsSelected()}
-                            mobile={isMobileSelected()}
-                            renderStyles={renderStyles}
-                        />
-                        <CartProvider>
-                            <FolderProvider>
-                                <RoutesApp />
-                                <VideoBackground />
-                            </FolderProvider>
-                        </CartProvider>
-                    </AuthProvider>
+                    <GapiProvider>
+                        <AuthProvider>
+                            <GlobalStyle
+                                background={getSelectedBackground()}
+                                linux={isLinuxSelected()}
+                                windows={isWindowsSelected()}
+                                mobile={isMobileSelected()}
+                                renderStyles={renderStyles}
+                            />
+                            <CartProvider>
+                                <FolderProvider>
+                                    <RoutesApp />
+                                    <VideoBackground />
+                                </FolderProvider>
+                            </CartProvider>
+                        </AuthProvider>
+                    </GapiProvider>
                 </FirebaseProvider>
             </NotificationsProvider>
         </SnackbarProvider>

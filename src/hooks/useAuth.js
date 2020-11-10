@@ -1,7 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useFirebaseContext, useNotificationsContext } from 'contexts';
+import {
+    useFirebaseContext,
+    useGapiContext,
+    useNotificationsContext
+} from 'contexts';
 
 const AuthContext = createContext();
 export function AuthProvider({ children }) {
@@ -11,9 +15,10 @@ export function AuthProvider({ children }) {
 }
 
 function useProvideAuth() {
-    const { auth } = useFirebaseContext();
-    const { showError } = useNotificationsContext();
     const [user, setUser] = useState(null);
+    const { showError } = useNotificationsContext();
+    const { auth } = useFirebaseContext();
+    const { logoutGapi } = useGapiContext();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -51,6 +56,7 @@ function useProvideAuth() {
 
     const logout = async () => {
         setUser(null);
+        await logoutGapi();
         return await auth
             .signOut()
             .then(() => {

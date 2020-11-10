@@ -6,23 +6,25 @@ import Calendar from 'react-calendar';
 import { Container, CustomCalendarStyles, Event } from './style';
 import { useCalendarApi } from './useCalendarApi';
 import { useAuth } from 'hooks';
+import { useGapiContext } from 'contexts';
 
 function CalendarApp() {
-    const [events, setEvents] = useState([]);
+    const [calendarEvents, setCalendarEvents] = useState([]);
     const [calendar, setCalendar] = useState({ value: new Date() });
+    const { isGapiConnected, loginGapi, logoutGapi } = useGapiContext();
+    const { getAllCalendarsEvents } = useCalendarApi();
     const { user } = useAuth();
-    const {
-        getAllCalendarsEvents,
-        signin,
-        signout,
-        isLoggedIn
-    } = useCalendarApi();
 
     useEffect(() => {
-        if (isLoggedIn && events.length === 0) {
-            getAllCalendarsEvents().then((events) => setEvents(events));
+        if (isGapiConnected) {
+            getAllCalendarsEvents().then((events) => {
+                setCalendarEvents(events);
+            });
+        } else {
+            setCalendarEvents([]);
         }
-    }, [events.length, getAllCalendarsEvents, isLoggedIn]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isGapiConnected]);
 
     const toolbarMenu = useCallback(() => {
         const menu = [
@@ -38,35 +40,29 @@ function CalendarApp() {
         // Show this option only for logged in users
         user &&
             menu.push({
-                name: isLoggedIn
+                name: isGapiConnected
                     ? 'Disconnect Google account'
                     : 'Connect Google account',
                 fontIcon: { icon: ['fab', 'google'] },
                 onClick: async () => {
-                    if (isLoggedIn) {
-                        await signout().then(() => setEvents([]));
-                    } else {
-                        await signin();
-                    }
+                    isGapiConnected ? logoutGapi() : loginGapi();
                 }
             });
 
         return menu;
-    }, [isLoggedIn, signin, signout, user]);
+    }, [isGapiConnected, loginGapi, logoutGapi, user]);
 
     const renderEvents = (activeStartDate, date, view) => {
         if (view === 'month') {
-            return events.map((item) => {
+            return calendarEvents.map(({ id, summary, colorId, start }) => {
                 if (
-                    date.getDate() ===
-                        new Date(item.start.dateTime).getDate() &&
-                    date.getMonth() ===
-                        new Date(item.start.dateTime).getMonth() &&
-                    date.getYear() === new Date(item.start.dateTime).getYear()
+                    date.getDate() === new Date(start.dateTime).getDate() &&
+                    date.getMonth() === new Date(start.dateTime).getMonth() &&
+                    date.getYear() === new Date(start.dateTime).getYear()
                 ) {
                     return (
-                        <Event key={item.id} colorId={item.colorId}>
-                            {item.summary}
+                        <Event key={id} colorId={colorId}>
+                            {summary}
                         </Event>
                     );
                 }
@@ -97,13 +93,13 @@ function CalendarApp() {
                                 size='sm'
                             />
                         }
-                        next2Label={null}
                         prevLabel={
                             <FontAwesomeIcon
                                 icon={['fas', 'chevron-left']}
                                 size='sm'
                             />
                         }
+                        next2Label={null}
                         prev2Label={null}
                     />
                 </CustomCalendarStyles>

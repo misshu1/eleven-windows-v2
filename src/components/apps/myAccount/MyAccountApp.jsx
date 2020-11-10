@@ -5,7 +5,7 @@ import { Container } from './style';
 const MyAccountApp = () => {
     return (
         <FolderApp appId={7} marginLeft={170} marginTop={120}>
-            <Container>ceva</Container>
+            <Container>coming soon</Container>
         </FolderApp>
     );
 };
