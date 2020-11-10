@@ -5,10 +5,12 @@ import FolderApp from 'components/folder/FolderApp';
 import Calendar from 'react-calendar';
 import { Container, CustomCalendarStyles, Event } from './style';
 import { useCalendarApi } from './useCalendarApi';
+import { useAuth } from 'hooks';
 
 function CalendarApp() {
     const [events, setEvents] = useState([]);
     const [calendar, setCalendar] = useState({ value: new Date() });
+    const { user } = useAuth();
     const {
         getAllCalendarsEvents,
         signin,
@@ -23,25 +25,23 @@ function CalendarApp() {
     }, [events.length, getAllCalendarsEvents, isLoggedIn]);
 
     const toolbarMenu = useCallback(() => {
-        return [
+        const menu = [
             {
                 name: 'Calendar settings',
                 fontIcon: { icon: ['fas', 'cog'] },
-                widgetIcon: null,
-                link: null,
-                scrollToRef: null,
                 onClick: () => {
                     console.log('asdasdsa');
                 }
-            },
-            {
+            }
+        ];
+
+        // Show this option only for logged in users
+        user &&
+            menu.push({
                 name: isLoggedIn
                     ? 'Disconnect Google account'
                     : 'Connect Google account',
                 fontIcon: { icon: ['fab', 'google'] },
-                widgetIcon: null,
-                link: null,
-                scrollToRef: null,
                 onClick: async () => {
                     if (isLoggedIn) {
                         await signout().then(() => setEvents([]));
@@ -49,9 +49,10 @@ function CalendarApp() {
                         await signin();
                     }
                 }
-            }
-        ];
-    }, [isLoggedIn, signin, signout]);
+            });
+
+        return menu;
+    }, [isLoggedIn, signin, signout, user]);
 
     const renderEvents = (activeStartDate, date, view) => {
         if (view === 'month') {
