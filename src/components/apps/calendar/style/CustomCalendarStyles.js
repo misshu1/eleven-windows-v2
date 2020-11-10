@@ -96,7 +96,7 @@ export const CustomCalendarStyles = styled.div`
                 flex-shrink: unset !important;
                 font-weight: bold;
                 padding-top: 2rem;
-                margin: 0 1rem 0 0.5rem;
+                margin-right: 0.5rem;
                 background-color: var(--backgroundLight);
                 border-radius: 0.5rem;
 
@@ -115,7 +115,10 @@ export const CustomCalendarStyles = styled.div`
                 display: grid !important;
                 grid-template-columns: repeat(7, 1fr);
                 grid-template-rows: repeat(6, 1fr);
+                background-color: var(--border);
                 height: calc(100% - 2rem);
+                padding: 1px;
+                gap: 1px;
 
                 &__day {
                     display: grid;
@@ -127,8 +130,7 @@ export const CustomCalendarStyles = styled.div`
                     max-width: 100% !important;
                     color: var(--whiteBlack);
                     font-size: 1rem;
-                    outline: 1px solid var(--border) !important;
-                    margin: 1px 0 0 1px;
+                    background-color: var(--background);
 
                     abbr {
                         justify-self: center;
@@ -161,7 +163,6 @@ export const CustomCalendarStyles = styled.div`
         &__tile {
             max-width: 100%;
             text-align: center;
-            background: none;
 
             &:disabled {
                 background-color: var(--whiteBlack);

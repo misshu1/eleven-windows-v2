@@ -19,6 +19,12 @@ export const IconContainer = styled.div`
         text-align: center;
         text-decoration: none;
         border: 1px solid transparent;
+
+        .name {
+            white-space: nowrap;
+            overflow: hidden;
+            /* text-overflow: ellipsis; */
+        }
     }
 
     &&:hover {

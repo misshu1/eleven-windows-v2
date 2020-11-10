@@ -43,7 +43,7 @@ const LinuxToolbar = (props) => {
     }, [folder, maximizeFolderDown, maximizeFolderUp]);
 
     return (
-        <NameBar onDoubleClick={toggleMaximize}>
+        <NameBar>
             {page && <BackButton setPage={setPage} page={page} />}
             {toolbarMenu && (
                 <Tooltip title='Menu' placement='top' enterDelay={500}>
@@ -57,7 +57,12 @@ const LinuxToolbar = (props) => {
                     </div>
                 </Tooltip>
             )}
-            <Name className='handle' toolbarMenu={!!toolbarMenu} page={!!page}>
+            <Name
+                className='handle'
+                toolbarMenu={!!toolbarMenu}
+                page={!!page}
+                onDoubleClick={toggleMaximize}
+            >
                 {folder.appName}
             </Name>
             <Buttons>

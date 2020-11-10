@@ -25,7 +25,7 @@ const DesktopIconApp = memo((props) => {
         <IconContainer tabIndex='0'>
             <div className='icon' onDoubleClick={start}>
                 {widgetIcon}
-                <div>{iconName}</div>
+                <div className='name'>{iconName}</div>
             </div>
         </IconContainer>
     );

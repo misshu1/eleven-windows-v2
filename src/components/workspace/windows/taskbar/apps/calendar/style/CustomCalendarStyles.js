@@ -18,13 +18,6 @@ export const CustomCalendarStyles = styled.div`
         &__navigation {
             height: 2.75rem;
             margin-bottom: 1rem;
-            .react-calendar__navigation__arrow {
-                font-size: 1.5rem;
-            }
-            .react-calendar__navigation__arrow:hover,
-            .react-calendar__navigation__arrow:focus {
-                font-size: 2rem;
-            }
 
             .react-calendar__navigation__label {
                 white-space: nowrap;

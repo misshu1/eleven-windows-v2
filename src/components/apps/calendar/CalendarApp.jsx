@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import FolderApp from 'components/folder/FolderApp';
@@ -22,13 +22,36 @@ function CalendarApp() {
         }
     }, [events.length, getAllCalendarsEvents, isLoggedIn]);
 
-    const test = async () => {
-        if (!isLoggedIn) {
-            await signin();
-        } else {
-            await signout().then(() => setEvents([]));
-        }
-    };
+    const toolbarMenu = useCallback(() => {
+        return [
+            {
+                name: 'Calendar settings',
+                fontIcon: { icon: ['fas', 'cog'] },
+                widgetIcon: null,
+                link: null,
+                scrollToRef: null,
+                onClick: () => {
+                    console.log('asdasdsa');
+                }
+            },
+            {
+                name: isLoggedIn
+                    ? 'Disconnect Google account'
+                    : 'Connect Google account',
+                fontIcon: { icon: ['fab', 'google'] },
+                widgetIcon: null,
+                link: null,
+                scrollToRef: null,
+                onClick: async () => {
+                    if (isLoggedIn) {
+                        await signout().then(() => setEvents([]));
+                    } else {
+                        await signin();
+                    }
+                }
+            }
+        ];
+    }, [isLoggedIn, signin, signout]);
 
     const renderEvents = (activeStartDate, date, view) => {
         if (view === 'month') {
@@ -51,13 +74,12 @@ function CalendarApp() {
     };
 
     return (
-        <FolderApp appId={6} marginLeft={150} marginTop={150}>
-            <button
-                onClick={test}
-                style={{ zIndex: 500, position: 'absolute' }}
-            >
-                asdasdda
-            </button>
+        <FolderApp
+            appId={6}
+            marginLeft={150}
+            marginTop={150}
+            toolbarMenu={toolbarMenu()}
+        >
             <Container>
                 <CustomCalendarStyles>
                     <Calendar
@@ -74,24 +96,14 @@ function CalendarApp() {
                                 size='sm'
                             />
                         }
-                        next2Label={
-                            <FontAwesomeIcon
-                                icon={['fas', 'angle-double-right']}
-                                size='lg'
-                            />
-                        }
+                        next2Label={null}
                         prevLabel={
                             <FontAwesomeIcon
                                 icon={['fas', 'chevron-left']}
                                 size='sm'
                             />
                         }
-                        prev2Label={
-                            <FontAwesomeIcon
-                                icon={['fas', 'angle-double-left']}
-                                size='lg'
-                            />
-                        }
+                        prev2Label={null}
                     />
                 </CustomCalendarStyles>
             </Container>

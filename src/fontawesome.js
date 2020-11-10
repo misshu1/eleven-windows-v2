@@ -2,7 +2,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faTelegramPlane,
     faUbuntu,
-    faWindows
+    faWindows,
+    faGoogle
 } from '@fortawesome/free-brands-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -72,5 +73,6 @@ library.add(
     faPalette,
     faHome,
     faChevronRight,
-    faChevronLeft
+    faChevronLeft,
+    faGoogle
 );

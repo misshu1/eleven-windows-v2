@@ -25,6 +25,9 @@ const TaskManagerApp = lazy(() =>
     import('components/apps/taskManager/TaskManagerApp')
 );
 const CalendarApp = lazy(() => import('components/apps/calendar/CalendarApp'));
+const MyAccountApp = lazy(() =>
+    import('components/apps/myAccount/MyAccountApp')
+);
 
 const FOLDER_ACTIONS = {
     open: 'OPEN',
@@ -147,7 +150,7 @@ const APPS_STATE = [
         id: 5,
         appName: 'Task Manager',
         widgetIcon: <TaskIcon />,
-        link: '/taskManager',
+        link: '/task-manager',
         component: <TaskManagerApp />,
         requireLogin: false,
         requireAdmin: false,
@@ -180,6 +183,28 @@ const APPS_STATE = [
             ICON_LOCATION.linux.appsMenu,
             ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.mobile.appsMenu
+        ]
+    },
+    {
+        id: 7,
+        appName: 'My Account',
+        widgetIcon: <SettingsIcon />,
+        link: '/my-account',
+        component: <MyAccountApp />,
+        requireLogin: true,
+        requireAdmin: false,
+        isOpen: null,
+        isMinimize: null,
+        isMaximize: null,
+        allowMaximize: true,
+        appIndex: zIndex.folder.default,
+        iconLocation: [
+            ICON_LOCATION.windows.desktop,
+            ICON_LOCATION.windows.notificationsWindow,
+            ICON_LOCATION.windows.startMenu.left,
+            ICON_LOCATION.mobile.homeScreen,
+            ICON_LOCATION.mobile.appsMenu,
+            ICON_LOCATION.linux.appsMenu
         ]
     }
 ];

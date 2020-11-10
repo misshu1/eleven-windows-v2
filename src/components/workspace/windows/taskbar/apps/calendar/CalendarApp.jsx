@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Calendar from 'react-calendar';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
@@ -36,6 +37,30 @@ const CalendarApp = ({ calendarRef }) => {
                             activeStartDate={calendar.startDate}
                             onActiveStartDateChange={(e) =>
                                 changeDate(e.activeStartDate)
+                            }
+                            nextLabel={
+                                <FontAwesomeIcon
+                                    icon={['fas', 'chevron-right']}
+                                    size='sm'
+                                />
+                            }
+                            next2Label={
+                                <FontAwesomeIcon
+                                    icon={['fas', 'angle-double-right']}
+                                    size='lg'
+                                />
+                            }
+                            prevLabel={
+                                <FontAwesomeIcon
+                                    icon={['fas', 'chevron-left']}
+                                    size='sm'
+                                />
+                            }
+                            prev2Label={
+                                <FontAwesomeIcon
+                                    icon={['fas', 'angle-double-left']}
+                                    size='lg'
+                                />
                             }
                         />
                     </CustomCalendarStyles>
