@@ -53,20 +53,56 @@ function CalendarApp() {
     }, [isGapiConnected, loginGapi, logoutGapi, user]);
 
     const renderEvents = (activeStartDate, date, view) => {
+        const today = date.getDate();
+        const thisMonth = date.getMonth();
+        const thisYear = date.getYear();
+
         if (view === 'month') {
-            return calendarEvents.map(({ id, summary, colorId, start }) => {
-                if (
-                    date.getDate() === new Date(start.dateTime).getDate() &&
-                    date.getMonth() === new Date(start.dateTime).getMonth() &&
-                    date.getYear() === new Date(start.dateTime).getYear()
-                ) {
-                    return (
-                        <Event key={id} colorId={colorId}>
-                            {summary}
-                        </Event>
-                    );
+            return calendarEvents.map(
+                ({ id, summary, colorId, start, end }) => {
+                    const eventStartDay = new Date(
+                        start.dateTime || start.date
+                    ).getDate();
+                    const eventStartMonth = new Date(
+                        start.dateTime || start.date
+                    ).getMonth();
+                    const eventStartYear = new Date(
+                        start.dateTime || start.date
+                    ).getYear();
+                    const eventEndDay = new Date(
+                        end.dateTime || end.date
+                    ).getDate();
+                    const eventEndMonth = new Date(
+                        end.dateTime || end.date
+                    ).getMonth();
+                    const eventEndYear = new Date(
+                        end.dateTime || end.date
+                    ).getYear();
+
+                    // today === eventStartDay &&
+                    // thisMonth === eventStartMonth &&
+                    // thisYear === eventStartYear &&
+                    // today <= eventEndDay &&
+                    // thisMonth <= eventEndMonth &&
+                    // thisYear <= eventEndYear
+
+                    if (
+                        today === eventStartDay &&
+                        thisMonth === eventStartMonth &&
+                        thisYear === eventStartYear
+                        // &&
+                        // today <= eventEndDay &&
+                        // thisMonth <= eventEndMonth &&
+                        // thisYear <= eventEndYear
+                    ) {
+                        return (
+                            <Event key={id} colorId={colorId}>
+                                {summary}
+                            </Event>
+                        );
+                    }
                 }
-            });
+            );
         }
     };
 
