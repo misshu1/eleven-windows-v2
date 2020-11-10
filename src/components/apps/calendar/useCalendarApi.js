@@ -17,23 +17,14 @@ export function useCalendarApi() {
     const { scriptStatus } = useScript('https://apis.google.com/js/api.js');
 
     const initClient = useCallback(async () => {
-        const loadClient = new Promise(function (resolve, reject) {
+        const loadClient = new Promise((resolve, reject) => {
             window.gapi.load('client:auth2', resolve);
         });
 
         return loadClient.then(async () => {
             await window.gapi.client.init(params);
             await window.gapi.client.load('calendar', 'v3');
-        });
-    }, []);
-
-    const initAuth = useCallback(async () => {
-        const loadAuth = new Promise(function (resolve, reject) {
-            window.gapi.load('auth2', resolve);
-        });
-
-        return loadAuth.then(async () => {
-            return await window.gapi.auth2.init(params).then((authInstance) => {
+            await window.gapi.auth2.getAuthInstance().then((authInstance) => {
                 setIsLoggedIn(authInstance.isSignedIn.get());
             });
         });
@@ -42,11 +33,8 @@ export function useCalendarApi() {
     useEffect(() => {
         if (scriptStatus === status.ready) {
             initClient();
-            initAuth();
         }
-
-        return () => {};
-    }, [initAuth, initClient, scriptStatus]);
+    }, [initClient, scriptStatus]);
 
     const getCalendarEvents = async (
         calendarId = 'primary',
@@ -96,10 +84,19 @@ export function useCalendarApi() {
 
     const createEvent = (calendarEvent, calendarId = 'primary') => {
         if (scriptStatus === status.ready) {
-            return window.gapi.client.calendar.events.insert({
-                calendarId: calendarId,
-                resource: calendarEvent
-            });
+            try {
+                return window.gapi.client.calendar.events.insert({
+                    calendarId: calendarId,
+                    resource: calendarEvent
+                });
+            } catch (err) {
+                showError(
+                    'Error',
+                    err.result.error.errors[0].message ||
+                        'Failed to create the calendar event.',
+                    err.result.error.code || 500
+                );
+            }
         }
     };
 
