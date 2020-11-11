@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { isWithinInterval } from 'date-fns';
 
 import FolderApp from 'components/folder/FolderApp';
 import Calendar from 'react-calendar';
@@ -53,47 +54,32 @@ function CalendarApp() {
     }, [isGapiConnected, loginGapi, logoutGapi, user]);
 
     const renderEvents = (activeStartDate, date, view) => {
-        const today = date.getDate();
-        const thisMonth = date.getMonth();
-        const thisYear = date.getYear();
+        const calendarDay = date.getDate();
+        const calendaMonth = date.getMonth();
+        const calendaYear = date.getFullYear();
 
         if (view === 'month') {
             return calendarEvents.map(
                 ({ id, summary, colorId, start, end }) => {
-                    const eventStartDay = new Date(
+                    const eventStartDate = new Date(
                         start.dateTime || start.date
-                    ).getDate();
+                    );
                     const eventStartMonth = new Date(
                         start.dateTime || start.date
                     ).getMonth();
                     const eventStartYear = new Date(
                         start.dateTime || start.date
-                    ).getYear();
-                    const eventEndDay = new Date(
-                        end.dateTime || end.date
-                    ).getDate();
-                    const eventEndMonth = new Date(
-                        end.dateTime || end.date
-                    ).getMonth();
-                    const eventEndYear = new Date(
-                        end.dateTime || end.date
-                    ).getYear();
-
-                    // today === eventStartDay &&
-                    // thisMonth === eventStartMonth &&
-                    // thisYear === eventStartYear &&
-                    // today <= eventEndDay &&
-                    // thisMonth <= eventEndMonth &&
-                    // thisYear <= eventEndYear
+                    ).getFullYear();
+                    const eventEndDate = new Date(end.dateTime || end.date);
 
                     if (
-                        today === eventStartDay &&
-                        thisMonth === eventStartMonth &&
-                        thisYear === eventStartYear
-                        // &&
-                        // today <= eventEndDay &&
-                        // thisMonth <= eventEndMonth &&
-                        // thisYear <= eventEndYear
+                        (calendarDay === eventStartDate.getDate() &&
+                            calendaMonth === eventStartMonth &&
+                            calendaYear === eventStartYear) ||
+                        isWithinInterval(date, {
+                            start: eventStartDate,
+                            end: eventEndDate
+                        })
                     ) {
                         return (
                             <Event key={id} colorId={colorId}>
