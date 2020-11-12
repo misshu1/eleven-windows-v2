@@ -165,7 +165,7 @@ export const CustomCalendarStyles = styled.div`
             text-align: center;
 
             &:disabled {
-                background-color: var(--whiteBlack);
+                background-color: var(--backgroundCard);
             }
 
             &:enabled {

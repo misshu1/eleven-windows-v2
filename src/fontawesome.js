@@ -36,7 +36,8 @@ import {
     faUserCircle,
     faWindowMinimize,
     faChevronRight,
-    faChevronLeft
+    faChevronLeft,
+    faPlus
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -74,5 +75,6 @@ library.add(
     faHome,
     faChevronRight,
     faChevronLeft,
-    faGoogle
+    faGoogle,
+    faPlus
 );

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { eventColors } from './colors';
 
-export const Event = styled.div`
+export const Summary = styled.div`
     overflow: hidden;
     white-space: nowrap;
     padding: 2px;
