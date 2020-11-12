@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { isWithinInterval } from 'date-fns';
+import { isWithinInterval, differenceInCalendarDays } from 'date-fns';
 
 import FolderApp from 'components/folder/FolderApp';
 import Calendar from 'react-calendar';
@@ -72,13 +72,23 @@ function CalendarApp() {
                     ).getFullYear();
                     const eventEndDate = new Date(end.dateTime || end.date);
 
+                    const daysDifference = differenceInCalendarDays(
+                        new Date(end.date),
+                        new Date(start.date)
+                    );
+
+                    // If the event has no 'timeZone' and it's lenght is 1 day or less
+                    // it means it's an all-day event
+                    const checkEndDate =
+                        daysDifference <= 1 ? eventStartDate : eventEndDate;
+
                     if (
                         (calendarDay === eventStartDate.getDate() &&
                             calendaMonth === eventStartMonth &&
                             calendaYear === eventStartYear) ||
                         isWithinInterval(date, {
                             start: eventStartDate,
-                            end: eventEndDate
+                            end: checkEndDate
                         })
                     ) {
                         return (
