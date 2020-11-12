@@ -9,12 +9,12 @@ import { Name, NameBar } from './style';
 
 const MobileToolbar = (props) => {
     const { getFolder } = useFolderContext();
-    const { appId, toolbarMenu, toggleDrawer, page, setPage } = props;
+    const { appId, toolbarMenu, toggleDrawer, page, changePage } = props;
     const folder = getFolder(appId);
 
     return (
         <NameBar>
-            <BackButton setPage={setPage} page={page} />
+            <BackButton changePage={changePage} page={page} />
             <Name>{folder.appName}</Name>
             {toolbarMenu && (
                 <Tooltip title='Menu' placement='top' enterDelay={500}>
@@ -35,5 +35,5 @@ export default MobileToolbar;
 MobileToolbar.propTypes = {
     appId: PropTypes.number.isRequired,
     toolbarMenu: PropTypes.array,
-    toggleDrawer: PropTypes.func,
+    toggleDrawer: PropTypes.func
 };

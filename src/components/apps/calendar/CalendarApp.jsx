@@ -9,7 +9,8 @@ import FolderApp from 'components/folder/FolderApp';
 import { Container, CustomCalendarStyles, Summary } from './style';
 import { useCalendarApi } from './useCalendarApi';
 import { useAuth } from 'hooks';
-import { useGapiContext } from 'contexts';
+import { useGapiContext, useFolderPagesContext } from 'contexts';
+import { folderPages } from 'components/folder/folderPages';
 
 const useStyles = makeStyles((theme) => ({
     addEventBtn: {
@@ -35,6 +36,7 @@ function CalendarApp() {
     const [calendar, setCalendar] = useState({ value: new Date() });
     const { isGapiConnected, loginGapi, logoutGapi } = useGapiContext();
     const { getAllCalendarsEvents } = useCalendarApi();
+    const { page, changePage } = useFolderPagesContext();
     const { user } = useAuth();
     const classes = useStyles();
 
@@ -56,6 +58,7 @@ function CalendarApp() {
                 fontIcon: { icon: ['fas', 'cog'] },
                 onClick: () => {
                     console.log('asdasdsa');
+                    changePage(folderPages.level_2);
                 }
             }
         ];
@@ -73,7 +76,7 @@ function CalendarApp() {
             });
 
         return menu;
-    }, [isGapiConnected, loginGapi, logoutGapi, user]);
+    }, [changePage, isGapiConnected, loginGapi, logoutGapi, user]);
 
     const renderEvents = (activeStartDate, date, view) => {
         if (view !== 'month') return;
@@ -113,7 +116,7 @@ function CalendarApp() {
         });
     };
 
-    const disableOtherMontTiles = (activeStartDate, date, view) => {
+    const disableOtherMontsTiles = (activeStartDate, date, view) => {
         if (view !== 'month') return;
         if (activeStartDate.getMonth() !== date.getMonth()) return true;
     };
@@ -124,47 +127,70 @@ function CalendarApp() {
             marginLeft={150}
             marginTop={150}
             toolbarMenu={toolbarMenu()}
+            page={page}
+            changePage={changePage}
         >
-            <Container>
-                <CustomCalendarStyles>
-                    <Calendar
-                        value={calendar.value}
-                        showFixedNumberOfWeeks
-                        showWeekNumbers
-                        view='month'
-                        tileContent={({ activeStartDate, date, view }) =>
-                            renderEvents(activeStartDate, date, view)
-                        }
-                        tileDisabled={({ activeStartDate, date, view }) =>
-                            disableOtherMontTiles(activeStartDate, date, view)
-                        }
-                        nextLabel={
-                            <FontAwesomeIcon
-                                icon={['fas', 'chevron-right']}
-                                size='sm'
+            {page === folderPages.level_1 && (
+                <>
+                    <Container>
+                        <CustomCalendarStyles>
+                            <Calendar
+                                value={calendar.value}
+                                showFixedNumberOfWeeks
+                                showWeekNumbers
+                                view='month'
+                                tileContent={({
+                                    activeStartDate,
+                                    date,
+                                    view
+                                }) => renderEvents(activeStartDate, date, view)}
+                                tileDisabled={({
+                                    activeStartDate,
+                                    date,
+                                    view
+                                }) =>
+                                    disableOtherMontsTiles(
+                                        activeStartDate,
+                                        date,
+                                        view
+                                    )
+                                }
+                                nextLabel={
+                                    <FontAwesomeIcon
+                                        icon={['fas', 'chevron-right']}
+                                        size='sm'
+                                    />
+                                }
+                                prevLabel={
+                                    <FontAwesomeIcon
+                                        icon={['fas', 'chevron-left']}
+                                        size='sm'
+                                    />
+                                }
+                                next2Label={null}
+                                prev2Label={null}
                             />
-                        }
-                        prevLabel={
-                            <FontAwesomeIcon
-                                icon={['fas', 'chevron-left']}
-                                size='sm'
-                            />
-                        }
-                        next2Label={null}
-                        prev2Label={null}
-                    />
-                </CustomCalendarStyles>
-            </Container>
-            {user && isGapiConnected && (
-                <Tooltip title='Create event' placement='top' enterDelay={500}>
-                    <Fab
-                        size='medium'
-                        aria-label='create-event'
-                        classes={{ root: classes.addEventBtn }}
-                    >
-                        <FontAwesomeIcon icon={['fas', 'plus']} size='lg' />
-                    </Fab>
-                </Tooltip>
+                        </CustomCalendarStyles>
+                    </Container>
+                    {user && isGapiConnected && (
+                        <Tooltip
+                            title='Create event'
+                            placement='top'
+                            enterDelay={500}
+                        >
+                            <Fab
+                                size='medium'
+                                aria-label='create-event'
+                                classes={{ root: classes.addEventBtn }}
+                            >
+                                <FontAwesomeIcon
+                                    icon={['fas', 'plus']}
+                                    size='lg'
+                                />
+                            </Fab>
+                        </Tooltip>
+                    )}
+                </>
             )}
         </FolderApp>
     );

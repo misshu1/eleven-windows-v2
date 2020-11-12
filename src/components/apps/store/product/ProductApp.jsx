@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     }
 });
 
-const ProductApp = ({ product, setSelectedProduct, setPage }) => {
+const ProductApp = ({ product, setSelectedProduct, changePage }) => {
     const { imagePreview, newPrice, oldPrice, reviews, title } = product;
     const { addToCart } = useDispatchCartContext();
     const { getProductDiscount } = useCartContext();
@@ -26,8 +26,8 @@ const ProductApp = ({ product, setSelectedProduct, setPage }) => {
 
     const selectProduct = useCallback(() => {
         setSelectedProduct(product);
-        setPage(folderPages.level_2);
-    }, [product, setPage, setSelectedProduct]);
+        changePage(folderPages.level_2);
+    }, [product, changePage, setSelectedProduct]);
 
     useEffect(() => {
         const discount = getProductDiscount(newPrice, oldPrice);

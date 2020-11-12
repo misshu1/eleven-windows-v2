@@ -52,7 +52,7 @@ const FolderApp = forwardRef((props, ref) => {
         marginLeft,
         marginTop,
         toolbarMenu,
-        setPage,
+        changePage,
         page
     } = props;
 
@@ -133,7 +133,7 @@ const FolderApp = forwardRef((props, ref) => {
                             toolbarMenu={toolbarMenu}
                             quitApp={quitApp}
                             toggleDrawer={toggleDrawer}
-                            setPage={setPage}
+                            changePage={changePage}
                             page={page}
                         />
                         <Content>

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import { useFirebaseContext, useNotificationsContext } from 'contexts';
+import {
+    useFirebaseContext,
+    useFolderPagesContext,
+    useNotificationsContext
+} from 'contexts';
 import FolderApp from 'components/folder/FolderApp';
 import { folderPages } from 'components/folder/folderPages';
 import ProductDetailsApp from './productDetails/ProductDetailsApp';
@@ -8,8 +12,8 @@ import ProductsListApp from './productsList/ProductsListApp';
 
 const StoreApp = () => {
     const [products, setProducts] = useState([]);
-    const [page, setPage] = useState(folderPages.level_1);
     const [selectedProduct, setSelectedProduct] = useState({});
+    const { page, changePage } = useFolderPagesContext();
     const { showError } = useNotificationsContext();
     const { firestore } = useFirebaseContext();
 
@@ -51,13 +55,13 @@ const StoreApp = () => {
             marginLeft={60}
             marginTop={60}
             page={page}
-            setPage={setPage}
+            changePage={changePage}
         >
             {page === folderPages.level_1 && (
                 <ProductsListApp
                     products={products}
                     setSelectedProduct={setSelectedProduct}
-                    setPage={setPage}
+                    changePage={changePage}
                 />
             )}
             {page === folderPages.level_2 && (
@@ -66,4 +70,5 @@ const StoreApp = () => {
         </FolderApp>
     );
 };
+
 export default StoreApp;

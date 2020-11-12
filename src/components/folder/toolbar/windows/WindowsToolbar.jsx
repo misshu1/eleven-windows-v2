@@ -17,7 +17,14 @@ const WindowsToolbar = (props) => {
         maximizeDown,
         minimizeDown
     } = useDispatchFolderContext();
-    const { appId, quitApp, toolbarMenu, toggleDrawer, setPage, page } = props;
+    const {
+        appId,
+        quitApp,
+        toolbarMenu,
+        toggleDrawer,
+        changePage,
+        page
+    } = props;
 
     const folder = getFolder(appId);
 
@@ -44,7 +51,7 @@ const WindowsToolbar = (props) => {
 
     return (
         <NameBar>
-            {page && <BackButton setPage={setPage} page={page} />}
+            {page && <BackButton changePage={changePage} page={page} />}
             {toolbarMenu && (
                 <Tooltip title='Menu' placement='top' enterDelay={500}>
                     <div className='menu' onClick={toggleDrawer}>

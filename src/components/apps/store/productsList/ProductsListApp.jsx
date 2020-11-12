@@ -3,17 +3,17 @@ import React, { useCallback } from 'react';
 import ProductApp from '../product/ProductApp';
 import { Container } from './style';
 
-const ProductsListApp = ({ products, setSelectedProduct, setPage }) => {
+const ProductsListApp = ({ products, setSelectedProduct, changePage }) => {
     const renderProducts = useCallback(() => {
         return products.map((product) => (
             <ProductApp
                 key={product.id}
                 product={product}
                 setSelectedProduct={setSelectedProduct}
-                setPage={setPage}
+                changePage={changePage}
             />
         ));
-    }, [products, setPage, setSelectedProduct]);
+    }, [products, changePage, setSelectedProduct]);
 
     return <Container>{renderProducts()}</Container>;
 };

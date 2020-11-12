@@ -14,6 +14,7 @@ import { TaskIcon } from 'assets/images/icons/TaskIcon';
 import { StoreIcon } from 'assets/images/icons/StoreIcon';
 import { zIndex } from 'components/theme/zIndex';
 import { useAuth } from 'hooks';
+import { FolderPagesProvider } from './folderPagesContext';
 
 const DocsApp = lazy(() => import('components/apps/docs/DocsApp'));
 const SettingsApp = lazy(() => import('components/apps/settings/SettingsApp'));
@@ -129,7 +130,11 @@ const APPS_STATE = [
         appName: 'Store',
         widgetIcon: <StoreIcon />,
         link: '/store',
-        component: <StoreApp />,
+        component: (
+            <FolderPagesProvider>
+                <StoreApp />
+            </FolderPagesProvider>
+        ),
         requireLogin: false,
         requireAdmin: false,
         isOpen: null,
@@ -169,7 +174,11 @@ const APPS_STATE = [
         appName: 'Calendar',
         widgetIcon: <CalculatorIcon />,
         link: '/calendar',
-        component: <CalendarApp />,
+        component: (
+            <FolderPagesProvider>
+                <CalendarApp />
+            </FolderPagesProvider>
+        ),
         requireLogin: true,
         requireAdmin: false,
         isOpen: null,

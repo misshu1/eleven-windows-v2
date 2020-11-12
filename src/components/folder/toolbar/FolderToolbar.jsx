@@ -7,11 +7,18 @@ import MobileToolbar from './mobile/MobileToolbar';
 import WindowsToolbar from './windows/WindowsToolbar';
 
 const FolderToolbar = (props) => {
-    const { appId, quitApp, toolbarMenu, toggleDrawer, setPage, page } = props;
+    const {
+        appId,
+        quitApp,
+        toolbarMenu,
+        toggleDrawer,
+        changePage,
+        page
+    } = props;
     const {
         isWindowsSelected,
         isLinuxSelected,
-        isMobileSelected,
+        isMobileSelected
     } = useSettingsContext();
 
     return (
@@ -21,7 +28,7 @@ const FolderToolbar = (props) => {
                     appId={appId}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
-                    setPage={setPage}
+                    changePage={changePage}
                     page={page}
                 />
             )}
@@ -31,7 +38,7 @@ const FolderToolbar = (props) => {
                     quitApp={quitApp}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
-                    setPage={setPage}
+                    changePage={changePage}
                     page={page}
                 />
             )}
@@ -41,7 +48,7 @@ const FolderToolbar = (props) => {
                     quitApp={quitApp}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
-                    setPage={setPage}
+                    changePage={changePage}
                     page={page}
                 />
             )}
@@ -54,5 +61,5 @@ export default FolderToolbar;
 FolderToolbar.propTypes = {
     quitApp: PropTypes.func.isRequired,
     toolbarMenu: PropTypes.array,
-    toggleDrawer: PropTypes.func,
+    toggleDrawer: PropTypes.func
 };
