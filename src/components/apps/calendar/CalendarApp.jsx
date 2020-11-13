@@ -7,7 +7,7 @@ import Calendar from 'react-calendar';
 
 import FolderApp from 'components/folder/FolderApp';
 import { Container, CustomCalendarStyles, Summary } from './style';
-import { useCalendarApi } from './useCalendarApi';
+import { useCalendarApi } from 'components/api';
 import { useAuth } from 'hooks';
 import { useGapiContext, useFolderPagesContext } from 'contexts';
 import { folderPages } from 'components/folder/folderPages';
@@ -155,6 +155,7 @@ function CalendarApp() {
                                         view
                                     )
                                 }
+                                // onClickDay={() => {}}
                                 nextLabel={
                                     <FontAwesomeIcon
                                         icon={['fas', 'chevron-right']}
@@ -182,6 +183,7 @@ function CalendarApp() {
                                 size='medium'
                                 aria-label='create-event'
                                 classes={{ root: classes.addEventBtn }}
+                                // onClick={() => {}}
                             >
                                 <FontAwesomeIcon
                                     icon={['fas', 'plus']}
