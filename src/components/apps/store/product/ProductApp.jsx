@@ -2,9 +2,12 @@ import { makeStyles } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { useCartContext, useDispatchCartContext } from 'contexts';
+import {
+    useCartContext,
+    useDispatchCartContext,
+    useFolderPagesContext
+} from 'contexts';
 import { AddToCartButton } from 'components/common';
-import { folderPages } from 'components/folder/folderPages';
 import { Card } from './style';
 
 const useStyles = makeStyles({
@@ -23,11 +26,12 @@ const ProductApp = ({ product, setSelectedProduct, changePage }) => {
     const [discountVal, setDiscountVal] = useState(0);
     const [ratingVal, setRatingVal] = useState(0);
     const classes = useStyles();
+    const { FOLDER_PAGES } = useFolderPagesContext();
 
     const selectProduct = useCallback(() => {
         setSelectedProduct(product);
-        changePage(folderPages.level_2);
-    }, [product, changePage, setSelectedProduct]);
+        changePage(FOLDER_PAGES.level_2);
+    }, [setSelectedProduct, product, changePage, FOLDER_PAGES.level_2]);
 
     useEffect(() => {
         const discount = getProductDiscount(newPrice, oldPrice);

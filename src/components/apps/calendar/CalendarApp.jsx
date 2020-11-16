@@ -1,44 +1,23 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { isWithinInterval, differenceInCalendarDays } from 'date-fns';
-import { makeStyles } from '@material-ui/core/styles';
-import { Fab, Tooltip } from '@material-ui/core';
-import Calendar from 'react-calendar';
-
+import React, { useEffect, useMemo, useState } from 'react';
 import FolderApp from 'components/folder/FolderApp';
-import { Container, CustomCalendarStyles, Summary } from './style';
 import { useCalendarApi } from 'components/api';
 import { useAuth } from 'hooks';
 import { useGapiContext, useFolderPagesContext } from 'contexts';
-import { folderPages } from 'components/folder/folderPages';
-
-const useStyles = makeStyles((theme) => ({
-    addEventBtn: {
-        position: 'absolute',
-        zIndex: '1',
-        bottom: '1.5rem',
-        right: '1.5rem',
-        backgroundColor: 'var(--colorSuccess)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: '100%',
-        color: '#fff',
-
-        '&:hover': {
-            backgroundColor: 'var(--colorSuccess)'
-        }
-    }
-}));
+import MyCalendar from './MyCalendar';
+import { DaySchedule } from './daySchedule/DaySchedule';
+import { EventDetails } from './eventDetails/EventDetails';
+import { EventForm } from './eventForm/EventForm';
+import { CreateEvent } from './createEvent/CreateEvent';
 
 function CalendarApp() {
     const [calendarEvents, setCalendarEvents] = useState([]);
-    const [calendar, setCalendar] = useState({ value: new Date() });
+    const [showDaySchedule, setShowDaySchedule] = useState(null);
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [selectedDay, setSelectedDay] = useState(null);
     const { isGapiConnected, loginGapi, logoutGapi } = useGapiContext();
     const { getAllCalendarsEvents } = useCalendarApi();
-    const { page, changePage } = useFolderPagesContext();
+    const { page, changePage, FOLDER_PAGES } = useFolderPagesContext();
     const { user } = useAuth();
-    const classes = useStyles();
 
     useEffect(() => {
         if (isGapiConnected) {
@@ -51,14 +30,13 @@ function CalendarApp() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isGapiConnected]);
 
-    const toolbarMenu = useCallback(() => {
+    const toolbarMenu = useMemo(() => {
         const menu = [
             {
                 name: 'Calendar settings',
                 fontIcon: { icon: ['fas', 'cog'] },
                 onClick: () => {
                     console.log('asdasdsa');
-                    changePage(folderPages.level_2);
                 }
             }
         ];
@@ -76,124 +54,38 @@ function CalendarApp() {
             });
 
         return menu;
-    }, [changePage, isGapiConnected, loginGapi, logoutGapi, user]);
-
-    const renderEvents = (activeStartDate, date, view) => {
-        if (view !== 'month') return;
-
-        return calendarEvents.map(({ id, summary, colorId, start, end }) => {
-            const eventStart = new Date(start.dateTime || start.date);
-            const eventEnd = new Date(end.dateTime || end.date);
-            const daysDifference = differenceInCalendarDays(
-                new Date(end.date),
-                new Date(start.date)
-            );
-
-            // If the event has no 'timeZone' and it's lenght is 1 day
-            // it means it's an all-day event
-            const checkEndDate = daysDifference === 1 ? eventStart : eventEnd;
-
-            if (
-                (date.getDate() === eventStart.getDate() &&
-                    date.getMonth() === eventStart.getMonth() &&
-                    date.getFullYear() === eventStart.getFullYear()) ||
-                isWithinInterval(date, {
-                    start: eventStart,
-                    end: checkEndDate
-                })
-            ) {
-                return (
-                    <Tooltip
-                        key={id}
-                        title={summary}
-                        placement='top'
-                        enterDelay={500}
-                    >
-                        <Summary colorId={colorId}>{summary}</Summary>
-                    </Tooltip>
-                );
-            }
-        });
-    };
-
-    const disableOtherMontsTiles = (activeStartDate, date, view) => {
-        if (view !== 'month') return;
-        if (activeStartDate.getMonth() !== date.getMonth()) return true;
-    };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isGapiConnected, user]);
 
     return (
         <FolderApp
             appId={6}
             marginLeft={150}
             marginTop={150}
-            toolbarMenu={toolbarMenu()}
+            toolbarMenu={toolbarMenu}
             page={page}
             changePage={changePage}
         >
-            {page === folderPages.level_1 && (
-                <>
-                    <Container>
-                        <CustomCalendarStyles>
-                            <Calendar
-                                value={calendar.value}
-                                showFixedNumberOfWeeks
-                                showWeekNumbers
-                                view='month'
-                                tileContent={({
-                                    activeStartDate,
-                                    date,
-                                    view
-                                }) => renderEvents(activeStartDate, date, view)}
-                                tileDisabled={({
-                                    activeStartDate,
-                                    date,
-                                    view
-                                }) =>
-                                    disableOtherMontsTiles(
-                                        activeStartDate,
-                                        date,
-                                        view
-                                    )
-                                }
-                                // onClickDay={() => {}}
-                                nextLabel={
-                                    <FontAwesomeIcon
-                                        icon={['fas', 'chevron-right']}
-                                        size='sm'
-                                    />
-                                }
-                                prevLabel={
-                                    <FontAwesomeIcon
-                                        icon={['fas', 'chevron-left']}
-                                        size='sm'
-                                    />
-                                }
-                                next2Label={null}
-                                prev2Label={null}
-                            />
-                        </CustomCalendarStyles>
-                    </Container>
-                    {user && isGapiConnected && (
-                        <Tooltip
-                            title='Create event'
-                            placement='top'
-                            enterDelay={500}
-                        >
-                            <Fab
-                                size='medium'
-                                aria-label='create-event'
-                                classes={{ root: classes.addEventBtn }}
-                                // onClick={() => {}}
-                            >
-                                <FontAwesomeIcon
-                                    icon={['fas', 'plus']}
-                                    size='lg'
-                                />
-                            </Fab>
-                        </Tooltip>
-                    )}
-                </>
+            {page === FOLDER_PAGES.level_1 && (
+                <MyCalendar
+                    setShowDaySchedule={setShowDaySchedule}
+                    setSelectedDay={setSelectedDay}
+                />
             )}
+            {page === FOLDER_PAGES.level_2 && showDaySchedule && (
+                <DaySchedule
+                    setSelectedEvent={setSelectedEvent}
+                    setShowDaySchedule={setShowDaySchedule}
+                    selectedDay={selectedDay}
+                />
+            )}
+            {page === FOLDER_PAGES.level_2 && !showDaySchedule && (
+                <CreateEvent />
+            )}
+            {page === FOLDER_PAGES.level_3 && (
+                <EventDetails selectedEvent={selectedEvent} />
+            )}
+            {page === FOLDER_PAGES.level_4 && <EventForm />}
         </FolderApp>
     );
 }

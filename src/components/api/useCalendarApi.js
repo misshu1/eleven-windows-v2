@@ -5,11 +5,16 @@ export function useCalendarApi() {
 
     const getCalendarEvents = async (
         calendarId = 'primary',
-        fromToday = true
+        fromToday = true,
+        startingDate
     ) => {
-        const date = new Date();
-        if (!fromToday) {
+        let date = new Date();
+        if (!fromToday && !startingDate) {
             date.setDate(date.getDate() - 30);
+        }
+
+        if (startingDate) {
+            date = new Date(startingDate);
         }
 
         const events = await window.gapi.client.calendar.events
@@ -78,10 +83,10 @@ export function useCalendarApi() {
         return calendars;
     };
 
-    const getAllCalendarsEvents = async () => {
+    const getAllCalendarsEvents = async (startingDate) => {
         const calendarList = await getCalendarList();
         const promisesArray = await calendarList.map((item) => {
-            return getCalendarEvents(item.id, false);
+            return getCalendarEvents(item.id, false, startingDate);
         });
         const settledCalendars = await Promise.allSettled(promisesArray);
 
@@ -90,9 +95,9 @@ export function useCalendarApi() {
             .map((err) => {
                 showError(
                     'Error',
-                    err.result.error.errors[0].message ||
+                    err?.result?.error?.errors[0]?.message ||
                         'Failed to get the calendar events from the database!',
-                    err.result.error.code || 500
+                    err?.result?.error?.code || 500
                 );
             });
 

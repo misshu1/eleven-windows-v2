@@ -6,14 +6,13 @@ import {
     useNotificationsContext
 } from 'contexts';
 import FolderApp from 'components/folder/FolderApp';
-import { folderPages } from 'components/folder/folderPages';
 import ProductDetailsApp from './productDetails/ProductDetailsApp';
 import ProductsListApp from './productsList/ProductsListApp';
 
 const StoreApp = () => {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState({});
-    const { page, changePage } = useFolderPagesContext();
+    const { page, changePage, FOLDER_PAGES } = useFolderPagesContext();
     const { showError } = useNotificationsContext();
     const { firestore } = useFirebaseContext();
 
@@ -57,14 +56,14 @@ const StoreApp = () => {
             page={page}
             changePage={changePage}
         >
-            {page === folderPages.level_1 && (
+            {page === FOLDER_PAGES.level_1 && (
                 <ProductsListApp
                     products={products}
                     setSelectedProduct={setSelectedProduct}
                     changePage={changePage}
                 />
             )}
-            {page === folderPages.level_2 && (
+            {page === FOLDER_PAGES.level_2 && (
                 <ProductDetailsApp product={selectedProduct} />
             )}
         </FolderApp>

@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useFolderPagesContext } from 'contexts';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { folderPages } from '../../folderPages';
-
 const BackButton = ({ page, changePage }) => {
     const navigate = useNavigate();
+    const { FOLDER_PAGES } = useFolderPagesContext();
 
     const goBack = () => {
         if (!page) {
@@ -13,32 +13,32 @@ const BackButton = ({ page, changePage }) => {
         }
 
         switch (page) {
-            case folderPages.level_1:
+            case FOLDER_PAGES.level_1:
                 return navigate('/');
 
-            case folderPages.level_2:
-                return changePage(folderPages.level_1);
+            case FOLDER_PAGES.level_2:
+                return changePage(FOLDER_PAGES.level_1);
 
-            case folderPages.level_3:
-                return changePage(folderPages.level_2);
+            case FOLDER_PAGES.level_3:
+                return changePage(FOLDER_PAGES.level_2);
 
-            case folderPages.level_4:
-                return changePage(folderPages.level_3);
+            case FOLDER_PAGES.level_4:
+                return changePage(FOLDER_PAGES.level_3);
 
-            case folderPages.level_5:
-                return changePage(folderPages.level_4);
+            case FOLDER_PAGES.level_5:
+                return changePage(FOLDER_PAGES.level_4);
 
-            case folderPages.level_6:
-                return changePage(folderPages.level_5);
+            case FOLDER_PAGES.level_6:
+                return changePage(FOLDER_PAGES.level_5);
 
-            case folderPages.level_7:
-                return changePage(folderPages.level_6);
+            case FOLDER_PAGES.level_7:
+                return changePage(FOLDER_PAGES.level_6);
 
-            case folderPages.level_8:
-                return changePage(folderPages.level_7);
+            case FOLDER_PAGES.level_8:
+                return changePage(FOLDER_PAGES.level_7);
 
-            case folderPages.level_9:
-                return changePage(folderPages.level_8);
+            case FOLDER_PAGES.level_9:
+                return changePage(FOLDER_PAGES.level_8);
 
             default:
                 throw new Error(`The Page "${page}" doesn't exist`);

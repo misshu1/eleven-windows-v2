@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { folderPages } from 'components/folder/folderPages';
-import { usePrevious } from 'hooks';
+import { FOLDER_PAGES } from '../contexts/folderPagesContext';
+import { usePrevious } from './usePrevious';
 
 // Used as an object key for 'defaultFolderScrollState' object
 export const pageScrollName = (page) => `${page}_scroll`;
 const defaultFolderScrollState = {};
 
-// Use 'folderPages' Object.keys to create new Object using 'pageScrollName' and add it to 'defaultFolderScrollState'
-Object.keys(folderPages).map(
+// Use 'FOLDER_PAGES' Object.keys to create new Object using 'pageScrollName' and add it to 'defaultFolderScrollState'
+Object.keys(FOLDER_PAGES).map(
     (page) => (defaultFolderScrollState[pageScrollName(page)] = 0)
 );
 
@@ -54,7 +54,7 @@ Object.keys(folderPages).map(
 // ]
 
 const getPageName = (page) => {
-    const pageName = Object.entries(folderPages)
+    const pageName = Object.entries(FOLDER_PAGES)
         .filter((item) => item[1] === page)
         .map((item) => pageScrollName(item[0]));
 
