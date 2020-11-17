@@ -22,8 +22,7 @@ const WindowsToolbar = (props) => {
         quitApp,
         toolbarMenu,
         toggleDrawer,
-        changePage,
-        page
+        enablePagination
     } = props;
 
     const folder = getFolder(appId);
@@ -51,7 +50,7 @@ const WindowsToolbar = (props) => {
 
     return (
         <NameBar>
-            {page && <BackButton changePage={changePage} page={page} />}
+            {enablePagination && <BackButton />}
             {toolbarMenu && (
                 <Tooltip title='Menu' placement='top' enterDelay={500}>
                     <div className='menu' onClick={toggleDrawer}>
@@ -65,7 +64,7 @@ const WindowsToolbar = (props) => {
             <Name
                 className='handle'
                 toolbarMenu={!!toolbarMenu}
-                page={!!page}
+                enablePagination={enablePagination}
                 onDoubleClick={toggleMaximize}
             >
                 {folder.appName}

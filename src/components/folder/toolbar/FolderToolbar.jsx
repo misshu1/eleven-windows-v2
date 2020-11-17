@@ -12,8 +12,7 @@ const FolderToolbar = (props) => {
         quitApp,
         toolbarMenu,
         toggleDrawer,
-        changePage,
-        page
+        enablePagination
     } = props;
     const {
         isWindowsSelected,
@@ -28,8 +27,7 @@ const FolderToolbar = (props) => {
                     appId={appId}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
-                    changePage={changePage}
-                    page={page}
+                    enablePagination={enablePagination}
                 />
             )}
             {isWindowsSelected() && (
@@ -38,8 +36,7 @@ const FolderToolbar = (props) => {
                     quitApp={quitApp}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
-                    changePage={changePage}
-                    page={page}
+                    enablePagination={enablePagination}
                 />
             )}
             {isLinuxSelected() && (
@@ -48,8 +45,7 @@ const FolderToolbar = (props) => {
                     quitApp={quitApp}
                     toolbarMenu={toolbarMenu}
                     toggleDrawer={toggleDrawer}
-                    changePage={changePage}
-                    page={page}
+                    enablePagination={enablePagination}
                 />
             )}
         </>

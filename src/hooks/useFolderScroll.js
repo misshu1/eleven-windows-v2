@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { FOLDER_PAGES } from '../contexts/folderPagesContext';
+import {
+    FOLDER_PAGES,
+    useFolderPagesContext
+} from '../contexts/folderPagesContext';
 import { usePrevious } from './usePrevious';
 
 // Used as an object key for 'defaultFolderScrollState' object
@@ -61,8 +64,9 @@ const getPageName = (page) => {
     return pageName[0];
 };
 
-export const useFolderScroll = (page, scrollTop, setScrollTop) => {
+export const useFolderScroll = (scrollTop, setScrollTop) => {
     const [scroll, setScroll] = useState(defaultFolderScrollState);
+    const { page } = useFolderPagesContext();
     const prevPage = usePrevious(page);
 
     const getPage = useCallback((page) => {

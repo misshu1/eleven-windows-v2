@@ -19,7 +19,6 @@ export const FOLDER_PAGES = {
 };
 
 // This context is used to manage folder pagination
-// Can be used in multiple folders
 const FolderPagesContext = createContext(null);
 export const FolderPagesProvider = ({ children }) => {
     const [page, setPage] = useState(FOLDER_PAGES.level_1);
@@ -29,7 +28,7 @@ export const FolderPagesProvider = ({ children }) => {
     }, []);
 
     return (
-        <FolderPagesContext.Provider value={{ page, changePage, FOLDER_PAGES }}>
+        <FolderPagesContext.Provider value={{ page, changePage }}>
             {children}
         </FolderPagesContext.Provider>
     );

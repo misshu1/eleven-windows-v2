@@ -24,9 +24,9 @@ import FolderToolbar from './toolbar/FolderToolbar';
 import { zIndex } from 'components/theme/zIndex';
 
 const FolderContent = (props) => {
-    const { children, page, scrollTop, setScrollTop } = props;
+    const { children, scrollTop, setScrollTop } = props;
 
-    useFolderScroll(page, scrollTop, setScrollTop);
+    useFolderScroll(scrollTop, setScrollTop);
 
     return <>{children}</>;
 };
@@ -52,8 +52,7 @@ const FolderApp = forwardRef((props, ref) => {
         marginLeft,
         marginTop,
         toolbarMenu,
-        changePage,
-        page
+        enablePagination
     } = props;
 
     const app = getFolder(appId);
@@ -133,8 +132,7 @@ const FolderApp = forwardRef((props, ref) => {
                             toolbarMenu={toolbarMenu}
                             quitApp={quitApp}
                             toggleDrawer={toggleDrawer}
-                            changePage={changePage}
-                            page={page}
+                            enablePagination={enablePagination}
                         />
                         <Content>
                             {showDrawer && (
@@ -158,9 +156,7 @@ const FolderApp = forwardRef((props, ref) => {
                                 </>
                             )}
                             <ScrollbarApp requireChildrenProps>
-                                <FolderContent page={page}>
-                                    {children}
-                                </FolderContent>
+                                <FolderContent>{children}</FolderContent>
                             </ScrollbarApp>
                         </Content>
                     </Folder>

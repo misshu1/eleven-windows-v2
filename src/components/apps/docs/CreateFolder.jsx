@@ -81,6 +81,9 @@ const marginLeftDescription = (
 const toolbarMenuDescription = (
     <span>Toolbar menu items, more about this, bellow.</span>
 );
+const paginationDescription = (
+    <span>If set to true will enable folder pagination.</span>
+);
 const refDescription = (
     <span>
         Passing references from the folder app elements to the toolbar menu.
@@ -97,6 +100,13 @@ const folderPropsTable = [
     createData('marginTop', false, 'Number', '60', marginTopDescription),
     createData('marginLeft', false, 'Number', '60', marginLeftDescription),
     createData('toolbarMenu', false, 'Array', '-', toolbarMenuDescription),
+    createData(
+        'enablePagination',
+        false,
+        'Boolean',
+        'false',
+        paginationDescription
+    ),
     createData('ref', false, 'Object', '-', refDescription)
 ];
 

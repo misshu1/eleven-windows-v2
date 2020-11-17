@@ -1,7 +1,11 @@
 import React, { Suspense, useEffect, useLayoutEffect, useState } from 'react';
 import { Navigate, Route, useLocation, useNavigate } from 'react-router-dom';
 
-import { useDispatchFolderContext, useFolderContext } from 'contexts';
+import {
+    FolderPagesProvider,
+    useDispatchFolderContext,
+    useFolderContext
+} from 'contexts';
 import { useAuth, useMediaQuery, usePrevious } from 'hooks';
 import { SpinnerApp } from 'components/common';
 
@@ -87,11 +91,15 @@ const FolderRoutes = () => {
                     element={
                         <>
                             {app.isOpen && checkUserPermisions(app) && (
-                                <Suspense
-                                    fallback={<SpinnerApp global delay={200} />}
-                                >
-                                    {app.component}
-                                </Suspense>
+                                <FolderPagesProvider>
+                                    <Suspense
+                                        fallback={
+                                            <SpinnerApp global delay={200} />
+                                        }
+                                    >
+                                        {app.component}
+                                    </Suspense>
+                                </FolderPagesProvider>
                             )}
                         </>
                     }

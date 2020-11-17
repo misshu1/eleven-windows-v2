@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useFolderPagesContext, useGapiContext } from 'contexts';
+import { useFolderPagesContext, useGapiContext, FOLDER_PAGES } from 'contexts';
 import { useCalendarApi } from 'components/api';
-import { format, isSameDay, compareAsc } from 'date-fns';
+import { format, isSameDay, eachDayOfInterval } from 'date-fns';
 import { Container, Summary, EventDay, SummaryContainer } from './style';
 import { Fab, Tooltip } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,7 +33,7 @@ export function DaySchedule({
     setShowDaySchedule
 }) {
     const [calendarEvents, setCalendarEvents] = useState([]);
-    const { changePage, FOLDER_PAGES } = useFolderPagesContext();
+    const { changePage } = useFolderPagesContext();
     const { isGapiConnected } = useGapiContext();
     const { getAllCalendarsEvents } = useCalendarApi();
     const { user } = useAuth();
@@ -50,12 +50,10 @@ export function DaySchedule({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isGapiConnected]);
 
-    const weekDay = (date) => format(new Date(date), 'EEE');
-
     const renderEvents = () => {
         let monthDate = new Date(selectedDay).getDate();
-        let wkDay = weekDay(selectedDay);
-        let date = new Date(selectedDay);
+        let weekDay = format(new Date(selectedDay), 'EEE');
+        let date = null;
 
         return calendarEvents
             .sort(
@@ -70,17 +68,20 @@ export function DaySchedule({
                     monthDate = new Date(
                         start.dateTime || start.date
                     ).getDate();
-                    wkDay = weekDay(start.dateTime || start.date);
+                    weekDay = format(
+                        new Date(start.dateTime || start.date),
+                        'EEE'
+                    );
                     date = new Date(start.dateTime || start.date);
                 } else {
-                    wkDay = null;
+                    weekDay = null;
                     monthDate = null;
                 }
 
                 return (
                     <SummaryContainer key={id}>
                         <EventDay>
-                            <span>{wkDay}</span>
+                            <span>{weekDay}</span>
                             <span>{monthDate}</span>
                         </EventDay>
                         <Summary

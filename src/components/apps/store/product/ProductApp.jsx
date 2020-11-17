@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {
     useCartContext,
     useDispatchCartContext,
+    FOLDER_PAGES,
     useFolderPagesContext
 } from 'contexts';
 import { AddToCartButton } from 'components/common';
@@ -19,19 +20,19 @@ const useStyles = makeStyles({
     }
 });
 
-const ProductApp = ({ product, setSelectedProduct, changePage }) => {
+const ProductApp = ({ product, setSelectedProduct }) => {
     const { imagePreview, newPrice, oldPrice, reviews, title } = product;
     const { addToCart } = useDispatchCartContext();
     const { getProductDiscount } = useCartContext();
+    const { changePage } = useFolderPagesContext();
     const [discountVal, setDiscountVal] = useState(0);
     const [ratingVal, setRatingVal] = useState(0);
     const classes = useStyles();
-    const { FOLDER_PAGES } = useFolderPagesContext();
 
     const selectProduct = useCallback(() => {
         setSelectedProduct(product);
         changePage(FOLDER_PAGES.level_2);
-    }, [setSelectedProduct, product, changePage, FOLDER_PAGES.level_2]);
+    }, [setSelectedProduct, product, changePage]);
 
     useEffect(() => {
         const discount = getProductDiscount(newPrice, oldPrice);

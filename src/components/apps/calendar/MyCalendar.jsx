@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { isWithinInterval, differenceInCalendarDays } from 'date-fns';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,7 +8,7 @@ import Calendar from 'react-calendar';
 import { Container, CustomCalendarStyles, Summary } from './style';
 import { useCalendarApi } from 'components/api';
 import { useAuth } from 'hooks';
-import { useGapiContext, useFolderPagesContext } from 'contexts';
+import { useGapiContext, useFolderPagesContext, FOLDER_PAGES } from 'contexts';
 
 const useStyles = makeStyles(() => ({
     addEventBtn: {
@@ -36,7 +36,7 @@ function MyCalendar({ setShowDaySchedule, setSelectedDay }) {
     const { getAllCalendarsEvents } = useCalendarApi();
     const { user } = useAuth();
     const classes = useStyles();
-    const { changePage, FOLDER_PAGES } = useFolderPagesContext();
+    const { changePage } = useFolderPagesContext();
 
     useEffect(() => {
         if (isGapiConnected) {

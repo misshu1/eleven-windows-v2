@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import {
     useFirebaseContext,
     useFolderPagesContext,
-    useNotificationsContext
+    useNotificationsContext,
+    FOLDER_PAGES
 } from 'contexts';
 import FolderApp from 'components/folder/FolderApp';
 import ProductDetailsApp from './productDetails/ProductDetailsApp';
@@ -12,7 +13,7 @@ import ProductsListApp from './productsList/ProductsListApp';
 const StoreApp = () => {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState({});
-    const { page, changePage, FOLDER_PAGES } = useFolderPagesContext();
+    const { page } = useFolderPagesContext();
     const { showError } = useNotificationsContext();
     const { firestore } = useFirebaseContext();
 
@@ -49,18 +50,11 @@ const StoreApp = () => {
     };
 
     return (
-        <FolderApp
-            appId={4}
-            marginLeft={60}
-            marginTop={60}
-            page={page}
-            changePage={changePage}
-        >
+        <FolderApp appId={4} marginLeft={60} marginTop={60} enablePagination>
             {page === FOLDER_PAGES.level_1 && (
                 <ProductsListApp
                     products={products}
                     setSelectedProduct={setSelectedProduct}
-                    changePage={changePage}
                 />
             )}
             {page === FOLDER_PAGES.level_2 && (

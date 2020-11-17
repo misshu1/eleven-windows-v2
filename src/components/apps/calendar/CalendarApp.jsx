@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import FolderApp from 'components/folder/FolderApp';
 import { useCalendarApi } from 'components/api';
 import { useAuth } from 'hooks';
-import { useGapiContext, useFolderPagesContext } from 'contexts';
+import { useGapiContext, useFolderPagesContext, FOLDER_PAGES } from 'contexts';
 import MyCalendar from './MyCalendar';
 import { DaySchedule } from './daySchedule/DaySchedule';
 import { EventDetails } from './eventDetails/EventDetails';
@@ -16,7 +16,7 @@ function CalendarApp() {
     const [selectedDay, setSelectedDay] = useState(null);
     const { isGapiConnected, loginGapi, logoutGapi } = useGapiContext();
     const { getAllCalendarsEvents } = useCalendarApi();
-    const { page, changePage, FOLDER_PAGES } = useFolderPagesContext();
+    const { page } = useFolderPagesContext();
     const { user } = useAuth();
 
     useEffect(() => {
@@ -63,8 +63,7 @@ function CalendarApp() {
             marginLeft={150}
             marginTop={150}
             toolbarMenu={toolbarMenu}
-            page={page}
-            changePage={changePage}
+            enablePagination
         >
             {page === FOLDER_PAGES.level_1 && (
                 <MyCalendar

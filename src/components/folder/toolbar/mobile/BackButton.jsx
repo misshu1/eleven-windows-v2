@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useFolderPagesContext } from 'contexts';
+import { FOLDER_PAGES, useFolderPagesContext } from 'contexts';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const BackButton = ({ page, changePage }) => {
+const BackButton = () => {
+    const { page, changePage } = useFolderPagesContext();
     const navigate = useNavigate();
-    const { FOLDER_PAGES } = useFolderPagesContext();
 
     const goBack = () => {
         if (!page) {
@@ -39,6 +39,24 @@ const BackButton = ({ page, changePage }) => {
 
             case FOLDER_PAGES.level_9:
                 return changePage(FOLDER_PAGES.level_8);
+
+            case FOLDER_PAGES.level_10:
+                return changePage(FOLDER_PAGES.level_9);
+
+            case FOLDER_PAGES.level_11:
+                return changePage(FOLDER_PAGES.level_10);
+
+            case FOLDER_PAGES.level_12:
+                return changePage(FOLDER_PAGES.level_11);
+
+            case FOLDER_PAGES.level_13:
+                return changePage(FOLDER_PAGES.level_12);
+
+            case FOLDER_PAGES.level_14:
+                return changePage(FOLDER_PAGES.level_13);
+
+            case FOLDER_PAGES.level_15:
+                return changePage(FOLDER_PAGES.level_14);
 
             default:
                 throw new Error(`The Page "${page}" doesn't exist`);

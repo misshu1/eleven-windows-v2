@@ -130,11 +130,7 @@ const APPS_STATE = [
         appName: 'Store',
         widgetIcon: <StoreIcon />,
         link: '/store',
-        component: (
-            <FolderPagesProvider>
-                <StoreApp />
-            </FolderPagesProvider>
-        ),
+        component: <StoreApp />,
         requireLogin: false,
         requireAdmin: false,
         isOpen: null,
@@ -174,11 +170,7 @@ const APPS_STATE = [
         appName: 'Calendar',
         widgetIcon: <CalculatorIcon />,
         link: '/calendar',
-        component: (
-            <FolderPagesProvider>
-                <CalendarApp />
-            </FolderPagesProvider>
-        ),
+        component: <CalendarApp />,
         requireLogin: true,
         requireAdmin: false,
         isOpen: null,
