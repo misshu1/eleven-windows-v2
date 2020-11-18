@@ -6,7 +6,6 @@ export const Summary = styled.div`
     flex-direction: column;
     width: 100%;
     max-width: 80rem;
-    margin: 0.5rem;
     padding: 0.5rem;
     border-radius: 5px;
     background-color: ${({ colorId }) =>

@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const EventDay = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding: 0.5rem;
     width: 5rem;
 
     span:first-child {
