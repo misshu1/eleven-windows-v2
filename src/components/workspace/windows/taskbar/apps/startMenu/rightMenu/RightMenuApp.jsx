@@ -24,7 +24,10 @@ const RightMenuApp = () => {
         return apps.current.map((app) => {
             return app.iconLocation.map((location) => {
                 if (location === ICON_LOCATION.windows.startMenu.right) {
-                    ANIMATION_DURATION++;
+                    // This if statement will make shure that the animation duration is not longer than 1 second
+                    if (ANIMATION_DURATION < 30) {
+                        ANIMATION_DURATION++;
+                    }
                     return (
                         checkUserPermisions(app) && (
                             <WidgetApp
