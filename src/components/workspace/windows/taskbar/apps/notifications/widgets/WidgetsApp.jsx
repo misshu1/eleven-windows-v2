@@ -8,6 +8,7 @@ import {
 } from 'contexts';
 import { useNotificationsTaskbarContext } from '../../../contexts/notificationsTaskbarContext';
 import { Container, Widget } from './style';
+import { ScrollbarApp } from 'components/common/ScrollbarApp';
 
 const WidgetsApp = () => {
     const {
@@ -33,7 +34,11 @@ const WidgetsApp = () => {
             );
         });
     };
-    return <Container>{widgetIcons()}</Container>;
+    return (
+        <ScrollbarApp style={{ height: '6.5rem' }}>
+            <Container>{widgetIcons()}</Container>
+        </ScrollbarApp>
+    );
 };
 
 const WidgetApp = ({ iconDisplayName, widgetIcon, appId }) => {

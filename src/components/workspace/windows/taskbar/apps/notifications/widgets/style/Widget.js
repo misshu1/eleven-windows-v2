@@ -3,9 +3,8 @@ import styled from 'styled-components';
 export const Widget = styled.div`
     display: flex;
     flex-direction: column;
-    width: 6rem;
+    width: 100%;
     height: 4rem;
-    margin: 0.5rem;
     background-color: var(--backgroundActive);
     border: 1px solid var(--border);
     padding: 0.2rem;

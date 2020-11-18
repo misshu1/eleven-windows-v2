@@ -29,7 +29,7 @@ const RightMenuApp = () => {
                         checkUserPermisions(app) && (
                             <WidgetApp
                                 key={app.id}
-                                animationDuration={ANIMATION_DURATION / 10}
+                                animationDuration={ANIMATION_DURATION / 40}
                                 appId={app.id}
                                 widgetIcon={app.widgetIcon}
                                 iconDisplayName={app.appName}
