@@ -5,7 +5,7 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import { tomorrow, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { v4 as uuidv4 } from 'uuid';
-import { FolderIcon, LogoIcon } from 'assets/images/icons';
+import { LogoIcon } from 'assets/images/icons';
 import { useNotificationsContext, useSettingsContext } from 'contexts';
 import { Emoji } from 'components/common';
 import FolderApp from 'components/folder/FolderApp';
@@ -17,7 +17,8 @@ import {
     loadingLogoExample,
     notificationExample,
     spinnerExample,
-    zIndexExample
+    zIndexExample,
+    folderPaginationExample
 } from './CodeExamples';
 import CreateFolder from './CreateFolder';
 import { Container } from './style';
@@ -99,8 +100,10 @@ const toolbarMenu = () => {
     return [
         {
             name: 'Create a new folder',
-            widgetIcon: <FolderIcon width='100%' height='100%' />,
-            fontIcon: null,
+            widgetIcon: null,
+            fontIcon: {
+                icon: ['fas', 'folder']
+            },
             link: null,
             scrollToRef: 'createFolderRef',
             onClick: null
@@ -113,6 +116,16 @@ const toolbarMenu = () => {
             },
             link: null,
             scrollToRef: 'addMenuToFolderRef',
+            onClick: null
+        },
+        {
+            name: 'Add folder pagination',
+            widgetIcon: null,
+            fontIcon: {
+                icon: ['fas', 'book-open']
+            },
+            link: null,
+            scrollToRef: 'addFolderPagination',
             onClick: null
         },
         {
@@ -201,6 +214,7 @@ const DocsApp = () => {
     const changeLoadingLogoRef = useRef(null);
     const createNotificationsRef = useRef(null);
     const createFolderRef = useRef(null);
+    const addFolderPagination = useRef(null);
     const addMenuToFolderRef = useRef(null);
     const zIndexRef = useRef(null);
     const folderStructureRef = useRef(null);
@@ -224,6 +238,7 @@ const DocsApp = () => {
                 createFolderRef,
                 changeLoadingLogoRef,
                 createNotificationsRef,
+                addFolderPagination,
                 addMenuToFolderRef,
                 zIndexRef,
                 folderStructureRef,
@@ -251,6 +266,11 @@ const DocsApp = () => {
 
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {folderMenuExample}
+                </SyntaxHighlighter>
+
+                <h2 ref={addFolderPagination}>Add folder pagination</h2>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {folderPaginationExample}
                 </SyntaxHighlighter>
 
                 <h2 ref={changeLoadingLogoRef}>Change loading logo</h2>
@@ -417,17 +437,10 @@ const DocsApp = () => {
                 //     - example how folder scrolling works
                 //     - example how to add scrolling tracking to a component
 
-                Folder pagination
-                    - example how to add pages
-                    - example how to switch pages  
-
                 Folder permisions
                     - requireLogin: true,
                     - requireAdmin: true,
                     
-                // Spinner 
-                //     - example how to use local and global spinner
-
                 // Routing
                 //     - explain how routing works
                 //     - also explain requireAuth routes               

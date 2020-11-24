@@ -272,11 +272,38 @@ const ExampleApp = ({ isAuthOpen }) => {
         <Suspense fallback={
           <SpinnerApp delay={200} global style={{ color: 'red' }} />
         }>
-            <AuthApp onCancel={hideAuth} />
+          <AuthApp onCancel={hideAuth} />
         </Suspense>
       )}
     </FolderApp>
 }
 
 export default ExampleApp;
+`.trim();
+
+export const folderPaginationExample = `
+import { useFolderPagesContext } from 'contexts';
+import { FOLDER_PAGES } from 'components/common';
+
+const ExampleApp = () => {
+  const { page, changePage } = useFolderPagesContext();
+
+  const goToPage2 = () => {
+    changePage(FOLDER_PAGES.level_2)
+  }
+
+  return (
+    <FolderApp appId={1234}>
+      <button onClick={goToPage2}>Go to Page 2</button>
+
+      {page === FOLDER_PAGES.level_1 && (
+        <FristPageComponent />
+      )}
+      {page === FOLDER_PAGES.level_2 && (
+        <SecondPageComponent />
+      )}
+      {page === FOLDER_PAGES.level_3 && (
+        <ThirdPageComponent />
+      )}
+    </FolderApp>
 `.trim();

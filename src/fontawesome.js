@@ -38,6 +38,8 @@ import {
     faChevronRight,
     faChevronLeft,
     faPlus,
+    faBookOpen,
+    faFolder,
     faCommentAlt as faCommentAlt2
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -78,5 +80,7 @@ library.add(
     faChevronRight,
     faChevronLeft,
     faGoogle,
-    faPlus
+    faPlus,
+    faBookOpen,
+    faFolder
 );

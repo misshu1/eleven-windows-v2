@@ -155,8 +155,12 @@ const FolderApp = forwardRef((props, ref) => {
                                     />
                                 </>
                             )}
-                            <ScrollbarApp requireChildrenProps>
-                                <FolderContent>{children}</FolderContent>
+                            <ScrollbarApp
+                            //  requireChildrenProps
+                            >
+                                {/* <FolderContent> */}
+                                {children}
+                                {/* </FolderContent> */}
                             </ScrollbarApp>
                         </Content>
                     </Folder>
