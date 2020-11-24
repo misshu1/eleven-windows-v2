@@ -10,13 +10,7 @@ import React, {
 import { v4 as uuidv4 } from 'uuid';
 
 import Notification from 'components/notifications/notification/Notification';
-
-export const NOTIFICATION_TYPE = {
-    success: 'SUCCESS',
-    error: 'ERROR',
-    warning: 'WARNING',
-    info: 'INFO'
-};
+import { NOTIFICATION_TYPE } from 'components/common';
 
 const NotificationsContext = createContext();
 export const NotificationsProvider = ({ children }) => {

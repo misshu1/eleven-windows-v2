@@ -1,6 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FOLDER_PAGES, useFolderPagesContext } from 'contexts';
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FOLDER_PAGES, ROUTES } from 'components/common';
+import { useFolderPagesContext } from 'contexts';
 import { useNavigate } from 'react-router-dom';
 
 const BackButton = () => {
@@ -9,12 +10,12 @@ const BackButton = () => {
 
     const goBack = () => {
         if (!page) {
-            return navigate('/');
+            return navigate(ROUTES.root);
         }
 
         switch (page) {
             case FOLDER_PAGES.level_1:
-                return navigate('/');
+                return navigate(ROUTES.root);
 
             case FOLDER_PAGES.level_2:
                 return changePage(FOLDER_PAGES.level_1);

@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
-import { ICON_LOCATION, useFolderContext } from 'contexts';
+import { useFolderContext } from 'contexts';
 import { Container } from './style';
 import WidgetApp from './WidgetApp';
+import { ICON_LOCATION } from 'components/common';
 
 let ANIMATION_DURATION = 0;
 

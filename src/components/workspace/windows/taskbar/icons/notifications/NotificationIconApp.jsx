@@ -1,5 +1,4 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCommentAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Badge from '@material-ui/core/Badge';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -11,15 +10,13 @@ import { useNotificationsContext } from '../../../../../../contexts/notification
 import { useNotificationsTaskbarContext } from '../../contexts/notificationsTaskbarContext';
 import { Container } from './style';
 
-library.add(faCommentAlt);
-
 const NotificationIconApp = ({ notificationIconRef }) => {
     const { notificationsHistory } = useNotificationsContext();
     const { closeSnackbar } = useSnackbar();
 
     const {
         toggleNotificationMenu,
-        isNotificationMenuOpen,
+        isNotificationMenuOpen
     } = useNotificationsTaskbarContext();
     const { t } = useTranslation();
 

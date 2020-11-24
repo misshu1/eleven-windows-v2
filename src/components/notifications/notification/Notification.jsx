@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IconButton from '@material-ui/core/IconButton';
+import { NOTIFICATION_TYPE } from 'components/common';
 import React, { forwardRef } from 'react';
 
-import { NOTIFICATION_TYPE } from 'contexts';
 import { Container } from './style';
 
 const Notification = forwardRef((props, ref) => {

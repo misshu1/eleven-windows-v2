@@ -7,7 +7,7 @@ import {
     useFolderContext
 } from 'contexts';
 import { useAuth, useMediaQuery, usePrevious } from 'hooks';
-import { SpinnerApp } from 'components/common';
+import { ROUTES, SpinnerApp } from 'components/common';
 
 const FolderRoutes = () => {
     const [pathExists, setPathExists] = useState(true);
@@ -58,14 +58,14 @@ const FolderRoutes = () => {
         folderState.apps.map((app) => {
             if (location.pathname === app.link) {
                 if (app.requireAdmin && !isUserAdmin()) {
-                    navigate('/401', {
+                    navigate(ROUTES[401], {
                         replace: true,
                         state: {
                             nextPathname: app.link
                         }
                     });
                 } else if (app.requireLogin && !isUserLoggedIn()) {
-                    navigate('/login', {
+                    navigate(ROUTES.login, {
                         replace: true,
                         state: {
                             nextPathname: app.link
@@ -83,7 +83,7 @@ const FolderRoutes = () => {
 
     return (
         <>
-            {!pathExists && <Navigate to='/404' />}
+            {!pathExists && <Navigate to={ROUTES[404]} />}
             {folderState.apps.map((app) => (
                 <Route
                     key={app.id}

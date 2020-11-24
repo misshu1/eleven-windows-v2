@@ -12,6 +12,7 @@ import { useAuth, useMediaQuery } from 'hooks';
 import { modalPageAnimation } from 'components/animations';
 import { Container, ErrorContainer } from './style';
 import { zIndex } from 'components/theme/zIndex';
+import { ROUTES } from 'components/common';
 
 const useStyles = makeStyles({
     btnStyle: {
@@ -92,9 +93,9 @@ const ErrorPageApp = () => {
             location.pathname === '/401'
         ) {
             if (!isMobile) {
-                navigateWithAnimation('/');
+                navigateWithAnimation(ROUTES.root);
             } else {
-                navigate('/');
+                navigate(ROUTES.root);
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -122,9 +123,9 @@ const ErrorPageApp = () => {
 
     const goHome = useCallback(() => {
         if (!isMobile) {
-            navigateWithAnimation('/');
+            navigateWithAnimation(ROUTES.root);
         } else {
-            navigate('/');
+            navigate(ROUTES.root);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

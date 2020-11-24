@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import {
     useFirebaseContext,
     useFolderPagesContext,
-    useNotificationsContext,
-    FOLDER_PAGES
+    useNotificationsContext
 } from 'contexts';
 import FolderApp from 'components/folder/FolderApp';
 import ProductDetailsApp from './productDetails/ProductDetailsApp';
 import ProductsListApp from './productsList/ProductsListApp';
+import { FOLDER_PAGES } from 'components/common';
 
 const StoreApp = () => {
     const [products, setProducts] = useState([]);

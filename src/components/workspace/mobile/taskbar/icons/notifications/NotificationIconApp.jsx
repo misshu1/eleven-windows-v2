@@ -1,5 +1,4 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCommentAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Badge from '@material-ui/core/Badge';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -9,8 +8,6 @@ import { useTranslation } from 'react-i18next';
 
 import { useNotificationsContext } from 'contexts';
 import { Container } from './style';
-
-library.add(faCommentAlt);
 
 const NotificationIconApp = (props) => {
     const { notificationsHistory } = useNotificationsContext();

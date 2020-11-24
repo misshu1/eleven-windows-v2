@@ -1,6 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FOLDER_PAGES, useFolderPagesContext } from 'contexts';
 import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FOLDER_PAGES } from 'components/common';
+import { useFolderPagesContext } from 'contexts';
 
 const BackButton = () => {
     const [isDisabled, setIsDisabled] = useState(true);

@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useEffect, useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { useNotificationsContext } from 'contexts';
-import { Emoji, SpinnerApp } from 'components/common';
+import { Emoji, ROUTES, SpinnerApp } from 'components/common';
 import WorkspaceApp from 'components/workspace/WorkspaceApp';
 
 const LoginPage = lazy(() => import('components/pages/login/LoginPage'));
@@ -49,7 +49,7 @@ const RoutesApp = () => {
     return (
         <Routes>
             <Route
-                path='/404'
+                path={ROUTES[404]}
                 element={
                     <Suspense fallback={<SpinnerApp delay={200} global />}>
                         <ErrorPageApp />
@@ -58,7 +58,7 @@ const RoutesApp = () => {
             />
 
             <Route
-                path='/401'
+                path={ROUTES[401]}
                 element={
                     <Suspense fallback={<SpinnerApp delay={200} global />}>
                         <ErrorPageApp />
@@ -67,7 +67,7 @@ const RoutesApp = () => {
             />
 
             <Route
-                path='/500'
+                path={ROUTES[500]}
                 element={
                     <Suspense fallback={<SpinnerApp delay={200} global />}>
                         <ErrorPageApp />
@@ -76,7 +76,7 @@ const RoutesApp = () => {
             />
 
             <Route
-                path='/login'
+                path={ROUTES.login}
                 element={
                     <Suspense fallback={<SpinnerApp delay={200} global />}>
                         <LoginPage />
@@ -85,7 +85,7 @@ const RoutesApp = () => {
             />
 
             <Route
-                path='/checkout'
+                path={ROUTES.checkout}
                 element={
                     <Suspense fallback={<SpinnerApp delay={200} global />}>
                         <CheckoutPageApp />
@@ -93,7 +93,7 @@ const RoutesApp = () => {
                 }
             />
 
-            <Route path='/*' element={<WorkspaceApp />} />
+            <Route path={ROUTES.workspace} element={<WorkspaceApp />} />
         </Routes>
     );
 };

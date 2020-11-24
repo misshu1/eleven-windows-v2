@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-
-import { NOTIFICATION_TYPE } from '../../../../contexts/notificationsContext';
+import { NOTIFICATION_TYPE } from 'components/common';
 
 export const Container = styled.div`
     display: flex;

@@ -9,7 +9,7 @@ import { useMediaQuery } from 'hooks';
 import { modalPageAnimation } from 'components/animations';
 import Product from 'components/cart/Product';
 import StoreButton from 'components/cart/StoreButton';
-import { ScrollbarApp } from 'components/common';
+import { ROUTES, ScrollbarApp } from 'components/common';
 import CheckoutApp from './CheckoutApp';
 import { CheckoutContainer, Container } from './style';
 import { zIndex } from 'components/theme/zIndex';
@@ -46,7 +46,7 @@ const CheckoutPageApp = () => {
         return (
             <div className='empty-cart'>
                 <h4>Your cart is empty add something.</h4>
-                <StoreButton onClick={() => navigate('/store')} />
+                <StoreButton onClick={() => navigate(ROUTES.store)} />
             </div>
         );
     };

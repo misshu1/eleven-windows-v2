@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { CartIcon } from 'assets/images/icons';
 import { useCartContext } from 'contexts';
+import { ROUTES } from './utils';
 
 const useStyles = makeStyles({
     btnStyle: {
@@ -53,7 +54,7 @@ export const CheckoutButton = () => {
             classes={{ root: classes.btnStyle }}
             style={{ flex: 1 }}
             fullWidth
-            onClick={() => navigate('/checkout')}
+            onClick={() => navigate(ROUTES.checkout)}
         >
             <div className={classes.icon}>
                 <FontAwesomeIcon

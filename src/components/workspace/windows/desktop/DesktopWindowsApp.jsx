@@ -1,9 +1,10 @@
 import React, { useCallback, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-import { ICON_LOCATION, useFolderContext } from 'contexts';
+import { useFolderContext } from 'contexts';
 import DesktopIconApp from './DesktopIconApp';
 import { Desktop } from './style';
+import { ICON_LOCATION } from 'components/common';
 
 const DesktopWindowsApp = () => {
     const {

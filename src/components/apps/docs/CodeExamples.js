@@ -1,8 +1,10 @@
 export const folderContextState = `
 import React, { lazy } from 'react';
-import exampleIcon from 'src/assets/images/icons/your_icon.svg';
+import exampleIcon from 'assets/images/icons/your_icon.svg';
+import { zIndex } from 'components/theme/zIndex';
+
 const ExampleApp = lazy(() =>
-  import('src/components/apps/example/ExampleApp')
+  import('components/apps/example/ExampleApp')
 );
 
 const APPS_STATE = [
@@ -20,7 +22,7 @@ const APPS_STATE = [
     // If 'allowMaximize' set to false 
     // The folder will not have maximize icon
     allowMaximize: true, 
-    appIndex: 100,
+    appIndex: zIndex.folder.default,
     iconLocation: [
       ICON_LOCATION.windows.desktop,
       ICON_LOCATION.windows.startMenu.right,
@@ -34,7 +36,7 @@ const APPS_STATE = [
 
 export const folderExample = `
 import React from 'react';
-import FolderApp from 'src/components/folder/FolderApp';
+import FolderApp from 'components/folder/FolderApp';
 
 const ExampleApp = () => {
   return (
@@ -62,9 +64,7 @@ export const loadingLogoExample = `
 
 export const notificationExample = `
 import React, { useContext } from 'react';
-import { 
-  useNotificationsContext
-} from 'src/contexts/notificationContext';
+import { useNotificationsContext } from 'contexts';
 
 const ExampleApp = () => {
   const { showSuccess, showWarning } = useNotificationsContext();
@@ -100,9 +100,9 @@ export default ExampleApp;
 
 export const folderMenuExample = `
 import React, { useRef } from 'react';
-import FolderApp from 'src/components/folder/FolderApp';
-import folderIcon from 'src/assets/images/icons/folder.svg';
-import logo from 'src/assets/images/logo/logo-red.svg';
+import FolderApp from 'components/folder/FolderApp';
+import folderIcon from 'assets/images/icons/folder.svg';
+import logo from 'assets/images/logo/logo-red.svg';
 
 const toolbarMenu = () => {
   return [
@@ -224,7 +224,7 @@ export const folderStructureExample = `
 `.trim();
 
 export const customScrollbarExample = `
-import { ScrollbarApp } from 'src/common';
+import { ScrollbarApp } from 'common';
 
 // The 'ScrollbarApp' should have a single child
 <ScrollbarApp>
@@ -235,8 +235,8 @@ import { ScrollbarApp } from 'src/common';
 `.trim();
 
 export const customScrollbarWithScrollTopExample = `
-import { ScrollbarApp } from 'src/common';
-import useFolderScroll from 'src/hooks/useFolderScroll';
+import { ScrollbarApp } from 'common';
+import useFolderScroll from 'hooks';
 
 const FolderContent = (props) => {
   // When the 'ScrollbarApp' have 'requireChildrenProps' prop
@@ -259,9 +259,9 @@ const FolderContent = (props) => {
 
 export const spinnerExample = `
 import React, { Suspense, lazy } from 'react';
-import FolderApp from 'src/components/folder/FolderApp';
+import FolderApp from 'components/folder/FolderApp';
 
-const AuthApp = lazy(() => import('src/components/auth/AuthApp'));
+const AuthApp = lazy(() => import('components/auth/AuthApp'));
 
 const ExampleApp = ({ isAuthOpen }) => {
   return (

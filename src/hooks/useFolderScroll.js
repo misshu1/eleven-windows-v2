@@ -1,9 +1,7 @@
+import { FOLDER_PAGES } from 'components/common';
 import { useCallback, useEffect, useState } from 'react';
 
-import {
-    FOLDER_PAGES,
-    useFolderPagesContext
-} from '../contexts/folderPagesContext';
+import { useFolderPagesContext } from '../contexts/folderPagesContext';
 import { usePrevious } from './usePrevious';
 
 // Used as an object key for 'defaultFolderScrollState' object

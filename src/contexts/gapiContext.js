@@ -5,8 +5,9 @@ import React, {
     useEffect,
     useState
 } from 'react';
-import { useScript, status } from 'hooks';
+import { useScript } from 'hooks';
 import { useNotificationsContext } from 'contexts';
+import { SCRIPT_STATUS } from 'components/common';
 
 const params = {
     apiKey: process.env.REACT_APP_GOOGLE_CALENDAR_API,
@@ -37,14 +38,14 @@ export function GapiProvider({ children }) {
     }, []);
 
     useEffect(() => {
-        if (scriptStatus === status.ready) {
+        if (scriptStatus === SCRIPT_STATUS.ready) {
             initGAPIClient();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [scriptStatus]);
 
     const loginGapi = async () => {
-        if (scriptStatus === status.ready) {
+        if (scriptStatus === SCRIPT_STATUS.ready) {
             return await window.gapi.auth2
                 .getAuthInstance()
                 .signIn()
@@ -63,7 +64,7 @@ export function GapiProvider({ children }) {
     };
 
     const logoutGapi = async () => {
-        if (scriptStatus === status.ready) {
+        if (scriptStatus === SCRIPT_STATUS.ready) {
             return await window.gapi.auth2
                 .getAuthInstance()
                 .signOut()

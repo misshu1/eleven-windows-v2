@@ -17,13 +17,8 @@ import {
 import { THEME_TYPE, themes } from 'components/theme/themes';
 import { videoBackgrounds } from 'components/theme/VideoBackgrounds';
 import { useMediaQuery } from 'hooks';
+import { OS_THEME } from 'components/common';
 import i18next, { languages } from '../i18next';
-
-const OS_THEME = {
-    windows: 'WINDOWS',
-    linux: 'LINUX',
-    mobile: 'MOBILE'
-};
 
 const SETTINGS_ACTIONS = {
     changeOS: 'CHANGE_OS',

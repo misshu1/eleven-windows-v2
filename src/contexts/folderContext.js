@@ -14,7 +14,7 @@ import { TaskIcon } from 'assets/images/icons/TaskIcon';
 import { StoreIcon } from 'assets/images/icons/StoreIcon';
 import { zIndex } from 'components/theme/zIndex';
 import { useAuth } from 'hooks';
-import { FolderPagesProvider } from './folderPagesContext';
+import { ICON_LOCATION, ROUTES } from 'components/common';
 
 const DocsApp = lazy(() => import('components/apps/docs/DocsApp'));
 const SettingsApp = lazy(() => import('components/apps/settings/SettingsApp'));
@@ -41,34 +41,12 @@ const FOLDER_ACTIONS = {
     maximizeDown: 'MAXIMIZE_DOWN'
 };
 
-export const ICON_LOCATION = {
-    windows: {
-        desktop: 'WINDOWS_DESKTOP',
-        notificationsWindow: 'WINDOWS_NOTIFICATIONS_WINDOW',
-        startMenu: {
-            left: 'WINDOWS_STARTMENU_LEFT',
-            right: 'WINDOWS_STARTMENU_RIGHT'
-        }
-    },
-    linux: {
-        desktop: 'LINUX_DESKTOP',
-        appsMenu: 'LINUX_APPS_MENU'
-    },
-    mobile: {
-        homeScreen: 'MOBILE_HOME_SCREEN',
-        appsMenu: 'MOBILE_APPS_MENU'
-    },
-    cart: {
-        cartApp: 'CART_APP'
-    }
-};
-
 const APPS_STATE = [
     {
         id: 1,
         appName: 'Settings',
         widgetIcon: <SettingsIcon />,
-        link: '/settings',
+        link: ROUTES.settings,
         component: <SettingsApp />,
         requireLogin: false,
         requireAdmin: false,
@@ -89,7 +67,7 @@ const APPS_STATE = [
         id: 2,
         appName: 'Docs',
         widgetIcon: <DocsIcon />,
-        link: '/docs',
+        link: ROUTES.docs,
         component: <DocsApp />,
         requireLogin: false,
         requireAdmin: false,
@@ -110,7 +88,7 @@ const APPS_STATE = [
         id: 3,
         appName: 'Calculator',
         widgetIcon: <CalculatorIcon />,
-        link: '/calculator',
+        link: ROUTES.calculator,
         component: <CalculatorApp />,
         requireLogin: false,
         requireAdmin: false,
@@ -129,7 +107,7 @@ const APPS_STATE = [
         id: 4,
         appName: 'Store',
         widgetIcon: <StoreIcon />,
-        link: '/store',
+        link: ROUTES.store,
         component: <StoreApp />,
         requireLogin: false,
         requireAdmin: false,
@@ -151,7 +129,7 @@ const APPS_STATE = [
         id: 5,
         appName: 'Task Manager',
         widgetIcon: <TaskIcon />,
-        link: '/task-manager',
+        link: ROUTES.taskManager,
         component: <TaskManagerApp />,
         requireLogin: false,
         requireAdmin: false,
@@ -169,7 +147,7 @@ const APPS_STATE = [
         id: 6,
         appName: 'Calendar',
         widgetIcon: <CalculatorIcon />,
-        link: '/calendar',
+        link: ROUTES.calendar,
         component: <CalendarApp />,
         requireLogin: true,
         requireAdmin: false,
@@ -190,7 +168,7 @@ const APPS_STATE = [
         id: 7,
         appName: 'My Account',
         widgetIcon: <SettingsIcon />,
-        link: '/my-account',
+        link: ROUTES.myAccount,
         component: <MyAccountApp />,
         requireLogin: true,
         requireAdmin: false,

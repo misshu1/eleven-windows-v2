@@ -6,6 +6,7 @@ import {
     useGapiContext,
     useNotificationsContext
 } from 'contexts';
+import { ROUTES } from 'components/common';
 
 const AuthContext = createContext();
 export function AuthProvider({ children }) {
@@ -60,8 +61,8 @@ function useProvideAuth() {
         return await auth
             .signOut()
             .then(() => {
-                if (location.pathname !== '/') {
-                    navigate('/');
+                if (location.pathname !== ROUTES.root) {
+                    navigate(ROUTES.root);
                 }
             })
             .catch((err) => showError('Error', err.message, 500));

@@ -4,12 +4,9 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { StoreIcon } from 'assets/images/icons';
-import {
-    ICON_LOCATION,
-    useDispatchFolderContext,
-    useFolderContext
-} from 'contexts';
+import { useDispatchFolderContext, useFolderContext } from 'contexts';
 import { useMediaQuery } from 'hooks';
+import { ICON_LOCATION } from 'components/common';
 
 const useStyles = makeStyles({
     btnStyle: {

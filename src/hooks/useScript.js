@@ -1,20 +1,14 @@
 import { useEffect, useState } from 'react';
-
-export const status = {
-    idle: 'IDLE',
-    loading: 'LOADING',
-    ready: 'READY',
-    error: 'ERROR'
-};
+import { SCRIPT_STATUS } from 'components/common';
 
 export function useScript(src) {
     const [scriptStatus, setScriptStatus] = useState(
-        src ? status.loading : status.idle
+        src ? SCRIPT_STATUS.loading : SCRIPT_STATUS.idle
     );
 
     useEffect(() => {
         if (!src) {
-            setScriptStatus(status.idle);
+            setScriptStatus(SCRIPT_STATUS.idle);
             return;
         }
 
@@ -24,13 +18,15 @@ export function useScript(src) {
             script = document.createElement('script');
             script.src = src;
             script.async = true;
-            script.setAttribute('data-status', status.loading);
+            script.setAttribute('data-status', SCRIPT_STATUS.loading);
             document.body.appendChild(script);
 
             const setAttributeFromEvent = (event) => {
                 script.setAttribute(
                     'data-status',
-                    event.type === 'load' ? status.ready : status.error
+                    event.type === 'load'
+                        ? SCRIPT_STATUS.ready
+                        : SCRIPT_STATUS.error
                 );
             };
 
@@ -42,7 +38,9 @@ export function useScript(src) {
 
         const setStateFromEvent = (event) => {
             setScriptStatus(
-                event.type === 'load' ? status.ready : status.error
+                event.type === 'load'
+                    ? SCRIPT_STATUS.ready
+                    : SCRIPT_STATUS.error
             );
         };
 

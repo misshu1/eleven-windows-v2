@@ -6,10 +6,10 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { PowerOffIcon } from 'assets/images/icons';
-import { ICON_LOCATION, useFolderContext } from 'contexts';
+import { useFolderContext } from 'contexts';
 import { useAuth } from 'hooks';
 import LoginButton from 'components/auth/LoginButton';
-import { ScrollbarApp, SpinnerApp } from 'components/common';
+import { ScrollbarApp, SpinnerApp, ICON_LOCATION } from 'components/common';
 import { Container, LoginContainer, Widget } from './style';
 
 const AuthApp = lazy(() => import('components/auth/AuthApp'));

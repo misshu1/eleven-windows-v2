@@ -1,9 +1,10 @@
 import React, { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ICON_LOCATION, useFolderContext } from 'contexts';
+import { useFolderContext } from 'contexts';
 import Clock from './Clock';
 import { Container, Desktop, IconContainer } from './style';
+import { ICON_LOCATION } from 'components/common';
 
 const DesktopIconApp = (props) => {
     const { link, widgetIcon, iconName } = props;

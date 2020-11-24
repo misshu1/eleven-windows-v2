@@ -8,7 +8,8 @@ import Calendar from 'react-calendar';
 import { Container, CustomCalendarStyles, Summary } from './style';
 import { useCalendarApi } from 'components/api';
 import { useAuth } from 'hooks';
-import { useGapiContext, useFolderPagesContext, FOLDER_PAGES } from 'contexts';
+import { useGapiContext, useFolderPagesContext } from 'contexts';
+import { FOLDER_PAGES } from 'components/common';
 
 const useStyles = makeStyles(() => ({
     addEventBtn: {

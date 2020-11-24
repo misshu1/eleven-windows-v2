@@ -10,6 +10,7 @@ import { modalPageAnimation } from 'components/animations';
 import AuthApp from 'components/auth/AuthApp';
 import { AuthContiner, Container } from './style';
 import { zIndex } from 'components/theme/zIndex';
+import { ROUTES } from 'components/common';
 
 const LoginPage = () => {
     const [showAuth, setShowAuth] = useState(true);
@@ -42,9 +43,9 @@ const LoginPage = () => {
             }
         } else if (!isUserLoggedIn() && !location.state?.nextPathname) {
             if (!isMobile) {
-                navigateWithAnimation('/');
+                navigateWithAnimation(ROUTES.root);
             } else {
-                navigate('/');
+                navigate(ROUTES.root);
             }
         }
     };
@@ -68,9 +69,9 @@ const LoginPage = () => {
             }
         } else if (isUserLoggedIn() && !location.state?.nextPathname) {
             if (!isMobile) {
-                navigateWithAnimation('/');
+                navigateWithAnimation(ROUTES.root);
             } else {
-                navigate('/');
+                navigate(ROUTES.root);
             }
         }
 

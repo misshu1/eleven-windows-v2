@@ -16,6 +16,7 @@ import { useAuth } from 'hooks';
 import IconApp from './IconApp';
 import { Container } from './style';
 import { zIndex } from 'components/theme/zIndex';
+import { ROUTES } from 'components/common';
 
 const ITEM_HEIGHT = 48;
 
@@ -151,7 +152,7 @@ const Toolbar = ({ toolbarRef, closeToolbar, isOpen }) => {
                     tooltip={'tooltip.login'}
                     fontIcon={['fas', 'sign-in-alt']}
                     onClick={() =>
-                        navigate('/login', {
+                        navigate(ROUTES.login, {
                             state: {
                                 nextPathname: location.pathname
                             }

@@ -1,14 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 
-import {
-    ICON_LOCATION,
-    useDispatchFolderContext,
-    useFolderContext
-} from 'contexts';
+import { useDispatchFolderContext, useFolderContext } from 'contexts';
 import { useNotificationsTaskbarContext } from '../../../contexts/notificationsTaskbarContext';
 import { Container, Widget } from './style';
-import { ScrollbarApp } from 'components/common/ScrollbarApp';
+import { ScrollbarApp, ICON_LOCATION } from 'components/common';
 
 const WidgetsApp = () => {
     const {

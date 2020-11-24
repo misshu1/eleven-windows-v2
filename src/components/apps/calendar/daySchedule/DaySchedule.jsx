@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useFolderPagesContext, useGapiContext, FOLDER_PAGES } from 'contexts';
+import { useFolderPagesContext, useGapiContext } from 'contexts';
 import { useCalendarApi } from 'components/api';
 import {
     format,
@@ -20,6 +20,7 @@ import { Fab, Tooltip } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { makeStyles } from '@material-ui/core/styles';
 import { useAuth } from 'hooks';
+import { FOLDER_PAGES } from 'components/common';
 
 const useStyles = makeStyles(() => ({
     addEventBtn: {

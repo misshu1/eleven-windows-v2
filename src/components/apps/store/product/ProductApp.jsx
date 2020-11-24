@@ -5,10 +5,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {
     useCartContext,
     useDispatchCartContext,
-    FOLDER_PAGES,
     useFolderPagesContext
 } from 'contexts';
-import { AddToCartButton } from 'components/common';
+import { AddToCartButton, FOLDER_PAGES } from 'components/common';
 import { Card } from './style';
 
 const useStyles = makeStyles({

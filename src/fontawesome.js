@@ -37,11 +37,13 @@ import {
     faWindowMinimize,
     faChevronRight,
     faChevronLeft,
-    faPlus
+    faPlus,
+    faCommentAlt as faCommentAlt2
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
     faCommentAlt,
+    faCommentAlt2,
     faCheck,
     faExclamation,
     faTimes,

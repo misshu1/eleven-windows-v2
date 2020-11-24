@@ -2,12 +2,13 @@ import React, { useEffect, useMemo, useState } from 'react';
 import FolderApp from 'components/folder/FolderApp';
 import { useCalendarApi } from 'components/api';
 import { useAuth } from 'hooks';
-import { useGapiContext, useFolderPagesContext, FOLDER_PAGES } from 'contexts';
+import { useGapiContext, useFolderPagesContext } from 'contexts';
 import MyCalendar from './MyCalendar';
 import { DaySchedule } from './daySchedule/DaySchedule';
 import { EventDetails } from './eventDetails/EventDetails';
 import { EventForm } from './eventForm/EventForm';
 import { CreateEvent } from './createEvent/CreateEvent';
+import { FOLDER_PAGES } from 'components/common';
 
 function CalendarApp() {
     const [calendarEvents, setCalendarEvents] = useState([]);
