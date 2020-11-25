@@ -18,8 +18,6 @@ export const Card = styled.li`
 
     /* Open card styles */
     transform: ${({ open }) => (open ? 'rotateY(180deg)' : 'rotateY(0)')};
-    pointer-events: ${({ open }) => (open ? 'none' : 'auto')};
-    cursor: ${({ open }) => (open ? 'default' : 'pointer')};
     transform-style: preserve-3d;
     transition: all 0.3s;
 

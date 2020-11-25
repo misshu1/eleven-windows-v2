@@ -209,7 +209,7 @@ function MemoryGame() {
         return deckOfCards.map(({ name, open, match }, index) => (
             <Card
                 key={index}
-                onClick={ceckCards}
+                onClick={(e) => !open && !match && ceckCards(e)}
                 id={name + ' ' + index}
                 open={open}
                 match={match}
