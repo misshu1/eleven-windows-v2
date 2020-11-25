@@ -40,7 +40,15 @@ import {
     faPlus,
     faBookOpen,
     faFolder,
-    faCommentAlt as faCommentAlt2
+    faCommentAlt as faCommentAlt2,
+    faGem,
+    faPaperPlane,
+    faAnchor,
+    faBolt,
+    faCube,
+    faLeaf,
+    faBicycle,
+    faBomb
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -82,5 +90,13 @@ library.add(
     faGoogle,
     faPlus,
     faBookOpen,
-    faFolder
+    faFolder,
+    faGem,
+    faPaperPlane,
+    faAnchor,
+    faBolt,
+    faCube,
+    faLeaf,
+    faBicycle,
+    faBomb
 );

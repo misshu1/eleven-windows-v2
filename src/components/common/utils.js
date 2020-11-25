@@ -70,6 +70,7 @@ export const ROUTES = {
     taskManager: '/task-manager',
     calendar: '/calendar',
     myAccount: '/my-account',
+    memoryGame: '/memory-game',
     404: '/404',
     401: '/401',
     500: '/500'

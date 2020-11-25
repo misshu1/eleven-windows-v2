@@ -26,6 +26,7 @@ const TaskManagerApp = lazy(() =>
     import('components/apps/taskManager/TaskManagerApp')
 );
 const CalendarApp = lazy(() => import('components/apps/calendar/CalendarApp'));
+const MemoryGame = lazy(() => import('components/apps/memoryGame/MemoryGame'));
 const MyAccountApp = lazy(() =>
     import('components/apps/myAccount/MyAccountApp')
 );
@@ -181,6 +182,27 @@ const APPS_STATE = [
             ICON_LOCATION.windows.desktop,
             ICON_LOCATION.windows.notificationsWindow,
             ICON_LOCATION.windows.startMenu.left,
+            ICON_LOCATION.mobile.homeScreen,
+            ICON_LOCATION.mobile.appsMenu,
+            ICON_LOCATION.linux.appsMenu
+        ]
+    },
+    {
+        id: 8,
+        appName: 'Memory Game',
+        widgetIcon: <SettingsIcon />,
+        link: ROUTES.memoryGame,
+        component: <MemoryGame />,
+        requireLogin: true,
+        requireAdmin: false,
+        isOpen: null,
+        isMinimize: null,
+        isMaximize: null,
+        allowMaximize: true,
+        appIndex: zIndex.folder.default,
+        iconLocation: [
+            ICON_LOCATION.windows.desktop,
+            ICON_LOCATION.windows.startMenu.right,
             ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.mobile.appsMenu,
             ICON_LOCATION.linux.appsMenu
