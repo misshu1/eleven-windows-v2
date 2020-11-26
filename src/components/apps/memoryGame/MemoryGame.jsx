@@ -37,7 +37,6 @@ function MemoryGame() {
         handleResetTimer
     } = useTimer(0);
     const openCards = useRef([]);
-    const selected = useRef([]);
 
     useEffect(() => {
         matchedCards === deckOfCards.length && handlePauseTimer();
@@ -71,7 +70,6 @@ function MemoryGame() {
         shuffleCards();
         handleResetTimer();
         openCards.current = [];
-        selected.current = [];
     }
 
     function movesCounter(num) {
@@ -98,128 +96,94 @@ function MemoryGame() {
         return array;
     }
 
-    function ceckCards(e) {
+    function ceckCards(name, cardIndex) {
         if (openCards.current.length < 2) {
-            openCards.current.push(e.currentTarget.id);
-            selected.current = [];
-            selected.current.push(e.currentTarget.id);
+            openCards.current.push({ name, cardIndex });
             movesCounter(1);
 
-            deckOfCards.map((cards, index) => {
-                if (selected.current[0].includes(index)) {
-                    // 'selectedCard' will return the index of the card
-                    const selectedCard = selected.current[0]
-                        .match(/\d/g)
-                        .join('');
+            deckOfCards.map((_, index) => {
+                // Open selected card
+                if (cardIndex === index) {
                     setDeckOfCards((prevState) =>
                         prevState.map((obj, index) =>
-                            index === Number(selectedCard)
+                            cardIndex === index
                                 ? Object.assign(obj, { open: true })
                                 : obj
                         )
                     );
                 }
-
-                if (openCards.current.length === 2) {
-                    // 'firstCard' and 'secondCard' will return the card name
-                    // without the index number
-                    const firstCard = String(
-                        openCards.current[0].replace(/[0-9]/g, '')
-                    );
-                    const secondCard = String(
-                        openCards.current[1].replace(/[0-9]/g, '')
-                    );
-
-                    if (firstCard === secondCard) {
-                        handleMatched(firstCard, secondCard);
-                    } else {
-                        handleNotMatch(firstCard, secondCard);
-                    }
-                }
-                return null;
             });
+
+            if (openCards.current.length === 2) {
+                const [firstCard, secondCard] = openCards.current;
+
+                if (firstCard.name === secondCard.name) {
+                    handleMatched(firstCard, secondCard);
+                } else {
+                    handleNotMatch(firstCard, secondCard);
+                }
+            }
         }
     }
 
     function handleMatched(firstCard, secondCard) {
-        if (
-            openCards.current.length !== 0 &&
-            openCards.current[0].includes(firstCard)
-        ) {
-            // 'selectedCard' is the index of the first matched card
-            const selectedCard = openCards.current[0].match(/\d/g).join('');
-            setDeckOfCards((prevState) =>
-                prevState.map((obj, index) =>
-                    index === Number(selectedCard)
-                        ? Object.assign(obj, { match: true })
-                        : obj
-                )
-            );
-        }
+        setDeckOfCards((prevState) =>
+            prevState.map((obj, index) =>
+                firstCard.cardIndex === index
+                    ? Object.assign(obj, { match: true })
+                    : obj
+            )
+        );
 
-        if (
-            openCards.current.length !== 0 &&
-            openCards.current[1].includes(secondCard)
-        ) {
-            // 'selectedCard' is the index of the second matched card
-            const selectedCard = openCards.current[1].match(/\d/g).join('');
-            setDeckOfCards((prevState) =>
-                prevState.map((obj, index) =>
-                    index === Number(selectedCard)
-                        ? Object.assign(obj, { match: true })
-                        : obj
-                )
-            );
-        }
+        setDeckOfCards((prevState) =>
+            prevState.map((obj, index) =>
+                secondCard.cardIndex === index
+                    ? Object.assign(obj, { match: true })
+                    : obj
+            )
+        );
+
         setMatchedCards((prevState) => prevState + 2);
         openCards.current = [];
     }
 
     function handleNotMatch(firstCard, secondCard) {
-        setTimeout(() => {
-            if (
-                openCards.current.length !== 0 &&
-                openCards.current[0].includes(firstCard)
-            ) {
-                const selectedCard = openCards.current[0].match(/\d/g).join('');
+        new Promise((resolve) => {
+            setTimeout(() => {
                 setDeckOfCards((prevState) =>
                     prevState.map((obj, index) =>
-                        index === Number(selectedCard)
+                        firstCard.cardIndex === index
                             ? Object.assign(obj, {
                                   open: false
                               })
                             : obj
                     )
                 );
-            }
 
-            if (
-                openCards.current.length !== 0 &&
-                openCards.current[1].includes(secondCard)
-            ) {
-                const selectedCard = openCards.current[1].match(/\d/g).join('');
                 setDeckOfCards((prevState) =>
                     prevState.map((obj, index) =>
-                        index === Number(selectedCard)
+                        secondCard.cardIndex === index
                             ? Object.assign(obj, {
                                   open: false
                               })
                             : obj
                     )
                 );
-            }
-        }, 600);
-        setTimeout(() => {
+            }, 600);
+
+            setTimeout(() => {
+                resolve();
+            }, 650);
+        }).then(() => {
             openCards.current = [];
-        }, 650);
+        });
     }
 
     const renderCards = () => {
         return deckOfCards.map(({ name, open, match }, index) => (
             <Card
                 key={index}
-                onClick={(e) => !open && !match && ceckCards(e)}
-                id={name + ' ' + index}
+                onClick={() => !open && !match && ceckCards(name, index)}
                 open={open}
                 match={match}
             >
