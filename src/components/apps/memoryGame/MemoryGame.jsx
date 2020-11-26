@@ -96,9 +96,9 @@ function MemoryGame() {
         return array;
     }
 
-    function ceckCards(name, cardIndex) {
+    function ceckCards(cardName, cardIndex) {
         if (openCards.current.length < 2) {
-            openCards.current.push({ name, cardIndex });
+            openCards.current.push({ name: cardName, index: cardIndex });
             movesCounter(1);
 
             deckOfCards.map((_, index) => {
@@ -129,7 +129,7 @@ function MemoryGame() {
     function handleMatched(firstCard, secondCard) {
         setDeckOfCards((prevState) =>
             prevState.map((obj, index) =>
-                firstCard.cardIndex === index
+                firstCard.index === index
                     ? Object.assign(obj, { match: true })
                     : obj
             )
@@ -137,7 +137,7 @@ function MemoryGame() {
 
         setDeckOfCards((prevState) =>
             prevState.map((obj, index) =>
-                secondCard.cardIndex === index
+                secondCard.index === index
                     ? Object.assign(obj, { match: true })
                     : obj
             )
@@ -152,7 +152,7 @@ function MemoryGame() {
             setTimeout(() => {
                 setDeckOfCards((prevState) =>
                     prevState.map((obj, index) =>
-                        firstCard.cardIndex === index
+                        firstCard.index === index
                             ? Object.assign(obj, {
                                   open: false
                               })
@@ -162,7 +162,7 @@ function MemoryGame() {
 
                 setDeckOfCards((prevState) =>
                     prevState.map((obj, index) =>
-                        secondCard.cardIndex === index
+                        secondCard.index === index
                             ? Object.assign(obj, {
                                   open: false
                               })
