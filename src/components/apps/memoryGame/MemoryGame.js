@@ -1,8 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import FolderApp from 'components/folder/FolderApp';
-import { Container, Card, Deck } from './style';
+import { Container, Card, Deck, ScorePanel } from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LogoIcon } from 'assets/images/icons';
+import { Button, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+    btnStyle: {
+        position: 'relative',
+        overflow: 'hidden',
+        paddingLeft: '3rem',
+        cursor: 'default',
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
+
+        '&:hover': {
+            backgroundColor: 'var(--primaryDark)'
+        }
+    },
+    icon: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        left: '0',
+        top: '0',
+        bottom: '0',
+        width: '2.5rem',
+        transition: 'background 0.2s ease-in-out',
+        borderTopRightRadius: '0 0',
+        borderBottomRightRadius: '37% 100%',
+        background: 'var(--secondary)'
+    }
+});
 
 const cards = [
     'gem',
@@ -32,6 +62,7 @@ function MemoryGame() {
     const [moves, setMoves] = useState(0);
     const [matchedCards, setMatchedCards] = useState(0);
     const [startTime, setStartTime] = useState(null);
+    const classes = useStyles();
 
     useEffect(() => {
         shuffleCards();
@@ -228,11 +259,34 @@ function MemoryGame() {
 
     return (
         <FolderApp appId={8} marginLeft={180} marginTop={120}>
-            <button onClick={restartGame}>Play again!</button>
-            <p>{moves}</p>
-            <p>{matchedCards}</p>
-            {/* <p>{time.seconds}</p> */}
             <Container>
+                <ScorePanel moves={moves}>
+                    <span className='stars'>
+                        <FontAwesomeIcon
+                            className='icon'
+                            icon={['fas', 'star']}
+                        />
+                        <FontAwesomeIcon
+                            className='icon'
+                            icon={['fas', 'star']}
+                        />
+                        <FontAwesomeIcon
+                            className='icon'
+                            icon={['fas', 'star']}
+                        />
+                    </span>
+                    <span>{moves} Moves</span>
+                    <Button
+                        aria-label='Restart game'
+                        classes={{ root: classes.btnStyle }}
+                        onClick={restartGame}
+                    >
+                        <div className={classes.icon}>
+                            <FontAwesomeIcon icon={['fas', 'redo']} size='lg' />
+                        </div>
+                        Play again!
+                    </Button>
+                </ScorePanel>
                 <Deck>{renderCards()}</Deck>
             </Container>
         </FolderApp>

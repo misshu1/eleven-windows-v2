@@ -12,7 +12,7 @@ export const Deck = styled.ul`
     border-radius: 1.25rem;
 
     @media (min-width: 28em) {
-        grid-gap: 1rem;
-        padding: 2rem;
+        gap: 1rem;
+        padding: 1rem;
     }
 `;

@@ -193,7 +193,7 @@ const APPS_STATE = [
         widgetIcon: <SettingsIcon />,
         link: ROUTES.memoryGame,
         component: <MemoryGame />,
-        requireLogin: true,
+        requireLogin: false,
         requireAdmin: false,
         isOpen: null,
         isMinimize: null,

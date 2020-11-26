@@ -48,7 +48,9 @@ import {
     faCube,
     faLeaf,
     faBicycle,
-    faBomb
+    faBomb,
+    faStar,
+    faRedo
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -98,5 +100,7 @@ library.add(
     faCube,
     faLeaf,
     faBicycle,
-    faBomb
+    faBomb,
+    faStar,
+    faRedo
 );
