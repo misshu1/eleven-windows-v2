@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FolderApp from 'components/folder/FolderApp';
 import { Container, Card, Deck } from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { LogoIcon } from 'assets/images/icons';
 
 const cards = [
     'gem',
@@ -105,9 +106,9 @@ function MemoryGame() {
 
     function ceckCards(e) {
         if (openCards.length < 2) {
-            openCards.push(e.target.id);
+            openCards.push(e.currentTarget.id);
             selected = [];
-            selected.push(e.target.id);
+            selected.push(e.currentTarget.id);
             movesCounter(1);
 
             deckOfCards.map((cards, index) => {
@@ -220,6 +221,7 @@ function MemoryGame() {
                         transform={{ flipX: 180 }}
                     />
                 )}
+                {!open && <LogoIcon width='40%' height='40%' />}
             </Card>
         ));
     };
