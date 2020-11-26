@@ -22,7 +22,7 @@ export const Card = styled.li`
     transition: all 0.3s;
 
     @media (max-width: 660px) {
-        max-height: 16vw;
-        max-width: 16vw;
+        max-height: 20vw;
+        max-width: 20vw;
     }
 `;

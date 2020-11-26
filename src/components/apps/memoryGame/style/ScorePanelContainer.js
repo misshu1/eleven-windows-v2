@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-export const ScorePanel = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+export const ScorePanelContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 0.5rem;
+    place-items: center;
     max-width: 31rem;
     margin: 0 auto;
     padding: 1rem 0;

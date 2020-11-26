@@ -6,3 +6,4 @@ export { useMediaQuery } from './useMediaQuery';
 export { useOnClickOutside } from './useOnClickOutside';
 export { usePrevious } from './usePrevious';
 export { useTimeSince } from './useTimeSince';
+export { useTimer } from './useTimer';

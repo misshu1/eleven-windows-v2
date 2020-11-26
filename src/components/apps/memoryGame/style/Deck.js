@@ -8,7 +8,7 @@ export const Deck = styled.ul`
     margin: 0 auto;
     width: fit-content;
     height: fit-content;
-    padding: 8vw;
+    padding: 0;
     border-radius: 1.25rem;
 
     @media (min-width: 28em) {
