@@ -293,7 +293,7 @@ const ExampleApp = () => {
   }
 
   return (
-    <FolderApp appId={1234}>
+    <FolderApp appId={1234} enablePagination>
       <button onClick={goToPage2}>Go to Page 2</button>
 
       {page === FOLDER_PAGES.level_1 && (

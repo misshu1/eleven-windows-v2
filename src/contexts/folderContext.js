@@ -15,6 +15,8 @@ import { StoreIcon } from 'assets/images/icons/StoreIcon';
 import { zIndex } from 'components/theme/zIndex';
 import { useAuth } from 'hooks';
 import { ICON_LOCATION, ROUTES } from 'components/common';
+import { MemoryGameIcon } from 'assets/images/icons/MemoryGameIcon';
+import { CalendarIcon } from 'assets/images/icons/CalendarIcon';
 
 const DocsApp = lazy(() => import('components/apps/docs/DocsApp'));
 const SettingsApp = lazy(() => import('components/apps/settings/SettingsApp'));
@@ -147,10 +149,10 @@ const APPS_STATE = [
     {
         id: 6,
         appName: 'Calendar',
-        widgetIcon: <CalculatorIcon />,
+        widgetIcon: <CalendarIcon />,
         link: ROUTES.calendar,
         component: <CalendarApp />,
-        requireLogin: true,
+        requireLogin: false,
         requireAdmin: false,
         isOpen: null,
         isMinimize: null,
@@ -190,7 +192,7 @@ const APPS_STATE = [
     {
         id: 8,
         appName: 'Memory Game',
-        widgetIcon: <SettingsIcon />,
+        widgetIcon: <MemoryGameIcon />,
         link: ROUTES.memoryGame,
         component: <MemoryGame />,
         requireLogin: false,
