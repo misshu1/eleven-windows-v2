@@ -26,6 +26,9 @@ const cards = [
     'bomb'
 ];
 
+const CARD_OPEN_TIME = 300;
+const CARD_ANIMATION_DURATION = 300;
+
 function MemoryGame() {
     const [deckOfCards, setDeckOfCards] = useState([]);
     const [moves, setMoves] = useState(0);
@@ -53,6 +56,13 @@ function MemoryGame() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(() => {
+        if (moves === 1) {
+            handleStartTimer();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [moves]);
+
     function shuffleCards() {
         const deck = cards.map((card) => ({
             name: card,
@@ -70,13 +80,6 @@ function MemoryGame() {
         shuffleCards();
         handleResetTimer();
         openCards.current = [];
-    }
-
-    function movesCounter(num) {
-        setMoves((prevState) => prevState + num);
-        if (moves === 1) {
-            handleStartTimer();
-        }
     }
 
     // Shuffle function from http://stackoverflow.com/a/2450976
@@ -99,20 +102,16 @@ function MemoryGame() {
     function ceckCards(cardName, cardIndex) {
         if (openCards.current.length < 2) {
             openCards.current.push({ name: cardName, index: cardIndex });
-            movesCounter(1);
+            setMoves((prevState) => prevState + 1);
 
-            deckOfCards.map((_, index) => {
-                // Open selected card
-                if (cardIndex === index) {
-                    setDeckOfCards((prevState) =>
-                        prevState.map((obj, index) =>
-                            cardIndex === index
-                                ? Object.assign(obj, { open: true })
-                                : obj
-                        )
-                    );
-                }
-            });
+            // Open selected card
+            setDeckOfCards((prevState) =>
+                prevState.map((obj, index) =>
+                    cardIndex === index
+                        ? Object.assign(obj, { open: true })
+                        : obj
+                )
+            );
 
             if (openCards.current.length === 2) {
                 const [firstCard, secondCard] = openCards.current;
@@ -128,19 +127,13 @@ function MemoryGame() {
 
     function handleMatched(firstCard, secondCard) {
         setDeckOfCards((prevState) =>
-            prevState.map((obj, index) =>
-                firstCard.index === index
-                    ? Object.assign(obj, { match: true })
-                    : obj
-            )
-        );
-
-        setDeckOfCards((prevState) =>
-            prevState.map((obj, index) =>
-                secondCard.index === index
-                    ? Object.assign(obj, { match: true })
-                    : obj
-            )
+            prevState.map((obj, index) => {
+                if (firstCard.index === index || secondCard.index === index) {
+                    return Object.assign(obj, { match: true });
+                } else {
+                    return obj;
+                }
+            })
         );
 
         setMatchedCards((prevState) => prevState + 2);
@@ -148,35 +141,21 @@ function MemoryGame() {
     }
 
     function handleNotMatch(firstCard, secondCard) {
-        new Promise((resolve) => {
-            setTimeout(() => {
-                setDeckOfCards((prevState) =>
-                    prevState.map((obj, index) =>
-                        firstCard.index === index
-                            ? Object.assign(obj, {
-                                  open: false
-                              })
-                            : obj
-                    )
-                );
-
-                setDeckOfCards((prevState) =>
-                    prevState.map((obj, index) =>
+        setTimeout(() => {
+            setDeckOfCards((prevState) =>
+                prevState.map((obj, index) => {
+                    if (
+                        firstCard.index === index ||
                         secondCard.index === index
-                            ? Object.assign(obj, {
-                                  open: false
-                              })
-                            : obj
-                    )
-                );
-            }, 600);
-
-            setTimeout(() => {
-                resolve();
-            }, 650);
-        }).then(() => {
+                    ) {
+                        return Object.assign(obj, { open: false });
+                    } else {
+                        return obj;
+                    }
+                })
+            );
             openCards.current = [];
-        });
+        }, CARD_OPEN_TIME + CARD_ANIMATION_DURATION);
     }
 
     const renderCards = () => {
@@ -186,6 +165,7 @@ function MemoryGame() {
                 onClick={() => !open && !match && ceckCards(name, index)}
                 open={open}
                 match={match}
+                animationDuration={CARD_ANIMATION_DURATION}
             >
                 {open && (
                     <FontAwesomeIcon

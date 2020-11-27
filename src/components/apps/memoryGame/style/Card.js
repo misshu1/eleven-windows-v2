@@ -19,7 +19,7 @@ export const Card = styled.li`
     /* Open card styles */
     transform: ${({ open }) => (open ? 'rotateY(180deg)' : 'rotateY(0)')};
     transform-style: preserve-3d;
-    transition: all 0.3s;
+    transition: ${({ animationDuration }) => `all ${animationDuration}ms`};
 
     @media (max-width: 660px) {
         max-height: 20vw;
