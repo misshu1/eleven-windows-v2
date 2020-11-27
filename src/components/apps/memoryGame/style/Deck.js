@@ -9,7 +9,6 @@ export const Deck = styled.ul`
     width: fit-content;
     height: fit-content;
     padding: 0;
-    border-radius: 1.25rem;
 
     @media (min-width: 28em) {
         gap: 1rem;

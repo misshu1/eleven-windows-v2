@@ -7,9 +7,15 @@ export const Card = styled.li`
     height: 7rem;
     width: 7rem;
     font-size: 2rem;
-    background: var(--backgroundCard);
-    background: ${({ open }) => (open ? 'var(--primary)' : '')};
-    background: ${({ match }) => (match ? 'var(--colorSuccess)' : '')};
+    background: ${({ open, match }) => {
+        if (open && !match) {
+            return 'var(--primary)';
+        } else if (match) {
+            return 'var(--colorSuccess)';
+        } else {
+            return 'var(--backgroundCard)';
+        }
+    }};
     color: #fff;
     border-radius: 0.5rem;
     padding: 0;
