@@ -7,3 +7,5 @@ export { PowerOffIcon } from './PowerOffIcon';
 export { SettingsIcon } from './SettingsIcon';
 export { StoreIcon } from './StoreIcon';
 export { TaskIcon } from './TaskIcon';
+export { CalendarIcon } from './CalendarIcon';
+export { MemoryGameIcon } from './MemoryGameIcon';

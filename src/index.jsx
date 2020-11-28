@@ -10,8 +10,13 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { App } from './App';
 import { SettingsProvider } from './contexts/settingsContext';
+import { disableReactDevTools } from 'components/common';
 import { ErrorBoundary } from './ErrorBoundary';
 import * as serviceWorker from './serviceWorker';
+
+if (process.env.NODE_ENV === 'production') {
+    disableReactDevTools();
+}
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 

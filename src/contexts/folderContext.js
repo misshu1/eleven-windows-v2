@@ -12,11 +12,11 @@ import { SettingsIcon } from 'assets/images/icons/SettingsIcon';
 import { DocsIcon } from 'assets/images/icons/DocsIcon';
 import { TaskIcon } from 'assets/images/icons/TaskIcon';
 import { StoreIcon } from 'assets/images/icons/StoreIcon';
-import { zIndex } from 'components/theme/zIndex';
-import { useAuth } from 'hooks';
-import { ICON_LOCATION, ROUTES } from 'components/common';
 import { MemoryGameIcon } from 'assets/images/icons/MemoryGameIcon';
 import { CalendarIcon } from 'assets/images/icons/CalendarIcon';
+import { zIndex } from 'components/theme/zIndex';
+import { ICON_LOCATION, ROUTES } from 'components/common';
+import { useAuth } from 'hooks';
 
 const DocsApp = lazy(() => import('components/apps/docs/DocsApp'));
 const SettingsApp = lazy(() => import('components/apps/settings/SettingsApp'));
@@ -72,7 +72,7 @@ const APPS_STATE = [
         widgetIcon: <DocsIcon />,
         link: ROUTES.docs,
         component: <DocsApp />,
-        requireLogin: false,
+        requireLogin: true,
         requireAdmin: false,
         isOpen: null,
         isMinimize: null,
