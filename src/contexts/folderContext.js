@@ -17,6 +17,9 @@ import { CalendarIcon } from 'assets/images/icons/CalendarIcon';
 import { zIndex } from 'components/theme/zIndex';
 import { ICON_LOCATION, ROUTES } from 'components/common';
 import { useAuth } from 'hooks';
+import { PrivacyIcon } from 'assets/images/icons/PrivacyIcon';
+import { TermsIcon } from 'assets/images/icons/TermsIcon';
+import { UserIcon } from 'assets/images/icons/UserIcon';
 
 const DocsApp = lazy(() => import('components/apps/docs/DocsApp'));
 const SettingsApp = lazy(() => import('components/apps/settings/SettingsApp'));
@@ -28,7 +31,11 @@ const TaskManagerApp = lazy(() =>
     import('components/apps/taskManager/TaskManagerApp')
 );
 const CalendarApp = lazy(() => import('components/apps/calendar/CalendarApp'));
-const MemoryGame = lazy(() => import('components/apps/memoryGame/MemoryGame'));
+const MemoryGameApp = lazy(() =>
+    import('components/apps/memoryGame/MemoryGameApp')
+);
+const TermsApp = lazy(() => import('components/apps/terms/TermsApp'));
+const PrivacyApp = lazy(() => import('components/apps/privacy/PrivacyApp'));
 const MyAccountApp = lazy(() =>
     import('components/apps/myAccount/MyAccountApp')
 );
@@ -170,7 +177,7 @@ const APPS_STATE = [
     {
         id: 7,
         appName: 'My Account',
-        widgetIcon: <SettingsIcon />,
+        widgetIcon: <UserIcon />,
         link: ROUTES.myAccount,
         component: <MyAccountApp />,
         requireLogin: true,
@@ -194,7 +201,7 @@ const APPS_STATE = [
         appName: 'Memory Game',
         widgetIcon: <MemoryGameIcon />,
         link: ROUTES.memoryGame,
-        component: <MemoryGame />,
+        component: <MemoryGameApp />,
         requireLogin: false,
         requireAdmin: false,
         isOpen: null,
@@ -205,6 +212,50 @@ const APPS_STATE = [
         iconLocation: [
             ICON_LOCATION.windows.desktop,
             ICON_LOCATION.windows.startMenu.right,
+            ICON_LOCATION.mobile.homeScreen,
+            ICON_LOCATION.mobile.appsMenu,
+            ICON_LOCATION.linux.appsMenu
+        ]
+    },
+    {
+        id: 9,
+        appName: 'Terms',
+        widgetIcon: <TermsIcon />,
+        link: ROUTES.terms,
+        component: <TermsApp />,
+        requireLogin: false,
+        requireAdmin: false,
+        isOpen: null,
+        isMinimize: null,
+        isMaximize: null,
+        allowMaximize: true,
+        appIndex: zIndex.folder.default,
+        iconLocation: [
+            ICON_LOCATION.windows.desktop,
+            ICON_LOCATION.windows.startMenu.left,
+            ICON_LOCATION.windows.notificationsWindow,
+            ICON_LOCATION.mobile.homeScreen,
+            ICON_LOCATION.mobile.appsMenu,
+            ICON_LOCATION.linux.appsMenu
+        ]
+    },
+    {
+        id: 10,
+        appName: 'Privacy',
+        widgetIcon: <PrivacyIcon />,
+        link: ROUTES.privacy,
+        component: <PrivacyApp />,
+        requireLogin: false,
+        requireAdmin: false,
+        isOpen: null,
+        isMinimize: null,
+        isMaximize: null,
+        allowMaximize: true,
+        appIndex: zIndex.folder.default,
+        iconLocation: [
+            ICON_LOCATION.windows.desktop,
+            ICON_LOCATION.windows.startMenu.left,
+            ICON_LOCATION.windows.notificationsWindow,
             ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.mobile.appsMenu,
             ICON_LOCATION.linux.appsMenu

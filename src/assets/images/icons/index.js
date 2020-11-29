@@ -9,3 +9,6 @@ export { StoreIcon } from './StoreIcon';
 export { TaskIcon } from './TaskIcon';
 export { CalendarIcon } from './CalendarIcon';
 export { MemoryGameIcon } from './MemoryGameIcon';
+export { TermsIcon } from './TermsIcon';
+export { PrivacyIcon } from './PrivacyIcon';
+export { UserIcon } from './UserIcon';

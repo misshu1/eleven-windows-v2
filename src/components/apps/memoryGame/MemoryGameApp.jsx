@@ -29,7 +29,7 @@ const cards = [
 const CARD_OPEN_TIME = 300;
 const CARD_ANIMATION_DURATION = 300;
 
-function MemoryGame() {
+function MemoryGameApp() {
     const [deckOfCards, setDeckOfCards] = useState([]);
     const [moves, setMoves] = useState(0);
     const [matchedCards, setMatchedCards] = useState(0);
@@ -193,4 +193,4 @@ function MemoryGame() {
     );
 }
 
-export default MemoryGame;
+export default MemoryGameApp;
