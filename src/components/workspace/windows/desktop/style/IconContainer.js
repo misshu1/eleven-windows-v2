@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const IconContainer = styled.div`
     border: 1px solid transparent;
     outline: none;
+    height: fit-content;
 
     svg {
         height: 3.75rem;
@@ -20,10 +21,21 @@ export const IconContainer = styled.div`
         text-decoration: none;
         border: 1px solid transparent;
 
-        .name {
-            white-space: nowrap;
-            overflow: hidden;
-            /* text-overflow: ellipsis; */
+        @supports (display: -webkit-box) {
+            .name {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
+
+        @supports not (display: -webkit-box) {
+            .name {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
         }
     }
 

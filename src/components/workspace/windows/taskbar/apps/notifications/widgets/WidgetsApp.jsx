@@ -5,6 +5,7 @@ import { useDispatchFolderContext, useFolderContext } from 'contexts';
 import { useNotificationsTaskbarContext } from '../../../contexts/notificationsTaskbarContext';
 import { Container, Widget } from './style';
 import { ScrollbarApp, ICON_LOCATION } from 'components/common';
+import { Tooltip } from '@material-ui/core';
 
 const WidgetsApp = () => {
     const {
@@ -56,10 +57,12 @@ const WidgetApp = ({ iconDisplayName, widgetIcon, appId }) => {
     };
 
     return (
-        <Widget onClick={start}>
-            {widgetIcon}
-            <h5>{iconDisplayName}</h5>
-        </Widget>
+        <Tooltip title={iconDisplayName} placement='bottom' enterDelay={500}>
+            <Widget onClick={start}>
+                {widgetIcon}
+                <h5>{iconDisplayName}</h5>
+            </Widget>
+        </Tooltip>
     );
 };
 

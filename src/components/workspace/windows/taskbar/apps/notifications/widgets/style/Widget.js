@@ -27,5 +27,8 @@ export const Widget = styled.div`
     h5 {
         margin: 0;
         text-align: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 `;

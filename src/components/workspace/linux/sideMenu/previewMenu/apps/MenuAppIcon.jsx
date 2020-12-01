@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useDispatchFolderContext } from 'contexts';
 import { useMediaQuery } from 'hooks';
 import { AppIcon } from './style';
+import { Tooltip } from '@material-ui/core';
 
 const MenuAppIcon = (props) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
@@ -26,17 +27,21 @@ const MenuAppIcon = (props) => {
     };
 
     return isMobile ? (
-        <AppIcon className='icon' onClick={closeSideMenu}>
-            <Link to={link}>
+        <Tooltip title={iconName} placement='top' enterDelay={500}>
+            <AppIcon className='icon' onClick={closeSideMenu}>
+                <Link to={link}>
+                    {widgetIcon}
+                    <div className='name'>{iconName}</div>
+                </Link>
+            </AppIcon>
+        </Tooltip>
+    ) : (
+        <Tooltip title={iconName} placement='top' enterDelay={500}>
+            <AppIcon onClick={start}>
                 {widgetIcon}
                 <div className='name'>{iconName}</div>
-            </Link>
-        </AppIcon>
-    ) : (
-        <AppIcon onClick={start}>
-            {widgetIcon}
-            <div className='name'>{iconName}</div>
-        </AppIcon>
+            </AppIcon>
+        </Tooltip>
     );
 };
 

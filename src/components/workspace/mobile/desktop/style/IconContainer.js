@@ -16,7 +16,20 @@ export const IconContainer = styled.div`
         text-decoration: none;
     }
 
-    .app-name {
-        margin-top: 0.5rem;
+    @supports (display: -webkit-box) {
+        .app-name {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+
+    @supports not (display: -webkit-box) {
+        .app-name {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
     }
 `;

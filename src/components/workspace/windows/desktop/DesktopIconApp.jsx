@@ -3,6 +3,7 @@ import React, { memo, useRef } from 'react';
 
 import { useDispatchFolderContext } from 'contexts';
 import { IconContainer } from './style';
+import { Tooltip } from '@material-ui/core';
 
 const DesktopIconApp = memo((props) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
@@ -22,12 +23,14 @@ const DesktopIconApp = memo((props) => {
     };
 
     return (
-        <IconContainer tabIndex='0'>
-            <div className='icon' onDoubleClick={start}>
-                {widgetIcon}
-                <div className='name'>{iconName}</div>
-            </div>
-        </IconContainer>
+        <Tooltip title={iconName} placement='right-end' enterDelay={500}>
+            <IconContainer tabIndex='0'>
+                <div className='icon' onDoubleClick={start}>
+                    {widgetIcon}
+                    <div className='name'>{iconName}</div>
+                </div>
+            </IconContainer>
+        </Tooltip>
     );
 }, checkProps);
 
