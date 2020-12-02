@@ -20,7 +20,7 @@ export function SettingsIcon({ width, height }) {
                 clipRule='evenodd'
             ></path>
             <path
-                fill='var(--primaryDark)'
+                fill='#fff'
                 fillRule='evenodd'
                 d='M375 565c104.934 0 190-85.066 190-190s-85.066-190-190-190-190 85.066-190 190 85.066 190 190 190zm0-30c88.366 0 160-71.634 160-160s-71.634-160-160-160-160 71.634-160 160 71.634 160 160 160z'
                 clipRule='evenodd'

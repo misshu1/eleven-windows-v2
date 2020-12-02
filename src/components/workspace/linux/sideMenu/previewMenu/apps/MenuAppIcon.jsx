@@ -27,7 +27,7 @@ const MenuAppIcon = (props) => {
     };
 
     return isMobile ? (
-        <Tooltip title={iconName} placement='top' enterDelay={500}>
+        <Tooltip title={iconName} placement='bottom' enterDelay={500}>
             <AppIcon className='icon' onClick={closeSideMenu}>
                 <Link to={link}>
                     {widgetIcon}
@@ -36,7 +36,7 @@ const MenuAppIcon = (props) => {
             </AppIcon>
         </Tooltip>
     ) : (
-        <Tooltip title={iconName} placement='top' enterDelay={500}>
+        <Tooltip title={iconName} placement='bottom' enterDelay={500}>
             <AppIcon onClick={start}>
                 {widgetIcon}
                 <div className='name'>{iconName}</div>

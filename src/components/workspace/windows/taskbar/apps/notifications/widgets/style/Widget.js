@@ -11,8 +11,8 @@ export const Widget = styled.div`
     transition: background 0.2s ease-in-out;
 
     svg {
-        width: 1.8rem;
-        height: 1.8rem;
+        width: 2.2rem;
+        height: 2.2rem;
         margin: 0 auto auto;
     }
 
