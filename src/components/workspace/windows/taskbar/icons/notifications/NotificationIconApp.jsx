@@ -42,7 +42,7 @@ const NotificationIconApp = ({ notificationIconRef }) => {
                     <Badge
                         badgeContent={notificationsHistory.length}
                         color='error'
-                        anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                         showZero={false}
                     >
                         <FontAwesomeIcon icon={['fas', 'comment-alt']} />

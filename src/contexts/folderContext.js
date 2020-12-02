@@ -79,7 +79,7 @@ const APPS_STATE = [
         widgetIcon: <DocsIcon />,
         link: ROUTES.docs,
         component: <DocsApp />,
-        requireLogin: true,
+        requireLogin: false,
         requireAdmin: false,
         isOpen: null,
         isMinimize: null,

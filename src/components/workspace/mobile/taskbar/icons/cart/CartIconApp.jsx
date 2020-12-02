@@ -23,11 +23,11 @@ export const CartIconApp = ({ cartIconRef, toggleCart, isCartOpen }) => {
                     badgeContent={cartState.length}
                     variant='dot'
                     color='error'
-                    anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 >
                     <CartIcon
-                        width='1.7rem'
-                        height='1.7rem'
+                        width='2rem'
+                        height='2rem'
                         color='var(--primary)'
                     />
                 </Badge>
