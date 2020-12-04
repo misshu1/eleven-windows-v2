@@ -11,14 +11,14 @@ import { Emoji } from 'components/common';
 import FolderApp from 'components/folder/FolderApp';
 import {
     customScrollbarExample,
-    customScrollbarWithScrollTopExample,
     folderMenuExample,
     folderStructureExample,
     loadingLogoExample,
     notificationExample,
     spinnerExample,
     zIndexExample,
-    folderPaginationExample
+    folderPaginationExample,
+    themingExample
 } from './CodeExamples';
 import CreateFolder from './CreateFolder';
 import { Container } from './style';
@@ -197,6 +197,16 @@ const toolbarMenu = () => {
             link: null,
             scrollToRef: 'spinnerRef',
             onClick: null
+        },
+        {
+            name: 'Theming',
+            widgetIcon: null,
+            fontIcon: {
+                icon: ['fas', 'palette']
+            },
+            link: null,
+            scrollToRef: 'themingRef',
+            onClick: null
         }
     ];
 };
@@ -221,6 +231,7 @@ const DocsApp = () => {
     const scrollbarRef = useRef(null);
     const routingRef = useRef(null);
     const spinnerRef = useRef(null);
+    const themingRef = useRef(null);
 
     useEffect(() => {
         if (isDarkThemeSelected()) {
@@ -244,7 +255,8 @@ const DocsApp = () => {
                 folderStructureRef,
                 scrollbarRef,
                 routingRef,
-                spinnerRef
+                spinnerRef,
+                themingRef
             }}
         >
             <Container>
@@ -376,14 +388,14 @@ const DocsApp = () => {
                     {customScrollbarExample}
                 </SyntaxHighlighter>
 
-                <p>
+                {/* <p>
                     When you need to track scroll position use the
                     <span className='text-highlight'>{` requireChildrenProps `}</span>
                     prop. Like the example below.
-                </p>
-                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    </p>
+                    <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {customScrollbarWithScrollTopExample}
-                </SyntaxHighlighter>
+                </SyntaxHighlighter> */}
 
                 <h2 ref={routingRef}>Routing</h2>
 
@@ -432,19 +444,24 @@ const DocsApp = () => {
                     not specified the spinner will be visible inside the current
                     component.
                 </p>
-                {/* 
-                // Folder scrolling
-                //     - example how folder scrolling works
-                //     - example how to add scrolling tracking to a component
+                <h2 ref={themingRef}>Theming</h2>
 
-                Folder permisions
-                    - requireLogin: true,
-                    - requireAdmin: true,
-                    
-                // Routing
-                //     - explain how routing works
-                //     - also explain requireAuth routes               
-                */}
+                <p>
+                    Go to
+                    <span className='text-highlight'>{` src/components/theme/themes.js `}</span>
+                    and add a new object to
+                    <span className='text-highlight'>{` themes `}</span> array.
+                </p>
+                <SyntaxHighlighter language='jsx' style={highlightStyle}>
+                    {themingExample}
+                </SyntaxHighlighter>
+
+                <p>
+                    Then add the className specified above to
+                    <span className='text-highlight'>{` src/components/theme/themeColors.css `}</span>
+                    with new colors. This web app theme is built with css
+                    variables.
+                </p>
             </Container>
         </FolderApp>
     );

@@ -78,12 +78,6 @@
     --almostPink40: #db1654;
     --almostPinkLight: #ffb3cb;
     --almostPinkDark: #bf1d50;
-
-    /* 
-        --defaultFontSize: 16px
-        font-size: calc(var(--defaultFontSize) * 1) // 1rem
-        font-size: calc(var(--defaultFontSize) * 2.5) // 2.5rem
-    */
 }
 
 .theme-not-so-dark {

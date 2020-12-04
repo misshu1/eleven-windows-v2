@@ -307,3 +307,15 @@ const ExampleApp = () => {
       )}
     </FolderApp>
 `.trim();
+
+export const themingExample = `
+export const themes = [
+  {
+    id: 'theme20',
+    name: 'My awesome theme',
+    isSelected: false,
+    className: 'theme-dark-potato',
+    themeType: THEME_TYPE.dark
+  }
+]
+`.trim();
