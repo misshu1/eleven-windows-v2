@@ -12,9 +12,7 @@ import { SCRIPT_STATUS } from 'components/common';
 const params = {
     apiKey: process.env.REACT_APP_GOOGLE_CALENDAR_API,
     clientId: process.env.REACT_APP_GOOGLE_CALENDAR_CLIENT_ID,
-    discoveryDocs: JSON.parse(
-        process.env.REACT_APP_GOOGLE_CALENDAR_DISCOVERY_DOCS
-    ),
+    discoveryDocs: [process.env.REACT_APP_GOOGLE_CALENDAR_DISCOVERY_DOCS],
     scope: process.env.REACT_APP_GOOGLE_CALENDAR_SCOPES
 };
 
