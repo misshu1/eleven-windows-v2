@@ -41,7 +41,8 @@ const SpinerGlobal = ({ ready, style }) => {
 export function SpinnerApp({ delay = 0, global, style }) {
     const [ready, setReady] = useState(false);
 
-    // Here we set a delay, so if the app loads faster then the specified delay, we will not display a loading indicator
+    // Here we set a delay, so if the app loads faster then the specified delay,
+    // we will not display a loading indicator
     useEffect(() => {
         const time = setTimeout(() => {
             setReady(true);

@@ -1,24 +1,17 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import FolderApp from 'components/folder/FolderApp';
 import { useCalendarApi } from 'components/api';
-import { useAuth } from 'hooks';
 import { useGapiContext, useFolderPagesContext } from 'contexts';
 import MyCalendar from './MyCalendar';
-import { DaySchedule } from './daySchedule/DaySchedule';
-import { EventDetails } from './eventDetails/EventDetails';
-import { EventForm } from './eventForm/EventForm';
-import { CreateEvent } from './createEvent/CreateEvent';
 import { FOLDER_PAGES } from 'components/common';
+import { CalendarProvider } from './CalendarContext';
+import { CalendarSettings } from './settings/CalendarSettings';
 
 function CalendarApp() {
     const [calendarEvents, setCalendarEvents] = useState([]);
-    const [showDaySchedule, setShowDaySchedule] = useState(null);
-    const [selectedEvent, setSelectedEvent] = useState(null);
-    const [selectedDay, setSelectedDay] = useState(null);
     const { isGapiConnected, loginGapi, logoutGapi } = useGapiContext();
     const { getAllCalendarsEvents } = useCalendarApi();
-    const { page } = useFolderPagesContext();
-    const { user } = useAuth();
+    const { page, changePage } = useFolderPagesContext();
 
     useEffect(() => {
         if (isGapiConnected) {
@@ -37,56 +30,38 @@ function CalendarApp() {
                 name: 'Calendar settings',
                 fontIcon: { icon: ['fas', 'cog'] },
                 onClick: () => {
-                    console.log('asdasdsa');
+                    changePage(FOLDER_PAGES.level_2);
                 }
             }
         ];
 
-        // Show this option only for logged in users
-        user &&
-            menu.push({
-                name: isGapiConnected
-                    ? 'Disconnect Google account'
-                    : 'Connect Google account',
-                fontIcon: { icon: ['fab', 'google'] },
-                onClick: async () => {
-                    isGapiConnected ? logoutGapi() : loginGapi();
-                }
-            });
+        menu.push({
+            name: isGapiConnected
+                ? 'Disconnect Google account'
+                : 'Connect Google account',
+            fontIcon: { icon: ['fab', 'google'] },
+            onClick: async () => {
+                isGapiConnected ? logoutGapi() : loginGapi();
+            }
+        });
 
         return menu;
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isGapiConnected, user]);
+    }, [isGapiConnected]);
 
     return (
-        <FolderApp
-            appId={6}
-            marginLeft={150}
-            marginTop={150}
-            toolbarMenu={toolbarMenu}
-            enablePagination
-        >
-            {page === FOLDER_PAGES.level_1 && (
-                <MyCalendar
-                    setShowDaySchedule={setShowDaySchedule}
-                    setSelectedDay={setSelectedDay}
-                />
-            )}
-            {page === FOLDER_PAGES.level_2 && showDaySchedule && (
-                <DaySchedule
-                    setSelectedEvent={setSelectedEvent}
-                    setShowDaySchedule={setShowDaySchedule}
-                    selectedDay={selectedDay}
-                />
-            )}
-            {page === FOLDER_PAGES.level_2 && !showDaySchedule && (
-                <CreateEvent />
-            )}
-            {page === FOLDER_PAGES.level_3 && (
-                <EventDetails selectedEvent={selectedEvent} />
-            )}
-            {page === FOLDER_PAGES.level_4 && <EventForm />}
-        </FolderApp>
+        <CalendarProvider>
+            <FolderApp
+                appId={6}
+                marginLeft={150}
+                marginTop={150}
+                toolbarMenu={toolbarMenu}
+                enablePagination
+            >
+                {page === FOLDER_PAGES.level_1 && <MyCalendar />}
+                {page === FOLDER_PAGES.level_2 && <CalendarSettings />}
+            </FolderApp>
+        </CalendarProvider>
     );
 }
 

@@ -45,7 +45,9 @@
             "5": "Thu",
             "6": "Fri",
             "7": "Sat"
-        }
+        },
+        "startOfTheWeek": "Start of the week",
+        "showWeekNumber": "Show week number"
     },
     "language": {
         "successTitle": "English (US)",

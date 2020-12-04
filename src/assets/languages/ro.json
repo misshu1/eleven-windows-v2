@@ -45,7 +45,9 @@
             "5": "Joi",
             "6": "Vin",
             "7": "Sâm"
-        }
+        },
+        "startOfTheWeek": "Începutul săptămânii",
+        "showWeekNumber": "Afișați numărul săptămânii"
     },
     "language": {
         "successTitle": "Română",

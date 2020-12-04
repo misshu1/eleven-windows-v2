@@ -1,43 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { isWithinInterval, differenceInCalendarDays } from 'date-fns';
-import { makeStyles } from '@material-ui/core/styles';
-import { Fab, Tooltip } from '@material-ui/core';
+import { Tooltip } from '@material-ui/core';
 import Calendar from 'react-calendar';
 
 import { Container, CustomCalendarStyles, Summary } from './style';
 import { useCalendarApi } from 'components/api';
-import { useAuth } from 'hooks';
-import { useGapiContext, useFolderPagesContext } from 'contexts';
-import { FOLDER_PAGES } from 'components/common';
+import { useGapiContext } from 'contexts';
+import { useTranslation } from 'react-i18next';
+import { useCalendarContext } from './CalendarContext';
 
-const useStyles = makeStyles(() => ({
-    addEventBtn: {
-        position: 'fixed',
-        zIndex: '1',
-        bottom: '1.5rem',
-        right: '1.5rem',
-        backgroundColor: 'var(--colorSuccess)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: '100%',
-        color: '#fff',
-
-        '&:hover': {
-            backgroundColor: 'var(--colorSuccess)'
-        }
-    }
-}));
-
-function MyCalendar({ setShowDaySchedule, setSelectedDay }) {
+function MyCalendar() {
     const [calendarEvents, setCalendarEvents] = useState([]);
     const [calendar, setCalendar] = useState({ value: new Date() });
+    const { calendarType, showWeekNumber } = useCalendarContext();
     const { isGapiConnected } = useGapiContext();
     const { getAllCalendarsEvents } = useCalendarApi();
-    const { user } = useAuth();
-    const classes = useStyles();
-    const { changePage } = useFolderPagesContext();
+    const { i18n } = useTranslation();
 
     useEffect(() => {
         if (isGapiConnected) {
@@ -100,19 +79,16 @@ function MyCalendar({ setShowDaySchedule, setSelectedDay }) {
                     <Calendar
                         value={calendar.value}
                         showFixedNumberOfWeeks
-                        showWeekNumbers
+                        showWeekNumbers={showWeekNumber}
                         view='month'
+                        locale={i18n.language}
+                        calendarType={calendarType}
                         tileContent={({ activeStartDate, date, view }) =>
                             renderEvents(activeStartDate, date, view)
                         }
                         tileDisabled={({ activeStartDate, date, view }) =>
                             disableOtherMontsTiles(activeStartDate, date, view)
                         }
-                        onClickDay={(value) => {
-                            setSelectedDay(value);
-                            setShowDaySchedule(true);
-                            changePage(FOLDER_PAGES.level_2);
-                        }}
                         nextLabel={
                             <FontAwesomeIcon
                                 icon={['fas', 'chevron-right']}
@@ -130,21 +106,6 @@ function MyCalendar({ setShowDaySchedule, setSelectedDay }) {
                     />
                 </CustomCalendarStyles>
             </Container>
-            {user && isGapiConnected && (
-                <Tooltip title='Create event' placement='top' enterDelay={500}>
-                    <Fab
-                        size='medium'
-                        aria-label='create-event'
-                        classes={{ root: classes.addEventBtn }}
-                        onClick={() => {
-                            setShowDaySchedule(false);
-                            changePage(FOLDER_PAGES.level_2);
-                        }}
-                    >
-                        <FontAwesomeIcon icon={['fas', 'plus']} size='lg' />
-                    </Fab>
-                </Tooltip>
-            )}
         </>
     );
 }

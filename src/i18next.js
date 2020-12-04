@@ -9,29 +9,29 @@ import translationRO from 'assets/languages/ro.json';
 export const languages = [
     {
         name: 'us',
-        lang: 'en',
+        lang: 'en-US',
         flag: flagUS
     },
     {
         name: 'ro',
-        lang: 'ro',
+        lang: 'ro-RO',
         flag: flagRO
     }
 ];
 
 const resources = {
-    en: {
+    'en-US': {
         translation: translationUS
     },
-    ro: {
+    'ro-RO': {
         translation: translationRO
     }
 };
 
 i18n.use(initReactI18next).init({
     resources,
-    lng: 'en',
-    fallbackLng: 'en',
+    lng: 'en-US',
+    fallbackLng: 'en-US',
     debug: false,
     keySeparator: '.',
     interpolation: {
