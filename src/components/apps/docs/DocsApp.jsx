@@ -22,6 +22,7 @@ import {
 } from './CodeExamples';
 import CreateFolder from './CreateFolder';
 import { Container } from './style';
+import { GetStarted } from './GetStarted';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 
@@ -99,6 +100,16 @@ const addWordBreak = (str) => {
 const toolbarMenu = () => {
     return [
         {
+            name: 'Get started',
+            widgetIcon: null,
+            fontIcon: {
+                icon: ['fas', 'rocket']
+            },
+            link: null,
+            scrollToRef: 'getStartedRef',
+            onClick: null
+        },
+        {
             name: 'Create a new folder',
             widgetIcon: null,
             fontIcon: {
@@ -157,7 +168,7 @@ const toolbarMenu = () => {
             onClick: null
         },
         {
-            name: 'Folder Structure',
+            name: 'Folder structure',
             widgetIcon: null,
             fontIcon: {
                 icon: ['fas', 'sitemap']
@@ -221,6 +232,7 @@ const DocsApp = () => {
         showInfo
     } = useNotificationsContext();
     const classes = useStyles();
+    const getStartedRef = useRef(null);
     const changeLoadingLogoRef = useRef(null);
     const createNotificationsRef = useRef(null);
     const createFolderRef = useRef(null);
@@ -246,6 +258,7 @@ const DocsApp = () => {
             appId={2}
             toolbarMenu={toolbarMenu()}
             ref={{
+                getStartedRef,
                 createFolderRef,
                 changeLoadingLogoRef,
                 createNotificationsRef,
@@ -266,6 +279,8 @@ const DocsApp = () => {
                     and resources. Eleven Windows was built using
                     create-react-app with React Hooks and Context API.
                 </p>
+                <GetStarted ref={getStartedRef} />
+
                 <CreateFolder ref={createFolderRef} />
                 <h2 ref={addMenuToFolderRef}>Add a menu to the folder</h2>
                 <p>

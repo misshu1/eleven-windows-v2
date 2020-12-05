@@ -167,10 +167,8 @@ const APPS_STATE = [
         allowMaximize: true,
         appIndex: zIndex.folder.default,
         iconLocation: [
-            ICON_LOCATION.windows.desktop,
             ICON_LOCATION.windows.startMenu.right,
             ICON_LOCATION.linux.appsMenu,
-            ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.mobile.appsMenu
         ]
     },
@@ -188,10 +186,8 @@ const APPS_STATE = [
         allowMaximize: true,
         appIndex: zIndex.folder.default,
         iconLocation: [
-            ICON_LOCATION.windows.desktop,
             ICON_LOCATION.windows.notificationsWindow,
             ICON_LOCATION.windows.startMenu.left,
-            ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.mobile.appsMenu,
             ICON_LOCATION.linux.appsMenu
         ]
@@ -231,10 +227,8 @@ const APPS_STATE = [
         allowMaximize: true,
         appIndex: zIndex.folder.default,
         iconLocation: [
-            ICON_LOCATION.windows.desktop,
             ICON_LOCATION.windows.startMenu.left,
             ICON_LOCATION.windows.notificationsWindow,
-            ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.mobile.appsMenu,
             ICON_LOCATION.linux.appsMenu
         ]
@@ -253,10 +247,8 @@ const APPS_STATE = [
         allowMaximize: true,
         appIndex: zIndex.folder.default,
         iconLocation: [
-            ICON_LOCATION.windows.desktop,
             ICON_LOCATION.windows.startMenu.left,
             ICON_LOCATION.windows.notificationsWindow,
-            ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.mobile.appsMenu,
             ICON_LOCATION.linux.appsMenu
         ]

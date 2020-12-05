@@ -19,7 +19,8 @@ SyntaxHighlighter.registerLanguage('jsx', jsx);
 const StyledTableCell = withStyles({
     root: {
         borderBottom: '1px solid rgba(0, 0, 0, 0.5)',
-        color: 'inherit'
+        color: 'inherit',
+        padding: '1rem'
     },
     head: {
         backgroundColor: 'rgba(0, 0, 0, 0.2)',

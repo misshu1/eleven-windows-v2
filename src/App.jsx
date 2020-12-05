@@ -3,7 +3,7 @@ import { SnackbarProvider } from 'notistack';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { SpinnerApp } from 'components/common';
+import { ROUTES, SpinnerApp } from 'components/common';
 import RoutesApp from 'components/routes/Routes';
 import { GlobalStyle } from 'components/style';
 import {
@@ -51,7 +51,13 @@ export function App() {
 
     // Disable the default styles for 'desktop' and 'taskbar' when naviating to 'excludedRoutes'
     useEffect(() => {
-        const excludedRoutes = ['/401', '/404', '/500', '/login', '/checkout'];
+        const excludedRoutes = [
+            ROUTES[401],
+            ROUTES[404],
+            ROUTES[500],
+            ROUTES.login,
+            ROUTES.checkout
+        ];
         const routeMatch = excludedRoutes.includes(location.pathname);
 
         if (!routeMatch) {

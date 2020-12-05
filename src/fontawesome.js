@@ -50,7 +50,8 @@ import {
     faBicycle,
     faBomb,
     faStar,
-    faRedo
+    faRedo,
+    faRocket
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -102,5 +103,6 @@ library.add(
     faBicycle,
     faBomb,
     faStar,
-    faRedo
+    faRedo,
+    faRocket
 );
