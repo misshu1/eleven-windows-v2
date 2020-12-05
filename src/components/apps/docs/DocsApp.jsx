@@ -375,7 +375,10 @@ const DocsApp = () => {
                     {notificationExample}
                 </SyntaxHighlighter>
                 <h2 ref={zIndexRef}>z-index</h2>
-                <p>Here are all the z-index values used.</p>
+                <p>
+                    All z-index values are declared in a single file in
+                    <span className='text-highlight'>{` components/theme/zIndex.js `}</span>
+                </p>
                 <SyntaxHighlighter language='jsx' style={highlightStyle}>
                     {zIndexExample}
                 </SyntaxHighlighter>

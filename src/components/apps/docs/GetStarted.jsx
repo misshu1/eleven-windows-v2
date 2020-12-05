@@ -97,6 +97,7 @@ export const GetStarted = forwardRef((props, ref) => {
                     href='https://firebase.google.com'
                     target='_blank'
                     rel='noopener noreferrer'
+                    style={{ textDecoration: 'none' }}
                 >
                     <span className='text-highlight'>{` https://firebase.google.com `}</span>
                 </a>
@@ -105,6 +106,7 @@ export const GetStarted = forwardRef((props, ref) => {
                     href='https://developers.google.com/calendar/quickstart/js'
                     target='_blank'
                     rel='noopener noreferrer'
+                    style={{ textDecoration: 'none' }}
                 >
                     <span className='text-highlight'>{` https://developers.google.com/calendar/quickstart/js `}</span>
                 </a>

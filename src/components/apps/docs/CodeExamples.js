@@ -165,35 +165,43 @@ export default ExampleApp;
 `.trim();
 
 export const zIndexExample = `
-zIndex = {
-  Desktop: 0, // main id='desktop' inside index.html
-  Taskbar: 300, // nav id='taskbar' inside index.html
-  Notification: 200, // div id='modal' inside index.html
-  Video: -100, // div id='video' inside index.html
-  SpinnerApp: 1000,
-  FolderApp: {
-    default: 100,
-    actived: 104,
-    DrawerApp: {
-      Menu: 1000,
-      Backdrop: 500
-    }
+export const zIndex = {
+  taskbar: 300, // nav id='taskbar' inside index.html
+  // 'modal' used for notifications  
+  modal: 200, // div id='modal' inside index.html
+  video: -100, // div id='video' inside index.html
+  spinner: 1000,
+  quickAccessToolbar: 150, // when opened
+  folder: {
+    default: 100, 
+    active: 104,
+    drawer: 1000,
+    drawerBackdrop: 500,
+    nameBar: 10
   },
   windows: {
-    StartMenuApp: 250,
-    CartApp: 250,
-    LanguageApp: 250,
-    CalendarApp: 250,
-    NotificationsApp: 250
-  },
-  mobile: {
-    AppsMenu: 250,
-    CartApp: 250,
-    NotificationsApp: 250
+    startMenu: 250,
+    language: 250,
+    calendar: 250,
+    notifications: 250
   },
   linux: {
-    SideMenuIcon: 150, // The logo
-    SideMenuApp: 400 
+    sideMenuIcon: 150,
+    sideMenu: {
+      body: 400,
+      icons: 150,
+      preview: 149, 
+      svg: 145 
+    }
+  },
+  mobile: {
+    appsMenu: 250,
+    notifications: 250
+  },
+  // modal pages
+  page: {
+    body: 100,
+    backdrop: 50
   }
 }
 `.trim();
@@ -205,7 +213,6 @@ export const folderStructureExample = `
 ---- animations // Framer motion animations
 ---- apps // All folder apps are here
 ---- auth
----- cart
 ---- common
 ---- folder
 ---- notifications
