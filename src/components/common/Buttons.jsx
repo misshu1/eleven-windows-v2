@@ -1,13 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
 import { CartIcon } from 'assets/images/icons';
-import { useCartContext } from 'contexts';
-import { ROUTES } from './utils';
+import { useCartContext, useDispatchCartContext } from 'contexts';
 
 const useStyles = makeStyles({
     btnStyle: {
@@ -45,8 +43,8 @@ const useStyles = makeStyles({
 });
 
 export const CheckoutButton = () => {
+    const { getCheckoutUrl } = useCartContext();
     const classes = useStyles();
-    const navigate = useNavigate();
 
     return (
         <Button
@@ -54,7 +52,9 @@ export const CheckoutButton = () => {
             classes={{ root: classes.btnStyle }}
             style={{ flex: 1 }}
             fullWidth
-            onClick={() => navigate(ROUTES.checkout)}
+            href={getCheckoutUrl()}
+            target='_blank'
+            rel='noreferrer'
         >
             <div className={classes.icon}>
                 <FontAwesomeIcon
@@ -67,23 +67,46 @@ export const CheckoutButton = () => {
     );
 };
 
-export const AddToCartButton = ({ onClick, productId }) => {
+export const AddToCartButton = ({ product }) => {
+    const [unmounted, setUnmounted] = useState(false);
+    const [loading, setLoading] = useState(false);
     const { isProductInCart } = useCartContext();
+    const { addToCart } = useDispatchCartContext();
     const { t } = useTranslation();
     const classes = useStyles();
+
+    useEffect(() => {
+        return () => {
+            setUnmounted(true);
+        };
+    }, []);
+
+    const handleAddToCart = () => {
+        setLoading(true);
+        addToCart(product).finally(() => {
+            !unmounted && setLoading(false);
+        });
+    };
 
     return (
         <Button
             aria-label='add product to cart'
             classes={{ root: classes.btnStyle }}
-            disabled={isProductInCart(productId)}
-            onClick={onClick}
+            disabled={isProductInCart(product) || loading}
+            onClick={handleAddToCart}
             fullWidth
         >
             <div className={classes.icon}>
-                <CartIcon width='1.5rem' height='1.5rem' />
+                {!loading && <CartIcon width='1.5rem' height='1.5rem' />}
+                {loading && (
+                    <FontAwesomeIcon
+                        icon={['fas', 'spinner']}
+                        pulse
+                        size='lg'
+                    />
+                )}
             </div>
-            {isProductInCart(productId)
+            {isProductInCart(product)
                 ? t('store.addedToCart')
                 : t('store.addToCart')}
         </Button>

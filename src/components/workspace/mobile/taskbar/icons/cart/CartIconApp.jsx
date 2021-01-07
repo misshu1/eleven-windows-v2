@@ -8,7 +8,7 @@ import { useCartContext } from 'contexts';
 import { Container } from './style';
 
 export const CartIconApp = ({ cartIconRef, toggleCart, isCartOpen }) => {
-    const { cartState } = useCartContext();
+    const { getCartItemsNumber } = useCartContext();
     const { t } = useTranslation();
 
     return (
@@ -20,7 +20,7 @@ export const CartIconApp = ({ cartIconRef, toggleCart, isCartOpen }) => {
                 ref={cartIconRef}
             >
                 <Badge
-                    badgeContent={cartState.length}
+                    badgeContent={getCartItemsNumber()}
                     variant='dot'
                     color='error'
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}

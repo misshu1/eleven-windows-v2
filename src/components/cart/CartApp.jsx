@@ -12,8 +12,12 @@ const AuthApp = lazy(() => import('../auth/AuthApp'));
 
 const CartApp = ({ onClick }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
-    const { cartState, getCartTotalPrice } = useCartContext();
-    const { user } = useAuth();
+    const {
+        getCartProducts,
+        getCartTotalPrice,
+        getCartItemsNumber
+    } = useCartContext();
+    // const { user } = useAuth();
 
     const emptryCart = () => {
         return (
@@ -25,14 +29,14 @@ const CartApp = ({ onClick }) => {
     };
 
     const renderCartProducts = () => {
-        return cartState.map((product) => (
+        return getCartProducts().map((product) => (
             <Product product={product} key={product.id} />
         ));
     };
 
-    const showAuth = () => {
-        setIsAuthOpen(true);
-    };
+    // const showAuth = () => {
+    //     setIsAuthOpen(true);
+    // };
 
     const hideAuth = () => {
         setIsAuthOpen(false);
@@ -40,8 +44,8 @@ const CartApp = ({ onClick }) => {
 
     return (
         <Container>
-            {cartState.length === 0 && emptryCart()}
-            {cartState.length !== 0 && (
+            {getCartItemsNumber() === 0 && emptryCart()}
+            {getCartItemsNumber() !== 0 && (
                 <>
                     {isAuthOpen && (
                         <Suspense fallback={<SpinnerApp delay={200} />}>
@@ -62,9 +66,9 @@ const CartApp = ({ onClick }) => {
                                         {getCartTotalPrice()} $
                                     </h3>
                                 </div>
-                                {user && <CheckoutButton />}
+                                <CheckoutButton />
 
-                                {!user && <LoginButton onClick={showAuth} />}
+                                {/* {!user && <LoginButton onClick={showAuth} />} */}
                             </div>
                         </>
                     )}

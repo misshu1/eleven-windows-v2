@@ -1,16 +1,31 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useDispatchCartContext } from 'contexts';
 import { ProductContainer } from './style';
 
 const Product = ({ product }) => {
+    const [unmounted, setUnmounted] = useState(false);
+    const [loading, setLoading] = useState(false);
     const { removeFromCart } = useDispatchCartContext();
+
+    useEffect(() => {
+        return () => {
+            setUnmounted(true);
+        };
+    }, []);
+
+    const handleRemoveFromCart = () => {
+        setLoading(true);
+        removeFromCart(product).finally(() => {
+            !unmounted && setLoading(false);
+        });
+    };
 
     return (
         <ProductContainer type={product.type}>
             <div className='img-container'>
-                <img src={product.imagePreview} alt='product.title' />
+                <img src={product.imagePreview} alt={product.title} />
             </div>
             <div className='product-info'>
                 <h4 className='title'>{product.title}</h4>
@@ -18,16 +33,26 @@ const Product = ({ product }) => {
                     <strong>{product.newPrice} $</strong>
                 </p>
             </div>
-            <div
+            <button
                 className='remove-product'
-                onClick={() => removeFromCart(product.id)}
+                onClick={handleRemoveFromCart}
+                disabled={loading}
             >
-                <FontAwesomeIcon
-                    icon={['fas', 'trash-alt']}
-                    size='lg'
-                    className='icon'
-                />
-            </div>
+                {!loading && (
+                    <FontAwesomeIcon
+                        icon={['fas', 'trash-alt']}
+                        size='lg'
+                        className='icon'
+                    />
+                )}
+                {loading && (
+                    <FontAwesomeIcon
+                        icon={['fas', 'spinner']}
+                        pulse
+                        size='lg'
+                    />
+                )}
+            </button>
         </ProductContainer>
     );
 };

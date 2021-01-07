@@ -35,6 +35,7 @@ export const ProductContainer = styled.div`
         img {
             width: 3.25rem;
             height: 3.25rem;
+            object-fit: contain;
         }
     }
 
@@ -70,6 +71,13 @@ export const ProductContainer = styled.div`
         width: 3rem;
         border-top-right-radius: inherit;
         border-bottom-right-radius: inherit;
+        outline: none;
+        border: none;
+    }
+
+    .remove-product:disabled {
+        filter: grayscale(1);
+        color: #d6d8de;
     }
 
     .remove-product:hover {

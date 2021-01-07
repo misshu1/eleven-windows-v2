@@ -34,7 +34,7 @@ export const IconsMenuApp = () => {
         activeMenuIcon
     } = useSideMenuContext();
     const { notificationsHistory } = useNotificationsContext();
-    const { cartState } = useCartContext();
+    const { getCartItemsNumber } = useCartContext();
 
     return (
         <Container
@@ -80,7 +80,7 @@ export const IconsMenuApp = () => {
                                     )}
                                     {app.showCartBadge && (
                                         <IconWithBadge
-                                            badgeContent={cartState.length}
+                                            badgeContent={getCartItemsNumber()}
                                             fontIcon={app.fontIcon}
                                         />
                                     )}

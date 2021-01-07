@@ -1,61 +1,25 @@
 import React, { useEffect, useState } from 'react';
 
-import {
-    useFirebaseContext,
-    useFolderPagesContext,
-    useNotificationsContext
-} from 'contexts';
+import { useDispatchCartContext, useFolderPagesContext } from 'contexts';
 import FolderApp from 'components/folder/FolderApp';
 import ProductDetailsApp from './productDetails/ProductDetailsApp';
 import ProductsListApp from './productsList/ProductsListApp';
 import { FOLDER_PAGES } from 'components/common';
 
 const StoreApp = () => {
-    const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState({});
     const { page } = useFolderPagesContext();
-    const { showError } = useNotificationsContext();
-    const { firestore } = useFirebaseContext();
+    const { getProducts } = useDispatchCartContext();
 
     useEffect(() => {
         getProducts();
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    const getProducts = async () => {
-        try {
-            await firestore.collection('products').onSnapshot((snapshot) => {
-                if (!snapshot.size) {
-                    return showError(
-                        'Error',
-                        'The "products" collection was not found in the database!',
-                        404
-                    );
-                }
-
-                const dbProducts = snapshot.docs.map((doc) => {
-                    return { id: doc.id, ...doc.data() };
-                });
-
-                setProducts(dbProducts);
-            });
-        } catch (err) {
-            showError(
-                'Error',
-                'Failed to get store products from database!',
-                500
-            );
-        }
-    };
 
     return (
         <FolderApp appId={4} marginLeft={60} marginTop={60} enablePagination>
             {page === FOLDER_PAGES.level_1 && (
-                <ProductsListApp
-                    products={products}
-                    setSelectedProduct={setSelectedProduct}
-                />
+                <ProductsListApp setSelectedProduct={setSelectedProduct} />
             )}
             {page === FOLDER_PAGES.level_2 && (
                 <ProductDetailsApp product={selectedProduct} />

@@ -2,8 +2,6 @@ import './components/theme/themeColors.css';
 import './i18next';
 import './fontawesome';
 
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
@@ -18,19 +16,12 @@ if (process.env.NODE_ENV === 'production') {
     disableReactDevTools();
 }
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
-
 ReactDOM.render(
     <ErrorBoundary>
         <StrictMode>
             <BrowserRouter>
                 <SettingsProvider>
-                    <Elements
-                        stripe={stripePromise}
-                        options={{ locale: 'auto' }}
-                    >
-                        <App />
-                    </Elements>
+                    <App />
                 </SettingsProvider>
             </BrowserRouter>
         </StrictMode>

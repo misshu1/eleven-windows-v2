@@ -16,7 +16,7 @@ const DesktopLinuxApp = () => {
     const { t } = useTranslation();
     const { notificationsHistory } = useNotificationsContext();
     const { isMenuOpen, openSideMenu } = useSideMenuContext();
-    const { cartState } = useCartContext();
+    const { getCartItemsNumber } = useCartContext();
 
     return ReactDOM.createPortal(
         <Desktop>
@@ -32,7 +32,8 @@ const DesktopLinuxApp = () => {
                     >
                         <Badge
                             badgeContent={
-                                notificationsHistory.length + cartState.length
+                                notificationsHistory.length +
+                                getCartItemsNumber()
                             }
                             color='error'
                             anchorOrigin={{

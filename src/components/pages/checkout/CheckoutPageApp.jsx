@@ -16,7 +16,11 @@ import { zIndex } from 'components/theme/zIndex';
 
 const CheckoutPageApp = () => {
     const [showCheckout] = useState(true);
-    const { cartState, getCartTotalPrice } = useCartContext();
+    const {
+        getCartProducts,
+        getCartTotalPrice,
+        getCartItemsNumber
+    } = useCartContext();
     const navigate = useNavigate();
 
     // const { isUserLoggedIn } = useAuth();
@@ -34,7 +38,7 @@ const CheckoutPageApp = () => {
         return (
             <ScrollbarApp>
                 <div className='products-container'>
-                    {cartState.map((product) => (
+                    {getCartProducts().map((product) => (
                         <Product product={product} key={product.id} />
                     ))}
                 </div>
@@ -72,8 +76,9 @@ const CheckoutPageApp = () => {
                     >
                         <div className='container'>
                             <div className='left'>
-                                {cartState.length === 0 && emptryCart()}
-                                {cartState.length !== 0 && renderCartProducts()}
+                                {getCartItemsNumber() === 0 && emptryCart()}
+                                {getCartItemsNumber() !== 0 &&
+                                    renderCartProducts()}
                             </div>
                             <div className='right'>
                                 <CheckoutApp />

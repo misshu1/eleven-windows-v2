@@ -1,64 +1,124 @@
-import React, { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
+import React, {
+    createContext,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useState
+} from 'react';
+import Client from 'shopify-buy';
+import { useNotificationsContext } from './notificationsContext';
 
-const CART_ACTIONS = {
-    add: 'ADD',
-    remove: 'REMOVE',
-    purchase: 'PURCHASE',
-};
-
-const cartReducer = (state, action) => {
-    switch (action.type) {
-        case CART_ACTIONS.add: {
-            const productExistsInCart = state.some(
-                (item) => item.id === action.payload.id
-            );
-
-            if (!productExistsInCart) {
-                return [...state, action.payload];
-            } else {
-                return state;
-            }
-        }
-
-        case CART_ACTIONS.remove: {
-            return state.filter((item) => item.id !== action.payload);
-        }
-
-        default: {
-            throw new Error(`Unhandled action type: ${action.type}`);
-        }
-    }
-};
+const client = Client.buildClient({
+    domain: process.env.REACT_APP_SHOPIFY_DOMAIN,
+    storefrontAccessToken: process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN
+});
 
 const CartContext = createContext();
 const DispatchCartContext = createContext();
 export const CartProvider = ({ children }) => {
-    const [cartState, cartDispatch] = useReducer(cartReducer, []);
+    const [products, setProducts] = useState([]);
+    const [checkout, setCheckout] = useState({});
+    const { showError } = useNotificationsContext();
 
-    const addToCart = (product) => {
-        cartDispatch({
-            type: CART_ACTIONS.add,
-            payload: product,
-        });
+    const createCheckout = async () => {
+        const newCheckout = await client.checkout.create();
+        setCheckout(newCheckout);
     };
 
-    const removeFromCart = (productId) => {
-        cartDispatch({
-            type: CART_ACTIONS.remove,
-            payload: productId,
-        });
-    };
+    useEffect(() => {
+        createCheckout();
+    }, []);
+
+    const addToCart = useCallback(
+        async (product) => {
+            try {
+                const lineItemsToAdd = [
+                    {
+                        variantId: product.variantId,
+                        quantity: 1
+                    }
+                ];
+
+                const newCheckout = await client.checkout.addLineItems(
+                    checkout.id,
+                    lineItemsToAdd
+                );
+                setCheckout(newCheckout);
+            } catch (error) {
+                showError('Error', 'Failed to add product to cart!', 500);
+            }
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [checkout]
+    );
+
+    const getProducts = useCallback(async () => {
+        try {
+            const shopifyProducts = await client.product.fetchAll();
+            setProducts(shopifyProducts);
+        } catch (error) {
+            showError(
+                'Error',
+                'Failed to get store products from database!',
+                500
+            );
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const getCartProducts = useCallback(() => {
+        const formatProducts = checkout.lineItems.map((product) => ({
+            id: product.id,
+            variantId: product.variant.id,
+            title: product.title,
+            imagePreview: product.variant.image
+                ? product.variant.image.src
+                : 'https://via.placeholder.com/140',
+            newPrice: product.variant.price
+        }));
+
+        return formatProducts;
+    }, [checkout]);
+
+    const removeFromCart = useCallback(
+        async (product) => {
+            try {
+                const lineItemIdsToRemove = checkout.lineItems
+                    .filter((item) => item.variant.id === product.variantId)
+                    .map((item) => item.id);
+
+                const newCheckout = await client.checkout.removeLineItems(
+                    checkout.id,
+                    lineItemIdsToRemove
+                );
+
+                setCheckout(newCheckout);
+            } catch (error) {
+                showError('Error', 'Failed to remove product from cart!', 500);
+            }
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [checkout]
+    );
 
     const getCartTotalPrice = useCallback(() => {
-        const total = cartState.reduce((a, b) => a + b.newPrice, 0);
-        return Math.round((total + Number.EPSILON) * 100) / 100;
-    }, [cartState]);
+        return checkout.totalPrice;
+    }, [checkout]);
+
+    const getCartItemsNumber = useCallback(() => {
+        return Object.keys(checkout).length !== 0
+            ? checkout.lineItems.length
+            : 0;
+    }, [checkout]);
 
     const isProductInCart = useCallback(
-        (productId) => {
-            return cartState.some((product) => product.id === productId);
+        (product) => {
+            return checkout.lineItems.some(
+                (item) => item.variant.id === product.variantId
+            );
         },
-        [cartState]
+        [checkout]
     );
 
     const getProductDiscount = useCallback((newPrice, oldPrice) => {
@@ -68,27 +128,47 @@ export const CartProvider = ({ children }) => {
             return discount;
         }
 
-        const val = (newPrice / oldPrice) * 100;
+        const val =
+            Math.abs(
+                (parseFloat(oldPrice) - parseFloat(newPrice)) /
+                    parseFloat(oldPrice)
+            ) * 100;
         discount = Math.round(val);
 
         return discount;
     }, []);
 
+    const getCheckoutUrl = useCallback(() => {
+        return Object.keys(checkout).length !== 0 && checkout.webUrl;
+    }, [checkout]);
+
     const cartValue = useMemo(() => {
         return {
-            cartState,
             getCartTotalPrice,
             getProductDiscount,
             isProductInCart,
+            products,
+            getCartItemsNumber,
+            getCartProducts,
+            getCheckoutUrl
         };
-    }, [cartState, getCartTotalPrice, getProductDiscount, isProductInCart]);
+    }, [
+        getCartItemsNumber,
+        getCartProducts,
+        getCartTotalPrice,
+        getCheckoutUrl,
+        getProductDiscount,
+        isProductInCart,
+        products
+    ]);
 
     const cartDispatchValue = useMemo(() => {
         return {
             addToCart,
             removeFromCart,
+            getProducts
         };
-    }, []);
+    }, [addToCart, getProducts, removeFromCart]);
 
     return (
         <CartContext.Provider value={cartValue}>

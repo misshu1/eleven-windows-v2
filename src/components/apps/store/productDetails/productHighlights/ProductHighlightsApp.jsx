@@ -21,7 +21,6 @@ function ProductHighlightsApp({ product }) {
     const [ratingVal, setRatingVal] = useState(0);
     const { newPrice, oldPrice, reviews, title } = product;
     const { getProductDiscount } = useCartContext();
-    const { addToCart } = useDispatchCartContext();
     const { t } = useTranslation();
     const classes = useStyles();
 
@@ -77,12 +76,7 @@ function ProductHighlightsApp({ product }) {
                 </p>
             </div>
 
-            <AddToCartButton
-                onClick={() => {
-                    addToCart(product);
-                }}
-                productId={product.id}
-            />
+            <AddToCartButton product={product} />
         </Container>
     );
 }
