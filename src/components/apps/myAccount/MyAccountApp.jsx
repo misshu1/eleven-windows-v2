@@ -43,12 +43,8 @@ const MyAccountApp = () => {
     return (
         <FolderApp appId={7} marginLeft={170} marginTop={120}>
             <Container>
-                <form
-                    onSubmit={handleSubmit}
-                    data-netlify='true'
-                    name='contact'
-                >
-                    <input type='hidden' name='form-name' value='contact' />
+                <form onSubmit={handleSubmit}>
+                    {/* <input type='hidden' name='form-name' value='contact' /> */}
                     <p>
                         <label>
                             Your Name:
