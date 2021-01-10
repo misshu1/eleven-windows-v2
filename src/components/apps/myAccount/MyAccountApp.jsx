@@ -26,7 +26,7 @@ const MyAccountApp = () => {
         fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: encode({ 'form-name': 'contact', ...values })
+            body: encode({ 'form-name': 'contact', values })
         })
             .then(() => showSuccess('Success!', 'message sent'))
             .catch((error) => alert(error));
@@ -44,7 +44,7 @@ const MyAccountApp = () => {
         <FolderApp appId={7} marginLeft={170} marginTop={120}>
             <Container>
                 <form onSubmit={handleSubmit}>
-                    {/* <input type='hidden' name='form-name' value='contact' /> */}
+                    <input type='hidden' name='form-name' value='contact' />
                     <p>
                         <label>
                             Your Name:
