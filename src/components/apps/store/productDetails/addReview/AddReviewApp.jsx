@@ -20,11 +20,11 @@ const useStyles = makeStyles(() => ({
         '&:disabled': {
             backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
-            color: '#d6d8de',
+            color: '#d6d8de'
         },
         '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
-        },
+            backgroundColor: 'var(--primaryDark)'
+        }
     },
     btnStyle: {
         position: 'relative',
@@ -37,14 +37,14 @@ const useStyles = makeStyles(() => ({
         color: '#fff',
 
         '&:hover': {
-            backgroundColor: 'var(--primaryDark)',
+            backgroundColor: 'var(--primaryDark)'
         },
 
         '&:disabled': {
             backgroundColor: 'var(--primary) !important',
             filter: 'grayscale(1)',
-            color: '#d6d8de',
-        },
+            color: '#d6d8de'
+        }
     },
     icon: {
         display: 'flex',
@@ -58,22 +58,22 @@ const useStyles = makeStyles(() => ({
         transition: 'background 0.2s ease-in-out',
         borderTopRightRadius: '0 0',
         borderBottomRightRadius: '37% 100%',
-        background: 'var(--secondary)',
+        background: 'var(--secondary)'
     },
     ratingColorEmpty: {
-        color: 'var(--grey60)',
+        color: 'var(--grey60)'
     },
     ratingColor: {
-        color: 'var(--primary)',
+        color: 'var(--primary)'
     },
     ratingIcon: {
-        margin: 0,
-    },
+        margin: 0
+    }
 }));
 
 const INITIAL_STATE = {
     review: '',
-    rating: 0,
+    rating: 0
 };
 
 const AddReviewApp = ({ productId, addTempReview }) => {
@@ -84,7 +84,7 @@ const AddReviewApp = ({ productId, addTempReview }) => {
         errors,
         isSubmitting,
         handleSubmit,
-        handleUpdateRating,
+        handleUpdateRating
     } = useReviewValidation(INITIAL_STATE, productId, addTempReview);
     const { t } = useTranslation();
     const classes = useStyles();
@@ -115,7 +115,7 @@ const AddReviewApp = ({ productId, addTempReview }) => {
                         classes={{
                             iconEmpty: classes.ratingColorEmpty,
                             iconFilled: classes.ratingColor,
-                            icon: classes.ratingIcon,
+                            icon: classes.ratingIcon
                         }}
                         value={values.rating}
                         onChange={handleUpdateRating}
