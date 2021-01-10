@@ -139,5 +139,19 @@
             "title": "Eroare interna a serverului!",
             "message": "Oops, ceva nu a mers foarte bine."
         }
+    },
+    "contact": {
+        "name": "Nume",
+        "email": "E-mail",
+        "message": "Mesaj",
+        "sendMessage": "Trimite mesaj",
+        "errors": {
+            "nameRequired": "Numele este obligatoriu.",
+            "nameToShort": "Numele trebuie să aibă cel puțin 3 caractere.",
+            "invalidEmail": "E-mail invalid.",
+            "emailRequired": "E-mailul este obligatoriu.",
+            "messageToShort": "Mesajul trebuie să aibă cel puțin 30 de caractere.",
+            "messageRequired": "Mesajul este obligatoriu."
+        }
     }
 }

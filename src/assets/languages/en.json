@@ -139,5 +139,19 @@
             "title": "Internal Server Error!",
             "message": "Oops, something went very wrong."
         }
+    },
+    "contact": {
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "sendMessage": "Send Message",
+        "errors": {
+            "nameRequired": "Name is required",
+            "nameToShort": "Name must have 3 characters",
+            "invalidEmail": "Invalid email",
+            "emailRequired": "Email is required",
+            "messageToShort": "The message must be at least 30 characters long.",
+            "messageRequired": "Message is required"
+        }
     }
 }

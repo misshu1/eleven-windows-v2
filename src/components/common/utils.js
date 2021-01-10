@@ -73,6 +73,7 @@ export const ROUTES = {
     memoryGame: '/memory-game',
     terms: '/terms',
     privacy: '/privacy',
+    contact: '/contact',
     404: '/404',
     401: '/401',
     500: '/500'

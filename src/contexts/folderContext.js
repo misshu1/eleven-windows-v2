@@ -20,6 +20,7 @@ import { useAuth } from 'hooks';
 import { PrivacyIcon } from 'assets/images/icons/PrivacyIcon';
 import { TermsIcon } from 'assets/images/icons/TermsIcon';
 import { UserIcon } from 'assets/images/icons/UserIcon';
+import { EmailIcon } from 'assets/images/icons/EmailIcon';
 
 const DocsApp = lazy(() => import('components/apps/docs/DocsApp'));
 const SettingsApp = lazy(() => import('components/apps/settings/SettingsApp'));
@@ -39,6 +40,7 @@ const PrivacyApp = lazy(() => import('components/apps/privacy/PrivacyApp'));
 const MyAccountApp = lazy(() =>
     import('components/apps/myAccount/MyAccountApp')
 );
+const ContactApp = lazy(() => import('components/apps/contact/ContactApp'));
 
 const FOLDER_ACTIONS = {
     open: 'OPEN',
@@ -249,6 +251,27 @@ const APPS_STATE = [
         iconLocation: [
             ICON_LOCATION.windows.startMenu.left,
             ICON_LOCATION.windows.notificationsWindow,
+            ICON_LOCATION.mobile.appsMenu,
+            ICON_LOCATION.linux.appsMenu
+        ]
+    },
+    {
+        id: 11,
+        appName: 'Contact',
+        widgetIcon: <EmailIcon />,
+        link: ROUTES.contact,
+        component: <ContactApp />,
+        requireLogin: false,
+        requireAdmin: false,
+        isOpen: null,
+        isMinimize: null,
+        isMaximize: null,
+        allowMaximize: false,
+        appIndex: zIndex.folder.default,
+        iconLocation: [
+            ICON_LOCATION.windows.desktop,
+            ICON_LOCATION.windows.startMenu.left,
+            ICON_LOCATION.mobile.homeScreen,
             ICON_LOCATION.mobile.appsMenu,
             ICON_LOCATION.linux.appsMenu
         ]
