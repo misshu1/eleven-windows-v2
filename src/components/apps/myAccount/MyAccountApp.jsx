@@ -44,7 +44,7 @@ const MyAccountApp = () => {
         <FolderApp appId={7} marginLeft={170} marginTop={120}>
             <Container>
                 <form onSubmit={handleSubmit}>
-                    <input type='hidden' name='form-name' value='contact' />
+                    <input type='hidden' name='contact' value='contact' />
                     <p>
                         <label>
                             Your Name:
