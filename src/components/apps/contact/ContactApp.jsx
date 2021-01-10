@@ -109,7 +109,12 @@ const ContactApp = () => {
             height='40rem'
         >
             <Container>
-                <Form onSubmit={handleSubmit} errors={errors} touched={touched}>
+                <Form
+                    autoComplete='off'
+                    onSubmit={handleSubmit}
+                    errors={errors}
+                    touched={touched}
+                >
                     <label htmlFor='name'>
                         <span>{t('contact.name')} *</span>
                         <input

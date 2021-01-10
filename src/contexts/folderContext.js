@@ -230,7 +230,6 @@ const APPS_STATE = [
         appIndex: zIndex.folder.default,
         iconLocation: [
             ICON_LOCATION.windows.startMenu.left,
-            ICON_LOCATION.windows.notificationsWindow,
             ICON_LOCATION.mobile.appsMenu,
             ICON_LOCATION.linux.appsMenu
         ]
@@ -250,7 +249,6 @@ const APPS_STATE = [
         appIndex: zIndex.folder.default,
         iconLocation: [
             ICON_LOCATION.windows.startMenu.left,
-            ICON_LOCATION.windows.notificationsWindow,
             ICON_LOCATION.mobile.appsMenu,
             ICON_LOCATION.linux.appsMenu
         ]
