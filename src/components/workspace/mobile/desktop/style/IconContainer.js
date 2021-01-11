@@ -16,6 +16,10 @@ export const IconContainer = styled.div`
         text-decoration: none;
     }
 
+    .app-name {
+        text-shadow: 1px 1px 1px black;
+    }
+
     @supports (display: -webkit-box) {
         .app-name {
             display: -webkit-box;

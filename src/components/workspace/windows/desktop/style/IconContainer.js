@@ -21,6 +21,10 @@ export const IconContainer = styled.div`
         text-decoration: none;
         border: 1px solid transparent;
 
+        .name {
+            text-shadow: 1px 1px 1px black;
+        }
+
         @supports (display: -webkit-box) {
             .name {
                 display: -webkit-box;
