@@ -236,7 +236,7 @@ const APPS_STATE = [
     },
     {
         id: 10,
-        appName: 'Privacy',
+        appName: 'Privacy Policy',
         widgetIcon: <PrivacyIcon />,
         link: ROUTES.privacy,
         component: <PrivacyApp />,

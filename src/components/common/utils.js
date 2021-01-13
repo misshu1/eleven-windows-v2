@@ -72,7 +72,7 @@ export const ROUTES = {
     myAccount: '/my-account',
     memoryGame: '/memory-game',
     terms: '/terms',
-    privacy: '/privacy',
+    privacy: '/privacy-policy',
     contact: '/contact',
     404: '/404',
     401: '/401',
