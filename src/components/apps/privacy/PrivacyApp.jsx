@@ -331,10 +331,10 @@ const PrivacyApp = () => {
                 </p>
                 <h2>Cookies and Similar Technologies</h2>
                 <p>
-                    Eleven Windows may use various technologies to collect and
-                    store information when you visit the Site including cookies
-                    or similar technologies to identify your browser or device.
-                    By using the Site, you consent to the use of such
+                    This site may use various technologies to collect and store
+                    information when you visit the Site including cookies or
+                    similar technologies to identify your browser or device. By
+                    using the Site, you consent to the use of such
                     technologies. 
                 </p>
                 <p>

@@ -217,7 +217,7 @@ const APPS_STATE = [
     },
     {
         id: 9,
-        appName: 'Terms',
+        appName: 'Terms of service',
         widgetIcon: <TermsIcon />,
         link: ROUTES.terms,
         component: <TermsApp />,

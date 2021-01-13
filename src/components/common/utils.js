@@ -71,7 +71,7 @@ export const ROUTES = {
     calendar: '/calendar',
     myAccount: '/my-account',
     memoryGame: '/memory-game',
-    terms: '/terms',
+    terms: '/terms-of-service',
     privacy: '/privacy-policy',
     contact: '/contact',
     404: '/404',
