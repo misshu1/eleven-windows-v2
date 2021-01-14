@@ -111,7 +111,6 @@ const FolderApp = forwardRef((props, ref) => {
                 <AnimateFadeInOut
                     isActive={isFolderActive(app.id)}
                     appIndex={app.appIndex}
-                    onClick={active}
                     open={app.isOpen}
                     minimize={app.isMinimize}
                     close={close}
@@ -126,6 +125,7 @@ const FolderApp = forwardRef((props, ref) => {
                         width={width}
                         height={height}
                         isMaximize={app.isMaximize}
+                        onMouseDown={active}
                     >
                         <FolderToolbar
                             appId={appId}

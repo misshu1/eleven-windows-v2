@@ -36,6 +36,7 @@
     --hoverBgBlue: rgba(0, 21, 255, 0.2);
     --hoverBgLightBlue: rgba(0, 21, 255, 0.1);
 
+    --red: #ea0606;
     --almostRed: #af0138;
     --almostRed60: #9e0938;
     --almostRed40: #910d37;
@@ -99,7 +100,7 @@
 
     /* Text colors */
     --colorDefault: var(--white60);
-    --colorError: red;
+    --colorError: var(--red);
     --colorSuccess: var(--almostGreen);
 
     --whiteBlack: var(--white);
@@ -128,7 +129,7 @@
     --backgroundActive: var(--hoverBgLightBlue);
 
     --colorDefault: var(--black85);
-    --colorError: red;
+    --colorError: var(--red);
     --colorSuccess: var(--almostGreen);
 
     --whiteBlack: var(--black);
@@ -157,7 +158,7 @@
     --backgroundActive: var(--almostDarkblue40);
 
     --colorDefault: var(--white60);
-    --colorError: red;
+    --colorError: var(--red);
     --colorSuccess: var(--almostGreen);
 
     --whiteBlack: var(--white);

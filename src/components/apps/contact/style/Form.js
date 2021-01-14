@@ -10,11 +10,19 @@ export const Form = styled.form`
     min-height: 100%;
     width: 100%;
 
+    .contact-text {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        min-height: 5rem;
+        max-height: 8rem;
+    }
+
     label {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
 
         .error {
             display: block;

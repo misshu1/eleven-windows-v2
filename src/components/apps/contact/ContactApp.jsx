@@ -108,66 +108,71 @@ const ContactApp = () => {
             width='35rem'
             height='40rem'
         >
-            <Container>
-                <Form
-                    autoComplete='off'
-                    onSubmit={handleSubmit}
-                    errors={errors}
-                    touched={touched}
-                >
-                    <label htmlFor='name'>
-                        <span>{t('contact.name')} *</span>
-                        <input
-                            value={values.name}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            name='name'
-                            type='text'
-                            id='name'
-                            required
-                        />
-                        <p className='error'>{touched.name && errors.name}</p>
-                    </label>
-                    <label htmlFor='email'>
-                        <span>{t('contact.email')} *</span>
-                        <input
-                            value={values.email}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            name='email'
-                            type='email'
-                            id='email'
-                            required
-                        />
-                        <p className='error'>{touched.email && errors.email}</p>
-                    </label>
-                    <label htmlFor='message'>
-                        <span>{t('contact.message')} *</span>
-                        <textarea
-                            name='message'
-                            value={values.message}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            id='message'
-                            rows='4'
-                            required
-                        />
+            <Form
+                autoComplete='off'
+                onSubmit={handleSubmit}
+                errors={errors}
+                touched={touched}
+            >
+                {/* <p>Have an inquery or somme feedback for us?</p>
+                <p>Fill out the form below to contact our team.</p> */}
+                <div className='contact-text'>
+                    Feel free to contact us and we will get back to you as soon
+                    as we can.
+                </div>
+                <label htmlFor='name'>
+                    <span>{t('contact.name')} *</span>
+                    <input
+                        value={values.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        name='name'
+                        type='text'
+                        id='name'
+                        placeholder='John Doe'
+                        required
+                    />
+                    <p className='error'>{touched.name && errors.name}</p>
+                </label>
+                <label htmlFor='email'>
+                    <span>{t('contact.email')} *</span>
+                    <input
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        name='email'
+                        type='email'
+                        id='email'
+                        placeholder='john_doe@gmail.com'
+                        required
+                    />
+                    <p className='error'>{touched.email && errors.email}</p>
+                </label>
+                <label htmlFor='message'>
+                    <span>{t('contact.message')} *</span>
+                    <textarea
+                        name='message'
+                        value={values.message}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        id='message'
+                        placeholder='Your message'
+                        rows='4'
+                        required
+                    />
 
-                        <p className='error'>
-                            {touched.message && errors.message}
-                        </p>
-                    </label>
-                    <Button
-                        variant='contained'
-                        type='submit'
-                        aria-label='send message'
-                        disabled={!isValid}
-                        className={classes.submitButton}
-                    >
-                        {t('contact.sendMessage')}
-                    </Button>
-                </Form>
-            </Container>
+                    <p className='error'>{touched.message && errors.message}</p>
+                </label>
+                <Button
+                    variant='contained'
+                    type='submit'
+                    aria-label='send message'
+                    disabled={!isValid}
+                    className={classes.submitButton}
+                >
+                    {t('contact.sendMessage')}
+                </Button>
+            </Form>
         </FolderApp>
     );
 };
