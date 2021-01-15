@@ -1,71 +1,18 @@
-import { makeStyles } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { StoreIcon } from 'assets/images/icons';
 import { useDispatchFolderContext, useFolderContext } from 'contexts';
 import { useMediaQuery } from 'hooks';
 import { ICON_LOCATION } from 'components/common';
-
-const useStyles = makeStyles({
-    btnStyle: {
-        position: 'relative',
-        overflow: 'hidden',
-        paddingLeft: '3rem',
-        cursor: 'default',
-        backgroundColor: 'var(--primary)',
-        color: '#fff',
-
-        '&:hover': {
-            backgroundColor: 'var(--primaryDark)'
-        }
-    },
-    btnStyleMobile: {
-        display: 'inline-block',
-        textDecoration: 'none',
-        position: 'relative',
-        overflow: 'hidden',
-        paddingLeft: '3rem',
-        cursor: 'default',
-        fontWeight: '500',
-        lineHeight: '1.75',
-        borderRadius: '4px',
-        letterSpacing: '0.02857em',
-        textTransform: 'uppercase',
-        backgroundColor: 'var(--primary)',
-        color: '#fff',
-
-        '&:hover': {
-            backgroundColor: 'var(--primaryDark)'
-        }
-    },
-    btnStyleMobileText: {
-        display: 'inline-block',
-        padding: '6px 8px'
-    },
-    icon: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        left: '0',
-        top: '0',
-        bottom: '0',
-        width: '2.5rem',
-        transition: 'background 0.2s ease-in-out',
-        borderTopRightRadius: '0 0',
-        borderBottomRightRadius: '37% 100%',
-        background: 'var(--secondary)'
-    }
-});
+import { PrimaryButton } from 'components/common/Buttons';
 
 const StoreButton = ({ onClick }) => {
     const { openFolder, activeFolder, minimizeUp } = useDispatchFolderContext();
     const { checkUserPermisions, folderState } = useFolderContext();
     const apps = useRef(folderState.apps);
-    const classes = useStyles();
     const isMobile = useMediaQuery('(max-width: 450px)');
+    const navigate = useNavigate();
 
     const openApp = (appId) => {
         openFolder(appId);
@@ -74,56 +21,35 @@ const StoreButton = ({ onClick }) => {
         onClick();
     };
 
-    const mobileBtn = () => {
-        return apps.current.map((app) => {
-            return app.iconLocation.map(
-                (location) =>
-                    location === ICON_LOCATION.cart.cartApp &&
-                    checkUserPermisions(app) && (
-                        <Link
-                            to={app.link}
-                            key={app.id}
-                            onClick={onClick}
-                            className={classes.btnStyleMobile}
-                        >
-                            <div className={classes.icon}>
-                                <StoreIcon width='1.5rem' height='1.5rem' />
-                            </div>
-                            <span className={classes.btnStyleMobileText}>
-                                Go to {app.appName}
-                            </span>
-                        </Link>
-                    )
-            );
-        });
-    };
-
-    const desktopBtn = () => {
-        return apps.current.map((app) => {
-            return app.iconLocation.map(
-                (location) =>
-                    location === ICON_LOCATION.cart.cartApp &&
-                    checkUserPermisions(app) && (
-                        <Button
-                            aria-label={`go to ${app.appName}`}
-                            classes={{ root: classes.btnStyle }}
-                            onClick={() => openApp(app.id)}
-                            key={app.id}
-                        >
-                            <div className={classes.icon}>
-                                <StoreIcon width='1.5rem' height='1.5rem' />
-                            </div>
-                            Go to {app.appName}
-                        </Button>
-                    )
-            );
-        });
+    const handleClick = (app) => {
+        if (isMobile) {
+            navigate(app.link);
+            onClick();
+        } else {
+            openApp(app.id);
+        }
     };
 
     return (
         <>
-            {isMobile && mobileBtn()}
-            {!isMobile && desktopBtn()}
+            {apps.current.map((app) => {
+                return app.iconLocation.map(
+                    (location) =>
+                        location === ICON_LOCATION.cart.cartApp &&
+                        checkUserPermisions(app) && (
+                            <PrimaryButton
+                                key={app.id}
+                                aria-label={`go to ${app.appName}`}
+                                onClick={() => handleClick(app)}
+                                svgIcon={
+                                    <StoreIcon width='1.5rem' height='1.5rem' />
+                                }
+                            >
+                                Go to {app.appName}
+                            </PrimaryButton>
+                        )
+                );
+            })}
         </>
     );
 };

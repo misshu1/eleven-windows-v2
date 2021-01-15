@@ -8,9 +8,9 @@ import { CartIcon } from 'assets/images/icons';
 import { useCartContext, useDispatchCartContext } from 'contexts';
 
 const StyledButton = styled(
-    ({ icon, backgroundColor, backgroundHoverColor, color, ...props }) => (
-        <Button {...props} classes={{ disabled: 'disabled' }} />
-    )
+    ({ icon, backgroundColor, backgroundHoverColor, color, ...props }) => {
+        return <Button {...props} classes={{ disabled: 'disabled' }} />;
+    }
 )`
     && {
         position: relative;
@@ -51,17 +51,16 @@ const StyledButton = styled(
     }
 `;
 
-export const PrimaryButton = (props) => {
-    const {
-        backgroundColor,
-        backgroundHoverColor,
-        color,
-        loading,
-        disabled,
-        fontIcon,
-        svgIcon
-    } = props;
-
+export const PrimaryButton = ({
+    backgroundColor,
+    backgroundHoverColor,
+    color,
+    loading,
+    disabled,
+    fontIcon,
+    svgIcon,
+    ...props
+}) => {
     return (
         <StyledButton
             {...props}
