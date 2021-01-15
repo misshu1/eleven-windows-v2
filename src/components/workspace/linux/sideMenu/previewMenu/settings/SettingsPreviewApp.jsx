@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Switch from '@material-ui/core/Switch';
@@ -20,17 +19,9 @@ import { FlagImgContainer } from 'components/apps/settings/style';
 import { ScrollbarApp } from 'components/common';
 import { FlagImg } from 'components/workspace/windows/taskbar/icons/language/style/FlagImg';
 import { Box, Container } from './style';
+import { PrimaryButton } from 'components/common/Buttons';
 
 const useStyles = makeStyles({
-    btnStyle: {
-        cursor: 'default',
-        backgroundColor: 'var(--primary)',
-        color: '#fff',
-
-        '&:hover': {
-            backgroundColor: 'var(--primaryDark)'
-        }
-    },
     switchBase: {
         color: 'var(--primary)',
         '&$checked': {
@@ -170,15 +161,14 @@ const SettingsPreviewApp = () => {
                 </Typography>
                 <Box>
                     <div className='buttons-container'>
-                        <Button
-                            className={classes.btnStyle}
+                        <PrimaryButton
+                            aria-label='change theme'
                             aria-haspopup='true'
                             aria-controls='themes-menu'
                             onClick={handleClickMenuTheme}
-                            aria-label='change theme'
                         >
                             {t('settings.themeButton')}
-                        </Button>
+                        </PrimaryButton>
                         <Menu
                             id='themes-menu'
                             anchorEl={themeMenuEl}
@@ -207,15 +197,14 @@ const SettingsPreviewApp = () => {
                         </Menu>
                         {!isVideoEnabledOnDesktop() && (
                             <>
-                                <Button
-                                    className={classes.btnStyle}
+                                <PrimaryButton
+                                    aria-label='change background'
                                     aria-haspopup='true'
                                     aria-controls='background-menu'
                                     onClick={handleClickMenuBg}
-                                    aria-label='change background'
                                 >
                                     {t('settings.backgroundButton')}
-                                </Button>
+                                </PrimaryButton>
                                 <Menu
                                     id='background-menu'
                                     container={containerRef.current}
@@ -247,15 +236,14 @@ const SettingsPreviewApp = () => {
                         )}
                         {isVideoEnabledOnDesktop() && (
                             <>
-                                <Button
-                                    className={classes.btnStyle}
+                                <PrimaryButton
+                                    aria-label='change video background'
                                     aria-haspopup='true'
                                     aria-controls='video-menu'
                                     onClick={handleClickMenuVideo}
-                                    aria-label='change video background'
                                 >
                                     {t('settings.videoBgButton')}
-                                </Button>
+                                </PrimaryButton>
                                 <Menu
                                     id='video-menu'
                                     container={containerRef.current}

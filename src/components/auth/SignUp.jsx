@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { ScrollbarApp } from 'components/common';
 import { Container, Form } from './style';
 import useAuthValidation from './useAuthValidation';
+import { PrimaryButton } from 'components/common/Buttons';
 
 const useStyles = makeStyles(() => ({
     loginButton: {
@@ -127,15 +128,14 @@ const SignUp = ({ onCancel, changeView }) => {
                         />
                         <p className='error'>{errors.password}</p>
                     </label>
-                    <Button
+                    <PrimaryButton
                         type='submit'
-                        variant='contained'
                         aria-label='sign up'
                         disabled={isSubmitting}
-                        className={classes.loginButton}
+                        style={{ margin: '0.5rem' }}
                     >
                         {t('auth.signUp')}
-                    </Button>
+                    </PrimaryButton>
                     <Button
                         type='button'
                         variant='outlined'

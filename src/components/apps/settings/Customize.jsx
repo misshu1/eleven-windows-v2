@@ -10,6 +10,7 @@ import { useDispatchSettingsContext, useSettingsContext } from 'contexts';
 import { useMediaQuery } from 'hooks';
 import Preview from './Preview';
 import { Box, Spacer, Title } from './style';
+import { PrimaryButton } from 'components/common/Buttons';
 
 const useStyles = makeStyles({
     btnStyle: {
@@ -123,15 +124,14 @@ const Customize = () => {
             <Title>{t('settings.title.customize')}</Title>
             <Box>
                 <div className='buttons-container'>
-                    <Button
-                        className={classes.btnStyle}
+                    <PrimaryButton
                         aria-haspopup='true'
                         aria-controls='themes-menu'
                         aria-label='change theme'
                         onClick={handleClickMenuTheme}
                     >
                         {t('settings.themeButton')}
-                    </Button>
+                    </PrimaryButton>
                     <Menu
                         id='themes-menu'
                         anchorEl={themeMenuEl}
@@ -157,15 +157,14 @@ const Customize = () => {
                     </Menu>
                     {!isVideoEnabledOnDesktop() && (
                         <>
-                            <Button
-                                className={classes.btnStyle}
+                            <PrimaryButton
                                 aria-haspopup='true'
                                 aria-controls='background-menu'
                                 aria-label='change background'
                                 onClick={handleClickMenuBg}
                             >
                                 {t('settings.backgroundButton')}
-                            </Button>
+                            </PrimaryButton>
                             <Menu
                                 id='background-menu'
                                 anchorEl={bgMenuEl}
@@ -196,15 +195,14 @@ const Customize = () => {
                     )}
                     {isVideoEnabledOnDesktop() && (
                         <>
-                            <Button
-                                className={classes.btnStyle}
+                            <PrimaryButton
                                 aria-haspopup='true'
                                 aria-controls='video-menu'
                                 aria-label='change video background'
                                 onClick={handleClickMenuVideo}
                             >
                                 {t('settings.videoBgButton')}
-                            </Button>
+                            </PrimaryButton>
                             <Menu
                                 id='video-menu'
                                 anchorEl={videoMenuEl}

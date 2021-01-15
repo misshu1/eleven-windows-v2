@@ -1,7 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { makeStyles } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
-import Button from '@material-ui/core/Button';
 import { AnimatePresence } from 'framer-motion';
 import React, { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -13,37 +10,7 @@ import { modalPageAnimation } from 'components/animations';
 import { Container, ErrorContainer } from './style';
 import { zIndex } from 'components/theme/zIndex';
 import { ROUTES } from 'components/common';
-
-const useStyles = makeStyles({
-    btnStyle: {
-        position: 'relative',
-        overflow: 'hidden',
-        paddingLeft: '3rem',
-        cursor: 'default',
-        backgroundColor: 'var(--primary)',
-        color: '#fff',
-        margin: '2rem 0',
-        minWidth: '10rem',
-
-        '&:hover': {
-            backgroundColor: 'var(--primaryDark)'
-        }
-    },
-    icon: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        left: '0',
-        top: '0',
-        bottom: '0',
-        width: '2.5rem',
-        transition: 'background 0.2s ease-in-out',
-        borderTopRightRadius: '0 0',
-        borderBottomRightRadius: '37% 100%',
-        background: 'var(--secondary)'
-    }
-});
+import { PrimaryButton } from 'components/common/Buttons';
 
 const ERRORS_LIST = [
     {
@@ -71,7 +38,6 @@ const ErrorPageApp = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const isMobile = useMediaQuery('(max-width: 450px)');
-    const classes = useStyles();
 
     useEffect(() => {
         // When folder route requires admin role
@@ -153,19 +119,14 @@ const ErrorPageApp = () => {
                         <h1 className='error-code'>{t(error.code)}</h1>
                         <h3 className='error-title'>{t(error.title)}</h3>
                         <p className='error-message'>{t(error.message)}</p>
-                        <Button
-                            classes={{ root: classes.btnStyle }}
-                            onClick={goHome}
+                        <PrimaryButton
                             aria-label='go to homepage'
+                            onClick={goHome}
+                            fontIcon={['fas', 'home']}
+                            style={{ minWidth: '10rem' }}
                         >
-                            <div className={classes.icon}>
-                                <FontAwesomeIcon
-                                    icon={['fas', 'home']}
-                                    size='lg'
-                                />
-                            </div>
                             {t('errors.home')}
-                        </Button>
+                        </PrimaryButton>
                     </ErrorContainer>
                 )}
             </AnimatePresence>

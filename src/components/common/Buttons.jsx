@@ -1,69 +1,116 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import styled, { css } from 'styled-components';
 
 import { CartIcon } from 'assets/images/icons';
 import { useCartContext, useDispatchCartContext } from 'contexts';
 
-const useStyles = makeStyles({
-    btnStyle: {
-        position: 'relative',
-        overflow: 'hidden',
-        paddingLeft: '3rem',
-        cursor: 'default',
-        backgroundColor: 'var(--primary)',
-        color: '#fff',
+const StyledButton = styled(
+    ({ icon, backgroundColor, backgroundHoverColor, color, ...props }) => (
+        <Button {...props} classes={{ disabled: 'disabled' }} />
+    )
+)`
+    && {
+        position: relative;
+        overflow: hidden;
+        cursor: default;
+        background-color: ${({ backgroundColor }) => backgroundColor};
+        color: ${({ color }) => color};
 
-        '&:hover': {
-            backgroundColor: 'var(--primaryDark)'
-        },
+        ${({ icon }) =>
+            icon &&
+            css`
+                padding-left: 3rem;
 
-        '&:disabled': {
-            backgroundColor: 'var(--primary) !important',
-            filter: 'grayscale(1)',
-            color: '#d6d8de'
-        }
-    },
-    icon: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        left: '0',
-        top: '0',
-        bottom: '0',
-        width: '2.5rem',
-        transition: 'background 0.2s ease-in-out',
-        borderTopRightRadius: '0 0',
-        borderBottomRightRadius: '37% 100%',
-        background: 'var(--secondary)'
+                .icon {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    bottom: 0;
+                    width: 2.5rem;
+                    transition: background 0.2s ease-in-out;
+                    border-top-right-radius: 0 0;
+                    border-bottom-right-radius: 37% 100%;
+                    background: var(--secondary);
+                }
+            `};
     }
-});
 
-export const CheckoutButton = () => {
-    const { getCheckoutUrl } = useCartContext();
-    const classes = useStyles();
+    &&:hover {
+        background-color: ${({ backgroundHoverColor }) => backgroundHoverColor};
+    }
+
+    &.disabled {
+        filter: grayscale(1);
+        color: #d6d8de;
+    }
+`;
+
+export const PrimaryButton = (props) => {
+    const {
+        backgroundColor,
+        backgroundHoverColor,
+        color,
+        loading,
+        disabled,
+        fontIcon,
+        svgIcon
+    } = props;
 
     return (
-        <Button
+        <StyledButton
+            {...props}
+            icon={!!fontIcon || !!svgIcon}
+            disabled={disabled || loading}
+            backgroundColor={backgroundColor || 'var(--primary)'}
+            backgroundHoverColor={backgroundHoverColor || 'var(--primaryDark)'}
+            color={color || '#fff'}
+        >
+            {(!!fontIcon || !!svgIcon) && (
+                <div className='icon'>
+                    {!loading && (
+                        <>
+                            {svgIcon && svgIcon}
+                            {fontIcon && (
+                                <FontAwesomeIcon icon={fontIcon} size='lg' />
+                            )}
+                        </>
+                    )}
+                    {loading && (
+                        <FontAwesomeIcon
+                            icon={['fas', 'spinner']}
+                            pulse
+                            size='lg'
+                        />
+                    )}
+                </div>
+            )}
+            {props.children}
+        </StyledButton>
+    );
+};
+
+export const CheckoutButton = () => {
+    const { getCheckoutUrl, isCheckoutLoading } = useCartContext();
+
+    return (
+        <PrimaryButton
             aria-label='checkout'
-            classes={{ root: classes.btnStyle }}
             style={{ flex: 1 }}
             fullWidth
             href={getCheckoutUrl()}
             target='_blank'
             rel='noreferrer'
+            loading={isCheckoutLoading}
+            fontIcon={['fas', 'angle-double-right']}
         >
-            <div className={classes.icon}>
-                <FontAwesomeIcon
-                    icon={['fas', 'angle-double-right']}
-                    size='lg'
-                />
-            </div>
             Checkout
-        </Button>
+        </PrimaryButton>
     );
 };
 
@@ -73,7 +120,6 @@ export const AddToCartButton = ({ product }) => {
     const { isProductInCart } = useCartContext();
     const { addToCart } = useDispatchCartContext();
     const { t } = useTranslation();
-    const classes = useStyles();
 
     useEffect(() => {
         return () => {
@@ -89,26 +135,17 @@ export const AddToCartButton = ({ product }) => {
     };
 
     return (
-        <Button
+        <PrimaryButton
             aria-label='add product to cart'
-            classes={{ root: classes.btnStyle }}
-            disabled={isProductInCart(product) || loading}
             onClick={handleAddToCart}
             fullWidth
+            loading={loading}
+            disabled={isProductInCart(product)}
+            svgIcon={<CartIcon width='1.5rem' height='1.5rem' />}
         >
-            <div className={classes.icon}>
-                {!loading && <CartIcon width='1.5rem' height='1.5rem' />}
-                {loading && (
-                    <FontAwesomeIcon
-                        icon={['fas', 'spinner']}
-                        pulse
-                        size='lg'
-                    />
-                )}
-            </div>
             {isProductInCart(product)
                 ? t('store.addedToCart')
                 : t('store.addToCart')}
-        </Button>
+        </PrimaryButton>
     );
 };

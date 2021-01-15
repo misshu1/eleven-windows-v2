@@ -1,5 +1,3 @@
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useRef, useState } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
@@ -23,59 +21,9 @@ import {
 import CreateFolder from './CreateFolder';
 import { Container } from './style';
 import { GetStarted } from './GetStarted';
+import { PrimaryButton } from 'components/common/Buttons';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
-
-const useStyles = makeStyles({
-    successButton: {
-        backgroundColor: '#43a047',
-        border: 0,
-        borderRadius: 3,
-        color: 'white',
-        padding: '.2rem 1rem',
-        margin: 'auto 0',
-        cursor: 'default',
-        '&:hover': {
-            backgroundColor: '#43a047'
-        }
-    },
-    warnButton: {
-        backgroundColor: '#ffa000',
-        border: 0,
-        borderRadius: 3,
-        color: 'white',
-        padding: '.2rem 1rem',
-        margin: 'auto 0',
-        cursor: 'default',
-        '&:hover': {
-            backgroundColor: '#ffa000'
-        }
-    },
-    errorButton: {
-        backgroundColor: '#d32f2f',
-        border: 0,
-        borderRadius: 3,
-        color: 'white',
-        padding: '.2rem 1rem',
-        margin: 'auto 0',
-        cursor: 'default',
-        '&:hover': {
-            backgroundColor: '#d32f2f'
-        }
-    },
-    infoButton: {
-        backgroundColor: '#2979ff',
-        border: 0,
-        borderRadius: 3,
-        color: 'white',
-        padding: '.2rem 1rem',
-        margin: 'auto 0',
-        cursor: 'default',
-        '&:hover': {
-            backgroundColor: '#2979ff'
-        }
-    }
-});
 
 const addWordBreak = (str) => {
     const regex = /(\/[a-zA-Z.]+)/g;
@@ -231,7 +179,6 @@ const DocsApp = () => {
         showWarning,
         showInfo
     } = useNotificationsContext();
-    const classes = useStyles();
     const getStartedRef = useRef(null);
     const changeLoadingLogoRef = useRef(null);
     const createNotificationsRef = useRef(null);
@@ -312,33 +259,35 @@ const DocsApp = () => {
                 </SyntaxHighlighter>
                 <h2 ref={createNotificationsRef}>Create notifications</h2>
                 <div className='notification-btn-container'>
-                    <Button
-                        className={classes.infoButton}
+                    <PrimaryButton
+                        aria-label='show info alert'
                         onClick={() => {
                             showInfo(
                                 'Info Title',
                                 'Notification info contante.'
                             );
                         }}
-                        aria-label='show info alert'
+                        backgroundColor='#2979ff'
+                        backgroundHoverColor='#2979ff'
                     >
                         show info
-                    </Button>
+                    </PrimaryButton>
 
-                    <Button
-                        className={classes.successButton}
+                    <PrimaryButton
+                        aria-label='show success alert'
                         onClick={() => {
                             showSuccess(
                                 'Success Title',
                                 'Notification success info.'
                             );
                         }}
-                        aria-label='show success alert'
+                        backgroundColor='#43a047'
+                        backgroundHoverColor='#43a047'
                     >
                         show success
-                    </Button>
-                    <Button
-                        className={classes.warnButton}
+                    </PrimaryButton>
+                    <PrimaryButton
+                        aria-label='show warn allert'
                         onClick={() => {
                             showWarning(
                                 'Warn Title',
@@ -346,12 +295,13 @@ const DocsApp = () => {
                                 400
                             );
                         }}
-                        aria-label='show warn allert'
+                        backgroundColor='#ffa000'
+                        backgroundHoverColor='#ffa000'
                     >
                         show warn
-                    </Button>
-                    <Button
-                        className={classes.errorButton}
+                    </PrimaryButton>
+                    <PrimaryButton
+                        aria-label='show error alert'
                         onClick={() => {
                             showError(
                                 'Error Title',
@@ -359,10 +309,11 @@ const DocsApp = () => {
                                 503
                             );
                         }}
-                        aria-label='show error alert'
+                        backgroundColor='#d32f2f'
+                        backgroundHoverColor='#d32f2f'
                     >
                         show error
-                    </Button>
+                    </PrimaryButton>
                 </div>
                 <p>
                     To create a notification alert is really easy, all you have

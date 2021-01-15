@@ -19,6 +19,7 @@ const DispatchCartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
     const [checkout, setCheckout] = useState({});
+    const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
     const { showError } = useNotificationsContext();
 
     const createCheckout = async () => {
@@ -32,6 +33,7 @@ export const CartProvider = ({ children }) => {
 
     const addToCart = useCallback(
         async (product) => {
+            setIsCheckoutLoading(true);
             try {
                 const lineItemsToAdd = [
                     {
@@ -47,6 +49,8 @@ export const CartProvider = ({ children }) => {
                 setCheckout(newCheckout);
             } catch (error) {
                 showError('Error', 'Failed to add product to cart!', 500);
+            } finally {
+                setIsCheckoutLoading(false);
             }
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -83,6 +87,7 @@ export const CartProvider = ({ children }) => {
 
     const removeFromCart = useCallback(
         async (product) => {
+            setIsCheckoutLoading(true);
             try {
                 const lineItemIdsToRemove = checkout.lineItems
                     .filter((item) => item.variant.id === product.variantId)
@@ -96,6 +101,8 @@ export const CartProvider = ({ children }) => {
                 setCheckout(newCheckout);
             } catch (error) {
                 showError('Error', 'Failed to remove product from cart!', 500);
+            } finally {
+                setIsCheckoutLoading(false);
             }
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -150,7 +157,8 @@ export const CartProvider = ({ children }) => {
             products,
             getCartItemsNumber,
             getCartProducts,
-            getCheckoutUrl
+            getCheckoutUrl,
+            isCheckoutLoading
         };
     }, [
         getCartItemsNumber,
@@ -159,7 +167,8 @@ export const CartProvider = ({ children }) => {
         getCheckoutUrl,
         getProductDiscount,
         isProductInCart,
-        products
+        products,
+        isCheckoutLoading
     ]);
 
     const cartDispatchValue = useMemo(() => {

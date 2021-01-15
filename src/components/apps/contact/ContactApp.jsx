@@ -4,29 +4,10 @@ import { useFormik } from 'formik';
 import i18n from '../../../i18next';
 
 import FolderApp from 'components/folder/FolderApp';
-import { Container, Form } from './style';
+import { Form } from './style';
 import { useNotificationsContext } from 'contexts';
-import { Button, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-
-const useStyles = makeStyles(() => ({
-    submitButton: {
-        backgroundColor: 'var(--primary)',
-        color: '#fff',
-        cursor: 'default',
-        border: 0,
-        margin: '.5rem',
-        borderRadius: 3,
-        '&:disabled': {
-            backgroundColor: 'var(--primary) !important',
-            filter: 'grayscale(1)',
-            color: '#d6d8de'
-        },
-        '&:hover': {
-            backgroundColor: 'var(--primaryDark)'
-        }
-    }
-}));
+import { PrimaryButton } from 'components/common/Buttons';
 
 const encode = (data) => {
     return Object.keys(data)
@@ -73,7 +54,6 @@ const ContactApp = () => {
         }
     });
     const { showSuccess, showError } = useNotificationsContext();
-    const classes = useStyles();
     const { t } = useTranslation();
 
     function sendMessage(values, resetForm) {
@@ -114,8 +94,6 @@ const ContactApp = () => {
                 errors={errors}
                 touched={touched}
             >
-                {/* <p>Have an inquery or somme feedback for us?</p>
-                <p>Fill out the form below to contact our team.</p> */}
                 <div className='contact-text'>
                     Feel free to contact us and we will get back to you as soon
                     as we can.
@@ -163,15 +141,14 @@ const ContactApp = () => {
 
                     <p className='error'>{touched.message && errors.message}</p>
                 </label>
-                <Button
-                    variant='contained'
+                <PrimaryButton
                     type='submit'
                     aria-label='send message'
                     disabled={!isValid}
-                    className={classes.submitButton}
+                    style={{ marginTop: '0.5rem' }}
                 >
                     {t('contact.sendMessage')}
-                </Button>
+                </PrimaryButton>
             </Form>
         </FolderApp>
     );

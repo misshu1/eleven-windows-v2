@@ -5,6 +5,7 @@ import './fontawesome';
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { StylesProvider } from '@material-ui/core/styles';
 
 import { App } from './App';
 import { SettingsProvider } from './contexts/settingsContext';
@@ -19,11 +20,13 @@ if (process.env.NODE_ENV === 'production') {
 ReactDOM.render(
     <ErrorBoundary>
         <StrictMode>
-            <BrowserRouter>
-                <SettingsProvider>
-                    <App />
-                </SettingsProvider>
-            </BrowserRouter>
+            <StylesProvider injectFirst>
+                <BrowserRouter>
+                    <SettingsProvider>
+                        <App />
+                    </SettingsProvider>
+                </BrowserRouter>
+            </StylesProvider>
         </StrictMode>
     </ErrorBoundary>,
     document.getElementById('desktop')

@@ -8,24 +8,9 @@ import { useTranslation } from 'react-i18next';
 import { ScrollbarApp } from 'components/common';
 import { Container, Form } from './style';
 import useAuthValidation from './useAuthValidation';
+import { PrimaryButton } from 'components/common/Buttons';
 
 const useStyles = makeStyles(() => ({
-    loginButton: {
-        backgroundColor: 'var(--primary)',
-        color: '#fff',
-        cursor: 'default',
-        border: 0,
-        margin: '.5rem',
-        borderRadius: 3,
-        '&:disabled': {
-            backgroundColor: 'var(--primary) !important',
-            filter: 'grayscale(1)',
-            color: '#d6d8de'
-        },
-        '&:hover': {
-            backgroundColor: 'var(--primaryDark)'
-        }
-    },
     changeViewButton: {
         border: '1px solid var(--primary)',
         color: 'var(--whiteBlack)',
@@ -112,15 +97,14 @@ const Login = ({ onCancel, changeView }) => {
                         />
                         <p className='error'>{errors.password}</p>
                     </label>
-                    <Button
-                        variant='contained'
+                    <PrimaryButton
                         type='submit'
                         aria-label='login'
                         disabled={isSubmitting}
-                        className={classes.loginButton}
+                        style={{ margin: '0.5rem' }}
                     >
                         {t('auth.login')}
-                    </Button>
+                    </PrimaryButton>
                     <Button
                         variant='outlined'
                         type='button'
