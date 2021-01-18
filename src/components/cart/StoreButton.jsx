@@ -18,7 +18,7 @@ const StoreButton = ({ onClick }) => {
         openFolder(appId);
         activeFolder(appId);
         minimizeUp(appId);
-        onClick();
+        onClick && onClick();
     };
 
     const handleClick = (app) => {
@@ -26,7 +26,7 @@ const StoreButton = ({ onClick }) => {
             navigate(app.link);
             onClick();
         } else {
-            openApp(app.id);
+            onClick && openApp(app.id);
         }
     };
 

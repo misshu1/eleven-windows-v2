@@ -9,14 +9,6 @@ export const Container = styled.div`
         background: inherit;
     }
 
-    .slide-image {
-        width: 100%;
-        height: 100%;
-        background-color: var(--backgroundActive);
-        background-position: center center;
-        background-size: cover;
-    }
-
     .dots-container {
         display: flex;
         justify-content: center;

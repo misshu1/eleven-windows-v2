@@ -15,6 +15,7 @@ import {
     GapiProvider
 } from 'contexts';
 import { AuthProvider } from 'hooks';
+import { WelcomeNotification } from './WelcomeNotification';
 
 const VideoApp = lazy(() => import('./components/video/VideoApp'));
 
@@ -92,6 +93,7 @@ export function App() {
                             />
                             <CartProvider>
                                 <FolderProvider>
+                                    <WelcomeNotification />
                                     <RoutesApp />
                                     <VideoBackground />
                                 </FolderProvider>

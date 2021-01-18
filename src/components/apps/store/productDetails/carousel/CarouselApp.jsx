@@ -3,19 +3,13 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
-import {
-    CarouselContext,
-    Dot,
-    Image,
-    Slide,
-    Slider
-} from 'pure-react-carousel';
+import { CarouselContext, Dot, Slide, Slider } from 'pure-react-carousel';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useMediaQuery } from 'hooks';
 import { SpinnerApp } from 'components/common';
-import { Container } from './style';
+import { Container, SlideImage } from './style';
 
 const useStyles = makeStyles({
     thumbnailsContainer: {
@@ -79,12 +73,11 @@ const CarouselApp = ({ images }) => {
             <Slider spinner={() => <SpinnerApp style={{ color: 'inherit' }} />}>
                 {images.map((url, index) => (
                     <Slide key={index} index={index}>
-                        <Image
+                        <SlideImage
                             src={url}
                             hasMasterSpinner
                             isBgImage
                             tag='div'
-                            className='slide-image'
                         />
                         {url === 'none' && (
                             <p className='no-images'>
