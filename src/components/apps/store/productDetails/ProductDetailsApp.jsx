@@ -7,6 +7,10 @@ import ProductHighlightsApp from './productHighlights/ProductHighlightsApp';
 import ReviewsListApp from './reviewsList/ReviewsListApp';
 import { Container } from './style';
 
+const CustomBlockquote = ({ children, ...props }) => (
+    <blockquote {...props}>{children}</blockquote>
+);
+
 const ProductDetailsApp = ({ product }) => {
     return (
         <Container>
@@ -23,7 +27,20 @@ const ProductDetailsApp = ({ product }) => {
                 <ProductHighlightsApp product={product} />
             </div>
 
-            <Markdown className='description' options={{ forceBlock: true }}>
+            <Markdown
+                className='description'
+                options={{
+                    forceBlock: true,
+                    overrides: {
+                        blockquote: {
+                            component: CustomBlockquote,
+                            props: {
+                                lang: 'en'
+                            }
+                        }
+                    }
+                }}
+            >
                 {product.description}
             </Markdown>
 
