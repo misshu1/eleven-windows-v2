@@ -30,6 +30,10 @@ export const FirebaseProvider = ({ children }) => {
     const firestoreTimestampFromDate = (date) =>
         firebase.firestore.Timestamp.fromDate(date);
     // const firebaseTimestamp = firebase.firestore.FieldValue.serverTimestamp;
+    const firebaseIncrement = (value) => {
+        return firebase.firestore.FieldValue.increment(value);
+    };
+
     return (
         <FirebaseContext.Provider
             value={{
@@ -37,7 +41,8 @@ export const FirebaseProvider = ({ children }) => {
                 firestore,
                 storage,
                 firebaseTimestamp,
-                firestoreTimestampFromDate
+                firestoreTimestampFromDate,
+                firebaseIncrement
             }}
         >
             {children}

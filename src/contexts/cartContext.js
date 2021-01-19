@@ -7,6 +7,7 @@ import React, {
     useState
 } from 'react';
 import Client from 'shopify-buy';
+import { useFirebaseContext } from './firebaseContext';
 import { useNotificationsContext } from './notificationsContext';
 
 const client = Client.buildClient({
@@ -18,9 +19,11 @@ const CartContext = createContext();
 const DispatchCartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
+    const [productsReviews, setProductsReviews] = useState([]);
     const [checkout, setCheckout] = useState({});
     const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
     const { showError } = useNotificationsContext();
+    const { firestore } = useFirebaseContext();
 
     const createCheckout = async () => {
         const newCheckout = await client.checkout.create();
@@ -57,8 +60,37 @@ export const CartProvider = ({ children }) => {
         [checkout]
     );
 
+    const getLast5ProductsReviews = useCallback(async () => {
+        try {
+            await firestore.collection('products').onSnapshot((snapshot) => {
+                if (!snapshot.size) {
+                    return showError(
+                        'Error',
+                        'The "products" collection was not found in the database!',
+                        404
+                    );
+                }
+
+                const dbProducts = snapshot.docs.map((doc) => {
+                    return { id: doc.id, ...doc.data() };
+                });
+
+                setProductsReviews(dbProducts);
+            });
+        } catch (err) {
+            showError(
+                'Error',
+                'Failed to get store products from database!',
+                500
+            );
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const getProducts = useCallback(async () => {
         try {
+            await getLast5ProductsReviews();
             const shopifyProducts = await client.product.fetchAll();
             setProducts(shopifyProducts);
         } catch (error) {
@@ -158,17 +190,19 @@ export const CartProvider = ({ children }) => {
             getCartItemsNumber,
             getCartProducts,
             getCheckoutUrl,
-            isCheckoutLoading
+            isCheckoutLoading,
+            productsReviews
         };
     }, [
-        getCartItemsNumber,
-        getCartProducts,
         getCartTotalPrice,
-        getCheckoutUrl,
         getProductDiscount,
         isProductInCart,
         products,
-        isCheckoutLoading
+        getCartItemsNumber,
+        getCartProducts,
+        getCheckoutUrl,
+        isCheckoutLoading,
+        productsReviews
     ]);
 
     const cartDispatchValue = useMemo(() => {

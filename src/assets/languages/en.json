@@ -82,7 +82,9 @@
         "addReview": "Add Review",
         "showAllReviews": "Show All Reviews",
         "description": "Description",
-        "noImagesFound": "No Images Found."
+        "noImagesFound": "No Images Found.",
+        "reviewName": "Name",
+        "textareaPlaceholder": "Tell us what you like about this product"
     },
     "tooltip": {
         "login": "Login",

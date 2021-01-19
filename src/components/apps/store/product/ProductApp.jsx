@@ -16,10 +16,11 @@ const useStyles = makeStyles({
 });
 
 const ProductApp = ({ product, setSelectedProduct }) => {
-    const { imagePreview, newPrice, oldPrice, reviews, title } = product;
-    const { getProductDiscount } = useCartContext();
+    const { imagePreview, newPrice, oldPrice, title, id } = product;
+    const { getProductDiscount, productsReviews } = useCartContext();
     const { changePage } = useFolderPagesContext();
     const [discountVal, setDiscountVal] = useState(0);
+    const [reviews, setReviews] = useState([]);
     const [ratingVal, setRatingVal] = useState(0);
     const classes = useStyles();
 
@@ -29,13 +30,21 @@ const ProductApp = ({ product, setSelectedProduct }) => {
     }, [setSelectedProduct, product, changePage]);
 
     useEffect(() => {
+        setReviews(
+            productsReviews
+                .filter((p) => p.id === product.id)
+                .map((item) => item.reviews)
+        );
+    }, [product.id, productsReviews]);
+
+    useEffect(() => {
         const discount = getProductDiscount(newPrice, oldPrice);
         setDiscountVal(discount);
     }, [getProductDiscount, newPrice, oldPrice, setDiscountVal]);
 
     useEffect(() => {
-        if (reviews) {
-            const ratings = reviews.ratings.map((review) => review.rating);
+        if (reviews.length !== 0) {
+            const ratings = reviews[0].ratings.map((review) => review.rating);
             const sumOfRatings = ratings.reduce((a, b) => a + b, 0);
             const rating = sumOfRatings / ratings.length;
             setRatingVal(rating);

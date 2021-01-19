@@ -1,11 +1,11 @@
 import { useCartContext } from 'contexts';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 
 import ProductApp from '../product/ProductApp';
 import { Container } from './style';
 
 const ProductsListApp = ({ setSelectedProduct }) => {
-    const { products } = useCartContext();
+    const { products, productsReviews } = useCartContext();
 
     const renderProducts = useCallback(() => {
         const formatProducts = products.map((product) => ({
@@ -22,6 +22,9 @@ const ProductsListApp = ({ setSelectedProduct }) => {
                     ? product.images.map((item) => item.src)
                     : ['none'],
             description: product.descriptionHtml
+            // reviews: productsReviews
+            //     .filter((p) => p.id === product.id)
+            //     .map((item) => item.reviews)
         }));
 
         return formatProducts.map((product) => (

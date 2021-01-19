@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useAuth, useDebounce } from 'hooks';
 import { useFirebaseContext, useNotificationsContext } from 'contexts';
@@ -10,7 +11,11 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
     const [errors, setErrors] = useState({});
     const debouncedValues = useDebounce(values, 500);
     const { user } = useAuth();
-    const { firestore, firebaseTimestamp } = useFirebaseContext();
+    const {
+        firestore,
+        firebaseTimestamp,
+        firebaseIncrement
+    } = useFirebaseContext();
     const { showError } = useNotificationsContext();
 
     const handleUpdateRating = (e) => {
@@ -60,32 +65,73 @@ const useReviewValidation = (initialState, productId, addTempReview) => {
         }
     };
 
+    const updateLast5Reviews = async (review) => {
+        const productRef = firestore.doc(`products/${review.productId}`);
+        const increment = firebaseIncrement(1);
+        let productData = null;
+
+        await productRef
+            .get()
+            .then((doc) => {
+                if (doc.exists) {
+                    return (productData = doc.data());
+                }
+            })
+            .catch((error) => {
+                return console.log('Error getting document:', error);
+            });
+
+        if (productData) {
+            const reviews = {
+                total: increment,
+                last5: [review, ...productData.reviews.last5.splice(0, 4)],
+                ratings: [
+                    { userId: review.userId, rating: review.rating },
+                    ...productData.reviews.ratings
+                ]
+            };
+
+            productRef.set({ reviews }, { merge: true });
+        } else {
+            // When posting the first revew
+            // Product doesn't have the 'reviews' object, yet
+            const reviews = {
+                total: 1,
+                last5: [review],
+                ratings: [{ userId: review.userId, rating: review.rating }]
+            };
+
+            productRef.set({ reviews });
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validationRules(values);
         setErrors(validationErrors);
         setSubmitting(true);
 
-        if (!errors.review && values.rating !== 0) {
+        if (!errors.name && !errors.review && values.rating !== 0) {
             const newReview = {
                 content: values.review,
-                userId: user.uid,
+                userId: user?.uid || 'anonymous',
                 productId: productId,
                 rating: values.rating,
-                userDisplayName: user.displayName,
+                userDisplayName: user?.displayName || values.name,
                 publishDate: firebaseTimestamp()
             };
 
             try {
                 await firestore
                     .collection('reviews')
-                    .doc(`${user.uid}_${productId}`)
+                    .doc(`${user?.uid || uuidv4()}_${productId}`)
                     .set(newReview)
                     .then(() => {
                         setSubmitting(false);
                         setValues(initialState);
                         addTempReview(newReview);
                     });
+                await updateLast5Reviews(newReview);
             } catch (err) {
                 setSubmitting(false);
                 showError('Error', 'Failed to send review!', 500);

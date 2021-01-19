@@ -3,7 +3,7 @@ import Rating from '@material-ui/lab/Rating';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useCartContext, useDispatchCartContext } from 'contexts';
+import { useCartContext } from 'contexts';
 import { AddToCartButton } from 'components/common';
 import { Container } from './style';
 
@@ -19,14 +19,23 @@ const useStyles = makeStyles({
 function ProductHighlightsApp({ product }) {
     const [discountVal, setDiscountVal] = useState(0);
     const [ratingVal, setRatingVal] = useState(0);
-    const { newPrice, oldPrice, reviews, title } = product;
-    const { getProductDiscount } = useCartContext();
+    const [reviews, setReviews] = useState([]);
+    const { newPrice, oldPrice, title } = product;
+    const { getProductDiscount, productsReviews } = useCartContext();
     const { t } = useTranslation();
     const classes = useStyles();
 
     useEffect(() => {
-        if (reviews) {
-            const ratings = reviews.ratings.map((review) => review.rating);
+        setReviews(
+            productsReviews
+                .filter((p) => p.id === product.id)
+                .map((item) => item.reviews)
+        );
+    }, [product.id, productsReviews]);
+
+    useEffect(() => {
+        if (reviews.length !== 0) {
+            const ratings = reviews[0].ratings.map((review) => review.rating);
             const sumOfRatings = ratings.reduce((a, b) => a + b, 0);
             const rating = sumOfRatings / ratings.length;
             setRatingVal(rating);
@@ -55,13 +64,13 @@ function ProductHighlightsApp({ product }) {
                 </span>
             </div>
             <p className='product-reviews-count'>
-                {reviews &&
-                    `${reviews.total} ${
-                        reviews.total > 1
+                {reviews[0] &&
+                    `${reviews[0]?.total} ${
+                        reviews[0]?.total > 1
                             ? t('store.reviews')
                             : t('store.review')
                     }`}
-                {!reviews && `${t('store.noReviews')}`}
+                {!reviews[0] && `${t('store.noReviews')}`}
             </p>
 
             <div className='price-container'>

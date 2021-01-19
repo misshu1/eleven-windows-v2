@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
+import { useAuth } from 'hooks';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -72,6 +73,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const INITIAL_STATE = {
+    name: '',
     review: '',
     rating: 0
 };
@@ -87,11 +89,32 @@ const AddReviewApp = ({ productId, addTempReview }) => {
         handleUpdateRating
     } = useReviewValidation(INITIAL_STATE, productId, addTempReview);
     const { t } = useTranslation();
+    const { user } = useAuth();
     const classes = useStyles();
 
     return (
         <Container>
             <Form autoCapitalize='off' errors={errors} onSubmit={handleSubmit}>
+                <h3>{t('store.addReview')}</h3>
+                {!user && (
+                    <label htmlFor='Name' className='name-label'>
+                        <span className='name-title'>
+                            {t('store.reviewName')} *
+                        </span>
+                        <input
+                            value={values.name}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            name='name'
+                            type='text'
+                            id='name'
+                            required
+                            placeholder='John Doe'
+                        />
+                        <p className='error'>{errors.name}</p>
+                    </label>
+                )}
+
                 <label htmlFor='review' className='review-label'>
                     <span className='review-title'>Review *</span>
                     <textarea
@@ -103,7 +126,7 @@ const AddReviewApp = ({ productId, addTempReview }) => {
                         id='review'
                         rows='4'
                         required
-                        placeholder='Tell us what you like about this product'
+                        placeholder={t('store.textareaPlaceholder')}
                     />
                     <p className='error'>{errors.review}</p>
                 </label>

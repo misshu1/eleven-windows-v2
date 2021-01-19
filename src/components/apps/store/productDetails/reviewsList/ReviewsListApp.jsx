@@ -3,7 +3,11 @@ import Button from '@material-ui/core/Button';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useFirebaseContext, useNotificationsContext } from 'contexts';
+import {
+    useCartContext,
+    useFirebaseContext,
+    useNotificationsContext
+} from 'contexts';
 import { useAuth } from 'hooks';
 import ReviewSkeleton from '../../skeletons/ReviewSkeleton';
 import AddReviewApp from '../addReview/AddReviewApp';
@@ -32,24 +36,34 @@ const useStyles = makeStyles({
 });
 
 const ReviewsListApp = ({ product }) => {
+    const [allReviews, setAllReviews] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [showAddReveiw, setShowAddReveiw] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [reviewsLoaded, setReviewsLoaded] = useState(false);
+    const [reviewsLoaded, setAllReviewsLoaded] = useState(false);
     const { firestore } = useFirebaseContext();
     const { showError, showWarning } = useNotificationsContext();
+    const { productsReviews } = useCartContext();
     const { user, isUserLoggedIn } = useAuth();
     const { t } = useTranslation();
     const isCanceled = useRef(false);
     const classes = useStyles();
 
     const addTempReview = useCallback((review) => {
-        setReviews((prevState) => [review, ...prevState]);
+        setAllReviews((prevState) => [review, ...prevState]);
     }, []);
 
     useEffect(() => {
-        setReviews(product?.reviews?.last5 || []);
-    }, [product]);
+        setReviews(
+            productsReviews
+                .filter((p) => p.id === product.id)
+                .map((item) => item.reviews)
+        );
+    }, [product.id, productsReviews]);
+
+    useEffect(() => {
+        setAllReviews(reviews[0]?.last5 || []);
+    }, [reviews]);
 
     useEffect(() => {
         // If the user makes a request to firebase and closes the folder
@@ -61,11 +75,11 @@ const ReviewsListApp = ({ product }) => {
 
     useEffect(() => {
         if (isUserLoggedIn()) {
-            const userPostedReview = product?.reviews?.ratings.find(
+            const userPostedReview = reviews[0]?.ratings.find(
                 (review) => review.userId === user.uid
             );
 
-            const tempPostedReview = reviews.find(
+            const tempPostedReview = allReviews.find(
                 (review) => review.userId === user.uid
             );
 
@@ -75,7 +89,7 @@ const ReviewsListApp = ({ product }) => {
                 setShowAddReveiw(true);
             }
         }
-    }, [isUserLoggedIn, user, product, reviews]);
+    }, [isUserLoggedIn, user, product, allReviews, reviews]);
 
     const getReviews = async () => {
         let dbReviews = [];
@@ -97,9 +111,9 @@ const ReviewsListApp = ({ product }) => {
             );
 
             if (!isCanceled.current) {
-                setReviews(dbReviews);
+                setAllReviews(dbReviews);
                 setIsLoading(false);
-                setReviewsLoaded(true);
+                setAllReviewsLoaded(true);
             } else {
                 showWarning(
                     'Request Canceled',
@@ -109,7 +123,7 @@ const ReviewsListApp = ({ product }) => {
             }
         } catch (err) {
             setIsLoading(false);
-            setReviewsLoaded(false);
+            setAllReviewsLoaded(false);
             showError(
                 'Error',
                 'Failed to get product reviews from database!',
@@ -119,7 +133,7 @@ const ReviewsListApp = ({ product }) => {
     };
 
     const renderReviews = useCallback(() => {
-        return reviews.map((review, index) => (
+        return allReviews.map((review, index) => (
             <ReviewApp
                 key={review.id || index}
                 userDisplayName={review.userDisplayName}
@@ -128,32 +142,32 @@ const ReviewsListApp = ({ product }) => {
                 content={review.content}
             />
         ));
-    }, [reviews]);
+    }, [allReviews]);
 
     const showReviewsSkeletons = useCallback(() => {
-        return product?.reviews?.ratings.map((_, index) => (
+        return reviews[0]?.ratings.map((_, index) => (
             <ReviewSkeleton key={index} />
         ));
-    }, [product]);
+    }, [reviews]);
 
     return (
         <Container>
             <h2 className='title'>{t('store.reviews')}</h2>
 
-            {showAddReveiw && (
-                <AddReviewApp
-                    productId={product.id}
-                    addTempReview={addTempReview}
-                />
-            )}
+            {/* {showAddReveiw && ( */}
+            <AddReviewApp
+                productId={product.id}
+                addTempReview={addTempReview}
+            />
+            {/* )} */}
 
             {renderReviews()}
             {!reviewsLoaded && isLoading && showReviewsSkeletons()}
-            {reviews.length === 0 && (
+            {allReviews.length === 0 && (
                 <p className='no-reviews'>{t('store.noReviews')}</p>
             )}
 
-            {product?.reviews?.total > 5 && !reviewsLoaded && (
+            {reviews[0]?.total > 5 && !reviewsLoaded && (
                 <Button
                     aria-label='show all reviews'
                     classes={{ root: classes.button }}

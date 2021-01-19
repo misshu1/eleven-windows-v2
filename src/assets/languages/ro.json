@@ -82,7 +82,9 @@
         "addReview": "Adaugă Review",
         "showAllReviews": "Afişează toate review-urile",
         "description": "Descriere",
-        "noImagesFound": "Nu au fost găsite imagini."
+        "noImagesFound": "Nu au fost găsite imagini.",
+        "reviewName": "Nume",
+        "textareaPlaceholder": "Spuneți-ne ce vă place la acest produs"
     },
     "tooltip": {
         "login": "Autentificare",
