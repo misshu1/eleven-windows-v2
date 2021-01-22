@@ -19,7 +19,13 @@ export function WelcomeNotification() {
     );
 
     useEffect(() => {
-        notification.current();
+        const timer = setTimeout(() => {
+            notification.current();
+        }, 2000);
+
+        return () => {
+            timer.clearTimeout();
+        };
     }, []);
 
     return null;

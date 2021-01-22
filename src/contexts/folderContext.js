@@ -121,7 +121,7 @@ const APPS_STATE = [
         widgetIcon: <StoreIcon />,
         link: ROUTES.store,
         component: <StoreApp />,
-        requireLogin: true,
+        requireLogin: false,
         requireAdmin: false,
         isOpen: null,
         isMinimize: null,
