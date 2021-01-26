@@ -104,7 +104,7 @@ export const CartProvider = ({ children }) => {
     }, []);
 
     const getCartProducts = useCallback(() => {
-        const formatProducts = checkout?.lineItems.map((product) => ({
+        const formatProducts = checkout?.lineItems?.map((product) => ({
             id: product.id,
             variantId: product.variant.id,
             title: product.title,
@@ -153,7 +153,7 @@ export const CartProvider = ({ children }) => {
 
     const isProductInCart = useCallback(
         (product) => {
-            return checkout?.lineItems.some(
+            return checkout?.lineItems?.some(
                 (item) => item.variant.id === product.variantId
             );
         },
