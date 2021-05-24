@@ -115,28 +115,28 @@ const APPS_STATE = [
             ICON_LOCATION.mobile.appsMenu
         ]
     },
-    {
-        id: 4,
-        appName: 'Store',
-        widgetIcon: <StoreIcon />,
-        link: ROUTES.store,
-        component: <StoreApp />,
-        requireLogin: false,
-        requireAdmin: false,
-        isOpen: null,
-        isMinimize: null,
-        isMaximize: null,
-        allowMaximize: true,
-        appIndex: zIndex.folder.default,
-        iconLocation: [
-            ICON_LOCATION.windows.desktop,
-            ICON_LOCATION.windows.startMenu.right,
-            ICON_LOCATION.linux.appsMenu,
-            ICON_LOCATION.mobile.homeScreen,
-            ICON_LOCATION.mobile.appsMenu,
-            ICON_LOCATION.cart.cartApp
-        ]
-    },
+    // {
+    //     id: 4,
+    //     appName: 'Store',
+    //     widgetIcon: <StoreIcon />,
+    //     link: ROUTES.store,
+    //     component: <StoreApp />,
+    //     requireLogin: false,
+    //     requireAdmin: false,
+    //     isOpen: null,
+    //     isMinimize: null,
+    //     isMaximize: null,
+    //     allowMaximize: true,
+    //     appIndex: zIndex.folder.default,
+    //     iconLocation: [
+    //         ICON_LOCATION.windows.desktop,
+    //         ICON_LOCATION.windows.startMenu.right,
+    //         ICON_LOCATION.linux.appsMenu,
+    //         ICON_LOCATION.mobile.homeScreen,
+    //         ICON_LOCATION.mobile.appsMenu,
+    //         ICON_LOCATION.cart.cartApp
+    //     ]
+    // },
     {
         id: 5,
         appName: 'Task Manager',

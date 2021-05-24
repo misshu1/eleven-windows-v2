@@ -4,7 +4,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { motion } from 'framer-motion';
 import React from 'react';
 
-import { useNotificationsContext, useCartContext } from 'contexts';
+import { useNotificationsContext } from 'contexts';
 import { fadeAnimations, iconsMenuAnimations } from 'components/animations';
 import { ScrollbarApp } from 'components/common';
 import { useSideMenuContext } from '../../contexts/sideMenuContext';
@@ -28,13 +28,10 @@ const IconWithBadge = ({ badgeContent, fontIcon }) => {
 };
 
 export const IconsMenuApp = () => {
-    const {
-        sideMenuState,
-        closeSideMenu,
-        activeMenuIcon
-    } = useSideMenuContext();
+    const { sideMenuState, closeSideMenu, activeMenuIcon } =
+        useSideMenuContext();
     const { notificationsHistory } = useNotificationsContext();
-    const { getCartItemsNumber } = useCartContext();
+    // const { getCartItemsNumber } = useCartContext();
 
     return (
         <Container
@@ -80,7 +77,7 @@ export const IconsMenuApp = () => {
                                     )}
                                     {app.showCartBadge && (
                                         <IconWithBadge
-                                            badgeContent={getCartItemsNumber()}
+                                            // badgeContent={getCartItemsNumber()}
                                             fontIcon={app.fontIcon}
                                         />
                                     )}

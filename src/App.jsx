@@ -7,7 +7,7 @@ import { ROUTES, SpinnerApp } from 'components/common';
 import RoutesApp from 'components/routes/Routes';
 import { GlobalStyle } from 'components/style';
 import {
-    CartProvider,
+    // CartProvider,
     FirebaseProvider,
     FolderProvider,
     NotificationsProvider,
@@ -91,13 +91,13 @@ export function App() {
                                 mobile={isMobileSelected()}
                                 renderStyles={renderStyles}
                             />
-                            <CartProvider>
-                                <FolderProvider>
-                                    <WelcomeNotification />
-                                    <RoutesApp />
-                                    <VideoBackground />
-                                </FolderProvider>
-                            </CartProvider>
+                            {/* <CartProvider> */}
+                            <FolderProvider>
+                                <WelcomeNotification />
+                                <RoutesApp />
+                                <VideoBackground />
+                            </FolderProvider>
+                            {/* </CartProvider> */}
                         </AuthProvider>
                     </GapiProvider>
                 </FirebaseProvider>

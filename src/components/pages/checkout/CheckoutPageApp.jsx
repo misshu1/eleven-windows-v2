@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 
-import { useCartContext } from 'contexts';
+// import { useCartContext } from 'contexts';
 import { useMediaQuery } from 'hooks';
 import { modalPageAnimation } from 'components/animations';
 import Product from 'components/cart/Product';
@@ -16,11 +16,11 @@ import { zIndex } from 'components/theme/zIndex';
 
 const CheckoutPageApp = () => {
     const [showCheckout] = useState(true);
-    const {
-        getCartProducts,
-        getCartTotalPrice,
-        getCartItemsNumber
-    } = useCartContext();
+    // const {
+    //     getCartProducts,
+    //     getCartTotalPrice,
+    //     getCartItemsNumber
+    // } = useCartContext();
     const navigate = useNavigate();
 
     // const { isUserLoggedIn } = useAuth();
@@ -38,9 +38,9 @@ const CheckoutPageApp = () => {
         return (
             <ScrollbarApp>
                 <div className='products-container'>
-                    {getCartProducts().map((product) => (
+                    {/* {getCartProducts().map((product) => (
                         <Product product={product} key={product.id} />
-                    ))}
+                    ))} */}
                 </div>
             </ScrollbarApp>
         );
@@ -76,9 +76,9 @@ const CheckoutPageApp = () => {
                     >
                         <div className='container'>
                             <div className='left'>
-                                {getCartItemsNumber() === 0 && emptryCart()}
+                                {/* {getCartItemsNumber() === 0 && emptryCart()}
                                 {getCartItemsNumber() !== 0 &&
-                                    renderCartProducts()}
+                                    renderCartProducts()} */}
                             </div>
                             <div className='right'>
                                 <CheckoutApp />

@@ -4,11 +4,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CartIcon } from 'assets/images/icons';
-import { useCartContext } from 'contexts';
+// import { useCartContext } from 'contexts';
 import { Container } from './style';
 
 export const CartIconApp = ({ cartIconRef, toggleCart, isCartOpen }) => {
-    const { getCartItemsNumber } = useCartContext();
+    // const { getCartItemsNumber } = useCartContext();
     const { t } = useTranslation();
 
     return (
@@ -20,7 +20,7 @@ export const CartIconApp = ({ cartIconRef, toggleCart, isCartOpen }) => {
                 ref={cartIconRef}
             >
                 <Badge
-                    badgeContent={getCartItemsNumber()}
+                    // badgeContent={getCartItemsNumber()}
                     color='error'
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     showZero={false}

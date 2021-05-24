@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 import { LogoIcon } from 'assets/images/icons';
-import { useCartContext, useNotificationsContext } from 'contexts';
+import { useNotificationsContext } from 'contexts';
 import { logoAnimations } from 'components/animations';
 import { useSideMenuContext } from '../contexts/sideMenuContext';
 import SideMenuApp from '../sideMenu/SideMenuApp';
@@ -16,7 +16,7 @@ const DesktopLinuxApp = () => {
     const { t } = useTranslation();
     const { notificationsHistory } = useNotificationsContext();
     const { isMenuOpen, openSideMenu } = useSideMenuContext();
-    const { getCartItemsNumber } = useCartContext();
+    // const { getCartItemsNumber } = useCartContext();
 
     return ReactDOM.createPortal(
         <Desktop>
@@ -32,8 +32,9 @@ const DesktopLinuxApp = () => {
                     >
                         <Badge
                             badgeContent={
-                                notificationsHistory.length +
-                                getCartItemsNumber()
+                                notificationsHistory.length
+                                // +
+                                // getCartItemsNumber()
                             }
                             color='error'
                             anchorOrigin={{

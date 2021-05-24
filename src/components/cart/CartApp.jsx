@@ -12,11 +12,11 @@ const AuthApp = lazy(() => import('../auth/AuthApp'));
 
 const CartApp = ({ onClick }) => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
-    const {
-        getCartProducts,
-        getCartTotalPrice,
-        getCartItemsNumber
-    } = useCartContext();
+    // const {
+    //     getCartProducts,
+    //     getCartTotalPrice,
+    //     getCartItemsNumber
+    // } = useCartContext();
     // const { user } = useAuth();
 
     const emptryCart = () => {
@@ -29,9 +29,9 @@ const CartApp = ({ onClick }) => {
     };
 
     const renderCartProducts = () => {
-        return getCartProducts().map((product) => (
-            <Product product={product} key={product.id} />
-        ));
+        // return getCartProducts().map((product) => (
+        //     <Product product={product} key={product.id} />
+        // ));
     };
 
     // const showAuth = () => {
@@ -44,8 +44,9 @@ const CartApp = ({ onClick }) => {
 
     return (
         <Container>
-            {getCartItemsNumber() === 0 && emptryCart()}
-            {getCartItemsNumber() !== 0 && (
+            {emptryCart()}
+            {/* {getCartItemsNumber() === 0 && emptryCart()} */}
+            {/* {getCartItemsNumber() !== 0 && (
                 <>
                     {isAuthOpen && (
                         <Suspense fallback={<SpinnerApp delay={200} />}>
@@ -66,14 +67,14 @@ const CartApp = ({ onClick }) => {
                                         {getCartTotalPrice()} $
                                     </h3>
                                 </div>
-                                <CheckoutButton />
+                                <CheckoutButton /> */}
 
-                                {/* {!user && <LoginButton onClick={showAuth} />} */}
-                            </div>
+            {/* {!user && <LoginButton onClick={showAuth} />} */}
+            {/* </div>
                         </>
                     )}
                 </>
-            )}
+            )}  */}
         </Container>
     );
 };

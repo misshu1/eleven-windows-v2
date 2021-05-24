@@ -24,7 +24,7 @@ export function WelcomeNotification() {
         }, 2000);
 
         return () => {
-            timer.clearTimeout();
+            clearTimeout(timer);
         };
     }, []);
 
