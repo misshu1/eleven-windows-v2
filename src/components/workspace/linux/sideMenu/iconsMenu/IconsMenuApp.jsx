@@ -21,6 +21,7 @@ const IconWithBadge = ({ badgeContent, fontIcon }) => {
             }}
             invisible={badgeContent === 0}
             variant='dot'
+            showZero={false}
         >
             <FontAwesomeIcon icon={fontIcon} />
         </Badge>
@@ -77,7 +78,7 @@ export const IconsMenuApp = () => {
                                     )}
                                     {app.showCartBadge && (
                                         <IconWithBadge
-                                            // badgeContent={getCartItemsNumber()}
+                                            badgeContent={0}
                                             fontIcon={app.fontIcon}
                                         />
                                     )}

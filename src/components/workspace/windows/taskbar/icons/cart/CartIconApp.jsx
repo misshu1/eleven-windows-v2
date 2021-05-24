@@ -20,7 +20,7 @@ export const CartIconApp = ({ cartIconRef, toggleCart, isCartOpen }) => {
                 ref={cartIconRef}
             >
                 <Badge
-                    // badgeContent={getCartItemsNumber()}
+                    badgeContent={0}
                     color='error'
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     showZero={false}
