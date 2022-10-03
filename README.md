@@ -1,17 +1,9 @@
-### Eleven Windows
+# Eleven Windows
 
-#### Routing
+### Demo
 
-##### Mobile
+[https://elevenwindows.dev](https://elevenwindows.dev)
 
--   Every app opens on it's own route, this will increase performance
+###
 
-##### Desktop
-
--   All apps open on the same route
-
-##### Examples
-
--   create custom notifications
--   how notification component works
--   how to create a folder
+Cloe of Windows 10 OS and Linux OS
