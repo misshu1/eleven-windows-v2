@@ -6,4 +6,4 @@
 
 ### About
 
-Cloe of Windows 10 OS and Linux OS
+Clone of Windows 10 OS and Linux OS
